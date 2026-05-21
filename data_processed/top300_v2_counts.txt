@@ -1,0 +1,1 @@
+touched_rows=180, enriched_rows=178, raw_count=3016, dedup_count=2405
