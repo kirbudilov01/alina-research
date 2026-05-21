@@ -27,3 +27,16 @@ Collected top 300 records for 5 target niches: Gaming, Astrology & Esoterics, Av
 - **Web Search Noise**: Web search results (DuckDuckGo) provide app names and snippets but lack structured fields like rating or publisher in many cases.
 - **Deduplication**: Deduplication performed on (app_name, platform, source_kind). Some near-duplicates (e.g., "App Name" vs "App Name - Pro") might still exist.
 - **Missing Fields**: Fields like `iap_present` and `subscription_present` are sparsely populated for non-store sources.
+
+## Play Market Fallback Update
+Revised source mix now includes direct data from Google Play for all niches.
+
+| Niche | Google Play | App Store | Web Search | Total |
+|-------|-------------|-----------|------------|-------|
+| Gaming | 85 | 180 | 35 | 300 |
+| Astrology & Esoterics | 137 | 163 | 0 | 300 |
+| Avatar & Identity | 123 | 177 | 0 | 300 |
+| Coaching | 125 | 175 | 0 | 300 |
+| Mindfulness | 107 | 193 | 0 | 300 |
+
+**Caveat**: For some Google Play fallback rows, the `app_name` field may reflect the `appId` (package name) if the scraper was only able to resolve the identifier during the initial scan. A subsequent enrichment step is recommended to normalize these names.

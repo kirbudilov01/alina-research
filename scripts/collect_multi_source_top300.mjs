@@ -15,7 +15,7 @@ const NICHES = {
 async function getGooglePlay(keyword) {
   try {
     const results = await gplay.search({ term: keyword, num: 50 });
-    return results.map(app => ({
+    const mapped = results.map(app => ({
       app_name: app.title,
       publisher: app.developer,
       platform: 'android',
@@ -33,7 +33,55 @@ async function getGooglePlay(keyword) {
       collected_at: new Date().toISOString(),
       source_kind: 'google_play'
     }));
-  } catch (e) { return []; }
+    if (mapped.length > 0) {
+      return mapped;
+    }
+  } catch (e) {
+    // Fallback below handles environments where library scraping fails.
+  }
+
+  try {
+    const url = `https://play.google.com/store/search?c=apps&q=${encodeURIComponent(keyword)}`;
+    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+    const html = await res.text();
+    const $ = cheerio.load(html);
+    const ids = new Set();
+
+    $('a[href*="/store/apps/details?id="]').each((_, el) => {
+      const href = $(el).attr('href') || '';
+      const m = href.match(/id=([^&"]+)/);
+      if (m && m[1]) {
+        ids.add(m[1]);
+      }
+    });
+
+    const fallbackRows = [];
+    for (const appId of Array.from(ids).slice(0, 80)) {
+      const appUrl = `https://play.google.com/store/apps/details?id=${appId}`;
+      fallbackRows.push({
+        app_name: appId,
+        publisher: '',
+        platform: 'android',
+        rank_position: null,
+        category: '',
+        rating: null,
+        review_count: null,
+        pricing_type: '',
+        iap_present: null,
+        subscription_present: null,
+        core_features: '',
+        retention_mechanics: '',
+        personalization_tags: '',
+        source_url: appUrl,
+        collected_at: new Date().toISOString(),
+        source_kind: 'google_play'
+      });
+    }
+
+    return fallbackRows;
+  } catch (e) {
+    return [];
+  }
 }
 
 async function getAppStore(keyword) {
