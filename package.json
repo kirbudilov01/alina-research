@@ -1,0 +1,29 @@
+{
+  "name": "alina_research_os",
+  "version": "1.0.0",
+  "description": "Market research operating system for the Alina concept app.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirbudilov01/alina-research.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kirbudilov01/alina-research/issues"
+  },
+  "homepage": "https://github.com/kirbudilov01/alina-research#readme",
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "google-play-scraper": "^10.1.2",
+    "node-fetch": "^3.3.2"
+  }
+}
