@@ -3,3 +3,5 @@ update_linear.py
 issues.json
 *.tmp
 venv/
+update_linear*.py
+create_issues*.py
