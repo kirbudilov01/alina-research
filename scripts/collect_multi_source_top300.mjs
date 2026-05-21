@@ -5,16 +5,55 @@ import fs from 'fs';
 import path from 'path';
 
 const NICHES = {
-  gaming: ['mobile games', 'action games', 'rpg mobile', 'casual games', 'puzzle games', 'strategy games', 'multiplayer games', 'indie games'],
-  astrology_esoterics: ['astrology', 'horoscope', 'tarot reading', 'zodiac', 'birth chart', 'palm reading', 'fortune teller', 'numerology'],
-  avatar_identity: ['avatar maker', 'character creator', 'vtuber app', 'digital identity', '3d avatar', 'personal emoji', 'metaverse avatar'],
-  coaching: ['life coaching', 'business coaching', 'career coaching', 'health coaching', 'productivity coach', 'executive coaching', 'skills coaching'],
-  mindfulness: ['meditation', 'mindfulness', 'sleep sounds', 'anxiety relief', 'breathwork', 'wellness tracker', 'mental health', 'guided meditation']
+  gaming: [
+    'mobile games', 'action games', 'rpg mobile', 'casual games', 'puzzle games',
+    'strategy games', 'multiplayer games', 'indie games', 'battle royale mobile',
+    'idle games', 'arcade games', 'simulation games', 'sports games mobile',
+    'card games mobile', 'gacha games', 'moba mobile', 'survival games mobile'
+  ],
+  astrology_esoterics: [
+    'astrology', 'horoscope', 'tarot reading', 'zodiac', 'birth chart',
+    'palm reading', 'fortune teller', 'numerology', 'moon phase app',
+    'spiritual guidance app', 'oracle cards app', 'chakra app',
+    'manifestation app', 'dream interpretation app', 'synastry app',
+    'vedic astrology app', 'daily horoscope app'
+  ],
+  avatar_identity: [
+    'avatar maker', 'character creator', 'vtuber app', 'digital identity',
+    '3d avatar', 'personal emoji', 'metaverse avatar', 'ai avatar generator',
+    'face animation app', 'photo avatar app', 'video avatar app', 'animoji app',
+    'virtual influencer app', 'profile picture ai app', 'virtual persona app'
+  ],
+  coaching: [
+    'life coaching', 'business coaching', 'career coaching', 'health coaching',
+    'productivity coach', 'executive coaching', 'skills coaching', 'habit coach app',
+    'goal tracker coach', 'self improvement app', 'accountability app',
+    'confidence coach app', 'mindset coach app', 'performance coach app',
+    'personal development app', 'ai coaching app'
+  ],
+  mindfulness: [
+    'meditation', 'mindfulness', 'sleep sounds', 'anxiety relief', 'breathwork',
+    'wellness tracker', 'mental health', 'guided meditation', 'stress relief app',
+    'focus timer app', 'sleep meditation app', 'calm app', 'mindful breathing app',
+    'relaxation app', 'journaling mindfulness app', 'gratitude app'
+  ]
 };
+
+const MAX_PER_NICHE = 1000;
+
+async function fetchWithTimeout(url, options = {}, timeoutMs = 8000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 async function getGooglePlay(keyword) {
   try {
-    const results = await gplay.search({ term: keyword, num: 50 });
+    const results = await gplay.search({ term: keyword, num: 120 });
     const mapped = results.map(app => ({
       app_name: app.title,
       publisher: app.developer,
@@ -42,7 +81,7 @@ async function getGooglePlay(keyword) {
 
   try {
     const url = `https://play.google.com/store/search?c=apps&q=${encodeURIComponent(keyword)}`;
-    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+    const res = await fetchWithTimeout(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, 9000);
     const html = await res.text();
     const $ = cheerio.load(html);
     const ids = new Set();
@@ -86,8 +125,8 @@ async function getGooglePlay(keyword) {
 
 async function getAppStore(keyword) {
   try {
-    const url = `https://itunes.apple.com/search?term=${encodeURIComponent(keyword)}&entity=software&limit=50`;
-    const res = await fetch(url);
+    const url = `https://itunes.apple.com/search?term=${encodeURIComponent(keyword)}&entity=software&limit=200`;
+    const res = await fetchWithTimeout(url, {}, 9000);
     const data = await res.json();
     return data.results.map(app => ({
       app_name: app.trackName,
@@ -113,11 +152,11 @@ async function getAppStore(keyword) {
 async function getWebSearch(keyword) {
   try {
     const url = `https://duckduckgo.com/html/?q=${encodeURIComponent(keyword + ' app')}`;
-    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+    const res = await fetchWithTimeout(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, 9000);
     const html = await res.text();
     const $ = cheerio.load(html);
     const results = [];
-    $('.result__body').slice(0, 20).each((i, el) => {
+    $('.result__body').slice(0, 40).each((i, el) => {
       const title = $(el).find('.result__title').text().trim();
       const link = $(el).find('.result__a').attr('href');
       const snippet = $(el).find('.result__snippet').text().trim();
@@ -158,6 +197,7 @@ function toCsv(rows) {
 
 async function run() {
   const summary = [];
+  const universe = [];
   for (const [niche, keywords] of Object.entries(NICHES)) {
     console.log(`Processing niche: ${niche}`);
     let allRecords = [];
@@ -178,9 +218,10 @@ async function run() {
       }
     }
     
-    const limited = uniqueRecords.slice(0, 300);
-    const filePath = `data_raw/top300_${niche}_multi_source.csv`;
+    const limited = uniqueRecords.slice(0, MAX_PER_NICHE);
+    const filePath = `data_raw/top1000_${niche}_multi_source.csv`;
     fs.writeFileSync(filePath, toCsv(limited));
+    universe.push(...limited.map(r => ({ ...r, niche })));
     
     // Summary
     const counts = limited.reduce((acc, r) => {
@@ -192,6 +233,17 @@ async function run() {
   }
   
   fs.writeFileSync('data_processed/top300_collection_summary.csv', toCsv(summary));
+  const seenUniverse = new Set();
+  const dedupUniverse = [];
+  for (const r of universe) {
+    const key = `${(r.app_name || '').toLowerCase()}|${r.platform}|${r.niche}`;
+    if (!seenUniverse.has(key)) {
+      seenUniverse.add(key);
+      dedupUniverse.push(r);
+    }
+  }
+  fs.writeFileSync('data_processed/competitor_universe_raw.csv', toCsv(universe));
+  fs.writeFileSync('data_processed/competitor_universe_dedup.csv', toCsv(dedupUniverse));
   console.log('Collection complete.');
 }
 
