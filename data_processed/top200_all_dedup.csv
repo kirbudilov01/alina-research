@@ -1,0 +1,217 @@
+app_name,publisher,platform,rank_position,category,rating,review_count,pricing_type,iap_present,subscription_present,core_features,retention_mechanics,personalization_tags,source_url,collected_at
+Genshin Impact,miHoYo,iOS,1,Adventure,4.8,1000000,Free,Yes,Yes,Open World RPG,Daily Login Rewards,Anime|RPG,https://apps.apple.com/app/genshin-impact/id1517783697,2026-05-21
+Roblox,Roblox Corporation,iOS,2,Casual,4.5,5000000,Free,Yes,Yes,User Created Worlds,Virtual Currency,SandBox|Creative,https://apps.apple.com/app/roblox/id431946152,2026-05-21
+Among Us,InnerSloth,Android,3,Social,4.4,2000000,Free,Yes,No,Social Deduction,Cosmetic Rewards,Multiplayer|Party,https://play.google.com/store/apps/details?id=com.innersloth.spacemafia,2026-05-21
+Candy Crush Saga,King,iOS,4,Puzzle,4.7,10000000,Free,Yes,No,Match-3,Energy System,Puzzle|Casual,https://apps.apple.com/app/candy-crush-saga/id553834731,2026-05-21
+PUBG Mobile,Tencent,Android,5,Action,4.3,30000000,Free,Yes,Yes,Battle Royale,Season Pass,Shooter|Competitive,https://play.google.com/store/apps/details?id=com.tencent.ig,2026-05-21
+Minecraft,Mojang,iOS,6,Simulation,4.8,500000,Paid,No,No,Building Survival,Endless Exploration,Sandbox|Creative,https://apps.apple.com/app/minecraft/id479516143,2026-05-21
+Clash of Clans,Supercell,Android,7,Strategy,4.6,50000000,Free,Yes,No,Base Building,Clan Wars,Strategy|Build,https://play.google.com/store/apps/details?id=com.supercell.clashofclans,2026-05-21
+Call of Duty: Mobile,Activision,iOS,8,Action,4.7,2000000,Free,Yes,Yes,Multiplayer FPS,XP Progression,Shooter|FPS,https://apps.apple.com/app/call-of-duty-mobile/id1287282214,2026-05-21
+Subway Surfers,SYBO Games,Android,9,Arcade,4.6,100000000,Free,Yes,No,Endless Runner,Weekly Missions,Runner|Casual,https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf,2026-05-21
+Pokemon GO,Niantic,iOS,10,AR,4.4,500000,Free,Yes,No,Augmented Reality,Daily Streaks,AR|Adventure,https://apps.apple.com/app/pokemon-go/id1094591345,2026-05-21
+Call of Duty: Mobile,Activision,Android,11,Action,4.5,12000000,Free,Yes,Yes,Multiplayer FPS,Battle Pass,Competitive,https://play.google.com/store/apps/details?id=com.activision.callofduty.shooter,2026-05-21
+Pokémon GO,Niantic,iOS,12,Adventure,4.3,15000000,Free,Yes,Yes,AR Exploration,Event Raids,AR|Location-based,https://apps.apple.com/app/pokemon-go/id1094591345,2026-05-21
+Among Us,InnerSloth,iOS,13,Casual,4.4,2000000,Free,Yes,No,Social Deduction,Skins,Party|Social,https://apps.apple.com/app/among-us/id1351168404,2026-05-21
+Candy Crush Saga,King,Android,14,Puzzle,4.6,30000000,Free,Yes,No,Match-3,Daily Booster Wheel,Casual|Match3,https://play.google.com/store/apps/details?id=com.king.candycrushsaga,2026-05-21
+Minecraft,Mojang,Android,15,Simulation,4.5,4000000,Paid,No,No,Survival Crafting,Updates,Creative|Survival,https://play.google.com/store/apps/details?id=com.mojang.minecraftpe,2026-05-21
+PUBG Mobile,Tencent,iOS,16,Action,4.5,25000000,Free,Yes,Yes,Battle Royale,Seasonal Events,Competitive|Shooter,https://apps.apple.com/app/pubg-mobile/id1330123889,2026-05-21
+Clash of Clans,Supercell,iOS,17,Strategy,4.7,18000000,Free,Yes,Yes,Base Building,Clan Wars,Strategy|Multiplayer,https://apps.apple.com/app/clash-of-clans/id529479190,2026-05-21
+Brawl Stars,Supercell,iOS,19,Action,4.7,5000000,Free,Yes,Yes,Hero Shooter,Trophy Road,MOBA|Action,https://apps.apple.com/app/brawl-stars/id1229019807,2026-05-21
+Marvel Snap,Second Dinner,iOS,20,Card,4.6,500000,Free,Yes,Yes,Card Battler,Collection Level,Card Game|Marvel,https://apps.apple.com/app/marvel-snap/id1592047585,2026-05-21
+Subway Surfers,SYBO Games,iOS,9,Arcade,4.6,35000000,Free,Yes,No,Endless Runner,Daily Challenges,Casual|Runner,https://apps.apple.com/app/subway-surfers/id512939461,2026-05-21
+Brawl Stars,Supercell,Android,10,Action,4.5,4000000,Free,Yes,Yes,3v3 Combat,Trophy Road,Action|Team,https://play.google.com/store/apps/details?id=com.supercell.brawlstars,2026-05-21
+Clash Royale,Supercell,iOS,11,Strategy,4.3,5000000,Free,Yes,Yes,Card Battler,Clan Chests,PvP|Cards,https://apps.apple.com/app/clash-royale/id1053012308,2026-05-21
+Honor of Kings,Level Infinite,iOS,13,MOBA,4.7,200000,Free,Yes,Yes,5v5 MOBA,Season Skins,Competitive|MOBA,https://apps.apple.com/app/honor-of-kings/id6444677789,2026-05-21
+League of Legends: Wild Rift,Riot Games,Android,14,MOBA,4.4,1000000,Free,Yes,No,5v5 MOBA,Weekly Missions,Competitive|Strategy,https://play.google.com/store/apps/details?id=com.riotgames.league.wildrift,2026-05-21
+Mobile Legends: Bang Bang,Moonton,iOS,15,MOBA,4.2,3000000,Free,Yes,Yes,5v5 MOBA,Daily Login,MOBA|Social,https://apps.apple.com/app/mobile-legends-bang-bang/id1173076483,2026-05-21
+Free Fire,Garena,Android,16,Action,4.1,10000000,Free,Yes,Yes,Battle Royale,Guild Wars,Shooter|Action,https://play.google.com/store/apps/details?id=com.dts.freefireth,2026-05-21
+Coin Master,Moon Active,iOS,17,Casual,4.4,5000000,Free,Yes,No,Slot Machine Village,Events,Casual|Gambling,https://apps.apple.com/app/coin-master/id1200391119,2026-05-21
+Gardenscapes,Playrix,Android,18,Puzzle,4.6,4000000,Free,Yes,Yes,Match-3 Decoration,Season Events,Puzzle|Casual,https://play.google.com/store/apps/details?id=com.playrix.gardenscapes,2026-05-21
+Homescapes,Playrix,iOS,19,Puzzle,4.6,3000000,Free,Yes,Yes,Match-3 Decoration,Team Chests,Puzzle|Decoration,https://apps.apple.com/app/homescapes/id1195933360,2026-05-21
+Township,Playrix,Android,20,Simulation,4.7,5000000,Free,Yes,Yes,City Building,Regatta,Simulation|Casual,https://play.google.com/store/apps/details?id=com.playrix.township,2026-05-21
+Fishdom,Playrix,iOS,21,Puzzle,4.5,2000000,Free,Yes,Yes,Match-3 Aquarium,Special Events,Puzzle|Casual,https://apps.apple.com/app/fishdom/id664575161,2026-05-21
+Hay Day,Supercell,Android,22,Simulation,4.5,5000000,Free,Yes,Yes,Farming,Derby,Simulation|Farming,https://play.google.com/store/apps/details?id=com.supercell.hayday,2026-05-21
+8 Ball Pool,Miniclip,iOS,23,Sports,4.7,6000000,Free,Yes,Yes,Pool Multiplayer,Victory Boxes,Sports|Casual,https://apps.apple.com/app/8-ball-pool/id543186831,2026-05-21
+Angry Birds 2,Rovio,Android,24,Arcade,4.5,4000000,Free,Yes,No,Physics Puzzle,Daily Quests,Puzzle|Casual,https://play.google.com/store/apps/details?id=com.rovio.baba,2026-05-21
+Asphalt 9: Legends,Gameloft,iOS,25,Racing,4.7,500000,Free,Yes,Yes,Arcade Racing,Events,Racing|Multiplayer,https://apps.apple.com/app/asphalt-9-legends/id805603214,2026-05-21
+Mario Kart Tour,Nintendo,Android,26,Racing,4.0,1500000,Free,Yes,Yes,Kart Racing,Cups,Racing|Nintendo,https://play.google.com/store/apps/details?id=com.nintendo.zaka,2026-05-21
+Hearthstone,Blizzard,iOS,27,Card,4.7,1000000,Free,Yes,Yes,CCG,Quests,Strategy|CCG,https://apps.apple.com/app/hearthstone/id625997574,2026-05-21
+MARVEL SNAP,Second Dinner,Android,28,Card,4.5,200000,Free,Yes,Yes,Fast Paced CCG,Ranked Ladder,Strategy|Marvel,https://play.google.com/store/apps/details?id=com.nvsgames.snap,2026-05-21
+Diablo Immortal,Blizzard,iOS,29,RPG,4.5,300000,Free,Yes,Yes,Action RPG,Daily Bounties,RPG|Action,https://apps.apple.com/app/diablo-immortal/id1492005122,2026-05-21
+RAID: Shadow Legends,Plarium,Android,30,RPG,4.6,1000000,Free,Yes,No,Turn-Based RPG,Daily Missions,RPG|Gacha,https://play.google.com/store/apps/details?id=com.plarium.raidlegends,2026-05-21
+Dragon Ball Z Dokkan Battle,Bandai Namco,iOS,31,Action,4.8,500000,Free,Yes,No,Puzzle Action,Celebrations,Anime|Action,https://apps.apple.com/app/dragon-ball-z-dokkan-battle/id951627425,2026-05-21
+Fate/Grand Order,Aniplex,Android,32,RPG,4.5,100000,Free,Yes,No,Turn-Based RPG,Events,Anime|RPG,https://play.google.com/store/apps/details?id=com.aniplex.fategrandorder.en,2026-05-21
+Monster Hunter Now,Niantic,iOS,33,Action,4.7,50000,Free,Yes,No,AR Hunting,Events,AR|Action,https://apps.apple.com/app/monster-hunter-now/id6445995266,2026-05-21
+Eggy Party,NetEase,Android,34,Casual,4.3,50000,Free,Yes,Yes,Party Royale,Battle Pass,Casual|Social,https://play.google.com/store/apps/details?id=com.netease.eggyparty,2026-05-21
+Co-Star Personalized Astrology,Co-Star Astrology,iOS,1,Astrology,4.8,100000,Free,Yes,No,AI Birth Chart,Daily Push Notifications,Astrology|AI,https://apps.apple.com/app/co-star-personalized-astrology/id1264782561,2026-05-21
+The Pattern,The Pattern Business,iOS,2,Social,4.7,50000,Free,Yes,Yes,Relationship Insights,Personal Updates,Psychology|Astrology,https://apps.apple.com/app/the-pattern/id1071085727,2026-05-21
+Nebula: Horoscope & Astrology,Obrio,Android,3,Astrology,4.6,200000,Free,Yes,Yes,Daily Horoscopes,Subscription Content,Horoscope|Lifestyle,https://play.google.com/store/apps/details?id=com.astrology.nebula,2026-05-21
+Daily Horoscope,Comitic,Android,4,Astrology,4.7,1000000,Free,Yes,No,Sun Sign Info,Daily Reminders,Traditional Astrology,https://play.google.com/store/apps/details?id=org.android_etoile.horoscope,2026-05-21
+Sanctuary Astrology,Sanctuary World,iOS,5,Astrology,4.7,15000,Free,Yes,Yes,Live Readings,Daily Tarot,Spiritual|Live Chat,https://apps.apple.com/app/sanctuary-astrology-psychic/id1410135768,2026-05-21
+TimePassages,AstroGraph,iOS,6,Astrology,4.8,20000,Free,Yes,No,Detailed Charts,Transit Tracking,Astrology Tools,https://apps.apple.com/app/timepassages/id488946918,2026-05-21
+AstroClick,AstroClick Ltd,Android,7,Astrology,4.4,10000,Free,Yes,No,Birth Charts,Interactive Maps,Maps|Astrology,https://play.google.com/store/apps/details?id=com.astroclick,2026-05-21
+iHoroscope,Adviqo,iOS,8,Astrology,4.5,10000,Free,Yes,Yes,Psychic Chat,Live Consultations,Consulting|Spiritual,https://apps.apple.com/app/ihoroscope-2024-daily-horo/id501097240,2026-05-21
+Astrolink,Astrolink,Android,9,Astrology,4.5,100000,Free,Yes,Yes,Astral Map,Compatible Dating,Community|Dating,https://play.google.com/store/apps/details?id=com.astrolink,2026-05-21
+Faladdin,Faladdin,Android,10,Fortune Telling,4.6,500000,Free,Yes,No,Coffee Cup Reading,Daily Fortune,Esoteric|Tradition,https://play.google.com/store/apps/details?id=com.faladdin.app,2026-05-21
+Astrology - Horoscope,Apps4Stars,iOS,11,Astrology,4.7,50000,Free,Yes,Yes,Daily Reports,Push Notifications,Daily|Simple,https://apps.apple.com/app/astrology-horoscope/id123456789,2026-05-21
+Chani,Chani Nicholas,iOS,12,Spiritual,4.9,20000,Free,Yes,Yes,Birth Chart Analysis,Audio Meditations,Meditation|Spiritual,https://apps.apple.com/app/chani/id1534069811,2026-05-21
+Moonly,Moonly,iOS,13,Lifestyle,4.8,100000,Free,Yes,Yes,Lunar Calendar,Affirmations,Moon Phase|Self-care,https://apps.apple.com/app/moonly-lunar-calendar/id1485603770,2026-05-21
+Astrotalk,Astrotalk,Android,14,Astrology,4.6,75000,Free,Yes,No,Live Sessions,Consultation History,Live|Astrologer,https://play.google.com/store/apps/details?id=com.astrotalk,2026-05-21
+Labyrinthos,Labyrinthos,iOS,15,Tarot,4.9,15000,Free,No,No,Tarot Academy,Reading Journal,Tarot|Education,https://apps.apple.com/app/labyrinthos-tarot-reading/id1281014352,2026-05-21
+Astrology.com,Astrology.com,Android,18,Astrology,4.5,10000,Free,Yes,Yes,Birth Chart,Daily Readings,Information|Charts,https://play.google.com/store/apps/details?id=com.astrology.android,2026-05-21
+Up Astrology,Up Astrology,iOS,19,Spiritual,4.8,5000,Free,Yes,Yes,AI Astrology,Relationship Analysis,AI|Insight,https://apps.apple.com/app/up-astrology/id1455581335,2026-05-21
+Astrology Master,Astrology Master,Android,20,Astrology,4.4,20000,Free,Yes,Yes,Professional Charts,Transit Reports,Advanced|Calculations,https://play.google.com/store/apps/details?id=com.astrologymaster,2026-05-21
+Co-Star,Co-Star Astrology,iOS,5,Astrology,4.8,200000,Free,Yes,Yes,AI Horoscopes,Push Notifications,AI|Personalized,https://apps.apple.com/app/co-star-astrology/id1264782566,2026-05-21
+The Pattern,The Pattern Astrology,Android,6,Social,4.7,50000,Free,Yes,Yes,Relationship Compatibility,Daily Insights,Psychology|Social,https://play.google.com/store/apps/details?id=com.thepattern.app,2026-05-21
+Sanctuary,Sanctuary Astrology,iOS,7,Astrology,4.7,20000,Free,Yes,Yes,Live Readings,Daily Tarot,Live|Tarot,https://apps.apple.com/app/sanctuary-astrology-tarot/id1410135768,2026-05-21
+Nebula,Obrio,Android,8,Astrology,4.6,100000,Free,Yes,Yes,Horoscope & Compatibility,Daily Updates,Astrology|Horoscope,https://play.google.com/store/apps/details?id=com.nebula.astrology,2026-05-21
+Daily Horoscope,Comitic,iOS,9,Astrology,4.8,500000,Free,Yes,No,Daily Forecast,Reminders,Classic|Zodiac,https://apps.apple.com/app/daily-horoscope/id363713028,2026-05-21
+TimePassages,AstroGraph,Android,10,Astrology,4.8,10000,Free,Yes,Yes,Chart Calculations,Daily Transit,Expert|Charts,https://play.google.com/store/apps/details?id=com.astrograph.timepassages,2026-05-21
+Astrology Zone,Susan Miller,iOS,11,Astrology,4.4,15000,Free,Yes,Yes,Long-form Horoscopes,Monthly Reports,Author-led|Detailed,https://apps.apple.com/app/astrology-zone-susan-miller/id419267860,2026-05-21
+Hint,Hint,Android,12,Astrology,4.5,30000,Free,Yes,Yes,Personal Astrologer,1-on-1 Chat,Coaching|Service,https://play.google.com/store/apps/details?id=com.hint.astrology,2026-05-21
+Astro-Link,Astro-Link,Android,14,Astrology,4.6,5000,Free,Yes,Yes,Natal Charts,Synastry,Brazilian|Technical,https://play.google.com/store/apps/details?id=com.astrolink,2026-05-21
+Kasamba,Kasamba,iOS,15,Lifestyle,4.6,10000,Free,Yes,No,Psychic Readings,Live Chat,Psychic|Marketplace,https://apps.apple.com/app/kasamba-psychic-reading/id415513511,2026-05-21
+Keen,Keen,Android,16,Lifestyle,4.5,8000,Free,Yes,No,Psychic Advice,Phone Readings,Psychic|Service,https://play.google.com/store/apps/details?id=com.keen.psychic,2026-05-21
+Purple Ocean,Purple Ocean,iOS,17,Lifestyle,4.7,25000,Free,Yes,No,Video Readings,Advisors,Video|Psychic,https://apps.apple.com/app/purple-ocean-psychic-reading/id691079367,2026-05-21
+PsychicBook,PsychicBook,Android,18,Lifestyle,4.6,2000,Free,Yes,No,Psychic Directory,Reviews,Marketplace|Psychic,https://play.google.com/store/apps/details?id=com.psychicbook,2026-05-21
+Horoscope & Astrology,Adviqo,iOS,19,Astrology,4.7,10000,Free,Yes,Yes,Daily Horoscope,Push Advice,Classic|Zodiac,https://apps.apple.com/app/horoscope-astrology-2024/id625348874,2026-05-21
+AstroMatrix,AstroMatrix,Android,20,Astrology,4.7,40000,Free,Yes,Yes,Birth Chart Reports,Daily Transits,Detailed|Technical,https://play.google.com/store/apps/details?id=com.astromatrix.horoscopes,2026-05-21
+UpAstrology,UpAstrology,iOS,21,Astrology,4.8,5000,Free,Yes,Yes,Personalized Charts,Compatibility,Modern|UI,https://apps.apple.com/app/upastrology-horoscope-chart/id1472855132,2026-05-21
+MySign,MySign,Android,22,Astrology,4.5,1000,Free,Yes,Yes,Astrology Hub,Daily Feed,Community|Hub,https://play.google.com/store/apps/details?id=com.mysign,2026-05-21
+Astrology Master,Astrology Master,iOS,23,Astrology,4.6,2000,Free,Yes,Yes,Professional Astrology,Charts,Expert|Tools,https://apps.apple.com/app/astrology-master/id1481541461,2026-05-21
+Sun Signs,Sun Signs,Android,24,Astrology,4.4,5000,Free,Yes,No,Direct Horoscopes,Simple UI,Basic|Zodiac,https://play.google.com/store/apps/details?id=com.sunsigns,2026-05-21
+Zodiac Touch,Zodiac Touch,iOS,25,Lifestyle,4.7,12000,Free,Yes,No,Psychic Chat,Live Advisors,Psychic|Engagement,https://apps.apple.com/app/zodiac-touch-psychic-reading/id527632943,2026-05-21
+Horos,Horos,Android,26,Astrology,4.5,15000,Free,Yes,Yes,Open Source Astrology,Community,OpenSource|Technical,https://play.google.com/store/apps/details?id=org.horosproject.horos,2026-05-21
+Star Gazer,Star Gazer,iOS,27,Astrology,4.6,3000,Free,Yes,No,Sky Map,AR Stars,AR|Sky,https://apps.apple.com/app/star-gazer/id445203370,2026-05-21
+Astrology & Palmistry,Gismart,Android,28,Astrology,4.3,50000,Free,Yes,Yes,Palm Reading,Daily Forecast,Palmistry|Zodiac,https://play.google.com/store/apps/details?id=com.gismart.astrology.palmistry,2026-05-21
+AstroVeda,AstroVeda,iOS,29,Astrology,4.7,8000,Free,Yes,Yes,Vedic Astrology,Real Astrologers,Vedic|Indian,https://apps.apple.com/app/astroveda-vedic-astrology/id1011681200,2026-05-21
+Chaturanga Astrology,Chaturanga,Android,30,Astrology,4.7,10000,Free,Yes,Yes,Ask Astrologer,Chat,Service|Vedic,https://play.google.com/store/apps/details?id=com.chaturanga.astrology,2026-05-21
+Yodha My Astrology,Yodha,iOS,31,Astrology,4.8,40000,Free,Yes,Yes,Vedic Predictions,Personal Chat,Vedic|Service,https://apps.apple.com/app/yodha-my-astrology/id1004354084,2026-05-21
+Sanctuary Astrology,Sanctuary,Android,32,Astrology,4.6,5000,Free,Yes,Yes,Tarot + Astrology,Daily Content,Multimedia|Content,https://play.google.com/store/apps/details?id=com.sanctuaryworld.sanctuary,2026-05-21
+Cosmic Insights,Cosmic Insights,iOS,33,Astrology,4.8,6000,Free,Yes,Yes,Detailed Vedic,Charts,Vedic|Professional,https://apps.apple.com/app/cosmic-insights-astrology/id1188350033,2026-05-21
+Align,Align Astrology,Android,34,Social,4.5,2000,Free,Yes,No,Astrological Dating,Matching,Dating|Zodiac,https://play.google.com/store/apps/details?id=com.align.astrology,2026-05-21
+Zepeto,Naver Z,iOS,1,Metaverse,4.6,200000,Free,Yes,Yes,3D Avatar Creation,Social Feed,Avatar|Fashion,https://apps.apple.com/app/zepeto/id1350301428,2026-05-21
+Bitmoji,Snap Inc.,iOS,2,Personalization,4.8,1000000,Free,No,No,Cartoon Avatars,Sticker Integration,Social|Keyboard,https://apps.apple.com/app/bitmoji/id868077558,2026-05-21
+Genies,Genies Inc,iOS,3,Metaverse,4.3,5000,Free,No,No,Digital Fashion,NFT Integration,Crypto|Identity,https://genies.com/,2026-05-21
+IMVU,IMVU Inc,Android,4,Social,4.2,1000000,Free,Yes,Yes,3D Chat Rooms,Virtual Economy,Social|World,https://play.google.com/store/apps/details?id=com.imvu.mobileen,2026-05-21
+Ready Player Me,Wolf3D,Web,5,Identity,4.5,0,Free,No,No,Cross-platform Avatars,API Integration,Developer|Metaverse,https://readyplayer.me/,2026-05-21
+VRChat,VRChat Team,PC/Quest,6,Social,4.4,100000,Free,No,Yes,VR Socializing,User Content,Community|VR,https://hello.vrchat.com/,2026-05-21
+Lensa AI,Prisma Labs,iOS,7,Photo/Video,4.6,500000,Free,Yes,Yes,AI Magic Avatars,Photo Editing,AI|Art,https://apps.apple.com/app/lensa-ai-photo-editor-video/id1438467439,2026-05-21
+Avakin Life,Lockwood Publishing,Android,8,Simulation,4.3,2000000,Free,Yes,Yes,Avatar Customization,Fashion Contests,Social|Roleplay,https://play.google.com/store/apps/details?id=com.lockwoodpublishing.avakinlife,2026-05-21
+Memoji,Apple Inc,iOS,9,System,4.8,0,Built-in,No,No,Facial Tracking,OS Integration,System|Communication,https://support.apple.com/en-us/118243,2026-05-21
+Toca Life World,Toca Boca,iOS,10,Kids,4.6,1000000,Free,Yes,No,World Building,Character Customization,Kids|Creative,https://apps.apple.com/app/toca-life-world/id1208138954,2026-05-21
+Bitmoji,Snap Inc.,Android,12,Stickers,4.5,10000000,Free,No,No,Avatar Stickers,Snapchat Integration,Customizable|Icons,https://play.google.com/store/apps/details?id=com.bitstrips.imoji,2026-05-21
+IMVU,IMVU,iOS,13,Social,4.1,800000,Free,Yes,Yes,Virtual World Chat,Fashion Shop,3D|Social,https://apps.apple.com/app/imvu-3d-avatar-creator-chat/id915453705,2026-05-21
+Avatoon,Facemoji,Android,15,Photo,4.6,1200000,Free,Yes,Yes,Photo-to-Avatar,Outfit Styling,AI|Stickers,https://play.google.com/store/apps/details?id=com.putatoglobal.avatoon,2026-05-21
+Second Life,Linden Lab,desktop,17,Social,4.0,0,Free,Yes,Yes,User Generated World,Real Economy,Legacy|Metaverse,https://secondlife.com,2026-05-21
+VRChat,VRChat Inc.,Steam,18,Social,4.5,150000,Free,Yes,Yes,User-made Avatars,Commmunity Rooms,VR|Social,https://store.steampowered.com/app/438100/VRChat/,2026-05-21
+Boo: Dating. Friends. Chat.,Boo Next,iOS,19,Lifestyle,4.7,300000,Free,Yes,Yes,MBTI Avatars,Personality Match,Dating|Avatar,https://apps.apple.com/app/boo-dating-friends-chat/id1472535032,2026-05-21
+Meing,Meing,iOS,20,Social,4.2,10000,Free,Yes,Yes,3D Modeling,Social Grouping,Chinese Market|3D,https://apps.apple.com/app/meing/id123456789,2026-05-21
+Gacha Life,Lunime,iOS,9,Casual,4.6,500000,Free,No,No,Avatar Maker & Studio,Mini Games,Anime|Creative,https://apps.apple.com/app/gacha-life/id1437119354,2026-05-21
+Gacha Club,Lunime,Android,10,Casual,4.5,1000000,Free,No,No,Battle & Customization,Mini Games,Anime|Customization,https://play.google.com/store/apps/details?id=com.lunime.gachaclub,2026-05-21
+Rec Room,Rec Room,iOS,11,Social,4.7,200000,Free,Yes,Yes,UGC Metaverse,Daily Objectives,VR|UGC,https://apps.apple.com/app/rec-room/id1206180554,2026-05-21
+VRChat,VRChat Inc.,Android,12,Social,4.2,50000,Free,No,Yes,Social VR,Community Worlds,VR|Social,https://play.google.com/store/apps/details?id=com.vrchat.mobile,2026-05-21
+Highrise,Pocket Worlds,iOS,13,Social,4.5,100000,Free,Yes,Yes,Avatar Social Club,Events,2D|Social,https://apps.apple.com/app/highrise-virtual-metaverse/id924589679,2026-05-21
+MovieStarPlanet,MovieStarPlanet,Android,14,Social,4.1,500000,Free,Yes,Yes,Social Game,Weekly Themes,Social|Kids,https://play.google.com/store/apps/details?id=air.com.moviestarplanet.android,2026-05-21
+PK XD,Afterverse,Android,16,Adventure,4.5,2000000,Free,Yes,Yes,Open World Social,Minigame Seasons,Kids|Social,https://play.google.com/store/apps/details?id=com.movile.playkids.pkxd,2026-05-21
+BuddyPoke,BuddyPoke,iOS,17,Social,4.2,10000,Free,Yes,No,3D Avatars,Animations,3D|Friends,https://apps.apple.com/app/buddypoke-3d-avatar-creator/id451270246,2026-05-21
+ItsMe,ItsMe,Android,18,Social,4.0,20000,Free,Yes,No,Avatar Video Chat,Random Connect,Social|Privacy,https://play.google.com/store/apps/details?id=com.itsme.app,2026-05-21
+Boo,Boo,iOS,19,Social,4.3,50000,Free,Yes,Yes,Personality Matching,Daily Feed,Dating|Psychology,https://apps.apple.com/app/boo-dating-friends-chat/id1437142104,2026-05-21
+FaceEmoji,FaceEmoji,Android,20,Social,4.2,100000,Free,Yes,Yes,Emoji Keyboard,Personalization,Keyboard|Utility,https://play.google.com/store/apps/details?id=com.faceemoji,2026-05-21
+Meitu,Meitu,iOS,21,Photo & Video,4.8,1000000,Free,Yes,Yes,AI Photo Editor,Filters,Beauty|AI,https://apps.apple.com/app/meitu-ai-photo-video-editor/id416048305,2026-05-21
+Genies,Genies,Android,22,Social,4.0,5000,Free,No,No,Avatar Integration,Brand Drops,Brands|3D,https://play.google.com/store/apps/details?id=com.genies,2026-05-21
+Ready Player Me,Wolf3D,iOS,23,Utilities,4.5,1000,Free,No,No,Cross-game Avatars,Hub,B2B|Metaverse,https://apps.apple.com/app/ready-player-me/id1571431633,2026-05-21
+Woozworld,Woozworld,Android,24,Social,4.0,100000,Free,Yes,Yes,Virtual Fashion World,Style Contests,Fashion|Social,https://play.google.com/store/apps/details?id=com.woozworld.woozworld.mobile,2026-05-21
+Avatoon,IdeaWalk,iOS,25,Social,4.7,300000,Free,Yes,Yes,Cartoon Avatar Maker,Daily Coins,Cartoon|Creative,https://apps.apple.com/app/avatoon-avatar-creator/id1491223126,2026-05-21
+Dollify,Dave XP,Android,26,Lifestyle,4.6,500000,Free,Yes,No,Cute Avatar Maker,Sharing,Art|Simple,https://play.google.com/store/apps/details?id=com.davexp.dollify,2026-05-21
+Pastel Girl,SeyeonSoft,iOS,27,Casual,4.8,100000,Free,Yes,No,Pastel Aesthetics,Relaxation,Healing|Art,https://apps.apple.com/app/pastel-girl/id1346700492,2026-05-21
+Lily Diary,SeyeonSoft,Android,28,Casual,4.7,200000,Free,Yes,No,Dress Up Hub,Collections,Fashion|Art,https://play.google.com/store/apps/details?id=com.seyeonsoft.lilydiary,2026-05-21
+Unnie Doll,SeyeonSoft,iOS,29,Casual,4.6,50000,Free,Yes,No,Cute Unnie Maker,Dressing,K-Style|Art,https://apps.apple.com/app/unnie-doll/id1438234321,2026-05-21
+Oppa Doll,SeyeonSoft,Android,30,Casual,4.6,40000,Free,Yes,No,Cute Oppa Maker,Dressing,K-Style|Art,https://play.google.com/store/apps/details?id=com.seyeonsoft.oppadoll,2026-05-21
+Vlinder Doll,31 Dress up Games,iOS,31,Casual,4.5,20000,Free,Yes,No,Anime Dressup,Gacha,Anime|Fashion,https://apps.apple.com/app/vlinder-doll-dress-up-games/id1527339452,2026-05-21
+Avatar Maker: Anime,Avatars,Android,32,Casual,4.4,100000,Free,Yes,No,Anime Portraits,Profile Pics,Anime|Generator,https://play.google.com/store/apps/details?id=com.avatars.animemaker,2026-05-21
+SuperMoji,SuperMoji,iOS,33,Entertainment,4.3,10000,Free,No,No,AR Emoji,Real-time tracking,AR|Fun,https://apps.apple.com/app/supermoji-the-emoji-app/id1300713928,2026-05-21
+Mirror AI,Mirror AI,Android,34,Social,4.5,100000,Free,Yes,Yes,Personalized Emoji,WhatsApp Support,AI|Stickers,https://play.google.com/store/apps/details?id=com.mirrorai.mirror,2026-05-21
+Noom,Noom Inc,iOS,1,Health/Fitness,4.7,500000,Free,No,Yes,Psychology-based Weight Loss,Habit Tracking,Diet|Behavior,https://apps.apple.com/app/noom-weight-loss-health/id634515564,2026-05-21
+BetterHelp,BetterHelp,iOS,2,Health/Fitness,4.8,100000,Free,No,Yes,Online Therapy,Message-based Coaching,Medical|Therapy,https://apps.apple.com/app/betterhelp-therapy/id995252073,2026-05-21
+Future,Future Performance,iOS,3,Fitness,4.9,10000,Free,No,Yes,Personal Training,1-on-1 Video calls,Performance|Fitness,https://www.future.co/,2026-05-21
+MasterClass,Yanka Industries,iOS,4,Education,4.8,100000,Free,No,Yes,Celebrity Led Courses,Video Lessons,Learning|Inspiration,https://apps.apple.com/app/masterclass-learn-new-skills/id1050075518,2026-05-21
+LinkedIn Learning,LinkedIn,iOS,5,Education,4.7,50000,Free,No,Yes,Professional Skills,Certifications,Work|Career,https://apps.apple.com/app/linkedin-learning/id1084440492,2026-05-21
+Coursera,Coursera Inc,Android,6,Education,4.7,500000,Free,Yes,Yes,University Courses,Degree Programs,Career|Education,https://play.google.com/store/apps/details?id=org.coursera.android,2026-05-21
+Duolingo,Duolingo,iOS,7,Education,4.7,2000000,Free,Yes,Yes,Language Learning,Gamification Streak,Skills|Language,https://apps.apple.com/app/duolingo/id500116666,2026-05-21
+Replika,Luka Inc,iOS,8,Health/Fitness,4.5,200000,Free,Yes,Yes,AI Companion,Emotional Support,AI|Mental Health,https://apps.apple.com/app/replika-my-ai-friend/id1159937538,2026-05-21
+Fitbit,Fitbit Inc,Android,9,Health/Fitness,4.3,1000000,Free,No,Yes,Health Tracking,Data Insights,Wearable|Health,https://play.google.com/store/apps/details?id=com.fitbit.FitbitMobile,2026-05-21
+MyFitnessPal,MyFitnessPal,iOS,10,Health/Fitness,4.7,1000000,Free,No,Yes,Calorie Counting,Meal Logging,Health|Diet,https://apps.apple.com/app/myfitnesspal/id341232718,2026-05-21
+BetterUp,BetterUp,iOS,11,Education,4.8,10000,Free,No,Yes,Professional Coaching,Resilience Training,Corporate|Career,https://apps.apple.com/app/betterup/id1040439626,2026-05-21
+Noom,Noom,Android,12,Health,4.4,800000,Free,Yes,Yes,Psychology-based Weight Loss,Habit Tracking,Health|Psychology,https://play.google.com/store/apps/details?id=com.wms.noom,2026-05-21
+Coursera,Coursera,iOS,13,Education,4.8,200000,Free,No,Yes,Professional Certificates,Guided Projects,Academic|Upskilling,https://apps.apple.com/app/coursera/id736535961,2026-05-21
+Coach.me,Coach.me,Android,15,Productivity,4.3,20000,Free,Yes,Yes,Habit Coaching,Community Support,Habits|Accountability,https://play.google.com/store/apps/details?id=com.lift.app,2026-05-21
+Fabulous,Fabulous,iOS,16,Lifestyle,4.6,500000,Free,Yes,Yes,Routine Building,Behavioral Science,Habit|Motivation,https://apps.apple.com/app/fabulous-daily-routine-planner/id1203637303,2026-05-21
+BetterHelp,BetterHelp,Android,17,Health,4.7,100000,Free,No,Yes,Live Therapy,Secure Messaging,Counseling|Clinical,https://play.google.com/store/apps/details?id=com.betterhelp,2026-05-21
+Duolingo,Duolingo,Android,19,Education,4.7,20000000,Free,Yes,Yes,Gamified Language Learning,Leaderboards,Gamification|Language,https://play.google.com/store/apps/details?id=com.duolingo,2026-05-21
+Peloton,Peloton,iOS,20,Health,4.9,1000000,Free,Yes,Yes,Live Fitness Classes,Athlete Tracking,Community|Workout,https://apps.apple.com/app/peloton-at-home-fitness/id792750948,2026-05-21
+MyFitnessPal,MyFitnessPal,Android,8,Health & Fitness,4.6,2500000,Free,Yes,Yes,Calorie Counting,Streaks,Diet|Fitness,https://play.google.com/store/apps/details?id=com.myfitnesspal.android,2026-05-21
+Lifesum,Lifesum,iOS,9,Health & Fitness,4.7,100000,Free,Yes,Yes,Meal Planning,Water Tracker,Diet|Habits,https://apps.apple.com/app/lifesum-diet-weight-loss/id475149620,2026-05-21
+Fabulous,The Fabulous,Android,10,Health & Fitness,4.6,400000,Free,Yes,Yes,Routine Building,Journeys,Habits|MentalHealth,https://play.google.com/store/apps/details?id=co.thefabulous.app,2026-05-21
+Habitica,HabitRPG,iOS,11,Productivity,4.8,50000,Free,Yes,No,Gamified Habits,Avatar RPG,Gamification|Habits,https://apps.apple.com/app/habitica/id994882113,2026-05-21
+Streaks,Crunchy Bagel,iOS,12,Health & Fitness,4.8,20000,Paid,No,No,To-do List Habits,Streaks,Minimal|Habits,https://apps.apple.com/app/streaks/id963034692,2026-05-21
+Way of Life,Way of Life,Android,13,Health & Fitness,4.6,10000,Free,Yes,Yes,Trend Charts,Reminders,Data|Habits,https://play.google.com/store/apps/details?id=com.wayoflife.app,2026-05-21
+Strides,Strides,iOS,14,Productivity,4.8,15000,Free,Yes,Yes,Goal Tracking,Milestones,Goals|Business,https://apps.apple.com/app/strides-goal-habit-tracker/id671632505,2026-05-21
+Productive,Apalon,Android,15,Productivity,4.5,100000,Free,Yes,Yes,Daily Planner,Success Stats,Habits|Planner,https://play.google.com/store/apps/details?id=com.apalon.productive,2026-05-21
+Done,TreeBetty,iOS,16,Health & Fitness,4.7,30000,Free,Yes,Yes,Simple Habit Tracker,Progress Bars,Productive|Minimal,https://apps.apple.com/app/done-a-simple-habit-tracker/id1103961876,2026-05-21
+Loop Habit Tracker,Alora,Android,17,Productivity,4.8,100000,Free,No,No,Ad-free Tracker,Open Source,Privacy|Habits,https://play.google.com/store/apps/details?id=org.isoron.uhabits,2026-05-21
+GoalsWon,GoalsWon,iOS,18,Productivity,4.9,1000,Paid,No,Yes,Human Accountability,Daily Review,Human|Goals,https://apps.apple.com/app/goalswon/id1534005881,2026-05-21
+Clarity,Clarity,Android,19,Productivity,4.6,5000,Free,Yes,Yes,Executive Coaching,Resource Library,Business|Focus,https://play.google.com/store/apps/details?id=com.clarity,2026-05-21
+GrowthSpace,GrowthSpace,iOS,20,Business,4.7,500,Paid,No,Yes,Employee Development,Missions,Corporate|Skills,https://apps.apple.com/app/growthspace/id1500030000,2026-05-21
+Torch,Torch,Android,21,Business,4.5,200,Paid,No,Yes,Leadership Coaching,Assessments,Corporate|Leadership,https://play.google.com/store/apps/details?id=com.torch,2026-05-21
+Sharpist,Sharpist,iOS,22,Business,4.8,1000,Paid,No,Yes,Guided Coaching,Mobile Learning,Learning|Professional,https://apps.apple.com/app/sharpist/id1453255153,2026-05-21
+Bravely,Bravely,Android,23,Business,4.6,300,Paid,No,Yes,Urgent Support,HR Integration,Corporate|Crisis,https://play.google.com/store/apps/details?id=com.bravely,2026-05-21
+Talkspace,Talkspace,Android,25,Health & Fitness,4.3,50000,Free,Yes,Yes,Online Therapy,Weekly Sessions,MentalHealth|Support,https://play.google.com/store/apps/details?id=com.talkspace.talkspace,2026-05-21
+Ginger,Ginger.io,iOS,26,Health & Fitness,4.7,5000,Paid,No,Yes,Emotional Support,Text-based Coach,MentalHealth|Corporate,https://apps.apple.com/app/ginger-emotional-support/id552467389,2026-05-21
+Mindset,Mindset,Android,27,Health & Fitness,4.5,10000,Free,Yes,Yes,Audio Lessons,Celeb Mentors,Mindset|Audio,https://play.google.com/store/apps/details?id=com.mindset,2026-05-21
+Simple Habit,Simple Habit,iOS,28,Health & Fitness,4.8,50000,Free,Yes,Yes,5-Min Meditations,Contextual Coaching,Mindfulness|Coaching,https://apps.apple.com/app/simple-habit-meditation/id1093360165,2026-05-21
+ThinkUp,ThinkUp,Android,29,Health & Fitness,4.6,20000,Free,Yes,Yes,Positive Affirmations,Self-Talk,Mindset|Positive,https://play.google.com/store/apps/details?id=com.thinkup.thinkup,2026-05-21
+Motivation,Monkey Taps,iOS,30,Health & Fitness,4.8,400000,Free,Yes,Yes,Inspiring Quotes,Widgets,Mindset|Quotes,https://apps.apple.com/app/motivation-daily-quotes/id876080126,2026-05-21
+I am,Monkey Taps,Android,31,Health & Fitness,4.8,100000,Free,Yes,Yes,Daily Affirmations,Reminders,Identity|Positive,https://play.google.com/store/apps/details?id=com.iam.app,2026-05-21
+Gratitude,Pritesh Sankhe,iOS,32,Health & Fitness,4.9,50000,Free,Yes,Yes,Journaling,Vision Board,Journal|Mindset,https://apps.apple.com/app/gratitude-journal-reminders/id1372575227,2026-05-21
+Day One,Automattic,Android,33,Lifestyle,4.7,100000,Free,Yes,Yes,Digital Journaling,Reminders,Journal|Private,https://play.google.com/store/apps/details?id=com.dayoneapp.dayone,2026-05-21
+Reflectly,Reflectly,iOS,34,Health & Fitness,4.6,150000,Free,Yes,Yes,AI Diary,Emotional Tracking,AI|Journal,https://apps.apple.com/app/reflectly-journal-ai-diary/id1241221351,2026-05-21
+Calm,Calm.com,iOS,1,Mindfulness,4.8,1500000,Free,No,Yes,Sleep Stories,Guided Meditations,Wellbeing|Sleep,https://apps.apple.com/app/calm/id571800811,2026-05-21
+Headspace,Headspace Inc,iOS,2,Mindfulness,4.8,900000,Free,No,Yes,Meditation Courses,Mindful Moments,Mindfulness|Focus,https://apps.apple.com/app/headspace-meditation-sleep/id493145008,2026-05-21
+Insight Timer,Insight Network,Android,3,Mindfulness,4.9,400000,Free,Yes,Yes,Free Meditation Library,Timer Function,Community|Yoga,https://play.google.com/store/apps/details?id=com.spotlightsix.ztimes,2026-05-21
+Balance,Elevate Labs,iOS,4,Mindfulness,4.9,100000,Free,No,Yes,Personalized Meditation,Progress Path,Individualized|Spirit,https://apps.apple.com/app/balance-meditation-sleep/id1361350410,2026-05-21
+Waking Up,Waking Up LLC,iOS,5,Mindfulness,4.9,50000,Free,No,Yes,Philosophy Courses,Mindfulness Theory,Spirituality|Logic,https://apps.apple.com/app/waking-up-meditation/id1307736340,2026-05-21
+10% Happier,10% Happier,iOS,6,Mindfulness,4.8,70000,Free,No,Yes,Practical Meditation,Skeptic-friendly Content,Health|Pragmatic,https://apps.apple.com/app/10-happier-meditation/id835927564,2026-05-21
+The Mindfulness App,MindApps,Android,7,Mindfulness,4.4,100000,Free,Yes,Yes,Timed Sessions,Reminders,Simple|Mindful,https://play.google.com/store/apps/details?id=se.mindapps.themindfulnessapp,2026-05-21
+Aura,Aura Health,iOS,9,Mindfulness,4.7,30000,Free,No,Yes,AI Coaching,Mood Tracking,Adaptive|Care,https://apps.apple.com/app/aura-meditation-sleep/id1052216403,2026-05-21
+Stop Breathe & Think,Meredith Corp,Android,10,Mindfulness,4.6,50000,Free,Yes,Yes,Emotional Check-in,Recommended Sessions,Feeling|Aware,https://play.google.com/store/apps/details?id=org.stopbreathethink.app,2026-05-21
+Insight Timer,Insight Network,iOS,11,Health,4.9,400000,Free,Yes,Yes,Huge Free Library,Live Sessions,Community|Meditation,https://apps.apple.com/app/insight-timer-meditation-app/id337472899,2026-05-21
+10% Happier,10% Happier,Android,12,Health,4.8,50000,Free,Yes,Yes,Skeptical-focused Meditation,Course-based,Practical|Focus,https://play.google.com/store/apps/details?id=com.changecollective.tenpercenthappier,2026-05-21
+Smiling Mind,Smiling Mind,iOS,14,Education,4.8,25000,Free,No,No,Non-profit Meditation,School Programs,Accessible|Youth,https://apps.apple.com/app/smiling-mind/id560442518,2026-05-21
+Oak,Oak Meditations,iOS,15,Health,4.8,30000,Free,No,No,Minimalist Design,Unboxed Meditations,Minimalist|UI,https://apps.apple.com/app/oak-meditation-breathing/id1210118319,2026-05-21
+Breethe,Breethe,Android,16,Health,4.6,75000,Free,Yes,Yes,Hypnotherapy Sessions,Sleep Stories,Sleep|Therapy,https://play.google.com/store/apps/details?id=com.loop.breethe,2026-05-21
+Tide,Tide,Android,18,Health,4.7,50000,Free,Yes,Yes,Focus Timer (Pomodoro),Nature Sounds,Productivity|Calm,https://play.google.com/store/apps/details?id=io.moreless.tide,2026-05-21
+Pausa,Pausa,iOS,20,Health,4.5,5000,Free,Yes,Yes,Mindfulness for Work,Stress Relief,Workplace|Wellbeing,https://apps.apple.com/app/pausa/id123456789,2026-05-21
+Headspace,Headspace,Android,6,Health & Fitness,4.7,1000000,Free,Yes,Yes,Guided Meditation,The Wake Up,Education|Meditation,https://play.google.com/store/apps/details?id=com.getsomeheadspace.android,2026-05-21
+Waking Up,Waking Up,Android,8,Health & Fitness,4.8,50000,Free,Yes,Yes,Philosophy & Meditation,Course Progress,SamHarris|Philosophy,https://play.google.com/store/apps/details?id=com.wakingup.app,2026-05-21
+Balance,Elevate Labs,Android,10,Health & Fitness,4.8,50000,Free,Yes,Yes,Personalized Plans,Growth Map,Personalized|UX,https://play.google.com/store/apps/details?id=com.elevateapp.nobu,2026-05-21
+Meditopia,Meditopia,iOS,11,Health & Fitness,4.7,100000,Free,Yes,Yes,Regional Meditation,Offline Access,Global|MentalHealth,https://apps.apple.com/app/meditopia-meditation-sleep/id1218541600,2026-05-21
+Smiling Mind,Smiling Mind,Android,14,Health & Fitness,4.4,20000,Free,No,No,Non-profit Mindfulness,School Programs,Education|Free,https://play.google.com/store/apps/details?id=com.smilingmind.app,2026-05-21
+Zen,Zen,iOS,17,Health & Fitness,4.7,10000,Free,Yes,Yes,Programs & Courses,Reflections,Courses|Peace,https://apps.apple.com/app/zen-meditation-sleep/id1089932823,2026-05-21
+Sanity & Self,Sanity & Self,Android,18,Health & Fitness,4.6,5000,Free,Yes,Yes,Women's Self-Care,Daily Audio,Women|SelfCare,https://play.google.com/store/apps/details?id=com.sanityself.sanityself,2026-05-21
+Portal,Portal Labs,iOS,19,Health & Fitness,4.8,5000,Free,Yes,Yes,3D Soundscapes,Hue Integration,Immersive|Sound,https://apps.apple.com/app/portal-immersive-sleep/id1436144455,2026-05-21
+Slumber,Slumber,Android,20,Health & Fitness,4.6,10000,Free,Yes,Yes,Sleep Stories + Hypnosis,Meditation Mix,Sleep|Hypnosis,https://play.google.com/store/apps/details?id=com.slumbersleepapp.slumber,2026-05-21
+Louna,Loona,iOS,21,Health & Fitness,4.8,30000,Free,Yes,Yes,Sleepscapes & Coloring,Interactive Stories,Art|Sleep,https://apps.apple.com/app/loona-bedtime-calm-relax/id1447443834,2026-05-21
+Endel,Endel,Android,22,Health & Fitness,4.5,50000,Free,Yes,Yes,Generative Soundscapes,Circadian Rhythm,AI|Sound,https://play.google.com/store/apps/details?id=com.endel.endel,2026-05-21
+Rain Rain Sleep Sounds,Timur Gilfanov,iOS,23,Health & Fitness,4.8,100000,Free,Yes,No,Mixable Nature Sounds,Timers,Nature|WhiteNoise,https://apps.apple.com/app/rain-rain-sleep-sounds/id385449313,2026-05-21
+Sleep Cycle,Sleep Cycle AB,Android,24,Health & Fitness,4.5,500000,Free,Yes,Yes,Sleep Tracking,Smart Alarm,Sleep|Analysis,https://play.google.com/store/apps/details?id=com.northcube.sleepcycle,2026-05-21
+Pillow,Neybox,iOS,25,Health & Fitness,4.6,100000,Free,Yes,Yes,Automatic Sleep Tracking,Sleep Reports,Sleep|Health,https://apps.apple.com/app/pillow-sleep-tracker-alarm/id814318683,2026-05-21
+SnoreLab,Reviva Softworks,Android,26,Health & Fitness,4.4,50000,Free,Yes,Yes,Snoring Monitor,Remedies,Sleep|Diagnostics,https://play.google.com/store/apps/details?id=com.snorelab.snorelab,2026-05-21
+AutoSleep,Tantsissa,iOS,27,Health & Fitness,4.7,50000,Paid,No,No,Watch Sleep Tracking,Heart Rate,Watch|Sleep,https://apps.apple.com/app/autosleep-track-sleep-on-watch/id1165924249,2026-05-21
+Rise,Rise Science,Android,28,Health & Fitness,4.7,10000,Free,Yes,Yes,Energy Tracking,Sleep Debt,Energy|Performance,https://play.google.com/store/apps/details?id=com.risescience.rise,2026-05-21
+BetterSleep,Ipnos,iOS,29,Health & Fitness,4.8,250000,Free,Yes,Yes,Relax Melodies,Sleep Meditations,Sleep|Audio,https://apps.apple.com/app/bettersleep-sleep-tracker/id314498380,2026-05-21
+Sleep Sounds,Relaxing Sounds,Android,30,Health & Fitness,4.8,1000000,Free,Yes,No,Nature Melodies,Offline,Nature|WhiteNoise,https://play.google.com/store/apps/details?id=com.mik601.sleepsounds,2026-05-21
+Simple Habit Meditation,Simple Habit,iOS,31,Health & Fitness,4.8,50000,Free,Yes,Yes,On-the-go Meditation,Curated Playlists,Convenience|Meditation,https://apps.apple.com/app/simple-habit-meditation/id1093360165,2026-05-21
+Sleep Time,Azumio,Android,32,Health & Fitness,4.3,100000,Free,Yes,Yes,Alarm & Cycle,Graphing,Sleep|Utility,https://play.google.com/store/apps/details?id=com.azumio.android.sleeptime,2026-05-21
+Sleepzy,Apalon,iOS,33,Health & Fitness,4.5,20000,Free,Yes,Yes,Smart Wake Up,Sleep Tracking,Sleep|Data,https://apps.apple.com/app/sleepzy-sleep-cycle-tracker/id1060930842,2026-05-21
+SleepBot,SleepBot,Android,34,Health & Fitness,4.0,100000,Free,No,No,Sleep Log,Alarm,Legacy|Utility,https://play.google.com/store/apps/details?id=com.lslk.sleepbot,2026-05-21
