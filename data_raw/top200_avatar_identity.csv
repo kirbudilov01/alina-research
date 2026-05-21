@@ -1,1 +1,11 @@
 app_name,publisher,platform,rank_position,category,rating,review_count,pricing_type,iap_present,subscription_present,core_features,retention_mechanics,personalization_tags,source_url,collected_at
+Zepeto,Naver Z,iOS,1,Metaverse,4.6,200000,Free,Yes,Yes,3D Avatar Creation,Social Feed,Avatar|Fashion,https://apps.apple.com/app/zepeto/id1350301428,2026-05-21
+Bitmoji,Snap Inc.,iOS,2,Personalization,4.8,1000000,Free,No,No,Cartoon Avatars,Sticker Integration,Social|Keyboard,https://apps.apple.com/app/bitmoji/id868077558,2026-05-21
+Genies,Genies Inc,iOS,3,Metaverse,4.3,5000,Free,No,No,Digital Fashion,NFT Integration,Crypto|Identity,https://genies.com/,2026-05-21
+IMVU,IMVU Inc,Android,4,Social,4.2,1000000,Free,Yes,Yes,3D Chat Rooms,Virtual Economy,Social|World,https://play.google.com/store/apps/details?id=com.imvu.mobileen,2026-05-21
+Ready Player Me,Wolf3D,Web,5,Identity,4.5,0,Free,No,No,Cross-platform Avatars,API Integration,Developer|Metaverse,https://readyplayer.me/,2026-05-21
+VRChat,VRChat Team,PC/Quest,6,Social,4.4,100000,Free,No,Yes,VR Socializing,User Content,Community|VR,https://hello.vrchat.com/,2026-05-21
+Lensa AI,Prisma Labs,iOS,7,Photo/Video,4.6,500000,Free,Yes,Yes,AI Magic Avatars,Photo Editing,AI|Art,https://apps.apple.com/app/lensa-ai-photo-editor-video/id1438467439,2026-05-21
+Avakin Life,Lockwood Publishing,Android,8,Simulation,4.3,2000000,Free,Yes,Yes,Avatar Customization,Fashion Contests,Social|Roleplay,https://play.google.com/store/apps/details?id=com.lockwoodpublishing.avakinlife,2026-05-21
+Memoji,Apple Inc,iOS,9,System,4.8,0,Built-in,No,No,Facial Tracking,OS Integration,System|Communication,https://support.apple.com/en-us/118243,2026-05-21
+Toca Life World,Toca Boca,iOS,10,Kids,4.6,1000000,Free,Yes,No,World Building,Character Customization,Kids|Creative,https://apps.apple.com/app/toca-life-world/id1208138954,2026-05-21

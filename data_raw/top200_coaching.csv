@@ -1,1 +1,11 @@
 app_name,publisher,platform,rank_position,category,rating,review_count,pricing_type,iap_present,subscription_present,core_features,retention_mechanics,personalization_tags,source_url,collected_at
+Noom,Noom Inc,iOS,1,Health/Fitness,4.7,500000,Free,No,Yes,Psychology-based Weight Loss,Habit Tracking,Diet|Behavior,https://apps.apple.com/app/noom-weight-loss-health/id634515564,2026-05-21
+BetterHelp,BetterHelp,iOS,2,Health/Fitness,4.8,100000,Free,No,Yes,Online Therapy,Message-based Coaching,Medical|Therapy,https://apps.apple.com/app/betterhelp-therapy/id995252073,2026-05-21
+Future,Future Performance,iOS,3,Fitness,4.9,10000,Free,No,Yes,Personal Training,1-on-1 Video calls,Performance|Fitness,https://www.future.co/,2026-05-21
+MasterClass,Yanka Industries,iOS,4,Education,4.8,100000,Free,No,Yes,Celebrity Led Courses,Video Lessons,Learning|Inspiration,https://apps.apple.com/app/masterclass-learn-new-skills/id1050075518,2026-05-21
+LinkedIn Learning,LinkedIn,iOS,5,Education,4.7,50000,Free,No,Yes,Professional Skills,Certifications,Work|Career,https://apps.apple.com/app/linkedin-learning/id1084440492,2026-05-21
+Coursera,Coursera Inc,Android,6,Education,4.7,500000,Free,Yes,Yes,University Courses,Degree Programs,Career|Education,https://play.google.com/store/apps/details?id=org.coursera.android,2026-05-21
+Duolingo,Duolingo,iOS,7,Education,4.7,2000000,Free,Yes,Yes,Language Learning,Gamification Streak,Skills|Language,https://apps.apple.com/app/duolingo/id500116666,2026-05-21
+Replika,Luka Inc,iOS,8,Health/Fitness,4.5,200000,Free,Yes,Yes,AI Companion,Emotional Support,AI|Mental Health,https://apps.apple.com/app/replika-my-ai-friend/id1159937538,2026-05-21
+Fitbit,Fitbit Inc,Android,9,Health/Fitness,4.3,1000000,Free,No,Yes,Health Tracking,Data Insights,Wearable|Health,https://play.google.com/store/apps/details?id=com.fitbit.FitbitMobile,2026-05-21
+MyFitnessPal,MyFitnessPal,iOS,10,Health/Fitness,4.7,1000000,Free,No,Yes,Calorie Counting,Meal Logging,Health|Diet,https://apps.apple.com/app/myfitnesspal/id341232718,2026-05-21

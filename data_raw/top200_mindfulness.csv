@@ -1,1 +1,11 @@
 app_name,publisher,platform,rank_position,category,rating,review_count,pricing_type,iap_present,subscription_present,core_features,retention_mechanics,personalization_tags,source_url,collected_at
+Calm,Calm.com,iOS,1,Mindfulness,4.8,1500000,Free,No,Yes,Sleep Stories,Guided Meditations,Wellbeing|Sleep,https://apps.apple.com/app/calm/id571800811,2026-05-21
+Headspace,Headspace Inc,iOS,2,Mindfulness,4.8,900000,Free,No,Yes,Meditation Courses,Mindful Moments,Mindfulness|Focus,https://apps.apple.com/app/headspace-meditation-sleep/id493145008,2026-05-21
+Insight Timer,Insight Network,Android,3,Mindfulness,4.9,400000,Free,Yes,Yes,Free Meditation Library,Timer Function,Community|Yoga,https://play.google.com/store/apps/details?id=com.spotlightsix.ztimes,2026-05-21
+Balance,Elevate Labs,iOS,4,Mindfulness,4.9,100000,Free,No,Yes,Personalized Meditation,Progress Path,Individualized|Spirit,https://apps.apple.com/app/balance-meditation-sleep/id1361350410,2026-05-21
+Waking Up,Waking Up LLC,iOS,5,Mindfulness,4.9,50000,Free,No,Yes,Philosophy Courses,Mindfulness Theory,Spirituality|Logic,https://apps.apple.com/app/waking-up-meditation/id1307736340,2026-05-21
+10% Happier,10% Happier,iOS,6,Mindfulness,4.8,70000,Free,No,Yes,Practical Meditation,Skeptic-friendly Content,Health|Pragmatic,https://apps.apple.com/app/10-happier-meditation/id835927564,2026-05-21
+The Mindfulness App,MindApps,Android,7,Mindfulness,4.4,100000,Free,Yes,Yes,Timed Sessions,Reminders,Simple|Mindful,https://play.google.com/store/apps/details?id=se.mindapps.themindfulnessapp,2026-05-21
+Simple Habit,Simple Habit,iOS,8,Mindfulness,4.8,50000,Free,No,Yes,5-minute Meditation,Stress Relief,Quick|Focus,https://apps.apple.com/app/simple-habit-daily-meditation/id1093360526,2026-05-21
+Aura,Aura Health,iOS,9,Mindfulness,4.7,30000,Free,No,Yes,AI Coaching,Mood Tracking,Adaptive|Care,https://apps.apple.com/app/aura-meditation-sleep/id1052216403,2026-05-21
+Stop Breathe & Think,Meredith Corp,Android,10,Mindfulness,4.6,50000,Free,Yes,Yes,Emotional Check-in,Recommended Sessions,Feeling|Aware,https://play.google.com/store/apps/details?id=org.stopbreathethink.app,2026-05-21

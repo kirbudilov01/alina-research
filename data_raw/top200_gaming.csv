@@ -1,1 +1,11 @@
 app_name,publisher,platform,rank_position,category,rating,review_count,pricing_type,iap_present,subscription_present,core_features,retention_mechanics,personalization_tags,source_url,collected_at
+Genshin Impact,miHoYo,iOS,1,Adventure,4.8,1000000,Free,Yes,Yes,Open World RPG,Daily Login Rewards,Anime|RPG,https://apps.apple.com/app/genshin-impact/id1517783697,2026-05-21
+Roblox,Roblox Corporation,iOS,2,Casual,4.5,5000000,Free,Yes,Yes,User Created Worlds,Virtual Currency,SandBox|Creative,https://apps.apple.com/app/roblox/id431946152,2026-05-21
+Among Us,InnerSloth,Android,3,Social,4.4,2000000,Free,Yes,No,Social Deduction,Cosmetic Rewards,Multiplayer|Party,https://play.google.com/store/apps/details?id=com.innersloth.spacemafia,2026-05-21
+Candy Crush Saga,King,iOS,4,Puzzle,4.7,10000000,Free,Yes,No,Match-3,Energy System,Puzzle|Casual,https://apps.apple.com/app/candy-crush-saga/id553834731,2026-05-21
+PUBG Mobile,Tencent,Android,5,Action,4.3,30000000,Free,Yes,Yes,Battle Royale,Season Pass,Shooter|Competitive,https://play.google.com/store/apps/details?id=com.tencent.ig,2026-05-21
+Minecraft,Mojang,iOS,6,Simulation,4.8,500000,Paid,No,No,Building Survival,Endless Exploration,Sandbox|Creative,https://apps.apple.com/app/minecraft/id479516143,2026-05-21
+Clash of Clans,Supercell,Android,7,Strategy,4.6,50000000,Free,Yes,No,Base Building,Clan Wars,Strategy|Build,https://play.google.com/store/apps/details?id=com.supercell.clashofclans,2026-05-21
+Call of Duty: Mobile,Activision,iOS,8,Action,4.7,2000000,Free,Yes,Yes,Multiplayer FPS,XP Progression,Shooter|FPS,https://apps.apple.com/app/call-of-duty-mobile/id1287282214,2026-05-21
+Subway Surfers,SYBO Games,Android,9,Arcade,4.6,100000000,Free,Yes,No,Endless Runner,Weekly Missions,Runner|Casual,https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf,2026-05-21
+Pokemon GO,Niantic,iOS,10,AR,4.4,500000,Free,Yes,No,Augmented Reality,Daily Streaks,AR|Adventure,https://apps.apple.com/app/pokemon-go/id1094591345,2026-05-21
