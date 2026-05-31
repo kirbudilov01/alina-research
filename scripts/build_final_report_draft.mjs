@@ -90,6 +90,7 @@ const core = csv('data_processed/product_core_evidence_matrix.csv');
 const reviewSignals = csv('data_processed/review_signal_matrix.csv');
 const rawReviews = csv('data_raw/app_store_top_candidate_reviews.csv');
 const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
+const forumSignals = csv('data_raw/forum_evidence_signals.csv');
 
 const highWhitespace = whitespace.filter(r => r.whitespace_band === 'high').length;
 const mediumWhitespace = whitespace.filter(r => r.whitespace_band === 'medium').length;
@@ -123,6 +124,7 @@ report.push(`- Top-100 intersection candidates enriched from App Store metadata:
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
+report.push(`- Forum/source evidence map: ${forumSignals.length} qualitative rows across ${Object.keys(countBy(forumSignals, 'market')).length} market pillars.`);
 report.push(`- Modeled direct intersection SAM base: USD ${baseIntersection.samBase || 'n/a'}.`);
 report.push('');
 report.push('## 2. Product Hypotheses');
@@ -250,6 +252,20 @@ report.push(mdTable(reviewClusters.slice(0, 8), [
 report.push('');
 report.push('The strongest product read: Alina should start as one daily ritual that turns personal meaning into one concrete action, then makes the effort visible through progress/avatar feedback. The strongest risk read: subscription gates, broken streak/reward mechanics, vague content, and unsafe overclaiming can destroy trust quickly.');
 report.push('');
+report.push('### Forum and External Discussion Signals');
+report.push('');
+report.push(`A first public forum/source map adds ${forumSignals.length} qualitative rows. These sources are not representative survey data, but they help triangulate language and objections outside app-store reviews.`);
+report.push('');
+report.push('Forum signals by market:');
+report.push('');
+report.push(bulletCounts(countBy(forumSignals, 'market')));
+report.push('');
+report.push('Forum signals by type:');
+report.push('');
+report.push(bulletCounts(countBy(forumSignals, 'signal_type')));
+report.push('');
+report.push('Cross-source read: daily anchors and visible progress are attractive, but users push back against generic guidance, hard paywalls, strict streak punishment, noisy gamification, and spiritual/AI overclaiming.');
+report.push('');
 report.push('## 8. Product Core');
 report.push('');
 report.push('Target loop: personal meaning -> one daily action -> short reset -> avatar/identity feedback -> visible progression -> next-day hook.');
@@ -286,6 +302,7 @@ report.push('Remaining proof required:');
 report.push('');
 report.push('- Manual validation of the top-100 candidates.');
 report.push('- Forum evidence and deeper manual clustering of reviews for user pain language and subscription objections.');
+report.push('- Manual quote-level coding of forum/source rows.');
 report.push('- Pricing/IAP extraction beyond App Store metadata.');
 report.push('- Prototype test of the two-minute daily loop.');
 report.push('');
@@ -310,6 +327,7 @@ report.push('- `docs/intersections/whitespace-map-v2.md`');
 report.push('- `docs/audience/audience-segmentation-v1.md`');
 report.push('- `docs/audience/review-language-synthesis-v1.md`');
 report.push('- `docs/audience/review-jtbd-clusters-v1.md`');
+report.push('- `docs/audience/forum-evidence-synthesis-v1.md`');
 report.push('- `docs/competitive/top-intersection-review-synthesis-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
@@ -323,6 +341,7 @@ report.push('- `data_processed/review_signal_matrix.csv`');
 report.push('- `data_processed/review_jtbd_cluster_summary.csv`');
 report.push('- `data_processed/review_jtbd_cluster_rows.csv`');
 report.push('- `data_raw/app_store_top_candidate_reviews.csv`');
+report.push('- `data_raw/forum_evidence_signals.csv`');
 report.push('');
 report.push('## 13. Next Work');
 report.push('');
@@ -330,7 +349,7 @@ report.push('1. Complete manual review of top 100 intersection candidates.');
 report.push('2. Manually validate the highest-signal review clusters and extract exact user language for positioning.');
 report.push('3. Extract detailed IAP/subscription pricing where accessible.');
 report.push('4. Build visual charts and render the PDF version.');
-report.push('5. Add Reddit/forum/website evidence beyond App Store reviews.');
+report.push('5. Manually code Reddit/forum/website evidence beyond the current source map.');
 report.push('6. Update go/no-go decision after manual review and user validation.');
 
 fs.writeFileSync(OUT, `${report.join('\n')}\n`);
@@ -349,7 +368,7 @@ status.push(mdTable([
   { requirement: 'Versioned on GitHub', evidence: 'git log through current commit after push', status: 'active' },
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf', status: 'draft PDF done' },
   { requirement: 'Manual review of top 100', evidence: 'data_processed/top_intersection_review_prefill.csv', status: 'prefilled, not manually completed' },
-  { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; docs/audience/review-language-synthesis-v1.md', status: 'App Store review extraction and JTBD clustering done v1; forums pending' }
+  { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md', status: 'App Store review extraction, JTBD clustering, and forum source map done v1; quote-level forum coding pending' }
 ], [
   { key: 'requirement', label: 'Requirement' },
   { key: 'evidence', label: 'Evidence' },
@@ -365,3 +384,4 @@ console.log(`market_claims=${claims.length}`);
 console.log(`review_rows=${rawReviews.length}`);
 console.log(`review_signal_rows=${reviewSignals.length}`);
 console.log(`review_clusters=${reviewClusters.length}`);
+console.log(`forum_signal_rows=${forumSignals.length}`);

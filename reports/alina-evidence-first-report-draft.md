@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T02:26:55.844Z
+Generated: 2026-05-31T02:29:49.253Z
 
 ## 1. Executive Summary
 
@@ -17,6 +17,7 @@ Key quantified signals:
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
+- Forum/source evidence map: 18 qualitative rows across 5 market pillars.
 - Modeled direct intersection SAM base: USD 201960000.
 
 ## 2. Product Hypotheses
@@ -171,6 +172,38 @@ Interpretation: users respond strongly to daily ritual loops, emotional support,
 
 The strongest product read: Alina should start as one daily ritual that turns personal meaning into one concrete action, then makes the effort visible through progress/avatar feedback. The strongest risk read: subscription gates, broken streak/reward mechanics, vague content, and unsafe overclaiming can destroy trust quickly.
 
+### Forum and External Discussion Signals
+
+A first public forum/source map adds 18 qualitative rows. These sources are not representative survey data, but they help triangulate language and objections outside app-store reviews.
+
+Forum signals by market:
+
+- coaching: 5
+- astrology_esoterics: 4
+- gaming: 4
+- mindfulness: 3
+- avatar_identity: 2
+
+Forum signals by type:
+
+- subscription_value: 3
+- trust_accuracy: 2
+- depth_request: 1
+- competitor_recommendation: 1
+- anti_gamification: 1
+- habit_friction: 1
+- routine_design: 1
+- streak_recovery: 1
+- streak_anxiety: 1
+- emotional_support: 1
+- attachment_behavior: 1
+- retention_backlash: 1
+- cozy_progression: 1
+- retention_mechanics: 1
+- daily_loops: 1
+
+Cross-source read: daily anchors and visible progress are attractive, but users push back against generic guidance, hard paywalls, strict streak punishment, noisy gamification, and spiritual/AI overclaiming.
+
 ## 8. Product Core
 
 Target loop: personal meaning -> one daily action -> short reset -> avatar/identity feedback -> visible progression -> next-day hook.
@@ -203,6 +236,7 @@ Remaining proof required:
 
 - Manual validation of the top-100 candidates.
 - Forum evidence and deeper manual clustering of reviews for user pain language and subscription objections.
+- Manual quote-level coding of forum/source rows.
 - Pricing/IAP extraction beyond App Store metadata.
 - Prototype test of the two-minute daily loop.
 
@@ -233,6 +267,7 @@ Market claims currently normalized: 14.
 - `docs/audience/audience-segmentation-v1.md`
 - `docs/audience/review-language-synthesis-v1.md`
 - `docs/audience/review-jtbd-clusters-v1.md`
+- `docs/audience/forum-evidence-synthesis-v1.md`
 - `docs/competitive/top-intersection-review-synthesis-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
@@ -246,6 +281,7 @@ Market claims currently normalized: 14.
 - `data_processed/review_jtbd_cluster_summary.csv`
 - `data_processed/review_jtbd_cluster_rows.csv`
 - `data_raw/app_store_top_candidate_reviews.csv`
+- `data_raw/forum_evidence_signals.csv`
 
 ## 13. Next Work
 
@@ -253,5 +289,5 @@ Market claims currently normalized: 14.
 2. Manually validate the highest-signal review clusters and extract exact user language for positioning.
 3. Extract detailed IAP/subscription pricing where accessible.
 4. Build visual charts and render the PDF version.
-5. Add Reddit/forum/website evidence beyond App Store reviews.
+5. Manually code Reddit/forum/website evidence beyond the current source map.
 6. Update go/no-go decision after manual review and user validation.

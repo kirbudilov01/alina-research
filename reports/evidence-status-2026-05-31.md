@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T02:26:55.862Z
+Generated: 2026-05-31T02:29:49.289Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -12,4 +12,4 @@ Generated: 2026-05-31T02:26:55.862Z
 | Versioned on GitHub | git log through current commit after push | active |
 | Final PDF | output/pdf/alina-evidence-first-report-draft.pdf | draft PDF done |
 | Manual review of top 100 | data_processed/top_intersection_review_prefill.csv | prefilled, not manually completed |
-| Review/forum evidence | data_raw/app_store_top_candidate_reviews.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; docs/audience/review-language-synthesis-v1.md | App Store review extraction and JTBD clustering done v1; forums pending |
+| Review/forum evidence | data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md | App Store review extraction, JTBD clustering, and forum source map done v1; quote-level forum coding pending |
