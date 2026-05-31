@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T11:10:49.473Z
+Generated: 2026-05-31T11:17:44.842Z
 
 ## 1. Executive Summary
 
@@ -25,8 +25,9 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 22 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 375 artifacts tracked, 87 CSV artifacts, 225886 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 378 artifacts tracked, 88 CSV artifacts, 225924 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
+- Research navigation index: 38 rows link requirements, claims, gates, tranches, briefings, source files, and next actions.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
 - Source-native itch.io expansion: 7047 rows, 6973 OK rows, adding web-game/mechanic references without broad search-engine crawling.
@@ -416,7 +417,7 @@ Status summary:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 375 artifacts; 87 CSV artifacts; 225886 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 378 artifacts; 88 CSV artifacts; 225924 tracked CSV rows; 0 missing required artifacts.
 Validation note artifact links: 29 existing local artifacts linked inside batch notes.
 
 Largest tracked CSV artifacts:
@@ -456,7 +457,7 @@ Objective readiness matrix:
 
 | Requirement | Status | Strength | Proof | Remaining Gap |
 | --- | --- | --- | --- | --- |
-| REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=16; execution_dashboard_rows=11; hypothesis_decision_rows=6; p0_command_rows=75; p0_field_guide_sections=8; russian_fieldbook_rows=7; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_batch_local_artifact_links=29; validation_rollup_rows=75; validation_tranche_rows=9; validation_briefing_rows=6 | Keep refreshing as validation results change. |
+| REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=16; execution_dashboard_rows=11; hypothesis_decision_rows=6; navigation_rows=38; p0_command_rows=75; p0_field_guide_sections=8; russian_fieldbook_rows=7; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_batch_local_artifact_links=29; validation_rollup_rows=75; validation_tranche_rows=9; validation_briefing_rows=6 | Keep refreshing as validation results change. |
 | REQ_02_COMPETITOR_UNIVERSE | proved_30k_plus_cross_source_dedup | medium_high | dedup=12552; cross_source_raw=61345; cross_source_dedup=33718; cross_source_summary_rows=15; coverage_cells=39; coverage_strong=11; coverage_medium=12; raw_core=17490; itch_rows=7047; steam_tag_rows=18569; desktop_store_rows=15397; chrome_extension_rows=252; reddit_mention_rows=2339; reddit_mention_ok=940; reddit_mention_summary_rows=42; reddit_signal_rows=2339; reddit_signal_groups=9; reddit_known_signal_rows=940; reddit_app_summary_rows=1202; reddit_manual_queue_rows=1852; reddit_manual_p0=336; reddit_manual_p1=238; reddit_manual_capture_rows=574; reddit_manual_capture_p0=336; known_raw_total=61094; itch_ok=6973; steam_tag_ok=17954; desktop_store_ok=15394; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | The 30k lower-bound dedup target is now met; the remaining expansion gap is the upper 50k aspiration plus Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and additional source-native coverage. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
 | REQ_04_MARKET_MONEY | supported_with_triangulated_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; assumption_audit_rows=6; stress_scenarios=6; strong_paid_proxy_markets=4/5; market_money_triangulation_rows=6; market_money_triangulation_verdicts=4; strong_triangulated_markets=3; medium_triangulated_markets=1; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing is stress-tested and triangulated, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall/WTP validation are still needed for final investor-grade claims. |
@@ -464,8 +465,21 @@ Objective readiness matrix:
 | REQ_06_AUDIENCE_ICP | directionally_supported_recruiting_ready | medium | audience_rows=20492; community_referral_rows=294; community_referral_signals=6; reddit_signal_rows=2339; reddit_signal_groups=9; reddit_medium_plus_signals=940; reddit_app_summary_rows=1202; reddit_manual_queue_rows=1852; reddit_manual_p0=336; reddit_manual_p1=238; reddit_prompt_rows=9; reddit_manual_capture_rows=574; reddit_manual_capture_p0=336; reddit_manual_capture_completed=0; icp_segments=6; icp_validation_tests=36; icp_recruiting_bridge_rows=24; icp_recruiting_message_rows=24; icp_capture_rows=96 | Segments and recruiting assets are directional and need actual interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=22; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | polished_and_russian_narrative_argument_map_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true; russian_narrative_report=true; russian_narrative_pdf=true; russian_narrative_map=true | Polished evidence PDF, Russian narrative PDF, and Russian argument map exist as publication-ready drafts, but they are not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=375; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
-| REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; p0_command_rows=75; p0_command_blockers=6; p0_command_p0=52; p0_field_guide_sections=8; russian_fieldbook_rows=7; validation_tranche_rows=9; validation_briefing_rows=6; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_rollup_rows=75; validation_rollup_missing=0; validation_gate_rows=6; validation_gate_status_rows=1; validation_gates_passed=0; validation_gates_not_started=6; validation_batch_local_artifact_links=29; hypothesis_decision_rows=6; hypothesis_hold=6; hypothesis_go=0; hypothesis_stop=0; capture_rows=850; manual_capture_rows=60; paid_capture_rows=40; icp_capture_rows=96; prototype_capture_rows=80; reddit_manual_capture_rows=574; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=378; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; navigation_rows=38; p0_command_rows=75; p0_command_blockers=6; p0_command_p0=52; p0_field_guide_sections=8; russian_fieldbook_rows=7; validation_tranche_rows=9; validation_briefing_rows=6; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_rollup_rows=75; validation_rollup_missing=0; validation_gate_rows=6; validation_gate_status_rows=1; validation_gates_passed=0; validation_gates_not_started=6; validation_batch_local_artifact_links=29; hypothesis_decision_rows=6; hypothesis_hold=6; hypothesis_go=0; hypothesis_stop=0; capture_rows=850; manual_capture_rows=60; paid_capture_rows=40; icp_capture_rows=96; prototype_capture_rows=80; reddit_manual_capture_rows=574; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
+
+## 2M.1. Research Navigation Index
+
+The navigation index is the map for the whole package. It connects requirement rows, claims, gates, tranches, briefing packets, source files, next actions, and claim boundaries so the research can be operated without losing track of where evidence lives.
+
+| Gate | Hypothesis | Status | Tranche | Briefing | Next Action |
+| --- | --- | --- | --- | --- | --- |
+| GATE_H1_MANUAL_PRODUCT_SHAPE | H1 | not_started | TRANCHE_00_STOP_RULES |  | Capture onboarding, first action, progress/avatar feedback, and paywall screenshots for the highest-risk public-listing rows. |
+| GATE_H3_MANUAL_WHITESPACE | H3 | not_started | TRANCHE_00_STOP_RULES |  | Use the public-listing risk read to classify action->avatar causality in walkthrough as visible, inferred, absent, or blocked. |
+| GATE_H2_PAID_FLOW | H2 | not_started | TRANCHE_00_STOP_RULES |  | Use stress-test risk rows to prioritize paid-flow inspection and prototype willingness-to-pay questions. |
+| GATE_H5_ICP_RECENT_BEHAVIOR | H5 | not_started | TRANCHE_00_STOP_RULES |  | Execute the ICP validation packet for the top two segments, then update segment status and selected primary ICP. |
+| GATE_H4_PROTOTYPE_ADVANTAGE | H4 | not_started | TRANCHE_00_STOP_RULES |  | Run prototype sessions with the top two ICP segments and fill the scorecard with observed results. |
+| GATE_H6_PRODUCT_CORE | H6 | not_started | TRANCHE_00_STOP_RULES |  | Run prototype sessions and measure loop completion, comprehension, meaning lift, return intent, and paid-depth interest. |
 
 ## 2N. Validation Gap Roadmap
 

@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T11:10:57.891Z
+Собрано: 2026-05-31T11:17:50.893Z
 
 ## Как читать этот документ
 
@@ -30,7 +30,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 375 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 378 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -174,6 +174,19 @@ Product-core evidence и prototype stimulus переводят исследов�
 | 5 | TRANCHE_05_PROTOTYPE_PILOT | P0_blocker | 32 | output/validation/2026-05-31/tranche_briefings/05__tranche-05-prototype-pilot__briefing.md | briefing_routes_execution_only_no_claim_upgrade_without_filled_capture_rows |
 | 6 | TRANCHE_06_REDDIT_TOP25_LANGUAGE | P0 | 25 | output/validation/2026-05-31/tranche_briefings/06__tranche-06-reddit-top25-language__briefing.md | briefing_routes_execution_only_no_claim_upgrade_without_filled_capture_rows |
 
+## 9.4. Навигационный индекс пакета
+
+Чтобы весь ресерч не распался на сотни файлов, добавлен navigation index на 38 строк. Он связывает requirement, claim, gate, tranche, briefing, source files и next action. Это не новый evidence, а карта движения по evidence package.
+
+| Gate | H | Status | Tranche | Briefing | Next action |
+| --- | --- | --- | --- | --- | --- |
+| GATE_H1_MANUAL_PRODUCT_SHAPE | H1 | not_started | TRANCHE_00_STOP_RULES |  | Capture onboarding, first action, progress/avatar feedback, and paywall screenshots for the highest-risk public-listing rows. |
+| GATE_H3_MANUAL_WHITESPACE | H3 | not_started | TRANCHE_00_STOP_RULES |  | Use the public-listing risk read to classify action->avatar causality in walkthrough as visible, inferred, absent, or blocked. |
+| GATE_H2_PAID_FLOW | H2 | not_started | TRANCHE_00_STOP_RULES |  | Use stress-test risk rows to prioritize paid-flow inspection and prototype willingness-to-pay questions. |
+| GATE_H5_ICP_RECENT_BEHAVIOR | H5 | not_started | TRANCHE_00_STOP_RULES |  | Execute the ICP validation packet for the top two segments, then update segment status and selected primary ICP. |
+| GATE_H4_PROTOTYPE_ADVANTAGE | H4 | not_started | TRANCHE_00_STOP_RULES |  | Run prototype sessions with the top two ICP segments and fill the scorecard with observed results. |
+| GATE_H6_PRODUCT_CORE | H6 | not_started | TRANCHE_00_STOP_RULES |  | Run prototype sessions and measure loop completion, comprehension, meaning lift, return intent, and paid-depth interest. |
+
 ## 10. Финальный текущий verdict
 
 Текущий verdict: продолжать, но не переобещать. Alina выглядит как исследовательски перспективная ставка на стыке digital ritual, self-improvement, reset и identity/progress feedback. Самая сильная формулировка возможности: не универсальный комбайн, а короткая ежедневная трансформационная петля, где действие меняет видимый образ прогресса. Самая большая опасность: сделать слишком широкий продукт, который будет одновременно слабым meditation app, слабым habit tracker, слабым astrology app и слабым avatar toy. Поэтому следующий этап должен быть не расширением ради расширения, а жесткой проверкой центральной петли на реальных конкурентных экранах и реальных людях.
@@ -183,6 +196,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/evidence_artifact_manifest.csv`
 - `data_processed/research_completion_audit.csv`
 - `data_processed/evidence_claim_register.csv`
+- `data_processed/research_navigation_index.csv`
 - `data_processed/reddit_manual_reading_capture_sheet.csv`
 - `data_processed/russian_narrative_evidence_map.csv`
 - `data_processed/russian_validation_fieldbook.csv`

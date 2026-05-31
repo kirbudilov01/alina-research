@@ -115,6 +115,7 @@ const narrativeMap = csv('data_processed/russian_narrative_evidence_map.csv');
 const russianFieldbook = csv('data_processed/russian_validation_fieldbook.csv');
 const tranchePlanner = csv('data_processed/validation_tranche_planner.csv');
 const trancheBriefings = csv('data_processed/validation_tranche_briefing_index.csv');
+const navigationIndex = csv('data_processed/research_navigation_index.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -302,6 +303,21 @@ if (trancheBriefings.length) {
   ], trancheBriefings.length));
   lines.push('');
 }
+if (navigationIndex.length) {
+  lines.push('## 9.4. Навигационный индекс пакета');
+  lines.push('');
+  lines.push(`Чтобы весь ресерч не распался на сотни файлов, добавлен navigation index на ${navigationIndex.length} строк. Он связывает requirement, claim, gate, tranche, briefing, source files и next action. Это не новый evidence, а карта движения по evidence package.`);
+  lines.push('');
+  lines.push(mdTable(navigationIndex.filter(row => row.nav_type === 'gate'), [
+    { key: 'label', label: 'Gate' },
+    { key: 'linked_hypothesis', label: 'H' },
+    { key: 'status', label: 'Status' },
+    { key: 'linked_tranche', label: 'Tranche' },
+    { key: 'briefing_path', label: 'Briefing' },
+    { key: 'next_action', label: 'Next action' }
+  ], 12));
+  lines.push('');
+}
 lines.push('## 10. Финальный текущий verdict');
 lines.push('');
 lines.push('Текущий verdict: продолжать, но не переобещать. Alina выглядит как исследовательски перспективная ставка на стыке digital ritual, self-improvement, reset и identity/progress feedback. Самая сильная формулировка возможности: не универсальный комбайн, а короткая ежедневная трансформационная петля, где действие меняет видимый образ прогресса. Самая большая опасность: сделать слишком широкий продукт, который будет одновременно слабым meditation app, слабым habit tracker, слабым astrology app и слабым avatar toy. Поэтому следующий этап должен быть не расширением ради расширения, а жесткой проверкой центральной петли на реальных конкурентных экранах и реальных людях.');
@@ -311,6 +327,7 @@ lines.push('');
 lines.push('- `data_processed/evidence_artifact_manifest.csv`');
 lines.push('- `data_processed/research_completion_audit.csv`');
 lines.push('- `data_processed/evidence_claim_register.csv`');
+lines.push('- `data_processed/research_navigation_index.csv`');
 lines.push('- `data_processed/reddit_manual_reading_capture_sheet.csv`');
 lines.push('- `data_processed/russian_narrative_evidence_map.csv`');
 lines.push('- `data_processed/russian_validation_fieldbook.csv`');

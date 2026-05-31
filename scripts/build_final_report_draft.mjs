@@ -174,6 +174,7 @@ const validationTranchePlanner = csv('data_processed/validation_tranche_planner.
 const validationTrancheBriefings = csv('data_processed/validation_tranche_briefing_index.csv');
 const validationGateCalculator = csv('data_processed/validation_gate_calculator.csv');
 const validationGateStatusSummary = csv('data_processed/validation_gate_status_summary.csv');
+const researchNavigationIndex = csv('data_processed/research_navigation_index.csv');
 const manualWalkthroughCapture = csv('data_processed/manual_walkthrough_capture_sheet.csv');
 const paidFlowCapture = csv('data_processed/paid_flow_capture_sheet.csv');
 const icpInterviewCapture = csv('data_processed/icp_interview_capture_sheet.csv');
@@ -285,6 +286,7 @@ report.push(`- Web paywall visual adjudication: ${webPaywallVisualAdjudication.l
 report.push(`- Evidence audit register: ${evidenceAudit.length} claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.`);
 report.push(`- Evidence package manifest: ${evidenceManifest.length} artifacts tracked, ${manifestCsvRows.length} CSV artifacts, ${manifestTrackedRows} tracked CSV rows, ${manifestMissing.length} missing required artifacts.`);
 report.push(`- Completion/readiness audit: ${completionAudit.length} objective requirements mapped; ${completionOpen.length} remain partial, directional, draft, or not final.`);
+report.push(`- Research navigation index: ${researchNavigationIndex.length} rows link requirements, claims, gates, tranches, briefings, source files, and next actions.`);
 report.push(`- Source expansion backlog: ${sourceExpansionBacklog.length} prioritized collector/source tasks for the next move toward a 30k-50k raw universe.`);
 report.push(`- Controlled P0 external-source smoke pass: ${p0ExternalSources.length} rows, ${p0ExternalUsable.length} usable candidates, with search-engine-heavy expansion intentionally deferred.`);
 report.push(`- Source-native itch.io expansion: ${itchRows.length} rows, ${itchOk.length} OK rows, adding web-game/mechanic references without broad search-engine crawling.`);
@@ -635,6 +637,21 @@ if (completionAudit.length) {
     { key: 'proof', label: 'Proof' },
     { key: 'remaining_gap', label: 'Remaining Gap' }
   ], completionAudit.length));
+  report.push('');
+}
+if (researchNavigationIndex.length) {
+  report.push('## 2M.1. Research Navigation Index');
+  report.push('');
+  report.push('The navigation index is the map for the whole package. It connects requirement rows, claims, gates, tranches, briefing packets, source files, next actions, and claim boundaries so the research can be operated without losing track of where evidence lives.');
+  report.push('');
+  report.push(mdTable(researchNavigationIndex.filter(row => row.nav_type === 'gate'), [
+    { key: 'label', label: 'Gate' },
+    { key: 'linked_hypothesis', label: 'Hypothesis' },
+    { key: 'status', label: 'Status' },
+    { key: 'linked_tranche', label: 'Tranche' },
+    { key: 'briefing_path', label: 'Briefing' },
+    { key: 'next_action', label: 'Next Action' }
+  ], 12));
   report.push('');
 }
 if (validationGapRoadmap.length) {
@@ -1863,6 +1880,7 @@ status.push(mdTable([
   { requirement: 'Evidence audit / claim register', evidence: 'data_processed/evidence_claim_register.csv; docs/decision/evidence-audit-v1.md', status: 'done v1; proof status, confidence, gaps, and next actions explicit' },
   { requirement: 'Evidence package manifest', evidence: 'data_processed/evidence_artifact_manifest.csv; docs/decision/evidence-package-manifest-v1.md', status: 'done v1; tracks key artifacts with row counts, source-reference coverage, sizes, and short hashes' },
   { requirement: 'Completion/readiness audit', evidence: 'data_processed/research_completion_audit.csv; docs/decision/research-completion-audit-v1.md', status: 'done v1; maps original objective to proved, partial, draft, and validation-ready requirements' },
+  { requirement: 'Research navigation index', evidence: 'data_processed/research_navigation_index.csv; docs/decision/research-navigation-index-v1.md', status: `done v1; ${researchNavigationIndex.length} navigation rows link requirements, claims, gates, tranches, briefings, source files, and next actions` },
   { requirement: 'Manual review of top 100', evidence: 'data_processed/top100_competitor_review_scorecard.csv; data_processed/top100_human_validation_queue.csv; data_processed/manual_competitor_inspection_packet.csv; data_processed/manual_competitor_inspection_rubric.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md; docs/competitive/human-validation-guide-v1.md; docs/competitive/manual-competitor-inspection-packet-v1.md', status: 'AI-assisted review, ranked human validation queue, and first-wave manual inspection packet done v1; human execution pending' },
   { requirement: 'Detailed pricing/IAP extraction', evidence: 'data_raw/app_store_iap_pricing_raw.csv; data_processed/app_store_iap_pricing_summary.csv; docs/competitive/app-store-iap-pricing-v1.md; data_raw/google_play_pricing_raw.csv; data_processed/google_play_pricing_summary.csv; docs/competitive/google-play-pricing-v1.md; data_raw/web_paywall_discovery_raw.csv; data_processed/web_paywall_signal_matrix.csv; docs/competitive/web-paywall-validation-v1.md; data_processed/web_paywall_screenshot_validation.csv; data_processed/web_paywall_screenshot_interpretation.csv; data_processed/web_paywall_visual_adjudication.csv; data_processed/web_paywall_visual_adjudication_summary.csv; docs/competitive/web-paywall-screenshot-validation-v1.md; docs/competitive/web-paywall-screenshot-interpretation-v1.md; docs/competitive/web-paywall-visual-adjudication-v1.md; output/paywall_screenshots/*.png', status: 'App Store web IAP extraction, Google Play pricing validation, developer website paywall discovery, screenshot capture, OCR interpretation, and conservative visual adjudication done v1; human paywall sign-off pending' },
   { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_raw/forum_quote_evidence_raw.csv; data_raw/expanded_reddit_competitor_mentions_raw.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; data_processed/community_referral_signal_rows.csv; data_processed/forum_quote_coding_matrix.csv; data_processed/reddit_competitor_mentions_summary.csv; data_processed/reddit_mention_signal_matrix.csv; data_processed/reddit_mention_app_summary.csv; data_processed/reddit_manual_reading_queue.csv; data_processed/reddit_manual_reading_prompt_bank.csv; data_processed/reddit_manual_reading_capture_sheet.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/community-referral-evidence-v1.md; docs/audience/forum-evidence-synthesis-v1.md; docs/audience/forum-quote-coding-v1.md; docs/audience/reddit-competitor-mentions-v1.md; docs/audience/reddit-mention-signal-matrix-v1.md; docs/audience/reddit-manual-reading-queue-v1.md; docs/audience/reddit-manual-reading-capture-sheet-v1.md', status: `App Store review extraction, JTBD clustering, community/referral mining, forum source map, retrieval-assisted quote coding, source-native Reddit mention expansion, Reddit signal coding, ${redditManualReadingQueue.length} Reddit manual-read queue rows, and ${redditManualCaptureSheet.length} focused capture rows done v1; human validation pending` }
@@ -1908,6 +1926,7 @@ console.log(`public_listing_visible_causality=${publicListingVisibleCausality.le
 console.log(`evidence_audit_rows=${evidenceAudit.length}`);
 console.log(`evidence_manifest_rows=${evidenceManifest.length}`);
 console.log(`completion_audit_rows=${completionAudit.length}`);
+console.log(`research_navigation_rows=${researchNavigationIndex.length}`);
 console.log(`hypothesis_decision_rows=${hypothesisDecisions.length}`);
 console.log(`p0_command_rows=${p0CommandCenter.length}`);
 console.log(`p0_field_guide_sections=${p0FieldGuide.length}`);
