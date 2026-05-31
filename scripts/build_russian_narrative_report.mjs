@@ -111,6 +111,7 @@ const gate = csv('data_processed/validation_gate_calculator.csv');
 const completion = csv('data_processed/research_completion_audit.csv');
 const manifest = csv('data_processed/evidence_artifact_manifest.csv');
 const paywallVisual = csv('data_processed/web_paywall_visual_adjudication.csv');
+const narrativeMap = csv('data_processed/russian_narrative_evidence_map.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -145,6 +146,19 @@ lines.push('Этот отчет специально написан как по�
 lines.push('');
 lines.push('Главный вывод на текущем этапе такой: направление Alina стоит продолжать исследовать, но нельзя честно объявлять его доказанным продуктом. Деньги и соседние рынки видны. Конкурентная среда большая. Аудиторные языки и боли повторяются. Узкое потенциальное белое пятно формулируется как ежедневная петля, где личный смысл превращается в одно действие, а результат действия становится видимым через прогресс, идентичность или аватар. Но эта петля пока должна пройти ручные конкурентные walkthrough, paywall sign-off, интервью и прототипные сессии.');
 lines.push('');
+if (narrativeMap.length) {
+  lines.push('## Карта аргумента');
+  lines.push('');
+  lines.push('Чтобы отчет читался как последовательная история, каждый крупный блок связан с одним тезисом, доказательным слоем, ограничением и следующим действием. Это защищает документ от двух ошибок: превращения в сухую таблицу и превращения в красивый текст без evidence backbone.');
+  lines.push('');
+  lines.push(mdTable(narrativeMap, [
+    { key: 'narrative_step', label: 'Шаг' },
+    { key: 'russian_thesis', label: 'Тезис' },
+    { key: 'evidence_summary', label: 'Доказательная опора' },
+    { key: 'claim_boundary_ru', label: 'Граница утверждения' }
+  ], narrativeMap.length));
+  lines.push('');
+}
 lines.push('## 1. Откуда мы начали');
 lines.push('');
 lines.push('Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.');
@@ -252,6 +266,7 @@ lines.push('- `data_processed/evidence_artifact_manifest.csv`');
 lines.push('- `data_processed/research_completion_audit.csv`');
 lines.push('- `data_processed/evidence_claim_register.csv`');
 lines.push('- `data_processed/reddit_manual_reading_capture_sheet.csv`');
+lines.push('- `data_processed/russian_narrative_evidence_map.csv`');
 lines.push('- `data_processed/validation_gate_calculator.csv`');
 lines.push('- `reports/alina-russian-narrative-report-v1.md`');
 lines.push('- `output/pdf/alina-russian-narrative-report-v1.pdf`');

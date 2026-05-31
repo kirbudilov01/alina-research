@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T10:40:42.861Z
+Собрано: 2026-05-31T10:49:51.557Z
 
 ## Как читать этот документ
 
@@ -8,11 +8,29 @@
 
 Главный вывод на текущем этапе такой: направление Alina стоит продолжать исследовать, но нельзя честно объявлять его доказанным продуктом. Деньги и соседние рынки видны. Конкурентная среда большая. Аудиторные языки и боли повторяются. Узкое потенциальное белое пятно формулируется как ежедневная петля, где личный смысл превращается в одно действие, а результат действия становится видимым через прогресс, идентичность или аватар. Но эта петля пока должна пройти ручные конкурентные walkthrough, paywall sign-off, интервью и прототипные сессии.
 
+## Карта аргумента
+
+Чтобы отчет читался как последовательная история, каждый крупный блок связан с одним тезисом, доказательным слоем, ограничением и следующим действием. Это защищает документ от двух ошибок: превращения в сухую таблицу и превращения в красивый текст без evidence backbone.
+
+| Шаг | Тезис | Доказательная опора | Граница утверждения |
+| --- | --- | --- | --- |
+| 01_problem_frame | Alina нужно рассматривать не как еще один трекер, медитацию или эзотерическое приложение, а как гипотезу о ежедневной петле личного смысла, действия, reset и видимого прогресса. | 33718 cross-source dedup rows across five markets; 20492 audience signal rows; 6 ICP hypotheses | Это формулировка исследовательской рамки, а не доказательство product-market fit. |
+| 02_market_money | В соседних рынках видны деньги и платное поведение, но это пока directional proxy, а не доказанная выручка Alina. | 6 market-money rows; 3 strong and 1 medium directional money cases; 22 strong competitor revenue proxies; 70 medium+ competitor revenue proxies | Нельзя подавать TAM/SAM/SOM как прогноз revenue; H2 остается gated до paid-flow signoff и WTP evidence. |
+| 03_competitive_density | Рынок не пустой: пользователи уже решают куски задачи соседними приложениями, поэтому искать нужно узкую комбинацию, а не широкую категорию. | 100 top-candidate review rows; 90 primary apps; 1/100 behavior-tied progression signal rows | Публичные листинги и metadata могут скрывать реальные onboarding loops; нельзя объявлять whitespace финальным без walkthrough. |
+| 04_whitespace | Потенциальное белое пятно - не отдельная функция, а причинная петля meaning -> action -> reset -> visible identity/progress feedback -> return. | 12552 whitespace rows; 593 high whitespace candidates; 6 cross-source saturation markets | Это narrow opportunity hypothesis; gaming/progression остается benchmark-only, пока не доказан прямой consumer overlap. |
+| 05_audience_icp | Общая аудитория - digital ritual users: люди, которые используют приложения для состояния, идентичности, прогресса и надежды на изменение. | 20492 audience rows; 6 ICP segments; 2339 coded Reddit rows; 574 Reddit capture rows | Это directional ICP, не финальная персона; Reddit rows не являются representative survey. |
+| 06_reddit_language | Reddit/forum слой нужен как язык боли и альтернатив: overload, streak anxiety, repetitive content, weak personalization, unclear value before paid. | 2339 coded signals; 1852 unique thread reads; 336 P0 and 238 P1 reads; 574 unread/do-not-upgrade capture rows | Пока capture_status=not_started, нельзя цитировать треды во внешнем документе и нельзя усиливать claims. |
+| 07_product_core | Проверяемая MVP-петля: персональное отражение дня, одно действие, короткий reset, завершение, причинное изменение прогресса/аватара и мягкий next-day hook. | 16 prototype stimulus rows; 6 scorecard metrics | Петля описана и подготовлена к тесту, но нет completed participant evidence. |
+| 08_claim_status | Текущий честный verdict: продолжать исследование, но не переобещать. Evidence base сильная как подготовка, но не финальная validation proof. | 10 completion requirements; 5 not fully proved/final; 6 validation gates; 6 not started gates; 357 manifest artifacts | Не отмечать цель complete: manual competitor walkthroughs, paid signoff, ICP interviews and prototype sessions remain open. |
+| 09_validation_operating_system | Исследование уже превращено в операционную систему проверки: гипотезы, gates, capture sheets и dashboard показывают, какие claims можно усиливать, а какие нужно держать. | 6 validation gates; 6 not-started gates; 10 completion audit rows | Наличие validation OS не равно завершенной валидации; это подготовка к disciplined execution. |
+| 10_provenance_and_versioning | Все ключевые данные должны оставаться локально воспроизводимыми и версионированными, иначе большой ресерч быстро превращается в набор непроверяемых утверждений. | 357 manifest rows; local artifact hashes and row counts tracked; GitHub push used as persistence layer | Manifest подтверждает наличие и форму артефактов, но не заменяет human validation содержательных выводов. |
+| 11_report_style | Финальный документ должен читаться как русское последовательное повествование: данные идут внутри рассказа, а не заменяют его. | Russian narrative report generated; evidence map is used as the chapter-level argument backbone; PDF output exists through the report pipeline | Красивый русский текст не должен усиливать недоказанные claims; каждое сильное утверждение остается связано с boundary. |
+
 ## 1. Откуда мы начали
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 357 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 360 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -103,7 +121,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 | REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | Cross-source saturation now keeps gaming/progression as benchmark-only and finds no primary market opportunity strong enough to upgrade without manual walkthrough; app/onboarding screenshots are still required. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_recruiting_ready | medium | Segments and recruiting assets are directional and need actual interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | No completed user/prototype sessions prove the loop is understood/preferred. |
-| REQ_08_REPORT_PDF | polished_and_russian_narrative_drafts_done_not_validated_final | medium_high | Polished evidence PDF and Russian narrative PDF exist as publication-ready drafts, but they are not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
+| REQ_08_REPORT_PDF | polished_and_russian_narrative_argument_map_done_not_validated_final | medium_high | Polished evidence PDF, Russian narrative PDF, and Russian argument map exist as publication-ready drafts, but they are not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
 | REQ_09_VERSIONING_PROVENANCE | proved_active | high | Manifest must be regenerated after future evidence changes. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
@@ -123,6 +141,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/research_completion_audit.csv`
 - `data_processed/evidence_claim_register.csv`
 - `data_processed/reddit_manual_reading_capture_sheet.csv`
+- `data_processed/russian_narrative_evidence_map.csv`
 - `data_processed/validation_gate_calculator.csv`
 - `reports/alina-russian-narrative-report-v1.md`
 - `output/pdf/alina-russian-narrative-report-v1.pdf`

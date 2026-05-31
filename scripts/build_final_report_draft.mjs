@@ -329,7 +329,7 @@ report.push(`- Reddit manual-read routing: ${redditManualReadingQueue.length} un
 report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, web paywall discovery, and forum quote coding.');
 report.push('- Visual PDF companion: native ReportLab charts embedded in a separate visual report.');
 report.push(`- Polished evidence pack: ${fs.existsSync('output/pdf/alina-polished-evidence-pack-v1.pdf') ? 'generated as a publication-ready evidence draft with validation caveats' : 'not generated yet'}.`);
-report.push(`- Russian narrative report: ${fs.existsSync('output/pdf/alina-russian-narrative-report-v1.pdf') ? 'generated as a sequential Russian-language narrative PDF' : 'not generated yet'}.`);
+report.push(`- Russian narrative report: ${fs.existsSync('output/pdf/alina-russian-narrative-report-v1.pdf') ? 'generated as a sequential Russian-language narrative PDF' : 'not generated yet'}; argument map: ${fs.existsSync('data_processed/russian_narrative_evidence_map.csv') ? 'generated' : 'not generated yet'}.`);
 report.push(`- Modeled direct intersection SAM base: USD ${baseIntersection.samBase || 'n/a'}.`);
 report.push('');
 report.push('## 2. Product Hypotheses');
@@ -1817,7 +1817,7 @@ status.push(mdTable([
   { requirement: 'Prototype validation stimulus', evidence: 'data_processed/prototype_validation_stimulus_flow.csv; data_processed/prototype_validation_scorecard.csv; docs/product/prototype-validation-stimulus-v1.md', status: 'done v1; two-minute loop stimulus, top-ICP comparison flow, and success/kill metrics ready; participant results pending' },
   { requirement: 'Versioned on GitHub', evidence: 'git log through current commit after push', status: 'active' },
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft evidence PDF and visual PDF companion done' },
-  { requirement: 'Russian narrative document', evidence: 'reports/alina-russian-narrative-report-v1.md; output/pdf/alina-russian-narrative-report-v1.pdf', status: 'done v1; sequential Russian-language narrative report generated from evidence warehouse' },
+  { requirement: 'Russian narrative document', evidence: 'reports/alina-russian-narrative-report-v1.md; output/pdf/alina-russian-narrative-report-v1.pdf; data_processed/russian_narrative_evidence_map.csv; docs/decision/russian-narrative-evidence-map-v1.md', status: 'done v1; sequential Russian-language narrative report and argument map generated from evidence warehouse' },
   { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft chart pack and embedded visual PDF done' },
   { requirement: 'Evidence audit / claim register', evidence: 'data_processed/evidence_claim_register.csv; docs/decision/evidence-audit-v1.md', status: 'done v1; proof status, confidence, gaps, and next actions explicit' },
   { requirement: 'Evidence package manifest', evidence: 'data_processed/evidence_artifact_manifest.csv; docs/decision/evidence-package-manifest-v1.md', status: 'done v1; tracks key artifacts with row counts, source-reference coverage, sizes, and short hashes' },
