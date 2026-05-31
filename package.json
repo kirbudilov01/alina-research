@@ -7,7 +7,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "collect:top1000": "node scripts/collect_multi_source_top300.mjs",
+    "collect:expanded": "node scripts/expand_competitor_universe.mjs",
+    "collect:expanded:smoke": "KEYWORD_LIMIT=1 MAX_PER_KEYWORD=25 node scripts/expand_competitor_universe.mjs",
+    "test": "node --check scripts/collect_multi_source_top300.mjs && node --check scripts/expand_competitor_universe.mjs"
   },
   "repository": {
     "type": "git",

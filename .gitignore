@@ -5,3 +5,4 @@ issues.json
 venv/
 update_linear*.py
 create_issues*.py
+node_modules/
