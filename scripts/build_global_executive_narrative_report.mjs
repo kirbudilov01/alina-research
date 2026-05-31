@@ -115,6 +115,7 @@ const nextBacklog = csv('data_processed/global_next_validation_backlog.csv');
 const validationRollup = csv('data_processed/global_validation_executive_rollup.csv');
 const russianStoryline = csv('data_processed/russian_sequential_storyline.csv');
 const frontmatterDashboard = csv('data_processed/russian_frontmatter_dashboard.csv');
+const p0ValidationExecutionSlice = csv('data_processed/p0_validation_execution_slice.csv');
 
 const intersection = by(tam, 'pillar', 'intersection');
 const holdGates = gates.filter(row => clean(row.decision_ru) === 'оставить hold_validate');
@@ -271,6 +272,26 @@ lines.push('## Что делать дальше');
 lines.push('');
 lines.push('Следующий скачок качества должен прийти не от бесконечного расширения desk research, а от observed rows. Правильный порядок: сначала hidden-clone walkthrough P0-конкурентов, затем paid-flow/WTP, затем P0 ICP interviews, затем prototype sessions. После каждого блока нужно обновлять capture sheets, gates, отчет, PDF и Git history.');
 lines.push('');
+if (p0ValidationExecutionSlice.length) {
+  lines.push('P0 execution slice для первой рабочей сессии:');
+  lines.push('');
+  lines.push(mdTable(p0ValidationExecutionSlice.slice(0, 12).map(row => ({
+    rank: row.slice_rank,
+    block: row.execution_block_ru,
+    id: row.command_id,
+    target: row.target,
+    h: row.linked_hypotheses,
+    file: row.output_file_to_update
+  })), [
+    { key: 'rank', label: '#' },
+    { key: 'block', label: 'Блок' },
+    { key: 'id', label: 'ID' },
+    { key: 'target', label: 'Что проверяем' },
+    { key: 'h', label: 'H' },
+    { key: 'file', label: 'Куда писать' }
+  ]));
+  lines.push('');
+}
 lines.push(mdTable(nextBacklog.slice(0, 8).map(row => ({
   id: row.command_id || row.task_id || row.backlog_id,
   h: row.linked_hypotheses || row.hypothesis_id,
@@ -297,6 +318,7 @@ lines.push('- `data_processed/global_report_readability_audit.csv`');
 lines.push('- `data_processed/russian_sequential_storyline.csv`');
 lines.push('- `data_processed/russian_frontmatter_dashboard.csv`');
 lines.push('- `data_processed/niche_count_reconciliation.csv`');
+lines.push('- `data_processed/p0_validation_execution_slice.csv`');
 
 fs.writeFileSync(OUT, `${lines.join('\n')}\n`);
 

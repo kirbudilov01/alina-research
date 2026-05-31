@@ -6,7 +6,7 @@
 
 Alina стоит дальше проверять как мировую consumer-app гипотезу на пересечении personal meaning, tiny action, short reset и visible progress. Сейчас это не доказанный продукт и не финальный инвестиционный claim. Это большой evidence-first пакет, который показывает: вокруг идеи есть пять платежеспособных adjacent-направлений, заметная конкурентная плотность, рабочая TAM/SAM/SOM методология, предварительное whitespace-окно и понятная P0-очередь валидации.
 
-Масштаб базы сейчас: 67,525 сырьевых source-строк, 36,694 уникализированных строк и 507 локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.
+Масштаб базы сейчас: 67,525 сырьевых source-строк, 36,694 уникализированных строк и 510 локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.
 
 ## Главные числа
 
@@ -14,7 +14,7 @@ Alina стоит дальше проверять как мировую consumer-
 
 | Метрика | Значение | Как читать | Граница |
 | --- | --- | --- | --- |
-| Масштаб evidence base | 67,525 raw source-строк; 36,694 global dedup; 507 manifest artifacts | Пакет уже большой как карта рынка и конкурентов. | Масштаб строк не равен доказанному спросу или числу прямых клонов. |
+| Масштаб evidence base | 67,525 raw source-строк; 36,694 global dedup; 510 manifest artifacts | Пакет уже большой как карта рынка и конкурентов. | Масштаб строк не равен доказанному спросу или числу прямых клонов. |
 | Покрытие пяти направлений | 5 market rows; 13,117 direct app dedup rows by niche; 43,144 all-source dedup rows by niche | По каждой нише видно, сколько данных лежит под выводами. | Niche dedup rows нельзя складывать как уникальные продукты: один продукт может жить в нескольких контекстах. |
 | Денежная рамка H2 | intersection SAM $202M; weighted SAM $80.8M; sensitivity high-or-above 4/6 | Денежная зона выглядит достаточно большой, чтобы продолжать проверку. | Это range-based sizing, не revenue forecast и не закрытый H2 gate. |
 | Статус гипотез | 6/6 gates hold_validate; H1 12 / 60; success 0 / 25; H2 28 / 40; success 8 / 12; H5 12 / 96; success 0 / 30 | Исследование готово к ручной проверке, но еще не готово к claim upgrade. | Listing-only, secondary VOC и prototype-readiness не заменяют observed walkthrough/interview/session evidence. |
@@ -101,6 +101,23 @@ Observed validation пока не закрывает claims: listing-only, secon
 
 Следующий скачок качества должен прийти не от бесконечного расширения desk research, а от observed rows. Правильный порядок: сначала hidden-clone walkthrough P0-конкурентов, затем paid-flow/WTP, затем P0 ICP interviews, затем prototype sessions. После каждого блока нужно обновлять capture sheets, gates, отчет, PDF и Git history.
 
+P0 execution slice для первой рабочей сессии:
+
+| # | Блок | ID | Что проверяем | H | Куда писать |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Сначала hidden-clone walkthrough | P0_MANUAL_01 | Shepherd: Spiritual Bible BFF | H1/H3 | data_processed/manual_competitor_inspection_packet.csv |
+| 2 | Сначала hidden-clone walkthrough | P0_MANUAL_02 | Zing AI: Home & Gym Workouts | H1/H3 | data_processed/manual_competitor_inspection_packet.csv |
+| 3 | Сначала hidden-clone walkthrough | P0_MANUAL_03 | Miracle Morning Routine | H1/H3 | data_processed/manual_competitor_inspection_packet.csv |
+| 4 | Сначала hidden-clone walkthrough | P0_MANUAL_04 | EVOLVE: Transform Your Life | H1/H3 | data_processed/manual_competitor_inspection_packet.csv |
+| 5 | Сначала hidden-clone walkthrough | P0_MANUAL_05 | Daily Yoga: Yoga for Fitness® | H1/H3 | data_processed/manual_competitor_inspection_packet.csv |
+| 6 | Потом paid-flow/WTP evidence | P0_PAYWALL_02 | Character AI: Chat, Talk, Text | H2 | data_processed/web_paywall_visual_adjudication.csv |
+| 7 | Потом paid-flow/WTP evidence | P0_PAYWALL_03 | Headspace: Sleep & Meditate | H2 | data_processed/web_paywall_visual_adjudication.csv |
+| 8 | Потом paid-flow/WTP evidence | P0_PAYWALL_04 | Meditopia: Sleep & Meditation | H2 | data_processed/web_paywall_visual_adjudication.csv |
+| 9 | Потом paid-flow/WTP evidence | P0_PAYWALL_05 | Nebula: Spiritual Guidance | H2 | data_processed/web_paywall_visual_adjudication.csv |
+| 10 | Потом paid-flow/WTP evidence | P0_PAYWALL_08 | Carrom Pool: Disc Game | H2 | data_processed/web_paywall_visual_adjudication.csv |
+| 11 | Затем ICP recent behavior | P0_ICP_ICP_A_T01 | Spiritual self-improvers / screener | H5/H6 | data_processed/icp_validation_test_plan.csv |
+| 12 | Затем ICP recent behavior | P0_ICP_ICP_A_T02 | Spiritual self-improvers / problem_interview | H5/H6 | data_processed/icp_validation_test_plan.csv |
+
 | ID | H | Следующий шаг | Куда писать evidence |
 | --- | --- | --- | --- |
 | P0_MANUAL_01 | H1/H3 | открыть listing/app, сохранить 5 слотов скриншотов, записать full-loop/directness/causality verdict | data_processed/manual_competitor_inspection_packet.csv |
@@ -114,7 +131,7 @@ Observed validation пока не закрывает claims: listing-only, secon
 
 ## Как читать этот документ
 
-Это executive narrative поверх полного evidence pack. Он специально короче основного отчета, потому что readability audit показал: полный документ логичен, но перегружен таблицами (markdown_table_rows=256). Для решений использовать эту версию как входную историю, а полный отчет, manifest, source appendix и capture sheets - как доказательную базу.
+Это executive narrative поверх полного evidence pack. Он специально короче основного отчета, потому что readability audit показал: полный документ логичен, но перегружен таблицами (markdown_table_rows=277). Для решений использовать эту версию как входную историю, а полный отчет, manifest, source appendix и capture sheets - как доказательную базу.
 
 ## Файлы
 
@@ -126,3 +143,4 @@ Observed validation пока не закрывает claims: listing-only, secon
 - `data_processed/russian_sequential_storyline.csv`
 - `data_processed/russian_frontmatter_dashboard.csv`
 - `data_processed/niche_count_reconciliation.csv`
+- `data_processed/p0_validation_execution_slice.csv`

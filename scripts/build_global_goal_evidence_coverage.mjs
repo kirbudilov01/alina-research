@@ -109,8 +109,8 @@ const rows = [
     objective_part_ru: 'Зафиксировать большой план задач и execution path',
     status_ru: 'покрыто как рабочая система',
     evidence_strength_ru: 'сильное',
-    current_evidence_ru: `${countRows('data_processed/global_next_validation_backlog.csv')} next-validation задач; ${countRows('data_processed/p0_validation_command_center.csv')} command-center задач; ${countRows('data_processed/russian_validation_runway.csv')} runway шагов`,
-    key_files: 'data_processed/global_next_validation_backlog.csv;docs/decision/global-next-validation-backlog-v1.md;data_processed/p0_validation_command_center.csv;data_processed/russian_validation_runway.csv',
+    current_evidence_ru: `${countRows('data_processed/global_next_validation_backlog.csv')} next-validation задач; ${countRows('data_processed/p0_validation_command_center.csv')} command-center задач; ${countRows('data_processed/p0_validation_execution_slice.csv')} execution-slice задач; ${countRows('data_processed/russian_validation_runway.csv')} runway шагов`,
+    key_files: 'data_processed/global_next_validation_backlog.csv;docs/decision/global-next-validation-backlog-v1.md;data_processed/p0_validation_command_center.csv;data_processed/p0_validation_execution_slice.csv;docs/decision/p0-validation-execution-slice-v1.md;data_processed/russian_validation_runway.csv',
     remaining_gap_ru: 'план есть, но требует обновления после observed evidence',
     next_move_ru: 'после каждой ручной проверки пересобирать backlog и gates'
   },

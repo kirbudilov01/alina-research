@@ -1,6 +1,6 @@
 # Alina Research. Мировой рынок и логика гипотез
 
-Собрано: 2026-05-31T17:23:45.934Z
+Собрано: 2026-05-31T17:32:37.243Z
 
 ## ОПИСАНИЕ ПРОЕКТА И ГИПОТЕЗА #1
 
@@ -12,7 +12,7 @@
 
 Гипотеза №1: на мировом consumer-app рынке есть место для приложения, которое объединяет личный смысл, короткое действие, reset и причинно видимый прогресс в одну ежедневную петлю. Эта гипотеза пока не доказана как product-market fit, но уже поддержана масштабной картой соседних рынков и конкурентных сигналов.
 
-На текущем этапе собрано 67,525 сырьевых source-строк, 36,694 уникализированных строк и 507 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
+На текущем этапе собрано 67,525 сырьевых source-строк, 36,694 уникализированных строк и 510 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
 
 ### Первые управленческие числа
 
@@ -20,7 +20,7 @@
 
 | Метрика | Значение | Как читать | Граница |
 | --- | --- | --- | --- |
-| Масштаб evidence base | 67,525 raw source-строк; 36,694 global dedup; 507 manifest artifacts | Пакет уже большой как карта рынка и конкурентов. | Масштаб строк не равен доказанному спросу или числу прямых клонов. |
+| Масштаб evidence base | 67,525 raw source-строк; 36,694 global dedup; 510 manifest artifacts | Пакет уже большой как карта рынка и конкурентов. | Масштаб строк не равен доказанному спросу или числу прямых клонов. |
 | Покрытие пяти направлений | 5 market rows; 13,117 direct app dedup rows by niche; 43,144 all-source dedup rows by niche | По каждой нише видно, сколько данных лежит под выводами. | Niche dedup rows нельзя складывать как уникальные продукты: один продукт может жить в нескольких контекстах. |
 | Денежная рамка H2 | intersection SAM $202M; weighted SAM $80.8M; sensitivity high-or-above 4/6 | Денежная зона выглядит достаточно большой, чтобы продолжать проверку. | Это range-based sizing, не revenue forecast и не закрытый H2 gate. |
 | Статус гипотез | 6/6 gates hold_validate; H1 12 / 60; success 0 / 25; H2 28 / 40; success 8 / 12; H5 12 / 96; success 0 / 30 | Исследование готово к ручной проверке, но еще не готово к claim upgrade. | Listing-only, secondary VOC и prototype-readiness не заменяют observed walkthrough/interview/session evidence. |
@@ -337,6 +337,31 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 
 Чтобы следующий шаг был исполнимым, из общего command center выделена короткая P0-очередь. Она начинается с hidden-clone walkthrough конкурентов, затем добирает paid-flow evidence, потом проверяет ICP recent behavior и только после этого переводит прототип в scorecard. Такой порядок сохраняет причинность исследования: сначала убираем риск “это уже существует”, затем проверяем деньги, затем аудиторию, затем преимущество продукта.
 
+### P0 execution slice: что делать в первую рабочую сессию
+
+Ниже показана сжатая очередь, которая превращает большой backlog в исполнимую сессию. У каждой строки есть gate impact и файл, куда писать observed evidence. До заполнения этих строк это не доказательство, а маршрут проверки.
+
+| # | Блок | ID | Что проверяем | H | Timebox | Действие | Что сдвигает | Куда писать |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | Сначала hidden-clone walkthrough | P0_MANUAL_01 | Shepherd: Spiritual Bible BFF | H1/H3 | 25-35 min | открыть listing/app, сохранить 5 слотов скриншотов, записать full-loop/directness/causality verdict | двигает H1/H3: directness, hidden clone risk, action -> avatar/progress causality | data_processed/manual_competitor_inspection_packet.csv |
+| 2 | Сначала hidden-clone walkthrough | P0_MANUAL_02 | Zing AI: Home & Gym Workouts | H1/H3 | 25-35 min | открыть listing/app, сохранить 5 слотов скриншотов, записать full-loop/directness/causality verdict | двигает H1/H3: directness, hidden clone risk, action -> avatar/progress causality | data_processed/manual_competitor_inspection_packet.csv |
+| 3 | Сначала hidden-clone walkthrough | P0_MANUAL_03 | Miracle Morning Routine | H1/H3 | 25-35 min | открыть listing/app, сохранить 5 слотов скриншотов, записать full-loop/directness/causality verdict | двигает H1/H3: directness, hidden clone risk, action -> avatar/progress causality | data_processed/manual_competitor_inspection_packet.csv |
+| 4 | Сначала hidden-clone walkthrough | P0_MANUAL_04 | EVOLVE: Transform Your Life | H1/H3 | 25-35 min | открыть listing/app, сохранить 5 слотов скриншотов, записать full-loop/directness/causality verdict | двигает H1/H3: directness, hidden clone risk, action -> avatar/progress causality | data_processed/manual_competitor_inspection_packet.csv |
+| 5 | Сначала hidden-clone walkthrough | P0_MANUAL_05 | Daily Yoga: Yoga for Fitness® | H1/H3 | 25-35 min | открыть listing/app, сохранить 5 слотов скриншотов, записать full-loop/directness/causality verdict | двигает H1/H3: directness, hidden clone risk, action -> avatar/progress causality | data_processed/manual_competitor_inspection_packet.csv |
+| 6 | Потом paid-flow/WTP evidence | P0_PAYWALL_02 | Character AI: Chat, Talk, Text | H2 | 10-15 min | проверить screenshot/source, подтвердить цену, trial, product-match и границу первого paywall | двигает H2: product-matched paid evidence, price/trial/paywall boundary | data_processed/web_paywall_visual_adjudication.csv |
+| 7 | Потом paid-flow/WTP evidence | P0_PAYWALL_03 | Headspace: Sleep & Meditate | H2 | 10-15 min | проверить screenshot/source, подтвердить цену, trial, product-match и границу первого paywall | двигает H2: product-matched paid evidence, price/trial/paywall boundary | data_processed/web_paywall_visual_adjudication.csv |
+| 8 | Потом paid-flow/WTP evidence | P0_PAYWALL_04 | Meditopia: Sleep & Meditation | H2 | 10-15 min | проверить screenshot/source, подтвердить цену, trial, product-match и границу первого paywall | двигает H2: product-matched paid evidence, price/trial/paywall boundary | data_processed/web_paywall_visual_adjudication.csv |
+| 9 | Потом paid-flow/WTP evidence | P0_PAYWALL_05 | Nebula: Spiritual Guidance | H2 | 10-15 min | проверить screenshot/source, подтвердить цену, trial, product-match и границу первого paywall | двигает H2: product-matched paid evidence, price/trial/paywall boundary | data_processed/web_paywall_visual_adjudication.csv |
+| 10 | Потом paid-flow/WTP evidence | P0_PAYWALL_08 | Carrom Pool: Disc Game | H2 | 10-15 min | проверить screenshot/source, подтвердить цену, trial, product-match и границу первого paywall | двигает H2: product-matched paid evidence, price/trial/paywall boundary | data_processed/web_paywall_visual_adjudication.csv |
+| 11 | Затем ICP recent behavior | P0_ICP_ICP_A_T01 | Spiritual self-improvers / screener | H5/H6 | 20-30 min | спросить, какие приложения/ритуалы/дневники/коучи/avatar-tools участник использовал за 30 дней и что запустило последнее использование | двигает H5/H6: recent behavior, workaround, language, WTP, loop comprehension | data_processed/icp_validation_test_plan.csv |
+| 12 | Затем ICP recent behavior | P0_ICP_ICP_A_T02 | Spiritual self-improvers / problem_interview | H5/H6 | 20-30 min | разобрать последний реальный эпизод, current workaround, эмоциональную ставку и точный язык боли | двигает H5/H6: recent behavior, workaround, language, WTP, loop comprehension | data_processed/icp_validation_test_plan.csv |
+| 13 | Затем ICP recent behavior | P0_ICP_ICP_A_T03 | Spiritual self-improvers / prototype_loop | H5/H6 | 20-30 min | показать простую петлю meaning -> action -> reset -> avatar/progress -> tomorrow hook и попросить участника narrate flow | двигает H5/H6: recent behavior, workaround, language, WTP, loop comprehension | data_processed/icp_validation_test_plan.csv |
+| 14 | Затем ICP recent behavior | P0_ICP_ICP_A_T04 | Spiritual self-improvers / positioning_test | H5/H6 | 20-30 min | сравнить current tool, generic habit/coach и Alina angle; записать, что участник выбрал бы первым и почему | двигает H5/H6: recent behavior, workaround, language, WTP, loop comprehension | data_processed/icp_validation_test_plan.csv |
+| 15 | После этого prototype loop | P0_PROTO_ICP_A_S06_AVATAR_CHANGE | Spiritual self-improvers / S06_AVATAR_CHANGE | H4/H6 | 10-15 min | показать S01-S08 без объяснения, записать время, понимание, цитаты, trust objection и return intent | двигает H4/H6: comprehension, differentiation, trust, return intent | data_processed/prototype_validation_scorecard.csv |
+| 16 | После этого prototype loop | P0_PROTO_ICP_D_S06_AVATAR_CHANGE | Habit and progress users / S06_AVATAR_CHANGE | H4/H6 | 10-15 min | показать S01-S08 без объяснения, записать время, понимание, цитаты, trust objection и return intent | двигает H4/H6: comprehension, differentiation, trust, return intent | data_processed/prototype_validation_scorecard.csv |
+| 17 | После этого prototype loop | P0_SCORE_PVS_M01 | comprehension | H4/H6 | 5-10 min after sessions | после сессий посчитать observed value и gate status по этой метрике | двигает H4/H6: comprehension, differentiation, trust, return intent | data_processed/prototype_validation_scorecard.csv |
+| 18 | После этого prototype loop | P0_SCORE_PVS_M02 | two_minute_completion | H4/H6 | 5-10 min after sessions | после сессий посчитать observed value и gate status по этой метрике | двигает H4/H6: comprehension, differentiation, trust, return intent | data_processed/prototype_validation_scorecard.csv |
+
 | # | Поток | Цель | Гипотезы | Что сделать | Куда писать evidence |
 | --- | --- | --- | --- | --- | --- |
 | 1 | walkthrough конкурентов | Shepherd: Spiritual Bible BFF | H1/H3 | открыть listing/app, сохранить 5 слотов скриншотов, записать full-loop/directness/causality verdict | data_processed/manual_competitor_inspection_packet.csv |
@@ -362,13 +387,13 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 
 | ID | Часть цели | Статус | Текущее evidence | Осталось | Следующий ход |
 | --- | --- | --- | --- | --- | --- |
-| GOAL_01_PLAN | Зафиксировать большой план задач и execution path | покрыто как рабочая система | 22 next-validation задач; 75 command-center задач; 5 runway шагов | план есть, но требует обновления после observed evidence | после каждой ручной проверки пересобирать backlog и gates |
-| GOAL_02_SOURCE_SCALE | Расширить конкурентов и источники по 5 рынкам до большого масштаба | покрыто по raw 50k и dedup 30k+, dedup 50k остается aspiration | raw=67525; dedup=36694; dedup50_status=open; source_refs=239889; source_quality_rows=5 | нельзя писать, что 50k dedup уникальных конкурентов доказаны; доказаны raw 50k и dedup 30k-40k band | расширять source-native lanes без тяжелого поискового crawl |
+| GOAL_01_PLAN | Зафиксировать большой план задач и execution path | покрыто как рабочая система | 22 next-validation задач; 75 command-center задач; 18 execution-slice задач; 5 runway шагов | план есть, но требует обновления после observed evidence | после каждой ручной проверки пересобирать backlog и gates |
+| GOAL_02_SOURCE_SCALE | Расширить конкурентов и источники по 5 рынкам до большого масштаба | покрыто по raw 50k и dedup 30k+, dedup 50k остается aspiration | raw=67525; dedup=36694; dedup50_status=open; source_refs=239908; source_quality_rows=5 | нельзя писать, что 50k dedup уникальных конкурентов доказаны; доказаны raw 50k и dedup 30k-40k band | расширять source-native lanes без тяжелого поискового crawl |
 | GOAL_03_FIVE_MARKETS | Покрыть 5 направлений: mindfulness, coaching, astrology/esoterics, avatar/identity, gaming/progression | покрыто | 5 market rows; 5 whitespace/audience rows; 6 market methodology rows; count_reconciliation_rows=10 | gaming остается benchmark-only до direct audience overlap proof | сохранять gaming вне прямого TAM и H3 proof |
 | GOAL_04_TAM_SAM_SOM | Подготовить рыночную методологию TAM/SAM/SOM и stress-сценарии | покрыто как range-based methodology, не финальный revenue proof | 6 methodology rows; 6 TAM/SAM/SOM rows; 6 stress scenarios; sensitivity_rows=6 | H2 не закрыт: paid-flow signoff ниже порога, WTP и paid-depth prototype signals еще нужны | добрать paid-flow capture rows и WTP вопросы из P0 backlog |
 | GOAL_05_WHITESPACE_AUDIENCE | Собрать whitespace и аудиторные матрицы | покрыто как directional synthesis, validation остается открытой | 5 synthesis rows; 6 whitespace rows; 6 ICP rows; 20492 audience signal rows | H3/H5 нельзя усиливать без manual walkthrough и recent-behavior interviews | исполнить первые 5 walkthrough и P0 ICP interview rows |
 | GOAL_06_REPORT_RU | Собрать последовательный русский мировой отчет и PDF/DOCX | покрыто как draft, не финальная validated версия | global report md=yes; pdf=yes; docx=yes; executive_md=yes; executive_pdf=yes; readability_audit_rows=9; storyline_rows=10; dashboard_rows=16 | финальная версия должна обновиться после observed validation rows | после capture rows пересобрать отчет и изменить claim language |
-| GOAL_07_VERSIONING | Сохранять локально, трассировать источники и версионировать через GitHub | покрыто активно | manifest=507; missing=0; docs=128; scripts=115 | manifest надо обновлять после каждого нового слоя | пересобирать manifest и делать commit/push после изменений |
+| GOAL_07_VERSIONING | Сохранять локально, трассировать источники и версионировать через GitHub | покрыто активно | manifest=510; missing=0; docs=129; scripts=116 | manifest надо обновлять после каждого нового слоя | пересобирать manifest и делать commit/push после изменений |
 | GOAL_08_VALIDATION | Критически мыслить и не закрывать гипотезы без observed evidence | открыто, capture-ready | gates=6; hold_validate=6; started=6; H1_completed=12 / 60; H1_success=0 / 25; H3_completed=12 / 60; H3_success=0 / 25; H2_completed=28 / 40; H2_success=8 / 12; H5_completed=12 / 96; H5_success=0 / 30; H4_completed=16 / 80; H4_success=0 / 32; H6_completed=16 / 80; H6_success=0 / 32 | цель нельзя считать завершенной, пока observed validation gates не закрыты или не понижены по evidence | исполнить P0 validation backlog и обновить gate statuses |
 
 Главный вывод по этой карте: пакет уже масштабный и трассируемый, но не финально валидированный. Это правильное состояние для evidence-first ресерча: сильные desk/source слои готовы, а product/market claims остаются в hold_validate до ручных walkthrough, интервью, прототипа и WTP.
@@ -381,7 +406,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 
 | ID | Раздел | Вопрос читателя | Ход повествования | Evidence | Граница |
 | --- | --- | --- | --- | --- | --- |
-| STORY_01_PRODUCT_THESIS | Описание проекта и гипотеза #1 | Что такое Alina и почему это не просто еще один tracker, meditation app или avatar toy? | Сначала дать продуктовую ставку человеческим языком: daily meaning превращается в маленькое действие, reset снижает трение, progress/avatar показывает причинное изменение. | source_base=67,525 raw; dedup=36,694; manifest=507; sample_style=yes | Это не PMF proof и не доказательство спроса; это стартовая рамка H1. |
+| STORY_01_PRODUCT_THESIS | Описание проекта и гипотеза #1 | Что такое Alina и почему это не просто еще один tracker, meditation app или avatar toy? | Сначала дать продуктовую ставку человеческим языком: daily meaning превращается в маленькое действие, reset снижает трение, progress/avatar показывает причинное изменение. | source_base=67,525 raw; dedup=36,694; manifest=510; sample_style=yes | Это не PMF proof и не доказательство спроса; это стартовая рамка H1. |
 | STORY_02_EVIDENCE_STATUS | Текущий статус доказательств | Можно ли уже говорить, что гипотезы доказаны? | Сразу поставить защитную рамку: все гипотезы идут через gates, а desk research не заменяет observed evidence. | gates=6; hold_validate=6; H2=28 / 40 completed | Не усиливать формулировки до go, пока нет walkthrough, интервью, prototype sessions и WTP. |
 | STORY_03_MARKET_MAP | Определение мировых целевых рынков и гипотеза #2 | Какие именно пять мировых направлений проверяются и сколько данных взято в каждой нише? | Показать пять направлений как роли в будущей ценности Alina: reset, action, meaning, visible identity, progression mechanics. | 5 market rows; direct_app_dedup=13,117; all_source_dedup_rows_by_niche=43,144 | Построчные niche dedup нельзя складывать как уникальных конкурентов; gaming остается benchmark, не прямой TAM. |
 | STORY_04_MARKET_MONEY | Методология TAM/SAM/SOM | Есть ли там деньги и насколько хрупка рыночная модель? | Разделить TAM, SAM, confidence-weighted SAM и stress scenarios; отдельно назвать чувствительные assumptions. | tam_rows=6; intersection_sam=201960000; sensitivity_rows=6 | Рыночная модель не является revenue forecast и не закрывает paid-flow/WTP gate. |
@@ -390,7 +415,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | STORY_07_AUDIENCE | Аудитория, интервью и гипотеза #4 | Кто потенциальный пользователь и почему это не демография? | Описывать audience через поведение: digital ritual users, recent behavior, paid depth, trust boundary и язык боли. | icp_rows=6; p0_segments=Spiritual self-improvers + Habit and progress users | Secondary VOC и review language не заменяют живые интервью. |
 | STORY_08_PRODUCT_LOOP | Итоговая модель продукта и гипотеза #5 | Что именно должен проверить MVP? | Сжать продукт до одной причинной сессии: вход в смысл, контекст, действие, reset, evidence, avatar/progress feedback, next-day hook. | product_loop_screens=8; prototype_scorecard_file=data_processed/prototype_validation_scorecard.csv | H4/H6 не закрыты, пока участники не объясняют петлю своими словами. |
 | STORY_09_VALIDATION_QUEUE | Ближайшая очередь валидации | Что делать следующим шагом, чтобы отчет стал сильнее? | Дать порядок работ: hidden-clone walkthrough, paid-flow/WTP, ICP interviews, prototype sessions. | next_validation_tasks=22; first_workstreams=manual walkthrough + paid-flow | Очередь задач не равна выполненной валидации. |
-| STORY_10_TRACEABILITY | Источники и границы доказательств | Можно ли проверить, откуда взялись утверждения? | Закрыть рассказ source appendix, manifest и границами claims, чтобы отчет был красивым, но не бездоказательным. | manifest=507; readability_rows=9; source_appendix=data_processed/global_hypothesis_source_appendix.csv | Traceability доказывает наличие и связность артефактов, но не доказывает продуктовый outcome. |
+| STORY_10_TRACEABILITY | Источники и границы доказательств | Можно ли проверить, откуда взялись утверждения? | Закрыть рассказ source appendix, manifest и границами claims, чтобы отчет был красивым, но не бездоказательным. | manifest=510; readability_rows=9; source_appendix=data_processed/global_hypothesis_source_appendix.csv | Traceability доказывает наличие и связность артефактов, но не доказывает продуктовый outcome. |
 
 ## ПРОВЕРКА СКЛАДНОСТИ И ЧИТАЕМОСТИ ОТЧЕТА
 
@@ -402,9 +427,9 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | --- | --- | --- | --- | --- |
 | Порядок повествования | складно | низкая | 20 крупных разделов; expected_sequence_breaks=0 | Сохранять этот порядок при следующих расширениях и не вставлять новые тяжелые таблицы до объясняющего абзаца. |
 | Видимость счетчиков по нишам | складно | средняя | в отчете есть таблицы Direct app/store dedup, Total dedup, Top-100 apps и niche rollup | Оставить счетчики в основном тексте; если добавлять новые источники, обновлять niche rollup до PDF/DOCX. |
-| Плотность таблиц | перегружено | высокая | markdown_table_rows=256 | В следующей итерации сделать два режима: executive narrative в основном PDF и heavy appendix для широких таблиц, сохранив текущий полный отчет как evidence pack. |
+| Плотность таблиц | перегружено | высокая | markdown_table_rows=277 | В следующей итерации сделать два режима: executive narrative в основном PDF и heavy appendix для широких таблиц, сохранив текущий полный отчет как evidence pack. |
 | Логичность competitor map | складно с оговоркой | средняя | competitor archetype rollup дополнен cleanup queue и прямой оговоркой queued_not_applied | После ручного taxonomy pass обновить top100 scorecard или оставить queue как documented limitation, если правки не подтверждены. |
-| Русский текст и технические EN-термины | понятно, но много терминов | средняя | technical_english_hits=466 | Для внешней версии сделать отдельный glossary или заменить часть table headers на русские подписи; для рабочей версии оставить EN labels там, где они являются ID/полями данных. |
+| Русский текст и технические EN-термины | понятно, но много терминов | средняя | technical_english_hits=515 | Для внешней версии сделать отдельный glossary или заменить часть table headers на русские подписи; для рабочей версии оставить EN labels там, где они являются ID/полями данных. |
 | Границы доказательств | складно | низкая | в тексте повторяются hold_validate, not final proof, source boundaries и запрет на claim upgrade без observed evidence | Не убирать эти границы ради красоты; лучше вынести краткий executive summary поверх них, если нужен более легкий PDF. |
 | Ясность следующего шага | складно | низкая | есть P0 очередь: competitor walkthrough -> paid-flow -> ICP interview -> prototype session | Следующим рабочим ходом закрывать первые P0 walkthrough и paid-flow tasks, а не расширять desk research бесконечно. |
 | Повествовательная склейка по образцу | складно | низкая | storyline_rows=10; section_present=yes | Держать STORY_01-STORY_10 как редакционный каркас перед каждой внешней сборкой PDF/DOCX. |
@@ -422,7 +447,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | SRC_04_WHITESPACE | Где дыры и возможность отличиться | поддержано направленно, но не финально доказано | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Whitespace нельзя апгрейдить без manual walkthrough и final verdict_after_inspection. |
 | SRC_05_AUDIENCE | Аудитория, интервью и гипотеза #4 | поддержано направленно, но не финально доказано | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Audience rows и Reddit/forum signals не являются representative survey и не заменяют recent-behavior interviews. |
 | SRC_06_PRODUCT_CORE | Итоговая модель продукта и гипотеза #5 | поддержано направленно, но не финально доказано | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | Product core не считается доказанным без заполненных prototype_session_capture_sheet и scorecard. |
-| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 507 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
+| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 510 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
 | SRC_08_SAMPLE_STYLE_REFERENCE | Логика гипотез и повествовательная форма | используется как style benchmark, не как market evidence | sample_docx_paragraphs=645; benchmark_doc=docs/decision/alina-sample-style-benchmark-v1.md | Образец задает композицию и русский нарратив; он не переносит российский рынок, локальные цифры или старую продуктовую гипотезу в мировой отчет. |
 | SRC_09_NICHE_COUNT_ROLLUP | Определение мировых целевых рынков и гипотеза #2 | доказано как source-count rollup, не как PMF proof | 5 niche rows; file=data_processed/global_niche_count_rollup.csv | Niche count rollup показывает масштаб source discovery по рынкам; он не доказывает спрос, WTP или отсутствие скрытого full-loop конкурента. |
 | SRC_10_REPORT_READABILITY | Проверка складности и читаемости отчета | проверено редакционным аудитом, не market proof | 9 readability audit rows | Readability audit оценивает форму и ясность текста; он не доказывает рыночные или продуктовые claims. |
@@ -431,6 +456,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | SRC_13_RUSSIAN_STORYLINE | Повествовательная логика отчета | проверено narrative-spine картой, не market proof | 10 storyline rows | Storyline карта управляет формой и переходами отчета; она не усиливает рыночные, конкурентные или продуктовые claims без observed evidence. |
 | SRC_14_FRONTMATTER_DASHBOARD | Первые управленческие числа | проверено frontmatter dashboard, не market proof | 16 dashboard rows | Dashboard улучшает читаемость и видимость счетчиков; он не превращает coverage, source volume или TAM/SAM/SOM в доказанный спрос. |
 | SRC_15_NICHE_COUNT_RECONCILIATION | Определение мировых целевых рынков и гипотеза #2 | доказано как count reconciliation, не demand proof | 10 reconciliation rows | Reconciliation объясняет арифметику и scope счетчиков; он не доказывает спрос, WTP или отсутствие hidden clone. |
+| SRC_16_P0_EXECUTION_SLICE | Ближайшая очередь валидации | доказано как execution routing, не observed validation | 18 execution-slice rows | Execution slice показывает порядок действий; он не апгрейдит H1-H6 без заполненных observed rows. |
 
 ## БЫСТРЫЕ ВЫВОДЫ ДЛЯ СТРАТЕГИИ
 
@@ -450,6 +476,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 - `data_processed/global_hypothesis_validation_questionnaire.csv`
 - `data_processed/global_hypothesis_gate_snapshot.csv`
 - `data_processed/global_next_validation_backlog.csv`
+- `data_processed/p0_validation_execution_slice.csv`
 - `data_processed/global_report_readability_audit.csv`
 - `data_processed/global_source_quality_gap_audit.csv`
 - `data_processed/russian_sequential_storyline.csv`

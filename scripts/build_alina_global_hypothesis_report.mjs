@@ -214,6 +214,7 @@ const claimAppendix = csv('data_processed/russian_claim_evidence_appendix.csv');
 const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv');
 const marketSources = csv('data_processed/market_source_registry.csv');
 const nextValidationBacklog = csv('data_processed/global_next_validation_backlog.csv');
+const p0ValidationExecutionSlice = csv('data_processed/p0_validation_execution_slice.csv');
 const reportReadabilityAudit = csv('data_processed/global_report_readability_audit.csv');
 const sourceQualityAudit = csv('data_processed/global_source_quality_gap_audit.csv');
 const marketSizingMethodology = csv('data_processed/global_market_sizing_methodology.csv');
@@ -508,6 +509,15 @@ const sourceAppendix = [
     primary_metric: `${nicheCountReconciliation.length} reconciliation rows`,
     evidence_files: 'data_processed/niche_count_reconciliation.csv;docs/competitive/niche-count-reconciliation-v1.md;data_processed/global_niche_count_rollup.csv;data_processed/cross_source_universe_dedup.csv',
     source_boundary_ru: 'Reconciliation объясняет арифметику и scope счетчиков; он не доказывает спрос, WTP или отсутствие hidden clone.'
+  },
+  {
+    claim_id: 'SRC_16_P0_EXECUTION_SLICE',
+    report_section: 'Ближайшая очередь валидации',
+    claim_ru: 'P0 validation queue сведена в исполнимую рабочую сессию: hidden-clone walkthrough, paid-flow, ICP recent behavior и prototype loop.',
+    evidence_status_ru: 'доказано как execution routing, не observed validation',
+    primary_metric: `${p0ValidationExecutionSlice.length} execution-slice rows`,
+    evidence_files: 'data_processed/p0_validation_execution_slice.csv;docs/decision/p0-validation-execution-slice-v1.md;data_processed/global_next_validation_backlog.csv;data_processed/p0_validation_command_center.csv',
+    source_boundary_ru: 'Execution slice показывает порядок действий; он не апгрейдит H1-H6 без заполненных observed rows.'
   }
 ];
 
@@ -1027,6 +1037,34 @@ lines.push('## БЛИЖАЙШАЯ ОЧЕРЕДЬ ВАЛИДАЦИИ');
 lines.push('');
 lines.push('Чтобы следующий шаг был исполнимым, из общего command center выделена короткая P0-очередь. Она начинается с hidden-clone walkthrough конкурентов, затем добирает paid-flow evidence, потом проверяет ICP recent behavior и только после этого переводит прототип в scorecard. Такой порядок сохраняет причинность исследования: сначала убираем риск “это уже существует”, затем проверяем деньги, затем аудиторию, затем преимущество продукта.');
 lines.push('');
+if (p0ValidationExecutionSlice.length) {
+  lines.push('### P0 execution slice: что делать в первую рабочую сессию');
+  lines.push('');
+  lines.push('Ниже показана сжатая очередь, которая превращает большой backlog в исполнимую сессию. У каждой строки есть gate impact и файл, куда писать observed evidence. До заполнения этих строк это не доказательство, а маршрут проверки.');
+  lines.push('');
+  lines.push(mdTable(p0ValidationExecutionSlice.map(row => ({
+    rank: row.slice_rank,
+    block: row.execution_block_ru,
+    id: row.command_id,
+    target: row.target,
+    h: row.linked_hypotheses,
+    timebox: row.timebox_ru,
+    action: row.operator_action_ru,
+    impact: row.gate_impact_ru,
+    file: row.output_file_to_update
+  })), [
+    { key: 'rank', label: '#' },
+    { key: 'block', label: 'Блок' },
+    { key: 'id', label: 'ID' },
+    { key: 'target', label: 'Что проверяем' },
+    { key: 'h', label: 'H' },
+    { key: 'timebox', label: 'Timebox' },
+    { key: 'action', label: 'Действие' },
+    { key: 'impact', label: 'Что сдвигает' },
+    { key: 'file', label: 'Куда писать' }
+  ]));
+  lines.push('');
+}
 lines.push(mdTable(nextValidationBacklog.slice(0, 14).map(row => ({
   rank: row.backlog_rank,
   lane: row.lane_ru,
@@ -1149,6 +1187,7 @@ lines.push('- `data_processed/global_hypothesis_source_appendix.csv`');
 lines.push('- `data_processed/global_hypothesis_validation_questionnaire.csv`');
 lines.push('- `data_processed/global_hypothesis_gate_snapshot.csv`');
 lines.push('- `data_processed/global_next_validation_backlog.csv`');
+lines.push('- `data_processed/p0_validation_execution_slice.csv`');
 lines.push('- `data_processed/global_report_readability_audit.csv`');
 lines.push('- `data_processed/global_source_quality_gap_audit.csv`');
 lines.push('- `data_processed/russian_sequential_storyline.csv`');
