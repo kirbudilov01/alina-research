@@ -1,6 +1,6 @@
 # Evidence Package Manifest V1
 
-Generated: 2026-05-31T18:44:01.496Z
+Generated: 2026-05-31T18:48:39.892Z
 
 ## Purpose
 
@@ -8,17 +8,17 @@ This manifest makes the research package auditable. It lists key raw data, proce
 
 ## Package Summary
 
-- Manifest rows: 553
+- Manifest rows: 557
 - Missing required artifacts: 0
-- CSV artifacts: 135
-- Total CSV data rows tracked: 243377
-- CSV rows with source-like identifiers/URLs/domains/packages: 241631
+- CSV artifacts: 137
+- Total CSV data rows tracked: 243428
+- CSV rows with source-like identifiers/URLs/domains/packages: 241678
 
 Artifact types:
 
-- research_doc: 135
-- generator_script: 122
-- processed_data: 119
+- research_doc: 136
+- generator_script: 123
+- processed_data: 121
 - validation_workspace: 114
 - report: 22
 - raw_data: 16
@@ -29,7 +29,7 @@ Artifact types:
 Evidence roles:
 
 - decision_artifact: 240
-- supporting: 104
+- supporting: 108
 - market_money: 64
 - audience_icp: 57
 - source_claim: 38
@@ -40,6 +40,8 @@ Evidence roles:
 
 | File | Role | Rows | Source Ref Rows | Hash |
 | --- | --- | ---: | ---: | --- |
+| data_processed/alina_sample_style_gap_map.csv | supporting | 9 | 5 | 58729260575f0b05 |
+| data_processed/alina_sample_style_profile.csv | supporting | 42 | 42 | d2152d96ac43f8bb |
 | data_processed/audience_signal_matrix.csv | audience_icp | 20492 | 20492 | 865f8a0de8b075d7 |
 | data_processed/chrome_webstore_source_expansion_summary.csv | source_claim | 7 | 0 | 67e9e02467d33083 |
 | data_processed/community_referral_signal_rows.csv | supporting | 294 | 294 | d704b257e5129880 |
@@ -65,7 +67,7 @@ Evidence roles:
 | data_processed/global_competitor_archetype_rollup.csv | supporting | 7 | 0 | 48cb0525926238b5 |
 | data_processed/global_goal_evidence_coverage.csv | decision_artifact | 8 | 0 | 9a2d8d695c180daa |
 | data_processed/global_hypothesis_gate_snapshot.csv | decision_artifact | 6 | 0 | 93be1bc96ec5e946 |
-| data_processed/global_hypothesis_source_appendix.csv | decision_artifact | 18 | 18 | fd3b4708650b65a8 |
+| data_processed/global_hypothesis_source_appendix.csv | decision_artifact | 18 | 18 | 5c5fb201c48efac2 |
 | data_processed/global_hypothesis_validation_questionnaire.csv | decision_artifact | 9 | 0 | e9cb87d734d19bbe |
 | data_processed/global_market_sizing_methodology.csv | market_money | 6 | 6 | 375ece2e2328fd3f |
 | data_processed/global_next_validation_backlog.csv | decision_artifact | 22 | 22 | 3d5175a0d7c04e56 |
@@ -78,8 +80,6 @@ Evidence roles:
 | data_processed/icp_recruiting_bridge.csv | audience_icp | 24 | 24 | 5253628a9b650cff |
 | data_processed/icp_recruiting_message_bank.csv | audience_icp | 24 | 24 | 1434b751d9085893 |
 | data_processed/icp_segment_matrix.csv | audience_icp | 6 | 0 | da930b6880a1c41e |
-| data_processed/icp_validation_test_plan.csv | audience_icp | 36 | 36 | 403bffc6be3783b4 |
-| data_processed/itch_source_summary.csv | source_claim | 3 | 3 | cebb7999a5443c22 |
 
 ## Decision Artifacts
 
@@ -87,7 +87,7 @@ Evidence roles:
 | --- | --- | ---: | ---: | --- |
 | docs/competitive/human-validation-guide-v1.md | research_doc | 91 | 12102 | b85e6b5dd29fcb2f |
 | docs/decision/evidence-audit-v1.md | research_doc | 87 | 9758 | 28cfc31515e5905e |
-| docs/decision/evidence-package-manifest-v1.md | research_doc | 131 | 8959 | 4024f16cb2a70288 |
+| docs/decision/evidence-package-manifest-v1.md | research_doc | 131 | 8952 | 66a69cf9ca60c652 |
 | docs/decision/global-goal-evidence-coverage-v1.md | research_doc | 31 | 6149 | d32e797b63ba8926 |
 | docs/decision/global-next-validation-backlog-v1.md | research_doc | 62 | 11960 | 2112606516152be7 |
 | docs/decision/global-report-readability-audit-v1.md | research_doc | 31 | 5768 | fd9fcd8f80a04b98 |
@@ -121,7 +121,7 @@ Evidence roles:
 | docs/product/prototype-validation-stimulus-v1.md | research_doc | 57 | 6109 | 0faba89f050d2b06 |
 | docs/strategy/validation-falsification-criteria.md | research_doc | 38 | 1152 | 310c8c3044a11540 |
 | docs/visuals/chart-index-v1.md | research_doc | 25 | 886 | 77cba8f26318bcae |
-| output/pdf/ALINA_RESEARCH_FULL_RU.pdf | pdf | 990 | 193290 | 9cd8262c03750c68 |
+| output/pdf/ALINA_RESEARCH_FULL_RU.pdf | pdf | 1028 | 196626 | c4698527684193a5 |
 | output/pdf/ALINA_RESEARCH_SEND_NOW_RU.pdf | pdf | 576 | 104422 | db69cd46b4277b7e |
 | output/pdf/alina-evidence-first-report-draft.pdf | pdf | 1423 | 194961 | 30a3025c4818d99e |
 | output/pdf/alina-evidence-visual-report-v1.pdf | pdf | 322 | 34684 | 3fca188b99b4541c |

@@ -864,6 +864,32 @@ lines.push('Сценарии входа для Alina не завязаны на 
 lines.push('');
 lines.push('Таким образом, рынок Alina должен рассматриваться не по одному каналу входа, а как пересечение потребностей: состояние, смысл, действие, видимость прогресса и возвращаемость.');
 lines.push('');
+lines.push('### ЛОГИКА СЕГМЕНТАЦИИ');
+lines.push('');
+lines.push('Как и в прошлом исследовательском документе Алины, сегментация здесь нужна не для красивых labels, а для ответа на практический вопрос: через какой мотив человек вообще войдет в систему и какой use case он принесет с собой. Поэтому аудитория Alina делится не по полу, возрасту или стране, а по мотивационным линиям: смысл, прогресс, reset, identity/avatar и мягкая возвращаемость.');
+lines.push('');
+lines.push('Первая линия - пользователи, которые ищут personal meaning и хотят превратить его в действие. Вторая линия - пользователи, которым нужен видимый прогресс без давления streak. Третья линия - пользователи короткого emotional reset. Четвертая линия - пользователи, которым важна identity/avatar метафора. Пятая линия - progression users, у которых можно брать механику возврата, но нельзя автоматически считать их прямым рынком Alina.');
+lines.push('');
+lines.push('Эта логика важна для продукта: один и тот же MVP-loop должен быть проверен разными входами. Если spiritual self-improver видит в продукте “очередное гадание”, H1/H6 слабеют. Если habit/progress user видит “еще один task manager”, H4 слабеет. Если reset user не связывает calm-down с действием, петля распадается. Поэтому сегментация сразу переводится в validation tests, а не остается маркетинговой типологией.');
+lines.push('');
+lines.push(mdTable(icp.map(row => ({
+  segment: row.segment_name,
+  priority: row.priority_ru,
+  markets: row.primary_markets,
+  job: row.core_job_ru,
+  why: row.why_it_matters_ru,
+  validation: row.screener_rule_ru
+})), [
+  { key: 'segment', label: 'Сегмент' },
+  { key: 'priority', label: 'Приоритет' },
+  { key: 'markets', label: 'Рынки' },
+  { key: 'job', label: 'Core job' },
+  { key: 'why', label: 'Почему важен' },
+  { key: 'validation', label: 'Как проверять' }
+]));
+lines.push('');
+lines.push('Итог по сегментации: первыми стоит проверять Spiritual self-improvers и Habit and progress users, потому что они дают два разных входа в одну и ту же причинную петлю. Остальные сегменты нужны как compare-layers: они покажут, является ли Alina отдельным продуктом с широкой daily ritual задачей или распадается на несколько уже занятых категорий.');
+lines.push('');
 lines.push('## ОПРЕДЕЛЕНИЕ КОНКУРЕНТОВ И ГИПОТЕЗА #3');
 lines.push('');
 lines.push('Конкурентная среда подтверждает, что пользователь уже решает части задачи через существующие приложения. В top-100 review сейчас есть meditation apps, habit trackers, AI journals, spiritual guidance apps, avatar/identity apps и progression products. Рынок не пустой, поэтому сильная ставка Alina не может звучать как “конкурентов нет”. Ставка должна быть точнее: конкуренты закрывают отдельные части петли, но полная причинная связка meaning -> action -> reset -> visible identity/progress встречается редко и требует ручной проверки.');

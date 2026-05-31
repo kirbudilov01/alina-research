@@ -1,6 +1,6 @@
 # Alina Research. Мировой рынок и логика гипотез
 
-Собрано: 2026-05-31T18:34:34.410Z
+Собрано: 2026-05-31T18:48:29.538Z
 
 ## ОПИСАНИЕ ПРОЕКТА И ГИПОТЕЗА #1
 
@@ -12,7 +12,7 @@
 
 Гипотеза №1: на мировом consumer-app рынке есть место для приложения, которое объединяет личный смысл, короткое действие, reset и причинно видимый прогресс в одну ежедневную петлю. Эта гипотеза пока не доказана как product-market fit, но уже поддержана масштабной картой соседних рынков и конкурентных сигналов.
 
-На текущем этапе собрано 68,085 сырьевых source-строк, 37,176 уникализированных строк и 529 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
+На текущем этапе собрано 68,085 сырьевых source-строк, 37,176 уникализированных строк и 557 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
 
 ### Первые управленческие числа
 
@@ -187,6 +187,25 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 Сценарии входа для Alina не завязаны на один канал. Логичнее рассматривать несколько мировых consumer-entry сценариев. Первый сценарий - пользователь приходит из состояния тревоги, усталости или перегруза и ищет короткий reset. Второй сценарий - пользователь приходит из self-improvement контекста: он хочет двигаться вперед, но устал от жестких streak и сложных систем. Третий сценарий - пользователь приходит из spiritual/meaning контекста и хочет не просто читать интерпретацию, а превратить ее в действие. Четвертый сценарий - пользователь приходит через avatar/identity интерес и хочет видеть, что версия себя меняется. Пятый сценарий - пользователь возвращается через мягкую progression-механику, если она не выглядит как манипулятивная игра.
 
 Таким образом, рынок Alina должен рассматриваться не по одному каналу входа, а как пересечение потребностей: состояние, смысл, действие, видимость прогресса и возвращаемость.
+
+### ЛОГИКА СЕГМЕНТАЦИИ
+
+Как и в прошлом исследовательском документе Алины, сегментация здесь нужна не для красивых labels, а для ответа на практический вопрос: через какой мотив человек вообще войдет в систему и какой use case он принесет с собой. Поэтому аудитория Alina делится не по полу, возрасту или стране, а по мотивационным линиям: смысл, прогресс, reset, identity/avatar и мягкая возвращаемость.
+
+Первая линия - пользователи, которые ищут personal meaning и хотят превратить его в действие. Вторая линия - пользователи, которым нужен видимый прогресс без давления streak. Третья линия - пользователи короткого emotional reset. Четвертая линия - пользователи, которым важна identity/avatar метафора. Пятая линия - progression users, у которых можно брать механику возврата, но нельзя автоматически считать их прямым рынком Alina.
+
+Эта логика важна для продукта: один и тот же MVP-loop должен быть проверен разными входами. Если spiritual self-improver видит в продукте “очередное гадание”, H1/H6 слабеют. Если habit/progress user видит “еще один task manager”, H4 слабеет. Если reset user не связывает calm-down с действием, петля распадается. Поэтому сегментация сразу переводится в validation tests, а не остается маркетинговой типологией.
+
+| Сегмент | Приоритет | Рынки | Core job | Почему важен | Как проверять |
+| --- | --- | --- | --- | --- | --- |
+| Spiritual self-improvers | P0: начинать интервью и прототип с этого сегмента | astrology_esoterics/coaching | Turn symbolic/personal meaning into one grounded action today. | Это люди, которые уже ищут личный смысл, символическое отражение дня, дневниковые практики, spiritual guidance или мягкий self-improvement. Для Alina это самый естественный вход: смысл должен быстро превращаться в одно реальное действие. | In the last 30 days, which apps, rituals, journals, coaches, avatars, or reset tools did you actually use for this job: Turn symbolic/personal meaning into one grounded action today. |
+| Habit and progress users | P0: начинать интервью и прототип с этого сегмента | coaching/mindfulness | Make vague growth concrete and keep momentum without streak anxiety. | Это люди, которым не хватает не еще одного списка задач, а более мягкого способа видеть движение вперед. Для Alina это проверка, может ли action-tied прогресс заменить жесткий streak pressure. | In the last 30 days, which apps, rituals, journals, coaches, avatars, or reset tools did you actually use for this job: Make vague growth concrete and keep momentum without streak anxiety. |
+| Anxious daily reset users | P1: использовать как сравнение после P0 | mindfulness/coaching | Calm down quickly and return to the day with one manageable next step. | Это пользователи коротких reset, calm, sleep, breathwork и mood tools. Для Alina они важны как проверка: reset должен не просто успокоить, а вернуть человека к одному посильному следующему шагу. | In the last 30 days, which apps, rituals, journals, coaches, avatars, or reset tools did you actually use for this job: Calm down quickly and return to the day with one manageable next step. |
+| Cozy/casual progression users | P1: использовать как сравнение после P0 | gaming/avatar_identity | Return because progress feels gentle, visible, and emotionally rewarding. | Это люди, которым близки мягкие игровые циклы, коллекционирование, daily rewards и уютная progression. Для Alina это источник языка возвращения, но есть риск выглядеть как манипулятивная retention-механика. | In the last 30 days, which apps, rituals, journals, coaches, avatars, or reset tools did you actually use for this job: Return because progress feels gentle, visible, and emotionally rewarding. |
+| Coaching professionals and structured growth users | P1: использовать как сравнение после P0 | coaching | Get structured guidance that turns intention into accountable practice. | Это пользователи структурированного роста, coaching и accountability. Для Alina сегмент полезен как проверка глубины, но продукт не должен превращаться в B2B/career coaching software. | In the last 30 days, which apps, rituals, journals, coaches, avatars, or reset tools did you actually use for this job: Get structured guidance that turns intention into accountable practice. |
+| Avatar identity builders | P1: использовать как сравнение после P0 | avatar_identity/coaching | See a version of myself change as I make progress. | Это пользователи identity, avatars, AI companions и future-self визуализаций. Для Alina сегмент важен как проверка, мотивирует ли визуальное self-change только тогда, когда оно связано с завершенным действием. | In the last 30 days, which apps, rituals, journals, coaches, avatars, or reset tools did you actually use for this job: See a version of myself change as I make progress. |
+
+Итог по сегментации: первыми стоит проверять Spiritual self-improvers и Habit and progress users, потому что они дают два разных входа в одну и ту же причинную петлю. Остальные сегменты нужны как compare-layers: они покажут, является ли Alina отдельным продуктом с широкой daily ritual задачей или распадается на несколько уже занятых категорий.
 
 ## ОПРЕДЕЛЕНИЕ КОНКУРЕНТОВ И ГИПОТЕЗА #3
 
@@ -448,7 +467,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | SRC_04_WHITESPACE | Где дыры и возможность отличиться | поддержано направленно, но не финально доказано | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Whitespace нельзя апгрейдить без manual walkthrough и final verdict_after_inspection. |
 | SRC_05_AUDIENCE | Аудитория, интервью и гипотеза #4 | поддержано направленно, но не финально доказано | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Audience rows и Reddit/forum signals не являются representative survey и не заменяют recent-behavior interviews. |
 | SRC_06_PRODUCT_CORE | Итоговая модель продукта и гипотеза #5 | поддержано направленно, но не финально доказано | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | Product core не считается доказанным без заполненных prototype_session_capture_sheet и scorecard. |
-| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 529 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
+| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 557 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
 | SRC_08_SAMPLE_STYLE_REFERENCE | Логика гипотез и повествовательная форма | используется как style benchmark, не как market evidence | sample_docx_paragraphs=645; benchmark_doc=docs/decision/alina-sample-style-benchmark-v1.md | Образец задает композицию и русский нарратив; он не переносит российский рынок, локальные цифры или старую продуктовую гипотезу в мировой отчет. |
 | SRC_09_NICHE_COUNT_ROLLUP | Определение мировых целевых рынков и гипотеза #2 | доказано как source-count rollup, не как PMF proof | 5 niche rows; file=data_processed/global_niche_count_rollup.csv | Niche count rollup показывает масштаб source discovery по рынкам; он не доказывает спрос, WTP или отсутствие скрытого full-loop конкурента. |
 | SRC_10_REPORT_READABILITY | Проверка складности и читаемости отчета | проверено редакционным аудитом, не market proof | 10 readability audit rows | Readability audit оценивает форму и ясность текста; он не доказывает рыночные или продуктовые claims. |
