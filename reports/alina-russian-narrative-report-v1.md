@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T12:25:19.069Z
+Собрано: 2026-05-31T12:33:20.667Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 408 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 411 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 408 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 411 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -323,6 +323,33 @@ Product-core evidence и prototype stimulus переводят исследов�
 
 Практический смысл этого слоя простой: пока completed_rows и success_rows равны нулю, отчет может быть большим и хорошо структурированным, но claims остаются в hold_validate.
 
+## 8.2. Русская observed-evidence ladder
+
+Чтобы отчет оставался речевым, но не терял доказательную строгость, добавлена observed-evidence ladder на 6 гипотез. Она отделяет desk support от observed proof: что уже можно говорить, чего пока нельзя утверждать, какой capture artifact надо заполнить и какая фраза допустима в текущей версии отчета.
+
+| H | Гипотеза | Observed mode | Need | Done | Честная фраза для отчета |
+| --- | --- | --- | ---: | ---: | --- |
+| H1 | форма продукта существует | ручной walkthrough конкурентов | 60 | 0 | Мы видим рядом продукты с похожими примитивами, но форму Alina нельзя считать доказанной, пока первые P0 walkthrough не покажут, что полный цикл не занят скрытым прямым клоном. |
+| H2 | в соседних рынках есть деньги | ручная проверка paywall/paid-flow | 40 | 0 | Деньги в соседних категориях подтверждаются proxy-слоями, но инвестиционный claim по рынку должен оставаться range-based до ручной проверки платных поверхностей и willingness-to-pay. |
+| H3 | есть узкое белое пятно | ручной walkthrough конкурентов | 60 | 0 | Белое пятно формулируется узко: не просто wellness, coaching или avatar, а причинная петля meaning -> action -> reset -> visible identity/progress; до walkthrough это directional, не финальный вывод. |
+| H4 | конкурентное преимущество правдоподобно | прототипные сессии | 80 | 0 | Преимущество Alina пока является проверяемой ставкой на интегрированную петлю, а не доказанным moat: оно должно пройти prototype comprehension, differentiation и trust gates. |
+| H5 | общая аудитория существует | интервью ICP | 96 | 0 | Аудитория видна через повторяющийся язык ritual/progress/support, но ICP нельзя выбирать окончательно без recent-behavior интервью и проверки готовности возвращаться. |
+| H6 | продуктовое ядро можно определить | прототипные сессии | 80 | 0 | Продуктовое ядро уже собрано в MVP framing, но оно станет настоящим core только если пользователи поймут причинность петли и смогут объяснить, зачем вернуться завтра. |
+
+**H1.** Наблюдаемых rows пока нет: desk evidence не переводит гипотезу из hold_validate в go. Главная дырка: No observed capture rows yet. Strict full loop is rare and still needs actual app/onboarding screenshots to confirm or downgrade public listing claims. Сначала заполнить: manual_walkthrough_capture_sheet.csv + screenshot paths + inspector_notes
+
+**H2.** Наблюдаемых rows пока нет: desk evidence не переводит гипотезу из hold_validate в go. Главная дырка: No observed capture rows yet. Market sizing still needs actual revenue estimates, paid intelligence, manual in-app paywall validation, and willingness-to-pay prototype evidence for final investor-grade claims. Сначала заполнить: paid_flow_capture_sheet.csv + public pricing screenshot + product-match verdict
+
+**H3.** Наблюдаемых rows пока нет: desk evidence не переводит гипотезу из hold_validate в go. Главная дырка: No observed capture rows yet. Actual app/onboarding inspection results are still missing; public listings and cross-source text rules can overstate or hide in-app loops. Сначала заполнить: manual_walkthrough_capture_sheet.csv + screenshot paths + inspector_notes
+
+**H4.** Наблюдаемых rows пока нет: desk evidence не переводит гипотезу из hold_validate в go. Главная дырка: No observed capture rows yet. No human prototype session yet proves users understand, prefer, or value the integrated loop. Сначала заполнить: prototype_session_capture_sheet.csv + prototype_validation_scorecard.csv + observed metrics
+
+**H5.** Наблюдаемых rows пока нет: desk evidence не переводит гипотезу из hold_validate в go. Главная дырка: No observed capture rows yet. Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. Сначала заполнить: icp_interview_capture_sheet.csv + recent behavior + verbatim quote + segment status
+
+**H6.** Наблюдаемых rows пока нет: desk evidence не переводит гипотезу из hold_validate в go. Главная дырка: No observed capture rows yet. No user prototype evidence yet confirms comprehension, emotional value, or retention impact. Сначала заполнить: prototype_session_capture_sheet.csv + prototype_validation_scorecard.csv + observed metrics
+
+Этот слой особенно важен для финального PDF: он не дает красивому повествованию случайно превратить незавершенную проверку в доказанный вывод.
+
 ## 9. Следующие действия
 
 Все H1-H6 validation gates сейчас требуют наблюдаемой валидации. Not-started gates: 6. Это не провал, а честная граница исследования: локальная evidence base готова, но реальные решения должны приниматься после ручного walkthrough и пользовательских сессий.
@@ -482,6 +509,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_product_loop_cards.csv`
 - `data_processed/russian_validation_gate_cards.csv`
 - `data_processed/russian_p0_execution_packet.csv`
+- `data_processed/russian_observed_evidence_ladder.csv`
 - `data_processed/russian_validation_fieldbook.csv`
 - `data_processed/validation_tranche_planner.csv`
 - `data_processed/validation_tranche_briefing_index.csv`

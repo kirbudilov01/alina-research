@@ -134,6 +134,7 @@ const icpBattlecards = csv('data_processed/russian_icp_battlecards.csv');
 const productLoopCards = csv('data_processed/russian_product_loop_cards.csv');
 const validationGateCards = csv('data_processed/russian_validation_gate_cards.csv');
 const p0ExecutionPacket = csv('data_processed/russian_p0_execution_packet.csv');
+const observedEvidenceLadder = csv('data_processed/russian_observed_evidence_ladder.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -429,6 +430,27 @@ if (validationGateCards.length) {
   lines.push('Практический смысл этого слоя простой: пока completed_rows и success_rows равны нулю, отчет может быть большим и хорошо структурированным, но claims остаются в hold_validate.');
   lines.push('');
 }
+if (observedEvidenceLadder.length) {
+  lines.push('## 8.2. Русская observed-evidence ladder');
+  lines.push('');
+  lines.push(`Чтобы отчет оставался речевым, но не терял доказательную строгость, добавлена observed-evidence ladder на ${observedEvidenceLadder.length} гипотез. Она отделяет desk support от observed proof: что уже можно говорить, чего пока нельзя утверждать, какой capture artifact надо заполнить и какая фраза допустима в текущей версии отчета.`);
+  lines.push('');
+  lines.push(mdTable(observedEvidenceLadder, [
+    { key: 'hypothesis_id', label: 'H' },
+    { key: 'hypothesis_ru', label: 'Гипотеза' },
+    { key: 'evidence_mode_ru', label: 'Observed mode' },
+    { key: 'required_capture_rows', label: 'Need', align: 'right' },
+    { key: 'completed_rows', label: 'Done', align: 'right' },
+    { key: 'report_sentence_ru', label: 'Честная фраза для отчета' }
+  ], observedEvidenceLadder.length));
+  lines.push('');
+  for (const row of observedEvidenceLadder) {
+    lines.push(`**${row.hypothesis_id}.** ${row.observed_gap_ru} Сначала заполнить: ${row.exact_artifact_to_fill_ru}`);
+    lines.push('');
+  }
+  lines.push('Этот слой особенно важен для финального PDF: он не дает красивому повествованию случайно превратить незавершенную проверку в доказанный вывод.');
+  lines.push('');
+}
 lines.push('## 9. Следующие действия');
 lines.push('');
 lines.push(`Все H1-H6 validation gates сейчас требуют наблюдаемой валидации. Not-started gates: ${notStartedGates.length}. Это не провал, а честная граница исследования: локальная evidence base готова, но реальные решения должны приниматься после ручного walkthrough и пользовательских сессий.`);
@@ -564,6 +586,7 @@ lines.push('- `data_processed/russian_icp_battlecards.csv`');
 lines.push('- `data_processed/russian_product_loop_cards.csv`');
 lines.push('- `data_processed/russian_validation_gate_cards.csv`');
 lines.push('- `data_processed/russian_p0_execution_packet.csv`');
+lines.push('- `data_processed/russian_observed_evidence_ladder.csv`');
 lines.push('- `data_processed/russian_validation_fieldbook.csv`');
 lines.push('- `data_processed/validation_tranche_planner.csv`');
 lines.push('- `data_processed/validation_tranche_briefing_index.csv`');
