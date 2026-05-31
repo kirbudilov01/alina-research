@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T02:29:49.253Z
+Generated: 2026-05-31T02:32:20.006Z
 
 ## 1. Executive Summary
 
@@ -18,6 +18,7 @@ Key quantified signals:
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
 - Forum/source evidence map: 18 qualitative rows across 5 market pillars.
+- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, and forum source coverage.
 - Modeled direct intersection SAM base: USD 201960000.
 
 ## 2. Product Hypotheses
@@ -268,6 +269,7 @@ Market claims currently normalized: 14.
 - `docs/audience/review-language-synthesis-v1.md`
 - `docs/audience/review-jtbd-clusters-v1.md`
 - `docs/audience/forum-evidence-synthesis-v1.md`
+- `docs/visuals/chart-index-v1.md`
 - `docs/competitive/top-intersection-review-synthesis-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
@@ -282,6 +284,11 @@ Market claims currently normalized: 14.
 - `data_processed/review_jtbd_cluster_rows.csv`
 - `data_raw/app_store_top_candidate_reviews.csv`
 - `data_raw/forum_evidence_signals.csv`
+- `output/charts/whitespace-bands.svg`
+- `output/charts/review-jtbd-clusters.svg`
+- `output/charts/sam-base-by-pillar.svg`
+- `output/charts/som-scenarios.svg`
+- `output/charts/forum-signals-by-market.svg`
 
 ## 13. Next Work
 

@@ -1,0 +1,166 @@
+import fs from 'fs';
+
+const OUT_DIR = 'output/charts';
+const OUT_DOC = 'docs/visuals/chart-index-v1.md';
+
+for (const dir of [OUT_DIR, 'docs/visuals']) fs.mkdirSync(dir, { recursive: true });
+
+function parseCsv(text) {
+  const rows = [];
+  let row = [];
+  let cell = '';
+  let quoted = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    const n = text[i + 1];
+    if (quoted) {
+      if (c === '"' && n === '"') {
+        cell += '"';
+        i++;
+      } else if (c === '"') {
+        quoted = false;
+      } else {
+        cell += c;
+      }
+    } else if (c === '"') {
+      quoted = true;
+    } else if (c === ',') {
+      row.push(cell);
+      cell = '';
+    } else if (c === '\n') {
+      row.push(cell);
+      rows.push(row);
+      row = [];
+      cell = '';
+    } else if (c !== '\r') {
+      cell += c;
+    }
+  }
+  if (cell || row.length) {
+    row.push(cell);
+    rows.push(row);
+  }
+  const header = rows.shift();
+  return rows.filter(r => r.length === header.length).map(r => Object.fromEntries(header.map((h, i) => [h, r[i] || ''])));
+}
+
+function csv(file) {
+  return parseCsv(fs.readFileSync(file, 'utf8'));
+}
+
+function countBy(rows, key) {
+  const out = {};
+  for (const row of rows) out[row[key] || 'unknown'] = (out[row[key] || 'unknown'] || 0) + 1;
+  return out;
+}
+
+function esc(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function fmt(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return String(value ?? '');
+  if (Math.abs(n) >= 1_000_000_000) return `$${(n / 1_000_000_000).toFixed(1)}B`;
+  if (Math.abs(n) >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`;
+  if (Math.abs(n) >= 1_000) return n.toLocaleString('en-US');
+  return String(n);
+}
+
+function horizontalBarChart({ title, subtitle, rows, file, valueLabel = fmt }) {
+  const width = 1120;
+  const rowH = 58;
+  const top = 112;
+  const left = 310;
+  const right = 80;
+  const height = top + rows.length * rowH + 56;
+  const max = Math.max(...rows.map(r => Number(r.value) || 0), 1);
+  const colors = ['#2563eb', '#059669', '#d97706', '#7c3aed', '#dc2626', '#0891b2', '#4f46e5', '#16a34a'];
+  const parts = [];
+  parts.push(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">`);
+  parts.push('<rect width="100%" height="100%" fill="#ffffff"/>');
+  parts.push(`<text x="48" y="48" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="#111827">${esc(title)}</text>`);
+  parts.push(`<text x="48" y="78" font-family="Inter, Arial, sans-serif" font-size="15" fill="#4b5563">${esc(subtitle)}</text>`);
+  rows.forEach((row, i) => {
+    const y = top + i * rowH;
+    const value = Number(row.value) || 0;
+    const barW = Math.max(2, ((width - left - right) * value) / max);
+    parts.push(`<text x="48" y="${y + 24}" font-family="Inter, Arial, sans-serif" font-size="17" fill="#111827">${esc(row.label)}</text>`);
+    parts.push(`<rect x="${left}" y="${y}" width="${width - left - right}" height="28" rx="5" fill="#eef2f7"/>`);
+    parts.push(`<rect x="${left}" y="${y}" width="${barW}" height="28" rx="5" fill="${colors[i % colors.length]}"/>`);
+    parts.push(`<text x="${left + barW + 10}" y="${y + 20}" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#111827">${esc(valueLabel(value))}</text>`);
+  });
+  parts.push('</svg>');
+  fs.writeFileSync(`${OUT_DIR}/${file}`, `${parts.join('\n')}\n`);
+}
+
+const whitespace = csv('data_processed/whitespace_signal_matrix.csv');
+const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
+const tam = csv('data_processed/tam_sam_som_model.csv');
+const som = csv('data_processed/som_sensitivity_scenarios.csv');
+const forum = csv('data_raw/forum_evidence_signals.csv');
+
+horizontalBarChart({
+  title: 'Whitespace Bands Across Expanded Competitor Universe',
+  subtitle: 'High whitespace is narrow; most rows are crowded adjacent substitutes.',
+  rows: Object.entries(countBy(whitespace, 'whitespace_band'))
+    .sort((a, b) => b[1] - a[1])
+    .map(([label, value]) => ({ label, value })),
+  file: 'whitespace-bands.svg'
+});
+
+horizontalBarChart({
+  title: 'Top Review JTBD and Pain Clusters',
+  subtitle: 'Keyword-clustered public App Store reviews from top intersection candidates.',
+  rows: reviewClusters.slice(0, 8).map(row => ({ label: row.cluster_label, value: row.review_rows })),
+  file: 'review-jtbd-clusters.svg'
+});
+
+horizontalBarChart({
+  title: 'Modeled SAM Base by Market Pillar',
+  subtitle: 'Intersection SAM is modeled separately to avoid adding five adjacent TAMs together.',
+  rows: tam.map(row => ({ label: row.pillar, value: row.samBase })),
+  file: 'sam-base-by-pillar.svg'
+});
+
+horizontalBarChart({
+  title: 'SOM Sensitivity Scenarios',
+  subtitle: 'Annual revenue scenarios based on reach, activation, paid conversion, and ARPPU.',
+  rows: som.map(row => ({ label: row.scenario, value: row.annualRevenue })),
+  file: 'som-scenarios.svg'
+});
+
+horizontalBarChart({
+  title: 'Forum Source Map by Market',
+  subtitle: 'Qualitative source rows discovered outside App Store reviews.',
+  rows: Object.entries(countBy(forum, 'market'))
+    .sort((a, b) => b[1] - a[1])
+    .map(([label, value]) => ({ label, value })),
+  file: 'forum-signals-by-market.svg'
+});
+
+const lines = [];
+lines.push('# Chart Index V1');
+lines.push('');
+lines.push(`Generated: ${new Date().toISOString()}`);
+lines.push('');
+lines.push('## Charts');
+lines.push('');
+lines.push('- `output/charts/whitespace-bands.svg`');
+lines.push('- `output/charts/review-jtbd-clusters.svg`');
+lines.push('- `output/charts/sam-base-by-pillar.svg`');
+lines.push('- `output/charts/som-scenarios.svg`');
+lines.push('- `output/charts/forum-signals-by-market.svg`');
+lines.push('');
+lines.push('## Notes');
+lines.push('');
+lines.push('- Charts are generated from normalized CSV files already committed in the repository.');
+lines.push('- These are draft research visuals for fast inspection and later PDF/layout design.');
+fs.writeFileSync(OUT_DOC, `${lines.join('\n')}\n`);
+
+console.log(`charts=${OUT_DIR}`);
+console.log(`doc=${OUT_DOC}`);

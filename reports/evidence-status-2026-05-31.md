@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T02:29:49.289Z
+Generated: 2026-05-31T02:32:20.029Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -11,5 +11,6 @@ Generated: 2026-05-31T02:29:49.289Z
 | Audience matrices | data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md | done v1 |
 | Versioned on GitHub | git log through current commit after push | active |
 | Final PDF | output/pdf/alina-evidence-first-report-draft.pdf | draft PDF done |
+| Visual charts | docs/visuals/chart-index-v1.md; output/charts/*.svg | draft chart pack done |
 | Manual review of top 100 | data_processed/top_intersection_review_prefill.csv | prefilled, not manually completed |
 | Review/forum evidence | data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md | App Store review extraction, JTBD clustering, and forum source map done v1; quote-level forum coding pending |

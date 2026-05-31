@@ -125,6 +125,7 @@ report.push(`- Strict behavior-tied avatar progression signal in top-100: ${beha
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
 report.push(`- Forum/source evidence map: ${forumSignals.length} qualitative rows across ${Object.keys(countBy(forumSignals, 'market')).length} market pillars.`);
+report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, and forum source coverage.');
 report.push(`- Modeled direct intersection SAM base: USD ${baseIntersection.samBase || 'n/a'}.`);
 report.push('');
 report.push('## 2. Product Hypotheses');
@@ -328,6 +329,7 @@ report.push('- `docs/audience/audience-segmentation-v1.md`');
 report.push('- `docs/audience/review-language-synthesis-v1.md`');
 report.push('- `docs/audience/review-jtbd-clusters-v1.md`');
 report.push('- `docs/audience/forum-evidence-synthesis-v1.md`');
+report.push('- `docs/visuals/chart-index-v1.md`');
 report.push('- `docs/competitive/top-intersection-review-synthesis-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
@@ -342,6 +344,11 @@ report.push('- `data_processed/review_jtbd_cluster_summary.csv`');
 report.push('- `data_processed/review_jtbd_cluster_rows.csv`');
 report.push('- `data_raw/app_store_top_candidate_reviews.csv`');
 report.push('- `data_raw/forum_evidence_signals.csv`');
+report.push('- `output/charts/whitespace-bands.svg`');
+report.push('- `output/charts/review-jtbd-clusters.svg`');
+report.push('- `output/charts/sam-base-by-pillar.svg`');
+report.push('- `output/charts/som-scenarios.svg`');
+report.push('- `output/charts/forum-signals-by-market.svg`');
 report.push('');
 report.push('## 13. Next Work');
 report.push('');
@@ -367,6 +374,7 @@ status.push(mdTable([
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
   { requirement: 'Versioned on GitHub', evidence: 'git log through current commit after push', status: 'active' },
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf', status: 'draft PDF done' },
+  { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg', status: 'draft chart pack done' },
   { requirement: 'Manual review of top 100', evidence: 'data_processed/top_intersection_review_prefill.csv', status: 'prefilled, not manually completed' },
   { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md', status: 'App Store review extraction, JTBD clustering, and forum source map done v1; quote-level forum coding pending' }
 ], [

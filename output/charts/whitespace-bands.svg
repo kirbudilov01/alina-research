@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="342" viewBox="0 0 1120 342">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="48" y="48" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="#111827">Whitespace Bands Across Expanded Competitor Universe</text>
+<text x="48" y="78" font-family="Inter, Arial, sans-serif" font-size="15" fill="#4b5563">High whitespace is narrow; most rows are crowded adjacent substitutes.</text>
+<text x="48" y="136" font-family="Inter, Arial, sans-serif" font-size="17" fill="#111827">low</text>
+<rect x="310" y="112" width="730" height="28" rx="5" fill="#eef2f7"/>
+<rect x="310" y="112" width="730" height="28" rx="5" fill="#2563eb"/>
+<text x="1050" y="132" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#111827">7,919</text>
+<text x="48" y="194" font-family="Inter, Arial, sans-serif" font-size="17" fill="#111827">medium</text>
+<rect x="310" y="170" width="730" height="28" rx="5" fill="#eef2f7"/>
+<rect x="310" y="170" width="372.4207601969946" height="28" rx="5" fill="#059669"/>
+<text x="692.4207601969946" y="190" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#111827">4,040</text>
+<text x="48" y="252" font-family="Inter, Arial, sans-serif" font-size="17" fill="#111827">high</text>
+<rect x="310" y="228" width="730" height="28" rx="5" fill="#eef2f7"/>
+<rect x="310" y="228" width="54.66473039525192" height="28" rx="5" fill="#d97706"/>
+<text x="374.6647303952519" y="248" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#111827">593</text>
+</svg>
