@@ -1,6 +1,6 @@
 # Evidence Package Manifest V1
 
-Generated: 2026-05-31T16:00:47.421Z
+Generated: 2026-05-31T16:10:36.826Z
 
 ## Purpose
 
@@ -8,7 +8,7 @@ This manifest makes the research package auditable. It lists key raw data, proce
 
 ## Package Summary
 
-- Manifest rows: 476
+- Manifest rows: 477
 - Missing required artifacts: 0
 - CSV artifacts: 118
 - Total CSV data rows tracked: 241521
@@ -16,7 +16,7 @@ This manifest makes the research package auditable. It lists key raw data, proce
 
 Artifact types:
 
-- research_doc: 118
+- research_doc: 119
 - generator_script: 105
 - processed_data: 103
 - validation_workspace: 95
@@ -29,7 +29,7 @@ Artifact types:
 Evidence roles:
 
 - decision_artifact: 201
-- supporting: 77
+- supporting: 78
 - market_money: 61
 - audience_icp: 59
 - source_claim: 35
@@ -87,7 +87,7 @@ Evidence roles:
 | --- | --- | ---: | ---: | --- |
 | docs/competitive/human-validation-guide-v1.md | research_doc | 91 | 12102 | b85e6b5dd29fcb2f |
 | docs/decision/evidence-audit-v1.md | research_doc | 87 | 9756 | ee273e9aa8578be7 |
-| docs/decision/evidence-package-manifest-v1.md | research_doc | 131 | 8894 | 502e0f1ba2357252 |
+| docs/decision/evidence-package-manifest-v1.md | research_doc | 131 | 8907 | a7e05ec1272a79b6 |
 | docs/decision/global-goal-evidence-coverage-v1.md | research_doc | 31 | 5844 | 6d590610da7ee818 |
 | docs/decision/global-next-validation-backlog-v1.md | research_doc | 62 | 11798 | 9cff4e6c347d8c75 |
 | docs/decision/global-validation-executive-rollup-v1.md | research_doc | 31 | 3880 | a9560b35f56c740e |

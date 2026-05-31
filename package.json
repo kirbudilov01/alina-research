@@ -77,7 +77,7 @@
     "build:public-listing-inspection": "node scripts/build_public_listing_inspection.mjs",
     "build:evidence-audit": "node scripts/build_evidence_audit_register.mjs",
     "build:evidence-manifest": "node scripts/build_evidence_package_manifest.mjs",
-    "build:completion-audit": "node scripts/build_research_completion_audit.mjs",
+    "build:completion-audit": "NODE_OPTIONS=--max-old-space-size=8192 node scripts/build_research_completion_audit.mjs",
     "build:source-backlog": "node scripts/build_source_expansion_backlog.mjs",
     "build:source-scale-milestone": "node scripts/build_source_scale_milestone.mjs",
     "build:cross-source-universe": "node scripts/build_cross_source_universe.mjs",
