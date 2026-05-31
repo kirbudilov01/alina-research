@@ -198,6 +198,7 @@ const marketDeepDives = csv('data_processed/russian_market_deep_dives.csv');
 const whitespace = csv('data_processed/russian_whitespace_decision_map.csv');
 const competitors = csv('data_processed/russian_competitor_battlecards.csv');
 const competitorArchetypeRollup = csv('data_processed/global_competitor_archetype_rollup.csv');
+const taxonomyCleanupQueue = csv('data_processed/competitor_taxonomy_cleanup_queue.csv');
 const icp = csv('data_processed/russian_icp_battlecards.csv');
 const voc = csv('data_processed/russian_voc_objection_map.csv');
 const productLoop = csv('data_processed/russian_product_loop_cards.csv');
@@ -225,6 +226,7 @@ const h2 = by(gates, 'gate_id', 'GATE_H2_PAID_FLOW');
 const claimById = Object.fromEntries(claimAppendix.map(row => [row.claim_id, row]));
 const provByLayer = Object.fromEntries(sourceProvenance.map(row => [row.layer, row]));
 const marketSourceIds = marketSources.map(row => row.source_id).join('|');
+const competitorPrimaryMetric = `${claimById.H1_product_shape_exists?.primary_metric || `${topCompetitors.length} P0 competitors; archetype_rows=${competitorArchetypeRollup.length}`}; taxonomy_cleanup_rows=${taxonomyCleanupQueue.length}`;
 
 const gateByHypothesis = Object.fromEntries(gateCards.map(row => [row.hypothesis_id, row]));
 const fieldByStep = Object.fromEntries(fieldSessionKit.map(row => [row.step_id, row]));
@@ -389,8 +391,8 @@ const sourceAppendix = [
     report_section: 'Определение конкурентов и гипотеза #3',
     claim_ru: 'Конкуренты закрывают отдельные части петли; P0 список нужен для проверки hidden-clone риска.',
     evidence_status_ru: claimById.H1_product_shape_exists?.status_ru || 'готово к проверке, gate открыт',
-    primary_metric: claimById.H1_product_shape_exists?.primary_metric || `${topCompetitors.length} P0 competitors; archetype_rows=${competitorArchetypeRollup.length}`,
-    evidence_files: 'data_processed/russian_competitor_battlecards.csv;data_processed/global_competitor_archetype_rollup.csv;data_processed/top100_competitor_review_scorecard.csv;data_processed/manual_competitor_inspection_packet.csv',
+    primary_metric: competitorPrimaryMetric,
+    evidence_files: 'data_processed/russian_competitor_battlecards.csv;data_processed/global_competitor_archetype_rollup.csv;data_processed/competitor_taxonomy_cleanup_queue.csv;docs/competitive/competitor-taxonomy-cleanup-queue-v1.md;data_processed/top100_competitor_review_scorecard.csv;data_processed/manual_competitor_inspection_packet.csv',
     source_boundary_ru: 'Public listings и scorecards не заменяют app/onboarding walkthrough screenshots.'
   },
   {
@@ -679,6 +681,28 @@ if (competitorArchetypeRollup.length) {
   ]));
   lines.push('');
 }
+if (taxonomyCleanupQueue.length) {
+  lines.push('Отдельно вынесена очередь taxonomy cleanup. Это не “исправленный датасет”, а список строк, где текущий classifier может смешивать AI companion, roleplay, tarot/oracle и habit-tracking продукты. Пока статус у всех строк queued_not_applied: эти замечания помогают читать competitor map критично, но не апгрейдят гипотезы без ручного подтверждения.');
+  lines.push('');
+  lines.push(mdTable(taxonomyCleanupQueue.map(row => ({
+    id: row.cleanup_id,
+    rank: row.review_rank,
+    app: row.app_name,
+    current: row.current_archetype,
+    suggested: row.suggested_archetype,
+    status: row.change_needed,
+    reason: row.cleanup_reason_ru
+  })), [
+    { key: 'id', label: 'ID' },
+    { key: 'rank', label: 'Rank', align: 'right' },
+    { key: 'app', label: 'App' },
+    { key: 'current', label: 'Current' },
+    { key: 'suggested', label: 'Suggested' },
+    { key: 'status', label: 'Status' },
+    { key: 'reason', label: 'Почему' }
+  ]));
+  lines.push('');
+}
 lines.push(mdTable(topCompetitors.map(row => ({
   app: row.app_name,
   risk: row.threat_ru,
@@ -896,6 +920,7 @@ lines.push('- `data_processed/global_market_sizing_methodology.csv`');
 lines.push('- `data_processed/global_niche_count_rollup.csv`');
 lines.push('- `data_processed/global_whitespace_audience_synthesis.csv`');
 lines.push('- `data_processed/global_competitor_archetype_rollup.csv`');
+lines.push('- `data_processed/competitor_taxonomy_cleanup_queue.csv`');
 lines.push('- `data_processed/global_goal_evidence_coverage.csv`');
 lines.push('- `reports/alina-russian-readable-report-v2.md`');
 lines.push('- `data_processed/russian_readable_niche_summary.csv`');

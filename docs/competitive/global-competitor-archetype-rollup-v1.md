@@ -1,6 +1,6 @@
 # Global Competitor Archetype Rollup V1
 
-Generated: 2026-05-31T16:25:22.150Z
+Generated: 2026-05-31T16:30:29.836Z
 
 ## Зачем нужен этот слой
 

@@ -1,6 +1,6 @@
 # Alina Research. Мировой рынок и логика гипотез
 
-Собрано: 2026-05-31T16:25:42.313Z
+Собрано: 2026-05-31T16:32:40.274Z
 
 ## ОПИСАНИЕ ПРОЕКТА И ГИПОТЕЗА #1
 
@@ -12,7 +12,7 @@
 
 Гипотеза №1: на мировом consumer-app рынке есть место для приложения, которое объединяет личный смысл, короткое действие, reset и причинно видимый прогресс в одну ежедневную петлю. Эта гипотеза пока не доказана как product-market fit, но уже поддержана масштабной картой соседних рынков и конкурентных сигналов.
 
-На текущем этапе собрано 67,525 сырьевых source-строк, 36,694 уникализированных строк и 483 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
+На текущем этапе собрано 67,525 сырьевых source-строк, 36,694 уникализированных строк и 486 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
 
 ### Логика гипотез
 
@@ -131,6 +131,19 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | gamified_self_improvement | coaching / habits / progression | 13 | 12 | 0 | 8 | 1 | 1 | usable_for_directional_grouping | LifeWheel Goal Habit Tracker (high_priority_close_substitute; score 29.7) / Habit Tracker - Statz (high_priority_close_substitute; score 28.6) / OtterLife: AI Health Tracker (high_priority_close_substitute; score 28) / Ricky Kalmon (high_priority_close_substitute; score 26.6) |
 | manifestation_tool | astrology / manifestation / self-improvement | 30 | 27 | 0 | 14 | 6 | 6 | usable_for_directional_grouping | Miracle Morning Routine (high_priority_close_substitute; score 33.7) / EVOLVE: Transform Your Life (high_priority_close_substitute; score 31) / Rosebud: AI Journal & Diary (high_priority_close_substitute; score 30.5) / Habit Tracker : Haby (high_priority_close_substitute; score 29.9) |
 | tarot_or_oracle_guidance | tarot / oracle / symbolic guidance | 7 | 4 | 0 | 3 | 0 | 0 | taxonomy_needs_manual_cleanup_before_claim_use | Harem AI - Chat & Talk & Crush (high_priority_close_substitute; score 29.1) / Kokoa AI: Roleplay AI Chat (high_priority_close_substitute; score 27.8) / Spark AI: Chat with Characters (high_priority_close_substitute; score 27) / LunaMate: AI Fanstasy Roleplay (high_priority_close_substitute; score 25.6) |
+
+Отдельно вынесена очередь taxonomy cleanup. Это не “исправленный датасет”, а список строк, где текущий classifier может смешивать AI companion, roleplay, tarot/oracle и habit-tracking продукты. Пока статус у всех строк queued_not_applied: эти замечания помогают читать competitor map критично, но не апгрейдят гипотезы без ручного подтверждения.
+
+| ID | Rank | App | Current | Suggested | Status | Почему |
+| --- | ---: | --- | --- | --- | --- | --- |
+| TAX_01 | 12 | LunaMate: AI Fanstasy Roleplay | tarot_or_oracle_guidance | ai_companion_roleplay | suggested_change | публичное описание сильнее указывает на AI characters/companions/roleplay, чем на tarot/oracle symbolic guidance |
+| TAX_02 | 13 | Kokoa AI: Roleplay AI Chat | tarot_or_oracle_guidance | ai_companion_roleplay | suggested_change | публичное описание сильнее указывает на AI characters/companions/roleplay, чем на tarot/oracle symbolic guidance |
+| TAX_03 | 14 | Harem AI - Chat & Talk & Crush | tarot_or_oracle_guidance | ai_companion_roleplay | suggested_change | публичное описание сильнее указывает на AI characters/companions/roleplay, чем на tarot/oracle symbolic guidance |
+| TAX_04 | 15 | Spark AI: Chat with Characters | tarot_or_oracle_guidance | ai_companion_roleplay | suggested_change | публичное описание сильнее указывает на AI characters/companions/roleplay, чем на tarot/oracle symbolic guidance |
+| TAX_05 | 24 | Intuitive Life Coaching Oracle | tarot_or_oracle_guidance | tarot_or_oracle_guidance | confirm_or_manual_read | публичное описание действительно указывает на oracle/tarot/symbolic guidance |
+| TAX_06 | 45 | Guiding Light Oracle Cards | tarot_or_oracle_guidance | tarot_or_oracle_guidance | confirm_or_manual_read | публичное описание действительно указывает на oracle/tarot/symbolic guidance |
+| TAX_07 | 54 | PALs by Tavus: AI Companions | tarot_or_oracle_guidance | ai_companion_roleplay | suggested_change | публичное описание сильнее указывает на AI characters/companions/roleplay, чем на tarot/oracle symbolic guidance |
+| TAX_08 | 62 | Habit Tracker | ai_companion_roleplay | gamified_self_improvement | suggested_change | публичное описание сильнее указывает на habit tracking/routine/planning, чем на AI companion roleplay |
 
 | Конкурент | Риск | Priority | Money proxy | Что проверить |
 | --- | --- | ---: | --- | --- |
@@ -278,12 +291,12 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | ID | Часть цели | Статус | Текущее evidence | Осталось | Следующий ход |
 | --- | --- | --- | --- | --- | --- |
 | GOAL_01_PLAN | Зафиксировать большой план задач и execution path | покрыто как рабочая система | 22 next-validation задач; 75 command-center задач; 5 runway шагов | план есть, но требует обновления после observed evidence | после каждой ручной проверки пересобирать backlog и gates |
-| GOAL_02_SOURCE_SCALE | Расширить конкурентов и источники по 5 рынкам до большого масштаба | покрыто по raw 50k и dedup 30k+, dedup 50k остается aspiration | raw=67525; dedup=36694; dedup50_status=open; source_refs=239848 | нельзя писать, что 50k dedup уникальных конкурентов доказаны; доказаны raw 50k и dedup 30k-40k band | расширять source-native lanes без тяжелого поискового crawl |
+| GOAL_02_SOURCE_SCALE | Расширить конкурентов и источники по 5 рынкам до большого масштаба | покрыто по raw 50k и dedup 30k+, dedup 50k остается aspiration | raw=67525; dedup=36694; dedup50_status=open; source_refs=239856 | нельзя писать, что 50k dedup уникальных конкурентов доказаны; доказаны raw 50k и dedup 30k-40k band | расширять source-native lanes без тяжелого поискового crawl |
 | GOAL_03_FIVE_MARKETS | Покрыть 5 направлений: mindfulness, coaching, astrology/esoterics, avatar/identity, gaming/progression | покрыто | 5 market rows; 5 whitespace/audience rows; 6 market methodology rows | gaming остается benchmark-only до direct audience overlap proof | сохранять gaming вне прямого TAM и H3 proof |
 | GOAL_04_TAM_SAM_SOM | Подготовить рыночную методологию TAM/SAM/SOM и stress-сценарии | покрыто как range-based methodology, не финальный revenue proof | 6 methodology rows; 6 TAM/SAM/SOM rows; 6 stress scenarios | H2 не закрыт: paid-flow signoff ниже порога, WTP и paid-depth prototype signals еще нужны | добрать paid-flow capture rows и WTP вопросы из P0 backlog |
 | GOAL_05_WHITESPACE_AUDIENCE | Собрать whitespace и аудиторные матрицы | покрыто как directional synthesis, validation остается открытой | 5 synthesis rows; 6 whitespace rows; 6 ICP rows; 20492 audience signal rows | H3/H5 нельзя усиливать без manual walkthrough и recent-behavior interviews | исполнить первые 5 walkthrough и P0 ICP interview rows |
 | GOAL_06_REPORT_RU | Собрать последовательный русский мировой отчет и PDF/DOCX | покрыто как draft, не финальная validated версия | global report md=yes; pdf=yes; docx=yes | финальная версия должна обновиться после observed validation rows | после capture rows пересобрать отчет и изменить claim language |
-| GOAL_07_VERSIONING | Сохранять локально, трассировать источники и версионировать через GitHub | покрыто активно | manifest=483; missing=0; docs=121; scripts=107 | manifest надо обновлять после каждого нового слоя | пересобирать manifest и делать commit/push после изменений |
+| GOAL_07_VERSIONING | Сохранять локально, трассировать источники и версионировать через GitHub | покрыто активно | manifest=486; missing=0; docs=122; scripts=108 | manifest надо обновлять после каждого нового слоя | пересобирать manifest и делать commit/push после изменений |
 | GOAL_08_VALIDATION | Критически мыслить и не закрывать гипотезы без observed evidence | открыто, capture-ready | gates=6; hold_validate=6; started=6; H1_completed=12 / 60; H1_success=0 / 25; H3_completed=12 / 60; H3_success=0 / 25; H2_completed=28 / 40; H2_success=8 / 12; H5_completed=12 / 96; H5_success=0 / 30; H4_completed=16 / 80; H4_success=0 / 32; H6_completed=16 / 80; H6_success=0 / 32 | цель нельзя считать завершенной, пока observed validation gates не закрыты или не понижены по evidence | исполнить P0 validation backlog и обновить gate statuses |
 
 Главный вывод по этой карте: пакет уже масштабный и трассируемый, но не финально валидированный. Это правильное состояние для evidence-first ресерча: сильные desk/source слои готовы, а product/market claims остаются в hold_validate до ручных walkthrough, интервью, прототипа и WTP.
@@ -296,11 +309,11 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | --- | --- | --- | --- | --- |
 | SRC_01_PROJECT_AND_SCALE | Описание проекта и гипотеза #1 | доказано как исследовательский слой | 67525 cross-source raw rows; 36694 cross-source dedup rows; 39 coverage cells; 11 strong and 12 medium source/market cells | Это source/discovery coverage, а не ручная проверка каждого конкурента и не proof спроса. |
 | SRC_02_MARKET_SIZING | Определение мировых целевых рынков и гипотеза #2 | поддержано направленно, но не финальный revenue/WTP proof | 6 market rows; 3 strong and 1 medium directional money cases | Market reports часто broad-category/paywalled; использовать как range-based sizing, не как прогноз выручки Alina. |
-| SRC_03_COMPETITORS | Определение конкурентов и гипотеза #3 | готово к проверке, gate открыт | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Public listings и scorecards не заменяют app/onboarding walkthrough screenshots. |
+| SRC_03_COMPETITORS | Определение конкурентов и гипотеза #3 | готово к проверке, gate открыт | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected; taxonomy_cleanup_rows=8 | Public listings и scorecards не заменяют app/onboarding walkthrough screenshots. |
 | SRC_04_WHITESPACE | Где дыры и возможность отличиться | поддержано направленно, но не финально доказано | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Whitespace нельзя апгрейдить без manual walkthrough и final verdict_after_inspection. |
 | SRC_05_AUDIENCE | Аудитория, интервью и гипотеза #4 | поддержано направленно, но не финально доказано | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Audience rows и Reddit/forum signals не являются representative survey и не заменяют recent-behavior interviews. |
 | SRC_06_PRODUCT_CORE | Итоговая модель продукта и гипотеза #5 | поддержано направленно, но не финально доказано | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | Product core не считается доказанным без заполненных prototype_session_capture_sheet и scorecard. |
-| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 483 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
+| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 486 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
 | SRC_08_SAMPLE_STYLE_REFERENCE | Логика гипотез и повествовательная форма | используется как style benchmark, не как market evidence | sample_docx_paragraphs=645; benchmark_doc=docs/decision/alina-sample-style-benchmark-v1.md | Образец задает композицию и русский нарратив; он не переносит российский рынок, локальные цифры или старую продуктовую гипотезу в мировой отчет. |
 | SRC_09_NICHE_COUNT_ROLLUP | Определение мировых целевых рынков и гипотеза #2 | доказано как source-count rollup, не как PMF proof | 5 niche rows; file=data_processed/global_niche_count_rollup.csv | Niche count rollup показывает масштаб source discovery по рынкам; он не доказывает спрос, WTP или отсутствие скрытого full-loop конкурента. |
 
@@ -324,6 +337,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 - `data_processed/global_niche_count_rollup.csv`
 - `data_processed/global_whitespace_audience_synthesis.csv`
 - `data_processed/global_competitor_archetype_rollup.csv`
+- `data_processed/competitor_taxonomy_cleanup_queue.csv`
 - `data_processed/global_goal_evidence_coverage.csv`
 - `reports/alina-russian-readable-report-v2.md`
 - `data_processed/russian_readable_niche_summary.csv`
