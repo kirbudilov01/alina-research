@@ -35,6 +35,11 @@ DOCUMENTS = [
         OUTPUT_DIR / "alina-russian-readable-report-v2.pdf",
         "Alina Research - читаемая русская версия V2",
     ),
+    (
+        ROOT / "reports" / "alina-global-hypothesis-report-v1.md",
+        OUTPUT_DIR / "alina-global-hypothesis-report-v1.pdf",
+        "Alina Research - мировой рынок и гипотезы",
+    ),
 ]
 
 

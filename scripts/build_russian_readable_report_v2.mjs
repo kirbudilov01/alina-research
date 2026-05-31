@@ -1,8 +1,9 @@
 import fs from 'fs';
 
 const OUT = 'reports/alina-russian-readable-report-v2.md';
+const NICHE_SUMMARY_OUT = 'data_processed/russian_readable_niche_summary.csv';
 
-for (const dir of ['reports']) fs.mkdirSync(dir, { recursive: true });
+for (const dir of ['reports', 'data_processed']) fs.mkdirSync(dir, { recursive: true });
 
 function parseCsv(text) {
   const rows = [];
@@ -58,6 +59,14 @@ function clean(value) {
   return String(value ?? '').replace(/\s+/g, ' ').trim();
 }
 
+function csvEscape(value) {
+  return `"${clean(value).replace(/"/g, '""')}"`;
+}
+
+function writeCsv(file, rows, headers) {
+  fs.writeFileSync(file, [headers.join(','), ...rows.map(row => headers.map(h => csvEscape(row[h])).join(','))].join('\n'));
+}
+
 function num(value) {
   const n = Number(String(value ?? '').replace(/[^\d.-]/g, ''));
   return Number.isFinite(n) ? n : 0;
@@ -104,6 +113,7 @@ function top(rows, key, limit = 3) {
 }
 
 const crossSummary = csv('data_processed/cross_source_universe_summary.csv');
+const coverage = csv('data_processed/cross_source_coverage_matrix.csv');
 const rawRows = csv('data_processed/cross_source_universe_raw.csv');
 const dedupRows = csv('data_processed/cross_source_universe_dedup.csv');
 const marketDeepDives = csv('data_processed/russian_market_deep_dives.csv');
@@ -123,9 +133,9 @@ const manualPacket = csv('data_processed/manual_competitor_inspection_packet.csv
 const redditSignals = csv('data_processed/reddit_mention_signal_matrix.csv');
 const redditQueue = csv('data_processed/reddit_manual_reading_queue.csv');
 
-const nicheRows = crossSummary.filter(row => row.summary_type === 'niche');
+const directSourceGroups = ['mobile_app_store', 'google_play_or_android', 'desktop_store', 'browser_extension'];
 const sourceRows = crossSummary.filter(row => row.summary_type === 'source_group');
-const directAppSources = sourceRows.filter(row => ['mobile_app_store', 'google_play_or_android', 'desktop_store', 'browser_extension'].includes(row.segment));
+const directAppSources = sourceRows.filter(row => directSourceGroups.includes(row.segment));
 const directRaw = sum(directAppSources, 'raw_rows');
 const directDedup = sum(directAppSources, 'dedup_rows');
 const raw50 = by(sourceScale, 'milestone_id', 'RAW_50K_SOURCE_SCALE');
@@ -146,8 +156,71 @@ const nicheName = {
   astrology_esoterics: 'Astrology / esoterics',
   coaching: 'Coaching / self-improvement',
   gaming: 'Gaming / progression mechanics',
-  gaming_progression: 'Gaming progression sub-layer'
+  gaming_progression: 'Gaming / progression benchmark'
 };
+
+const marketToCoverageNiches = {
+  mindfulness: ['mindfulness'],
+  avatar_identity: ['avatar_identity'],
+  astrology_esoterics: ['astrology_esoterics'],
+  coaching: ['coaching'],
+  gaming_progression: ['gaming', 'gaming_progression']
+};
+
+function coverageRowsForMarket(marketId, sourceFilter = () => true) {
+  const niches = marketToCoverageNiches[marketId] || [marketId];
+  return coverage.filter(row => niches.includes(row.niche) && sourceFilter(row));
+}
+
+const nicheSummary = marketDeepDives.map(row => {
+  const directRows = coverageRowsForMarket(row.market_id, r => directSourceGroups.includes(r.source_group));
+  const allRows = coverageRowsForMarket(row.market_id);
+  const directSourceList = Array.from(new Set(directRows.map(r => r.source_group))).join('|');
+  return {
+    market_id: row.market_id,
+    ru_name: row.ru_name,
+    role_ru: row.market_id === 'gaming_progression'
+      ? 'benchmark механик, не прямой TAM'
+      : 'adjacent рынок для конкурентной карты',
+    total_cross_source_dedup_rows: fmt(row.cross_source_dedup_rows),
+    direct_app_store_raw_rows: fmt(sum(directRows, 'raw_rows')),
+    direct_app_store_dedup_rows: fmt(sum(directRows, 'dedup_rows')),
+    all_source_raw_rows: fmt(sum(allRows, 'raw_rows')),
+    all_source_dedup_rows: fmt(sum(allRows, 'dedup_rows')),
+    top100_primary_competitors: fmt(row.top100_primary_competitors),
+    manual_validation_targets: fmt(row.manual_validation_targets),
+    money_verdict: row.money_verdict,
+    opportunity_band: row.opportunity_band,
+    direct_source_groups: directSourceList || 'none'
+  };
+});
+
+const whitespaceByFiveMarkets = marketDeepDives.map(row => {
+  const whitespaceRow = by(whitespaceMap, 'niche', row.market_id === 'gaming_progression' ? 'gaming' : row.market_id);
+  return {
+    niche: row.ru_name,
+    dedup: fmt(row.cross_source_dedup_rows),
+    loop: pct(row.full_loop_rate_pct),
+    band: whitespaceRow.opportunity_read_ru || row.opportunity_band,
+    h3: whitespaceRow.h3_decision_read_ru || row.next_validation_move_ru
+  };
+});
+
+writeCsv(NICHE_SUMMARY_OUT, nicheSummary, [
+  'market_id',
+  'ru_name',
+  'role_ru',
+  'total_cross_source_dedup_rows',
+  'direct_app_store_raw_rows',
+  'direct_app_store_dedup_rows',
+  'all_source_raw_rows',
+  'all_source_dedup_rows',
+  'top100_primary_competitors',
+  'manual_validation_targets',
+  'money_verdict',
+  'opportunity_band',
+  'direct_source_groups'
+]);
 
 const lines = [];
 
@@ -167,27 +240,27 @@ lines.push('Исходная гипотеза простая: пользоват
 lines.push('');
 lines.push('Поэтому исследование разложено на пять основных направлений. Mindfulness отвечает за reset и calm. Coaching/self-improvement отвечает за действие и структуру роста. Astrology/esoterics отвечает за личный смысл и символический язык. Avatar/identity отвечает за видимый образ изменения. Gaming/progression не считается прямым рынком Alina, но нужен как источник retention и прогресс-механик.');
 lines.push('');
-lines.push('## 2. Сколько приложений и источников взяли по нишам');
+lines.push('## 2. Сколько приложений и источников взяли по пяти направлениям');
 lines.push('');
-lines.push('Ниже - самая важная таблица для ориентации. Raw rows показывают общий объем собранных строк из источников. Dedup rows - очищенную рабочую базу после снятия дублей. Это не значит, что каждая строка является прямым конкурентом Alina: часть gaming/Steam/itch строк используется как benchmark механик, а Reddit/forum строки используются как язык боли и контекст.');
+lines.push('Ниже - самая важная таблица для ориентации. Здесь ровно пять рабочих направлений, а не технические подниши. Direct app/store rows показывают более близкий к конкурентам слой: App Store, Google Play/Android, desktop stores и browser extensions. Total dedup показывает весь cross-source слой, включая Steam/itch как benchmark механик и Reddit/forum как язык боли и контекст.');
 lines.push('');
-lines.push(mdTable(nicheRows.map(row => ({
-  niche: nicheName[row.segment] || row.segment,
-  raw: fmt(row.raw_rows),
-  dedup: fmt(row.dedup_rows),
-  ok: fmt(row.ok_rows),
-  read: row.segment === 'gaming' || row.segment === 'gaming_progression'
-    ? 'benchmark механик, не прямой TAM'
-    : 'adjacent рынок для конкурентной карты'
+lines.push(mdTable(nicheSummary.map(row => ({
+  niche: row.ru_name,
+  direct_raw: row.direct_app_store_raw_rows,
+  direct_dedup: row.direct_app_store_dedup_rows,
+  total_dedup: row.total_cross_source_dedup_rows,
+  competitors: row.top100_primary_competitors,
+  read: row.role_ru
 })), [
   { key: 'niche', label: 'Ниша' },
-  { key: 'raw', label: 'Raw rows', align: 'right' },
-  { key: 'dedup', label: 'Dedup rows', align: 'right' },
-  { key: 'ok', label: 'OK rows', align: 'right' },
+  { key: 'direct_raw', label: 'Direct app/store raw', align: 'right' },
+  { key: 'direct_dedup', label: 'Direct app/store dedup', align: 'right' },
+  { key: 'total_dedup', label: 'Total dedup', align: 'right' },
+  { key: 'competitors', label: 'Top-100 apps', align: 'right' },
   { key: 'read', label: 'Как читать' }
 ]));
 lines.push('');
-lines.push(`Если смотреть только на более прямые source-native каналы приложений и витрин - App Store, Google Play/Android, desktop stores и browser extensions - там сейчас ${fmt(directRaw)} raw rows и ${fmt(directDedup)} dedup rows. Остальной объем дает более широкий discovery слой: Steam/itch для механик, Reddit/forum для языка аудитории и дополнительные source lanes для насыщения карты.`);
+lines.push(`Если смотреть только на более прямые source-native каналы приложений и витрин, там сейчас ${fmt(directRaw)} raw rows и ${fmt(directDedup)} dedup rows. Важно: direct app/store слой нужен для карты конкурентов, а общий total dedup нужен для насыщения discovery и поиска белого пятна. Эти два слоя нельзя смешивать в один claim.`);
 lines.push('');
 lines.push(`По масштабу граница такая: ${raw50.status === 'proved' ? `raw 50k уже закрыт (${fmt(raw50.metric_value)} строк)` : 'raw 50k еще не закрыт'}, ${dedup30.status === 'proved' ? `dedup 30k+ закрыт (${fmt(dedup30.metric_value)} строк)` : 'dedup 30k+ еще открыт'}, а dedup 50k остается целью следующего расширения (${dedup50.status || 'open'}, gap сохраняется). Поэтому правильная формулировка: у нас есть большая карта источников, но не 50k вручную проверенных прямых конкурентов.`);
 lines.push('');
@@ -239,13 +312,7 @@ lines.push('## 5. Где может быть белое пятно');
 lines.push('');
 lines.push('Белое пятно не в том, что на рынке нет медитаций, привычек, коучинга или аватаров. Они есть, и их много. Возможность появляется только в узкой комбинации: личное отражение дня должно превращаться в одно действие, действие должно быть достаточно маленьким, reset должен снижать трение, а avatar/progress должен меняться причинно, не декоративно.');
 lines.push('');
-lines.push(mdTable(whitespaceMap.map(row => ({
-  niche: nicheName[row.niche] || row.niche,
-  dedup: fmt(row.cross_source_dedup_rows),
-  loop: pct(row.full_loop_rate_pct),
-  band: row.opportunity_read_ru,
-  h3: row.h3_decision_read_ru
-})), [
+lines.push(mdTable(whitespaceByFiveMarkets, [
   { key: 'niche', label: 'Ниша' },
   { key: 'dedup', label: 'Dedup rows', align: 'right' },
   { key: 'loop', label: 'Full-loop rate', align: 'right' },
@@ -346,6 +413,7 @@ lines.push('- `output/pdf/alina-russian-readable-report-v2.pdf`');
 lines.push('- `reports/alina-russian-narrative-report-v1.md`');
 lines.push('- `output/pdf/alina-russian-narrative-report-v1.pdf`');
 lines.push('- `data_processed/cross_source_universe_summary.csv`');
+lines.push('- `data_processed/russian_readable_niche_summary.csv`');
 lines.push('- `data_processed/russian_market_deep_dives.csv`');
 lines.push('- `data_processed/russian_whitespace_decision_map.csv`');
 lines.push('- `data_processed/russian_icp_battlecards.csv`');
@@ -354,8 +422,9 @@ lines.push('- `data_processed/validation_gate_calculator.csv`');
 fs.writeFileSync(OUT, `${lines.join('\n')}\n`);
 
 console.log(`russian_readable_report=${OUT}`);
+console.log(`russian_readable_niche_summary=${NICHE_SUMMARY_OUT}`);
 console.log(`raw_rows=${rawRows.length}`);
 console.log(`dedup_rows=${dedupRows.length}`);
-console.log(`niches=${nicheRows.length}`);
+console.log(`markets=${nicheSummary.length}`);
 console.log(`direct_source_raw=${directRaw}`);
 console.log(`direct_source_dedup=${directDedup}`);
