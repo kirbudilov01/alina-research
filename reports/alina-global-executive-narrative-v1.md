@@ -6,7 +6,27 @@
 
 Alina стоит дальше проверять как мировую consumer-app гипотезу на пересечении personal meaning, tiny action, short reset и visible progress. Сейчас это не доказанный продукт и не финальный инвестиционный claim. Это большой evidence-first пакет, который показывает: вокруг идеи есть пять платежеспособных adjacent-направлений, заметная конкурентная плотность, рабочая TAM/SAM/SOM методология, предварительное whitespace-окно и понятная P0-очередь валидации.
 
-Масштаб базы сейчас: 67,525 сырьевых source-строк, 36,694 уникализированных строк и 501 локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.
+Масштаб базы сейчас: 67,525 сырьевых source-строк, 36,694 уникализированных строк и 504 локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.
+
+## Главные числа
+
+Коротко перед чтением: это большой мировой desk/source пакет с понятными счетчиками по пяти направлениям, но не финальная validated версия продукта. Числа ниже нужны для ориентации в масштабе и границах evidence.
+
+| Метрика | Значение | Как читать | Граница |
+| --- | --- | --- | --- |
+| Масштаб evidence base | 67,525 raw source-строк; 36,694 global dedup; 504 manifest artifacts | Пакет уже большой как карта рынка и конкурентов. | Масштаб строк не равен доказанному спросу или числу прямых клонов. |
+| Покрытие пяти направлений | 5 market rows; 13,117 direct app dedup rows by niche; 43,144 all-source dedup rows by niche | По каждой нише видно, сколько данных лежит под выводами. | Niche dedup rows нельзя складывать как уникальные продукты: один продукт может жить в нескольких контекстах. |
+| Денежная рамка H2 | intersection SAM $202M; weighted SAM $80.8M; sensitivity high-or-above 4/6 | Денежная зона выглядит достаточно большой, чтобы продолжать проверку. | Это range-based sizing, не revenue forecast и не закрытый H2 gate. |
+| Статус гипотез | 6/6 gates hold_validate; H1 12 / 60; success 0 / 25; H2 28 / 40; success 8 / 12; H5 12 / 96; success 0 / 30 | Исследование готово к ручной проверке, но еще не готово к claim upgrade. | Listing-only, secondary VOC и prototype-readiness не заменяют observed walkthrough/interview/session evidence. |
+| Следующий рабочий фокус | 22 next-validation tasks; readability rows=9; source-quality rows=5 | Следующий прирост качества должен прийти от observed rows, а не от бесконечного расширения desk research. | Backlog описывает работу, но не считается выполненным evidence. |
+
+| Ниша | Сколько данных | Как читать |
+| --- | --- | --- |
+| Mindfulness / reset | raw=15,109; all dedup=9,803; direct app dedup=2,550; top100=21; manual targets=0 | сильный money proxy |
+| Avatar / identity | raw=14,872; all dedup=9,952; direct app dedup=2,506; top100=49; manual targets=3 | сильный money proxy |
+| Astrology / esoterics | raw=5,427; all dedup=2,657; direct app dedup=2,206; top100=59; manual targets=7 | сильный money proxy |
+| Coaching / self-improvement | raw=7,671; all dedup=3,857; direct app dedup=2,651; top100=50; manual targets=8 | средний money proxy |
+| Gaming / progression benchmark | raw=24,446; all dedup=16,875; direct app dedup=3,204; top100=8; manual targets=0 | Использовать как benchmark механик прогресса, возврата и монетизации. |
 
 ## Как устроен рассказ
 
@@ -92,7 +112,7 @@ Observed validation пока не закрывает claims: listing-only, secon
 
 ## Как читать этот документ
 
-Это executive narrative поверх полного evidence pack. Он специально короче основного отчета, потому что readability audit показал: полный документ логичен, но перегружен таблицами (markdown_table_rows=217). Для решений использовать эту версию как входную историю, а полный отчет, manifest, source appendix и capture sheets - как доказательную базу.
+Это executive narrative поверх полного evidence pack. Он специально короче основного отчета, потому что readability audit показал: полный документ логичен, но перегружен таблицами (markdown_table_rows=241). Для решений использовать эту версию как входную историю, а полный отчет, manifest, source appendix и capture sheets - как доказательную базу.
 
 ## Файлы
 
@@ -102,3 +122,4 @@ Observed validation пока не закрывает claims: listing-only, secon
 - `data_processed/evidence_artifact_manifest.csv`
 - `data_processed/global_report_readability_audit.csv`
 - `data_processed/russian_sequential_storyline.csv`
+- `data_processed/russian_frontmatter_dashboard.csv`

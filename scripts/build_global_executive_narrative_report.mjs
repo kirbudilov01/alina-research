@@ -113,6 +113,7 @@ const whitespaceAudience = csv('data_processed/global_whitespace_audience_synthe
 const nextBacklog = csv('data_processed/global_next_validation_backlog.csv');
 const validationRollup = csv('data_processed/global_validation_executive_rollup.csv');
 const russianStoryline = csv('data_processed/russian_sequential_storyline.csv');
+const frontmatterDashboard = csv('data_processed/russian_frontmatter_dashboard.csv');
 
 const intersection = by(tam, 'pillar', 'intersection');
 const holdGates = gates.filter(row => clean(row.decision_ru) === 'оставить hold_validate');
@@ -152,6 +153,36 @@ lines.push('Alina стоит дальше проверять как мирову
 lines.push('');
 lines.push(`Масштаб базы сейчас: ${fmt(rawRows.length)} сырьевых source-строк, ${fmt(dedupRows.length)} уникализированных строк и ${fmt(manifest.length)} локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.`);
 lines.push('');
+if (frontmatterDashboard.length) {
+  const summaryRows = frontmatterDashboard.filter(row => row.block_ru === 'Сводка пакета');
+  const nicheRows = frontmatterDashboard.filter(row => row.block_ru === 'Ниши');
+  lines.push('## Главные числа');
+  lines.push('');
+  lines.push('Коротко перед чтением: это большой мировой desk/source пакет с понятными счетчиками по пяти направлениям, но не финальная validated версия продукта. Числа ниже нужны для ориентации в масштабе и границах evidence.');
+  lines.push('');
+  lines.push(mdTable(summaryRows.map(row => ({
+    metric: row.metric_ru,
+    value: row.value_ru,
+    read: row.interpretation_ru,
+    boundary: row.boundary_ru
+  })), [
+    { key: 'metric', label: 'Метрика' },
+    { key: 'value', label: 'Значение' },
+    { key: 'read', label: 'Как читать' },
+    { key: 'boundary', label: 'Граница' }
+  ]));
+  lines.push('');
+  lines.push(mdTable(nicheRows.map(row => ({
+    niche: row.metric_ru,
+    count: row.value_ru,
+    read: row.interpretation_ru
+  })), [
+    { key: 'niche', label: 'Ниша' },
+    { key: 'count', label: 'Сколько данных' },
+    { key: 'read', label: 'Как читать' }
+  ]));
+  lines.push('');
+}
 if (russianStoryline.length) {
   lines.push('## Как устроен рассказ');
   lines.push('');
@@ -256,6 +287,7 @@ lines.push('- `output/pdf/alina-global-executive-narrative-v1.pdf`');
 lines.push('- `data_processed/evidence_artifact_manifest.csv`');
 lines.push('- `data_processed/global_report_readability_audit.csv`');
 lines.push('- `data_processed/russian_sequential_storyline.csv`');
+lines.push('- `data_processed/russian_frontmatter_dashboard.csv`');
 
 fs.writeFileSync(OUT, `${lines.join('\n')}\n`);
 

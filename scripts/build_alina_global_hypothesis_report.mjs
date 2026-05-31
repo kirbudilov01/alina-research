@@ -218,6 +218,7 @@ const sourceQualityAudit = csv('data_processed/global_source_quality_gap_audit.c
 const marketSizingMethodology = csv('data_processed/global_market_sizing_methodology.csv');
 const marketSensitivityAudit = csv('data_processed/market_model_sensitivity_audit.csv');
 const russianStoryline = csv('data_processed/russian_sequential_storyline.csv');
+const frontmatterDashboard = csv('data_processed/russian_frontmatter_dashboard.csv');
 const marketStressScenarios = csv('data_processed/market_sizing_stress_test.csv');
 const whitespaceAudienceSynthesis = csv('data_processed/global_whitespace_audience_synthesis.csv');
 const goalEvidenceCoverage = csv('data_processed/global_goal_evidence_coverage.csv');
@@ -488,6 +489,15 @@ const sourceAppendix = [
     primary_metric: `${russianStoryline.length} storyline rows`,
     evidence_files: 'data_processed/russian_sequential_storyline.csv;docs/decision/russian-sequential-storyline-v1.md;docs/decision/alina-sample-style-benchmark-v1.md',
     source_boundary_ru: 'Storyline карта управляет формой и переходами отчета; она не усиливает рыночные, конкурентные или продуктовые claims без observed evidence.'
+  },
+  {
+    claim_id: 'SRC_14_FRONTMATTER_DASHBOARD',
+    report_section: 'Первые управленческие числа',
+    claim_ru: 'В начале отчета должна быть короткая панель: масштаб базы, счетчики по пяти нишам, денежная рамка, validation gates и следующий рабочий фокус.',
+    evidence_status_ru: 'проверено frontmatter dashboard, не market proof',
+    primary_metric: `${frontmatterDashboard.length} dashboard rows`,
+    evidence_files: 'data_processed/russian_frontmatter_dashboard.csv;docs/decision/russian-frontmatter-dashboard-v1.md;data_processed/global_niche_count_rollup.csv;data_processed/global_hypothesis_gate_snapshot.csv',
+    source_boundary_ru: 'Dashboard улучшает читаемость и видимость счетчиков; он не превращает coverage, source volume или TAM/SAM/SOM в доказанный спрос.'
   }
 ];
 
@@ -519,6 +529,53 @@ lines.push('Гипотеза №1: на мировом consumer-app рынке �
 lines.push('');
 lines.push(`На текущем этапе собрано ${fmt(rawRows.length)} сырьевых source-строк, ${fmt(dedupRows.length)} уникализированных строк и ${fmt(manifest.length)} локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.`);
 lines.push('');
+if (frontmatterDashboard.length) {
+  const dashboardSummary = frontmatterDashboard.filter(row => row.block_ru === 'Сводка пакета');
+  const dashboardNiches = frontmatterDashboard.filter(row => row.block_ru === 'Ниши');
+  const dashboardGates = frontmatterDashboard.filter(row => row.block_ru === 'Gates');
+  lines.push('### Первые управленческие числа');
+  lines.push('');
+  lines.push('Перед длинным evidence pack ниже вынесена короткая панель. Она отвечает на базовые вопросы: сколько данных собрано, сколько приложений/строк видно по каждой нише, где находится денежная модель, какие gates еще открыты и что делать дальше. Это не отдельное доказательство продукта, а навигация по текущему состоянию ресерча.');
+  lines.push('');
+  lines.push(mdTable(dashboardSummary.map(row => ({
+    metric: row.metric_ru,
+    value: row.value_ru,
+    read: row.interpretation_ru,
+    boundary: row.boundary_ru
+  })), [
+    { key: 'metric', label: 'Метрика' },
+    { key: 'value', label: 'Значение' },
+    { key: 'read', label: 'Как читать' },
+    { key: 'boundary', label: 'Граница' }
+  ]));
+  lines.push('');
+  lines.push('Самая важная читательская оговорка: счетчики по нишам показывают coverage и источник для анализа, а не количество прямых клонов Alina и не доказанный спрос.');
+  lines.push('');
+  lines.push(mdTable(dashboardNiches.map(row => ({
+    niche: row.metric_ru,
+    count: row.value_ru,
+    read: row.interpretation_ru,
+    boundary: row.boundary_ru
+  })), [
+    { key: 'niche', label: 'Ниша' },
+    { key: 'count', label: 'Сколько данных' },
+    { key: 'read', label: 'Как читать' },
+    { key: 'boundary', label: 'Граница' }
+  ]));
+  lines.push('');
+  lines.push(mdTable(dashboardGates.map(row => ({
+    h: row.metric_ru,
+    status: row.value_ru,
+    next: row.interpretation_ru,
+    decision: row.boundary_ru
+  })), [
+    { key: 'h', label: 'Гипотеза' },
+    { key: 'status', label: 'Статус' },
+    { key: 'next', label: 'Следующий шаг' },
+    { key: 'decision', label: 'Решение сейчас' }
+  ]));
+  lines.push('');
+}
 if (sourceQualityAudit.length) {
   lines.push('Чтобы масштаб базы не читался как одинаковое качество источников, отдельно добавлен source-quality audit по пяти рынкам. Он показывает, где coverage ближе к прямым consumer-app конкурентам, где это скорее Steam/itch mechanics benchmark, а где нужны source-native lanes из backlog. Это защищает отчет от ложного вывода “много строк = все доказано”.');
   lines.push('');
@@ -1049,6 +1106,7 @@ lines.push('- `data_processed/global_next_validation_backlog.csv`');
 lines.push('- `data_processed/global_report_readability_audit.csv`');
 lines.push('- `data_processed/global_source_quality_gap_audit.csv`');
 lines.push('- `data_processed/russian_sequential_storyline.csv`');
+lines.push('- `data_processed/russian_frontmatter_dashboard.csv`');
 lines.push('- `data_processed/global_market_sizing_methodology.csv`');
 lines.push('- `data_processed/market_model_sensitivity_audit.csv`');
 lines.push('- `data_processed/global_niche_count_rollup.csv`');

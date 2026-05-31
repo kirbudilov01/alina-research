@@ -38,6 +38,7 @@ function csvRowCount(file) {
 
 const text = fs.existsSync(REPORT) ? fs.readFileSync(REPORT, 'utf8') : '';
 const storylineRows = csvRowCount('data_processed/russian_sequential_storyline.csv');
+const dashboardRows = csvRowCount('data_processed/russian_frontmatter_dashboard.csv');
 const sections = [...text.matchAll(/^##\s+(.+)$/gm)].map(match => clean(match[1]));
 const tableRows = text.split('\n').filter(line => /^\|.+\|$/.test(line)).length;
 const technicalEnglishHits = (text.match(/\b(?:meaning|action|reset|visible|progress|avatar|workflow|scorecard|walkthrough|paywall|prototype|gate|hold_validate|queued_not_applied|source|dedup|raw|benchmark|claim)\b/g) || []).length;
@@ -156,6 +157,17 @@ const rows = [
     recommendation_ru: 'Держать STORY_01-STORY_10 как редакционный каркас перед каждой внешней сборкой PDF/DOCX.',
     target_file: 'data_processed/russian_sequential_storyline.csv',
     claim_boundary_ru: 'Narrative spine улучшает форму отчета, но не усиливает market/product claims без observed evidence.'
+  },
+  {
+    audit_id: 'READ_09_FRONTMATTER_DASHBOARD',
+    report_area_ru: 'Первые управленческие числа',
+    readability_status_ru: dashboardRows >= 15 && has(text, /Первые управленческие числа/) ? 'складно' : 'нужна правка',
+    severity_ru: 'низкая',
+    evidence_seen_ru: `dashboard_rows=${dashboardRows}; section_present=${has(text, /Первые управленческие числа/) ? 'yes' : 'no'}`,
+    issue_ru: 'Читатель должен видеть счетчики по нишам и статус gates до длинных таблиц, иначе отчет кажется перегруженным и нелогичным.',
+    recommendation_ru: 'Оставлять frontmatter dashboard в начале полного отчета и executive narrative; тяжелые детализации держать ниже.',
+    target_file: 'data_processed/russian_frontmatter_dashboard.csv',
+    claim_boundary_ru: 'Dashboard показывает навигационные числа, но не апгрейдит гипотезы.'
   }
 ];
 
@@ -182,7 +194,7 @@ lines.push('Этот аудит отвечает на вопрос: складн
 lines.push('');
 lines.push('## Краткий вывод');
 lines.push('');
-lines.push('Текущая версия читается последовательно: продуктовая идея ведет к рынкам, рынки к конкурентам, конкуренты к whitespace, затем к аудитории, MVP и validation queue. Новый narrative-spine слой дополнительно фиксирует вопрос читателя и переход для каждого крупного блока. Главная слабость остается в плотности таблиц и большом количестве технических EN labels. Для рабочего evidence pack это допустимо; для внешнего PDF позже нужен облегченный executive narrative и тяжелое приложение.');
+lines.push('Текущая версия читается последовательно: продуктовая идея ведет к рынкам, рынки к конкурентам, конкуренты к whitespace, затем к аудитории, MVP и validation queue. Narrative-spine слой фиксирует вопрос читателя и переход для каждого крупного блока, а frontmatter dashboard выносит ключевые счетчики до длинных таблиц. Главная слабость остается в плотности таблиц и большом количестве технических EN labels. Для рабочего evidence pack это допустимо; для внешнего PDF позже нужен облегченный executive narrative и тяжелое приложение.');
 lines.push('');
 lines.push('## Audit Table');
 lines.push('');
