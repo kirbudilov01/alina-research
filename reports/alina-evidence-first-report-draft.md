@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T03:28:10.729Z
+Generated: 2026-05-31T03:33:58.037Z
 
 ## 1. Executive Summary
 
@@ -19,6 +19,7 @@ Key quantified signals:
 - App Store IAP pricing layer: 498 observed purchase rows across 80 apps; observed price range $0.00-$549.99.
 - Google Play pricing validation: 247/250 successful Android lookups; 191 apps offer IAP.
 - Developer website paywall discovery: 560 fetched URL rows across 70 app/domain rows; 29 domains queued for screenshot validation.
+- Web paywall screenshot capture: 29/29 queued screenshots captured for manual interpretation.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
@@ -181,6 +182,39 @@ Screenshot validation queue: 29 domains with medium/high public pricing or paywa
 | Call of Duty®: Mobile - Garena | gaming | medium | https://codm.garena.tw/ | $5,00 |
 | AstroSage Kundli: AI Astrology | astrology_esoterics | medium | https://www.astrosage.com/ |  |
 | Character AI: Chat, Talk, Text | avatar_identity | high | https://character.ai/subscribe | $9.99/$94.99/$119.88 |
+
+### Web Paywall Screenshot Evidence
+
+Headless Chrome captured 29/29 screenshots from the web-paywall queue. These PNGs are visual evidence for manual interpretation; a captured page may confirm, weaken, or reject the original paywall signal.
+
+Screenshot capture status:
+
+- captured: 29
+
+Captured screenshots by market:
+
+- gaming: 12
+- avatar_identity: 7
+- mindfulness: 6
+- astrology_esoterics: 3
+- coaching: 1
+
+Highest-priority screenshot evidence:
+
+| Rank | App | Market | Signal | Status | Screenshot |
+| ---: | --- | --- | --- | --- | --- |
+| 1 | The Sims™ FreePlay | gaming | high | captured | output/paywall_screenshots/01-the-sims-freeplay-high.png |
+| 2 | Character AI: Chat, Talk, Text | avatar_identity | high | captured | output/paywall_screenshots/02-character-ai-chat-talk-text-high.png |
+| 3 | Headspace: Sleep & Meditate | mindfulness | high | captured | output/paywall_screenshots/03-headspace-sleep-meditate-high.png |
+| 4 | Meditopia: Sleep & Meditation | mindfulness | high | captured | output/paywall_screenshots/04-meditopia-sleep-meditation-high.png |
+| 5 | Nebula: Spiritual Guidance | astrology_esoterics | high | captured | output/paywall_screenshots/05-nebula-spiritual-guidance-high.png |
+| 6 | Lords Mobile: Kingdom Wars | gaming | medium | captured | output/paywall_screenshots/06-lords-mobile-kingdom-wars-medium.png |
+| 7 | Clash of Clans | gaming | medium | captured | output/paywall_screenshots/07-clash-of-clans-medium.png |
+| 8 | Carrom Pool: Disc Game | gaming | medium | captured | output/paywall_screenshots/08-carrom-pool-disc-game-medium.png |
+| 9 | Pokémon GO | gaming | medium | captured | output/paywall_screenshots/09-pok-mon-go-medium.png |
+| 10 | Tennis Clash: Multiplayer Game | gaming | medium | captured | output/paywall_screenshots/10-tennis-clash-multiplayer-game-medium.png |
+| 11 | Mob Control | gaming | medium | captured | output/paywall_screenshots/11-mob-control-medium.png |
+| 12 | Modern Strike Online: War FPS | gaming | medium | captured | output/paywall_screenshots/12-modern-strike-online-war-fps-medium.png |
 
 ### Retention Signals
 
@@ -443,6 +477,7 @@ Market claims currently normalized: 14.
 - `docs/competitive/app-store-iap-pricing-v1.md`
 - `docs/competitive/google-play-pricing-v1.md`
 - `docs/competitive/web-paywall-validation-v1.md`
+- `docs/competitive/web-paywall-screenshot-validation-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
 - `data_processed/competitor_feature_matrix.csv`
@@ -454,6 +489,7 @@ Market claims currently normalized: 14.
 - `data_processed/app_store_iap_pricing_summary.csv`
 - `data_processed/google_play_pricing_summary.csv`
 - `data_processed/web_paywall_signal_matrix.csv`
+- `data_processed/web_paywall_screenshot_validation.csv`
 - `data_processed/pricing_retention_matrix.csv`
 - `data_processed/product_core_evidence_matrix.csv`
 - `data_processed/review_signal_matrix.csv`
@@ -479,6 +515,7 @@ Market claims currently normalized: 14.
 - `output/charts/google-play-iap-by-market.svg`
 - `output/charts/web-paywall-signal-strength.svg`
 - `output/charts/web-paywall-screenshot-queue-by-market.svg`
+- `output/paywall_screenshots/*.png`
 - `output/pdf/alina-evidence-first-report-draft.pdf`
 - `output/pdf/alina-evidence-visual-report-v1.pdf`
 

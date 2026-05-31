@@ -100,6 +100,7 @@ const googlePlayPricing = csv('data_raw/google_play_pricing_raw.csv');
 const googlePlayPricingSummary = csv('data_processed/google_play_pricing_summary.csv');
 const webPaywallRaw = csv('data_raw/web_paywall_discovery_raw.csv');
 const webPaywallSignals = csv('data_processed/web_paywall_signal_matrix.csv');
+const webPaywallScreenshots = csv('data_processed/web_paywall_screenshot_validation.csv');
 
 const highWhitespace = whitespace.filter(r => r.whitespace_band === 'high').length;
 const mediumWhitespace = whitespace.filter(r => r.whitespace_band === 'medium').length;
@@ -120,6 +121,7 @@ const appsWithIap = new Set(iapRaw.map(r => r.app_store_id).filter(Boolean)).siz
 const iapPrices = iapRaw.map(r => Number(r.price_usd)).filter(Number.isFinite);
 const googlePlayOk = googlePlayPricing.filter(r => r.collection_status === 'ok');
 const webPaywallScreenshotQueue = webPaywallSignals.filter(r => r.needs_screenshot_validation === 'yes');
+const webPaywallCapturedScreenshots = webPaywallScreenshots.filter(r => r.screenshot_status === 'captured');
 
 const report = [];
 
@@ -144,6 +146,7 @@ report.push(`- Human validation packet: ${humanValidationQueue.length} primary a
 report.push(`- App Store IAP pricing layer: ${iapRaw.length} observed purchase rows across ${appsWithIap} apps; observed price range ${iapPrices.length ? `$${Math.min(...iapPrices).toFixed(2)}-$${Math.max(...iapPrices).toFixed(2)}` : 'n/a'}.`);
 report.push(`- Google Play pricing validation: ${googlePlayOk.length}/${googlePlayPricing.length} successful Android lookups; ${googlePlayOk.filter(r => r.offers_iap === 'yes').length} apps offer IAP.`);
 report.push(`- Developer website paywall discovery: ${webPaywallRaw.length} fetched URL rows across ${webPaywallSignals.length} app/domain rows; ${webPaywallScreenshotQueue.length} domains queued for screenshot validation.`);
+report.push(`- Web paywall screenshot capture: ${webPaywallCapturedScreenshots.length}/${webPaywallScreenshots.length} queued screenshots captured for manual interpretation.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
@@ -285,6 +288,31 @@ if (webPaywallSignals.length) {
     { key: 'strongest_signal', label: 'Signal' },
     { key: 'best_url', label: 'Best URL' },
     { key: 'detected_price_points', label: 'Detected Prices' }
+  ], 12));
+  report.push('');
+}
+if (webPaywallScreenshots.length) {
+  report.push('### Web Paywall Screenshot Evidence');
+  report.push('');
+  report.push(`Headless Chrome captured ${webPaywallCapturedScreenshots.length}/${webPaywallScreenshots.length} screenshots from the web-paywall queue. These PNGs are visual evidence for manual interpretation; a captured page may confirm, weaken, or reject the original paywall signal.`);
+  report.push('');
+  report.push('Screenshot capture status:');
+  report.push('');
+  report.push(bulletCounts(countBy(webPaywallScreenshots, 'screenshot_status')));
+  report.push('');
+  report.push('Captured screenshots by market:');
+  report.push('');
+  report.push(bulletCounts(countBy(webPaywallCapturedScreenshots, 'niche')));
+  report.push('');
+  report.push('Highest-priority screenshot evidence:');
+  report.push('');
+  report.push(mdTable(webPaywallScreenshots.slice(0, 12), [
+    { key: 'capture_rank', label: 'Rank', align: 'right' },
+    { key: 'app_name', label: 'App' },
+    { key: 'niche', label: 'Market' },
+    { key: 'strongest_signal', label: 'Signal' },
+    { key: 'screenshot_status', label: 'Status' },
+    { key: 'screenshot_path', label: 'Screenshot' }
   ], 12));
   report.push('');
 }
@@ -497,6 +525,7 @@ report.push('- `docs/competitive/human-validation-guide-v1.md`');
 report.push('- `docs/competitive/app-store-iap-pricing-v1.md`');
 report.push('- `docs/competitive/google-play-pricing-v1.md`');
 report.push('- `docs/competitive/web-paywall-validation-v1.md`');
+report.push('- `docs/competitive/web-paywall-screenshot-validation-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
 report.push('- `data_processed/competitor_feature_matrix.csv`');
@@ -508,6 +537,7 @@ report.push('- `data_processed/top100_human_validation_queue.csv`');
 report.push('- `data_processed/app_store_iap_pricing_summary.csv`');
 report.push('- `data_processed/google_play_pricing_summary.csv`');
 report.push('- `data_processed/web_paywall_signal_matrix.csv`');
+report.push('- `data_processed/web_paywall_screenshot_validation.csv`');
 report.push('- `data_processed/pricing_retention_matrix.csv`');
 report.push('- `data_processed/product_core_evidence_matrix.csv`');
 report.push('- `data_processed/review_signal_matrix.csv`');
@@ -533,6 +563,7 @@ report.push('- `output/charts/google-play-pricing-models.svg`');
 report.push('- `output/charts/google-play-iap-by-market.svg`');
 report.push('- `output/charts/web-paywall-signal-strength.svg`');
 report.push('- `output/charts/web-paywall-screenshot-queue-by-market.svg`');
+report.push('- `output/paywall_screenshots/*.png`');
 report.push('- `output/pdf/alina-evidence-first-report-draft.pdf`');
 report.push('- `output/pdf/alina-evidence-visual-report-v1.pdf`');
 report.push('');
@@ -562,7 +593,7 @@ status.push(mdTable([
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft evidence PDF and visual PDF companion done' },
   { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft chart pack and embedded visual PDF done' },
   { requirement: 'Manual review of top 100', evidence: 'data_processed/top100_competitor_review_scorecard.csv; data_processed/top100_human_validation_queue.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md; docs/competitive/human-validation-guide-v1.md', status: 'AI-assisted review and ranked human validation packet done v1; human execution pending' },
-  { requirement: 'Detailed pricing/IAP extraction', evidence: 'data_raw/app_store_iap_pricing_raw.csv; data_processed/app_store_iap_pricing_summary.csv; docs/competitive/app-store-iap-pricing-v1.md; data_raw/google_play_pricing_raw.csv; data_processed/google_play_pricing_summary.csv; docs/competitive/google-play-pricing-v1.md; data_raw/web_paywall_discovery_raw.csv; data_processed/web_paywall_signal_matrix.csv; docs/competitive/web-paywall-validation-v1.md', status: 'App Store web IAP extraction, Google Play pricing validation, and developer website paywall discovery done v1; screenshot/manual paywall validation pending' },
+  { requirement: 'Detailed pricing/IAP extraction', evidence: 'data_raw/app_store_iap_pricing_raw.csv; data_processed/app_store_iap_pricing_summary.csv; docs/competitive/app-store-iap-pricing-v1.md; data_raw/google_play_pricing_raw.csv; data_processed/google_play_pricing_summary.csv; docs/competitive/google-play-pricing-v1.md; data_raw/web_paywall_discovery_raw.csv; data_processed/web_paywall_signal_matrix.csv; docs/competitive/web-paywall-validation-v1.md; data_processed/web_paywall_screenshot_validation.csv; docs/competitive/web-paywall-screenshot-validation-v1.md; output/paywall_screenshots/*.png', status: 'App Store web IAP extraction, Google Play pricing validation, developer website paywall discovery, and screenshot capture done v1; human paywall interpretation pending' },
   { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_raw/forum_quote_evidence_raw.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; data_processed/forum_quote_coding_matrix.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md; docs/audience/forum-quote-coding-v1.md', status: 'App Store review extraction, JTBD clustering, forum source map, and retrieval-assisted quote coding done v1; human validation pending' }
 ], [
   { key: 'requirement', label: 'Requirement' },
@@ -585,4 +616,5 @@ console.log(`iap_rows=${iapRaw.length}`);
 console.log(`google_play_pricing_rows=${googlePlayPricing.length}`);
 console.log(`web_paywall_rows=${webPaywallRaw.length}`);
 console.log(`web_paywall_domains=${webPaywallSignals.length}`);
+console.log(`web_paywall_screenshots=${webPaywallCapturedScreenshots.length}/${webPaywallScreenshots.length}`);
 console.log(`human_validation_queue_rows=${humanValidationQueue.length}`);
