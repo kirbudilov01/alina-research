@@ -193,6 +193,7 @@ function mdTable(rows, columns, limit = rows.length) {
 const rawRows = csv('data_processed/cross_source_universe_raw.csv');
 const dedupRows = csv('data_processed/cross_source_universe_dedup.csv');
 const nicheSummary = csv('data_processed/russian_readable_niche_summary.csv');
+const nicheCountRollup = csv('data_processed/global_niche_count_rollup.csv');
 const marketDeepDives = csv('data_processed/russian_market_deep_dives.csv');
 const whitespace = csv('data_processed/russian_whitespace_decision_map.csv');
 const competitors = csv('data_processed/russian_competitor_battlecards.csv');
@@ -435,6 +436,15 @@ const sourceAppendix = [
     primary_metric: 'sample_docx_paragraphs=645; benchmark_doc=docs/decision/alina-sample-style-benchmark-v1.md',
     evidence_files: 'docs/decision/alina-sample-style-benchmark-v1.md',
     source_boundary_ru: 'Образец задает композицию и русский нарратив; он не переносит российский рынок, локальные цифры или старую продуктовую гипотезу в мировой отчет.'
+  },
+  {
+    claim_id: 'SRC_09_NICHE_COUNT_ROLLUP',
+    report_section: 'Определение мировых целевых рынков и гипотеза #2',
+    claim_ru: 'По каждой из пяти ниш отдельно зафиксированы raw/dedup/direct/top100/manual-target счетчики, чтобы читатель видел масштаб данных по направлению.',
+    evidence_status_ru: 'доказано как source-count rollup, не как PMF proof',
+    primary_metric: `${nicheCountRollup.length} niche rows; file=data_processed/global_niche_count_rollup.csv`,
+    evidence_files: 'data_processed/global_niche_count_rollup.csv;docs/competitive/global-niche-count-rollup-v1.md;data_processed/russian_readable_niche_summary.csv;data_processed/cross_source_coverage_matrix.csv',
+    source_boundary_ru: 'Niche count rollup показывает масштаб source discovery по рынкам; он не доказывает спрос, WTP или отсутствие скрытого full-loop конкурента.'
   }
 ];
 
@@ -544,6 +554,32 @@ lines.push(mdTable(nicheSummary.map(row => ({
   { key: 'role', label: 'Роль в гипотезе' }
 ]));
 lines.push('');
+if (nicheCountRollup.length) {
+  lines.push('Чтобы счетчики не терялись в приложениях, ниже отдельно показан rollup по каждой нише. Здесь важно различать three layers: all-source rows показывают ширину карты, direct app-store dedup показывает ближнее consumer-app поле, а top-100/manual targets показывают, какие конкуренты уже вынесены в более внимательный review. Эти числа не читаются как “столько прямых клонов Alina”; они показывают, какой объем данных стоит за каждым направлением. Глобальный dedup пакета остается 36,694: построчные niche dedup нельзя просто складывать как уникальных конкурентов, потому что один продукт может попадать в несколько тематических контекстов.');
+  lines.push('');
+  lines.push(mdTable(nicheCountRollup.map(row => ({
+    market: row.market_ru,
+    all_raw: row.all_source_raw_rows,
+    all_dedup: row.all_source_dedup_rows,
+    direct: row.direct_app_store_dedup_rows,
+    direct_share: row.direct_app_store_dedup_share,
+    top100: row.top100_primary_competitors,
+    manual: row.manual_validation_targets,
+    coverage: `${row.coverage_groups} groups; strong ${row.strong_coverage_groups}; medium ${row.medium_coverage_groups}`,
+    read: row.opportunity_ru
+  })), [
+    { key: 'market', label: 'Ниша' },
+    { key: 'all_raw', label: 'All raw', align: 'right' },
+    { key: 'all_dedup', label: 'All dedup', align: 'right' },
+    { key: 'direct', label: 'Direct app dedup', align: 'right' },
+    { key: 'direct_share', label: 'Direct share' },
+    { key: 'top100', label: 'Top-100', align: 'right' },
+    { key: 'manual', label: 'Manual targets', align: 'right' },
+    { key: 'coverage', label: 'Coverage' },
+    { key: 'read', label: 'Как читать' }
+  ]));
+  lines.push('');
+}
 lines.push('Гипотеза №2: мировые adjacent-рынки достаточно велики и монетизируемы, чтобы продолжать проверку Alina, но рыночные цифры должны читаться как sizing для направления, а не как прогноз выручки самого продукта.');
 lines.push('');
 lines.push(mdTable(marketDeepDives.map(row => ({
@@ -828,6 +864,7 @@ lines.push('- `data_processed/global_hypothesis_validation_questionnaire.csv`');
 lines.push('- `data_processed/global_hypothesis_gate_snapshot.csv`');
 lines.push('- `data_processed/global_next_validation_backlog.csv`');
 lines.push('- `data_processed/global_market_sizing_methodology.csv`');
+lines.push('- `data_processed/global_niche_count_rollup.csv`');
 lines.push('- `data_processed/global_whitespace_audience_synthesis.csv`');
 lines.push('- `data_processed/global_goal_evidence_coverage.csv`');
 lines.push('- `reports/alina-russian-readable-report-v2.md`');
