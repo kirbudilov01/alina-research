@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T10:49:51.557Z
+Собрано: 2026-05-31T10:56:39.607Z
 
 ## Как читать этот документ
 
@@ -30,7 +30,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 360 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 363 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -131,6 +131,20 @@ Product-core evidence и prototype stimulus переводят исследов�
 
 Практический порядок следующий. Сначала закрыть manual competitor walkthrough для P0 приложений: onboarding, first action, progress/avatar feedback, first paywall. Затем пройти paid-flow sign-off по сильным money proxy. Затем прочитать P0 Reddit threads и заполнить capture sheet: user job, alternatives, rejected patterns, paid/WTP signal, safety boundary, Alina implication. Затем провести ICP interviews по двум верхним сегментам и короткие prototype sessions. Только после этого можно обновлять H1-H6 из hold/validate в более сильные решения.
 
+## 9.1. Русский полевой протокол
+
+Чтобы следующий этап не остался абстрактным "надо провалидировать", создан русский полевой протокол на 7 фаз. Он переводит открытые gates в человеческую последовательность действий: сначала сохраняем сырой evidence, затем заполняем capture rows, затем обновляем claims и только после этого пересобираем PDF. Это не доказательство спроса, а инструкция, как не потерять строгость во время ручной работы.
+
+| Фаза | Что делаем | Evidence | Правило решения |
+| --- | --- | --- | --- |
+| RU_FIELD_01 | Начать не с красивого вывода, а с evidence discipline | raw screenshot path / notes path / participant quote / observed score / human signoff note / final verdict | Если evidence не связан с конкретным локальным файлом или строкой capture sheet, он не может усиливать внешний claim. |
+| RU_FIELD_02 | Ручной walkthrough конкурентов: проверить, нет ли скрытого прямого клона | listing screenshot / onboarding first value / first action/task / progress/avatar/identity feedback / paywall/free boundary / final directness verdict | Если хотя бы один P0 конкурент полноценно владеет петлей meaning -> action -> reset -> visible identity/progress -> return, whitespace нужно резко сузить или downgrade. |
+| RU_FIELD_03 | Paid-flow signoff: отделить реальные деньги от proxy-шумов | pricing screenshot / product match / monthly/annual/trial price / first meaningful paywall boundary / human signoff | H2 можно усиливать только там, где paid evidence совпадает с конкретным продуктом или честно помечено как partial proxy. |
+| RU_FIELD_04 | ICP interviews: выбрать аудиторию через недавнее поведение, а не через демографию | recent behavior / last episode / current workaround / pain intensity / language resonance / trust/safety objection / acceptable price range / quote | Primary ICP выбирается только если есть concrete recent behavior, понятная боль, резонанс языка, activation trigger и хотя бы directional WTP. |
+| RU_FIELD_05 | Prototype sessions: проверить, понимают ли люди причинность петли | completion time / comprehension yes/no / meaning lift 1-5 / differentiation 1-5 / return intent 1-5 / trust objection / verbatim quote | H4/H6 остаются hold, пока ключевые scorecard metrics не получают observed participant evidence. |
+| RU_FIELD_06 | Reddit/manual reading: читать как язык боли, а не как количественный спрос | source thread / user job / alternative used / rejected pattern / paid signal / safety boundary / Alina implication / quote approved for external use | Forum/Reddit evidence усиливает только language and pain claims, если нет репрезентативной выборки или подтверждения в интервью. |
+| RU_FIELD_07 | Обновить gates и отчет: evidence меняет документ, а не живет рядом | updated gate status / updated hypothesis decision / changed claim boundary / regenerated PDF / git commit hash | Любой validation result должен завершаться rebuild -> audit -> commit -> push, иначе research package считается рассинхронизированным. |
+
 ## 10. Финальный текущий verdict
 
 Текущий verdict: продолжать, но не переобещать. Alina выглядит как исследовательски перспективная ставка на стыке digital ritual, self-improvement, reset и identity/progress feedback. Самая сильная формулировка возможности: не универсальный комбайн, а короткая ежедневная трансформационная петля, где действие меняет видимый образ прогресса. Самая большая опасность: сделать слишком широкий продукт, который будет одновременно слабым meditation app, слабым habit tracker, слабым astrology app и слабым avatar toy. Поэтому следующий этап должен быть не расширением ради расширения, а жесткой проверкой центральной петли на реальных конкурентных экранах и реальных людях.
@@ -142,6 +156,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/evidence_claim_register.csv`
 - `data_processed/reddit_manual_reading_capture_sheet.csv`
 - `data_processed/russian_narrative_evidence_map.csv`
+- `data_processed/russian_validation_fieldbook.csv`
 - `data_processed/validation_gate_calculator.csv`
 - `reports/alina-russian-narrative-report-v1.md`
 - `output/pdf/alina-russian-narrative-report-v1.pdf`

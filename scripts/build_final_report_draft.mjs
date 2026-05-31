@@ -162,6 +162,7 @@ const validationExecutionDashboard = csv('data_processed/validation_execution_da
 const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv');
 const p0CommandCenter = csv('data_processed/p0_validation_command_center.csv');
 const p0FieldGuide = csv('data_processed/p0_validation_field_guide.csv');
+const russianValidationFieldbook = csv('data_processed/russian_validation_fieldbook.csv');
 const validationWorkspace = csv('data_processed/validation_evidence_workspace_index.csv');
 const validationBatch01 = csv('data_processed/validation_batch_01_index.csv');
 const validationBatch02 = csv('data_processed/validation_batch_02_index.csv');
@@ -301,6 +302,7 @@ report.push(`- Validation execution dashboard: ${validationExecutionDashboard.le
 report.push(`- H1-H6 hypothesis decision matrix: ${hypothesisDecisions.length} rows; ${holdHypothesisDecisions.length} hold/validate, ${goHypothesisDecisions.length} go, ${stopHypothesisDecisions.length} stop/pivot.`);
 report.push(`- P0 validation command center: ${p0CommandCenter.length} operator rows; ${p0CommandBlockers.length} blocker rows and ${p0CommandRows.length} P0 rows.`);
 report.push(`- P0 validation field guide: ${p0FieldGuide.length} script/protocol sections for walkthroughs, paid-flow signoff, ICP interviews, prototype sessions, and rebuild/commit hygiene.`);
+report.push(`- Russian validation fieldbook: ${russianValidationFieldbook.length} sequential Russian phases for manual validation execution and claim-update discipline.`);
 report.push(`- Validation evidence workspace: ${validationWorkspace.length} lane folders/index rows with local templates for screenshots, notes, quotes, and scorecard calculations.`);
 report.push(`- Validation Batch 01: ${validationBatch01.length} prefilled blocker-note files ready for first observed validation tranche.`);
 report.push(`- Validation Batch 02: ${validationBatch02.length} prefilled P0-breadth note files for manual walkthrough, paid-flow signoff, ICP interviews, prototype sessions, and scorecard gates.`);
@@ -329,7 +331,7 @@ report.push(`- Reddit manual-read routing: ${redditManualReadingQueue.length} un
 report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, web paywall discovery, and forum quote coding.');
 report.push('- Visual PDF companion: native ReportLab charts embedded in a separate visual report.');
 report.push(`- Polished evidence pack: ${fs.existsSync('output/pdf/alina-polished-evidence-pack-v1.pdf') ? 'generated as a publication-ready evidence draft with validation caveats' : 'not generated yet'}.`);
-report.push(`- Russian narrative report: ${fs.existsSync('output/pdf/alina-russian-narrative-report-v1.pdf') ? 'generated as a sequential Russian-language narrative PDF' : 'not generated yet'}; argument map: ${fs.existsSync('data_processed/russian_narrative_evidence_map.csv') ? 'generated' : 'not generated yet'}.`);
+report.push(`- Russian narrative report: ${fs.existsSync('output/pdf/alina-russian-narrative-report-v1.pdf') ? 'generated as a sequential Russian-language narrative PDF' : 'not generated yet'}; argument map: ${fs.existsSync('data_processed/russian_narrative_evidence_map.csv') ? 'generated' : 'not generated yet'}; Russian fieldbook: ${fs.existsSync('data_processed/russian_validation_fieldbook.csv') ? 'generated' : 'not generated yet'}.`);
 report.push(`- Modeled direct intersection SAM base: USD ${baseIntersection.samBase || 'n/a'}.`);
 report.push('');
 report.push('## 2. Product Hypotheses');
@@ -1801,6 +1803,7 @@ status.push(mdTable([
   { requirement: 'H1-H6 hypothesis decision matrix', evidence: 'data_processed/hypothesis_decision_matrix.csv; docs/decision/hypothesis-decision-matrix-v1.md', status: `done v1; ${holdHypothesisDecisions.length} hold/validate rows keep open gates explicit before final go/no-go` },
   { requirement: 'P0 validation command center', evidence: 'data_processed/p0_validation_command_center.csv; docs/decision/p0-validation-command-center-v1.md', status: `done v1; ${p0CommandCenter.length} operator rows turn open gates into exact evidence capture commands` },
   { requirement: 'P0 validation field guide', evidence: 'data_processed/p0_validation_field_guide.csv; docs/decision/p0-validation-field-guide-v1.md', status: `done v1; ${p0FieldGuide.length} scripts/protocol sections make P0 execution repeatable` },
+  { requirement: 'Russian validation fieldbook', evidence: 'data_processed/russian_validation_fieldbook.csv; docs/decision/russian-validation-fieldbook-v1.md', status: `done v1; ${russianValidationFieldbook.length} Russian narrative phases turn P0 validation into an executable field protocol` },
   { requirement: 'Validation evidence workspace', evidence: 'data_processed/validation_evidence_workspace_index.csv; docs/decision/validation-evidence-workspace-v1.md; output/validation/README.md; output/validation/templates/*.md', status: `done v1; ${validationWorkspace.length} lane workspaces and note templates created for observed evidence intake` },
   { requirement: 'Validation Batch 01', evidence: 'data_processed/validation_batch_01_index.csv; docs/decision/validation-batch-01-v1.md; output/validation/2026-05-31/*/batch01_*.md', status: `done v1; ${validationBatch01.length} blocker notes prefilled for first validation tranche` },
   { requirement: 'Validation Batch 02', evidence: 'data_processed/validation_batch_02_index.csv; docs/decision/validation-batch-02-v1.md; output/validation/2026-05-31/*/batch02_*.md', status: `done v1; ${validationBatch02.length} P0-breadth notes prefilled for non-blocker validation commands` },
@@ -1870,6 +1873,7 @@ console.log(`completion_audit_rows=${completionAudit.length}`);
 console.log(`hypothesis_decision_rows=${hypothesisDecisions.length}`);
 console.log(`p0_command_rows=${p0CommandCenter.length}`);
 console.log(`p0_field_guide_sections=${p0FieldGuide.length}`);
+console.log(`russian_validation_fieldbook_rows=${russianValidationFieldbook.length}`);
 console.log(`validation_workspace_lanes=${validationWorkspace.length}`);
 console.log(`validation_batch01_rows=${validationBatch01.length}`);
 console.log(`validation_batch02_rows=${validationBatch02.length}`);

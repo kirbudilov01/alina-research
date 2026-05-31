@@ -112,6 +112,7 @@ const completion = csv('data_processed/research_completion_audit.csv');
 const manifest = csv('data_processed/evidence_artifact_manifest.csv');
 const paywallVisual = csv('data_processed/web_paywall_visual_adjudication.csv');
 const narrativeMap = csv('data_processed/russian_narrative_evidence_map.csv');
+const russianFieldbook = csv('data_processed/russian_validation_fieldbook.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -256,6 +257,19 @@ lines.push(`Все H1-H6 validation gates сейчас требуют наблю
 lines.push('');
 lines.push('Практический порядок следующий. Сначала закрыть manual competitor walkthrough для P0 приложений: onboarding, first action, progress/avatar feedback, first paywall. Затем пройти paid-flow sign-off по сильным money proxy. Затем прочитать P0 Reddit threads и заполнить capture sheet: user job, alternatives, rejected patterns, paid/WTP signal, safety boundary, Alina implication. Затем провести ICP interviews по двум верхним сегментам и короткие prototype sessions. Только после этого можно обновлять H1-H6 из hold/validate в более сильные решения.');
 lines.push('');
+if (russianFieldbook.length) {
+  lines.push('## 9.1. Русский полевой протокол');
+  lines.push('');
+  lines.push(`Чтобы следующий этап не остался абстрактным "надо провалидировать", создан русский полевой протокол на ${russianFieldbook.length} фаз. Он переводит открытые gates в человеческую последовательность действий: сначала сохраняем сырой evidence, затем заполняем capture rows, затем обновляем claims и только после этого пересобираем PDF. Это не доказательство спроса, а инструкция, как не потерять строгость во время ручной работы.`);
+  lines.push('');
+  lines.push(mdTable(russianFieldbook, [
+    { key: 'phase_id', label: 'Фаза' },
+    { key: 'phase_title_ru', label: 'Что делаем' },
+    { key: 'evidence_to_collect_ru', label: 'Evidence' },
+    { key: 'decision_rule_ru', label: 'Правило решения' }
+  ], russianFieldbook.length));
+  lines.push('');
+}
 lines.push('## 10. Финальный текущий verdict');
 lines.push('');
 lines.push('Текущий verdict: продолжать, но не переобещать. Alina выглядит как исследовательски перспективная ставка на стыке digital ritual, self-improvement, reset и identity/progress feedback. Самая сильная формулировка возможности: не универсальный комбайн, а короткая ежедневная трансформационная петля, где действие меняет видимый образ прогресса. Самая большая опасность: сделать слишком широкий продукт, который будет одновременно слабым meditation app, слабым habit tracker, слабым astrology app и слабым avatar toy. Поэтому следующий этап должен быть не расширением ради расширения, а жесткой проверкой центральной петли на реальных конкурентных экранах и реальных людях.');
@@ -267,6 +281,7 @@ lines.push('- `data_processed/research_completion_audit.csv`');
 lines.push('- `data_processed/evidence_claim_register.csv`');
 lines.push('- `data_processed/reddit_manual_reading_capture_sheet.csv`');
 lines.push('- `data_processed/russian_narrative_evidence_map.csv`');
+lines.push('- `data_processed/russian_validation_fieldbook.csv`');
 lines.push('- `data_processed/validation_gate_calculator.csv`');
 lines.push('- `reports/alina-russian-narrative-report-v1.md`');
 lines.push('- `output/pdf/alina-russian-narrative-report-v1.pdf`');

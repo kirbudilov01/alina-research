@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T10:49:44.247Z
+Generated: 2026-05-31T10:56:32.087Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -21,6 +21,7 @@ Generated: 2026-05-31T10:49:44.247Z
 | H1-H6 hypothesis decision matrix | data_processed/hypothesis_decision_matrix.csv; docs/decision/hypothesis-decision-matrix-v1.md | done v1; 6 hold/validate rows keep open gates explicit before final go/no-go |
 | P0 validation command center | data_processed/p0_validation_command_center.csv; docs/decision/p0-validation-command-center-v1.md | done v1; 75 operator rows turn open gates into exact evidence capture commands |
 | P0 validation field guide | data_processed/p0_validation_field_guide.csv; docs/decision/p0-validation-field-guide-v1.md | done v1; 8 scripts/protocol sections make P0 execution repeatable |
+| Russian validation fieldbook | data_processed/russian_validation_fieldbook.csv; docs/decision/russian-validation-fieldbook-v1.md | done v1; 7 Russian narrative phases turn P0 validation into an executable field protocol |
 | Validation evidence workspace | data_processed/validation_evidence_workspace_index.csv; docs/decision/validation-evidence-workspace-v1.md; output/validation/README.md; output/validation/templates/*.md | done v1; 5 lane workspaces and note templates created for observed evidence intake |
 | Validation Batch 01 | data_processed/validation_batch_01_index.csv; docs/decision/validation-batch-01-v1.md; output/validation/2026-05-31/*/batch01_*.md | done v1; 6 blocker notes prefilled for first validation tranche |
 | Validation Batch 02 | data_processed/validation_batch_02_index.csv; docs/decision/validation-batch-02-v1.md; output/validation/2026-05-31/*/batch02_*.md | done v1; 52 P0-breadth notes prefilled for non-blocker validation commands |
