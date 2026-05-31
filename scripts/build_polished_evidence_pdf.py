@@ -297,6 +297,7 @@ def main() -> None:
     evidence = read_csv("data_processed/evidence_claim_register.csv")
     completion = read_csv("data_processed/research_completion_audit.csv")
     hypothesis_decisions = read_csv("data_processed/hypothesis_decision_matrix.csv")
+    p0_commands = read_csv("data_processed/p0_validation_command_center.csv")
     manifest = read_csv("data_processed/evidence_artifact_manifest.csv")
     revenue = read_csv("data_processed/competitor_revenue_proxy_review.csv")
     revenue_summary = read_csv("data_processed/competitor_revenue_proxy_market_summary.csv")
@@ -354,6 +355,8 @@ def main() -> None:
     hold_hypotheses = [row for row in hypothesis_decisions if row.get("current_decision") == "hold_validate"]
     go_hypotheses = [row for row in hypothesis_decisions if row.get("current_decision") == "go_for_next_phase"]
     stop_hypotheses = [row for row in hypothesis_decisions if row.get("current_decision") == "stop_or_pivot"]
+    blocker_commands = [row for row in p0_commands if row.get("priority") == "P0_blocker"]
+    p0_command_rows = [row for row in p0_commands if row.get("priority") == "P0"]
 
     metrics = {
         "Known raw source/app rows": number(known_raw_total),
@@ -366,6 +369,7 @@ def main() -> None:
         "Competitor revenue proxy rows": number(len(revenue)),
         "Manual P0 inspection targets": number(len(manual)),
         "Hypothesis decision rows": number(len(hypothesis_decisions)),
+        "P0 command rows": number(len(p0_commands)),
         "Validation capture rows": number(capture_rows),
     }
     build_doc_note(metrics)
@@ -456,6 +460,7 @@ def main() -> None:
                 ["Market assumption audit", len(market_assumptions), "TAM/SAM/SOM risk rows by market and intersection."],
                 ["Market stress scenarios", len(market_stress), "Bottom-up sensitivity cases for reachable users, conversion, and ARPPU."],
                 ["Hypothesis decision rows", len(hypothesis_decisions), "H1-H6 operating gates with go/hold/kill criteria and next validation actions."],
+                ["P0 command center rows", len(p0_commands), "Operator-ready validation commands across walkthrough, paid-flow, ICP, and prototype lanes."],
                 ["Manifest source-like refs", source_refs, "Rows with URLs, package IDs, domains, source IDs, or comparable identifiers."],
                 ["Top-100 primary apps", len(primary_top100), "Human-facing competitor review layer."],
                 ["Behavior-tied progression signals", len(behavior_tied), "Strict signal is rare in metadata, hence manual inspection is critical."],
@@ -523,6 +528,36 @@ def main() -> None:
             ],
             [1.65 * inch, 0.75 * inch, 4.7 * inch],
             small=False,
+        ),
+        Spacer(1, 0.14 * inch),
+        para("P0 Validation Command Center", "H2"),
+        para(
+            "The command center converts the remaining validation burden into concrete operator rows. It keeps the next work focused on observed evidence rather than more claim expansion.",
+            "Body",
+        ),
+        table(
+            [["Priority", "Rows", "Read"]]
+            + [
+                ["P0 blocker", len(blocker_commands), "Run first: hidden direct clone risk, prototype comprehension, differentiation, trust/safety."],
+                ["P0", len(p0_command_rows), "Core walkthrough, paid-flow, ICP, and prototype evidence capture commands."],
+                ["Total commands", len(p0_commands), "Full operator checklist with source files and output files to update."],
+            ],
+            [1.4 * inch, 0.75 * inch, 4.95 * inch],
+            small=False,
+        ),
+        Spacer(1, 0.1 * inch),
+        table(
+            [["Command", "Lane", "Target", "Next action"]]
+            + [
+                [
+                    row.get("command_id"),
+                    row.get("lane"),
+                    short(row.get("target"), 58),
+                    short(row.get("next_operator_action"), 105),
+                ]
+                for row in blocker_commands[:6]
+            ],
+            [1.05 * inch, 1.45 * inch, 1.65 * inch, 2.95 * inch],
         ),
         PageBreak(),
         para("Market-Money Proxy Read", "H1"),
@@ -696,6 +731,7 @@ def main() -> None:
                 ["Prototype", "data_processed/prototype_validation_stimulus_flow.csv; data_processed/prototype_validation_scorecard.csv"],
                 ["Validation capture", "data_processed/manual_walkthrough_capture_sheet.csv; data_processed/paid_flow_capture_sheet.csv; data_processed/icp_interview_capture_sheet.csv; data_processed/prototype_session_capture_sheet.csv"],
                 ["Decision gates", "data_processed/hypothesis_decision_matrix.csv; docs/decision/hypothesis-decision-matrix-v1.md"],
+                ["P0 command center", "data_processed/p0_validation_command_center.csv; docs/decision/p0-validation-command-center-v1.md"],
                 ["Audit/provenance", "data_processed/evidence_claim_register.csv; data_processed/research_completion_audit.csv; data_processed/evidence_artifact_manifest.csv"],
             ],
             [1.7 * inch, 5.4 * inch],

@@ -131,6 +131,7 @@ const crossSourceCoverage = csv('data_processed/cross_source_coverage_matrix.csv
 const crossSourceSaturation = csv('data_processed/cross_source_market_saturation_matrix.csv');
 const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
 const validationExecutionDashboard = csv('data_processed/validation_execution_dashboard.csv');
+const p0CommandCenter = csv('data_processed/p0_validation_command_center.csv');
 const evidenceManifest = csv('data_processed/evidence_artifact_manifest.csv');
 const completionAudit = csv('data_processed/research_completion_audit.csv');
 const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv');
@@ -175,6 +176,8 @@ const chromeExtensionStrong = chromeExtensionFit.filter(row => row.alina_fit_ban
 const chromeMechanicPriority = chromeExtensionBattlecards.filter(row => ['mechanic_threat_high', 'mechanic_threat_medium', 'mechanic_reference_high'].includes(row.threat_band));
 const validationRoadmapP0 = validationGapRoadmap.filter(row => row.priority === 'P0');
 const validationExecutionP0 = validationExecutionDashboard.filter(row => row.priority === 'P0');
+const p0CommandBlockers = p0CommandCenter.filter(row => row.priority === 'P0_blocker');
+const p0CommandRows = p0CommandCenter.filter(row => row.priority === 'P0');
 const manifestMissing = evidenceManifest.filter(row => row.exists !== 'yes');
 const manifestCsvRows = evidenceManifest.filter(row => row.file_path.endsWith('.csv'));
 const manifestTrackedRows = manifestCsvRows.reduce((sum, row) => sum + Number(row.row_count || 0), 0);
@@ -235,6 +238,19 @@ const rows = [
     strongest_support: 'Decision matrix links H1-H6 to current evidence status, confidence, go gates, hold gates, kill/pivot gates, next actions, workstreams, and capture rows.',
     key_gap: 'Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open.',
     next_action: 'Use the hold/validate rows as the next execution order and update decisions only after observed evidence is captured.'
+  },
+  {
+    claim_id: 'REQ_p0_validation_command_center',
+    claim_type: 'project_requirement',
+    claim: 'Open P0 validation is converted into an operator-ready command center.',
+    evidence_status: p0CommandCenter.length ? 'proved_v1_operator_ready_open_gates' : 'missing',
+    confidence: p0CommandCenter.length ? 'high' : 'low',
+    primary_metric: `${p0CommandCenter.length} command rows; ${p0CommandBlockers.length} blocker rows; ${p0CommandRows.length} P0 rows`,
+    quantitative_evidence: `command_rows=${p0CommandCenter.length}; p0_blockers=${p0CommandBlockers.length}; p0_rows=${p0CommandRows.length}; execution_p0=${validationExecutionP0.length}`,
+    evidence_files: 'data_processed/p0_validation_command_center.csv;docs/decision/p0-validation-command-center-v1.md;data_processed/validation_execution_dashboard.csv;docs/decision/validation-execution-dashboard-v1.md',
+    strongest_support: 'Command center expands P0 tasks into exact evidence to capture, pass gates, downgrade/kill gates, source files, output files, and notes fields to fill.',
+    key_gap: 'The command center is operational scaffolding; it still requires actual screenshots, participant evidence, paywall signoff, and updated verdicts.',
+    next_action: 'Execute blocker rows first: direct competitor walkthrough for Shepherd, avatar-change prototype comprehension, differentiation/trust scorecard gates, then paid-flow signoff and ICP interviews.'
   },
   {
     claim_id: 'REQ_competitor_universe',
@@ -392,6 +408,7 @@ lines.push('- Strongest proved project layers: plan/backlog, TAM/SAM/SOM v1, mat
 lines.push('- Traceability layer: evidence package manifest tracks raw/processed data, docs, reports, charts, PDFs, and generator scripts with row counts and short hashes.');
 lines.push('- Readiness layer: completion audit maps the original objective to proved, partial, draft, and validation-ready requirements.');
 lines.push('- Decision layer: hypothesis decision matrix converts H1-H6 into go/hold/kill gates and keeps open validation burden visible.');
+lines.push('- Execution layer: P0 validation command center translates open gates into operator-ready evidence capture rows.');
 lines.push('- Strongest product evidence: adjacent markets are monetized; the user language around daily ritual/progress is real; strict behavior-tied avatar progression remains narrow in current metadata.');
 lines.push('- Weakest remaining proof: human validation of competitors, actual in-app paywall/onboarding flows, real user prototype response, and final source-by-source market sizing review.');
 lines.push('- Current decision should remain conditional-go for validation, not full product-build go.');

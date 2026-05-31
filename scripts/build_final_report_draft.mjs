@@ -138,6 +138,7 @@ const crossSourceSaturation = csv('data_processed/cross_source_market_saturation
 const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
 const validationExecutionDashboard = csv('data_processed/validation_execution_dashboard.csv');
 const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv');
+const p0CommandCenter = csv('data_processed/p0_validation_command_center.csv');
 const manualWalkthroughCapture = csv('data_processed/manual_walkthrough_capture_sheet.csv');
 const paidFlowCapture = csv('data_processed/paid_flow_capture_sheet.csv');
 const icpInterviewCapture = csv('data_processed/icp_interview_capture_sheet.csv');
@@ -187,6 +188,8 @@ const validationRoadmapP0 = validationGapRoadmap.filter(r => r.priority === 'P0'
 const validationRoadmapP1 = validationGapRoadmap.filter(r => r.priority === 'P1');
 const validationExecutionP0 = validationExecutionDashboard.filter(r => r.priority === 'P0');
 const validationExecutionP1 = validationExecutionDashboard.filter(r => r.priority === 'P1');
+const p0CommandBlockers = p0CommandCenter.filter(r => r.priority === 'P0_blocker');
+const p0CommandRows = p0CommandCenter.filter(r => r.priority === 'P0');
 const validationCaptureRows = manualWalkthroughCapture.length + paidFlowCapture.length + icpInterviewCapture.length + prototypeSessionCapture.length;
 const highUseMarketSources = marketSourceConfidence.filter(r => r.confidence_review_band === 'high_use');
 const rangeOnlyMarketSources = marketSourceConfidence.filter(r => ['low_use_range_only', 'context_only'].includes(r.confidence_review_band));
@@ -249,6 +252,7 @@ report.push(`- Chrome mechanic battlecards: ${chromeExtensionBattlecards.length}
 report.push(`- Validation gap roadmap: ${validationGapRoadmap.length} rows; ${validationRoadmapP0.length} P0 and ${validationRoadmapP1.length} P1 next validation tasks across markets, hypotheses, and cross-source checks.`);
 report.push(`- Validation execution dashboard: ${validationExecutionDashboard.length} concrete execution tasks; ${validationExecutionP0.length} P0 and ${validationExecutionP1.length} P1.`);
 report.push(`- H1-H6 hypothesis decision matrix: ${hypothesisDecisions.length} rows; ${holdHypothesisDecisions.length} hold/validate, ${goHypothesisDecisions.length} go, ${stopHypothesisDecisions.length} stop/pivot.`);
+report.push(`- P0 validation command center: ${p0CommandCenter.length} operator rows; ${p0CommandBlockers.length} blocker rows and ${p0CommandRows.length} P0 rows.`);
 report.push(`- Validation capture sheets: ${validationCaptureRows} fillable capture rows across manual walkthrough, paid-flow, ICP interview, and prototype-session evidence.`);
 report.push(`- Market source confidence review: ${marketSourceConfidence.length} sources graded; ${highUseMarketSources.length} high-use anchors and ${rangeOnlyMarketSources.length} range-only/context sources.`);
 report.push(`- Market sizing stress test: ${marketAssumptionAudit.length} assumption-risk rows and ${marketStressTest.length} bottom-up stress scenarios.`);
@@ -332,8 +336,32 @@ if (hypothesisDecisions.length) {
   ], hypothesisDecisions.length));
   report.push('');
 }
+if (p0CommandCenter.length) {
+  report.push('## 2D. P0 Validation Command Center');
+  report.push('');
+  report.push('The command center turns open gates into concrete operator rows. It is the bridge from research package to actual validation: every row names what to capture, what would pass, what would downgrade or kill, which source files support it, and which output files must be updated.');
+  report.push('');
+  report.push('Command rows by lane:');
+  report.push('');
+  report.push(bulletCounts(countBy(p0CommandCenter, 'lane')));
+  report.push('');
+  report.push('Command rows by priority:');
+  report.push('');
+  report.push(bulletCounts(countBy(p0CommandCenter, 'priority')));
+  report.push('');
+  report.push('Blocker commands first:');
+  report.push('');
+  report.push(mdTable(p0CommandBlockers, [
+    { key: 'command_id', label: 'Command' },
+    { key: 'lane', label: 'Lane' },
+    { key: 'target', label: 'Target' },
+    { key: 'linked_hypotheses', label: 'Hypotheses' },
+    { key: 'next_operator_action', label: 'Next Action' }
+  ], p0CommandBlockers.length));
+  report.push('');
+}
 if (evidenceManifest.length) {
-  report.push('## 2D. Evidence Package Manifest');
+  report.push('## 2E. Evidence Package Manifest');
   report.push('');
   report.push('The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.');
   report.push('');
@@ -354,7 +382,7 @@ if (evidenceManifest.length) {
   report.push('');
 }
 if (completionAudit.length) {
-  report.push('## 2E. Research Completion Audit');
+  report.push('## 2F. Research Completion Audit');
   report.push('');
   report.push('The completion audit maps the original objective to current proof. It is intentionally conservative: several requirements are strong enough for continued validation, but not yet final enough to call the whole goal complete.');
   report.push('');
@@ -374,7 +402,7 @@ if (completionAudit.length) {
   report.push('');
 }
 if (validationGapRoadmap.length) {
-  report.push('## 2F. Validation Gap Roadmap');
+  report.push('## 2G. Validation Gap Roadmap');
   report.push('');
   report.push('The research now includes a validation roadmap that turns current evidence gaps into explicit success gates. This keeps the project honest: a claim is not final merely because a table exists.');
   report.push('');
@@ -1282,6 +1310,7 @@ report.push('- `docs/decision/evidence-audit-v1.md`');
 report.push('- `docs/decision/evidence-package-manifest-v1.md`');
 report.push('- `docs/decision/research-completion-audit-v1.md`');
 report.push('- `docs/decision/hypothesis-decision-matrix-v1.md`');
+report.push('- `docs/decision/p0-validation-command-center-v1.md`');
 report.push('- `docs/decision/validation-gap-roadmap-v1.md`');
 report.push('- `docs/decision/validation-execution-dashboard-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
@@ -1294,6 +1323,7 @@ report.push('- `data_processed/evidence_claim_register.csv`');
 report.push('- `data_processed/evidence_artifact_manifest.csv`');
 report.push('- `data_processed/research_completion_audit.csv`');
 report.push('- `data_processed/hypothesis_decision_matrix.csv`');
+report.push('- `data_processed/p0_validation_command_center.csv`');
 report.push('- `data_processed/source_expansion_backlog.csv`');
 report.push('- `data_processed/p0_external_source_summary.csv`');
 report.push('- `data_processed/itch_source_summary.csv`');
@@ -1389,6 +1419,7 @@ status.push(mdTable([
   { requirement: 'Validation gap roadmap', evidence: 'data_processed/validation_gap_roadmap.csv; docs/decision/validation-gap-roadmap-v1.md', status: 'done v1; maps five markets and H1-H6 gaps into P0/P1 success gates' },
   { requirement: 'Validation execution dashboard', evidence: 'data_processed/validation_execution_dashboard.csv; docs/decision/validation-execution-dashboard-v1.md', status: 'done v1; converts open gates into ranked execution tasks, exact evidence requirements, success gates, and downgrade gates' },
   { requirement: 'H1-H6 hypothesis decision matrix', evidence: 'data_processed/hypothesis_decision_matrix.csv; docs/decision/hypothesis-decision-matrix-v1.md', status: `done v1; ${holdHypothesisDecisions.length} hold/validate rows keep open gates explicit before final go/no-go` },
+  { requirement: 'P0 validation command center', evidence: 'data_processed/p0_validation_command_center.csv; docs/decision/p0-validation-command-center-v1.md', status: `done v1; ${p0CommandCenter.length} operator rows turn open gates into exact evidence capture commands` },
   { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; docs/market/competitor-revenue-proxy-review-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv; data_processed/competitor_revenue_proxy_review.csv; data_processed/competitor_revenue_proxy_market_summary.csv', status: 'done v1; source confidence, market monetization proxy, and bottom-up competitor revenue proxy layers added; model remains range-based and not final forecast' },
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
@@ -1446,6 +1477,7 @@ console.log(`evidence_audit_rows=${evidenceAudit.length}`);
 console.log(`evidence_manifest_rows=${evidenceManifest.length}`);
 console.log(`completion_audit_rows=${completionAudit.length}`);
 console.log(`hypothesis_decision_rows=${hypothesisDecisions.length}`);
+console.log(`p0_command_rows=${p0CommandCenter.length}`);
 console.log(`source_expansion_backlog_rows=${sourceExpansionBacklog.length}`);
 console.log(`p0_external_rows=${p0ExternalSources.length}`);
 console.log(`p0_external_usable=${p0ExternalUsable.length}`);
