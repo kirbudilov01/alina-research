@@ -9,9 +9,9 @@ P0 execution slice показывает, что делать первым. Эт�
 ## Короткий статус
 
 - P0 задач: 18
-- Задач с привязанными capture IDs: 16
-- Задач, где нужно сначала создать/добавить source capture row: 2
-- Source rows to update в первой сессии: 51
+- Задач с привязанными capture IDs: 18
+- Задач, где нужно сначала создать/добавить source capture row: 0
+- Source rows to update в первой сессии: 59
 - Manual walkthrough задач: 5
 - Paid-flow задач: 5
 - ICP interview задач: 4
@@ -27,9 +27,9 @@ P0 execution slice показывает, что делать первым. Эт�
 | 4 | P0_MANUAL_04 | EVOLVE: Transform Your Life | H1<br>H3 | data_processed/manual_walkthrough_capture_sheet.csv | MCI_04_MCI_S01<br>MCI_04_MCI_S02<br>MCI_04_MCI_S03<br>MCI_04_MCI_S04<br>MCI_04_MCI_S05 | capture_status; observed_answer; directness_label; action_to_avatar_causality_label; paywall_boundary_label; inspector_notes; screenshot file paths | есть незаполненные app/onboarding walkthrough слоты |
 | 5 | P0_MANUAL_05 | Daily Yoga: Yoga for Fitness® | H1<br>H3 | data_processed/manual_walkthrough_capture_sheet.csv | MCI_05_MCI_S01<br>MCI_05_MCI_S02<br>MCI_05_MCI_S03<br>MCI_05_MCI_S04<br>MCI_05_MCI_S05 | capture_status; observed_answer; directness_label; action_to_avatar_causality_label; paywall_boundary_label; inspector_notes; screenshot file paths | есть незаполненные app/onboarding walkthrough слоты |
 | 6 | P0_PAYWALL_02 | Character AI: Chat, Talk, Text | H2 | data_processed/paid_flow_capture_sheet.csv | PF_01_PF_S01<br>PF_01_PF_S02<br>PF_01_PF_S03<br>PF_01_PF_S04 | capture_status; observed_price_or_trial; paid_flow_label; product_match_label; human_notes; screenshot/source path | есть local/public signoff; остается проверить first-value boundary и WTP |
-| 7 | P0_PAYWALL_03 | Headspace: Sleep & Meditate | H2 | data_processed/paid_flow_capture_sheet.csv |  | capture_status; observed_price_or_trial; paid_flow_label; product_match_label; human_notes; screenshot/source path | есть local/public signoff; остается проверить first-value boundary и WTP |
+| 7 | P0_PAYWALL_03 | Headspace: Sleep & Meditate | H2 | data_processed/paid_flow_capture_sheet.csv | PF_11_PF_S01<br>PF_11_PF_S02<br>PF_11_PF_S03<br>PF_11_PF_S04 | capture_status; observed_price_or_trial; paid_flow_label; product_match_label; human_notes; screenshot/source path | paid-flow rows еще не заполнены человеком |
 | 8 | P0_PAYWALL_04 | Meditopia: Sleep & Meditation | H2 | data_processed/paid_flow_capture_sheet.csv | PF_02_PF_S01<br>PF_02_PF_S02<br>PF_02_PF_S03<br>PF_02_PF_S04 | capture_status; observed_price_or_trial; paid_flow_label; product_match_label; human_notes; screenshot/source path | есть local/public signoff; остается проверить first-value boundary и WTP |
-| 9 | P0_PAYWALL_05 | Nebula: Spiritual Guidance | H2 | data_processed/paid_flow_capture_sheet.csv |  | capture_status; observed_price_or_trial; paid_flow_label; product_match_label; human_notes; screenshot/source path | есть local/public signoff; остается проверить first-value boundary и WTP |
+| 9 | P0_PAYWALL_05 | Nebula: Spiritual Guidance | H2 | data_processed/paid_flow_capture_sheet.csv | PF_12_PF_S01<br>PF_12_PF_S02<br>PF_12_PF_S03<br>PF_12_PF_S04 | capture_status; observed_price_or_trial; paid_flow_label; product_match_label; human_notes; screenshot/source path | paid-flow rows еще не заполнены человеком |
 | 10 | P0_PAYWALL_08 | Carrom Pool: Disc Game | H2 | data_processed/paid_flow_capture_sheet.csv | PF_03_PF_S01<br>PF_03_PF_S02<br>PF_03_PF_S03<br>PF_03_PF_S04 | capture_status; observed_price_or_trial; paid_flow_label; product_match_label; human_notes; screenshot/source path | есть local/public signoff; остается проверить first-value boundary и WTP |
 | 11 | P0_ICP_ICP_A_T01 | Spiritual self-improvers / screener | H5<br>H6 | data_processed/icp_interview_capture_sheet.csv | ICP_A_T01_P01<br>ICP_A_T01_P02 | capture_status; observed_answer_or_score; success_flag; fatal_objection_flag; exact_quote; researcher_notes | нужны реальные participant answers; secondary VOC не апгрейдит H5/H6 |
 | 12 | P0_ICP_ICP_A_T02 | Spiritual self-improvers / problem_interview | H5<br>H6 | data_processed/icp_interview_capture_sheet.csv | ICP_A_T02_P01<br>ICP_A_T02_P02 | capture_status; observed_answer_or_score; success_flag; fatal_objection_flag; exact_quote; researcher_notes | нужны реальные participant answers; secondary VOC не апгрейдит H5/H6 |

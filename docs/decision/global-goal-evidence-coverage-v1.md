@@ -1,6 +1,6 @@
 # Global Goal Evidence Coverage V1
 
-Generated: 2026-05-31T17:52:30.726Z
+Generated: 2026-05-31T17:56:51.614Z
 
 ## Зачем нужен этот слой
 

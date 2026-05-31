@@ -28,7 +28,7 @@ Alina не должна быть еще одним habit tracker, meditation lib
 
 ## Есть ли рынок и деньги
 
-Денежная рамка поддерживает продолжение проверки: intersection SAM сейчас $202M, confidence-weighted SAM $80.8M. Это не forecast выручки Alina, а способ не спорить вслепую о масштабе. H2 сейчас ближе остальных к доказательному состоянию, но тоже не закрыта: 28 / 40 completed и 8 / 12 success.
+Денежная рамка поддерживает продолжение проверки: intersection SAM сейчас $202M, confidence-weighted SAM $80.8M. Это не forecast выручки Alina, а способ не спорить вслепую о масштабе. H2 сейчас ближе остальных к доказательному состоянию, но тоже не закрыта: 28 / 48 completed и 8 / 12 success.
 
 Что можно сказать: в adjacent-рынках есть платные привычки, подписки и персональная глубина. Что нельзя сказать: “Alina точно заработает”, пока не проверены paid-flow границы и willingness-to-pay на самой продуктовой петле.
 
@@ -75,7 +75,7 @@ MVP должен проверить не весь будущий продукт,
 | Гипотеза | Что проверяет | Где сейчас | Что нужно дальше |
 | --- | --- | --- | --- |
 | H1/H3 | форма продукта и whitespace | 12 / 60; 12 / 60 | manual app walkthrough P0 конкурентов |
-| H2 | деньги и WTP | 28 / 40; success 8 / 12 | paid-flow boundary и WTP questions |
+| H2 | деньги и WTP | 28 / 48; success 8 / 12 | paid-flow boundary и WTP questions |
 | H5 | аудитория | 12 / 96 | recent-behavior interviews |
 | H4/H6 | преимущество и MVP-петля | 16 / 80; 16 / 80 | prototype sessions и scorecard |
 

@@ -1,6 +1,6 @@
 # Validation Capture Sheets V1
 
-Generated: 2026-05-31T06:58:43.490Z
+Generated: 2026-05-31T17:56:40.786Z
 
 ## Purpose
 
@@ -9,17 +9,17 @@ These capture sheets turn the validation execution dashboard into fillable evide
 ## Summary
 
 - Manual walkthrough rows: 60
-- Paid-flow rows: 40
+- Paid-flow rows: 48
 - ICP interview rows: 96
 - Prototype session rows: 80
-- Total capture rows: 276
+- Total capture rows: 284
 
 ## Sheets
 
 | Sheet | Rows | Purpose |
 | --- | ---: | --- |
 | data_processed/manual_walkthrough_capture_sheet.csv | 60 | P0 app/onboarding screenshot capture by app and slot. |
-| data_processed/paid_flow_capture_sheet.csv | 40 | Human paid-flow signoff by app and evidence slot. |
+| data_processed/paid_flow_capture_sheet.csv | 48 | Human paid-flow signoff by app and evidence slot. |
 | data_processed/icp_interview_capture_sheet.csv | 96 | Top-two ICP interview capture by participant and test. |
 | data_processed/prototype_session_capture_sheet.csv | 80 | Two-minute prototype session observations by segment, participant, and screen. |
 

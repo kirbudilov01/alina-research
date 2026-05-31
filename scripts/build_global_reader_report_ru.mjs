@@ -101,6 +101,28 @@ function by(rows, key, value) {
   return rows.find(row => row[key] === value) || {};
 }
 
+function ratioParts(row, ratioField, leftFallback, rightFallback) {
+  const parts = clean(row[ratioField]).split('/').map(part => clean(part));
+  return {
+    left: parts[0] || leftFallback,
+    right: parts[1] || rightFallback
+  };
+}
+
+function completedParts(row, leftFallback, rightFallback) {
+  return {
+    left: clean(row.completed_count) || ratioParts(row, 'completed_vs_required', leftFallback, rightFallback).left,
+    right: clean(row.required_count) || ratioParts(row, 'completed_vs_required', leftFallback, rightFallback).right
+  };
+}
+
+function successParts(row, leftFallback, rightFallback) {
+  return {
+    left: clean(row.success_count) || ratioParts(row, 'success_vs_threshold', leftFallback, rightFallback).left,
+    right: clean(row.success_threshold) || ratioParts(row, 'success_vs_threshold', leftFallback, rightFallback).right
+  };
+}
+
 const rawRows = csv('data_processed/cross_source_universe_raw.csv');
 const dedupRows = csv('data_processed/cross_source_universe_dedup.csv');
 const manifest = csv('data_processed/evidence_artifact_manifest.csv');
@@ -123,6 +145,16 @@ const h3 = by(gates, 'hypothesis_id', 'H3');
 const h4 = by(gates, 'hypothesis_id', 'H4');
 const h5 = by(gates, 'hypothesis_id', 'H5');
 const h6 = by(gates, 'hypothesis_id', 'H6');
+const h1Done = completedParts(h1, '12', '60');
+const h2Done = completedParts(h2, '28', '48');
+const h3Done = completedParts(h3, '12', '60');
+const h4Done = completedParts(h4, '16', '80');
+const h5Done = completedParts(h5, '12', '96');
+const h6Done = completedParts(h6, '16', '80');
+const h2Success = successParts(h2, '8', '12');
+const h4Success = successParts(h4, '0', '32');
+const h5Success = successParts(h5, '0', '30');
+const h6Success = successParts(h6, '0', '32');
 
 const glossaryRows = [
   {
@@ -281,7 +313,7 @@ reportLines.push('Поэтому главный риск не в том, что 
 reportLines.push('');
 reportLines.push('## Есть ли рынок и деньги');
 reportLines.push('');
-reportLines.push(`Денежная рамка поддерживает продолжение проверки: intersection SAM сейчас ${money(intersectionSam)}, confidence-weighted SAM ${money(weightedSam)}. Это не forecast выручки Alina, а способ не спорить вслепую о масштабе. H2 сейчас ближе остальных к доказательному состоянию, но тоже не закрыта: ${clean(h2.completed_count) || '28'} / ${clean(h2.required_count) || '40'} completed и ${clean(h2.success_count) || '8'} / ${clean(h2.success_threshold) || '12'} success.`);
+reportLines.push(`Денежная рамка поддерживает продолжение проверки: intersection SAM сейчас ${money(intersectionSam)}, confidence-weighted SAM ${money(weightedSam)}. Это не forecast выручки Alina, а способ не спорить вслепую о масштабе. H2 сейчас ближе остальных к доказательному состоянию, но тоже не закрыта: ${h2Done.left} / ${h2Done.right} completed и ${h2Success.left} / ${h2Success.right} success.`);
 reportLines.push('');
 reportLines.push('Что можно сказать: в adjacent-рынках есть платные привычки, подписки и персональная глубина. Что нельзя сказать: “Alina точно заработает”, пока не проверены paid-flow границы и willingness-to-pay на самой продуктовой петле.');
 reportLines.push('');
@@ -315,23 +347,23 @@ reportLines.push('## Кто может быть первым пользоват�
 reportLines.push('');
 reportLines.push('Рабочая аудитория описывается не возрастом и страной, а поведением: digital ritual users. Это люди, которые уже используют приложения, чтобы регулировать состояние, получать персональный смысл, возвращаться к практике, видеть прогресс и иногда платить за глубину. Первые два сегмента для проверки: Spiritual self-improvers и Habit and progress users.');
 reportLines.push('');
-reportLines.push('У этого вывода жесткая граница: secondary VOC и Reddit/forum signals помогают говорить языком пользователя, но не заменяют recent-behavior интервью. H5 пока не доказана: ' + `${clean(h5.completed_count) || '12'} / ${clean(h5.required_count) || '96'} completed и ${clean(h5.success_count) || '0'} / ${clean(h5.success_threshold) || '30'} success.`);
+reportLines.push('У этого вывода жесткая граница: secondary VOC и Reddit/forum signals помогают говорить языком пользователя, но не заменяют recent-behavior интервью. H5 пока не доказана: ' + `${h5Done.left} / ${h5Done.right} completed и ${h5Success.left} / ${h5Success.right} success.`);
 reportLines.push('');
 reportLines.push('## Что должен проверить MVP');
 reportLines.push('');
 reportLines.push('MVP должен проверить не весь будущий продукт, а одну причинную сессию: entry в личный смысл, короткий контекстный prompt, одно приземленное действие, короткий reset, evidence сделанного шага, visible progress/avatar feedback и hook на завтра. Если участник не может своими словами объяснить, что изменилось и почему, H4/H6 нельзя усиливать.');
 reportLines.push('');
-reportLines.push(`Сейчас H4: ${clean(h4.completed_count) || '16'} / ${clean(h4.required_count) || '80'} completed, ${clean(h4.success_count) || '0'} / ${clean(h4.success_threshold) || '32'} success. H6: ${clean(h6.completed_count) || '16'} / ${clean(h6.required_count) || '80'} completed, ${clean(h6.success_count) || '0'} / ${clean(h6.success_threshold) || '32'} success. Это значит, что прототип готов к проверке, но не доказан пользователями.`);
+reportLines.push(`Сейчас H4: ${h4Done.left} / ${h4Done.right} completed, ${h4Success.left} / ${h4Success.right} success. H6: ${h6Done.left} / ${h6Done.right} completed, ${h6Success.left} / ${h6Success.right} success. Это значит, что прототип готов к проверке, но не доказан пользователями.`);
 reportLines.push('');
 reportLines.push('## Текущий статус гипотез');
 reportLines.push('');
 reportLines.push('Все шесть gates остаются в hold_validate. Это важная честность отчета: рынок, конкуренты, деньги и аудитория уже разложены, но observed validation еще не закрыла walkthrough, интервью, prototype sessions и WTP.');
 reportLines.push('');
 reportLines.push(mdTable([
-  { h: 'H1/H3', status: 'форма продукта и whitespace', progress: `${clean(h1.completed_count) || '12'} / ${clean(h1.required_count) || '60'}; ${clean(h3.completed_count) || '12'} / ${clean(h3.required_count) || '60'}`, next: 'manual app walkthrough P0 конкурентов' },
-  { h: 'H2', status: 'деньги и WTP', progress: `${clean(h2.completed_count) || '28'} / ${clean(h2.required_count) || '40'}; success ${clean(h2.success_count) || '8'} / ${clean(h2.success_threshold) || '12'}`, next: 'paid-flow boundary и WTP questions' },
-  { h: 'H5', status: 'аудитория', progress: `${clean(h5.completed_count) || '12'} / ${clean(h5.required_count) || '96'}`, next: 'recent-behavior interviews' },
-  { h: 'H4/H6', status: 'преимущество и MVP-петля', progress: `${clean(h4.completed_count) || '16'} / ${clean(h4.required_count) || '80'}; ${clean(h6.completed_count) || '16'} / ${clean(h6.required_count) || '80'}`, next: 'prototype sessions и scorecard' }
+  { h: 'H1/H3', status: 'форма продукта и whitespace', progress: `${h1Done.left} / ${h1Done.right}; ${h3Done.left} / ${h3Done.right}`, next: 'manual app walkthrough P0 конкурентов' },
+  { h: 'H2', status: 'деньги и WTP', progress: `${h2Done.left} / ${h2Done.right}; success ${h2Success.left} / ${h2Success.right}`, next: 'paid-flow boundary и WTP questions' },
+  { h: 'H5', status: 'аудитория', progress: `${h5Done.left} / ${h5Done.right}`, next: 'recent-behavior interviews' },
+  { h: 'H4/H6', status: 'преимущество и MVP-петля', progress: `${h4Done.left} / ${h4Done.right}; ${h6Done.left} / ${h6Done.right}`, next: 'prototype sessions и scorecard' }
 ], [
   { key: 'h', label: 'Гипотеза' },
   { key: 'status', label: 'Что проверяет' },

@@ -10,11 +10,11 @@ Generated: 2026-05-31
 
 | Метрика | Значение | Как читать | Граница |
 | --- | --- | --- | --- |
-| Масштаб evidence base | 67,525 raw source-строк; 36,694 global dedup; 510 manifest artifacts | Пакет уже большой как карта рынка и конкурентов. | Масштаб строк не равен доказанному спросу или числу прямых клонов. |
+| Масштаб evidence base | 67,525 raw source-строк; 36,694 global dedup; 518 manifest artifacts | Пакет уже большой как карта рынка и конкурентов. | Масштаб строк не равен доказанному спросу или числу прямых клонов. |
 | Покрытие пяти направлений | 5 market rows; 13,117 direct app dedup rows by niche; 43,144 all-source dedup rows by niche | По каждой нише видно, сколько данных лежит под выводами. | Niche dedup rows нельзя складывать как уникальные продукты: один продукт может жить в нескольких контекстах. |
 | Денежная рамка H2 | intersection SAM $202M; weighted SAM $80.8M; sensitivity high-or-above 4/6 | Денежная зона выглядит достаточно большой, чтобы продолжать проверку. | Это range-based sizing, не revenue forecast и не закрытый H2 gate. |
-| Статус гипотез | 6/6 gates hold_validate; H1 12 / 60; success 0 / 25; H2 28 / 40; success 8 / 12; H5 12 / 96; success 0 / 30 | Исследование готово к ручной проверке, но еще не готово к claim upgrade. | Listing-only, secondary VOC и prototype-readiness не заменяют observed walkthrough/interview/session evidence. |
-| Следующий рабочий фокус | 22 next-validation tasks; readability rows=9; source-quality rows=5 | Следующий прирост качества должен прийти от observed rows, а не от бесконечного расширения desk research. | Backlog описывает работу, но не считается выполненным evidence. |
+| Статус гипотез | 6/6 gates hold_validate; H1 12 / 60; success 0 / 25; H2 28 / 48; success 8 / 12; H5 12 / 96; success 0 / 30 | Исследование готово к ручной проверке, но еще не готово к claim upgrade. | Listing-only, secondary VOC и prototype-readiness не заменяют observed walkthrough/interview/session evidence. |
+| Следующий рабочий фокус | 22 next-validation tasks; readability rows=10; source-quality rows=5 | Следующий прирост качества должен прийти от observed rows, а не от бесконечного расширения desk research. | Backlog описывает работу, но не считается выполненным evidence. |
 
 ## Пять ниш
 
@@ -32,7 +32,7 @@ Generated: 2026-05-31
 | --- | --- | --- | --- |
 | H1: форма продукта существует | начато, но доказательств недостаточно; completed 12 / 60; success 0 / 25 | Нужна observed validation строка. | оставить hold_validate |
 | H3: есть узкое белое пятно | начато, но доказательств недостаточно; completed 12 / 60; success 0 / 25 | Нужна observed validation строка. | оставить hold_validate |
-| H2: в рынках есть деньги | начато, но доказательств недостаточно; completed 28 / 40; success 8 / 12 | Нужна observed validation строка. | оставить hold_validate |
+| H2: в рынках есть деньги | начато, но доказательств недостаточно; completed 28 / 48; success 8 / 12 | Нужна observed validation строка. | оставить hold_validate |
 | H5: общая аудитория существует | начато, но доказательств недостаточно; completed 12 / 96; success 0 / 30 | Нужна observed validation строка. | оставить hold_validate |
 | H4: конкурентное преимущество правдоподобно | начато, но доказательств недостаточно; completed 16 / 80; success 0 / 32 | Нужна observed validation строка. | оставить hold_validate |
 | H6: продуктовое ядро можно определить | начато, но доказательств недостаточно; completed 16 / 80; success 0 / 32 | Нужна observed validation строка. | оставить hold_validate |

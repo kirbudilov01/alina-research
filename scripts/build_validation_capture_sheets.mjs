@@ -64,6 +64,19 @@ function csv(file) {
   return fs.existsSync(file) ? parseCsv(fs.readFileSync(file, 'utf8')) : [];
 }
 
+function preserveExistingRows(generatedRows, existingRows, preserveFields) {
+  const existingById = new Map(existingRows.map(row => [row.capture_id, row]));
+  return generatedRows.map(row => {
+    const existing = existingById.get(row.capture_id);
+    if (!existing) return row;
+    const preserved = {};
+    for (const field of preserveFields) {
+      if (clean(existing[field])) preserved[field] = existing[field];
+    }
+    return { ...row, ...preserved };
+  });
+}
+
 function writeCsv(file, rows, headers) {
   fs.writeFileSync(file, [
     headers.join(','),
@@ -87,6 +100,12 @@ function slug(value) {
     .slice(0, 56);
 }
 
+function normalizedName(value) {
+  return clean(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '');
+}
+
 function topSegments(rows) {
   return rows
     .slice()
@@ -101,6 +120,11 @@ const prototypeFlow = csv('data_processed/prototype_validation_stimulus_flow.csv
 const prototypeScorecard = csv('data_processed/prototype_validation_scorecard.csv');
 const paywallAdjudication = csv('data_processed/web_paywall_visual_adjudication.csv');
 const revenueProxy = csv('data_processed/competitor_revenue_proxy_review.csv');
+const p0ExecutionSlice = csv('data_processed/p0_validation_execution_slice.csv');
+const existingWalkthroughRows = csv(WALKTHROUGH_OUT);
+const existingPaidRows = csv(PAID_OUT);
+const existingIcpRows = csv(ICP_OUT);
+const existingPrototypeRows = csv(PROTOTYPE_OUT);
 
 const screenshotSlots = [
   {
@@ -130,7 +154,7 @@ const screenshotSlots = [
   }
 ];
 
-const walkthroughRows = [];
+let walkthroughRows = [];
 for (const app of manualPacket) {
   for (const slot of screenshotSlots) {
     walkthroughRows.push({
@@ -159,6 +183,20 @@ for (const app of manualPacket) {
 const paidTargets = paywallAdjudication
   .filter(row => ['confirmed_visible_public_pricing', 'confirmed_paid_surface_no_clean_price', 'partial_paid_surface_language', 'visible_price_context_uncertain'].includes(row.visual_adjudication))
   .slice(0, 12);
+const paidTargetNames = new Set(paidTargets.map(row => normalizedName(row.app_name)));
+for (const row of p0ExecutionSlice) {
+  const isPaidP0 = row.execution_block === 'BLOCK_02_paid_flow' || clean(row.command_id).startsWith('P0_PAYWALL_');
+  const key = normalizedName(row.target);
+  if (!isPaidP0 || !key || paidTargetNames.has(key)) continue;
+  paidTargets.push({
+    app_name: row.target,
+    market: '',
+    visual_adjudication: 'p0_intake_requires_capture_row',
+    screenshot_source_url: row.source_url,
+    source_url: row.source_url
+  });
+  paidTargetNames.add(key);
+}
 const revenueByName = new Map(revenueProxy.map(row => [row.app_name, row]));
 const paidSlots = [
   ['PF_S01', 'public_pricing_or_store_iap', 'Capture visible price, trial, subscription term, or IAP list.'],
@@ -166,7 +204,7 @@ const paidSlots = [
   ['PF_S03', 'plan_depth_and_unlocks', 'Capture what paid tier unlocks and whether it matches Alina paid-depth logic.'],
   ['PF_S04', 'human_match_check', 'Confirm the paid surface belongs to the same product/app, not a parent or unrelated page.']
 ];
-const paidRows = [];
+let paidRows = [];
 paidTargets.forEach((app, index) => {
   const proxy = revenueByName.get(app.app_name) || {};
   for (const [slotId, slot, question] of paidSlots) {
@@ -190,7 +228,7 @@ paidTargets.forEach((app, index) => {
   }
 });
 
-const icpRows = [];
+let icpRows = [];
 const testsBySegment = new Map();
 for (const test of icpTests) {
   const rows = testsBySegment.get(test.segment_name) || [];
@@ -222,7 +260,7 @@ for (const segment of icpSegments) {
   }
 }
 
-const prototypeRows = [];
+let prototypeRows = [];
 const metricIds = prototypeScorecard.map(row => row.metric_id).filter(Boolean);
 for (const segment of icpSegments) {
   for (let participant = 1; participant <= 5; participant += 1) {
@@ -248,6 +286,28 @@ for (const segment of icpSegments) {
     }
   }
 }
+
+const preserveWalkthroughFields = [
+  'capture_status', 'observed_answer', 'directness_label',
+  'action_to_avatar_causality_label', 'paywall_boundary_label', 'inspector_notes'
+];
+const preservePaidFields = [
+  'capture_status', 'observed_price_or_trial', 'paid_flow_label',
+  'product_match_label', 'human_notes'
+];
+const preserveIcpFields = [
+  'capture_status', 'observed_answer_or_score', 'success_flag',
+  'fatal_objection_flag', 'exact_quote', 'researcher_notes'
+];
+const preservePrototypeFields = [
+  'capture_status', 'observed_behavior', 'participant_paraphrase',
+  'success_signal_seen', 'failure_signal_seen', 'researcher_notes'
+];
+
+walkthroughRows = preserveExistingRows(walkthroughRows, existingWalkthroughRows, preserveWalkthroughFields);
+paidRows = preserveExistingRows(paidRows, existingPaidRows, preservePaidFields);
+icpRows = preserveExistingRows(icpRows, existingIcpRows, preserveIcpFields);
+prototypeRows = preserveExistingRows(prototypeRows, existingPrototypeRows, preservePrototypeFields);
 
 writeCsv(WALKTHROUGH_OUT, walkthroughRows, [
   'capture_id', 'inspection_rank', 'app_name', 'app_store_id', 'revenue_proxy_band',
