@@ -14,8 +14,8 @@ This document registers the publication-style PDF layer.
 - Coverage cells: 39
 - Saturation markets: 6
 - Deduplicated universe rows: 12,552
-- Tracked manifest artifacts: 350
-- Tracked CSV rows: 225,279
+- Tracked manifest artifacts: 353
+- Tracked CSV rows: 225,853
 - Competitor revenue proxy rows: 90
 - Market-money triangulation rows: 6
 - Manual P0 inspection targets: 12

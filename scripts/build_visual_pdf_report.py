@@ -242,6 +242,7 @@ def main():
     reddit_app_summary = read_csv("data_processed/reddit_mention_app_summary.csv")
     reddit_manual_queue = read_csv("data_processed/reddit_manual_reading_queue.csv")
     reddit_manual_prompts = read_csv("data_processed/reddit_manual_reading_prompt_bank.csv")
+    reddit_manual_capture = read_csv("data_processed/reddit_manual_reading_capture_sheet.csv")
     reviews = read_csv("data_processed/review_jtbd_cluster_summary.csv")
     community_referral = read_csv("data_processed/community_referral_signal_rows.csv")
     community_referral_summary = read_csv("data_processed/community_referral_summary.csv")
@@ -295,6 +296,7 @@ def main():
                 ["Reddit app summaries", number(str(len(reddit_app_summary)))],
                 ["Reddit manual reads queued", number(str(len(reddit_manual_queue)))],
                 ["Reddit prompt lanes", number(str(len(reddit_manual_prompts)))],
+                ["Reddit read capture rows", number(str(len(reddit_manual_capture)))],
                 ["Forum quote-coding rows", number(str(len(forum)))],
                 ["Community/referral rows", number(str(len(community_referral)))],
                 ["ICP segment hypotheses", number(str(len(icp)))],

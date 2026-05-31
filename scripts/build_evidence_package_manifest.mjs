@@ -212,6 +212,7 @@ const requiredArtifacts = [
   'data_processed/reddit_mention_app_summary.csv',
   'data_processed/reddit_manual_reading_queue.csv',
   'data_processed/reddit_manual_reading_prompt_bank.csv',
+  'data_processed/reddit_manual_reading_capture_sheet.csv',
   'data_processed/top100_competitor_review_scorecard.csv',
   'data_processed/top100_human_validation_queue.csv',
   'data_processed/manual_competitor_inspection_packet.csv',
