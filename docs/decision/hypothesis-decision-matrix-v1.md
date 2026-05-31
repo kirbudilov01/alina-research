@@ -1,6 +1,6 @@
 # Hypothesis Decision Matrix V1
 
-Generated: 2026-05-31T07:44:55.410Z
+Generated: 2026-05-31T14:26:09.378Z
 
 ## Purpose
 
@@ -26,7 +26,7 @@ Decision mix:
 | H2 | Markets have money | hold_validate | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, manual in-app paywall validation, and willingness-to-pay prototype evidence for final investor-grade claims. |
 | H3 | Whitespace exists | hold_validate | medium | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Actual app/onboarding inspection results are still missing; public listings and cross-source text rules can overstate or hide in-app loops. |
 | H4 | Competitive advantage is plausible | hold_validate | medium | 1 direct reference competitor; 45 high-threat competitors; 8 prototype screens; 6 success/kill metrics | No human prototype session yet proves users understand, prefer, or value the integrated loop. |
-| H5 | Shared audience exists | hold_validate | medium | 20492 audience signal rows; 6 ICP segment hypotheses; 36 ICP validation tests | Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. |
+| H5 | Shared audience exists | hold_validate | medium | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Keyword/OCR/forum coding and directional ICP recruiting assets need human validation, interviews, and prototype tests. |
 | H6 | Product core can be defined | hold_validate | medium | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
 
 ## Gates

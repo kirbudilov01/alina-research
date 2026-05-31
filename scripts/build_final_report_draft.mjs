@@ -133,6 +133,7 @@ const webPaywallScreenshots = csv('data_processed/web_paywall_screenshot_validat
 const webPaywallScreenshotInterpretation = csv('data_processed/web_paywall_screenshot_interpretation.csv');
 const webPaywallVisualAdjudication = csv('data_processed/web_paywall_visual_adjudication.csv');
 const webPaywallVisualAdjudicationSummary = csv('data_processed/web_paywall_visual_adjudication_summary.csv');
+const paidFlowLocalSignoff = csv('data_processed/paid_flow_local_signoff.csv');
 const evidenceAudit = csv('data_processed/evidence_claim_register.csv');
 const sourceExpansionBacklog = csv('data_processed/source_expansion_backlog.csv');
 const p0ExternalSources = csv('data_raw/expanded/p0_external_sources_raw.csv');
@@ -304,6 +305,7 @@ report.push(`- Developer website paywall discovery: ${webPaywallRaw.length} fetc
 report.push(`- Web paywall screenshot capture: ${webPaywallCapturedScreenshots.length}/${webPaywallScreenshots.length} queued screenshots captured for manual interpretation.`);
 report.push(`- Web paywall OCR interpretation: ${webPaywallScreenshotInterpretation.length} screenshots interpreted; ${confirmedPublicPricingScreenshots.length} currently confirm visible public pricing, while the rest need human review or weaken the signal.`);
 report.push(`- Web paywall visual adjudication: ${webPaywallVisualAdjudication.length} screenshots adjudicated; ${confirmedVisualPricing.length} confirmed public pricing and ${partialVisualPaidSurface.length} partial paid-surface examples.`);
+report.push(`- Paid-flow local signoff: ${paidFlowLocalSignoff.length} observed rows from local screenshot review; Character AI is confirmed public web subscription evidence, while Meditopia is kept as partial B2B/EAP monetization evidence.`);
 report.push(`- Evidence audit register: ${evidenceAudit.length} claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.`);
 report.push(`- Evidence package manifest: ${evidenceManifest.length} artifacts tracked, ${manifestCsvRows.length} CSV artifacts, ${manifestTrackedRows} tracked CSV rows, ${manifestMissing.length} missing required artifacts.`);
 report.push(`- Completion/readiness audit: ${completionAudit.length} objective requirements mapped; ${completionOpen.length} remain partial, directional, draft, or not final.`);
@@ -1392,6 +1394,20 @@ if (webPaywallVisualAdjudication.length) {
   ], 15));
   report.push('');
 }
+if (paidFlowLocalSignoff.length) {
+  report.push('### Paid-Flow Local Signoff');
+  report.push('');
+  report.push('The first paid-flow spike now has local visual signoff rows from already captured screenshots. This moves H2 from zero observed paid-flow rows into partial observed evidence, but it does not make H2 pass-ready: the gate still requires more completed rows plus WTP/prototype support.');
+  report.push('');
+  report.push(mdTable(paidFlowLocalSignoff, [
+    { key: 'capture_id', label: 'Capture' },
+    { key: 'app_name', label: 'App' },
+    { key: 'signoff_strength', label: 'Strength' },
+    { key: 'observed_price_or_trial', label: 'Observed' },
+    { key: 'claim_limit', label: 'Claim Limit' }
+  ], paidFlowLocalSignoff.length));
+  report.push('');
+}
 report.push('### Retention Signals');
 report.push('');
 const retentionTags = {};
@@ -1822,6 +1838,7 @@ report.push('- `data_processed/google_play_pricing_summary.csv`');
 report.push('- `data_processed/web_paywall_signal_matrix.csv`');
 report.push('- `data_processed/web_paywall_screenshot_validation.csv`');
 report.push('- `data_processed/web_paywall_screenshot_interpretation.csv`');
+report.push('- `data_processed/paid_flow_local_signoff.csv`');
 report.push('- `data_processed/pricing_retention_matrix.csv`');
 report.push('- `data_processed/product_core_evidence_matrix.csv`');
 report.push('- `data_processed/review_signal_matrix.csv`');
@@ -1919,6 +1936,7 @@ status.push(mdTable([
   { requirement: 'Market-money triangulation', evidence: 'data_processed/market_money_triangulation.csv; data_processed/market_money_triangulation_summary.csv; docs/market/market-money-triangulation-v1.md', status: `done v1; ${marketMoneyTriangulation.length} market rows triangulate TAM/SAM/SOM, monetization proxy, competitor revenue proxy, paywall screenshots, and H2 gate status` },
   { requirement: 'Russian five-market deep dives', evidence: 'data_processed/russian_market_deep_dives.csv; docs/market/russian-market-deep-dives-v1.md; reports/alina-russian-narrative-report-v1.md', status: `done v1; ${russianMarketDeepDives.length} Russian market-by-market rows connect TAM/SAM, coverage, saturation, money, audience, and validation boundaries` },
   { requirement: 'Russian paid-flow dossiers', evidence: 'data_processed/russian_paid_flow_dossiers.csv; docs/market/russian-paid-flow-dossiers-v1.md; reports/alina-russian-narrative-report-v1.md', status: `done v1; ${russianPaidFlowDossiers.length} paid-flow products translate H2 proxy evidence into price, product-match, paywall-boundary, and signoff tasks` },
+  { requirement: 'Paid-flow local signoff', evidence: 'data_processed/paid_flow_local_signoff.csv; docs/market/paid-flow-local-signoff-v1.md; data_processed/paid_flow_capture_sheet.csv', status: `done v1; ${paidFlowLocalSignoff.length} local screenshot-review rows move H2 into partial observed paid-flow evidence without upgrading WTP claims` },
   { requirement: 'Russian claim evidence appendix', evidence: 'data_processed/russian_claim_evidence_appendix.csv; docs/decision/russian-claim-evidence-appendix-v1.md; reports/alina-russian-narrative-report-v1.md', status: `done v1; ${russianClaimAppendix.length} claim rows connect status, confidence, metrics, boundaries, source files, and next actions` },
   { requirement: 'Russian source provenance index', evidence: 'data_processed/russian_source_provenance_index.csv; docs/decision/russian-source-provenance-index-v1.md; reports/alina-russian-narrative-report-v1.md', status: `done v1; ${russianSourceProvenance.length} provenance rows connect manifest, source refs, market source registry, and discovery/backlog boundaries` },
   { requirement: 'Russian P0 competitor battlecards', evidence: 'data_processed/russian_competitor_battlecards.csv; docs/competitive/russian-competitor-battlecards-v1.md; reports/alina-russian-narrative-report-v1.md', status: `done v1; ${russianCompetitorBattlecards.length} P0 competitor cards translate manual inspection targets into readable threat, opening, and walkthrough prompts` },
@@ -1985,6 +2003,7 @@ console.log(`web_paywall_screenshot_interpretations=${webPaywallScreenshotInterp
 console.log(`web_paywall_visual_adjudications=${webPaywallVisualAdjudication.length}`);
 console.log(`web_paywall_visual_confirmed=${confirmedVisualPricing.length}`);
 console.log(`web_paywall_visual_partial=${partialVisualPaidSurface.length}`);
+console.log(`paid_flow_local_signoff=${paidFlowLocalSignoff.length}`);
 console.log(`human_validation_queue_rows=${humanValidationQueue.length}`);
 console.log(`manual_inspection_targets=${manualInspectionPacket.length}`);
 console.log(`manual_inspection_rubric=${manualInspectionRubric.length}`);

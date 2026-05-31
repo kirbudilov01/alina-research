@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T14:16:39.337Z
+Generated: 2026-05-31T14:27:18.340Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -37,6 +37,7 @@ Generated: 2026-05-31T14:16:39.337Z
 | Market-money triangulation | data_processed/market_money_triangulation.csv; data_processed/market_money_triangulation_summary.csv; docs/market/market-money-triangulation-v1.md | done v1; 6 market rows triangulate TAM/SAM/SOM, monetization proxy, competitor revenue proxy, paywall screenshots, and H2 gate status |
 | Russian five-market deep dives | data_processed/russian_market_deep_dives.csv; docs/market/russian-market-deep-dives-v1.md; reports/alina-russian-narrative-report-v1.md | done v1; 5 Russian market-by-market rows connect TAM/SAM, coverage, saturation, money, audience, and validation boundaries |
 | Russian paid-flow dossiers | data_processed/russian_paid_flow_dossiers.csv; docs/market/russian-paid-flow-dossiers-v1.md; reports/alina-russian-narrative-report-v1.md | done v1; 10 paid-flow products translate H2 proxy evidence into price, product-match, paywall-boundary, and signoff tasks |
+| Paid-flow local signoff | data_processed/paid_flow_local_signoff.csv; docs/market/paid-flow-local-signoff-v1.md; data_processed/paid_flow_capture_sheet.csv | done v1; 8 local screenshot-review rows move H2 into partial observed paid-flow evidence without upgrading WTP claims |
 | Russian claim evidence appendix | data_processed/russian_claim_evidence_appendix.csv; docs/decision/russian-claim-evidence-appendix-v1.md; reports/alina-russian-narrative-report-v1.md | done v1; 22 claim rows connect status, confidence, metrics, boundaries, source files, and next actions |
 | Russian source provenance index | data_processed/russian_source_provenance_index.csv; docs/decision/russian-source-provenance-index-v1.md; reports/alina-russian-narrative-report-v1.md | done v1; 16 provenance rows connect manifest, source refs, market source registry, and discovery/backlog boundaries |
 | Russian P0 competitor battlecards | data_processed/russian_competitor_battlecards.csv; docs/competitive/russian-competitor-battlecards-v1.md; reports/alina-russian-narrative-report-v1.md | done v1; 12 P0 competitor cards translate manual inspection targets into readable threat, opening, and walkthrough prompts |

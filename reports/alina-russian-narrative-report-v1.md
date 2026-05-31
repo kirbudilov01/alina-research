@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T14:16:47.464Z
+Собрано: 2026-05-31T14:27:30.011Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 36694 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 441 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 36694 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 444 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 441 артефакта, missing в manifest: 0. Cross-source universe содержит 67525 нормализованных raw rows и 36694 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 444 артефакта, missing в manifest: 0. Cross-source universe содержит 67525 нормализованных raw rows и 36694 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -154,6 +154,21 @@
 **5. AstroSage Kundli: AI Astrology.** слабый или смешанный public signal: использовать только как очередь для проверки, не как proof денег Upgrade: если human review не подтверждает product-match, убрать этот источник из H2 support или понизить до context-only.
 
 Граница этого слоя: paid-flow dossier делает H2 проверяемой, но не заменяет human signoff. Пока completed slots равны нулю, деньги можно описывать как range/proxy-supported, а не как доказанную willingness-to-pay для Alina.
+
+## 2.3. Локальный paid-flow signoff по сохраненным скриншотам
+
+Первый маленький paid-flow spike теперь не только запланирован, но и частично просмотрен по локальным screenshot artifacts. Заполнено 8 observed rows: Character AI/c.ai+ можно читать как подтвержденную public-web subscription surface, а Meditopia нужно читать осторожнее - это Meditopia-branded B2B/EAP pricing, не consumer app paywall. Поэтому H2 становится не "доказанной", а in-progress: появились наблюдаемые платные поверхности, но willingness-to-pay для Alina, in-app timing и consumer conversion все еще открыты.
+
+| Capture | Product | Strength | Что видно | Граница |
+| --- | --- | --- | --- | --- |
+| PF_01_PF_S01 | Character AI: Chat, Talk, Text | confirmed_public_web | $9.99/month; $94.99/year; annual page also shows $119.88 struck-through reference price | Supports adjacent paid-behavior / paid-depth proxy for AI companion/avatar-identity market; does not prove Alina WTP or in-app conversion. |
+| PF_01_PF_S02 | Character AI: Chat, Talk, Text | partial_boundary_unknown | Public subscribe page is visible independently; first meaningful in-app value boundary was not inspected. | Use as public paid-surface evidence only, not as first-value/paywall-timing proof. |
+| PF_01_PF_S03 | Character AI: Chat, Talk, Text | confirmed_public_web | Paid tier unlocks: better memory, ad-free chats, bonus Charms, latest/best models, no slow mode, unlimited voice calls, more muted words/voice memos/go-ons/swipes, customization. | Useful for paid-depth analogs around memory, personalization, voice, and premium model access. |
+| PF_01_PF_S04 | Character AI: Chat, Talk, Text | confirmed_public_web | Same public page brands the paid tier as c.ai+ and includes Character AI site footer links. | Product-match support for public pricing row; still not a substitute for in-app subscription confirmation. |
+| PF_02_PF_S01 | Meditopia: Sleep & Meditation | partial_b2b_price | $3.50 per user per month (PUPM) average price shown for Essential Care on Meditopia business pricing page. | Supports enterprise wellness monetization proxy only; do not use as direct consumer app WTP proof. |
+| PF_02_PF_S02 | Meditopia: Sleep & Meditation | partial_boundary_unknown | Business pricing page with Calculate Pricing / Book a Demo CTAs; consumer first meaningful paywall boundary not inspected. | Use only as B2B paid-surface evidence; keep consumer paywall boundary open. |
+| PF_02_PF_S03 | Meditopia: Sleep & Meditation | partial_b2b_feature_depth | Essential Care includes personalized wellbeing library with AI support, 10,000+ resources, web/mobile/smartwatch access; Total Care adds 1:1 expert sessions, integrations, social features. | Use as wellness/EAP paid-depth benchmark; do not treat as direct Alina consumer subscription analog. |
+| PF_02_PF_S04 | Meditopia: Sleep & Meditation | partial_b2b_product_match | Same Meditopia brand, business navigation, and EAP pricing page; product family matches, consumer app plan does not. | Use as same-brand enterprise monetization context; keep consumer product-match and WTP open. |
 
 ## 3. Конкурентная плотность: рынок большой, но не пустой
 
@@ -502,7 +517,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 
 ## 9. Следующие действия
 
-Все H1-H6 validation gates сейчас требуют наблюдаемой валидации. Not-started gates: 6. Это не провал, а честная граница исследования: локальная evidence base готова, но реальные решения должны приниматься после ручного walkthrough и пользовательских сессий.
+Все H1-H6 validation gates сейчас требуют наблюдаемой валидации. Not-started gates: 5. Это не провал, а честная граница исследования: локальная evidence base готова, но реальные решения должны приниматься после ручного walkthrough и пользовательских сессий.
 
 Практический порядок следующий. Сначала закрыть manual competitor walkthrough для P0 приложений: onboarding, first action, progress/avatar feedback, first paywall. Затем пройти paid-flow sign-off по сильным money proxy. Затем прочитать P0 Reddit threads и заполнить capture sheet: user job, alternatives, rejected patterns, paid/WTP signal, safety boundary, Alina implication. Затем провести ICP interviews по двум верхним сегментам и короткие prototype sessions. Только после этого можно обновлять H1-H6 из hold/validate в более сильные решения.
 
@@ -640,11 +655,11 @@ Product-core evidence и prototype stimulus переводят исследов�
 | REQ_validation_batch_02 | доказано как исследовательский слой | high | 52 batch rows; 52 not started; 12 local artifacts linked | Это операционная готовность, не observed validation evidence. |
 | REQ_validation_batch_03 | доказано как исследовательский слой | high | 17 batch rows; 17 not started; 17 local artifacts linked | Это операционная готовность, не observed validation evidence. |
 | REQ_validation_evidence_rollup | доказано как исследовательский слой | high | 75 command rows; 75 notes present; 29 local artifacts linked | Это операционная готовность, не observed validation evidence. |
-| REQ_validation_gate_calculator | доказано как исследовательский слой | high | 6 gate rows; 0 pass-ready; 0 in-progress; 6 not started; 0 downgrade/kill triggered | Это операционная готовность, не observed validation evidence. |
+| REQ_validation_gate_calculator | доказано как исследовательский слой | high | 6 gate rows; 0 pass-ready; 1 in-progress; 5 not started; 0 downgrade/kill triggered | Это операционная готовность, не observed validation evidence. |
 | REQ_competitor_universe | доказано как исследовательский слой | medium_high | 67525 cross-source raw rows; 36694 cross-source dedup rows; 39 coverage cells; 11 strong and 12 medium source/market cells | Raw 50k source scale is met; dedup 30k+ and the 30k-40k working band are met; dedup 50k remains open and should not be overclaimed. |
 | H1_product_shape_exists | готово к проверке, gate открыт | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Нельзя усиливать claim без app/onboarding walkthrough и скриншотов причинной петли. |
-| H2_markets_have_money | поддержано направленно, но не финально доказано | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |
-| H2_paywall_visible_evidence | поддержано направленно, но не финально доказано | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |
+| H2_markets_have_money | поддержано направленно, но не финально доказано | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies; 8 local paid-flow signoff rows | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |
+| H2_paywall_visible_evidence | поддержано направленно, но не финально доказано | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples; 8 local signoff rows | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |
 | H3_whitespace_exists | поддержано направленно, но не финально доказано | medium | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Нельзя усиливать claim без app/onboarding walkthrough и скриншотов причинной петли. |
 | H4_competitive_advantage_plausible | готово к проверке, gate открыт | medium | 1 direct reference competitor; 45 high-threat competitors; 8 prototype screens; 6 success/kill metrics | Нельзя считать продуктовое преимущество доказанным без prototype sessions и observed scorecard. |
 | H5_shared_audience_exists | поддержано направленно, но не финально доказано | medium | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Нельзя превращать directional language signals в финальную персону без интервью. |
@@ -686,6 +701,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_market_sizing_playbook.csv`
 - `data_processed/russian_market_deep_dives.csv`
 - `data_processed/russian_paid_flow_dossiers.csv`
+- `data_processed/paid_flow_local_signoff.csv`
 - `data_processed/russian_whitespace_decision_map.csv`
 - `data_processed/russian_claim_evidence_appendix.csv`
 - `data_processed/russian_source_provenance_index.csv`

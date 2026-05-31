@@ -143,6 +143,7 @@ const observedEvidenceLadder = csv('data_processed/russian_observed_evidence_lad
 const validationRunway = csv('data_processed/russian_validation_runway.csv');
 const p0WalkthroughDossiers = csv('data_processed/russian_p0_walkthrough_dossiers.csv');
 const paidFlowDossiers = csv('data_processed/russian_paid_flow_dossiers.csv');
+const paidFlowLocalSignoff = csv('data_processed/paid_flow_local_signoff.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -305,6 +306,20 @@ if (paidFlowDossiers.length) {
     lines.push('');
   }
   lines.push('Граница этого слоя: paid-flow dossier делает H2 проверяемой, но не заменяет human signoff. Пока completed slots равны нулю, деньги можно описывать как range/proxy-supported, а не как доказанную willingness-to-pay для Alina.');
+  lines.push('');
+}
+if (paidFlowLocalSignoff.length) {
+  lines.push('## 2.3. Локальный paid-flow signoff по сохраненным скриншотам');
+  lines.push('');
+  lines.push(`Первый маленький paid-flow spike теперь не только запланирован, но и частично просмотрен по локальным screenshot artifacts. Заполнено ${paidFlowLocalSignoff.length} observed rows: Character AI/c.ai+ можно читать как подтвержденную public-web subscription surface, а Meditopia нужно читать осторожнее - это Meditopia-branded B2B/EAP pricing, не consumer app paywall. Поэтому H2 становится не "доказанной", а in-progress: появились наблюдаемые платные поверхности, но willingness-to-pay для Alina, in-app timing и consumer conversion все еще открыты.`);
+  lines.push('');
+  lines.push(mdTable(paidFlowLocalSignoff, [
+    { key: 'capture_id', label: 'Capture' },
+    { key: 'app_name', label: 'Product' },
+    { key: 'signoff_strength', label: 'Strength' },
+    { key: 'observed_price_or_trial', label: 'Что видно' },
+    { key: 'claim_limit', label: 'Граница' }
+  ], paidFlowLocalSignoff.length));
   lines.push('');
 }
 lines.push('## 3. Конкурентная плотность: рынок большой, но не пустой');
@@ -754,6 +769,7 @@ lines.push('- `data_processed/russian_narrative_evidence_map.csv`');
 lines.push('- `data_processed/russian_market_sizing_playbook.csv`');
 lines.push('- `data_processed/russian_market_deep_dives.csv`');
 lines.push('- `data_processed/russian_paid_flow_dossiers.csv`');
+lines.push('- `data_processed/paid_flow_local_signoff.csv`');
 lines.push('- `data_processed/russian_whitespace_decision_map.csv`');
 lines.push('- `data_processed/russian_claim_evidence_appendix.csv`');
 lines.push('- `data_processed/russian_source_provenance_index.csv`');
@@ -781,5 +797,6 @@ fs.writeFileSync(OUT, `${lines.join('\n')}\n`);
 console.log(`russian_narrative_report=${OUT}`);
 console.log(`cross_source_dedup=${crossSourceDedup.length}`);
 console.log(`source_scale_milestones=${sourceScaleMilestone.length}`);
+console.log(`paid_flow_local_signoff=${paidFlowLocalSignoff.length}`);
 console.log(`reddit_capture_rows=${redditCapture.length}`);
 console.log(`completion_rows=${completion.length}`);

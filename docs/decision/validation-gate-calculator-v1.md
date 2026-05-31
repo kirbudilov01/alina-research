@@ -1,6 +1,6 @@
 # Validation Gate Calculator V1
 
-Generated: 2026-05-31T09:42:19.932Z
+Generated: 2026-05-31T14:26:09.000Z
 
 ## Purpose
 
@@ -12,7 +12,7 @@ This calculator reads the manual walkthrough, paid-flow, ICP interview, and prot
 | --- | --- | --- | --- | ---: | ---: | ---: | --- |
 | GATE_H1_MANUAL_PRODUCT_SHAPE | H1 | manual_competitor_walkthrough | not_started | 60 | 0 | 0 | keeps_hold_validate |
 | GATE_H3_MANUAL_WHITESPACE | H3 | manual_competitor_walkthrough | not_started | 60 | 0 | 0 | keeps_hold_validate |
-| GATE_H2_PAID_FLOW | H2 | paid_flow_validation | not_started | 40 | 0 | 0 | keeps_hold_validate |
+| GATE_H2_PAID_FLOW | H2 | paid_flow_validation | in_progress_insufficient_evidence | 40 | 8 | 8 | keeps_hold_validate |
 | GATE_H5_ICP_RECENT_BEHAVIOR | H5 | icp_interviews | not_started | 96 | 0 | 0 | keeps_hold_validate |
 | GATE_H4_PROTOTYPE_ADVANTAGE | H4 | prototype_user_validation | not_started | 80 | 0 | 0 | keeps_hold_validate |
 | GATE_H6_PRODUCT_CORE | H6 | prototype_user_validation | not_started | 80 | 0 | 0 | keeps_hold_validate |
@@ -21,7 +21,8 @@ This calculator reads the manual walkthrough, paid-flow, ICP interview, and prot
 
 | Status | Gates | Hypotheses | Required Capture Rows | Completed Capture Rows |
 | --- | ---: | --- | ---: | ---: |
-| not_started | 6 | H1/H3/H2/H5/H4/H6 | 416 | 0 |
+| not_started | 5 | H1/H3/H5/H4/H6 | 376 | 0 |
+| in_progress_insufficient_evidence | 1 | H2 | 40 | 8 |
 
 ## Interpretation
 
