@@ -1,6 +1,6 @@
 # Validation Gate Calculator V1
 
-Generated: 2026-05-31T15:52:29.224Z
+Generated: 2026-05-31T15:55:53.187Z
 
 ## Purpose
 
@@ -14,15 +14,14 @@ This calculator reads the manual walkthrough, paid-flow, ICP interview, and prot
 | GATE_H3_MANUAL_WHITESPACE | H3 | manual_competitor_walkthrough | in_progress_insufficient_evidence | 60 | 12 | 0 | keeps_hold_validate |
 | GATE_H2_PAID_FLOW | H2 | paid_flow_validation | in_progress_insufficient_evidence | 40 | 28 | 8 | keeps_hold_validate |
 | GATE_H5_ICP_RECENT_BEHAVIOR | H5 | icp_interviews | in_progress_insufficient_evidence | 96 | 12 | 0 | keeps_hold_validate |
-| GATE_H4_PROTOTYPE_ADVANTAGE | H4 | prototype_user_validation | not_started | 80 | 0 | 0 | keeps_hold_validate |
-| GATE_H6_PRODUCT_CORE | H6 | prototype_user_validation | not_started | 80 | 0 | 0 | keeps_hold_validate |
+| GATE_H4_PROTOTYPE_ADVANTAGE | H4 | prototype_user_validation | in_progress_insufficient_evidence | 80 | 16 | 0 | keeps_hold_validate |
+| GATE_H6_PRODUCT_CORE | H6 | prototype_user_validation | in_progress_insufficient_evidence | 80 | 16 | 0 | keeps_hold_validate |
 
 ## Status Summary
 
 | Status | Gates | Hypotheses | Required Capture Rows | Completed Capture Rows |
 | --- | ---: | --- | ---: | ---: |
-| in_progress_insufficient_evidence | 4 | H1/H3/H2/H5 | 256 | 64 |
-| not_started | 2 | H4/H6 | 160 | 0 |
+| in_progress_insufficient_evidence | 6 | H1/H3/H2/H5/H4/H6 | 416 | 96 |
 
 ## Interpretation
 

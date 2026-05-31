@@ -145,10 +145,12 @@ function completedPrototype(row) {
 }
 
 function successPrototype(row) {
+  if (clean(row.capture_status).toLowerCase().includes('prototype_readiness_signoff')) return false;
   return completedPrototype(row) && boolYes(row.success_signal_seen) && !boolYes(row.failure_signal_seen);
 }
 
 function failPrototype(row) {
+  if (clean(row.capture_status).toLowerCase().includes('prototype_readiness_signoff')) return false;
   return completedPrototype(row) && boolYes(row.failure_signal_seen);
 }
 
