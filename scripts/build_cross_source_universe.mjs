@@ -228,6 +228,7 @@ const inputs = [
   ['data_raw/expanded/all_expanded_raw.csv', csv('data_raw/expanded/all_expanded_raw.csv')],
   ['data_raw/expanded_itch_raw.csv', csv('data_raw/expanded_itch_raw.csv')],
   ['data_raw/expanded_steam_tags_raw.csv', csv('data_raw/expanded_steam_tags_raw.csv')],
+  ['data_raw/expanded_steam_deep_tags_raw.csv', csv('data_raw/expanded_steam_deep_tags_raw.csv')],
   ['data_raw/expanded_desktop_store_raw.csv', csv('data_raw/expanded_desktop_store_raw.csv')],
   ['data_raw/expanded_chrome_extensions_raw.csv', csv('data_raw/expanded_chrome_extensions_raw.csv')],
   ['data_raw/chrome_extension_detail_raw.csv', csv('data_raw/chrome_extension_detail_raw.csv')],

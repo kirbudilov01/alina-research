@@ -140,7 +140,9 @@ const p0ExternalSummary = csv('data_processed/p0_external_source_summary.csv');
 const itchRows = csv('data_raw/expanded_itch_raw.csv');
 const itchSummary = csv('data_processed/itch_source_summary.csv');
 const steamTagRows = csv('data_raw/expanded_steam_tags_raw.csv');
+const steamDeepTagRows = csv('data_raw/expanded_steam_deep_tags_raw.csv');
 const steamTagSummary = csv('data_processed/steam_tag_source_summary.csv');
+const steamDeepTagSummary = csv('data_processed/steam_deep_tag_source_summary.csv');
 const desktopStoreRows = csv('data_raw/expanded_desktop_store_raw.csv');
 const desktopStoreSummary = csv('data_processed/desktop_store_source_summary.csv');
 const redditMentionRows = csv('data_raw/expanded_reddit_competitor_mentions_raw.csv');
@@ -309,6 +311,7 @@ report.push(`- Source expansion backlog: ${sourceExpansionBacklog.length} priori
 report.push(`- Controlled P0 external-source smoke pass: ${p0ExternalSources.length} rows, ${p0ExternalUsable.length} usable candidates, with search-engine-heavy expansion intentionally deferred.`);
 report.push(`- Source-native itch.io expansion: ${itchRows.length} rows, ${itchOk.length} OK rows, adding web-game/mechanic references without broad search-engine crawling.`);
 report.push(`- Source-native Steam tag expansion: ${steamTagRows.length} rows, ${steamTagOk.length} OK rows, adding PC progression/cozy/avatar mechanic references.`);
+report.push(`- Additive Steam deep-tag increment: ${steamDeepTagRows.length} rows, ${steamDeepTagRows.filter(row => row.collection_status === 'ok').length} OK rows, extending progression, identity, narrative, and reflective benchmark coverage without overwriting the main Steam corpus.`);
 report.push(`- Source-native desktop store expansion: ${desktopStoreRows.length} Mac App Store rows, ${desktopStoreOk.length} OK rows, adding desktop wellness/productivity/avatar/game references without search-engine crawling.`);
 report.push(`- Source-native Reddit forum mention expansion: ${redditMentionRows.length} old.reddit rows, ${redditMentionOk.length} known-app mention rows, adding forum competitor/need signals without search-engine crawling.`);
 report.push(`- Reddit mention signal coding: ${redditMentionSignals.length} coded qualitative rows, ${Object.keys(countBy(redditMentionSignals, 'signal_group')).length} signal groups, ${redditMentionKnownSignals.length} known-app signal rows, and ${redditMentionAppSummary.length} app summaries.`);
@@ -872,6 +875,24 @@ if (steamTagRows.length) {
     { key: 'core_features', label: 'Rows / OK' },
     { key: 'evidence_quality', label: 'Quality' }
   ], steamTagSummary.length));
+  report.push('');
+}
+if (steamDeepTagRows.length) {
+  report.push('### Additive Steam Deep-Tag Increment');
+  report.push('');
+  report.push(`A separate additive Steam deep-tag collector adds ${steamDeepTagRows.length} rows, including ${steamDeepTagRows.filter(row => row.collection_status === 'ok').length} OK rows. This extends progression, identity, narrative, and reflective benchmark coverage without overwriting the main Steam corpus.`);
+  report.push('');
+  report.push('Deep Steam rows by market:');
+  report.push('');
+  report.push(bulletCounts(countBy(steamDeepTagRows, 'niche')));
+  report.push('');
+  report.push('Deep Steam tag summary:');
+  report.push('');
+  report.push(mdTable(steamDeepTagSummary, [
+    { key: 'niche', label: 'Market' },
+    { key: 'core_features', label: 'Rows / OK' },
+    { key: 'evidence_quality', label: 'Quality' }
+  ], steamDeepTagSummary.length));
   report.push('');
 }
 if (desktopStoreRows.length) {
@@ -1773,6 +1794,7 @@ report.push('- `data_processed/source_expansion_backlog.csv`');
 report.push('- `data_processed/p0_external_source_summary.csv`');
 report.push('- `data_processed/itch_source_summary.csv`');
 report.push('- `data_processed/steam_tag_source_summary.csv`');
+report.push('- `data_processed/steam_deep_tag_source_summary.csv`');
 report.push('- `data_processed/desktop_store_source_summary.csv`');
 report.push('- `data_processed/cross_source_universe_raw_index.csv`');
 report.push('- `data_processed/cross_source_universe_raw_parts/part_*.csv`');
@@ -1819,6 +1841,7 @@ report.push('- `data_raw/forum_quote_evidence_raw.csv`');
 report.push('- `data_raw/expanded/p0_external_sources_raw.csv`');
 report.push('- `data_raw/expanded_itch_raw.csv`');
 report.push('- `data_raw/expanded_steam_tags_raw.csv`');
+report.push('- `data_raw/expanded_steam_deep_tags_raw.csv`');
 report.push('- `data_raw/expanded_desktop_store_raw.csv`');
 report.push('- `data_raw/expanded_chrome_extensions_raw.csv`');
 report.push('- `data_raw/expanded_reddit_competitor_mentions_raw.csv`');
@@ -1866,6 +1889,7 @@ status.push(mdTable([
   { requirement: 'Controlled P0 external-source smoke pass', evidence: 'data_raw/expanded/p0_external_sources_raw.csv; data_processed/p0_external_source_summary.csv; docs/competitive/p0-external-source-collection-v1.md', status: 'done v1; small by design; Chrome Web Store yielded usable candidates, Product Hunt/AlternativeTo attempts retained as empty-source evidence' },
   { requirement: 'Source-native itch.io expansion', evidence: 'data_raw/expanded_itch_raw.csv; data_processed/itch_source_summary.csv; docs/competitive/itch-source-expansion-v1.md', status: 'done v1; adds web-game/mechanic discovery rows for gaming, mindfulness, and avatar/identity without broad search-engine crawling' },
   { requirement: 'Source-native Steam tag expansion', evidence: 'data_raw/expanded_steam_tags_raw.csv; data_processed/steam_tag_source_summary.csv; docs/competitive/steam-tag-expansion-v1.md', status: 'done v1; adds PC progression/cozy/avatar mechanic benchmarks without broad search-engine crawling' },
+  { requirement: 'Additive Steam deep-tag increment', evidence: 'data_raw/expanded_steam_deep_tags_raw.csv; data_processed/steam_deep_tag_source_summary.csv; docs/competitive/steam-deep-tag-increment-v1.md', status: `done v1; ${steamDeepTagRows.length} additional Steam benchmark rows extend progression, identity, narrative, and reflective mechanics without overwriting the main Steam corpus` },
   { requirement: 'Source-native desktop store expansion', evidence: 'data_raw/expanded_desktop_store_raw.csv; data_processed/desktop_store_source_summary.csv; docs/competitive/desktop-store-expansion-v1.md', status: 'done v1; adds Mac App Store desktop wellness/productivity/avatar/game references through a source-native API, not broad search crawling' },
   { requirement: 'Cross-source universe normalization', evidence: 'data_processed/cross_source_universe_raw_index.csv;data_processed/cross_source_universe_raw_parts/part_*.csv; data_processed/cross_source_universe_dedup.csv; data_processed/cross_source_universe_summary.csv; docs/competitive/cross-source-universe-v1.md', status: 'done v1; normalizes core app-store, Google Play fallback, itch.io, Steam, desktop store, and Chrome rows into one provenance-preserving universe' },
   { requirement: 'Cross-source coverage matrix', evidence: 'data_processed/cross_source_coverage_matrix.csv; docs/competitive/cross-source-coverage-matrix-v1.md', status: 'done v1; grades source-by-market cells into strong, medium, thin, and context-only coverage for safer interpretation' },
@@ -2003,6 +2027,8 @@ console.log(`itch_rows=${itchRows.length}`);
 console.log(`itch_ok=${itchOk.length}`);
 console.log(`steam_tag_rows=${steamTagRows.length}`);
 console.log(`steam_tag_ok=${steamTagOk.length}`);
+console.log(`steam_deep_tag_rows=${steamDeepTagRows.length}`);
+console.log(`steam_deep_tag_ok=${steamDeepTagRows.filter(row => row.collection_status === 'ok').length}`);
 console.log(`desktop_store_rows=${desktopStoreRows.length}`);
 console.log(`desktop_store_ok=${desktopStoreOk.length}`);
 console.log(`reddit_mention_rows=${redditMentionRows.length}`);

@@ -1,6 +1,6 @@
 # Cross-Source Coverage Matrix V1
 
-Generated: 2026-05-31T10:02:26.910Z
+Generated: 2026-05-31T14:02:03.989Z
 
 ## Purpose
 
@@ -38,7 +38,7 @@ Market role mix:
 
 | Source Group | Cells | Raw Rows | Dedup Rows | Strong/Medium Cells | Weak Cells |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| steam_pc | 5 | 21462 | 17764 | 5 | 0 |
+| steam_pc | 5 | 27642 | 21473 | 5 | 0 |
 | mobile_app_store | 5 | 12000 | 8103 | 5 | 0 |
 | itch_web_game | 3 | 7047 | 6395 | 3 | 0 |
 | desktop_store | 5 | 15397 | 2954 | 5 | 0 |
@@ -52,10 +52,10 @@ Market role mix:
 
 | Source | Market | Dedup | OK % | Role | Use |
 | --- | --- | ---: | ---: | --- | --- |
-| steam_pc | gaming | 8629 | 96.9 | pc_progression_and_mechanic_benchmark | Use for market saturation, competitor discovery, and source-triangulation; sample manually before final claims. |
-| steam_pc | mindfulness | 5048 | 97.8 | pc_progression_and_mechanic_benchmark | Use for market saturation, competitor discovery, and source-triangulation; sample manually before final claims. |
+| steam_pc | gaming | 10250 | 97.2 | pc_progression_and_mechanic_benchmark | Use for market saturation, competitor discovery, and source-triangulation; sample manually before final claims. |
+| steam_pc | avatar_identity | 5244 | 97.1 | pc_progression_and_mechanic_benchmark | Use for market saturation, competitor discovery, and source-triangulation; sample manually before final claims. |
+| steam_pc | mindfulness | 5128 | 96.5 | pc_progression_and_mechanic_benchmark | Use for market saturation, competitor discovery, and source-triangulation; sample manually before final claims. |
 | itch_web_game | gaming | 3292 | 100.0 | indie_mechanic_and_experiment_discovery | Use for market saturation, competitor discovery, and source-triangulation; sample manually before final claims. |
-| steam_pc | avatar_identity | 3236 | 95.9 | pc_progression_and_mechanic_benchmark | Use for market saturation, competitor discovery, and source-triangulation; sample manually before final claims. |
 | mobile_app_store | gaming | 1931 | 100.0 | direct_consumer_app_competitor_base | Use for market saturation, competitor discovery, and source-triangulation; sample manually before final claims. |
 | mobile_app_store | coaching | 1679 | 100.0 | direct_consumer_app_competitor_base | Use for market saturation, competitor discovery, and source-triangulation; sample manually before final claims. |
 | itch_web_game | avatar_identity | 1623 | 98.4 | indie_mechanic_and_experiment_discovery | Use for market saturation, competitor discovery, and source-triangulation; sample manually before final claims. |

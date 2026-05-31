@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T13:30:30.359Z
+Собрано: 2026-05-31T14:03:30.548Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 434 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 36694 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 438 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,11 +40,11 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 434 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 438 артефакта, missing в manifest: 0. Cross-source universe содержит 67525 нормализованных raw rows и 36694 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
-| Dedup competitor/source universe | 33718 | нижняя граница 30k+ уже закрыта на cross-source уровне |
+| Dedup competitor/source universe | 36694 | нижняя граница 30k+ уже закрыта на cross-source уровне |
 | Coverage cells | 39 | покрытие рынков источниками, не один канал |
 | Top-100 reviewed rows | 100 | AI-assisted конкурентный обзор, требует manual validation |
 | Validation capture rows | 850 | готовые строки для ручной фиксации доказательств |
@@ -189,8 +189,8 @@ Manual inspection packet уже выделяет 12 P0 приложений дл
 
 | Рынок | Opportunity band | Интерпретация | Следующий шаг |
 | --- | --- | --- | --- |
-| mindfulness | medium_opportunity_needs_sampling | Plausible whitespace, but needs sampled competitor inspection before claim upgrade. | Sample top direct consumer-app and desktop rows, then compare against prototype scorecard. |
 | avatar_identity | medium_opportunity_needs_sampling | Plausible whitespace, but needs sampled competitor inspection before claim upgrade. | Sample top direct consumer-app and desktop rows, then compare against prototype scorecard. |
+| mindfulness | medium_opportunity_needs_sampling | Plausible whitespace, but needs sampled competitor inspection before claim upgrade. | Sample top direct consumer-app and desktop rows, then compare against prototype scorecard. |
 | gaming | mechanic_benchmark_not_primary_market | Strong mechanic/saturation benchmark, but not a primary Alina consumer market without direct ritual/self-improvement overlap. | Use for progression/avatar/retention mechanics only; do not treat as direct market proof. |
 | gaming_progression | mechanic_benchmark_not_primary_market | Strong mechanic/saturation benchmark, but not a primary Alina consumer market without direct ritual/self-improvement overlap. | Use for progression/avatar/retention mechanics only; do not treat as direct market proof. |
 | coaching | crowded_or_unclear_context | Market is visible but either crowded, indirect, or weakly tied to the full Alina loop. | Use only as support/context unless new source-native evidence is added. |
@@ -616,8 +616,8 @@ Product-core evidence и prototype stimulus переводят исследов�
 | Claim | Статус | Confidence | Метрика | Граница |
 | --- | --- | --- | --- | --- |
 | REQ_plan | доказано как исследовательский слой | high | master plan exists; 16 validation roadmap rows; 11 execution tasks | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | доказано как исследовательский слой | high | 384 manifest rows; 0 missing artifacts | Это provenance proof, а не содержательное доказательство спроса. |
-| REQ_completion_readiness_audit | доказано как исследовательский слой | high | 10 completion requirements; 6 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
+| REQ_evidence_package_traceability | доказано как исследовательский слой | high | 434 manifest rows; 0 missing artifacts | Это provenance proof, а не содержательное доказательство спроса. |
+| REQ_completion_readiness_audit | доказано как исследовательский слой | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_hypothesis_decision_matrix | доказано как исследовательский слой | high | 6 hypothesis decision rows; 6 hold/validate; 0 go; 0 stop/pivot | Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open. |
 | REQ_market_money_triangulation | доказано как исследовательский слой | medium_high | 6 market rows; 3 strong and 1 medium directional money cases | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |
 | REQ_p0_validation_command_center | доказано как исследовательский слой | high | 75 command rows; 6 blocker rows; 52 P0 rows | Это операционная готовность, не observed validation evidence. |
@@ -628,7 +628,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 | REQ_validation_batch_03 | доказано как исследовательский слой | high | 17 batch rows; 17 not started; 17 local artifacts linked | Это операционная готовность, не observed validation evidence. |
 | REQ_validation_evidence_rollup | доказано как исследовательский слой | high | 75 command rows; 75 notes present; 29 local artifacts linked | Это операционная готовность, не observed validation evidence. |
 | REQ_validation_gate_calculator | доказано как исследовательский слой | high | 6 gate rows; 0 pass-ready; 0 in-progress; 6 not started; 0 downgrade/kill triggered | Это операционная готовность, не observed validation evidence. |
-| REQ_competitor_universe | доказано как исследовательский слой | medium_high | 61345 cross-source raw rows; 33718 cross-source dedup rows; 39 coverage cells; 11 strong and 12 medium source/market cells | The 30k lower-bound dedup target is met; upper-bound 50k expansion and Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and additional source-native coverage remain backlog. |
+| REQ_competitor_universe | доказано как исследовательский слой | medium_high | 67525 cross-source raw rows; 36694 cross-source dedup rows; 39 coverage cells; 11 strong and 12 medium source/market cells | The 30k lower-bound dedup target is met; upper-bound 50k expansion and Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and additional source-native coverage remain backlog. |
 | H1_product_shape_exists | готово к проверке, gate открыт | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Нельзя усиливать claim без app/onboarding walkthrough и скриншотов причинной петли. |
 | H2_markets_have_money | поддержано направленно, но не финально доказано | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |
 | H2_paywall_visible_evidence | поддержано направленно, но не финально доказано | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |

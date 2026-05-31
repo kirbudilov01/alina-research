@@ -1,6 +1,6 @@
 # Cross-Source Saturation And Whitespace V1
 
-Generated: 2026-05-31T10:02:29.682Z
+Generated: 2026-05-31T14:02:06.328Z
 
 ## Purpose
 
@@ -24,17 +24,17 @@ Opportunity band mix:
 
 | Market | Dedup Rows | Strong/Medium Cells | Directness-Weighted Rows | Full-Loop-Like | Scarcity | Opportunity |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| mindfulness | 9723 | 5 | 4518.3 | 371 | 61.8 | medium_opportunity_needs_sampling |
-| avatar_identity | 7944 | 5 | 3855.8 | 225 | 71.7 | medium_opportunity_needs_sampling |
-| gaming | 14304 | 4 | 6119.2 | 147 | 89.7 | mechanic_benchmark_not_primary_market |
+| avatar_identity | 9952 | 5 | 4558.6 | 228 | 77.1 | medium_opportunity_needs_sampling |
+| mindfulness | 9803 | 5 | 4546.3 | 371 | 62.2 | medium_opportunity_needs_sampling |
+| gaming | 15925 | 4 | 6686.5 | 149 | 90.6 | mechanic_benchmark_not_primary_market |
 | gaming_progression | 950 | 1 | 571.5 | 63 | 33.7 | mechanic_benchmark_not_primary_market |
-| coaching | 3857 | 4 | 2683.4 | 502 | 0.0 | crowded_or_unclear_context |
-| astrology_esoterics | 2657 | 4 | 2145.1 | 364 | 0.0 | crowded_or_unclear_context |
+| coaching | 3857 | 4 | 2683.4 | 504 | 0.0 | crowded_or_unclear_context |
+| astrology_esoterics | 2657 | 4 | 2145.1 | 366 | 0.0 | crowded_or_unclear_context |
 
 ## Interpretation
 
-- mindfulness: Plausible whitespace, but needs sampled competitor inspection before claim upgrade. Next: Sample top direct consumer-app and desktop rows, then compare against prototype scorecard.
 - avatar_identity: Plausible whitespace, but needs sampled competitor inspection before claim upgrade. Next: Sample top direct consumer-app and desktop rows, then compare against prototype scorecard.
+- mindfulness: Plausible whitespace, but needs sampled competitor inspection before claim upgrade. Next: Sample top direct consumer-app and desktop rows, then compare against prototype scorecard.
 - gaming: Strong mechanic/saturation benchmark, but not a primary Alina consumer market without direct ritual/self-improvement overlap. Next: Use for progression/avatar/retention mechanics only; do not treat as direct market proof.
 - gaming_progression: Strong mechanic/saturation benchmark, but not a primary Alina consumer market without direct ritual/self-improvement overlap. Next: Use for progression/avatar/retention mechanics only; do not treat as direct market proof.
 - coaching: Market is visible but either crowded, indirect, or weakly tied to the full Alina loop. Next: Use only as support/context unless new source-native evidence is added.
