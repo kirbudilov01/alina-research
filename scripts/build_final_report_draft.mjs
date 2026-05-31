@@ -147,6 +147,8 @@ const redditMentionRows = csv('data_raw/expanded_reddit_competitor_mentions_raw.
 const redditMentionSummary = csv('data_processed/reddit_competitor_mentions_summary.csv');
 const redditMentionSignals = csv('data_processed/reddit_mention_signal_matrix.csv');
 const redditMentionAppSummary = csv('data_processed/reddit_mention_app_summary.csv');
+const redditManualReadingQueue = csv('data_processed/reddit_manual_reading_queue.csv');
+const redditManualPromptBank = csv('data_processed/reddit_manual_reading_prompt_bank.csv');
 const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv');
 const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
 const crossSourceRaw = csv('data_processed/cross_source_universe_raw.csv');
@@ -212,6 +214,8 @@ const desktopStoreOk = desktopStoreRows.filter(r => r.collection_status === 'ok'
 const redditMentionOk = redditMentionRows.filter(r => r.collection_status === 'ok');
 const redditMentionKnownSignals = redditMentionSignals.filter(r => clean(r.app_name) && r.collection_status === 'ok');
 const redditMentionMediumPlusSignals = redditMentionSignals.filter(r => ['medium_high_qualitative', 'medium_qualitative'].includes(r.competitor_signal_strength));
+const redditManualP0 = redditManualReadingQueue.filter(r => r.priority_band === 'P0_read_first');
+const redditManualP1 = redditManualReadingQueue.filter(r => r.priority_band === 'P1_read_next');
 const chromeExtensionDetailOk = chromeExtensionFit.filter(r => r.detail_status === 'ok');
 const chromeExtensionStrong = chromeExtensionFit.filter(r => r.alina_fit_band === 'strong_adjacent');
 const chromeExtensionUseful = chromeExtensionFit.filter(r => r.alina_fit_band === 'useful_adjacent');
@@ -282,6 +286,7 @@ report.push(`- Source-native Steam tag expansion: ${steamTagRows.length} rows, $
 report.push(`- Source-native desktop store expansion: ${desktopStoreRows.length} Mac App Store rows, ${desktopStoreOk.length} OK rows, adding desktop wellness/productivity/avatar/game references without search-engine crawling.`);
 report.push(`- Source-native Reddit forum mention expansion: ${redditMentionRows.length} old.reddit rows, ${redditMentionOk.length} known-app mention rows, adding forum competitor/need signals without search-engine crawling.`);
 report.push(`- Reddit mention signal coding: ${redditMentionSignals.length} coded qualitative rows, ${Object.keys(countBy(redditMentionSignals, 'signal_group')).length} signal groups, ${redditMentionKnownSignals.length} known-app signal rows, and ${redditMentionAppSummary.length} app summaries.`);
+report.push(`- Reddit manual reading queue: ${redditManualReadingQueue.length} unique threads prioritized, including ${redditManualP0.length} P0 read-first and ${redditManualP1.length} P1 read-next threads, with ${redditManualPromptBank.length} prompt-bank lanes.`);
 report.push(`- Cross-source universe normalization: ${crossSourceRaw.length} normalized raw rows and ${crossSourceDedup.length} dedup rows across core app stores, Google Play fallback, itch.io, Steam, Mac desktop store, Chrome, and Reddit forum mentions.`);
 report.push(`- Cross-source coverage matrix: ${crossSourceCoverage.length} source/market cells, ${crossSourceCoverage.filter(r => r.coverage_band === 'strong_coverage').length} strong and ${crossSourceCoverage.filter(r => r.coverage_band === 'medium_coverage').length} medium coverage cells.`);
 report.push(`- Cross-source saturation/whitespace matrix: ${crossSourceSaturation.length} markets scored; ${crossSourceSaturation.filter(r => r.opportunity_band === 'mechanic_benchmark_not_primary_market').length} benchmark-only markets and ${crossSourceSaturation.filter(r => r.opportunity_band === 'high_opportunity_validate_now').length} primary high-opportunity markets before manual validation.`);
@@ -316,6 +321,7 @@ report.push(`- Community/referral evidence matrix: ${communityReferralRows.lengt
 report.push(`- Forum/source evidence map: ${forumSignals.length} qualitative rows across ${Object.keys(countBy(forumSignals, 'market')).length} market pillars.`);
 report.push(`- Forum quote coding layer: ${forumQuoteCoding.length} snippet rows across ${new Set(forumQuoteCoding.map(r => r.source_id)).size} sources.`);
 report.push(`- Reddit competitor mention layer: ${redditMentionRows.length} source-native forum rows across ${Object.keys(countBy(redditMentionRows, 'subreddit')).length} subreddits and ${Object.keys(countBy(redditMentionRows, 'mention_type')).length} mention types; coded into ${redditMentionSignals.length} signal rows for audience, competitor, and whitespace use.`);
+report.push(`- Reddit manual-read routing: ${redditManualReadingQueue.length} unique source threads with manual tasks, interview prompt seeds, whitespace prompt seeds, and capture fields before any claim upgrade.`);
 report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, web paywall discovery, and forum quote coding.');
 report.push('- Visual PDF companion: native ReportLab charts embedded in a separate visual report.');
 report.push(`- Polished evidence pack: ${fs.existsSync('output/pdf/alina-polished-evidence-pack-v1.pdf') ? 'generated as a publication-ready evidence draft with validation caveats' : 'not generated yet'}.`);
@@ -845,6 +851,33 @@ if (redditMentionSignals.length) {
     { key: 'top_signal_groups', label: 'Top Signals' },
     { key: 'evidence_strength', label: 'Evidence Strength' }
   ], 20));
+  report.push('');
+}
+if (redditManualReadingQueue.length) {
+  report.push('### Reddit Manual Reading Queue');
+  report.push('');
+  report.push(`The coded Reddit layer now routes into ${redditManualReadingQueue.length} unique thread reads. ${redditManualP0.length} are P0 read-first items and ${redditManualP1.length} are P1 read-next items. Each queued row has a manual task, ICP interview prompt seed, whitespace prompt seed, capture fields, and an explicit claim boundary so the team does not accidentally treat Reddit volume as representative demand proof.`);
+  report.push('');
+  report.push('Manual reading lanes:');
+  report.push('');
+  report.push(mdTable(redditManualPromptBank, [
+    { key: 'queue_lane', label: 'Lane' },
+    { key: 'row_count', label: 'Rows', align: 'right' },
+    { key: 'p0_rows', label: 'P0', align: 'right' },
+    { key: 'p1_rows', label: 'P1', align: 'right' },
+    { key: 'top_icp_segments', label: 'Top ICP' },
+    { key: 'interview_prompt_seed', label: 'Interview Prompt' }
+  ], redditManualPromptBank.length));
+  report.push('');
+  report.push('Top P0 Reddit reads:');
+  report.push('');
+  report.push(mdTable(redditManualReadingQueue.slice(0, 15), [
+    { key: 'priority_rank', label: 'Rank', align: 'right' },
+    { key: 'queue_lane', label: 'Lane' },
+    { key: 'app_names', label: 'Apps' },
+    { key: 'thread_title', label: 'Thread' },
+    { key: 'manual_read_task', label: 'Manual Task' }
+  ], 15));
   report.push('');
 }
 if (crossSourceDedup.length) {
@@ -1413,7 +1446,7 @@ if (icpSegments.length) {
 if (redditMentionSignals.length) {
   report.push('### Reddit Signals for ICP and Audience');
   report.push('');
-  report.push(`Coded Reddit rows add ${redditMentionSignals.length} thread-level signals, including ${redditMentionMediumPlusSignals.length} medium-or-stronger qualitative rows. These are useful for recruiting copy, screener language, prototype objections, and manual competitor-read queues; they do not replace interviews or representative survey data.`);
+  report.push(`Coded Reddit rows add ${redditMentionSignals.length} thread-level signals, including ${redditMentionMediumPlusSignals.length} medium-or-stronger qualitative rows. The manual-read queue converts them into ${redditManualReadingQueue.length} unique thread reads and ${redditManualPromptBank.length} prompt lanes for recruiting copy, screener language, prototype objections, and whitespace review; they do not replace interviews or representative survey data.`);
   report.push('');
   report.push('Linked ICP segments from Reddit coding:');
   report.push('');
@@ -1784,7 +1817,7 @@ status.push(mdTable([
   { requirement: 'Completion/readiness audit', evidence: 'data_processed/research_completion_audit.csv; docs/decision/research-completion-audit-v1.md', status: 'done v1; maps original objective to proved, partial, draft, and validation-ready requirements' },
   { requirement: 'Manual review of top 100', evidence: 'data_processed/top100_competitor_review_scorecard.csv; data_processed/top100_human_validation_queue.csv; data_processed/manual_competitor_inspection_packet.csv; data_processed/manual_competitor_inspection_rubric.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md; docs/competitive/human-validation-guide-v1.md; docs/competitive/manual-competitor-inspection-packet-v1.md', status: 'AI-assisted review, ranked human validation queue, and first-wave manual inspection packet done v1; human execution pending' },
   { requirement: 'Detailed pricing/IAP extraction', evidence: 'data_raw/app_store_iap_pricing_raw.csv; data_processed/app_store_iap_pricing_summary.csv; docs/competitive/app-store-iap-pricing-v1.md; data_raw/google_play_pricing_raw.csv; data_processed/google_play_pricing_summary.csv; docs/competitive/google-play-pricing-v1.md; data_raw/web_paywall_discovery_raw.csv; data_processed/web_paywall_signal_matrix.csv; docs/competitive/web-paywall-validation-v1.md; data_processed/web_paywall_screenshot_validation.csv; data_processed/web_paywall_screenshot_interpretation.csv; data_processed/web_paywall_visual_adjudication.csv; data_processed/web_paywall_visual_adjudication_summary.csv; docs/competitive/web-paywall-screenshot-validation-v1.md; docs/competitive/web-paywall-screenshot-interpretation-v1.md; docs/competitive/web-paywall-visual-adjudication-v1.md; output/paywall_screenshots/*.png', status: 'App Store web IAP extraction, Google Play pricing validation, developer website paywall discovery, screenshot capture, OCR interpretation, and conservative visual adjudication done v1; human paywall sign-off pending' },
-  { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_raw/forum_quote_evidence_raw.csv; data_raw/expanded_reddit_competitor_mentions_raw.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; data_processed/community_referral_signal_rows.csv; data_processed/forum_quote_coding_matrix.csv; data_processed/reddit_competitor_mentions_summary.csv; data_processed/reddit_mention_signal_matrix.csv; data_processed/reddit_mention_app_summary.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/community-referral-evidence-v1.md; docs/audience/forum-evidence-synthesis-v1.md; docs/audience/forum-quote-coding-v1.md; docs/audience/reddit-competitor-mentions-v1.md; docs/audience/reddit-mention-signal-matrix-v1.md', status: 'App Store review extraction, JTBD clustering, community/referral mining, forum source map, retrieval-assisted quote coding, source-native Reddit mention expansion, and Reddit signal coding done v1; human validation pending' }
+  { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_raw/forum_quote_evidence_raw.csv; data_raw/expanded_reddit_competitor_mentions_raw.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; data_processed/community_referral_signal_rows.csv; data_processed/forum_quote_coding_matrix.csv; data_processed/reddit_competitor_mentions_summary.csv; data_processed/reddit_mention_signal_matrix.csv; data_processed/reddit_mention_app_summary.csv; data_processed/reddit_manual_reading_queue.csv; data_processed/reddit_manual_reading_prompt_bank.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/community-referral-evidence-v1.md; docs/audience/forum-evidence-synthesis-v1.md; docs/audience/forum-quote-coding-v1.md; docs/audience/reddit-competitor-mentions-v1.md; docs/audience/reddit-mention-signal-matrix-v1.md; docs/audience/reddit-manual-reading-queue-v1.md', status: `App Store review extraction, JTBD clustering, community/referral mining, forum source map, retrieval-assisted quote coding, source-native Reddit mention expansion, Reddit signal coding, and ${redditManualReadingQueue.length} Reddit manual-read queue rows done v1; human validation pending` }
 ], [
   { key: 'requirement', label: 'Requirement' },
   { key: 'evidence', label: 'Evidence' },
@@ -1849,6 +1882,8 @@ console.log(`reddit_mention_rows=${redditMentionRows.length}`);
 console.log(`reddit_mention_ok=${redditMentionOk.length}`);
 console.log(`reddit_mention_signal_rows=${redditMentionSignals.length}`);
 console.log(`reddit_mention_app_summary_rows=${redditMentionAppSummary.length}`);
+console.log(`reddit_manual_read_queue_rows=${redditManualReadingQueue.length}`);
+console.log(`reddit_manual_read_p0=${redditManualP0.length}`);
 console.log(`cross_source_raw_rows=${crossSourceRaw.length}`);
 console.log(`cross_source_dedup_rows=${crossSourceDedup.length}`);
 console.log(`cross_source_coverage_cells=${crossSourceCoverage.length}`);

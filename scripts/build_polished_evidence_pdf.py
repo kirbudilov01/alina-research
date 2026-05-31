@@ -313,6 +313,8 @@ def main() -> None:
     reddit_mentions = read_csv("data_raw/expanded_reddit_competitor_mentions_raw.csv")
     reddit_signal_matrix = read_csv("data_processed/reddit_mention_signal_matrix.csv")
     reddit_app_summary = read_csv("data_processed/reddit_mention_app_summary.csv")
+    reddit_manual_queue = read_csv("data_processed/reddit_manual_reading_queue.csv")
+    reddit_manual_prompts = read_csv("data_processed/reddit_manual_reading_prompt_bank.csv")
     cross_source_raw = read_csv("data_processed/cross_source_universe_raw.csv")
     cross_source_dedup = read_csv("data_processed/cross_source_universe_dedup.csv")
     cross_source_coverage = read_csv("data_processed/cross_source_coverage_matrix.csv")
@@ -527,6 +529,8 @@ def main() -> None:
                 ["Reddit mention rows", len(reddit_mentions), "Source-native old.reddit competitor/need mention expansion across five markets."],
                 ["Reddit coded signal rows", len(reddit_signal_matrix), "Qualitative Reddit rows coded into audience, competitor, ICP, and whitespace signals."],
                 ["Reddit app summaries", len(reddit_app_summary), "App-level summaries routing mention clusters into manual reading queues."],
+                ["Reddit manual reads queued", len(reddit_manual_queue), "Unique threads prioritized for human reading before quote or claim upgrades."],
+                ["Reddit prompt lanes", len(reddit_manual_prompts), "Manual task, ICP interview, and whitespace prompt lanes derived from coded Reddit signals."],
                 ["Chrome detail pages parsed", len([row for row in chrome_fit if row.get("detail_status") == "ok"]), "Fit bands, users, tags, and mechanic evidence."],
                 ["Chrome mechanic battlecards", len(chrome_battlecards), "Browser-extension mechanics translated into whitespace lessons."],
                 ["Market assumption audit", len(market_assumptions), "TAM/SAM/SOM risk rows by market and intersection."],

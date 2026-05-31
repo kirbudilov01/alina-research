@@ -240,6 +240,8 @@ def main():
     reddit_mentions = read_csv("data_raw/expanded_reddit_competitor_mentions_raw.csv")
     reddit_signal_matrix = read_csv("data_processed/reddit_mention_signal_matrix.csv")
     reddit_app_summary = read_csv("data_processed/reddit_mention_app_summary.csv")
+    reddit_manual_queue = read_csv("data_processed/reddit_manual_reading_queue.csv")
+    reddit_manual_prompts = read_csv("data_processed/reddit_manual_reading_prompt_bank.csv")
     reviews = read_csv("data_processed/review_jtbd_cluster_summary.csv")
     community_referral = read_csv("data_processed/community_referral_signal_rows.csv")
     community_referral_summary = read_csv("data_processed/community_referral_summary.csv")
@@ -291,6 +293,8 @@ def main():
                 ["Reddit mention rows", number(str(len(reddit_mentions)))],
                 ["Reddit coded signal rows", number(str(len(reddit_signal_matrix)))],
                 ["Reddit app summaries", number(str(len(reddit_app_summary)))],
+                ["Reddit manual reads queued", number(str(len(reddit_manual_queue)))],
+                ["Reddit prompt lanes", number(str(len(reddit_manual_prompts)))],
                 ["Forum quote-coding rows", number(str(len(forum)))],
                 ["Community/referral rows", number(str(len(community_referral)))],
                 ["ICP segment hypotheses", number(str(len(icp)))],
@@ -476,6 +480,13 @@ def main():
         BarChart(
             "Reddit Coded Signal Groups",
             [(k, float(v)) for k, v in count_by(reddit_signal_matrix, "signal_group").most_common(8)],
+        )
+    )
+    story.append(Spacer(1, 0.12 * inch))
+    story.append(
+        BarChart(
+            "Reddit Manual Reading Queue Lanes",
+            [(r["queue_lane"], float(r.get("row_count") or 0)) for r in reddit_manual_prompts[:8]],
         )
     )
     story.append(Spacer(1, 0.12 * inch))
