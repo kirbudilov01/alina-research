@@ -102,6 +102,7 @@ const forumQuotes = csv('data_processed/forum_quote_coding_matrix.csv');
 const productCore = csv('data_processed/product_core_evidence_matrix.csv');
 const p0External = csv('data_raw/expanded/p0_external_sources_raw.csv');
 const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv');
+const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
 
 const primary = top100.filter(row => row.duplicate_flag === 'primary_app_entry');
 const highThreat = primary.filter(row => Number(row.competitive_threat_score || 0) >= 24);
@@ -120,6 +121,7 @@ const intersection = tam.find(row => row.pillar === 'intersection') || {};
 const p0ExternalUsable = p0External.filter(row => row.collection_status === 'ok');
 const chromeExtensionDetailOk = chromeExtensionFit.filter(row => row.detail_status === 'ok');
 const chromeExtensionStrong = chromeExtensionFit.filter(row => row.alina_fit_band === 'strong_adjacent');
+const chromeMechanicPriority = chromeExtensionBattlecards.filter(row => ['mechanic_threat_high', 'mechanic_threat_medium', 'mechanic_reference_high'].includes(row.threat_band));
 
 const rows = [
   {
@@ -193,12 +195,12 @@ const rows = [
     claim: 'There is a narrow whitespace around behavior-tied avatar/identity progression caused by a daily action.',
     evidence_status: 'narrow_supported_not_final',
     confidence: 'medium',
-    primary_metric: `${behaviorTied.length}/100 strict behavior-tied progression signals`,
-    quantitative_evidence: `high_whitespace=${highWhitespace.length}; medium_whitespace=${whitespace.filter(row => row.whitespace_band === 'medium').length}; low_whitespace=${whitespace.filter(row => row.whitespace_band === 'low').length}`,
-    evidence_files: 'data_processed/whitespace_signal_matrix.csv;data_processed/product_core_evidence_matrix.csv;docs/intersections/whitespace-map-v2.md;docs/product/product-core-evidence-v1.md',
-    strongest_support: 'Broad adjacent market is crowded, but strict behavior-tied avatar progression appears rare in current top-100 metadata.',
-    key_gap: 'Metadata can under-detect in-app mechanics; manual app inspection may reveal more direct competitors.',
-    next_action: 'Validate P0/P1 competitors for actual in-app progression mechanics.'
+    primary_metric: `${behaviorTied.length}/100 strict behavior-tied progression signals; ${chromeMechanicPriority.length} Chrome mechanic references to inspect`,
+    quantitative_evidence: `high_whitespace=${highWhitespace.length}; medium_whitespace=${whitespace.filter(row => row.whitespace_band === 'medium').length}; low_whitespace=${whitespace.filter(row => row.whitespace_band === 'low').length}; chrome_battlecards=${chromeExtensionBattlecards.length}; chrome_priority_mechanics=${chromeMechanicPriority.length}`,
+    evidence_files: 'data_processed/whitespace_signal_matrix.csv;data_processed/product_core_evidence_matrix.csv;data_processed/chrome_extension_mechanic_battlecards.csv;docs/intersections/whitespace-map-v2.md;docs/product/product-core-evidence-v1.md;docs/competitive/chrome-extension-mechanic-battlecards-v1.md',
+    strongest_support: 'Broad adjacent market is crowded; Chrome battlecards show habit/progress/accountability mechanics exist, while strict behavior-tied avatar progression still appears rare in current metadata.',
+    key_gap: 'Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors.',
+    next_action: 'Validate P0/P1 competitors and Chrome mechanic references for actual in-app progression and identity/avatar causality.'
   },
   {
     claim_id: 'H4_competitive_advantage_plausible',
@@ -206,10 +208,10 @@ const rows = [
     claim: 'A competitive advantage is plausible if Alina owns the integrated daily transformation loop rather than a generic feature.',
     evidence_status: 'plausible_unproven',
     confidence: 'medium_low',
-    primary_metric: `${direct.length} direct reference competitor; ${highThreat.length} high-threat competitors`,
-    quantitative_evidence: `P0_validation=${p0.length}; P1_validation=${p1.length}; human_confirmed=0`,
-    evidence_files: 'data_processed/top100_competitor_review_scorecard.csv;data_processed/top100_human_validation_queue.csv;docs/competitive/human-validation-guide-v1.md;docs/strategy/value-proposition-v1.md',
-    strongest_support: 'Scorecard separates close substitutes from the one current direct reference; strategy docs define differentiating loop.',
+    primary_metric: `${direct.length} direct reference competitor; ${highThreat.length} high-threat competitors; ${chromeExtensionBattlecards.length} Chrome mechanic battlecards`,
+    quantitative_evidence: `P0_validation=${p0.length}; P1_validation=${p1.length}; chrome_priority_mechanics=${chromeMechanicPriority.length}; human_confirmed=0`,
+    evidence_files: 'data_processed/top100_competitor_review_scorecard.csv;data_processed/top100_human_validation_queue.csv;data_processed/chrome_extension_mechanic_battlecards.csv;docs/competitive/human-validation-guide-v1.md;docs/competitive/chrome-extension-mechanic-battlecards-v1.md;docs/strategy/value-proposition-v1.md',
+    strongest_support: 'Scorecard separates close substitutes from the one current direct reference; Chrome mechanic battlecards show which habit/progress/accountability mechanics are table stakes versus differentiation levers.',
     key_gap: 'No human validation or prototype test yet proves users value the loop.',
     next_action: 'Run manual competitor validation and prototype the two-minute loop.'
   },

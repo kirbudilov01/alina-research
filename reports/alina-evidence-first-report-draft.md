@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T04:01:40.987Z
+Generated: 2026-05-31T04:05:26.465Z
 
 ## 1. Executive Summary
 
@@ -25,6 +25,7 @@ Key quantified signals:
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
 - Chrome extension detail enrichment: 23/23 detail pages parsed; 3 strong and 10 useful adjacent mechanic references.
+- Chrome mechanic battlecards: 23 browser-extension cards, 9 high/medium references for manual mechanic inspection.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
@@ -71,8 +72,8 @@ Claim-level audit snapshot:
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
 | H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000 | Market sizing is modeled from public claims and needs source-by-source confidence review. |
 | H2_paywall_visible_evidence | supported_narrowly | medium_low | 2/29 screenshots confirm visible public pricing | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. |
-| H3_whitespace_exists | narrow_supported_not_final | medium | 1/100 strict behavior-tied progression signals | Metadata can under-detect in-app mechanics; manual app inspection may reveal more direct competitors. |
-| H4_competitive_advantage_plausible | plausible_unproven | medium_low | 1 direct reference competitor; 45 high-threat competitors | No human validation or prototype test yet proves users value the loop. |
+| H3_whitespace_exists | narrow_supported_not_final | medium | 1/100 strict behavior-tied progression signals; 9 Chrome mechanic references to inspect | Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors. |
+| H4_competitive_advantage_plausible | plausible_unproven | medium_low | 1 direct reference competitor; 45 high-threat competitors; 23 Chrome mechanic battlecards | No human validation or prototype test yet proves users value the loop. |
 | H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows | Keyword/OCR/forum coding needs human validation and real user interviews. |
 | H6_product_core_defined | supported_for_mvp_framing | medium | 12552 feature matrix rows; 100 product-core rows | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
 | REQ_final_artifacts_versioned | proved_active | high | current branch pushed through latest commit | Final polished investor/user-facing PDF is still draft-level, not final designed publication. |
@@ -152,6 +153,41 @@ Fit band mix:
 | AI Prompt Coach by LeadWithAI.co | useful_adjacent | 4 | 76 | 4.3 | ai_coaching/progress_feedback |
 | LeetCode AI Coach | useful_adjacent | 4 | 2 | 4.6 | ai_coaching/progress_feedback/developer_or_learning_coach |
 | Daily Habit Tracker | useful_adjacent | 3 | 5 | 4.4 | habit_tracking |
+
+### Chrome Extension Mechanic Battlecards
+
+The enriched Chrome candidates are converted into mechanic battlecards. This layer is deliberately interpretive: it identifies what a browser extension proves about habits, progress, accountability, and AI feedback, then separates mechanic inspiration from direct competitive threat.
+
+Threat/reference band mix:
+
+- boundary_or_low: 10
+- mechanic_reference_high: 6
+- mechanic_reference_medium: 4
+- mechanic_threat_medium: 2
+- mechanic_threat_high: 1
+
+Core mechanic mix:
+
+- narrow_ai_coaching: 7
+- habit_progress_loop: 4
+- simple_habit_capture: 4
+- accountability_monitoring_loop: 3
+- ai_feedback_loop: 3
+- habit_progress_reflection_loop: 1
+- ai_accountability_loop: 1
+
+| Candidate | Threat/Reference | Mechanic | Alina Lesson | Whitespace Implication |
+| --- | --- | --- | --- | --- |
+| Ritual — Habit Tracker | mechanic_threat_medium | habit_progress_reflection_loop | Use visible progress plus mood/reflection as proof that tiny rituals can feel emotionally richer than checkbox habits. | Narrows whitespace: lightweight habit/progress/reflection exists, but no avatar/identity transformation object is visible in extracted evidence. |
+| Accountability Shield - Free Website Blocker | mechanic_threat_medium | ai_accountability_loop | AI nudging and accountability can support behavior change, but Alina should avoid surveillance framing and keep consent/softness central. | Supports positioning risk: AI accountability language exists, so Alina should differentiate through emotional safety and personal meaning. |
+| Habit Tracker - Track My Habit | mechanic_threat_high | habit_progress_loop | Borrow the lightweight capture/progress affordance, but connect it to identity/avatar feedback rather than a plain stat surface. | Supports whitespace: progress loops exist, but they appear utilitarian rather than identity/avatar-centered. |
+| Habit Tracker | mechanic_reference_high | simple_habit_capture | Habit capture is table stakes; the differentiator has to be what completion changes in the user-facing identity object. | Low direct impact on whitespace; keep for market-boundary mapping. |
+| Habit Tracker | mechanic_reference_high | habit_progress_loop | Borrow the lightweight capture/progress affordance, but connect it to identity/avatar feedback rather than a plain stat surface. | Supports whitespace: progress loops exist, but they appear utilitarian rather than identity/avatar-centered. |
+| Time Tracker - Web Habit Builder | mechanic_reference_high | accountability_monitoring_loop | Accountability creates commitment, but the consumer version should be self-compassionate and not feel punitive. | Boundary evidence: accountability mechanics are viable but can conflict with calm/wellness framing. |
+| Habit Squares: Bullet Journal Habit Tracker | mechanic_reference_high | simple_habit_capture | Habit capture is table stakes; the differentiator has to be what completion changes in the user-facing identity object. | Low direct impact on whitespace; keep for market-boundary mapping. |
+| Ora - New Tab: Habit Tracker & Time Progress | mechanic_reference_high | habit_progress_loop | Borrow the lightweight capture/progress affordance, but connect it to identity/avatar feedback rather than a plain stat surface. | Supports whitespace: progress loops exist, but they appear utilitarian rather than identity/avatar-centered. |
+| Habit Tracker – Progress & Stats on New Tab | mechanic_reference_high | habit_progress_loop | Borrow the lightweight capture/progress affordance, but connect it to identity/avatar feedback rather than a plain stat surface. | Supports whitespace: progress loops exist, but they appear utilitarian rather than identity/avatar-centered. |
+| AI Prompt Coach by LeadWithAI.co | mechanic_reference_medium | ai_feedback_loop | AI feedback is common in narrow contexts; Alina needs personal meaning and ritual continuity to avoid becoming a generic coach. | Boundary evidence: AI coaching is crowded in narrow tasks, so generic AI coach positioning is weak. |
 
 ## 4. Market Sizing
 
@@ -603,6 +639,7 @@ Claim audit rows currently normalized: 10.
 - `docs/competitive/source-expansion-backlog-v1.md`
 - `docs/competitive/p0-external-source-collection-v1.md`
 - `docs/competitive/chrome-extension-detail-enrichment-v1.md`
+- `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`
 - `docs/decision/evidence-audit-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
@@ -610,6 +647,7 @@ Claim audit rows currently normalized: 10.
 - `data_processed/source_expansion_backlog.csv`
 - `data_processed/p0_external_source_summary.csv`
 - `data_processed/chrome_extension_fit_matrix.csv`
+- `data_processed/chrome_extension_mechanic_battlecards.csv`
 - `data_processed/competitor_feature_matrix.csv`
 - `data_processed/audience_signal_matrix.csv`
 - `data_processed/whitespace_signal_matrix.csv`

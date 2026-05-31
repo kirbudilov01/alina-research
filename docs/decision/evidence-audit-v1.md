@@ -1,6 +1,6 @@
 # Evidence Audit V1
 
-Generated: 2026-05-31T04:01:34.479Z
+Generated: 2026-05-31T04:05:18.575Z
 
 ## Purpose
 
@@ -35,8 +35,8 @@ This register turns the large research corpus into an auditable claim map. Each 
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
 | H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000 | Market sizing is modeled from public claims and needs source-by-source confidence review. |
 | H2_paywall_visible_evidence | supported_narrowly | medium_low | 2/29 screenshots confirm visible public pricing | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. |
-| H3_whitespace_exists | narrow_supported_not_final | medium | 1/100 strict behavior-tied progression signals | Metadata can under-detect in-app mechanics; manual app inspection may reveal more direct competitors. |
-| H4_competitive_advantage_plausible | plausible_unproven | medium_low | 1 direct reference competitor; 45 high-threat competitors | No human validation or prototype test yet proves users value the loop. |
+| H3_whitespace_exists | narrow_supported_not_final | medium | 1/100 strict behavior-tied progression signals; 9 Chrome mechanic references to inspect | Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors. |
+| H4_competitive_advantage_plausible | plausible_unproven | medium_low | 1 direct reference competitor; 45 high-threat competitors; 23 Chrome mechanic battlecards | No human validation or prototype test yet proves users value the loop. |
 | H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows | Keyword/OCR/forum coding needs human validation and real user interviews. |
 | H6_product_core_defined | supported_for_mvp_framing | medium | 12552 feature matrix rows; 100 product-core rows | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
 | REQ_final_artifacts_versioned | proved_active | high | current branch pushed through latest commit | Final polished investor/user-facing PDF is still draft-level, not final designed publication. |

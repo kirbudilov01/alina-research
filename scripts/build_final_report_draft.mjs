@@ -107,6 +107,7 @@ const sourceExpansionBacklog = csv('data_processed/source_expansion_backlog.csv'
 const p0ExternalSources = csv('data_raw/expanded/p0_external_sources_raw.csv');
 const p0ExternalSummary = csv('data_processed/p0_external_source_summary.csv');
 const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv');
+const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
 
 const highWhitespace = whitespace.filter(r => r.whitespace_band === 'high').length;
 const mediumWhitespace = whitespace.filter(r => r.whitespace_band === 'medium').length;
@@ -133,6 +134,7 @@ const p0ExternalUsable = p0ExternalSources.filter(r => r.collection_status === '
 const chromeExtensionDetailOk = chromeExtensionFit.filter(r => r.detail_status === 'ok');
 const chromeExtensionStrong = chromeExtensionFit.filter(r => r.alina_fit_band === 'strong_adjacent');
 const chromeExtensionUseful = chromeExtensionFit.filter(r => r.alina_fit_band === 'useful_adjacent');
+const chromeMechanicPriority = chromeExtensionBattlecards.filter(r => ['mechanic_threat_high', 'mechanic_threat_medium', 'mechanic_reference_high'].includes(r.threat_band));
 
 const report = [];
 
@@ -163,6 +165,7 @@ report.push(`- Evidence audit register: ${evidenceAudit.length} claim rows mappi
 report.push(`- Source expansion backlog: ${sourceExpansionBacklog.length} prioritized collector/source tasks for the next move toward a 30k-50k raw universe.`);
 report.push(`- Controlled P0 external-source smoke pass: ${p0ExternalSources.length} rows, ${p0ExternalUsable.length} usable candidates, with search-engine-heavy expansion intentionally deferred.`);
 report.push(`- Chrome extension detail enrichment: ${chromeExtensionDetailOk.length}/${chromeExtensionFit.length} detail pages parsed; ${chromeExtensionStrong.length} strong and ${chromeExtensionUseful.length} useful adjacent mechanic references.`);
+report.push(`- Chrome mechanic battlecards: ${chromeExtensionBattlecards.length} browser-extension cards, ${chromeMechanicPriority.length} high/medium references for manual mechanic inspection.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
@@ -271,6 +274,28 @@ if (chromeExtensionFit.length) {
       { key: 'rating', label: 'Rating', align: 'right' },
       { key: 'feature_tags', label: 'Feature Tags' }
     ], 12));
+  report.push('');
+}
+if (chromeExtensionBattlecards.length) {
+  report.push('### Chrome Extension Mechanic Battlecards');
+  report.push('');
+  report.push('The enriched Chrome candidates are converted into mechanic battlecards. This layer is deliberately interpretive: it identifies what a browser extension proves about habits, progress, accountability, and AI feedback, then separates mechanic inspiration from direct competitive threat.');
+  report.push('');
+  report.push('Threat/reference band mix:');
+  report.push('');
+  report.push(bulletCounts(countBy(chromeExtensionBattlecards, 'threat_band')));
+  report.push('');
+  report.push('Core mechanic mix:');
+  report.push('');
+  report.push(bulletCounts(countBy(chromeExtensionBattlecards, 'core_mechanic')));
+  report.push('');
+  report.push(mdTable(chromeExtensionBattlecards.slice(0, 10), [
+    { key: 'app_name', label: 'Candidate' },
+    { key: 'threat_band', label: 'Threat/Reference' },
+    { key: 'core_mechanic', label: 'Mechanic' },
+    { key: 'alina_lesson', label: 'Alina Lesson' },
+    { key: 'whitespace_implication', label: 'Whitespace Implication' }
+  ], 10));
   report.push('');
 }
 report.push('## 4. Market Sizing');
@@ -645,6 +670,7 @@ report.push('- `docs/competitive/web-paywall-screenshot-interpretation-v1.md`');
 report.push('- `docs/competitive/source-expansion-backlog-v1.md`');
 report.push('- `docs/competitive/p0-external-source-collection-v1.md`');
 report.push('- `docs/competitive/chrome-extension-detail-enrichment-v1.md`');
+report.push('- `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`');
 report.push('- `docs/decision/evidence-audit-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
@@ -652,6 +678,7 @@ report.push('- `data_processed/evidence_claim_register.csv`');
 report.push('- `data_processed/source_expansion_backlog.csv`');
 report.push('- `data_processed/p0_external_source_summary.csv`');
 report.push('- `data_processed/chrome_extension_fit_matrix.csv`');
+report.push('- `data_processed/chrome_extension_mechanic_battlecards.csv`');
 report.push('- `data_processed/competitor_feature_matrix.csv`');
 report.push('- `data_processed/audience_signal_matrix.csv`');
 report.push('- `data_processed/whitespace_signal_matrix.csv`');
@@ -717,6 +744,7 @@ status.push(mdTable([
   { requirement: 'Next source expansion backlog', evidence: 'data_processed/source_expansion_backlog.csv; docs/competitive/source-expansion-backlog-v1.md', status: 'done v1; prioritized sources, target outputs, expected row ranges, and risks captured' },
   { requirement: 'Controlled P0 external-source smoke pass', evidence: 'data_raw/expanded/p0_external_sources_raw.csv; data_processed/p0_external_source_summary.csv; docs/competitive/p0-external-source-collection-v1.md', status: 'done v1; small by design; Chrome Web Store yielded usable candidates, Product Hunt/AlternativeTo attempts retained as empty-source evidence' },
   { requirement: 'Chrome extension detail enrichment', evidence: 'data_raw/chrome_extension_detail_raw.csv; data_processed/chrome_extension_fit_matrix.csv; docs/competitive/chrome-extension-detail-enrichment-v1.md', status: 'done v1; detail pages parsed for known Chrome candidates only, producing fit bands and mechanic tags without broad search expansion' },
+  { requirement: 'Chrome extension mechanic battlecards', evidence: 'data_processed/chrome_extension_mechanic_battlecards.csv; docs/competitive/chrome-extension-mechanic-battlecards-v1.md', status: 'done v1; converts enriched Chrome candidates into mechanic lessons, whitespace implications, and validation tasks' },
   { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; data_processed/tam_sam_som_model.csv', status: 'done v1' },
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
@@ -757,3 +785,5 @@ console.log(`p0_external_rows=${p0ExternalSources.length}`);
 console.log(`p0_external_usable=${p0ExternalUsable.length}`);
 console.log(`chrome_extension_detail_rows=${chromeExtensionFit.length}`);
 console.log(`chrome_extension_strong=${chromeExtensionStrong.length}`);
+console.log(`chrome_extension_battlecards=${chromeExtensionBattlecards.length}`);
+console.log(`chrome_extension_priority=${chromeMechanicPriority.length}`);
