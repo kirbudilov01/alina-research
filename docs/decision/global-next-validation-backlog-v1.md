@@ -1,6 +1,6 @@
 # Global Next Validation Backlog V1
 
-Generated: 2026-05-31T15:48:53.375Z
+Generated: 2026-05-31T15:52:35.116Z
 
 ## Purpose
 
@@ -10,8 +10,8 @@ Generated: 2026-05-31T15:48:53.375Z
 
 | Hypothesis | What | Status | Completed / Required | Next action |
 | --- | --- | --- | --- | --- |
-| H1 | форма продукта существует | не начато | 0 / 60 | Собрать onboarding, первое действие, progress/avatar feedback, границу paywall/free и заметки по самым рискованным P0-конкурентам. |
-| H3 | есть узкое белое пятно | не начато | 0 / 60 | В walkthrough классифицировать action -> avatar/progress causality как visible, inferred, absent или blocked. |
+| H1 | форма продукта существует | начато, но доказательств недостаточно | 12 / 60 | Собрать onboarding, первое действие, progress/avatar feedback, границу paywall/free и заметки по самым рискованным P0-конкурентам. |
+| H3 | есть узкое белое пятно | начато, но доказательств недостаточно | 12 / 60 | В walkthrough классифицировать action -> avatar/progress causality как visible, inferred, absent или blocked. |
 | H2 | в рынках есть деньги | начато, но доказательств недостаточно | 28 / 40 | Использовать stress-test risk rows, чтобы выбрать следующие paid-flow проверки и WTP-вопросы для прототипа. |
 | H5 | общая аудитория существует | не начато | 0 / 96 | Use the ICP recruiting bridge to source top-two segment participants, execute the ICP validation packet, then update segment status and selected primary ICP. |
 | H4 | конкурентное преимущество правдоподобно | не начато | 0 / 80 | Провести прототипные сессии с двумя P0-сегментами и заполнить scorecard наблюдаемыми результатами. |

@@ -131,10 +131,12 @@ function completedIcp(row) {
 }
 
 function successIcp(row) {
+  if (clean(row.capture_status).toLowerCase().includes('secondary_voc_signoff')) return false;
   return completedIcp(row) && boolYes(row.success_flag) && !boolYes(row.fatal_objection_flag);
 }
 
 function failIcp(row) {
+  if (clean(row.capture_status).toLowerCase().includes('secondary_voc_signoff')) return false;
   return completedIcp(row) && (boolNo(row.success_flag) || boolYes(row.fatal_objection_flag));
 }
 
