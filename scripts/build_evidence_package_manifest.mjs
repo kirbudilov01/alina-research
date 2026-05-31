@@ -95,7 +95,7 @@ function classify(file) {
 function evidenceRole(file) {
   if (/expanded|top300|competitor_universe|chrome_extension|p0_external/.test(file)) return 'competitor_universe';
   if (/tam|som|market|monetization|pricing|iap|paywall/.test(file)) return 'market_money';
-  if (/whitespace|product_core|battlecard|top100/.test(file)) return 'competitive_whitespace';
+  if (/whitespace|product_core|battlecard|top100|positioning/.test(file)) return 'competitive_whitespace';
   if (/audience|review|forum|icp/.test(file)) return 'audience_icp';
   if (/evidence|validation|roadmap|status|report|pdf|chart|hypothesis/.test(file)) return 'decision_artifact';
   if (/source|registry|claim/.test(file)) return 'source_claim';
@@ -183,6 +183,7 @@ const requiredArtifacts = [
   'data_raw/app_store_iap_pricing_raw.csv',
   'data_raw/google_play_pricing_raw.csv',
   'data_raw/web_paywall_discovery_raw.csv',
+  'data_raw/company_positioning_raw.csv',
   'data_raw/forum_quote_evidence_raw.csv',
   'data_processed/competitor_feature_matrix.csv',
   'data_processed/cross_source_universe_raw_index.csv',
@@ -207,6 +208,7 @@ const requiredArtifacts = [
   'data_processed/competitor_revenue_proxy_market_summary.csv',
   'data_processed/web_paywall_visual_adjudication.csv',
   'data_processed/web_paywall_visual_adjudication_summary.csv',
+  'data_processed/company_positioning_matrix.csv',
   'data_processed/paid_flow_local_signoff.csv',
   'data_processed/itch_source_summary.csv',
   'data_processed/steam_tag_source_summary.csv',
@@ -317,6 +319,7 @@ const requiredArtifacts = [
   'docs/competitive/russian-competitor-battlecards-v1.md',
   'docs/competitive/global-competitor-archetype-rollup-v1.md',
   'docs/competitive/competitor-taxonomy-cleanup-queue-v1.md',
+  'docs/competitive/company-positioning-matrix-v1.md',
   'docs/audience/russian-icp-battlecards-v1.md',
   'docs/audience/russian-icp-interview-dossiers-v1.md',
   'docs/audience/russian-voc-objection-map-v1.md',

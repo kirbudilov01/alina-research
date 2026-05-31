@@ -1,6 +1,6 @@
 # Русское приложение Claim -> Evidence -> Boundary V1
 
-Собрано: 2026-05-31T14:26:29.034Z
+Собрано: 2026-05-31T18:22:00.542Z
 
 ## Зачем нужен этот файл
 
@@ -9,7 +9,7 @@
 ## Сводка
 
 - Claim rows: 22
-- Manifest artifacts at build time: 441
+- Manifest artifacts at build time: 525
 - доказано как исследовательский слой: 15
 - готово к проверке, gate открыт: 2
 - поддержано направленно, но не финально доказано: 5
@@ -19,8 +19,8 @@
 | Claim | Статус | Confidence | Метрика | Граница | Файлы |
 | --- | --- | --- | --- | --- | ---: |
 | REQ_plan | доказано как исследовательский слой | high | master plan exists; 16 validation roadmap rows; 11 execution tasks | Needs periodic refresh as validation findings change. | 7 |
-| REQ_evidence_package_traceability | доказано как исследовательский слой | high | 441 manifest rows; 0 missing artifacts | Это provenance proof, а не содержательное доказательство спроса. | 2 |
-| REQ_completion_readiness_audit | доказано как исследовательский слой | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. | 2 |
+| REQ_evidence_package_traceability | доказано как исследовательский слой | high | 525 manifest rows; 0 missing artifacts | Это provenance proof, а не содержательное доказательство спроса. | 2 |
+| REQ_completion_readiness_audit | доказано как исследовательский слой | high | 10 completion requirements; 6 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. | 2 |
 | REQ_hypothesis_decision_matrix | доказано как исследовательский слой | high | 6 hypothesis decision rows; 6 hold/validate; 0 go; 0 stop/pivot | Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open. | 2 |
 | REQ_market_money_triangulation | доказано как исследовательский слой | medium_high | 6 market rows; 3 strong and 1 medium directional money cases | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. | 9 |
 | REQ_p0_validation_command_center | доказано как исследовательский слой | high | 75 command rows; 6 blocker rows; 52 P0 rows | Это операционная готовность, не observed validation evidence. | 4 |
@@ -30,11 +30,11 @@
 | REQ_validation_batch_02 | доказано как исследовательский слой | high | 52 batch rows; 52 not started; 12 local artifacts linked | Это операционная готовность, не observed validation evidence. | 3 |
 | REQ_validation_batch_03 | доказано как исследовательский слой | high | 17 batch rows; 17 not started; 17 local artifacts linked | Это операционная готовность, не observed validation evidence. | 3 |
 | REQ_validation_evidence_rollup | доказано как исследовательский слой | high | 75 command rows; 75 notes present; 29 local artifacts linked | Это операционная готовность, не observed validation evidence. | 5 |
-| REQ_validation_gate_calculator | доказано как исследовательский слой | high | 6 gate rows; 0 pass-ready; 1 in-progress; 5 not started; 0 downgrade/kill triggered | Это операционная готовность, не observed validation evidence. | 7 |
-| REQ_competitor_universe | доказано как исследовательский слой | medium_high | 67525 cross-source raw rows; 36694 cross-source dedup rows; 39 coverage cells; 11 strong and 12 medium source/market cells | Raw 50k source scale is met; dedup 30k+ and the 30k-40k working band are met; dedup 50k remains open and should not be overclaimed. | 47 |
+| REQ_validation_gate_calculator | доказано как исследовательский слой | high | 6 gate rows; 0 pass-ready; 6 in-progress; 0 not started; 0 downgrade/kill triggered | Это операционная готовность, не observed validation evidence. | 7 |
+| REQ_competitor_universe | доказано как исследовательский слой | medium_high | 68085 cross-source raw rows; 37176 cross-source dedup rows; 44 coverage cells; 11 strong and 12 medium source/market cells | Raw 50k source scale is met; dedup 30k+ and the 30k-40k working band are met; dedup 50k remains open and should not be overclaimed. | 47 |
 | H1_product_shape_exists | готово к проверке, gate открыт | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Нельзя усиливать claim без app/onboarding walkthrough и скриншотов причинной петли. | 8 |
-| H2_markets_have_money | поддержано направленно, но не финально доказано | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies; 8 local paid-flow signoff rows | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. | 20 |
-| H2_paywall_visible_evidence | поддержано направленно, но не финально доказано | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples; 8 local signoff rows | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. | 10 |
+| H2_markets_have_money | поддержано направленно, но не финально доказано | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies; 28 local paid-flow signoff rows | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. | 20 |
+| H2_paywall_visible_evidence | поддержано направленно, но не финально доказано | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples; 28 local signoff rows | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. | 10 |
 | H3_whitespace_exists | поддержано направленно, но не финально доказано | medium | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Нельзя усиливать claim без app/onboarding walkthrough и скриншотов причинной петли. | 13 |
 | H4_competitive_advantage_plausible | готово к проверке, gate открыт | medium | 1 direct reference competitor; 45 high-threat competitors; 8 prototype screens; 6 success/kill metrics | Нельзя считать продуктовое преимущество доказанным без prototype sessions и observed scorecard. | 9 |
 | H5_shared_audience_exists | поддержано направленно, но не финально доказано | medium | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Нельзя превращать directional language signals в финальную персону без интервью. | 25 |

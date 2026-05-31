@@ -122,6 +122,7 @@ function topGroups(rows, countKey, limit = 4) {
 const nicheSummary = csv('data_processed/russian_readable_niche_summary.csv');
 const coverage = csv('data_processed/cross_source_coverage_matrix.csv');
 const sourceScale = csv('data_processed/source_scale_milestone.csv');
+const globalRaw = sourceScale.find(row => row.milestone_id === 'RAW_50K_SOURCE_SCALE')?.metric_value || '';
 const globalDedup = sourceScale.find(row => row.milestone_id === 'DEDUP_30_40K_BAND')?.metric_value || '';
 
 const rows = nicheSummary.map(row => {
@@ -212,7 +213,8 @@ lines.push('');
 lines.push('## Общий счет');
 lines.push('');
 lines.push(`- Ниш: ${rows.length}`);
-lines.push(`- All-source raw rows по пяти нишам: ${fmt(totals.raw)}`);
+lines.push(`- Global raw source rows без повторного сложения ниш: ${fmt(globalRaw)}`);
+lines.push(`- Five-niche rollup raw rows без company-positioning lane: ${fmt(totals.raw)}`);
 lines.push(`- All-source dedup rows по нишам, суммарно: ${fmt(totals.dedup)}`);
 lines.push(`- Global cross-source dedup без повторного сложения ниш: ${fmt(globalDedup)}`);
 lines.push(`- Direct app-store dedup rows: ${fmt(totals.direct)}`);

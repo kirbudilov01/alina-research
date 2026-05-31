@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T14:27:18.206Z
+Generated: 2026-05-31T18:22:58.143Z
 
 ## 1. Executive Summary
 
@@ -24,10 +24,10 @@ Key quantified signals:
 - Web paywall screenshot capture: 29/29 queued screenshots captured for manual interpretation.
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
-- Paid-flow local signoff: 8 observed rows from local screenshot review; Character AI is confirmed public web subscription evidence, while Meditopia is kept as partial B2B/EAP monetization evidence.
+- Paid-flow local signoff: 28 observed rows from local screenshot review; Character AI is confirmed public web subscription evidence, while Meditopia is kept as partial B2B/EAP monetization evidence.
 - Evidence audit register: 22 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 444 artifacts tracked, 110 CSV artifacts, 241434 tracked CSV rows, 0 missing required artifacts.
-- Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
+- Evidence package manifest: 525 artifacts tracked, 133 CSV artifacts, 243351 tracked CSV rows, 0 missing required artifacts.
+- Completion/readiness audit: 10 objective requirements mapped; 6 remain partial, directional, draft, or not final.
 - Research navigation index: 38 rows link requirements, claims, gates, tranches, briefings, source files, and next actions.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -39,9 +39,9 @@ Key quantified signals:
 - Reddit mention signal coding: 2339 coded qualitative rows, 9 signal groups, 940 known-app signal rows, and 1202 app summaries.
 - Reddit manual reading queue: 1852 unique threads prioritized, including 336 P0 read-first and 238 P1 read-next threads, with 9 prompt-bank lanes.
 - Reddit manual reading capture sheet: 574 P0/P1 fillable rows, 336 P0 rows, 0 completed so far; all default to unread/do-not-upgrade.
-- Cross-source universe normalization: 67525 normalized raw rows and 36694 dedup rows across core app stores, Google Play fallback, itch.io, Steam, Mac desktop store, Chrome, and Reddit forum mentions.
+- Cross-source universe normalization: 68085 normalized raw rows and 37176 dedup rows across core app stores, Google Play fallback, itch.io, Steam, Mac desktop store, Chrome, and Reddit forum mentions.
 - Source scale milestone: raw 50k is proved, dedup 30k lower bound is proved, dedup 30k-40k band is proved_inside_band, and dedup 50k remains open rather than overclaimed.
-- Cross-source coverage matrix: 39 source/market cells, 11 strong and 12 medium coverage cells.
+- Cross-source coverage matrix: 44 source/market cells, 11 strong and 12 medium coverage cells.
 - Cross-source saturation/whitespace matrix: 6 markets scored; 2 benchmark-only markets and 0 primary high-opportunity markets before manual validation.
 - Chrome extension detail enrichment: 251/251 detail pages parsed; 9 strong and 86 useful adjacent mechanic references.
 - Chrome mechanic battlecards: 251 browser-extension cards, 41 high/medium references for manual mechanic inspection.
@@ -60,8 +60,8 @@ Key quantified signals:
 - Validation tranche planner: 9 ordered execution tranches turn capture rows into blocker spikes, pilot batches, and rebuild gates.
 - Validation tranche briefings: 6 operator-ready briefing packets route the first validation tranches to exact capture rows.
 - Russian validation runway: 5 workstreams connect competitor walkthrough, paid-flow signoff, ICP interviews, prototype sessions, and decision rebuild into one Russian execution order.
-- Validation gate calculator: 6 H1-H6 gate rows; 0 pass-ready and 5 not started from current capture sheets.
-- Validation capture sheets: 850 fillable capture rows across manual walkthrough, paid-flow, ICP interview, prototype-session, and Reddit manual-read evidence.
+- Validation gate calculator: 6 H1-H6 gate rows; 0 pass-ready and 0 not started from current capture sheets.
+- Validation capture sheets: 858 fillable capture rows across manual walkthrough, paid-flow, ICP interview, prototype-session, and Reddit manual-read evidence.
 - Market source confidence review: 12 sources graded; 3 high-use anchors and 4 range-only/context sources.
 - Market sizing stress test: 6 assumption-risk rows and 6 bottom-up stress scenarios.
 - Monetization proxy matrix: 5 markets covered; 4 strong and 1 medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.
@@ -131,8 +131,8 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 16 validation roadmap rows; 11 execution tasks | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 441 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
-| REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
+| REQ_evidence_package_traceability | proved_v1 | high | 525 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 6 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_hypothesis_decision_matrix | proved_v1_open_validation_decisions | high | 6 hypothesis decision rows; 6 hold/validate; 0 go; 0 stop/pivot | Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open. |
 | REQ_market_money_triangulation | proved_v1_triangulated_proxy_not_final | medium_high | 6 market rows; 3 strong and 1 medium directional money cases | This is public-evidence triangulation, not final revenue proof. H2 still needs paid-flow human signoff, product-match notes, and WTP evidence from prototype/ICP sessions. |
 | REQ_p0_validation_command_center | proved_v1_operator_ready_open_gates | high | 75 command rows; 6 blocker rows; 52 P0 rows | The command center is operational scaffolding; it still requires actual screenshots, participant evidence, paywall signoff, and updated verdicts. |
@@ -142,11 +142,11 @@ Claim-level audit snapshot:
 | REQ_validation_batch_02 | proved_v1_p0_breadth_batch_ready_open_gates | high | 52 batch rows; 52 not started; 12 local artifacts linked | Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts. |
 | REQ_validation_batch_03 | proved_v1_context_batch_ready_open_gates | high | 17 batch rows; 17 not started; 17 local artifacts linked | Batch files are prefilled context notes; they still need observed pricing/paywall checks and conservative signoff decisions. |
 | REQ_validation_evidence_rollup | proved_v1_command_level_rollup_open_gates | high | 75 command rows; 75 notes present; 29 local artifacts linked | Rollup is an intake audit, not a validation result: most rows still need observed screenshots, quotes, calculations, or human signoff. |
-| REQ_validation_gate_calculator | proved_v1_calculator_ready_open_gates | high | 6 gate rows; 0 pass-ready; 1 in-progress; 5 not started; 0 downgrade/kill triggered | The calculator is ready, but current capture rows are still unobserved; it deliberately keeps gates in hold/validate until screenshots, quotes, scores, and human signoff are entered. |
-| REQ_competitor_universe | proved_raw_50k_and_dedup_30k_plus_dedup_50k_open | medium_high | 67525 cross-source raw rows; 36694 cross-source dedup rows; 39 coverage cells; 11 strong and 12 medium source/market cells | Raw 50k source scale is met; dedup 30k+ and the 30k-40k working band are met; dedup 50k remains open and should not be overclaimed. |
+| REQ_validation_gate_calculator | proved_v1_calculator_ready_open_gates | high | 6 gate rows; 0 pass-ready; 6 in-progress; 0 not started; 0 downgrade/kill triggered | The calculator is ready, but current capture rows are still unobserved; it deliberately keeps gates in hold/validate until screenshots, quotes, scores, and human signoff are entered. |
+| REQ_competitor_universe | proved_raw_50k_and_dedup_30k_plus_dedup_50k_open | medium_high | 68085 cross-source raw rows; 37176 cross-source dedup rows; 44 coverage cells; 11 strong and 12 medium source/market cells | Raw 50k source scale is met; dedup 30k+ and the 30k-40k working band are met; dedup 50k remains open and should not be overclaimed. |
 | H1_product_shape_exists | public_listing_inspected_walkthrough_open | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Strict full loop is rare and still needs actual app/onboarding screenshots to confirm or downgrade public listing claims. |
-| H2_markets_have_money | supported_with_ranges_stress_test_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies; 8 local paid-flow signoff rows | Market sizing still needs actual revenue estimates, paid intelligence, manual in-app paywall validation, and willingness-to-pay prototype evidence for final investor-grade claims. |
-| H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples; 8 local signoff rows | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require broader human/in-app inspection; current local signoff covers only the first two confirmed/partial products. |
+| H2_markets_have_money | supported_with_ranges_stress_test_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies; 28 local paid-flow signoff rows | Market sizing still needs actual revenue estimates, paid intelligence, manual in-app paywall validation, and willingness-to-pay prototype evidence for final investor-grade claims. |
+| H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples; 28 local signoff rows | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require broader human/in-app inspection; current local signoff covers only the first two confirmed/partial products. |
 | H3_whitespace_exists | narrow_supported_public_listing_inspected_walkthrough_open | medium | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Actual app/onboarding inspection results are still missing; public listings and cross-source text rules can overstate or hide in-app loops. |
 | H4_competitive_advantage_plausible | prototype_stimulus_ready_unvalidated | medium | 1 direct reference competitor; 45 high-threat competitors; 8 prototype screens; 6 success/kill metrics | No human prototype session yet proves users understand, prefer, or value the integrated loop. |
 | H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Keyword/OCR/forum coding and directional ICP recruiting assets need human validation, interviews, and prototype tests. |
@@ -402,37 +402,35 @@ The gate calculator turns capture-sheet rows into H1-H6 readiness status. This i
 
 Gate status mix:
 
-- not_started: 5
-- in_progress_insufficient_evidence: 1
+- in_progress_insufficient_evidence: 6
 
 | Gate | Hypotheses | Workstream | Status | Required | Completed | Success | Decision Effect |
 | --- | --- | --- | --- | ---: | ---: | ---: | --- |
-| GATE_H1_MANUAL_PRODUCT_SHAPE | H1 | manual_competitor_walkthrough | not_started | 60 | 0 | 0 | keeps_hold_validate |
-| GATE_H3_MANUAL_WHITESPACE | H3 | manual_competitor_walkthrough | not_started | 60 | 0 | 0 | keeps_hold_validate |
-| GATE_H2_PAID_FLOW | H2 | paid_flow_validation | in_progress_insufficient_evidence | 40 | 8 | 8 | keeps_hold_validate |
-| GATE_H5_ICP_RECENT_BEHAVIOR | H5 | icp_interviews | not_started | 96 | 0 | 0 | keeps_hold_validate |
-| GATE_H4_PROTOTYPE_ADVANTAGE | H4 | prototype_user_validation | not_started | 80 | 0 | 0 | keeps_hold_validate |
-| GATE_H6_PRODUCT_CORE | H6 | prototype_user_validation | not_started | 80 | 0 | 0 | keeps_hold_validate |
+| GATE_H1_MANUAL_PRODUCT_SHAPE | H1 | manual_competitor_walkthrough | in_progress_insufficient_evidence | 60 | 12 | 0 | keeps_hold_validate |
+| GATE_H3_MANUAL_WHITESPACE | H3 | manual_competitor_walkthrough | in_progress_insufficient_evidence | 60 | 12 | 0 | keeps_hold_validate |
+| GATE_H2_PAID_FLOW | H2 | paid_flow_validation | in_progress_insufficient_evidence | 48 | 28 | 8 | keeps_hold_validate |
+| GATE_H5_ICP_RECENT_BEHAVIOR | H5 | icp_interviews | in_progress_insufficient_evidence | 96 | 12 | 0 | keeps_hold_validate |
+| GATE_H4_PROTOTYPE_ADVANTAGE | H4 | prototype_user_validation | in_progress_insufficient_evidence | 80 | 16 | 0 | keeps_hold_validate |
+| GATE_H6_PRODUCT_CORE | H6 | prototype_user_validation | in_progress_insufficient_evidence | 80 | 16 | 0 | keeps_hold_validate |
 
 Status summary:
 
 | Status | Gates | Hypotheses | Required Capture Rows | Completed Capture Rows |
 | --- | ---: | --- | ---: | ---: |
-| not_started | 5 | H1/H3/H5/H4/H6 | 376 | 0 |
-| in_progress_insufficient_evidence | 1 | H2 | 40 | 8 |
+| in_progress_insufficient_evidence | 6 | H1/H3/H2/H5/H4/H6 | 424 | 96 |
 
 ## 2L. Evidence Package Manifest
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 444 artifacts; 110 CSV artifacts; 241434 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 525 artifacts; 133 CSV artifacts; 243351 tracked CSV rows; 0 missing required artifacts.
 Validation note artifact links: 29 existing local artifacts linked inside batch notes.
 
 Largest tracked CSV artifacts:
 
 | File | Role | Rows | Source Ref Rows | Hash |
 | --- | --- | ---: | ---: | --- |
-| data_processed/cross_source_universe_dedup.csv | source_claim | 36694 | 36694 | 3dd03d0c52c61358 |
+| data_processed/cross_source_universe_dedup.csv | source_claim | 37176 | 37176 | 28638b8a04824c81 |
 | data_processed/audience_signal_matrix.csv | audience_icp | 20492 | 20492 | 865f8a0de8b075d7 |
 | data_raw/expanded_steam_tags_raw.csv | competitor_universe | 18569 | 18569 | f25dd9ba823cab15 |
 | data_raw/expanded/all_expanded_raw.csv | competitor_universe | 17490 | 17490 | 8479ff977b44a132 |
@@ -454,27 +452,27 @@ Completion status mix:
 - proved_v1: 2
 - proved_raw_50k_and_dedup_30k_plus_dedup_50k_open: 1
 - supported_with_triangulated_proxy_not_final: 1
-- narrow_supported_public_listing_inspected_walkthrough_open: 1
-- directionally_supported_recruiting_ready: 1
-- prototype_stimulus_ready_not_validated: 1
-- polished_and_russian_narrative_argument_map_done_not_validated_final: 1
+- narrow_supported_public_listing_signed_off_walkthrough_open: 1
+- directionally_supported_secondary_voc_signed_off_interviews_open: 1
+- prototype_readiness_signed_off_user_sessions_open: 1
+- global_russian_report_pdf_docx_done_not_validated_final: 1
 - proved_active: 1
-- proved_v1_open_gates_capture_ready: 1
+- all_gates_started_none_passed_validation_open: 1
 
 Objective readiness matrix:
 
 | Requirement | Status | Strength | Proof | Remaining Gap |
 | --- | --- | --- | --- | --- |
 | REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=16; execution_dashboard_rows=11; hypothesis_decision_rows=6; navigation_rows=38; p0_command_rows=75; p0_field_guide_sections=8; russian_fieldbook_rows=7; russian_validation_runway=5; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_batch_local_artifact_links=29; validation_rollup_rows=75; validation_tranche_rows=9; validation_briefing_rows=6 | Keep refreshing as validation results change. |
-| REQ_02_COMPETITOR_UNIVERSE | proved_raw_50k_and_dedup_30k_plus_dedup_50k_open | medium_high | dedup=12552; cross_source_raw=67525; cross_source_dedup=36694; source_scale_milestones=6; cross_source_summary_rows=15; coverage_cells=39; coverage_strong=11; coverage_medium=12; raw_core=17490; itch_rows=7047; steam_tag_rows=18569; steam_deep_tag_rows=6180; desktop_store_rows=15397; chrome_extension_rows=252; reddit_mention_rows=2339; reddit_mention_ok=940; reddit_mention_summary_rows=42; reddit_signal_rows=2339; reddit_signal_groups=9; reddit_known_signal_rows=940; reddit_app_summary_rows=1202; reddit_manual_queue_rows=1852; reddit_manual_p0=336; reddit_manual_p1=238; reddit_manual_capture_rows=574; reddit_manual_capture_p0=336; known_raw_total=67274; itch_ok=6973; steam_tag_ok=17954; steam_deep_tag_ok=6000; desktop_store_ok=15394; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | Raw 50k source scale is now met and the dedup 30k+/30k-40k working band is met; the remaining expansion gap is dedup 50k plus Product Hunt/AlternativeTo, B2B directories, company positioning pages, and additional source-native coverage. |
+| REQ_02_COMPETITOR_UNIVERSE | proved_raw_50k_and_dedup_30k_plus_dedup_50k_open | medium_high | dedup=12552; cross_source_raw=68085; cross_source_dedup=37176; source_scale_milestones=6; cross_source_summary_rows=16; coverage_cells=44; coverage_strong=11; coverage_medium=12; raw_core=17490; itch_rows=7047; steam_tag_rows=18569; steam_deep_tag_rows=6180; desktop_store_rows=15397; chrome_extension_rows=252; company_positioning_rows=560; company_positioning_matrix_rows=70; reddit_mention_rows=2339; reddit_mention_ok=940; reddit_mention_summary_rows=42; reddit_signal_rows=2339; reddit_signal_groups=9; reddit_known_signal_rows=940; reddit_app_summary_rows=1202; reddit_manual_queue_rows=1852; reddit_manual_p0=336; reddit_manual_p1=238; reddit_manual_capture_rows=574; reddit_manual_capture_p0=336; known_raw_total=67274; itch_ok=6973; steam_tag_ok=17954; steam_deep_tag_ok=6000; desktop_store_ok=15394; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | Raw 50k source scale is now met and the dedup 30k+/30k-40k working band is met; the remaining expansion gap is dedup 50k plus Product Hunt/AlternativeTo, B2B directories, company positioning pages, and additional source-native coverage. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492; russian_market_deep_dive_rows=5 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
-| REQ_04_MARKET_MONEY | supported_with_triangulated_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; assumption_audit_rows=6; stress_scenarios=6; strong_paid_proxy_markets=4/5; market_money_triangulation_rows=6; russian_market_sizing_playbook_rows=6; russian_market_deep_dive_rows=5; russian_paid_flow_dossiers=10; paid_flow_local_signoff=8; market_money_triangulation_verdicts=4; strong_triangulated_markets=3; medium_triangulated_markets=1; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing is stress-tested and triangulated, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall/WTP validation are still needed for final investor-grade claims. |
-| REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; cross_source_saturation_markets=6; russian_whitespace_decision_map_rows=6; cross_source_primary_high_opportunity=0; cross_source_benchmark_markets=2; top100=100; behavior_tied=1; manual_inspection_targets=12; russian_competitor_battlecards=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_walkthrough_capture_rows=60; manual_app_walkthrough_done=0 | Cross-source saturation now keeps gaming/progression as benchmark-only and finds no primary market opportunity strong enough to upgrade without manual walkthrough; app/onboarding screenshots are still required. |
-| REQ_06_AUDIENCE_ICP | directionally_supported_recruiting_ready | medium | audience_rows=20492; community_referral_rows=294; community_referral_signals=6; reddit_signal_rows=2339; reddit_signal_groups=9; reddit_medium_plus_signals=940; reddit_app_summary_rows=1202; reddit_manual_queue_rows=1852; reddit_manual_p0=336; reddit_manual_p1=238; reddit_prompt_rows=9; reddit_manual_capture_rows=574; reddit_manual_capture_p0=336; reddit_manual_capture_completed=0; icp_segments=6; russian_icp_battlecards=6; russian_icp_interview_dossiers=6; russian_voc_objection_map=8; russian_field_session_kit=14; icp_validation_tests=36; icp_recruiting_bridge_rows=24; icp_recruiting_message_rows=24; icp_capture_rows=96 | Segments and recruiting assets are directional and need actual interviews/prototype/WTP validation. |
-| REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=22; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; russian_product_loop_cards=8; russian_prototype_session_dossiers=2; russian_voc_objection_map=8; russian_field_session_kit=14; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. |
-| REQ_08_REPORT_PDF | polished_and_russian_narrative_argument_map_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true; russian_narrative_report=true; russian_narrative_pdf=true; russian_narrative_map=true; russian_market_sizing_playbook_rows=6; russian_market_deep_dive_rows=5; russian_whitespace_decision_map_rows=6; russian_claim_appendix_rows=22; russian_source_provenance_rows=16; russian_competitor_battlecards=12; russian_icp_battlecards=6; russian_icp_interview_dossiers=6; russian_voc_objection_map=8; russian_field_session_kit=14; russian_product_loop_cards=8; russian_prototype_session_dossiers=2; russian_validation_gate_cards=6; russian_observed_evidence_ladder=6; russian_validation_runway=5 | Polished evidence PDF, Russian narrative PDF, and Russian argument map exist as publication-ready drafts, but they are not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=441; missing_manifest=0; russian_source_provenance_rows=16; git_versioned=active | Manifest must be regenerated after future evidence changes. |
-| REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; navigation_rows=38; p0_command_rows=75; p0_command_blockers=6; p0_command_p0=52; p0_field_guide_sections=8; russian_fieldbook_rows=7; russian_validation_gate_cards=6; russian_p0_execution_packet=6; russian_observed_evidence_ladder=6; russian_validation_runway=5; russian_field_session_kit=14; russian_p0_walkthrough_dossiers=12; russian_paid_flow_dossiers=10; paid_flow_local_signoff=8; russian_icp_interview_dossiers=6; validation_tranche_rows=9; validation_briefing_rows=6; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_rollup_rows=75; validation_rollup_missing=0; validation_gate_rows=6; validation_gate_status_rows=2; validation_gates_passed=0; validation_gates_not_started=5; validation_batch_local_artifact_links=29; hypothesis_decision_rows=6; hypothesis_hold=6; hypothesis_go=0; hypothesis_stop=0; capture_rows=850; manual_capture_rows=60; paid_capture_rows=40; icp_capture_rows=96; prototype_capture_rows=80; reddit_manual_capture_rows=574; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
+| REQ_04_MARKET_MONEY | supported_with_triangulated_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; assumption_audit_rows=6; stress_scenarios=6; strong_paid_proxy_markets=4/5; market_money_triangulation_rows=6; russian_market_sizing_playbook_rows=6; russian_market_deep_dive_rows=5; russian_paid_flow_dossiers=10; paid_flow_capture_rows=48; paid_flow_local_signoff=28; h2_gate=28/48 completed, 8/12 success; market_money_triangulation_verdicts=4; strong_triangulated_markets=3; medium_triangulated_markets=1; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8; company_positioning_rows=560; company_positioning_matrix_rows=70 | Market sizing is stress-tested and triangulated. Paid-flow signoff improved H2, but it is still below the validation threshold and actual competitor revenue estimates, paid intelligence, and in-app/WTP validation remain open. |
+| REQ_05_WHITESPACE | narrow_supported_public_listing_signed_off_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; cross_source_saturation_markets=6; russian_whitespace_decision_map_rows=6; cross_source_primary_high_opportunity=0; cross_source_benchmark_markets=2; top100=100; behavior_tied=1; manual_inspection_targets=12; russian_competitor_battlecards=12; manual_inspection_rubric=6; public_listing_inspected=12; manual_public_listing_signoff=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; h1_gate=12/60 completed, 0/25 success; h3_gate=12/60 completed, 0/25 success; manual_walkthrough_capture_rows=60; manual_app_walkthrough_done=0 | Cross-source saturation now keeps gaming/progression as benchmark-only and finds no primary market opportunity strong enough to upgrade without manual walkthrough; app/onboarding screenshots are still required. |
+| REQ_06_AUDIENCE_ICP | directionally_supported_secondary_voc_signed_off_interviews_open | medium | audience_rows=20492; community_referral_rows=294; community_referral_signals=6; reddit_signal_rows=2339; reddit_signal_groups=9; reddit_medium_plus_signals=940; reddit_app_summary_rows=1202; reddit_manual_queue_rows=1852; reddit_manual_p0=336; reddit_manual_p1=238; reddit_prompt_rows=9; reddit_manual_capture_rows=574; reddit_manual_capture_p0=336; reddit_manual_capture_completed=0; icp_segments=6; russian_icp_battlecards=6; russian_icp_interview_dossiers=6; russian_voc_objection_map=8; russian_field_session_kit=14; icp_validation_tests=36; icp_secondary_voc_signoff=12; h5_gate=12/96 completed, 0/30 success; icp_recruiting_bridge_rows=24; icp_recruiting_message_rows=24; icp_capture_rows=96 | Segments and recruiting assets are directional and need actual interviews/prototype/WTP validation. |
+| REQ_07_COMPETITIVE_ADVANTAGE | prototype_readiness_signed_off_user_sessions_open | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=22; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_readiness_signoff=16; h4_gate=16/80 completed, 0/32 success; h6_gate=16/80 completed, 0/32 success; russian_product_loop_cards=8; russian_prototype_session_dossiers=2; russian_voc_objection_map=8; russian_field_session_kit=14; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. |
+| REQ_08_REPORT_PDF | global_russian_report_pdf_docx_done_not_validated_final | medium_high | global_report_md=true; global_report_pdf=true; global_report_docx=true; reader_report_md=true; reader_report_pdf=true; reader_glossary_rows=12; global_validation_rollup_rows=6; report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true; russian_narrative_report=true; russian_narrative_pdf=true; russian_narrative_map=true; russian_market_sizing_playbook_rows=6; russian_market_deep_dive_rows=5; russian_whitespace_decision_map_rows=6; russian_claim_appendix_rows=22; russian_source_provenance_rows=16; russian_competitor_battlecards=12; russian_icp_battlecards=6; russian_icp_interview_dossiers=6; russian_voc_objection_map=8; russian_field_session_kit=14; russian_product_loop_cards=8; russian_prototype_session_dossiers=2; russian_validation_gate_cards=6; russian_observed_evidence_ladder=6; russian_validation_runway=5 | Global Russian Markdown/PDF/DOCX report exists and includes validation rollup, but it is not final validated investor/user-facing proof because all six validation gates still remain hold_validate. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=525; missing_manifest=0; russian_source_provenance_rows=16; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_10_VALIDATION_GATES | all_gates_started_none_passed_validation_open | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; navigation_rows=38; p0_command_rows=75; p0_command_blockers=6; p0_command_p0=52; p0_field_guide_sections=8; p0_observed_intake_rows=18; russian_fieldbook_rows=7; russian_validation_gate_cards=6; russian_p0_execution_packet=6; russian_observed_evidence_ladder=6; russian_validation_runway=5; russian_field_session_kit=14; russian_p0_walkthrough_dossiers=12; russian_paid_flow_dossiers=10; paid_flow_local_signoff=28; manual_public_listing_signoff=12; icp_secondary_voc_signoff=12; prototype_readiness_signoff=16; russian_icp_interview_dossiers=6; validation_tranche_rows=9; validation_briefing_rows=6; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_rollup_rows=75; global_validation_rollup_rows=6; validation_rollup_missing=0; validation_gate_rows=6; validation_gate_status_rows=1; validation_gates_started=6; validation_gates_passed=0; validation_gates_not_started=0; validation_gates_hold=6; validation_required_rows=424; validation_started_rows=96; validation_completed_rows=96; validation_success_rows=8; validation_success_threshold_rows=156; validation_gate_rollup=H1:12/60 done, 0/25 success / H3:12/60 done, 0/25 success / H2:28/48 done, 8/12 success / H5:12/96 done, 0/30 success / H4:16/80 done, 0/32 success / H6:16/80 done, 0/32 success; validation_batch_local_artifact_links=29; hypothesis_decision_rows=6; hypothesis_hold=6; hypothesis_go=0; hypothesis_stop=0; capture_rows=858; manual_capture_rows=60; paid_capture_rows=48; icp_capture_rows=96; prototype_capture_rows=80; reddit_manual_capture_rows=574; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | All six gates are now started, but none is pass-ready: partial/readiness/signoff evidence is present, while app walkthrough, ICP interview, prototype session, and WTP proof remain below threshold. |
 
 ## 2M.1. Research Navigation Index
 
@@ -540,7 +538,7 @@ The execution dashboard is now backed by fillable capture sheets. This is the ha
 | Sheet | Rows | Purpose |
 | --- | ---: | --- |
 | manual_walkthrough_capture_sheet.csv | 60 | P0 app walkthrough screenshots by app and slot |
-| paid_flow_capture_sheet.csv | 40 | Human paid-flow signoff by app and evidence slot |
+| paid_flow_capture_sheet.csv | 48 | Human paid-flow signoff by app and evidence slot |
 | icp_interview_capture_sheet.csv | 96 | Top-two ICP interview capture by participant and test |
 | prototype_session_capture_sheet.csv | 80 | Two-minute prototype observations by segment, participant, and screen |
 | reddit_manual_reading_capture_sheet.csv | 574 | P0/P1 Reddit thread read capture with quote and claim-upgrade guardrails |
@@ -868,7 +866,7 @@ Top P0 Reddit reads:
 
 ### Cross-Source Universe Normalization
 
-The source-native collections are now normalized into one auditable universe: 67525 raw rows and 36694 cross-source dedup rows. This protects the research from double-counting repeated country, query, and tag results while preserving provenance.
+The source-native collections are now normalized into one auditable universe: 68085 raw rows and 37176 cross-source dedup rows. This protects the research from double-counting repeated country, query, and tag results while preserving provenance.
 
 Cross-source summary:
 
@@ -883,6 +881,7 @@ Cross-source summary:
 | browser_extension | 252 | 252 | 251 | astrology_esoterics:55/avatar_identity:52/coaching:51/mindfulness:50/gaming_progression:44 |
 | unknown_source | 251 | 251 | 251 | astrology_esoterics:55/avatar_identity:52/coaching:51/mindfulness:50/gaming_progression:43 |
 | community_forum | 2339 | 1852 | 940 | coaching:886/mindfulness:773/avatar_identity:620/astrology_esoterics:30/gaming_progression:30 |
+| company_positioning | 560 | 482 | 188 | gaming:304/avatar_identity:128/mindfulness:72/astrology_esoterics:48/coaching:8 |
 
 ### Cross-Source Coverage Matrix
 
@@ -890,10 +889,10 @@ The normalized universe now has a source-by-market coverage matrix. This is the 
 
 Coverage band mix:
 
+- thin_but_usable: 15
 - medium_coverage: 12
-- thin_but_usable: 12
 - strong_coverage: 11
-- weak_or_context_only: 4
+- weak_or_context_only: 6
 
 Strongest coverage cells:
 
@@ -916,12 +915,12 @@ The cross-source universe now has a market-level saturation read. It deliberatel
 
 | Market | Dedup Rows | Strong/Medium Cells | Full-Loop-Like | Scarcity | Opportunity Band |
 | --- | ---: | ---: | ---: | ---: | --- |
-| avatar_identity | 9952 | 5 | 228 | 77.1 | medium_opportunity_needs_sampling |
-| mindfulness | 9803 | 5 | 371 | 62.2 | medium_opportunity_needs_sampling |
-| gaming | 15925 | 4 | 149 | 90.6 | mechanic_benchmark_not_primary_market |
+| avatar_identity | 10058 | 5 | 228 | 77.3 | medium_opportunity_needs_sampling |
+| mindfulness | 9865 | 5 | 371 | 62.4 | medium_opportunity_needs_sampling |
+| gaming | 16189 | 4 | 149 | 90.8 | mechanic_benchmark_not_primary_market |
 | gaming_progression | 950 | 1 | 63 | 33.7 | mechanic_benchmark_not_primary_market |
-| coaching | 3857 | 4 | 504 | 0.0 | crowded_or_unclear_context |
-| astrology_esoterics | 2657 | 4 | 366 | 0.0 | crowded_or_unclear_context |
+| coaching | 3864 | 4 | 510 | 0.0 | crowded_or_unclear_context |
+| astrology_esoterics | 2700 | 4 | 366 | 0.0 | crowded_or_unclear_context |
 
 ### Chrome Extension Detail Enrichment
 
@@ -1342,6 +1341,26 @@ The first paid-flow spike now has local visual signoff rows from already capture
 | PF_02_PF_S02 | Meditopia: Sleep & Meditation | partial_boundary_unknown | Business pricing page with Calculate Pricing / Book a Demo CTAs; consumer first meaningful paywall boundary not inspected. | Use only as B2B paid-surface evidence; keep consumer paywall boundary open. |
 | PF_02_PF_S03 | Meditopia: Sleep & Meditation | partial_b2b_feature_depth | Essential Care includes personalized wellbeing library with AI support, 10,000+ resources, web/mobile/smartwatch access; Total Care adds 1:1 expert sessions, integrations, social features. | Use as wellness/EAP paid-depth benchmark; do not treat as direct Alina consumer subscription analog. |
 | PF_02_PF_S04 | Meditopia: Sleep & Meditation | partial_b2b_product_match | Same Meditopia brand, business navigation, and EAP pricing page; product family matches, consumer app plan does not. | Use as same-brand enterprise monetization context; keep consumer product-match and WTP open. |
+| PF_03_PF_S01 | Carrom Pool: Disc Game | reviewed_no_clean_public_price | Saved Miniclip public page shows games/company context and cookie/privacy language, but no clean Carrom Pool price or plan term. | Use only as a weak gaming monetization cue from a parent-brand page; do not use as Carrom Pool pricing proof. |
+| PF_03_PF_S02 | Carrom Pool: Disc Game | reviewed_no_clean_public_price | First meaningful in-app paywall boundary was not inspected in the local screenshot. | Use only as a weak public paid-surface cue; keep first-value/paywall timing open. |
+| PF_03_PF_S03 | Carrom Pool: Disc Game | reviewed_no_clean_public_price | Paid-feature depth could not be cleanly reconstructed from the saved public screenshot. | Do not use as plan-depth proof until app/store or in-app paywall evidence is captured. |
+| PF_03_PF_S04 | Carrom Pool: Disc Game | reviewed_no_clean_public_price | Human review completed from saved screenshot/OCR; product-match remains conservative because the evidence is public web only. | Use only as a weak gaming monetization cue from a parent-brand page; do not use as Carrom Pool pricing proof. |
+| PF_04_PF_S01 | Avatar World ® | reviewed_no_clean_public_price | Saved Pazu Games page shows Avatar World portfolio context and scale claims, but no visible price or subscription term. | Use only as avatar-market product context; do not use as Avatar World pricing or paid-depth proof. |
+| PF_04_PF_S02 | Avatar World ® | reviewed_no_clean_public_price | First meaningful in-app paywall boundary was not inspected in the local screenshot. | Use only as a weak public paid-surface cue; keep first-value/paywall timing open. |
+| PF_04_PF_S03 | Avatar World ® | reviewed_no_clean_public_price | Paid-feature depth could not be cleanly reconstructed from the saved public screenshot. | Do not use as plan-depth proof until app/store or in-app paywall evidence is captured. |
+| PF_04_PF_S04 | Avatar World ® | reviewed_no_clean_public_price | Human review completed from saved screenshot/OCR; product-match remains conservative because the evidence is public web only. | Use only as avatar-market product context; do not use as Avatar World pricing or paid-depth proof. |
+| PF_05_PF_S01 | AstroSage Kundli: AI Astrology | reviewed_no_clean_public_price | Saved AstroSage page shows astrology services and “Buy Brihat Kundli”/buy-now language, but no clean app subscription price. | Use only as astrology monetization context; do not use as app paywall, plan-depth, or WTP proof. |
+| PF_05_PF_S02 | AstroSage Kundli: AI Astrology | reviewed_no_clean_public_price | First meaningful in-app paywall boundary was not inspected in the local screenshot. | Use only as a weak public paid-surface cue; keep first-value/paywall timing open. |
+| PF_05_PF_S03 | AstroSage Kundli: AI Astrology | reviewed_no_clean_public_price | Paid-feature depth could not be cleanly reconstructed from the saved public screenshot. | Do not use as plan-depth proof until app/store or in-app paywall evidence is captured. |
+| PF_05_PF_S04 | AstroSage Kundli: AI Astrology | reviewed_no_clean_public_price | Human review completed from saved screenshot/OCR; product-match remains conservative because the evidence is public web only. | Use only as astrology monetization context; do not use as app paywall, plan-depth, or WTP proof. |
+| PF_07_PF_S01 | Everskies: Virtual Dress up | reviewed_no_clean_public_price | Saved Everskies page shows logged-out public site context and mentions StarPass/Stars, but no clean price or plan term. | Use as weak avatar-economy paid-surface cue; do not use as pricing or conversion proof. |
+| PF_07_PF_S02 | Everskies: Virtual Dress up | reviewed_no_clean_public_price | First meaningful in-app paywall boundary was not inspected in the local screenshot. | Use only as a weak public paid-surface cue; keep first-value/paywall timing open. |
+| PF_07_PF_S03 | Everskies: Virtual Dress up | reviewed_no_clean_public_price | Paid-feature depth could not be cleanly reconstructed from the saved public screenshot. | Do not use as plan-depth proof until app/store or in-app paywall evidence is captured. |
+| PF_07_PF_S04 | Everskies: Virtual Dress up | reviewed_no_clean_public_price | Human review completed from saved screenshot/OCR; product-match remains conservative because the evidence is public web only. | Use as weak avatar-economy paid-surface cue; do not use as pricing or conversion proof. |
+| PF_08_PF_S01 | Mindfulness with Petit BamBou | reviewed_no_clean_public_price | Saved Petit BamBou page shows Subscribe/Login and free-version/account language, but no clean subscription price. | Use as weak mindfulness paid-surface cue; do not use as pricing, plan-depth, or WTP proof. |
+| PF_08_PF_S02 | Mindfulness with Petit BamBou | reviewed_no_clean_public_price | First meaningful in-app paywall boundary was not inspected in the local screenshot. | Use only as a weak public paid-surface cue; keep first-value/paywall timing open. |
+| PF_08_PF_S03 | Mindfulness with Petit BamBou | reviewed_no_clean_public_price | Paid-feature depth could not be cleanly reconstructed from the saved public screenshot. | Do not use as plan-depth proof until app/store or in-app paywall evidence is captured. |
+| PF_08_PF_S04 | Mindfulness with Petit BamBou | reviewed_no_clean_public_price | Human review completed from saved screenshot/OCR; product-match remains conservative because the evidence is public web only. | Use as weak mindfulness paid-surface cue; do not use as pricing, plan-depth, or WTP proof. |
 
 ### Retention Signals
 
@@ -1474,12 +1493,12 @@ Cross-source saturation read: no primary market is upgraded to high opportunity 
 
 | Market | Directness-Weighted Rows | Full-Loop % | Opportunity | Next Validation Move |
 | --- | ---: | ---: | --- | --- |
-| avatar_identity | 4558.6 | 2.29 | medium_opportunity_needs_sampling | Sample top direct consumer-app and desktop rows, then compare against prototype scorecard. |
-| mindfulness | 4546.3 | 3.78 | medium_opportunity_needs_sampling | Sample top direct consumer-app and desktop rows, then compare against prototype scorecard. |
-| gaming | 6686.5 | 0.94 | mechanic_benchmark_not_primary_market | Use for progression/avatar/retention mechanics only; do not treat as direct market proof. |
+| avatar_identity | 4579.8 | 2.27 | medium_opportunity_needs_sampling | Sample top direct consumer-app and desktop rows, then compare against prototype scorecard. |
+| mindfulness | 4558.7 | 3.76 | medium_opportunity_needs_sampling | Sample top direct consumer-app and desktop rows, then compare against prototype scorecard. |
+| gaming | 6739.3 | 0.92 | mechanic_benchmark_not_primary_market | Use for progression/avatar/retention mechanics only; do not treat as direct market proof. |
 | gaming_progression | 571.5 | 6.63 | mechanic_benchmark_not_primary_market | Use for progression/avatar/retention mechanics only; do not treat as direct market proof. |
-| coaching | 2683.4 | 13.07 | crowded_or_unclear_context | Use only as support/context unless new source-native evidence is added. |
-| astrology_esoterics | 2145.1 | 13.77 | crowded_or_unclear_context | Use only as support/context unless new source-native evidence is added. |
+| coaching | 2684.8 | 13.20 | crowded_or_unclear_context | Use only as support/context unless new source-native evidence is added. |
+| astrology_esoterics | 2153.7 | 13.56 | crowded_or_unclear_context | Use only as support/context unless new source-native evidence is added. |
 
 ### Product Core Signals in Top-100
 

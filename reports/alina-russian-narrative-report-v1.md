@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T14:27:30.011Z
+Собрано: 2026-05-31T18:23:11.719Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 36694 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 444 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 37176 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 525 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,14 +40,14 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 444 артефакта, missing в manifest: 0. Cross-source universe содержит 67525 нормализованных raw rows и 36694 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 525 артефакта, missing в manifest: 0. Cross-source universe содержит 68085 нормализованных raw rows и 37176 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
-| Dedup competitor/source universe | 36694 | нижняя граница 30k+ уже закрыта на cross-source уровне |
-| Coverage cells | 39 | покрытие рынков источниками, не один канал |
+| Dedup competitor/source universe | 37176 | нижняя граница 30k+ уже закрыта на cross-source уровне |
+| Coverage cells | 44 | покрытие рынков источниками, не один канал |
 | Top-100 reviewed rows | 100 | AI-assisted конкурентный обзор, требует manual validation |
-| Validation capture rows | 850 | готовые строки для ручной фиксации доказательств |
+| Validation capture rows | 858 | готовые строки для ручной фиксации доказательств |
 
 ## 1.1. Масштаб источников: что уже закрыто, а что нет
 
@@ -55,11 +55,11 @@
 
 | Milestone | Status | Metric | Threshold | Как читать | Граница |
 | --- | --- | ---: | --- | --- | --- |
-| RAW_50K_SOURCE_SCALE | proved | 67525 | >= 50000 raw normalized source rows | Raw cross-source universe уже прошел 50k: 67,525 строк. Это закрывает масштаб discovery/source-map, но не означает 67,525 уникальных прямых конкурентов. | Raw rows сохраняют повторы по источникам, странам, запросам, тегам и форумным упоминаниям; это слой покрытия, а не dedup competitor proof. |
-| DEDUP_30K_LOWER_BOUND | proved | 36694 | >= 30000 dedup competitor/source rows | Dedup cross-source universe закрыл нижнюю границу 30k: 36,694 строк. | Dedup снижает дубли, но часть строк остается benchmark/context evidence, особенно Steam/itch/gaming mechanics и Reddit mentions. |
-| DEDUP_30_40K_BAND | proved_inside_band | 36694 | 30000-40000 dedup competitor/source rows | Dedup universe сейчас находится внутри рабочей зоны 30k-40k: 36,694 строк. | Это достаточный масштаб для картирования соседних рынков, но не финальный validation proof по H1-H6. |
-| DEDUP_50K_UPPER_ASPIRATION | open | 36694 | >= 50000 dedup competitor/source rows | Dedup 50k aspiration еще открыт: 36,694 строк, gap 13,306 строк. | Нельзя писать, что 50k уникальных/dedup конкурентов уже доказаны; доказаны raw 50k и dedup 30k+. |
-| SOURCE_QUALITY_BOUNDARY | explicit | 15 summary rows; 39 coverage cells; 11 strong; 12 medium | quality boundary stated | Масштаб источников полезен для discovery, saturation и поиска белого пятна, но качество claim зависит от типа источника. | App Store/Google Play/desktop/web extensions ближе к конкурентам; Steam/itch часто benchmark/mechanic; Reddit/forum чаще VOC/context до manual read. |
+| RAW_50K_SOURCE_SCALE | proved | 68085 | >= 50000 raw normalized source rows | Raw cross-source universe уже прошел 50k: 68,085 строк. Это закрывает масштаб discovery/source-map, но не означает 68,085 уникальных прямых конкурентов. | Raw rows сохраняют повторы по источникам, странам, запросам, тегам и форумным упоминаниям; это слой покрытия, а не dedup competitor proof. |
+| DEDUP_30K_LOWER_BOUND | proved | 37176 | >= 30000 dedup competitor/source rows | Dedup cross-source universe закрыл нижнюю границу 30k: 37,176 строк. | Dedup снижает дубли, но часть строк остается benchmark/context evidence, особенно Steam/itch/gaming mechanics и Reddit mentions. |
+| DEDUP_30_40K_BAND | proved_inside_band | 37176 | 30000-40000 dedup competitor/source rows | Dedup universe сейчас находится внутри рабочей зоны 30k-40k: 37,176 строк. | Это достаточный масштаб для картирования соседних рынков, но не финальный validation proof по H1-H6. |
+| DEDUP_50K_UPPER_ASPIRATION | open | 37176 | >= 50000 dedup competitor/source rows | Dedup 50k aspiration еще открыт: 37,176 строк, gap 12,824 строк. | Нельзя писать, что 50k уникальных/dedup конкурентов уже доказаны; доказаны raw 50k и dedup 30k+. |
+| SOURCE_QUALITY_BOUNDARY | explicit | 16 summary rows; 44 coverage cells; 11 strong; 12 medium | quality boundary stated | Масштаб источников полезен для discovery, saturation и поиска белого пятна, но качество claim зависит от типа источника. | App Store/Google Play/desktop/web extensions ближе к конкурентам; Steam/itch часто benchmark/mechanic; Reddit/forum чаще VOC/context до manual read. |
 | NEXT_SOURCE_LANES | prioritized | 10 backlog lanes | non-search-heavy next expansion lanes | Следующий рост лучше делать не через широкие поисковики, а через source-native/direct lanes: B2B directories, company positioning pages, дополнительные desktop/browser stores, curated Product Hunt/AlternativeTo exports если доступны без Cloudflare-блокировки. | Product Hunt и AlternativeTo direct/sitemap попытки ранее уперлись в Cloudflare 403; этот факт не надо обходить тяжелым search-engine crawl без отдельного решения. |
 
 ## 2. Рынки и деньги: почему здесь вообще может быть бизнес
@@ -157,7 +157,7 @@
 
 ## 2.3. Локальный paid-flow signoff по сохраненным скриншотам
 
-Первый маленький paid-flow spike теперь не только запланирован, но и частично просмотрен по локальным screenshot artifacts. Заполнено 8 observed rows: Character AI/c.ai+ можно читать как подтвержденную public-web subscription surface, а Meditopia нужно читать осторожнее - это Meditopia-branded B2B/EAP pricing, не consumer app paywall. Поэтому H2 становится не "доказанной", а in-progress: появились наблюдаемые платные поверхности, но willingness-to-pay для Alina, in-app timing и consumer conversion все еще открыты.
+Первый маленький paid-flow spike теперь не только запланирован, но и частично просмотрен по локальным screenshot artifacts. Заполнено 28 observed rows: Character AI/c.ai+ можно читать как подтвержденную public-web subscription surface, а Meditopia нужно читать осторожнее - это Meditopia-branded B2B/EAP pricing, не consumer app paywall. Поэтому H2 становится не "доказанной", а in-progress: появились наблюдаемые платные поверхности, но willingness-to-pay для Alina, in-app timing и consumer conversion все еще открыты.
 
 | Capture | Product | Strength | Что видно | Граница |
 | --- | --- | --- | --- | --- |
@@ -169,6 +169,26 @@
 | PF_02_PF_S02 | Meditopia: Sleep & Meditation | partial_boundary_unknown | Business pricing page with Calculate Pricing / Book a Demo CTAs; consumer first meaningful paywall boundary not inspected. | Use only as B2B paid-surface evidence; keep consumer paywall boundary open. |
 | PF_02_PF_S03 | Meditopia: Sleep & Meditation | partial_b2b_feature_depth | Essential Care includes personalized wellbeing library with AI support, 10,000+ resources, web/mobile/smartwatch access; Total Care adds 1:1 expert sessions, integrations, social features. | Use as wellness/EAP paid-depth benchmark; do not treat as direct Alina consumer subscription analog. |
 | PF_02_PF_S04 | Meditopia: Sleep & Meditation | partial_b2b_product_match | Same Meditopia brand, business navigation, and EAP pricing page; product family matches, consumer app plan does not. | Use as same-brand enterprise monetization context; keep consumer product-match and WTP open. |
+| PF_03_PF_S01 | Carrom Pool: Disc Game | reviewed_no_clean_public_price | Saved Miniclip public page shows games/company context and cookie/privacy language, but no clean Carrom Pool price or plan term. | Use only as a weak gaming monetization cue from a parent-brand page; do not use as Carrom Pool pricing proof. |
+| PF_03_PF_S02 | Carrom Pool: Disc Game | reviewed_no_clean_public_price | First meaningful in-app paywall boundary was not inspected in the local screenshot. | Use only as a weak public paid-surface cue; keep first-value/paywall timing open. |
+| PF_03_PF_S03 | Carrom Pool: Disc Game | reviewed_no_clean_public_price | Paid-feature depth could not be cleanly reconstructed from the saved public screenshot. | Do not use as plan-depth proof until app/store or in-app paywall evidence is captured. |
+| PF_03_PF_S04 | Carrom Pool: Disc Game | reviewed_no_clean_public_price | Human review completed from saved screenshot/OCR; product-match remains conservative because the evidence is public web only. | Use only as a weak gaming monetization cue from a parent-brand page; do not use as Carrom Pool pricing proof. |
+| PF_04_PF_S01 | Avatar World ® | reviewed_no_clean_public_price | Saved Pazu Games page shows Avatar World portfolio context and scale claims, but no visible price or subscription term. | Use only as avatar-market product context; do not use as Avatar World pricing or paid-depth proof. |
+| PF_04_PF_S02 | Avatar World ® | reviewed_no_clean_public_price | First meaningful in-app paywall boundary was not inspected in the local screenshot. | Use only as a weak public paid-surface cue; keep first-value/paywall timing open. |
+| PF_04_PF_S03 | Avatar World ® | reviewed_no_clean_public_price | Paid-feature depth could not be cleanly reconstructed from the saved public screenshot. | Do not use as plan-depth proof until app/store or in-app paywall evidence is captured. |
+| PF_04_PF_S04 | Avatar World ® | reviewed_no_clean_public_price | Human review completed from saved screenshot/OCR; product-match remains conservative because the evidence is public web only. | Use only as avatar-market product context; do not use as Avatar World pricing or paid-depth proof. |
+| PF_05_PF_S01 | AstroSage Kundli: AI Astrology | reviewed_no_clean_public_price | Saved AstroSage page shows astrology services and “Buy Brihat Kundli”/buy-now language, but no clean app subscription price. | Use only as astrology monetization context; do not use as app paywall, plan-depth, or WTP proof. |
+| PF_05_PF_S02 | AstroSage Kundli: AI Astrology | reviewed_no_clean_public_price | First meaningful in-app paywall boundary was not inspected in the local screenshot. | Use only as a weak public paid-surface cue; keep first-value/paywall timing open. |
+| PF_05_PF_S03 | AstroSage Kundli: AI Astrology | reviewed_no_clean_public_price | Paid-feature depth could not be cleanly reconstructed from the saved public screenshot. | Do not use as plan-depth proof until app/store or in-app paywall evidence is captured. |
+| PF_05_PF_S04 | AstroSage Kundli: AI Astrology | reviewed_no_clean_public_price | Human review completed from saved screenshot/OCR; product-match remains conservative because the evidence is public web only. | Use only as astrology monetization context; do not use as app paywall, plan-depth, or WTP proof. |
+| PF_07_PF_S01 | Everskies: Virtual Dress up | reviewed_no_clean_public_price | Saved Everskies page shows logged-out public site context and mentions StarPass/Stars, but no clean price or plan term. | Use as weak avatar-economy paid-surface cue; do not use as pricing or conversion proof. |
+| PF_07_PF_S02 | Everskies: Virtual Dress up | reviewed_no_clean_public_price | First meaningful in-app paywall boundary was not inspected in the local screenshot. | Use only as a weak public paid-surface cue; keep first-value/paywall timing open. |
+| PF_07_PF_S03 | Everskies: Virtual Dress up | reviewed_no_clean_public_price | Paid-feature depth could not be cleanly reconstructed from the saved public screenshot. | Do not use as plan-depth proof until app/store or in-app paywall evidence is captured. |
+| PF_07_PF_S04 | Everskies: Virtual Dress up | reviewed_no_clean_public_price | Human review completed from saved screenshot/OCR; product-match remains conservative because the evidence is public web only. | Use as weak avatar-economy paid-surface cue; do not use as pricing or conversion proof. |
+| PF_08_PF_S01 | Mindfulness with Petit BamBou | reviewed_no_clean_public_price | Saved Petit BamBou page shows Subscribe/Login and free-version/account language, but no clean subscription price. | Use as weak mindfulness paid-surface cue; do not use as pricing, plan-depth, or WTP proof. |
+| PF_08_PF_S02 | Mindfulness with Petit BamBou | reviewed_no_clean_public_price | First meaningful in-app paywall boundary was not inspected in the local screenshot. | Use only as a weak public paid-surface cue; keep first-value/paywall timing open. |
+| PF_08_PF_S03 | Mindfulness with Petit BamBou | reviewed_no_clean_public_price | Paid-feature depth could not be cleanly reconstructed from the saved public screenshot. | Do not use as plan-depth proof until app/store or in-app paywall evidence is captured. |
+| PF_08_PF_S04 | Mindfulness with Petit BamBou | reviewed_no_clean_public_price | Human review completed from saved screenshot/OCR; product-match remains conservative because the evidence is public web only. | Use as weak mindfulness paid-surface cue; do not use as pricing, plan-depth, or WTP proof. |
 
 ## 3. Конкурентная плотность: рынок большой, но не пустой
 
@@ -429,13 +449,13 @@ Product-core evidence и prototype stimulus переводят исследов�
 | REQ_01_MASTER_PLAN | proved_v1 | strong | Keep refreshing as validation results change. |
 | REQ_02_COMPETITOR_UNIVERSE | proved_raw_50k_and_dedup_30k_plus_dedup_50k_open | medium_high | Raw 50k source scale is now met and the dedup 30k+/30k-40k working band is met; the remaining expansion gap is dedup 50k plus Product Hunt/AlternativeTo, B2B directories, company positioning pages, and additional source-native coverage. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
-| REQ_04_MARKET_MONEY | supported_with_triangulated_proxy_not_final | medium_high | Market sizing is stress-tested and triangulated, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall/WTP validation are still needed for final investor-grade claims. |
-| REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | Cross-source saturation now keeps gaming/progression as benchmark-only and finds no primary market opportunity strong enough to upgrade without manual walkthrough; app/onboarding screenshots are still required. |
-| REQ_06_AUDIENCE_ICP | directionally_supported_recruiting_ready | medium | Segments and recruiting assets are directional and need actual interviews/prototype/WTP validation. |
-| REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | No completed user/prototype sessions prove the loop is understood/preferred. |
-| REQ_08_REPORT_PDF | polished_and_russian_narrative_argument_map_done_not_validated_final | medium_high | Polished evidence PDF, Russian narrative PDF, and Russian argument map exist as publication-ready drafts, but they are not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
+| REQ_04_MARKET_MONEY | supported_with_triangulated_proxy_not_final | medium_high | Market sizing is stress-tested and triangulated. Paid-flow signoff improved H2, but it is still below the validation threshold and actual competitor revenue estimates, paid intelligence, and in-app/WTP validation remain open. |
+| REQ_05_WHITESPACE | narrow_supported_public_listing_signed_off_walkthrough_open | medium | Cross-source saturation now keeps gaming/progression as benchmark-only and finds no primary market opportunity strong enough to upgrade without manual walkthrough; app/onboarding screenshots are still required. |
+| REQ_06_AUDIENCE_ICP | directionally_supported_secondary_voc_signed_off_interviews_open | medium | Segments and recruiting assets are directional and need actual interviews/prototype/WTP validation. |
+| REQ_07_COMPETITIVE_ADVANTAGE | prototype_readiness_signed_off_user_sessions_open | medium | No completed user/prototype sessions prove the loop is understood/preferred. |
+| REQ_08_REPORT_PDF | global_russian_report_pdf_docx_done_not_validated_final | medium_high | Global Russian Markdown/PDF/DOCX report exists and includes validation rollup, but it is not final validated investor/user-facing proof because all six validation gates still remain hold_validate. |
 | REQ_09_VERSIONING_PROVENANCE | proved_active | high | Manifest must be regenerated after future evidence changes. |
-| REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
+| REQ_10_VALIDATION_GATES | all_gates_started_none_passed_validation_open | strong | All six gates are now started, but none is pass-ready: partial/readiness/signoff evidence is present, while app walkthrough, ICP interview, prototype session, and WTP proof remain below threshold. |
 
 ## 8.1. Русские карточки H1-H6 validation gates
 
@@ -517,7 +537,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 
 ## 9. Следующие действия
 
-Все H1-H6 validation gates сейчас требуют наблюдаемой валидации. Not-started gates: 5. Это не провал, а честная граница исследования: локальная evidence base готова, но реальные решения должны приниматься после ручного walkthrough и пользовательских сессий.
+Все H1-H6 validation gates сейчас требуют наблюдаемой валидации. Not-started gates: 0. Это не провал, а честная граница исследования: локальная evidence base готова, но реальные решения должны приниматься после ручного walkthrough и пользовательских сессий.
 
 Практический порядок следующий. Сначала закрыть manual competitor walkthrough для P0 приложений: onboarding, first action, progress/avatar feedback, first paywall. Затем пройти paid-flow sign-off по сильным money proxy. Затем прочитать P0 Reddit threads и заполнить capture sheet: user job, alternatives, rejected patterns, paid/WTP signal, safety boundary, Alina implication. Затем провести ICP interviews по двум верхним сегментам и короткие prototype sessions. Только после этого можно обновлять H1-H6 из hold/validate в более сильные решения.
 
@@ -644,8 +664,8 @@ Product-core evidence и prototype stimulus переводят исследов�
 | Claim | Статус | Confidence | Метрика | Граница |
 | --- | --- | --- | --- | --- |
 | REQ_plan | доказано как исследовательский слой | high | master plan exists; 16 validation roadmap rows; 11 execution tasks | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | доказано как исследовательский слой | high | 441 manifest rows; 0 missing artifacts | Это provenance proof, а не содержательное доказательство спроса. |
-| REQ_completion_readiness_audit | доказано как исследовательский слой | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
+| REQ_evidence_package_traceability | доказано как исследовательский слой | high | 525 manifest rows; 0 missing artifacts | Это provenance proof, а не содержательное доказательство спроса. |
+| REQ_completion_readiness_audit | доказано как исследовательский слой | high | 10 completion requirements; 6 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_hypothesis_decision_matrix | доказано как исследовательский слой | high | 6 hypothesis decision rows; 6 hold/validate; 0 go; 0 stop/pivot | Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open. |
 | REQ_market_money_triangulation | доказано как исследовательский слой | medium_high | 6 market rows; 3 strong and 1 medium directional money cases | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |
 | REQ_p0_validation_command_center | доказано как исследовательский слой | high | 75 command rows; 6 blocker rows; 52 P0 rows | Это операционная готовность, не observed validation evidence. |
@@ -655,11 +675,11 @@ Product-core evidence и prototype stimulus переводят исследов�
 | REQ_validation_batch_02 | доказано как исследовательский слой | high | 52 batch rows; 52 not started; 12 local artifacts linked | Это операционная готовность, не observed validation evidence. |
 | REQ_validation_batch_03 | доказано как исследовательский слой | high | 17 batch rows; 17 not started; 17 local artifacts linked | Это операционная готовность, не observed validation evidence. |
 | REQ_validation_evidence_rollup | доказано как исследовательский слой | high | 75 command rows; 75 notes present; 29 local artifacts linked | Это операционная готовность, не observed validation evidence. |
-| REQ_validation_gate_calculator | доказано как исследовательский слой | high | 6 gate rows; 0 pass-ready; 1 in-progress; 5 not started; 0 downgrade/kill triggered | Это операционная готовность, не observed validation evidence. |
-| REQ_competitor_universe | доказано как исследовательский слой | medium_high | 67525 cross-source raw rows; 36694 cross-source dedup rows; 39 coverage cells; 11 strong and 12 medium source/market cells | Raw 50k source scale is met; dedup 30k+ and the 30k-40k working band are met; dedup 50k remains open and should not be overclaimed. |
+| REQ_validation_gate_calculator | доказано как исследовательский слой | high | 6 gate rows; 0 pass-ready; 6 in-progress; 0 not started; 0 downgrade/kill triggered | Это операционная готовность, не observed validation evidence. |
+| REQ_competitor_universe | доказано как исследовательский слой | medium_high | 68085 cross-source raw rows; 37176 cross-source dedup rows; 44 coverage cells; 11 strong and 12 medium source/market cells | Raw 50k source scale is met; dedup 30k+ and the 30k-40k working band are met; dedup 50k remains open and should not be overclaimed. |
 | H1_product_shape_exists | готово к проверке, gate открыт | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Нельзя усиливать claim без app/onboarding walkthrough и скриншотов причинной петли. |
-| H2_markets_have_money | поддержано направленно, но не финально доказано | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies; 8 local paid-flow signoff rows | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |
-| H2_paywall_visible_evidence | поддержано направленно, но не финально доказано | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples; 8 local signoff rows | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |
+| H2_markets_have_money | поддержано направленно, но не финально доказано | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies; 28 local paid-flow signoff rows | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |
+| H2_paywall_visible_evidence | поддержано направленно, но не финально доказано | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples; 28 local signoff rows | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |
 | H3_whitespace_exists | поддержано направленно, но не финально доказано | medium | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Нельзя усиливать claim без app/onboarding walkthrough и скриншотов причинной петли. |
 | H4_competitive_advantage_plausible | готово к проверке, gate открыт | medium | 1 direct reference competitor; 45 high-threat competitors; 8 prototype screens; 6 success/kill metrics | Нельзя считать продуктовое преимущество доказанным без prototype sessions и observed scorecard. |
 | H5_shared_audience_exists | поддержано направленно, но не финально доказано | medium | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Нельзя превращать directional language signals в финальную персону без интервью. |

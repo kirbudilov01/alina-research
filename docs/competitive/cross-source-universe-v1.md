@@ -1,19 +1,19 @@
 # Cross-Source Universe V1
 
-Generated: 2026-05-31T14:02:00.781Z
+Generated: 2026-05-31T18:18:26.642Z
 
 ## Purpose
 
-This layer normalizes the major source-native collections into one auditable universe. It keeps raw provenance while producing a cross-source deduplicated view across core app-store rows, itch.io, Steam, Mac desktop store, Chrome Web Store search/detail pages, and Reddit forum mention discovery.
+This layer normalizes the major source-native collections into one auditable universe. It keeps raw provenance while producing a cross-source deduplicated view across core app-store rows, itch.io, Steam, Mac desktop store, Chrome Web Store search/detail pages, Reddit forum mention discovery, and known company/public-web positioning pages.
 
 ## Summary
 
-- Cross-source raw rows: 67525
-- Cross-source dedup rows: 36694
+- Cross-source raw rows: 68085
+- Cross-source dedup rows: 37176
 - Raw shard files: 5
-- Source groups: 9
+- Source groups: 10
 - Niches represented: 6
-- Rows with source URLs: 67525
+- Rows with source URLs: 68085
 
 Raw rows by source group:
 
@@ -23,6 +23,7 @@ Raw rows by source group:
 - itch_web_game: 7047
 - google_play_or_android: 2527
 - community_forum: 2339
+- company_positioning: 560
 - browser_extension: 252
 - unknown_source: 251
 - duckduckgo_search: 70
@@ -35,6 +36,7 @@ Dedup rows by primary source group:
 - desktop_store: 2478
 - community_forum: 1852
 - google_play_or_android: 1646
+- company_positioning: 482
 - browser_extension: 252
 - unknown_source: 251
 - duckduckgo_search: 56
@@ -52,12 +54,13 @@ Dedup rows by primary source group:
 | browser_extension | 252 | 252 | 251 | astrology_esoterics:55<br>avatar_identity:52<br>coaching:51<br>mindfulness:50<br>gaming_progression:44 |
 | unknown_source | 251 | 251 | 251 | astrology_esoterics:55<br>avatar_identity:52<br>coaching:51<br>mindfulness:50<br>gaming_progression:43 |
 | community_forum | 2339 | 1852 | 940 | coaching:886<br>mindfulness:773<br>avatar_identity:620<br>astrology_esoterics:30<br>gaming_progression:30 |
+| company_positioning | 560 | 482 | 188 | gaming:304<br>avatar_identity:128<br>mindfulness:72<br>astrology_esoterics:48<br>coaching:8 |
 
 ## Claim Boundary
 
 - This is a normalization/provenance layer, not new market-share proof.
 - Cross-source dedup protects the project from double-counting repeated country/query/tag results.
-- Source-specific interpretation caveats still apply: Steam/itch are mechanic discovery, desktop store is discovery, Chrome is browser-mechanic evidence, Reddit is qualitative forum-discovery evidence, and mobile app-store rows remain the strongest direct consumer-app competitor base.
+- Source-specific interpretation caveats still apply: Steam/itch are mechanic discovery, desktop store is discovery, Chrome is browser-mechanic evidence, Reddit is qualitative forum-discovery evidence, company positioning pages are public positioning/paywall context, and mobile app-store rows remain the strongest direct consumer-app competitor base.
 
 ## Files
 

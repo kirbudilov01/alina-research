@@ -1,12 +1,12 @@
 # Alina Research. Читаемая русская версия V2
 
-Собрано: 2026-05-31T14:47:28.601Z
+Собрано: 2026-05-31T18:23:19.241Z
 
 ## Короткий вывод
 
 Alina пока нельзя честно называть доказанным продуктом, но ее стоит продолжать исследовать. Вокруг идеи уже виден большой соседний рынок: люди платят за mindfulness, коучинг, astrology/spiritual guidance, аватары/AI companions и игровые механики прогресса. При этом сама возможность для Alina находится не в одной из этих категорий, а на пересечении: короткая ежедневная петля, где личный смысл превращается в одно действие, действие дает reset, а результат становится видимым через прогресс, идентичность или аватар.
 
-Главное, что сейчас есть: 67,525 raw source rows, 36,694 dedup rows, 448 локальных артефакта в manifest и 90 первичных приложений в top-100 конкурентном разборе. Это уже не маленький ресерч на несколько тысяч строк. Но это все еще desk/source evidence, а не финальная пользовательская валидация. Поэтому вывод аккуратный: идея выглядит перспективной, но следующие решения должны приниматься после ручного walkthrough конкурентов, проверки paywall и коротких прототипных сессий.
+Главное, что сейчас есть: 68,085 raw source rows, 37,176 dedup rows, 525 локальных артефакта в manifest и 90 первичных приложений в top-100 конкурентном разборе. Это уже не маленький ресерч на несколько тысяч строк. Но это все еще desk/source evidence, а не финальная пользовательская валидация. Поэтому вывод аккуратный: идея выглядит перспективной, но следующие решения должны приниматься после ручного walkthrough конкурентов, проверки paywall и коротких прототипных сессий.
 
 ## 1. Что мы проверяем
 
@@ -28,7 +28,7 @@ Alina пока нельзя честно называть доказанным �
 
 Если смотреть только на более прямые source-native каналы приложений и витрин, там сейчас 30,176 raw rows и 11,334 dedup rows. Важно: direct app/store слой нужен для карты конкурентов, а общий total dedup нужен для насыщения discovery и поиска белого пятна. Эти два слоя нельзя смешивать в один claim.
 
-По масштабу граница такая: raw 50k уже закрыт (67,525 строк), dedup 30k+ закрыт (36,694 строк), а dedup 50k остается целью следующего расширения (open, gap сохраняется). Поэтому правильная формулировка: у нас есть большая карта источников, но не 50k вручную проверенных прямых конкурентов.
+По масштабу граница такая: raw 50k уже закрыт (68,085 строк), dedup 30k+ закрыт (37,176 строк), а dedup 50k остается целью следующего расширения (open, gap сохраняется). Поэтому правильная формулировка: у нас есть большая карта источников, но не 50k вручную проверенных прямых конкурентов.
 
 ## 3. Что видно по рынкам и деньгам
 
@@ -42,7 +42,7 @@ Alina пока нельзя честно называть доказанным �
 | Coaching / self-improvement | $300M | 3,857 | medium_directional_money_case | 50 | рынок важен, но crowded/unclear без walkthrough |
 | Gaming / progression benchmark | $671M | 14,304 | benchmark_money_visible_not_direct_tam | 8 | mechanic benchmark, не direct TAM |
 
-В текущей модели intersection SAM равен $202M. Это не прогноз выручки Alina. Это рабочая рамка: рядом есть достаточно большой платежный контекст, чтобы проверять продукт дальше. Сейчас 3 рынков имеют strong directional money case, 1 рынок имеет medium directional money case, а локальный paid-flow signoff заполнен на 8 строках. Самый важный нюанс: Character AI/c.ai+ подтверждает публичную платную поверхность в AI companion/avatar-identity зоне, а Meditopia подтверждает скорее B2B/EAP wellness pricing, не прямой consumer paywall.
+В текущей модели intersection SAM равен $202M. Это не прогноз выручки Alina. Это рабочая рамка: рядом есть достаточно большой платежный контекст, чтобы проверять продукт дальше. Сейчас 3 рынков имеют strong directional money case, 1 рынок имеет medium directional money case, а локальный paid-flow signoff заполнен на 28 строках. Самый важный нюанс: Character AI/c.ai+ подтверждает публичную платную поверхность в AI companion/avatar-identity зоне, а Meditopia подтверждает скорее B2B/EAP wellness pricing, не прямой consumer paywall.
 
 ## 4. Что видно по конкурентам
 
@@ -136,14 +136,14 @@ Reddit/forum слой сейчас дает 2,339 coded signal rows и 1,852 т�
 
 | Gate | Status | Need | Done | Success | Следующий шаг |
 | --- | --- | ---: | ---: | ---: | --- |
-| GATE_H1_MANUAL_PRODUCT_SHAPE | not_started | 60 | 0 | 0 | Capture onboarding, first action, progress/avatar feedback, and paywall screenshots for the highest-risk public-listing rows. |
-| GATE_H3_MANUAL_WHITESPACE | not_started | 60 | 0 | 0 | Use the public-listing risk read to classify action->avatar causality in walkthrough as visible, inferred, absent, or blocked. |
-| GATE_H2_PAID_FLOW | in_progress_insufficient_evidence | 40 | 8 | 8 | Use stress-test risk rows to prioritize paid-flow inspection and prototype willingness-to-pay questions. |
-| GATE_H5_ICP_RECENT_BEHAVIOR | not_started | 96 | 0 | 0 | Execute the ICP validation packet for the top two segments, then update segment status and selected primary ICP. |
-| GATE_H4_PROTOTYPE_ADVANTAGE | not_started | 80 | 0 | 0 | Run prototype sessions with the top two ICP segments and fill the scorecard with observed results. |
-| GATE_H6_PRODUCT_CORE | not_started | 80 | 0 | 0 | Run prototype sessions and measure loop completion, comprehension, meaning lift, return intent, and paid-depth interest. |
+| GATE_H1_MANUAL_PRODUCT_SHAPE | in_progress_insufficient_evidence | 60 | 12 | 0 | Capture onboarding, first action, progress/avatar feedback, and paywall screenshots for the highest-risk public-listing rows. |
+| GATE_H3_MANUAL_WHITESPACE | in_progress_insufficient_evidence | 60 | 12 | 0 | Use the public-listing risk read to classify action->avatar causality in walkthrough as visible, inferred, absent, or blocked. |
+| GATE_H2_PAID_FLOW | in_progress_insufficient_evidence | 48 | 28 | 8 | Use stress-test risk rows to prioritize paid-flow inspection and prototype willingness-to-pay questions. |
+| GATE_H5_ICP_RECENT_BEHAVIOR | in_progress_insufficient_evidence | 96 | 12 | 0 | Use the ICP recruiting bridge to source top-two segment participants, execute the ICP validation packet, then update segment status and selected primary ICP. |
+| GATE_H4_PROTOTYPE_ADVANTAGE | in_progress_insufficient_evidence | 80 | 16 | 0 | Run prototype sessions with the top two ICP segments and fill the scorecard with observed results. |
+| GATE_H6_PRODUCT_CORE | in_progress_insufficient_evidence | 80 | 16 | 0 | Run prototype sessions and measure loop completion, comprehension, meaning lift, return intent, and paid-depth interest. |
 
-Технический статус gates: GATE_H1_MANUAL_PRODUCT_SHAPE: not_started; GATE_H3_MANUAL_WHITESPACE: not_started; GATE_H2_PAID_FLOW: in_progress_insufficient_evidence; GATE_H5_ICP_RECENT_BEHAVIOR: not_started; GATE_H4_PROTOTYPE_ADVANTAGE: not_started; GATE_H6_PRODUCT_CORE: not_started. Если где-то уже есть локальные observed rows, это нужно читать как in-progress, а не как финальный pass. Для финального решения нужны одинаково заполненные capture rows, screenshots/quotes/scorecard values, пересборка отчета и сохранение в Git.
+Технический статус gates: GATE_H1_MANUAL_PRODUCT_SHAPE: in_progress_insufficient_evidence; GATE_H3_MANUAL_WHITESPACE: in_progress_insufficient_evidence; GATE_H2_PAID_FLOW: in_progress_insufficient_evidence; GATE_H5_ICP_RECENT_BEHAVIOR: in_progress_insufficient_evidence; GATE_H4_PROTOTYPE_ADVANTAGE: in_progress_insufficient_evidence; GATE_H6_PRODUCT_CORE: in_progress_insufficient_evidence. Если где-то уже есть локальные observed rows, это нужно читать как in-progress, а не как финальный pass. Для финального решения нужны одинаково заполненные capture rows, screenshots/quotes/scorecard values, пересборка отчета и сохранение в Git.
 
 ## 10. Что делать дальше
 
