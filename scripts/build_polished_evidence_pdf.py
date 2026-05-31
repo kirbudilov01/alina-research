@@ -305,6 +305,7 @@ def main() -> None:
     whitespace = read_csv("data_processed/whitespace_signal_matrix.csv")
     top100 = read_csv("data_processed/top100_competitor_review_scorecard.csv")
     roadmap = read_csv("data_processed/validation_gap_roadmap.csv")
+    execution_dashboard = read_csv("data_processed/validation_execution_dashboard.csv")
 
     known_raw_total = len(expanded_raw) + len(itch) + len(steam) + len(chrome_raw)
     csv_rows = sum(int(row.get("row_count") or 0) for row in manifest if row.get("file_path", "").endswith(".csv"))
@@ -337,6 +338,8 @@ def main() -> None:
     ]
     p0_roadmap = [row for row in roadmap if row.get("priority") == "P0"]
     p1_roadmap = [row for row in roadmap if row.get("priority") == "P1"]
+    p0_execution = [row for row in execution_dashboard if row.get("priority") == "P0"]
+    p1_execution = [row for row in execution_dashboard if row.get("priority") == "P1"]
 
     metrics = {
         "Known raw source/app rows": number(known_raw_total),
@@ -577,6 +580,8 @@ def main() -> None:
                 ["Success/kill scorecard metrics", len(prototype_scorecard)],
                 ["P0 validation roadmap rows", len(p0_roadmap)],
                 ["P1 validation roadmap rows", len(p1_roadmap)],
+                ["P0 execution dashboard tasks", len(p0_execution)],
+                ["P1 execution dashboard tasks", len(p1_execution)],
             ],
             [3.4 * inch, 1.1 * inch],
             small=False,
@@ -599,6 +604,19 @@ def main() -> None:
                 if not row.get("status", "").startswith("proved")
             ],
             [1.2 * inch, 3.25 * inch, 2.65 * inch],
+        ),
+        Spacer(1, 0.12 * inch),
+        table(
+            [["Execution task", "Priority", "Evidence to capture"]]
+            + [
+                [
+                    row.get("workstream"),
+                    row.get("priority"),
+                    short(row.get("exact_evidence_to_capture"), 160),
+                ]
+                for row in execution_dashboard[:7]
+            ],
+            [1.75 * inch, 0.65 * inch, 4.7 * inch],
         ),
         Spacer(1, 0.15 * inch),
         para("Evidence File Map", "H1"),

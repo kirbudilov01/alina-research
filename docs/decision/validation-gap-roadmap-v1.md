@@ -1,6 +1,6 @@
 # Validation Gap Roadmap V1
 
-Generated: 2026-05-31T04:32:19.111Z
+Generated: 2026-05-31T06:50:39.579Z
 
 ## Purpose
 
@@ -8,8 +8,8 @@ This roadmap converts the current evidence base into the next validation queue. 
 
 ## Priority Mix
 
-- P1: 9
-- P0: 5
+- P1: 12
+- P0: 4
 
 ## Market Validation
 
@@ -25,11 +25,11 @@ This roadmap converts the current evidence base into the next validation queue. 
 
 | Hypothesis | Evidence Band | Priority | Gap | Success Gate |
 | --- | --- | --- | --- | --- |
-| H1_product_shape_exists | partially_supported/medium | P0 | Strict full loop is rare and needs manual product/onboarding validation. | Human validation confirms at least 5 close substitutes and no hidden direct clone invalidates the loop. |
-| H2_markets_have_money | supported_with_ranges/medium | P1 | Market sizing still needs competitor revenue/proxy review and additional triangulation for thin/contextual markets. | Market source confidence review adds credible low/base/high ranges and revenue/pricing proxy checks by direct market. |
-| H2_paywall_visible_evidence | supported_narrowly/medium_low | P0 | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. | Human screenshot review classifies public pricing/paywall evidence as confirm/partial/reject. |
-| H3_whitespace_exists | narrow_supported_not_final/medium | P0 | Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors. | Manual app/onboarding inspection confirms action -> identity/avatar causality remains rare. |
-| H4_competitive_advantage_plausible | plausible_unproven/medium_low | P0 | No human validation or prototype test yet proves users value the loop. | Prototype or user test shows the integrated loop is understood and preferred over generic habit/coach alternatives. |
+| H1_product_shape_exists | public_listing_inspected_walkthrough_open/medium | P1 | Strict full loop is rare and still needs actual app/onboarding screenshots to confirm or downgrade public listing claims. | Human validation confirms at least 5 close substitutes and no hidden direct clone invalidates the loop. |
+| H2_markets_have_money | supported_with_ranges_stress_test_and_bottom_up_proxy/medium | P1 | Market sizing still needs actual revenue estimates, paid intelligence, manual in-app paywall validation, and willingness-to-pay prototype evidence for final investor-grade claims. | Market stress-test, source confidence, and paid-flow validation support range-based money claims without overclaiming revenue. |
+| H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication/medium_low | P0 | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require human sign-off/in-app inspection. | Human screenshot review classifies public pricing/paywall evidence as confirm/partial/reject. |
+| H3_whitespace_exists | narrow_supported_public_listing_inspected_walkthrough_open/medium | P0 | Actual app/onboarding inspection results are still missing; public listings can overstate or hide in-app loops. | Manual app/onboarding inspection confirms action -> identity/avatar causality remains rare. |
+| H4_competitive_advantage_plausible | prototype_stimulus_ready_unvalidated/medium | P1 | No human prototype session yet proves users understand, prefer, or value the integrated loop. | Prototype or user test shows the integrated loop is understood and preferred over generic habit/coach alternatives. |
 | H5_shared_audience_exists | directionally_supported/medium | P1 | Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. | User interviews or validated quotes confirm one audience segment with shared language and willingness to use/pay. |
 | H6_product_core_defined | supported_for_mvp_framing/medium | P1 | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. | Prototype test validates comprehension, emotional value, and next-day return intent. |
 
@@ -38,10 +38,26 @@ This roadmap converts the current evidence base into the next validation queue. 
 ### Chrome extension mechanic references
 
 - Priority: P1
-- Current evidence: 23 battlecards; 9 priority mechanic references
+- Current evidence: 251 battlecards; 41 priority mechanic references
 - Gap: screenshots/onboarding may reveal hidden identity metaphors or richer loops than metadata shows
 - Next action: Capture screenshots for priority Chrome mechanic references and classify progress as numeric, emotional, behavioral, or identity/avatar-linked.
 - Success gate: Priority Chrome references are classified and either strengthen or weaken the narrow whitespace claim.
+
+### Market sizing stress-test follow-up
+
+- Priority: P1
+- Current evidence: 6 stress scenarios; 3 high-risk/range-only rows
+- Gap: stress-test is model evidence, not actual revenue or willingness-to-pay proof
+- Next action: Use stress-test rows to prioritize paid-flow inspection and prototype willingness-to-pay questions.
+- Success gate: High-risk market assumptions either gain stronger source/proxy support or remain explicitly caveated in final PDF.
+
+### P0 public listing to app walkthrough bridge
+
+- Priority: P0
+- Current evidence: 12 public listings inspected; manual app walkthrough done=0
+- Gap: public listing evidence cannot prove hidden in-app mechanics
+- Next action: Capture onboarding, first action, progress/avatar feedback, and paywall-boundary screenshots for the high-risk P0 apps.
+- Success gate: P0 apps have final directness, action-to-avatar causality, hidden clone risk, and paywall-boundary verdicts.
 
 ### ICP segment validation
 

@@ -210,6 +210,7 @@ const requiredArtifacts = [
   'data_processed/prototype_validation_scorecard.csv',
   'data_processed/evidence_claim_register.csv',
   'data_processed/validation_gap_roadmap.csv',
+  'data_processed/validation_execution_dashboard.csv',
   'reports/alina-evidence-first-report-draft.md',
   'reports/evidence-status-2026-05-31.md',
   'output/pdf/alina-evidence-first-report-draft.pdf',

@@ -108,10 +108,16 @@ const pricing = csv('data_raw/app_store_iap_pricing_raw.csv');
 const googlePricing = csv('data_raw/google_play_pricing_raw.csv');
 const forumQuotes = csv('data_processed/forum_quote_coding_matrix.csv');
 const chromeBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
+const publicListingInspection = csv('data_processed/public_listing_inspection_results.csv');
+const marketStressTest = csv('data_processed/market_sizing_stress_test.csv');
+const marketAssumptionAudit = csv('data_processed/market_sizing_assumption_audit.csv');
 const icpSegments = csv('data_processed/icp_segment_matrix.csv');
 const icpValidationPlan = csv('data_processed/icp_validation_test_plan.csv');
 const evidence = csv('data_processed/evidence_claim_register.csv');
 const strongIcpSegments = icpSegments.filter(row => row.evidence_band === 'strong_directional_icp');
+const publicListingInspected = publicListingInspection.filter(row => row.public_listing_inspection_status === 'public_listing_inspected').length;
+const publicListingHighRisk = publicListingInspection.filter(row => row.hidden_clone_risk_public_read === 'high_hidden_clone_risk_requires_app_walkthrough').length;
+const chromePriorityCount = count(chromeBattlecards, row => ['mechanic_threat_high', 'mechanic_threat_medium', 'mechanic_reference_high'].includes(row.threat_band));
 
 const marketNames = {
   coaching: 'Coaching / self-improvement',
@@ -206,7 +212,7 @@ function hypothesisRow(claim) {
 
 function successGateForClaim(claimId) {
   if (claimId === 'H1_product_shape_exists') return 'Human validation confirms at least 5 close substitutes and no hidden direct clone invalidates the loop.';
-  if (claimId === 'H2_markets_have_money') return 'Market source confidence review adds credible low/base/high ranges and revenue/pricing proxy checks by direct market.';
+  if (claimId === 'H2_markets_have_money') return 'Market stress-test, source confidence, and paid-flow validation support range-based money claims without overclaiming revenue.';
   if (claimId === 'H2_paywall_visible_evidence') return 'Human screenshot review classifies public pricing/paywall evidence as confirm/partial/reject.';
   if (claimId === 'H3_whitespace_exists') return 'Manual app/onboarding inspection confirms action -> identity/avatar causality remains rare.';
   if (claimId === 'H4_competitive_advantage_plausible') return 'Prototype or user test shows the integrated loop is understood and preferred over generic habit/coach alternatives.';
@@ -228,11 +234,37 @@ const rows = [
     label: 'Chrome extension mechanic references',
     evidence_band: 'mechanic_evidence_not_direct_competition',
     priority: 'P1',
-    current_evidence: `${chromeBattlecards.length} battlecards; ${count(chromeBattlecards, row => ['mechanic_threat_high', 'mechanic_threat_medium', 'mechanic_reference_high'].includes(row.threat_band))} priority mechanic references`,
+    current_evidence: `${chromeBattlecards.length} battlecards; ${chromePriorityCount} priority mechanic references`,
     main_gap: 'screenshots/onboarding may reveal hidden identity metaphors or richer loops than metadata shows',
     recommended_next_action: 'Capture screenshots for priority Chrome mechanic references and classify progress as numeric, emotional, behavioral, or identity/avatar-linked.',
     success_gate: 'Priority Chrome references are classified and either strengthen or weaken the narrow whitespace claim.',
     source_files: 'data_processed/chrome_extension_mechanic_battlecards.csv;docs/competitive/chrome-extension-mechanic-battlecards-v1.md'
+  },
+  {
+    roadmap_id: 'XR_MARKET_STRESS_FOLLOWUP',
+    roadmap_type: 'cross_source_validation',
+    market: 'all',
+    label: 'Market sizing stress-test follow-up',
+    evidence_band: `${marketAssumptionAudit.length} assumption rows; ${marketStressTest.length} stress scenarios`,
+    priority: 'P1',
+    current_evidence: `${marketStressTest.length} stress scenarios; ${marketAssumptionAudit.filter(row => /high|benchmark_only/.test(row.model_risk)).length} high-risk/range-only rows`,
+    main_gap: 'stress-test is model evidence, not actual revenue or willingness-to-pay proof',
+    recommended_next_action: 'Use stress-test rows to prioritize paid-flow inspection and prototype willingness-to-pay questions.',
+    success_gate: 'High-risk market assumptions either gain stronger source/proxy support or remain explicitly caveated in final PDF.',
+    source_files: 'data_processed/market_sizing_assumption_audit.csv;data_processed/market_sizing_stress_test.csv;docs/market/market-sizing-stress-test-v1.md'
+  },
+  {
+    roadmap_id: 'XR_PUBLIC_LISTING_WALKTHROUGH',
+    roadmap_type: 'cross_source_validation',
+    market: 'all',
+    label: 'P0 public listing to app walkthrough bridge',
+    evidence_band: `${publicListingInspected} public listings inspected; ${publicListingHighRisk} high clone-risk public read`,
+    priority: 'P0',
+    current_evidence: `${publicListingInspected} public listings inspected; manual app walkthrough done=0`,
+    main_gap: 'public listing evidence cannot prove hidden in-app mechanics',
+    recommended_next_action: 'Capture onboarding, first action, progress/avatar feedback, and paywall-boundary screenshots for the high-risk P0 apps.',
+    success_gate: 'P0 apps have final directness, action-to-avatar causality, hidden clone risk, and paywall-boundary verdicts.',
+    source_files: 'data_processed/public_listing_inspection_results.csv;data_processed/manual_competitor_inspection_packet.csv;docs/competitive/public-listing-inspection-v1.md'
   },
   {
     roadmap_id: 'XR_ICP_SEGMENT_VALIDATION',
