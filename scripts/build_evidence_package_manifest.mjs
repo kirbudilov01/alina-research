@@ -84,6 +84,7 @@ function classify(file) {
   if (file.startsWith('data_processed/')) return 'processed_data';
   if (file.startsWith('docs/')) return 'research_doc';
   if (file.startsWith('reports/')) return 'report';
+  if (file.startsWith('output/docx/')) return 'docx';
   if (file.startsWith('output/pdf/')) return 'pdf';
   if (file.startsWith('output/charts/')) return 'chart';
   if (file.startsWith('output/validation/')) return 'validation_workspace';
@@ -278,6 +279,7 @@ const requiredArtifacts = [
   'reports/alina-global-hypothesis-report-v1.md',
   'reports/alina-russian-narrative-report-v1.md',
   'reports/alina-russian-readable-report-v2.md',
+  'output/docx/alina-global-hypothesis-report-v1.docx',
   'docs/decision/research-navigation-index-v1.md',
   'docs/decision/russian-narrative-evidence-map-v1.md',
   'docs/market/russian-market-sizing-playbook-v1.md',

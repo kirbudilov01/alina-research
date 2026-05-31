@@ -1,6 +1,6 @@
 # Evidence Package Manifest V1
 
-Generated: 2026-05-31T14:48:00.714Z
+Generated: 2026-05-31T14:53:51.790Z
 
 ## Purpose
 
@@ -8,7 +8,7 @@ This manifest makes the research package auditable. It lists key raw data, proce
 
 ## Package Summary
 
-- Manifest rows: 451
+- Manifest rows: 453
 - Missing required artifacts: 0
 - CSV artifacts: 111
 - Total CSV data rows tracked: 241439
@@ -17,17 +17,18 @@ This manifest makes the research package auditable. It lists key raw data, proce
 Artifact types:
 
 - research_doc: 110
+- generator_script: 97
 - processed_data: 96
-- generator_script: 96
 - validation_workspace: 95
 - report: 19
 - raw_data: 15
 - chart: 14
 - pdf: 6
+- docx: 1
 
 Evidence roles:
 
-- decision_artifact: 188
+- decision_artifact: 190
 - supporting: 73
 - market_money: 58
 - audience_icp: 57
@@ -86,7 +87,7 @@ Evidence roles:
 | --- | --- | ---: | ---: | --- |
 | docs/competitive/human-validation-guide-v1.md | research_doc | 91 | 12102 | b85e6b5dd29fcb2f |
 | docs/decision/evidence-audit-v1.md | research_doc | 87 | 9756 | ee273e9aa8578be7 |
-| docs/decision/evidence-package-manifest-v1.md | research_doc | 130 | 8804 | af4a885535aa0e5c |
+| docs/decision/evidence-package-manifest-v1.md | research_doc | 130 | 8804 | 14cc5c49969680d9 |
 | docs/decision/hypothesis-decision-matrix-v1.md | research_doc | 51 | 4817 | baa9668809d8dc7f |
 | docs/decision/p0-validation-command-center-v1.md | research_doc | 69 | 7260 | 51d22a2990e6aaf3 |
 | docs/decision/p0-validation-field-guide-v1.md | research_doc | 136 | 12679 | 839df92dd885c73b |
