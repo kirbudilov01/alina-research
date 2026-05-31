@@ -86,6 +86,7 @@ function classify(file) {
   if (file.startsWith('reports/')) return 'report';
   if (file.startsWith('output/pdf/')) return 'pdf';
   if (file.startsWith('output/charts/')) return 'chart';
+  if (file.startsWith('output/validation/')) return 'validation_workspace';
   if (file.startsWith('scripts/')) return 'generator_script';
   return 'other';
 }
@@ -221,6 +222,7 @@ const requiredArtifacts = [
   'data_processed/validation_execution_dashboard.csv',
   'data_processed/p0_validation_command_center.csv',
   'data_processed/p0_validation_field_guide.csv',
+  'data_processed/validation_evidence_workspace_index.csv',
   'data_processed/manual_walkthrough_capture_sheet.csv',
   'data_processed/paid_flow_capture_sheet.csv',
   'data_processed/icp_interview_capture_sheet.csv',
@@ -229,13 +231,16 @@ const requiredArtifacts = [
   'reports/evidence-status-2026-05-31.md',
   'output/pdf/alina-evidence-first-report-draft.pdf',
   'output/pdf/alina-evidence-visual-report-v1.pdf',
-  'output/pdf/alina-polished-evidence-pack-v1.pdf'
+  'output/pdf/alina-polished-evidence-pack-v1.pdf',
+  'output/validation/README.md',
+  'output/validation/templates/generic-validation-note-template.md'
 ];
 
 const discoveredArtifacts = [
   ...listFiles('docs', file => /\.(md)$/i.test(file)),
   ...listFiles('reports', file => /\.(md)$/i.test(file)),
   ...listFiles('output/charts', file => /\.(svg)$/i.test(file)),
+  ...listFiles('output/validation', file => /\.(md)$/i.test(file)),
   ...listFiles('scripts', file => /^scripts\/(build_|collect_|enrich_|capture_|interpret_|expand_).*\.(mjs|py)$/i.test(file))
 ];
 

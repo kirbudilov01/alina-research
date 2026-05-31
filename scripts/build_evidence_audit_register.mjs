@@ -133,6 +133,7 @@ const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
 const validationExecutionDashboard = csv('data_processed/validation_execution_dashboard.csv');
 const p0CommandCenter = csv('data_processed/p0_validation_command_center.csv');
 const p0FieldGuide = csv('data_processed/p0_validation_field_guide.csv');
+const validationWorkspace = csv('data_processed/validation_evidence_workspace_index.csv');
 const evidenceManifest = csv('data_processed/evidence_artifact_manifest.csv');
 const completionAudit = csv('data_processed/research_completion_audit.csv');
 const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv');
@@ -265,6 +266,19 @@ const rows = [
     strongest_support: 'Field guide provides scripts for competitor walkthrough, paid-flow signoff, ICP interviews, prototype sessions, scorecard calculation, evidence naming, and post-validation rebuild/commit protocol.',
     key_gap: 'Field guide is still an execution artifact, not observed validation evidence.',
     next_action: 'Use the scripts to run the first validation tranche and update capture sheets with screenshots, quotes, observed values, and final verdicts.'
+  },
+  {
+    claim_id: 'REQ_validation_evidence_workspace',
+    claim_type: 'project_requirement',
+    claim: 'Validation evidence has a local intake workspace with templates and lane-level folders.',
+    evidence_status: validationWorkspace.length ? 'proved_v1_intake_workspace_ready_open_gates' : 'missing',
+    confidence: validationWorkspace.length ? 'high' : 'low',
+    primary_metric: `${validationWorkspace.length} workspace lanes; output/validation README and templates generated`,
+    quantitative_evidence: `workspace_lanes=${validationWorkspace.length}; field_guide_sections=${p0FieldGuide.length}; command_rows=${p0CommandCenter.length}`,
+    evidence_files: 'data_processed/validation_evidence_workspace_index.csv;docs/decision/validation-evidence-workspace-v1.md;output/validation/README.md;output/validation/templates/generic-validation-note-template.md',
+    strongest_support: 'Workspace creates lane folders, lane READMEs, and note templates tied to command_id naming conventions.',
+    key_gap: 'Workspace is empty until real screenshots, notes, quotes, and calculations are captured.',
+    next_action: 'Store first validation tranche evidence under output/validation/<date>/<lane>/ and link paths into source CSVs.'
   },
   {
     claim_id: 'REQ_competitor_universe',
@@ -424,6 +438,7 @@ lines.push('- Readiness layer: completion audit maps the original objective to p
 lines.push('- Decision layer: hypothesis decision matrix converts H1-H6 into go/hold/kill gates and keeps open validation burden visible.');
 lines.push('- Execution layer: P0 validation command center translates open gates into operator-ready evidence capture rows.');
 lines.push('- Field layer: P0 validation field guide provides scripts, evidence naming, and post-validation rebuild protocol.');
+lines.push('- Intake layer: validation evidence workspace creates local folders and templates for screenshots, notes, quotes, and scorecard calculations.');
 lines.push('- Strongest product evidence: adjacent markets are monetized; the user language around daily ritual/progress is real; strict behavior-tied avatar progression remains narrow in current metadata.');
 lines.push('- Weakest remaining proof: human validation of competitors, actual in-app paywall/onboarding flows, real user prototype response, and final source-by-source market sizing review.');
 lines.push('- Current decision should remain conditional-go for validation, not full product-build go.');

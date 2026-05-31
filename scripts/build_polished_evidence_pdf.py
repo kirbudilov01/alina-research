@@ -299,6 +299,7 @@ def main() -> None:
     hypothesis_decisions = read_csv("data_processed/hypothesis_decision_matrix.csv")
     p0_commands = read_csv("data_processed/p0_validation_command_center.csv")
     p0_field_guide = read_csv("data_processed/p0_validation_field_guide.csv")
+    validation_workspace = read_csv("data_processed/validation_evidence_workspace_index.csv")
     manifest = read_csv("data_processed/evidence_artifact_manifest.csv")
     revenue = read_csv("data_processed/competitor_revenue_proxy_review.csv")
     revenue_summary = read_csv("data_processed/competitor_revenue_proxy_market_summary.csv")
@@ -372,6 +373,7 @@ def main() -> None:
         "Hypothesis decision rows": number(len(hypothesis_decisions)),
         "P0 command rows": number(len(p0_commands)),
         "P0 field guide sections": number(len(p0_field_guide)),
+        "Validation workspace lanes": number(len(validation_workspace)),
         "Validation capture rows": number(capture_rows),
     }
     build_doc_note(metrics)
@@ -464,6 +466,7 @@ def main() -> None:
                 ["Hypothesis decision rows", len(hypothesis_decisions), "H1-H6 operating gates with go/hold/kill criteria and next validation actions."],
                 ["P0 command center rows", len(p0_commands), "Operator-ready validation commands across walkthrough, paid-flow, ICP, and prototype lanes."],
                 ["P0 field guide sections", len(p0_field_guide), "Executable scripts, evidence naming, and post-validation rebuild protocol."],
+                ["Validation workspace lanes", len(validation_workspace), "Local intake folders and note templates for screenshots, quotes, signoff, and scorecards."],
                 ["Manifest source-like refs", source_refs, "Rows with URLs, package IDs, domains, source IDs, or comparable identifiers."],
                 ["Top-100 primary apps", len(primary_top100), "Human-facing competitor review layer."],
                 ["Behavior-tied progression signals", len(behavior_tied), "Strict signal is rare in metadata, hence manual inspection is critical."],
@@ -579,6 +582,24 @@ def main() -> None:
                 for row in p0_field_guide
             ],
             [2.1 * inch, 1.45 * inch, 3.55 * inch],
+        ),
+        Spacer(1, 0.14 * inch),
+        para("Validation Evidence Workspace", "H2"),
+        para(
+            "The workspace is the local intake structure for observed evidence. It keeps screenshots and notes linked to command_id before verdicts are changed.",
+            "Body",
+        ),
+        table(
+            [["Lane", "Commands", "Workspace"]]
+            + [
+                [
+                    row.get("lane"),
+                    row.get("command_rows"),
+                    short(row.get("workspace_dir"), 86),
+                ]
+                for row in validation_workspace
+            ],
+            [2.25 * inch, 0.75 * inch, 4.1 * inch],
         ),
         PageBreak(),
         para("Market-Money Proxy Read", "H1"),
@@ -754,6 +775,7 @@ def main() -> None:
                 ["Decision gates", "data_processed/hypothesis_decision_matrix.csv; docs/decision/hypothesis-decision-matrix-v1.md"],
                 ["P0 command center", "data_processed/p0_validation_command_center.csv; docs/decision/p0-validation-command-center-v1.md"],
                 ["P0 field guide", "data_processed/p0_validation_field_guide.csv; docs/decision/p0-validation-field-guide-v1.md"],
+                ["Validation workspace", "data_processed/validation_evidence_workspace_index.csv; docs/decision/validation-evidence-workspace-v1.md; output/validation/README.md"],
                 ["Audit/provenance", "data_processed/evidence_claim_register.csv; data_processed/research_completion_audit.csv; data_processed/evidence_artifact_manifest.csv"],
             ],
             [1.7 * inch, 5.4 * inch],
