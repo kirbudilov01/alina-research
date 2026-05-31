@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T03:42:17.182Z
+Generated: 2026-05-31T03:45:34.086Z
 
 ## 1. Executive Summary
 
@@ -22,6 +22,7 @@ Key quantified signals:
 - Web paywall screenshot capture: 29/29 queued screenshots captured for manual interpretation.
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Evidence audit register: 10 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
+- Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
@@ -90,6 +91,29 @@ Claim-level audit snapshot:
 - steam_search: 2585
 - google_play_search_fallback: 1808
 - duckduckgo_search: 56
+
+### Next Source Expansion Backlog
+
+The next collector wave is now prioritized so expansion beyond the current universe is concrete rather than generic. P0 focuses on Product Hunt, AlternativeTo, and Chrome Web Store/browser extensions to reduce app-store bias.
+
+Backlog priority mix:
+
+- P1: 4
+- P0: 3
+- P2: 3
+
+| ID | Priority | Source | Expected Rows | Output |
+| --- | --- | --- | --- | --- |
+| SRC-001 | P0 | Product Hunt | 1500-4000 | data_raw/expanded_product_hunt_raw.csv |
+| SRC-002 | P0 | AlternativeTo | 1000-2500 | data_raw/expanded_alternativeto_raw.csv |
+| SRC-003 | P0 | Chrome Web Store / browser extensions | 1000-3000 | data_raw/expanded_chrome_extensions_raw.csv |
+| SRC-004 | P1 | Microsoft Store / Mac App Store web | 1000-2500 | data_raw/expanded_desktop_store_raw.csv |
+| SRC-005 | P1 | itch.io / indie game directories | 2000-6000 | data_raw/expanded_itch_raw.csv |
+| SRC-006 | P1 | G2 / Capterra / GetApp style directories | 500-1500 | data_raw/expanded_b2b_review_directories_raw.csv |
+| SRC-007 | P1 | Reddit/subreddit discovery as competitor source | 500-2000 mentions | data_raw/expanded_reddit_competitor_mentions_raw.csv |
+| SRC-008 | P2 | Public website/pricing pages for top candidates | 500-1200 pages | data_raw/company_positioning_raw.csv;data_processed/company_positioning_matrix.csv |
+| SRC-009 | P2 | Steam deep tag expansion | 3000-8000 | data_raw/expanded_steam_tags_raw.csv |
+| SRC-010 | P2 | Market reports and PDF source expansion | 50-150 claims | data_processed/market_source_registry_v2.csv;data_processed/market_claims_v2.csv |
 
 ## 4. Market Sizing
 
@@ -538,10 +562,12 @@ Claim audit rows currently normalized: 10.
 - `docs/competitive/web-paywall-validation-v1.md`
 - `docs/competitive/web-paywall-screenshot-validation-v1.md`
 - `docs/competitive/web-paywall-screenshot-interpretation-v1.md`
+- `docs/competitive/source-expansion-backlog-v1.md`
 - `docs/decision/evidence-audit-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
 - `data_processed/evidence_claim_register.csv`
+- `data_processed/source_expansion_backlog.csv`
 - `data_processed/competitor_feature_matrix.csv`
 - `data_processed/audience_signal_matrix.csv`
 - `data_processed/whitespace_signal_matrix.csv`

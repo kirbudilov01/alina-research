@@ -172,7 +172,7 @@ Tasks:
 
 ### Block B. Source Expansion
 
-Status: pending
+Status: partial/substantial v1 complete; next collector backlog defined
 
 Target sources:
 
@@ -192,6 +192,18 @@ Target scale:
 - Short-term: 10,000 to 15,000 raw rows.
 - Overnight target: 30,000 to 50,000 raw rows if rate limits allow.
 - Deduplicated useful universe target: 15,000 to 25,000 rows.
+
+Current evidence:
+
+- Expanded deduplicated universe: `data_raw/expanded/all_expanded_dedup.csv`.
+- Current source map: `docs/competitive/expanded-source-map.md`.
+- Next source expansion backlog: `docs/competitive/source-expansion-backlog-v1.md`.
+
+Next collector priority:
+
+1. Product Hunt, AlternativeTo, and Chrome Web Store/browser-extension discovery.
+2. Desktop stores, itch.io, B2B review directories, and Reddit competitor mentions.
+3. Company positioning pages, Steam deep tag expansion, and market-report source expansion.
 
 ### Block C. Market Sizing
 
@@ -269,4 +281,3 @@ Tasks:
 - `data_processed/market_source_registry.csv`
 - `docs/sources/claim-schema.md`
 - `scripts/expand_competitor_universe.mjs`
-

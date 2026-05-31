@@ -103,6 +103,7 @@ const webPaywallSignals = csv('data_processed/web_paywall_signal_matrix.csv');
 const webPaywallScreenshots = csv('data_processed/web_paywall_screenshot_validation.csv');
 const webPaywallScreenshotInterpretation = csv('data_processed/web_paywall_screenshot_interpretation.csv');
 const evidenceAudit = csv('data_processed/evidence_claim_register.csv');
+const sourceExpansionBacklog = csv('data_processed/source_expansion_backlog.csv');
 
 const highWhitespace = whitespace.filter(r => r.whitespace_band === 'high').length;
 const mediumWhitespace = whitespace.filter(r => r.whitespace_band === 'medium').length;
@@ -152,6 +153,7 @@ report.push(`- Developer website paywall discovery: ${webPaywallRaw.length} fetc
 report.push(`- Web paywall screenshot capture: ${webPaywallCapturedScreenshots.length}/${webPaywallScreenshots.length} queued screenshots captured for manual interpretation.`);
 report.push(`- Web paywall OCR interpretation: ${webPaywallScreenshotInterpretation.length} screenshots interpreted; ${confirmedPublicPricingScreenshots.length} currently confirm visible public pricing, while the rest need human review or weaken the signal.`);
 report.push(`- Evidence audit register: ${evidenceAudit.length} claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.`);
+report.push(`- Source expansion backlog: ${sourceExpansionBacklog.length} prioritized collector/source tasks for the next move toward a 30k-50k raw universe.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
@@ -207,6 +209,24 @@ report.push('### Expanded Rows by Source Kind');
 report.push('');
 report.push(bulletCounts(countBy(expanded, 'source_kind')));
 report.push('');
+if (sourceExpansionBacklog.length) {
+  report.push('### Next Source Expansion Backlog');
+  report.push('');
+  report.push('The next collector wave is now prioritized so expansion beyond the current universe is concrete rather than generic. P0 focuses on Product Hunt, AlternativeTo, and Chrome Web Store/browser extensions to reduce app-store bias.');
+  report.push('');
+  report.push('Backlog priority mix:');
+  report.push('');
+  report.push(bulletCounts(countBy(sourceExpansionBacklog, 'priority')));
+  report.push('');
+  report.push(mdTable(sourceExpansionBacklog, [
+    { key: 'backlog_id', label: 'ID' },
+    { key: 'priority', label: 'Priority' },
+    { key: 'source_bucket', label: 'Source' },
+    { key: 'expected_raw_rows', label: 'Expected Rows' },
+    { key: 'target_output', label: 'Output' }
+  ], sourceExpansionBacklog.length));
+  report.push('');
+}
 report.push('## 4. Market Sizing');
 report.push('');
 report.push('The model intentionally avoids adding five TAMs together. Gaming is treated primarily as a mechanic benchmark; direct SAM is modeled from discounted adjacent consumer app markets.');
@@ -576,10 +596,12 @@ report.push('- `docs/competitive/google-play-pricing-v1.md`');
 report.push('- `docs/competitive/web-paywall-validation-v1.md`');
 report.push('- `docs/competitive/web-paywall-screenshot-validation-v1.md`');
 report.push('- `docs/competitive/web-paywall-screenshot-interpretation-v1.md`');
+report.push('- `docs/competitive/source-expansion-backlog-v1.md`');
 report.push('- `docs/decision/evidence-audit-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
 report.push('- `data_processed/evidence_claim_register.csv`');
+report.push('- `data_processed/source_expansion_backlog.csv`');
 report.push('- `data_processed/competitor_feature_matrix.csv`');
 report.push('- `data_processed/audience_signal_matrix.csv`');
 report.push('- `data_processed/whitespace_signal_matrix.csv`');
@@ -639,6 +661,7 @@ status.push('');
 status.push(mdTable([
   { requirement: 'Large plan/backlog', evidence: 'docs/research-expansion-master-plan.md', status: 'done' },
   { requirement: 'Competitor/source expansion', evidence: 'data_raw/expanded/all_expanded_raw.csv; data_raw/research_source_discovery.csv', status: 'partial but substantial' },
+  { requirement: 'Next source expansion backlog', evidence: 'data_processed/source_expansion_backlog.csv; docs/competitive/source-expansion-backlog-v1.md', status: 'done v1; prioritized sources, target outputs, expected row ranges, and risks captured' },
   { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; data_processed/tam_sam_som_model.csv', status: 'done v1' },
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
@@ -674,3 +697,4 @@ console.log(`web_paywall_screenshots=${webPaywallCapturedScreenshots.length}/${w
 console.log(`web_paywall_screenshot_interpretations=${webPaywallScreenshotInterpretation.length}`);
 console.log(`human_validation_queue_rows=${humanValidationQueue.length}`);
 console.log(`evidence_audit_rows=${evidenceAudit.length}`);
+console.log(`source_expansion_backlog_rows=${sourceExpansionBacklog.length}`);
