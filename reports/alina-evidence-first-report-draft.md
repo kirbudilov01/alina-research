@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T03:37:47.396Z
+Generated: 2026-05-31T03:42:17.182Z
 
 ## 1. Executive Summary
 
@@ -21,6 +21,7 @@ Key quantified signals:
 - Developer website paywall discovery: 560 fetched URL rows across 70 app/domain rows; 29 domains queued for screenshot validation.
 - Web paywall screenshot capture: 29/29 queued screenshots captured for manual interpretation.
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
+- Evidence audit register: 10 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
@@ -40,6 +41,38 @@ Key quantified signals:
 | H4 | Competitive advantage is plausible | unproven but sharpened | Moat candidate is integrated daily transformation loop, not any single feature. |
 | H5 | Shared audience exists | directionally supported | Audience matrix plus 2288 review-language signals point to digital ritual users across spirituality, identity, self-improvement, calm, and cozy progress. |
 | H6 | Product core can be defined | supported for MVP framing | Product-core evidence defines target loop and MVP testable claim. |
+
+## 2B. Evidence Audit Register
+
+The project now has a claim-level audit register. This conservative layer separates proved project infrastructure from directional product evidence, and it names remaining validation burden explicitly.
+
+Evidence status mix:
+
+- proved_v1: 1
+- substantial_v1_not_50k_dedup: 1
+- partially_supported: 1
+- supported_with_ranges: 1
+- supported_narrowly: 1
+- narrow_supported_not_final: 1
+- plausible_unproven: 1
+- directionally_supported: 1
+- supported_for_mvp_framing: 1
+- proved_active: 1
+
+Claim-level audit snapshot:
+
+| Claim | Status | Confidence | Primary Metric | Key Gap |
+| --- | --- | --- | --- | --- |
+| REQ_plan | proved_v1 | high | master plan exists | Needs periodic refresh as validation findings change. |
+| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows | Deduped universe is below the aspirational 30k-50k app target; raw collection across older and expanded layers is larger but not final dedup. |
+| H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
+| H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000 | Market sizing is modeled from public claims and needs source-by-source confidence review. |
+| H2_paywall_visible_evidence | supported_narrowly | medium_low | 2/29 screenshots confirm visible public pricing | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. |
+| H3_whitespace_exists | narrow_supported_not_final | medium | 1/100 strict behavior-tied progression signals | Metadata can under-detect in-app mechanics; manual app inspection may reveal more direct competitors. |
+| H4_competitive_advantage_plausible | plausible_unproven | medium_low | 1 direct reference competitor; 45 high-threat competitors | No human validation or prototype test yet proves users value the loop. |
+| H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows | Keyword/OCR/forum coding needs human validation and real user interviews. |
+| H6_product_core_defined | supported_for_mvp_framing | medium | 12552 feature matrix rows; 100 product-core rows | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
+| REQ_final_artifacts_versioned | proved_active | high | current branch pushed through latest commit | Final polished investor/user-facing PDF is still draft-level, not final designed publication. |
 
 ## 3. Dataset Overview
 
@@ -468,6 +501,7 @@ Remaining proof required:
 ## 11. Source and Claim Layer
 
 Market claims currently normalized: 14.
+Claim audit rows currently normalized: 10.
 
 | Claim ID | Market | Value | Period | Confidence | Source |
 | --- | --- | ---: | --- | --- | --- |
@@ -504,8 +538,10 @@ Market claims currently normalized: 14.
 - `docs/competitive/web-paywall-validation-v1.md`
 - `docs/competitive/web-paywall-screenshot-validation-v1.md`
 - `docs/competitive/web-paywall-screenshot-interpretation-v1.md`
+- `docs/decision/evidence-audit-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
+- `data_processed/evidence_claim_register.csv`
 - `data_processed/competitor_feature_matrix.csv`
 - `data_processed/audience_signal_matrix.csv`
 - `data_processed/whitespace_signal_matrix.csv`
