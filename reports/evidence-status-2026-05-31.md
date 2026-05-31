@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T04:38:17.969Z
+Generated: 2026-05-31T04:42:48.773Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -21,6 +21,7 @@ Generated: 2026-05-31T04:38:17.969Z
 | Visual charts | docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf | draft chart pack and embedded visual PDF done |
 | Evidence audit / claim register | data_processed/evidence_claim_register.csv; docs/decision/evidence-audit-v1.md | done v1; proof status, confidence, gaps, and next actions explicit |
 | Evidence package manifest | data_processed/evidence_artifact_manifest.csv; docs/decision/evidence-package-manifest-v1.md | done v1; tracks key artifacts with row counts, source-reference coverage, sizes, and short hashes |
+| Completion/readiness audit | data_processed/research_completion_audit.csv; docs/decision/research-completion-audit-v1.md | done v1; maps original objective to proved, partial, draft, and validation-ready requirements |
 | Manual review of top 100 | data_processed/top100_competitor_review_scorecard.csv; data_processed/top100_human_validation_queue.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md; docs/competitive/human-validation-guide-v1.md | AI-assisted review and ranked human validation packet done v1; human execution pending |
 | Detailed pricing/IAP extraction | data_raw/app_store_iap_pricing_raw.csv; data_processed/app_store_iap_pricing_summary.csv; docs/competitive/app-store-iap-pricing-v1.md; data_raw/google_play_pricing_raw.csv; data_processed/google_play_pricing_summary.csv; docs/competitive/google-play-pricing-v1.md; data_raw/web_paywall_discovery_raw.csv; data_processed/web_paywall_signal_matrix.csv; docs/competitive/web-paywall-validation-v1.md; data_processed/web_paywall_screenshot_validation.csv; data_processed/web_paywall_screenshot_interpretation.csv; docs/competitive/web-paywall-screenshot-validation-v1.md; docs/competitive/web-paywall-screenshot-interpretation-v1.md; output/paywall_screenshots/*.png | App Store web IAP extraction, Google Play pricing validation, developer website paywall discovery, screenshot capture, and OCR interpretation done v1; human paywall interpretation pending |
 | Review/forum evidence | data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_raw/forum_quote_evidence_raw.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; data_processed/forum_quote_coding_matrix.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md; docs/audience/forum-quote-coding-v1.md | App Store review extraction, JTBD clustering, forum source map, and retrieval-assisted quote coding done v1; human validation pending |

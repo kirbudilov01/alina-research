@@ -110,6 +110,7 @@ const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv')
 const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
 const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
 const evidenceManifest = csv('data_processed/evidence_artifact_manifest.csv');
+const completionAudit = csv('data_processed/research_completion_audit.csv');
 const highUseMarketSources = marketSourceConfidence.filter(row => row.confidence_review_band === 'high_use');
 const rangeOnlyMarketSources = marketSourceConfidence.filter(row => ['low_use_range_only', 'context_only'].includes(row.confidence_review_band));
 const strongMonetizationMarkets = monetizationProxy.filter(row => row.monetization_proxy_band === 'strong_paid_behavior_proxy');
@@ -137,6 +138,7 @@ const validationRoadmapP0 = validationGapRoadmap.filter(row => row.priority === 
 const manifestMissing = evidenceManifest.filter(row => row.exists !== 'yes');
 const manifestCsvRows = evidenceManifest.filter(row => row.file_path.endsWith('.csv'));
 const manifestTrackedRows = manifestCsvRows.reduce((sum, row) => sum + Number(row.row_count || 0), 0);
+const completionOpen = completionAudit.filter(row => !/^proved/.test(row.status));
 
 const rows = [
   {
@@ -164,6 +166,19 @@ const rows = [
     strongest_support: 'Evidence package manifest records row counts, source-reference coverage, file sizes, and short SHA-256 hashes for key research artifacts and generator scripts.',
     key_gap: 'Manifest is a reproducibility layer, not a substitute for human validation of claims.',
     next_action: 'Regenerate manifest after each major data/report/PDF update and before final archive.'
+  },
+  {
+    claim_id: 'REQ_completion_readiness_audit',
+    claim_type: 'project_requirement',
+    claim: 'The original research objective is audited requirement-by-requirement so completion is not overclaimed.',
+    evidence_status: 'proved_v1_open_requirements',
+    confidence: 'high',
+    primary_metric: `${completionAudit.length} completion requirements; ${completionOpen.length} not fully proved/final`,
+    quantitative_evidence: `completion_rows=${completionAudit.length}; open_or_partial=${completionOpen.length}`,
+    evidence_files: 'data_processed/research_completion_audit.csv;docs/decision/research-completion-audit-v1.md',
+    strongest_support: 'Completion audit maps the user objective to current proof, remaining gaps, and next actions, including scale, validation, and final PDF gaps.',
+    key_gap: 'Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete.',
+    next_action: 'Use completion audit to prioritize P0 validation and source expansion before any final completion claim.'
   },
   {
     claim_id: 'REQ_competitor_universe',
@@ -319,6 +334,7 @@ lines.push('## Audit Read');
 lines.push('');
 lines.push('- Strongest proved project layers: plan/backlog, TAM/SAM/SOM v1, matrices, saved artifacts, PDF rendering, and GitHub versioning.');
 lines.push('- Traceability layer: evidence package manifest tracks raw/processed data, docs, reports, charts, PDFs, and generator scripts with row counts and short hashes.');
+lines.push('- Readiness layer: completion audit maps the original objective to proved, partial, draft, and validation-ready requirements.');
 lines.push('- Strongest product evidence: adjacent markets are monetized; the user language around daily ritual/progress is real; strict behavior-tied avatar progression remains narrow in current metadata.');
 lines.push('- Weakest remaining proof: human validation of competitors, actual in-app paywall/onboarding flows, real user prototype response, and final source-by-source market sizing review.');
 lines.push('- Current decision should remain conditional-go for validation, not full product-build go.');

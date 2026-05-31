@@ -212,6 +212,7 @@ Current evidence:
 - ICP segment matrix: `docs/audience/icp-segment-matrix-v1.md`.
 - ICP validation packet: `docs/audience/icp-validation-packet-v1.md`.
 - Evidence package manifest: `docs/decision/evidence-package-manifest-v1.md`.
+- Research completion audit: `docs/decision/research-completion-audit-v1.md`.
 
 Next collector priority:
 
