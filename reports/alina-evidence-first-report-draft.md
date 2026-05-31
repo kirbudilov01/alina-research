@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T05:23:03.349Z
+Generated: 2026-05-31T06:03:31.248Z
 
 ## 1. Executive Summary
 
@@ -23,7 +23,7 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 12 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 159 artifacts tracked, 33 CSV artifacts, 93187 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 163 artifacts tracked, 35 CSV artifacts, 93209 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -37,6 +37,7 @@ Key quantified signals:
 - Competitor revenue proxy review: 90 primary competitors reviewed; 22 strong and 70 medium-or-stronger bottom-up money proxies.
 - ICP segment matrix: 6 segment hypotheses; strongest current directional ICP is "Spiritual self-improvers".
 - ICP validation packet: 36 interview/prototype test rows for selecting one primary and one secondary ICP.
+- Prototype validation stimulus: 8 screens across 2 top ICP segments, with 6 success/kill metrics.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
@@ -70,7 +71,7 @@ Evidence status mix:
 - supported_with_ranges_and_bottom_up_proxy: 1
 - supported_narrowly_with_visual_adjudication: 1
 - narrow_supported_not_final: 1
-- plausible_unproven: 1
+- prototype_stimulus_ready_unvalidated: 1
 - directionally_supported: 1
 - supported_for_mvp_framing: 1
 - proved_active: 1
@@ -80,23 +81,23 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 14 validation roadmap rows | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 155 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 159 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 6973 usable itch rows; 6000 usable Steam tag rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
 | H2_markets_have_money | supported_with_ranges_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 4/5 strong market-level monetization proxies; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, or manual in-app paywall validation for final investor-grade claims. |
 | H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require human sign-off/in-app inspection. |
 | H3_whitespace_exists | narrow_supported_not_final | medium | 1/100 strict behavior-tied progression signals; 9 Chrome mechanic references to inspect | Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors. |
-| H4_competitive_advantage_plausible | plausible_unproven | medium_low | 1 direct reference competitor; 45 high-threat competitors; 23 Chrome mechanic battlecards | No human validation or prototype test yet proves users value the loop. |
+| H4_competitive_advantage_plausible | prototype_stimulus_ready_unvalidated | medium | 1 direct reference competitor; 45 high-threat competitors; 8 prototype screens; 6 success/kill metrics | No human prototype session yet proves users understand, prefer, or value the integrated loop. |
 | H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 6 ICP segment hypotheses; 36 ICP validation tests | Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. |
-| H6_product_core_defined | supported_for_mvp_framing | medium | 12552 feature matrix rows; 100 product-core rows | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
+| H6_product_core_defined | supported_for_mvp_framing | medium | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
 | REQ_final_artifacts_versioned | proved_active | high | current branch pushed through latest commit | Final polished investor/user-facing PDF is still draft-level, not final designed publication. |
 
 ## 2D. Evidence Package Manifest
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 159 artifacts; 33 CSV artifacts; 93187 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 163 artifacts; 35 CSV artifacts; 93209 tracked CSV rows; 0 missing required artifacts.
 
 Largest tracked CSV artifacts:
 
@@ -126,7 +127,7 @@ Completion status mix:
 - supported_with_bottom_up_proxy_not_final: 1
 - narrow_supported_not_final: 1
 - directionally_supported_validation_ready: 1
-- supported_for_mvp_framing_not_validated: 1
+- prototype_stimulus_ready_not_validated: 1
 - draft_done_not_polished_final: 1
 - proved_active: 1
 - proved_v1_open_gates: 1
@@ -141,9 +142,9 @@ Objective readiness matrix:
 | REQ_04_MARKET_MONEY | supported_with_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing remains range-based; actual revenue estimates and manual in-app paywall validation are needed for final investor-grade claims. |
 | REQ_05_WHITESPACE | narrow_supported_not_final | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1 | Metadata can miss hidden in-app mechanics; manual app/onboarding validation is still required. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36 | Segments are directional and need interviews/prototype/WTP validation. |
-| REQ_07_COMPETITIVE_ADVANTAGE | supported_for_mvp_framing_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=12 | No prototype or user test proves the loop is understood/preferred. |
+| REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=12; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6 | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | draft_done_not_polished_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true | PDF is draft evidence/reporting artifact, not final polished investor/user-facing publication. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=155; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=159; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates | strong | roadmap_rows=14; p0=5; p1=9; human_confirmed=0 | Open P0 gates remain: manual competitor validation, paywall review, whitespace validation, competitive advantage prototype, ICP validation. |
 
 ## 2C. Validation Gap Roadmap
@@ -764,6 +765,34 @@ Validation test types:
 - willingness_to_pay: 6
 - disconfirmation: 6
 
+### Prototype Validation Stimulus
+
+A concrete two-minute loop stimulus now exists for the top ICP comparison: 8 screens across 2 segments, with 6 success/kill metrics. This closes the prototype-design gap but not the user-validation gap.
+
+Prototype screens:
+
+| Step | Screen | User Goal | Expected Signal | Failure Signal |
+| ---: | --- | --- | --- | --- |
+| 1 | Daily meaning entry | Recognize why today matters without deterministic or clinical overclaim. | Participant can explain why this is personal rather than generic content. | Participant reads it as vague astrology, generic motivation, or unsafe certainty. |
+| 2 | Tiny context prompt | Give the loop enough context to avoid generic advice. | Participant supplies a concrete lived moment or emotional target. | Participant skips because the prompt feels too broad, exposing, or irrelevant. |
+| 3 | One grounded action | Convert meaning into a concrete action small enough to finish now. | Participant sees the action as doable and causally linked to the chosen theme. | Participant sees it as a random task, chore list, or generic habit tracker. |
+| 4 | Short reset | Reduce friction and avoid hard streak pressure before completion. | Participant feels the reset makes action easier without feeling clinical. | Participant thinks the reset is filler or clashes with the progress mechanic. |
+| 5 | Action evidence | Capture proof of completion without turning the flow into surveillance. | Participant accepts lightweight self-report as enough evidence. | Participant wants objective tracking, rejects proof language, or feels judged. |
+| 6 | Identity/avatar feedback | Make completed action visibly change the identity object. | Participant understands action -> identity/avatar causality. | Participant sees avatar as decoration, reward spam, or unrelated game skin. |
+| 7 | Next-day hook | Create return intent without punitive streak anxiety. | Participant wants to return and understands continuity. | Participant feels manipulated, infantilized, or indifferent. |
+| 8 | Immediate value check | Measure comprehension, emotional lift, differentiation, and willingness to continue. | Participant names the integrated loop in their own words. | Participant cannot distinguish it from a generic habit tracker, meditation app, or horoscope. |
+
+Success/kill gates:
+
+| Gate | Success Threshold | Kill Threshold |
+| --- | --- | --- |
+| comprehension | >=80% of prototype participants correctly explain personal meaning -> action -> avatar/progress causality | <50% can explain the causal loop without prompting |
+| two_minute_completion | >=70% complete simulated loop in under 120 seconds | <40% complete or flow feels too fragmented |
+| meaning_lift | Average meaning_lift >=4/5 among target ICP participants | Average meaning_lift <=2.5/5 |
+| differentiation | >=60% prefer Alina framing over generic habit/coach alternative | Generic habit/coach/meditation alternative wins by clear margin |
+| trust_safety | No fatal safety/trust objection from target participants; objections are addressable by copy/control | Recurring fatal objections: manipulative, spiritual overclaim, childish, clinical, or unsafe guidance |
+| paid_depth | >=40% name a plausible paid depth feature after free loop value is clear | Users expect all value free or reject paid depth after seeing loop |
+
 ### App Store Review Language
 
 Recent public App Store reviews were collected for top intersection candidates. Coverage is 2294 deduplicated reviews across 78 apps, converted into keyword-based signal rows. This is not final sentiment modeling, but it is useful evidence for user language, delight, objections, and churn risk.
@@ -856,6 +885,8 @@ Cross-source read: daily anchors and visible progress are attractive, but users 
 Target loop: personal meaning -> one daily action -> short reset -> avatar/identity feedback -> visible progression -> next-day hook.
 
 MVP testable claim: users should understand and complete the full daily loop in under two minutes, then report that the avatar/progress cue makes the action feel more personally meaningful.
+
+Prototype validation readiness: stimulus pack is ready, but no participant results have been recorded. The next evidence upgrade is observed comprehension, completion time, meaning lift, differentiation, return intent, trust objections, and paid-depth interest.
 
 ## 9. Risk Register
 

@@ -198,6 +198,8 @@ const requiredArtifacts = [
   'data_processed/forum_quote_coding_matrix.csv',
   'data_processed/icp_segment_matrix.csv',
   'data_processed/icp_validation_test_plan.csv',
+  'data_processed/prototype_validation_stimulus_flow.csv',
+  'data_processed/prototype_validation_scorecard.csv',
   'data_processed/evidence_claim_register.csv',
   'data_processed/validation_gap_roadmap.csv',
   'reports/alina-evidence-first-report-draft.md',

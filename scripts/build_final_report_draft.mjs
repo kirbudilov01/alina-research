@@ -98,6 +98,8 @@ const forumSignals = csv('data_raw/forum_evidence_signals.csv');
 const forumQuoteCoding = csv('data_processed/forum_quote_coding_matrix.csv');
 const icpSegments = csv('data_processed/icp_segment_matrix.csv');
 const icpValidationPlan = csv('data_processed/icp_validation_test_plan.csv');
+const prototypeStimulusFlow = csv('data_processed/prototype_validation_stimulus_flow.csv');
+const prototypeScorecard = csv('data_processed/prototype_validation_scorecard.csv');
 const top100Review = csv('data_processed/top100_competitor_review_scorecard.csv');
 const humanValidationQueue = csv('data_processed/top100_human_validation_queue.csv');
 const iapRaw = csv('data_raw/app_store_iap_pricing_raw.csv');
@@ -164,6 +166,8 @@ const strongMonetizationMarkets = monetizationProxy.filter(r => r.monetization_p
 const mediumMonetizationMarkets = monetizationProxy.filter(r => r.monetization_proxy_band === 'medium_paid_behavior_proxy');
 const strongRevenueProxyCompetitors = competitorRevenueProxy.filter(r => r.revenue_proxy_band === 'strong_bottom_up_money_proxy');
 const mediumPlusRevenueProxyCompetitors = competitorRevenueProxy.filter(r => ['strong_bottom_up_money_proxy', 'medium_bottom_up_money_proxy'].includes(r.revenue_proxy_band));
+const prototypeSegments = new Set(prototypeStimulusFlow.map(r => r.segment_id).filter(Boolean));
+const prototypeScreens = new Set(prototypeStimulusFlow.map(r => r.screen_id).filter(Boolean));
 const strongestIcpSegment = [...icpSegments].sort((a, b) => Number(b.evidence_score || 0) - Number(a.evidence_score || 0))[0] || {};
 const manifestMissing = evidenceManifest.filter(r => r.exists !== 'yes');
 const manifestCsvRows = evidenceManifest.filter(r => r.file_path.endsWith('.csv'));
@@ -211,6 +215,7 @@ report.push(`- Monetization proxy matrix: ${monetizationProxy.length} markets co
 report.push(`- Competitor revenue proxy review: ${competitorRevenueProxy.length} primary competitors reviewed; ${strongRevenueProxyCompetitors.length} strong and ${mediumPlusRevenueProxyCompetitors.length} medium-or-stronger bottom-up money proxies.`);
 report.push(`- ICP segment matrix: ${icpSegments.length} segment hypotheses; strongest current directional ICP is "${strongestIcpSegment.segment_name || 'n/a'}".`);
 report.push(`- ICP validation packet: ${icpValidationPlan.length} interview/prototype test rows for selecting one primary and one secondary ICP.`);
+report.push(`- Prototype validation stimulus: ${prototypeScreens.size} screens across ${prototypeSegments.size} top ICP segments, with ${prototypeScorecard.length} success/kill metrics.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
@@ -843,6 +848,30 @@ if (icpValidationPlan.length) {
   report.push(bulletCounts(countBy(icpValidationPlan, 'validation_type')));
   report.push('');
 }
+if (prototypeStimulusFlow.length) {
+  report.push('### Prototype Validation Stimulus');
+  report.push('');
+  report.push(`A concrete two-minute loop stimulus now exists for the top ICP comparison: ${prototypeScreens.size} screens across ${prototypeSegments.size} segments, with ${prototypeScorecard.length} success/kill metrics. This closes the prototype-design gap but not the user-validation gap.`);
+  report.push('');
+  report.push('Prototype screens:');
+  report.push('');
+  report.push(mdTable([...new Map(prototypeStimulusFlow.map(row => [row.screen_id, row])).values()], [
+    { key: 'step', label: 'Step', align: 'right' },
+    { key: 'screen_name', label: 'Screen' },
+    { key: 'user_goal', label: 'User Goal' },
+    { key: 'expected_signal', label: 'Expected Signal' },
+    { key: 'failure_signal', label: 'Failure Signal' }
+  ], 10));
+  report.push('');
+  report.push('Success/kill gates:');
+  report.push('');
+  report.push(mdTable(prototypeScorecard, [
+    { key: 'gate', label: 'Gate' },
+    { key: 'success_threshold', label: 'Success Threshold' },
+    { key: 'kill_threshold', label: 'Kill Threshold' }
+  ], prototypeScorecard.length));
+  report.push('');
+}
 report.push('### App Store Review Language');
 report.push('');
 report.push(`Recent public App Store reviews were collected for top intersection candidates. Coverage is ${rawReviews.length} deduplicated reviews across ${reviewApps} apps, converted into keyword-based signal rows. This is not final sentiment modeling, but it is useful evidence for user language, delight, objections, and churn risk.`);
@@ -902,6 +931,10 @@ report.push('Target loop: personal meaning -> one daily action -> short reset ->
 report.push('');
 report.push('MVP testable claim: users should understand and complete the full daily loop in under two minutes, then report that the avatar/progress cue makes the action feel more personally meaningful.');
 report.push('');
+if (prototypeStimulusFlow.length) {
+  report.push('Prototype validation readiness: stimulus pack is ready, but no participant results have been recorded. The next evidence upgrade is observed comprehension, completion time, meaning lift, differentiation, return intent, trust objections, and paid-depth interest.');
+  report.push('');
+}
 report.push('## 9. Risk Register');
 report.push('');
 report.push(mdTable([
@@ -1082,6 +1115,7 @@ status.push(mdTable([
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
   { requirement: 'ICP / audience segment matrix', evidence: 'data_processed/icp_segment_matrix.csv; docs/audience/icp-segment-matrix-v1.md', status: 'done v1; maps audience/review/forum/monetization evidence into testable ICP hypotheses' },
   { requirement: 'ICP validation packet', evidence: 'data_processed/icp_validation_test_plan.csv; docs/audience/icp-validation-packet-v1.md', status: 'done v1; interview/prototype/WTP/disconfirmation protocol created for top ICP selection' },
+  { requirement: 'Prototype validation stimulus', evidence: 'data_processed/prototype_validation_stimulus_flow.csv; data_processed/prototype_validation_scorecard.csv; docs/product/prototype-validation-stimulus-v1.md', status: 'done v1; two-minute loop stimulus, top-ICP comparison flow, and success/kill metrics ready; participant results pending' },
   { requirement: 'Versioned on GitHub', evidence: 'git log through current commit after push', status: 'active' },
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft evidence PDF and visual PDF companion done' },
   { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft chart pack and embedded visual PDF done' },
@@ -1104,6 +1138,8 @@ console.log(`expanded_rows=${expanded.length}`);
 console.log(`audience_rows=${audience.length}`);
 console.log(`icp_segments=${icpSegments.length}`);
 console.log(`icp_validation_tests=${icpValidationPlan.length}`);
+console.log(`prototype_stimulus_rows=${prototypeStimulusFlow.length}`);
+console.log(`prototype_scorecard_metrics=${prototypeScorecard.length}`);
 console.log(`market_claims=${claims.length}`);
 console.log(`competitor_revenue_proxy_rows=${competitorRevenueProxy.length}`);
 console.log(`competitor_revenue_proxy_strong=${strongRevenueProxyCompetitors.length}`);

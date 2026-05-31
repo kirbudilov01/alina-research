@@ -105,12 +105,16 @@ const top100 = csv('data_processed/top100_competitor_review_scorecard.csv');
 const validationQueue = csv('data_processed/top100_human_validation_queue.csv');
 const icpSegments = csv('data_processed/icp_segment_matrix.csv');
 const icpValidation = csv('data_processed/icp_validation_test_plan.csv');
+const prototypeStimulusFlow = csv('data_processed/prototype_validation_stimulus_flow.csv');
+const prototypeScorecard = csv('data_processed/prototype_validation_scorecard.csv');
 
 const p0Roadmap = roadmap.filter(row => row.priority === 'P0');
 const p1Roadmap = roadmap.filter(row => row.priority === 'P1');
 const humanConfirmed = validationQueue.filter(row => !['', 'not_started'].includes(row.validation_status)).length;
 const manifestMissing = manifest.filter(row => row.exists !== 'yes').length;
 const primaryApps = top100.filter(row => row.duplicate_flag === 'primary_app_entry').length;
+const prototypeScreens = new Set(prototypeStimulusFlow.map(row => row.screen_id).filter(Boolean)).size;
+const prototypeSegments = new Set(prototypeStimulusFlow.map(row => row.segment_id).filter(Boolean)).size;
 const strongMoneyMarkets = monetizationProxy.filter(row => row.monetization_proxy_band === 'strong_paid_behavior_proxy').length;
 const strongRevenueProxyCompetitors = competitorRevenueProxy.filter(row => row.revenue_proxy_band === 'strong_bottom_up_money_proxy').length;
 const mediumPlusRevenueProxyCompetitors = competitorRevenueProxy.filter(row => ['strong_bottom_up_money_proxy', 'medium_bottom_up_money_proxy'].includes(row.revenue_proxy_band)).length;
@@ -191,12 +195,12 @@ const requirements = [
     requirement_id: 'REQ_07_COMPETITIVE_ADVANTAGE',
     requirement: 'Competitive advantage and product-core hypotheses are made explicit.',
     objective_source: 'User asked to prove competitive advantage and move toward product ядро.',
-    status: feature.length && fs.existsSync('docs/product/product-core-evidence-v1.md') ? 'supported_for_mvp_framing_not_validated' : 'missing',
+    status: feature.length && prototypeStimulusFlow.length && prototypeScorecard.length ? 'prototype_stimulus_ready_not_validated' : 'missing',
     evidence_strength: 'medium',
-    proof: `feature_rows=${feature.length}; primary_top100_apps=${primaryApps}; evidence_claims=${evidence.length}`,
-    evidence_files: 'data_processed/product_core_evidence_matrix.csv;docs/product/product-core-evidence-v1.md;docs/strategy/value-proposition-v1.md;data_processed/evidence_claim_register.csv',
-    remaining_gap: 'No prototype or user test proves the loop is understood/preferred.',
-    next_action: 'Prototype two-minute loop and measure comprehension, emotional value, return intent.'
+    proof: `feature_rows=${feature.length}; primary_top100_apps=${primaryApps}; evidence_claims=${evidence.length}; prototype_segments=${prototypeSegments}; prototype_screens=${prototypeScreens}; prototype_flow_rows=${prototypeStimulusFlow.length}; prototype_scorecard_metrics=${prototypeScorecard.length}`,
+    evidence_files: 'data_processed/product_core_evidence_matrix.csv;data_processed/prototype_validation_stimulus_flow.csv;data_processed/prototype_validation_scorecard.csv;docs/product/product-core-evidence-v1.md;docs/product/prototype-validation-stimulus-v1.md;docs/strategy/value-proposition-v1.md;data_processed/evidence_claim_register.csv',
+    remaining_gap: 'No completed user/prototype sessions prove the loop is understood/preferred.',
+    next_action: 'Run prototype sessions with the top two ICP segments and record comprehension, meaning lift, differentiation, return intent, and paid-depth signals.'
   },
   {
     requirement_id: 'REQ_08_REPORT_PDF',

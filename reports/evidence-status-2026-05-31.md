@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T05:23:03.364Z
+Generated: 2026-05-31T06:03:31.263Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -18,6 +18,7 @@ Generated: 2026-05-31T05:23:03.364Z
 | Audience matrices | data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md | done v1 |
 | ICP / audience segment matrix | data_processed/icp_segment_matrix.csv; docs/audience/icp-segment-matrix-v1.md | done v1; maps audience/review/forum/monetization evidence into testable ICP hypotheses |
 | ICP validation packet | data_processed/icp_validation_test_plan.csv; docs/audience/icp-validation-packet-v1.md | done v1; interview/prototype/WTP/disconfirmation protocol created for top ICP selection |
+| Prototype validation stimulus | data_processed/prototype_validation_stimulus_flow.csv; data_processed/prototype_validation_scorecard.csv; docs/product/prototype-validation-stimulus-v1.md | done v1; two-minute loop stimulus, top-ICP comparison flow, and success/kill metrics ready; participant results pending |
 | Versioned on GitHub | git log through current commit after push | active |
 | Final PDF | output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf | draft evidence PDF and visual PDF companion done |
 | Visual charts | docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf | draft chart pack and embedded visual PDF done |

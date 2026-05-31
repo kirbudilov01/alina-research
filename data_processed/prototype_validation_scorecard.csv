@@ -1,0 +1,7 @@
+metric_id,gate,success_threshold,kill_threshold,why_it_matters
+"PVS_M01","comprehension",">=80% of prototype participants correctly explain personal meaning -> action -> avatar/progress causality","<50% can explain the causal loop without prompting","Competitive advantage depends on the integrated loop being understood, not merely on feature novelty."
+"PVS_M02","two_minute_completion",">=70% complete simulated loop in under 120 seconds","<40% complete or flow feels too fragmented","The MVP claim is a tiny daily ritual, not a long onboarding or content library."
+"PVS_M03","meaning_lift","Average meaning_lift >=4/5 among target ICP participants","Average meaning_lift <=2.5/5","The avatar/progress cue must make action feel personally meaningful, not decorative."
+"PVS_M04","differentiation",">=60% prefer Alina framing over generic habit/coach alternative","Generic habit/coach/meditation alternative wins by clear margin","H4 is about competitive advantage, not general product appeal."
+"PVS_M05","trust_safety","No fatal safety/trust objection from target participants; objections are addressable by copy/control","Recurring fatal objections: manipulative, spiritual overclaim, childish, clinical, or unsafe guidance","Trust failures can invalidate the spiritual/identity loop even if engagement is high."
+"PVS_M06","paid_depth",">=40% name a plausible paid depth feature after free loop value is clear","Users expect all value free or reject paid depth after seeing loop","Market-money evidence needs product-level willingness-to-pay validation."

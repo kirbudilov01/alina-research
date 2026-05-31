@@ -108,6 +108,8 @@ const forumSources = csv('data_raw/forum_evidence_signals.csv');
 const forumQuotes = csv('data_processed/forum_quote_coding_matrix.csv');
 const icpSegments = csv('data_processed/icp_segment_matrix.csv');
 const icpValidationPlan = csv('data_processed/icp_validation_test_plan.csv');
+const prototypeStimulusFlow = csv('data_processed/prototype_validation_stimulus_flow.csv');
+const prototypeScorecard = csv('data_processed/prototype_validation_scorecard.csv');
 const productCore = csv('data_processed/product_core_evidence_matrix.csv');
 const p0External = csv('data_raw/expanded/p0_external_sources_raw.csv');
 const itchRows = csv('data_raw/expanded_itch_raw.csv');
@@ -140,6 +142,8 @@ const p1 = validationQueue.filter(row => row.priority_band === 'P1_high');
 const reviewApps = new Set(reviews.map(row => row.app_store_id).filter(Boolean)).size;
 const forumSourceCount = new Set(forumQuotes.map(row => row.source_id).filter(Boolean)).size;
 const strongIcpSegments = icpSegments.filter(row => row.evidence_band === 'strong_directional_icp');
+const prototypeSegments = new Set(prototypeStimulusFlow.map(row => row.segment_id).filter(Boolean));
+const prototypeScreens = new Set(prototypeStimulusFlow.map(row => row.screen_id).filter(Boolean));
 const intersection = tam.find(row => row.pillar === 'intersection') || {};
 const p0ExternalUsable = p0External.filter(row => row.collection_status === 'ok');
 const itchOk = itchRows.filter(row => row.collection_status === 'ok');
@@ -262,14 +266,14 @@ const rows = [
     claim_id: 'H4_competitive_advantage_plausible',
     claim_type: 'product_hypothesis',
     claim: 'A competitive advantage is plausible if Alina owns the integrated daily transformation loop rather than a generic feature.',
-    evidence_status: 'plausible_unproven',
-    confidence: 'medium_low',
-    primary_metric: `${direct.length} direct reference competitor; ${highThreat.length} high-threat competitors; ${chromeExtensionBattlecards.length} Chrome mechanic battlecards`,
-    quantitative_evidence: `P0_validation=${p0.length}; P1_validation=${p1.length}; chrome_priority_mechanics=${chromeMechanicPriority.length}; human_confirmed=0`,
-    evidence_files: 'data_processed/top100_competitor_review_scorecard.csv;data_processed/top100_human_validation_queue.csv;data_processed/chrome_extension_mechanic_battlecards.csv;docs/competitive/human-validation-guide-v1.md;docs/competitive/chrome-extension-mechanic-battlecards-v1.md;docs/strategy/value-proposition-v1.md',
-    strongest_support: 'Scorecard separates close substitutes from the one current direct reference; Chrome mechanic battlecards show which habit/progress/accountability mechanics are table stakes versus differentiation levers.',
-    key_gap: 'No human validation or prototype test yet proves users value the loop.',
-    next_action: 'Run manual competitor validation and prototype the two-minute loop.'
+    evidence_status: 'prototype_stimulus_ready_unvalidated',
+    confidence: 'medium',
+    primary_metric: `${direct.length} direct reference competitor; ${highThreat.length} high-threat competitors; ${prototypeScreens.size} prototype screens; ${prototypeScorecard.length} success/kill metrics`,
+    quantitative_evidence: `P0_validation=${p0.length}; P1_validation=${p1.length}; chrome_priority_mechanics=${chromeMechanicPriority.length}; prototype_segments=${prototypeSegments.size}; prototype_flow_rows=${prototypeStimulusFlow.length}; prototype_screens=${prototypeScreens.size}; prototype_scorecard_metrics=${prototypeScorecard.length}; human_confirmed=0`,
+    evidence_files: 'data_processed/top100_competitor_review_scorecard.csv;data_processed/top100_human_validation_queue.csv;data_processed/chrome_extension_mechanic_battlecards.csv;data_processed/prototype_validation_stimulus_flow.csv;data_processed/prototype_validation_scorecard.csv;docs/product/prototype-validation-stimulus-v1.md;docs/competitive/human-validation-guide-v1.md;docs/competitive/chrome-extension-mechanic-battlecards-v1.md;docs/strategy/value-proposition-v1.md',
+    strongest_support: 'Scorecard separates close substitutes from the one current direct reference; Chrome battlecards identify table-stakes mechanics; prototype stimulus pack now defines the two-minute loop and measurable success/kill gates.',
+    key_gap: 'No human prototype session yet proves users understand, prefer, or value the integrated loop.',
+    next_action: 'Run prototype sessions with the top two ICP segments and fill the scorecard with observed results.'
   },
   {
     claim_id: 'H5_shared_audience_exists',
@@ -290,12 +294,12 @@ const rows = [
     claim: 'The MVP product core can be defined as personal meaning -> one daily action -> short reset -> avatar/identity feedback -> visible progression -> next-day hook.',
     evidence_status: 'supported_for_mvp_framing',
     confidence: 'medium',
-    primary_metric: `${feature.length} feature matrix rows; ${productCore.length} product-core rows`,
-    quantitative_evidence: `retention_tags=${Object.keys(countBy(csv('data_processed/pricing_retention_matrix.csv'), 'retention_tags')).length}; product_core_rows=${productCore.length}`,
-    evidence_files: 'data_processed/product_core_evidence_matrix.csv;docs/product/product-core-evidence-v1.md;docs/strategy/user-flow-v1.md;docs/strategy/avatar-loop-spec.md',
-    strongest_support: 'Product-core matrix and strategy docs converge on a testable MVP loop.',
+    primary_metric: `${feature.length} feature matrix rows; ${productCore.length} product-core rows; ${prototypeScreens.size} prototype screens`,
+    quantitative_evidence: `retention_tags=${Object.keys(countBy(csv('data_processed/pricing_retention_matrix.csv'), 'retention_tags')).length}; product_core_rows=${productCore.length}; prototype_flow_rows=${prototypeStimulusFlow.length}; prototype_scorecard_metrics=${prototypeScorecard.length}`,
+    evidence_files: 'data_processed/product_core_evidence_matrix.csv;data_processed/prototype_validation_stimulus_flow.csv;data_processed/prototype_validation_scorecard.csv;docs/product/product-core-evidence-v1.md;docs/product/prototype-validation-stimulus-v1.md;docs/strategy/user-flow-v1.md;docs/strategy/avatar-loop-spec.md',
+    strongest_support: 'Product-core matrix, strategy docs, and prototype stimulus pack converge on a testable MVP loop.',
     key_gap: 'No user prototype evidence yet confirms comprehension, emotional value, or retention impact.',
-    next_action: 'Build/validate prototype and measure loop completion, comprehension, and willingness to return.'
+    next_action: 'Run prototype sessions and measure loop completion, comprehension, meaning lift, return intent, and paid-depth interest.'
   },
   {
     claim_id: 'REQ_final_artifacts_versioned',
