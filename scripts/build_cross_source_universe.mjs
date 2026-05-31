@@ -152,6 +152,7 @@ function sourceGroup(sourceKind, sourceBucket, platform) {
   if (/itch/.test(text)) return 'itch_web_game';
   if (/mac|desktop|itunes/.test(text)) return 'desktop_store';
   if (/chrome|browser/.test(text)) return 'browser_extension';
+  if (/reddit|forum|community/.test(text)) return 'community_forum';
   if (/app store|itunes|ios/.test(text)) return 'mobile_app_store';
   if (/google|android/.test(text)) return 'google_play_or_android';
   return clean(sourceBucket || sourceKind || platform || 'unknown_source');
@@ -229,7 +230,8 @@ const inputs = [
   ['data_raw/expanded_steam_tags_raw.csv', csv('data_raw/expanded_steam_tags_raw.csv')],
   ['data_raw/expanded_desktop_store_raw.csv', csv('data_raw/expanded_desktop_store_raw.csv')],
   ['data_raw/expanded_chrome_extensions_raw.csv', csv('data_raw/expanded_chrome_extensions_raw.csv')],
-  ['data_raw/chrome_extension_detail_raw.csv', csv('data_raw/chrome_extension_detail_raw.csv')]
+  ['data_raw/chrome_extension_detail_raw.csv', csv('data_raw/chrome_extension_detail_raw.csv')],
+  ['data_raw/expanded_reddit_competitor_mentions_raw.csv', csv('data_raw/expanded_reddit_competitor_mentions_raw.csv')]
 ];
 
 const rawRows = inputs.flatMap(([file, rows]) => rows.map(row => normalizeRow(row, file)));
@@ -316,7 +318,7 @@ lines.push(`Generated: ${new Date().toISOString()}`);
 lines.push('');
 lines.push('## Purpose');
 lines.push('');
-lines.push('This layer normalizes the major source-native collections into one auditable universe. It keeps raw provenance while producing a cross-source deduplicated view across core app-store rows, itch.io, Steam, Mac desktop store, Chrome Web Store search, and Chrome detail pages.');
+lines.push('This layer normalizes the major source-native collections into one auditable universe. It keeps raw provenance while producing a cross-source deduplicated view across core app-store rows, itch.io, Steam, Mac desktop store, Chrome Web Store search/detail pages, and Reddit forum mention discovery.');
 lines.push('');
 lines.push('## Summary');
 lines.push('');
@@ -349,7 +351,7 @@ lines.push('## Claim Boundary');
 lines.push('');
 lines.push('- This is a normalization/provenance layer, not new market-share proof.');
 lines.push('- Cross-source dedup protects the project from double-counting repeated country/query/tag results.');
-lines.push('- Source-specific interpretation caveats still apply: Steam/itch are mechanic discovery, desktop store is discovery, Chrome is browser-mechanic evidence, and mobile app-store rows remain the strongest direct consumer-app competitor base.');
+lines.push('- Source-specific interpretation caveats still apply: Steam/itch are mechanic discovery, desktop store is discovery, Chrome is browser-mechanic evidence, Reddit is qualitative forum-discovery evidence, and mobile app-store rows remain the strongest direct consumer-app competitor base.');
 lines.push('');
 lines.push('## Files');
 lines.push('');

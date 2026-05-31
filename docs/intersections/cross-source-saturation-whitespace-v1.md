@@ -1,6 +1,6 @@
 # Cross-Source Saturation And Whitespace V1
 
-Generated: 2026-05-31T09:18:34.172Z
+Generated: 2026-05-31T10:02:29.682Z
 
 ## Purpose
 
@@ -24,12 +24,12 @@ Opportunity band mix:
 
 | Market | Dedup Rows | Strong/Medium Cells | Directness-Weighted Rows | Full-Loop-Like | Scarcity | Opportunity |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| mindfulness | 9128 | 5 | 4399.3 | 368 | 59.7 | medium_opportunity_needs_sampling |
-| avatar_identity | 7417 | 5 | 3750.4 | 224 | 69.8 | medium_opportunity_needs_sampling |
+| mindfulness | 9723 | 5 | 4518.3 | 371 | 61.8 | medium_opportunity_needs_sampling |
+| avatar_identity | 7944 | 5 | 3855.8 | 225 | 71.7 | medium_opportunity_needs_sampling |
 | gaming | 14304 | 4 | 6119.2 | 147 | 89.7 | mechanic_benchmark_not_primary_market |
-| gaming_progression | 920 | 1 | 565.5 | 63 | 31.5 | mechanic_benchmark_not_primary_market |
-| coaching | 3187 | 4 | 2549.4 | 490 | 0.0 | crowded_or_unclear_context |
-| astrology_esoterics | 2627 | 4 | 2139.1 | 364 | 0.0 | crowded_or_unclear_context |
+| gaming_progression | 950 | 1 | 571.5 | 63 | 33.7 | mechanic_benchmark_not_primary_market |
+| coaching | 3857 | 4 | 2683.4 | 502 | 0.0 | crowded_or_unclear_context |
+| astrology_esoterics | 2657 | 4 | 2145.1 | 364 | 0.0 | crowded_or_unclear_context |
 
 ## Interpretation
 

@@ -237,6 +237,7 @@ def main():
     iap = read_csv("data_raw/app_store_iap_pricing_raw.csv")
     gplay = read_csv("data_raw/google_play_pricing_raw.csv")
     web_paywalls = read_csv("data_processed/web_paywall_signal_matrix.csv")
+    reddit_mentions = read_csv("data_raw/expanded_reddit_competitor_mentions_raw.csv")
     reviews = read_csv("data_processed/review_jtbd_cluster_summary.csv")
     community_referral = read_csv("data_processed/community_referral_signal_rows.csv")
     community_referral_summary = read_csv("data_processed/community_referral_summary.csv")
@@ -285,6 +286,7 @@ def main():
                 ["Web paywall domains", number(str(len(web_paywalls)))],
                 ["Web screenshot queue", number(str(len(web_queue)))],
                 ["Market-money rows", number(str(len(market_money)))],
+                ["Reddit mention rows", number(str(len(reddit_mentions)))],
                 ["Forum quote-coding rows", number(str(len(forum)))],
                 ["Community/referral rows", number(str(len(community_referral)))],
                 ["ICP segment hypotheses", number(str(len(icp)))],
@@ -456,6 +458,13 @@ def main():
         BarChart(
             "Top Review JTBD And Pain Clusters",
             [(r["cluster_label"], float(r.get("review_rows") or 0)) for r in reviews[:8]],
+        )
+    )
+    story.append(Spacer(1, 0.12 * inch))
+    story.append(
+        BarChart(
+            "Reddit Mention Rows By Market",
+            [(k, float(v)) for k, v in count_by(reddit_mentions, "niche").most_common()],
         )
     )
     story.append(Spacer(1, 0.12 * inch))

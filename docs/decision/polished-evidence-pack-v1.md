@@ -9,13 +9,13 @@ This document registers the publication-style PDF layer.
 
 ## Snapshot
 
-- Known raw source/app rows: 58,755
-- Cross-source dedup rows: 31,866
-- Coverage cells: 34
+- Known raw source/app rows: 61,094
+- Cross-source dedup rows: 33,718
+- Coverage cells: 39
 - Saturation markets: 6
 - Deduplicated universe rows: 12,552
-- Tracked manifest artifacts: 333
-- Tracked CSV rows: 213,287
+- Tracked manifest artifacts: 337
+- Tracked CSV rows: 213,298
 - Competitor revenue proxy rows: 90
 - Market-money triangulation rows: 6
 - Manual P0 inspection targets: 12

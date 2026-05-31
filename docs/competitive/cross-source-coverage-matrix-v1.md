@@ -1,6 +1,6 @@
 # Cross-Source Coverage Matrix V1
 
-Generated: 2026-05-31T09:19:59.061Z
+Generated: 2026-05-31T10:02:26.910Z
 
 ## Purpose
 
@@ -8,18 +8,18 @@ This matrix converts the cross-source universe into a market/source coverage rea
 
 ## Summary
 
-- Coverage cells: 34
+- Coverage cells: 39
 - Strong coverage cells: 11
 - Medium coverage cells: 12
-- Thin but usable cells: 9
-- Weak/context-only cells: 2
+- Thin but usable cells: 12
+- Weak/context-only cells: 4
 
 Coverage band mix:
 
 - medium_coverage: 12
+- thin_but_usable: 12
 - strong_coverage: 11
-- thin_but_usable: 9
-- weak_or_context_only: 2
+- weak_or_context_only: 4
 
 Market role mix:
 
@@ -27,6 +27,7 @@ Market role mix:
 - direct_consumer_app_competitor_base: 5
 - desktop_web_productivity_and_wellness_discovery: 5
 - android_cross_check_and_pricing_path: 5
+- forum_competitor_and_need_discovery: 5
 - browser_mechanic_reference: 5
 - supporting_discovery: 4
 - indie_mechanic_and_experiment_discovery: 3
@@ -41,6 +42,7 @@ Market role mix:
 | mobile_app_store | 5 | 12000 | 8103 | 5 | 0 |
 | itch_web_game | 3 | 7047 | 6395 | 3 | 0 |
 | desktop_store | 5 | 15397 | 2954 | 5 | 0 |
+| community_forum | 5 | 2339 | 1852 | 0 | 2 |
 | google_play_or_android | 5 | 2527 | 1808 | 5 | 0 |
 | browser_extension | 5 | 252 | 252 | 0 | 1 |
 | unknown_source | 5 | 251 | 251 | 0 | 1 |

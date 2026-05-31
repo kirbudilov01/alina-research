@@ -96,6 +96,7 @@ function marketRole(sourceGroup, niche) {
   if (sourceGroup === 'google_play_or_android') return 'android_cross_check_and_pricing_path';
   if (sourceGroup === 'desktop_store') return 'desktop_web_productivity_and_wellness_discovery';
   if (sourceGroup === 'browser_extension') return 'browser_mechanic_reference';
+  if (sourceGroup === 'community_forum') return 'forum_competitor_and_need_discovery';
   if (sourceGroup === 'steam_pc') return 'pc_progression_and_mechanic_benchmark';
   if (sourceGroup === 'itch_web_game') return 'indie_mechanic_and_experiment_discovery';
   if (sourceGroup === 'duckduckgo_search') return 'legacy_smoke_discovery_low_weight';

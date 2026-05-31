@@ -310,6 +310,7 @@ def main() -> None:
     steam = read_csv("data_raw/expanded_steam_tags_raw.csv")
     desktop = read_csv("data_raw/expanded_desktop_store_raw.csv")
     chrome_raw = read_csv("data_raw/expanded_chrome_extensions_raw.csv")
+    reddit_mentions = read_csv("data_raw/expanded_reddit_competitor_mentions_raw.csv")
     cross_source_raw = read_csv("data_processed/cross_source_universe_raw.csv")
     cross_source_dedup = read_csv("data_processed/cross_source_universe_dedup.csv")
     cross_source_coverage = read_csv("data_processed/cross_source_coverage_matrix.csv")
@@ -356,7 +357,7 @@ def main() -> None:
     icp_capture = read_csv("data_processed/icp_interview_capture_sheet.csv")
     prototype_capture = read_csv("data_processed/prototype_session_capture_sheet.csv")
 
-    known_raw_total = len(expanded_raw) + len(itch) + len(steam) + len(desktop) + len(chrome_raw)
+    known_raw_total = len(expanded_raw) + len(itch) + len(steam) + len(desktop) + len(chrome_raw) + len(reddit_mentions)
     csv_rows = sum(int(row.get("row_count") or 0) for row in manifest if row.get("file_path", "").endswith(".csv"))
     source_refs = sum(int(row.get("source_ref_rows") or 0) for row in manifest if row.get("file_path", "").endswith(".csv"))
     strong_revenue = [row for row in revenue if row.get("revenue_proxy_band") == "strong_bottom_up_money_proxy"]
@@ -514,13 +515,14 @@ def main() -> None:
                 ["Evidence layer", "Count", "Interpretation"],
                 ["Five-market coverage", len(count_by(expanded, "niche")), "Core markets represented in the normalized universe."],
                 ["Known raw universe", known_raw_total, "Core + itch.io + Steam tag + desktop store + Chrome rows exceed the 30k lower-bound target."],
-                ["Cross-source normalized raw", len(cross_source_raw), "Unified provenance rows across core app stores, Google Play fallback, Steam, itch.io, desktop, and Chrome."],
+                ["Cross-source normalized raw", len(cross_source_raw), "Unified provenance rows across core app stores, Google Play fallback, Steam, itch.io, desktop, Chrome, and Reddit mentions."],
                 ["Cross-source dedup", len(cross_source_dedup), "Deduped normalization layer that protects against repeated query/country/tag rows."],
                 ["Coverage matrix cells", len(cross_source_coverage), "Source-by-market interpretation layer for strong/medium/thin/context-only evidence cells."],
                 ["Saturation/whitespace markets", len(cross_source_saturation), "Market-level prioritization layer; keeps gaming/progression benchmark-only unless direct overlap is validated."],
                 ["Deduped source universe", len(expanded), "Normalized rows for matrices and scoring."],
                 ["Chrome Web Store raw rows", len(chrome_raw), "Source-native browser-extension expansion across five markets."],
                 ["Desktop store raw rows", len(desktop), "Source-native Mac App Store desktop/wellness/productivity/game expansion."],
+                ["Reddit mention rows", len(reddit_mentions), "Source-native old.reddit competitor/need mention expansion across five markets."],
                 ["Chrome detail pages parsed", len([row for row in chrome_fit if row.get("detail_status") == "ok"]), "Fit bands, users, tags, and mechanic evidence."],
                 ["Chrome mechanic battlecards", len(chrome_battlecards), "Browser-extension mechanics translated into whitespace lessons."],
                 ["Market assumption audit", len(market_assumptions), "TAM/SAM/SOM risk rows by market and intersection."],
@@ -982,7 +984,7 @@ def main() -> None:
         table(
             [
                 ["Evidence group", "Primary files"],
-                ["Universe", "data_raw/expanded/*; data_raw/expanded_itch_raw.csv; data_raw/expanded_steam_tags_raw.csv; data_raw/expanded_desktop_store_raw.csv"],
+                ["Universe", "data_raw/expanded/*; data_raw/expanded_itch_raw.csv; data_raw/expanded_steam_tags_raw.csv; data_raw/expanded_desktop_store_raw.csv; data_raw/expanded_reddit_competitor_mentions_raw.csv"],
                 ["Cross-source universe", "data_processed/cross_source_universe_raw_index.csv;data_processed/cross_source_universe_raw_parts/part_*.csv; data_processed/cross_source_universe_dedup.csv; data_processed/cross_source_universe_summary.csv"],
                 ["Coverage matrix", "data_processed/cross_source_coverage_matrix.csv; docs/competitive/cross-source-coverage-matrix-v1.md"],
                 ["Saturation whitespace", "data_processed/cross_source_market_saturation_matrix.csv; docs/intersections/cross-source-saturation-whitespace-v1.md"],
