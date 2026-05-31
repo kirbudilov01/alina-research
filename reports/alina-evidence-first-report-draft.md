@@ -1,12 +1,12 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T02:17:29.924Z
+Generated: 2026-05-31T02:23:31.658Z
 
 ## 1. Executive Summary
 
 Alina is a proposed daily companion app combining personal meaning, identity reinforcement, coaching/action, short reset practices, and game-like progression. The research now supports a more precise opportunity statement: adjacent markets and partial substitutes are real, but the under-owned space appears to be the causal loop where completing a daily action visibly changes an identity/avatar feedback object.
 
-Current evidence verdict: **continue research / conditional go**. The market existence signal is strong enough to keep going; the remaining proof burden is competitor manual review, pricing/paywall extraction, app-review/forum evidence, and user validation of the avatar-progress mechanic.
+Current evidence verdict: **continue research / conditional go**. The market existence signal is strong enough to keep going; the remaining proof burden is competitor manual review, detailed pricing/paywall extraction, forum evidence beyond App Store reviews, and user validation of the avatar-progress mechanic.
 
 Key quantified signals:
 
@@ -15,6 +15,7 @@ Key quantified signals:
 - High whitespace candidates: 593; medium: 4040; low: 7919.
 - Top-100 intersection candidates enriched from App Store metadata: 100/100.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
+- App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Modeled direct intersection SAM base: USD 201960000.
 
 ## 2. Product Hypotheses
@@ -25,7 +26,7 @@ Key quantified signals:
 | H2 | Markets have money | supported with ranges | TAM/SAM/SOM model and 14 market claims across gaming, astrology, avatar, coaching, mindfulness. |
 | H3 | Whitespace exists | narrowed | Broad space is crowded; strict behavior-tied avatar progression appears rare in top-100 metadata. |
 | H4 | Competitive advantage is plausible | unproven but sharpened | Moat candidate is integrated daily transformation loop, not any single feature. |
-| H5 | Shared audience exists | directionally supported | Audience matrix points to digital ritual users across spirituality, identity, self-improvement, calm, and cozy progress. |
+| H5 | Shared audience exists | directionally supported | Audience matrix plus 2288 review-language signals point to digital ritual users across spirituality, identity, self-improvement, calm, and cozy progress. |
 | H6 | Product core can be defined | supported for MVP framing | Product-core evidence defines target loop and MVP testable claim. |
 
 ## 3. Dataset Overview
@@ -127,6 +128,33 @@ Audience signal counts:
 - spiritual_seekers: 2569
 - coaching_professionals: 932
 
+### App Store Review Language
+
+Recent public App Store reviews were collected for top intersection candidates. Coverage is 2294 deduplicated reviews across 78 apps, converted into keyword-based signal rows. This is not final sentiment modeling, but it is useful evidence for user language, delight, objections, and churn risk.
+
+Review rating mix:
+
+- 5: 1473
+- 1: 415
+- 4: 160
+- 3: 137
+- 2: 109
+
+Review signal counts:
+
+- content_depth_request: 605
+- pricing_complaint: 367
+- loves_daily_loop: 347
+- loves_avatar_progress: 300
+- loves_emotional_support: 238
+- quality_bug_complaint: 150
+- churn_signal: 139
+- trust_accuracy_complaint: 62
+- privacy_safety_signal: 40
+- loves_personalization: 40
+
+Interpretation: users respond strongly to daily ritual loops, emotional support, and visible progress/identity mechanics; recurring objections cluster around content depth, subscription value, bugs, trust/accuracy, and safety/privacy.
+
 ## 8. Product Core
 
 Target loop: personal meaning -> one daily action -> short reset -> avatar/identity feedback -> visible progression -> next-day hook.
@@ -153,11 +181,12 @@ Go signals present:
 - Adjacent markets have meaningful revenue pools.
 - Users are already trained on daily loops, streaks, reflection, and spiritual/personalized guidance.
 - Top-100 evidence suggests avatar/identity is common but behavior-tied avatar progression is rare.
+- Review language confirms user pull toward daily support, emotional regulation, progress cues, and personal meaning.
 
 Remaining proof required:
 
 - Manual validation of the top-100 candidates.
-- Reviews/forums for user pain language and subscription objections.
+- Forum evidence and deeper manual clustering of reviews for user pain language and subscription objections.
 - Pricing/IAP extraction beyond App Store metadata.
 - Prototype test of the two-minute daily loop.
 
@@ -186,6 +215,7 @@ Market claims currently normalized: 14.
 - `docs/market/tam-sam-som-model-v1.md`
 - `docs/intersections/whitespace-map-v2.md`
 - `docs/audience/audience-segmentation-v1.md`
+- `docs/audience/review-language-synthesis-v1.md`
 - `docs/competitive/top-intersection-review-synthesis-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
@@ -195,11 +225,14 @@ Market claims currently normalized: 14.
 - `data_processed/top_intersection_review_prefill.csv`
 - `data_processed/pricing_retention_matrix.csv`
 - `data_processed/product_core_evidence_matrix.csv`
+- `data_processed/review_signal_matrix.csv`
+- `data_raw/app_store_top_candidate_reviews.csv`
 
 ## 13. Next Work
 
 1. Complete manual review of top 100 intersection candidates.
-2. Pull and cluster app reviews for close competitors.
+2. Manually cluster the highest-signal app reviews into exact Jobs To Be Done / pain language.
 3. Extract detailed IAP/subscription pricing where accessible.
 4. Build visual charts and render the PDF version.
-5. Update go/no-go decision after manual review and review-language evidence.
+5. Add Reddit/forum/website evidence beyond App Store reviews.
+6. Update go/no-go decision after manual review and user validation.

@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T02:17:29.957Z
+Generated: 2026-05-31T02:23:31.689Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -10,6 +10,6 @@ Generated: 2026-05-31T02:17:29.957Z
 | Whitespace matrices | data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md | done v1 |
 | Audience matrices | data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md | done v1 |
 | Versioned on GitHub | git log through current commit after push | active |
-| Final PDF | reports/alina-evidence-first-report-draft.md | not done; draft markdown started |
+| Final PDF | output/pdf/alina-evidence-first-report-draft.pdf | draft PDF done |
 | Manual review of top 100 | data_processed/top_intersection_review_prefill.csv | prefilled, not manually completed |
-| Review/forum evidence | data_raw/forum_source_registry.csv | registry only; extraction pending |
+| Review/forum evidence | data_raw/app_store_top_candidate_reviews.csv; data_processed/review_signal_matrix.csv; docs/audience/review-language-synthesis-v1.md | App Store review extraction done v1; forums pending |

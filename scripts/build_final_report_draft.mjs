@@ -87,6 +87,8 @@ const claims = csv('data_processed/market_claims.csv');
 const prefill = csv('data_processed/top_intersection_review_prefill.csv');
 const pricing = csv('data_processed/pricing_retention_matrix.csv');
 const core = csv('data_processed/product_core_evidence_matrix.csv');
+const reviewSignals = csv('data_processed/review_signal_matrix.csv');
+const rawReviews = csv('data_raw/app_store_top_candidate_reviews.csv');
 
 const highWhitespace = whitespace.filter(r => r.whitespace_band === 'high').length;
 const mediumWhitespace = whitespace.filter(r => r.whitespace_band === 'medium').length;
@@ -95,6 +97,9 @@ const veryClose = core.filter(r => r.alina_closeness === 'very_close').length;
 const close = core.filter(r => r.alina_closeness === 'close').length;
 const behaviorTied = core.filter(r => r.behavior_tied_progression === 'yes').length;
 const baseIntersection = tam.find(r => r.pillar === 'intersection') || {};
+const reviewApps = new Set(rawReviews.map(r => r.app_store_id).filter(Boolean)).size;
+const ratingMix = countBy(rawReviews, 'rating');
+const reviewSignalCounts = countBy(reviewSignals, 'signal');
 
 const report = [];
 
@@ -106,7 +111,7 @@ report.push('## 1. Executive Summary');
 report.push('');
 report.push('Alina is a proposed daily companion app combining personal meaning, identity reinforcement, coaching/action, short reset practices, and game-like progression. The research now supports a more precise opportunity statement: adjacent markets and partial substitutes are real, but the under-owned space appears to be the causal loop where completing a daily action visibly changes an identity/avatar feedback object.');
 report.push('');
-report.push('Current evidence verdict: **continue research / conditional go**. The market existence signal is strong enough to keep going; the remaining proof burden is competitor manual review, pricing/paywall extraction, app-review/forum evidence, and user validation of the avatar-progress mechanic.');
+report.push('Current evidence verdict: **continue research / conditional go**. The market existence signal is strong enough to keep going; the remaining proof burden is competitor manual review, detailed pricing/paywall extraction, forum evidence beyond App Store reviews, and user validation of the avatar-progress mechanic.');
 report.push('');
 report.push('Key quantified signals:');
 report.push('');
@@ -115,6 +120,7 @@ report.push(`- Audience signal rows: ${audience.length}.`);
 report.push(`- High whitespace candidates: ${highWhitespace}; medium: ${mediumWhitespace}; low: ${lowWhitespace}.`);
 report.push(`- Top-100 intersection candidates enriched from App Store metadata: ${prefill.length}/100.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
+report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Modeled direct intersection SAM base: USD ${baseIntersection.samBase || 'n/a'}.`);
 report.push('');
 report.push('## 2. Product Hypotheses');
@@ -124,7 +130,7 @@ report.push(mdTable([
   { id: 'H2', hypothesis: 'Markets have money', status: 'supported with ranges', evidence: `TAM/SAM/SOM model and ${claims.length} market claims across gaming, astrology, avatar, coaching, mindfulness.` },
   { id: 'H3', hypothesis: 'Whitespace exists', status: 'narrowed', evidence: 'Broad space is crowded; strict behavior-tied avatar progression appears rare in top-100 metadata.' },
   { id: 'H4', hypothesis: 'Competitive advantage is plausible', status: 'unproven but sharpened', evidence: 'Moat candidate is integrated daily transformation loop, not any single feature.' },
-  { id: 'H5', hypothesis: 'Shared audience exists', status: 'directionally supported', evidence: 'Audience matrix points to digital ritual users across spirituality, identity, self-improvement, calm, and cozy progress.' },
+  { id: 'H5', hypothesis: 'Shared audience exists', status: 'directionally supported', evidence: `Audience matrix plus ${reviewSignals.length} review-language signals point to digital ritual users across spirituality, identity, self-improvement, calm, and cozy progress.` },
   { id: 'H6', hypothesis: 'Product core can be defined', status: 'supported for MVP framing', evidence: 'Product-core evidence defines target loop and MVP testable claim.' }
 ], [
   { key: 'id', label: 'ID' },
@@ -215,6 +221,20 @@ report.push('Audience signal counts:');
 report.push('');
 report.push(bulletCounts(countBy(audience, 'audience_tag')));
 report.push('');
+report.push('### App Store Review Language');
+report.push('');
+report.push(`Recent public App Store reviews were collected for top intersection candidates. Coverage is ${rawReviews.length} deduplicated reviews across ${reviewApps} apps, converted into keyword-based signal rows. This is not final sentiment modeling, but it is useful evidence for user language, delight, objections, and churn risk.`);
+report.push('');
+report.push('Review rating mix:');
+report.push('');
+report.push(bulletCounts(ratingMix));
+report.push('');
+report.push('Review signal counts:');
+report.push('');
+report.push(bulletCounts(reviewSignalCounts));
+report.push('');
+report.push('Interpretation: users respond strongly to daily ritual loops, emotional support, and visible progress/identity mechanics; recurring objections cluster around content depth, subscription value, bugs, trust/accuracy, and safety/privacy.');
+report.push('');
 report.push('## 8. Product Core');
 report.push('');
 report.push('Target loop: personal meaning -> one daily action -> short reset -> avatar/identity feedback -> visible progression -> next-day hook.');
@@ -245,11 +265,12 @@ report.push('');
 report.push('- Adjacent markets have meaningful revenue pools.');
 report.push('- Users are already trained on daily loops, streaks, reflection, and spiritual/personalized guidance.');
 report.push('- Top-100 evidence suggests avatar/identity is common but behavior-tied avatar progression is rare.');
+report.push('- Review language confirms user pull toward daily support, emotional regulation, progress cues, and personal meaning.');
 report.push('');
 report.push('Remaining proof required:');
 report.push('');
 report.push('- Manual validation of the top-100 candidates.');
-report.push('- Reviews/forums for user pain language and subscription objections.');
+report.push('- Forum evidence and deeper manual clustering of reviews for user pain language and subscription objections.');
 report.push('- Pricing/IAP extraction beyond App Store metadata.');
 report.push('- Prototype test of the two-minute daily loop.');
 report.push('');
@@ -272,6 +293,7 @@ report.push('- `docs/research-expansion-master-plan.md`');
 report.push('- `docs/market/tam-sam-som-model-v1.md`');
 report.push('- `docs/intersections/whitespace-map-v2.md`');
 report.push('- `docs/audience/audience-segmentation-v1.md`');
+report.push('- `docs/audience/review-language-synthesis-v1.md`');
 report.push('- `docs/competitive/top-intersection-review-synthesis-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
@@ -281,14 +303,17 @@ report.push('- `data_processed/whitespace_signal_matrix.csv`');
 report.push('- `data_processed/top_intersection_review_prefill.csv`');
 report.push('- `data_processed/pricing_retention_matrix.csv`');
 report.push('- `data_processed/product_core_evidence_matrix.csv`');
+report.push('- `data_processed/review_signal_matrix.csv`');
+report.push('- `data_raw/app_store_top_candidate_reviews.csv`');
 report.push('');
 report.push('## 13. Next Work');
 report.push('');
 report.push('1. Complete manual review of top 100 intersection candidates.');
-report.push('2. Pull and cluster app reviews for close competitors.');
+report.push('2. Manually cluster the highest-signal app reviews into exact Jobs To Be Done / pain language.');
 report.push('3. Extract detailed IAP/subscription pricing where accessible.');
 report.push('4. Build visual charts and render the PDF version.');
-report.push('5. Update go/no-go decision after manual review and review-language evidence.');
+report.push('5. Add Reddit/forum/website evidence beyond App Store reviews.');
+report.push('6. Update go/no-go decision after manual review and user validation.');
 
 fs.writeFileSync(OUT, `${report.join('\n')}\n`);
 
@@ -304,9 +329,9 @@ status.push(mdTable([
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
   { requirement: 'Versioned on GitHub', evidence: 'git log through current commit after push', status: 'active' },
-  { requirement: 'Final PDF', evidence: 'reports/alina-evidence-first-report-draft.md', status: 'not done; draft markdown started' },
+  { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf', status: 'draft PDF done' },
   { requirement: 'Manual review of top 100', evidence: 'data_processed/top_intersection_review_prefill.csv', status: 'prefilled, not manually completed' },
-  { requirement: 'Review/forum evidence', evidence: 'data_raw/forum_source_registry.csv', status: 'registry only; extraction pending' }
+  { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_processed/review_signal_matrix.csv; docs/audience/review-language-synthesis-v1.md', status: 'App Store review extraction done v1; forums pending' }
 ], [
   { key: 'requirement', label: 'Requirement' },
   { key: 'evidence', label: 'Evidence' },
@@ -319,3 +344,5 @@ console.log(`status=${STATUS_OUT}`);
 console.log(`expanded_rows=${expanded.length}`);
 console.log(`audience_rows=${audience.length}`);
 console.log(`market_claims=${claims.length}`);
+console.log(`review_rows=${rawReviews.length}`);
+console.log(`review_signal_rows=${reviewSignals.length}`);
