@@ -153,7 +153,7 @@ Output:
 
 - `docs/product/product-core-v1.md`
 - `docs/product/mvp-scope-v1.md`
-- `docs/product/validation-roadmap-v1.md`
+- `docs/decision/validation-gap-roadmap-v1.md`
 
 ## 12-Hour Execution Plan
 
@@ -169,6 +169,7 @@ Tasks:
 - Create source and claim schemas.
 - Add scripts for large-scale competitor expansion.
 - Initialize or reconnect Git repository.
+- Maintain validation gap roadmap after each major evidence layer.
 
 ### Block B. Source Expansion
 
@@ -201,6 +202,7 @@ Current evidence:
 - Controlled P0 external source smoke pass: `docs/competitive/p0-external-source-collection-v1.md`.
 - Chrome extension detail enrichment: `docs/competitive/chrome-extension-detail-enrichment-v1.md`.
 - Chrome extension mechanic battlecards: `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`.
+- Validation gap roadmap: `docs/decision/validation-gap-roadmap-v1.md`.
 
 Next collector priority:
 

@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T04:05:26.465Z
+Generated: 2026-05-31T04:10:27.099Z
 
 ## 1. Executive Summary
 
@@ -26,6 +26,7 @@ Key quantified signals:
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
 - Chrome extension detail enrichment: 23/23 detail pages parsed; 3 strong and 10 useful adjacent mechanic references.
 - Chrome mechanic battlecards: 23 browser-extension cards, 9 high/medium references for manual mechanic inspection.
+- Validation gap roadmap: 13 rows; 4 P0 and 9 P1 next validation tasks across markets, hypotheses, and cross-source checks.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
@@ -67,7 +68,7 @@ Claim-level audit snapshot:
 
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
-| REQ_plan | proved_v1 | high | master plan exists | Needs periodic refresh as validation findings change. |
+| REQ_plan | proved_v1 | high | master plan exists; 13 validation roadmap rows | Needs periodic refresh as validation findings change. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; P0 external pass is intentionally small, with Product Hunt/AlternativeTo still needing source-native or curated collection. |
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
 | H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000 | Market sizing is modeled from public claims and needs source-by-source confidence review. |
@@ -77,6 +78,34 @@ Claim-level audit snapshot:
 | H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows | Keyword/OCR/forum coding needs human validation and real user interviews. |
 | H6_product_core_defined | supported_for_mvp_framing | medium | 12552 feature matrix rows; 100 product-core rows | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
 | REQ_final_artifacts_versioned | proved_active | high | current branch pushed through latest commit | Final polished investor/user-facing PDF is still draft-level, not final designed publication. |
+
+## 2C. Validation Gap Roadmap
+
+The research now includes a validation roadmap that turns current evidence gaps into explicit success gates. This keeps the project honest: a claim is not final merely because a table exists.
+
+Validation priority mix:
+
+- P1: 9
+- P0: 4
+
+Market-level validation roadmap:
+
+| Market | Evidence Band | Priority | Main Gap | Next Action | Success Gate |
+| --- | --- | --- | --- | --- | --- |
+| coaching | medium_directional | P1 | human_validation | Validate whether AI coach/accountability tools overlap with daily ritual users or mostly serve narrow productivity/B2B jobs. | At least 5 inspected coaching/accountability products with clear consumer daily-use overlap. |
+| mindfulness | medium_directional | P1 | market_claim_depth/manual_competitor_validation | Manually inspect reset/paywall/onboarding flows for calm-versus-gamification tension. | At least 5 inspected reset products with notes on monetization, streak pressure, and calm UX. |
+| avatar_identity | medium_directional | P1 | market_claim_depth/consumer_identity_share_uncertain | Validate whether avatar identity products create recurring self-change value or only one-off generation/novelty. | At least 5 inspected products prove identity/avatar is part of recurring loop, not only asset creation. |
+| astrology_esoterics | medium_directional | P1 | market_claim_depth/public_market_sources_vary_widely | Add source confidence review and compare subscription/retention mechanics against app-store IAP evidence. | At least 3 credible market/revenue sources plus pricing evidence for subscription willingness. |
+| gaming | medium_directional | P1 | market_claim_depth/manual_competitor_validation/directness_limit_mechanic_benchmark_only | Use only as retention/progression benchmark; extract 10 concrete mechanics from high-signal cozy/progression examples before any direct TAM claim. | Mechanic benchmark only: 10 inspected mechanics, 0 claims of direct spend unless direct consumer overlap is proven. |
+
+P0 hypothesis gates:
+
+| Hypothesis | Evidence Band | Gap | Success Gate |
+| --- | --- | --- | --- |
+| H1_product_shape_exists | partially_supported/medium | Strict full loop is rare and needs manual product/onboarding validation. | Human validation confirms at least 5 close substitutes and no hidden direct clone invalidates the loop. |
+| H2_paywall_visible_evidence | supported_narrowly/medium_low | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. | Human screenshot review classifies public pricing/paywall evidence as confirm/partial/reject. |
+| H3_whitespace_exists | narrow_supported_not_final/medium | Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors. | Manual app/onboarding inspection confirms action -> identity/avatar causality remains rare. |
+| H4_competitive_advantage_plausible | plausible_unproven/medium_low | No human validation or prototype test yet proves users value the loop. | Prototype or user test shows the integrated loop is understood and preferred over generic habit/coach alternatives. |
 
 ## 3. Dataset Overview
 
@@ -641,6 +670,7 @@ Claim audit rows currently normalized: 10.
 - `docs/competitive/chrome-extension-detail-enrichment-v1.md`
 - `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`
 - `docs/decision/evidence-audit-v1.md`
+- `docs/decision/validation-gap-roadmap-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
 - `data_processed/evidence_claim_register.csv`
@@ -648,6 +678,7 @@ Claim audit rows currently normalized: 10.
 - `data_processed/p0_external_source_summary.csv`
 - `data_processed/chrome_extension_fit_matrix.csv`
 - `data_processed/chrome_extension_mechanic_battlecards.csv`
+- `data_processed/validation_gap_roadmap.csv`
 - `data_processed/competitor_feature_matrix.csv`
 - `data_processed/audience_signal_matrix.csv`
 - `data_processed/whitespace_signal_matrix.csv`

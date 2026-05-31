@@ -103,6 +103,7 @@ const productCore = csv('data_processed/product_core_evidence_matrix.csv');
 const p0External = csv('data_raw/expanded/p0_external_sources_raw.csv');
 const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv');
 const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
+const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
 
 const primary = top100.filter(row => row.duplicate_flag === 'primary_app_entry');
 const highThreat = primary.filter(row => Number(row.competitive_threat_score || 0) >= 24);
@@ -122,6 +123,7 @@ const p0ExternalUsable = p0External.filter(row => row.collection_status === 'ok'
 const chromeExtensionDetailOk = chromeExtensionFit.filter(row => row.detail_status === 'ok');
 const chromeExtensionStrong = chromeExtensionFit.filter(row => row.alina_fit_band === 'strong_adjacent');
 const chromeMechanicPriority = chromeExtensionBattlecards.filter(row => ['mechanic_threat_high', 'mechanic_threat_medium', 'mechanic_reference_high'].includes(row.threat_band));
+const validationRoadmapP0 = validationGapRoadmap.filter(row => row.priority === 'P0');
 
 const rows = [
   {
@@ -130,10 +132,10 @@ const rows = [
     claim: 'A large expansion plan/backlog exists and routes the research into phased work.',
     evidence_status: 'proved_v1',
     confidence: 'high',
-    primary_metric: 'master plan exists',
-    quantitative_evidence: 'docs/research-expansion-master-plan.md',
-    evidence_files: 'docs/research-expansion-master-plan.md;docs/strategy/research-phases.md;reports/expanded-research-kickoff-2026-05-31.md',
-    strongest_support: 'Research expansion plan and phase docs exist in repository.',
+    primary_metric: `master plan exists; ${validationGapRoadmap.length} validation roadmap rows`,
+    quantitative_evidence: `roadmap_rows=${validationGapRoadmap.length}; roadmap_p0=${validationRoadmapP0.length}`,
+    evidence_files: 'docs/research-expansion-master-plan.md;docs/strategy/research-phases.md;docs/decision/validation-gap-roadmap-v1.md;data_processed/validation_gap_roadmap.csv;reports/expanded-research-kickoff-2026-05-31.md',
+    strongest_support: 'Research expansion plan, phase docs, and validation gap roadmap exist in repository.',
     key_gap: 'Needs periodic refresh as validation findings change.',
     next_action: 'Update plan after human validation and prototype testing.'
   },

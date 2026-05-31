@@ -108,6 +108,7 @@ const p0ExternalSources = csv('data_raw/expanded/p0_external_sources_raw.csv');
 const p0ExternalSummary = csv('data_processed/p0_external_source_summary.csv');
 const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv');
 const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
+const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
 
 const highWhitespace = whitespace.filter(r => r.whitespace_band === 'high').length;
 const mediumWhitespace = whitespace.filter(r => r.whitespace_band === 'medium').length;
@@ -135,6 +136,8 @@ const chromeExtensionDetailOk = chromeExtensionFit.filter(r => r.detail_status =
 const chromeExtensionStrong = chromeExtensionFit.filter(r => r.alina_fit_band === 'strong_adjacent');
 const chromeExtensionUseful = chromeExtensionFit.filter(r => r.alina_fit_band === 'useful_adjacent');
 const chromeMechanicPriority = chromeExtensionBattlecards.filter(r => ['mechanic_threat_high', 'mechanic_threat_medium', 'mechanic_reference_high'].includes(r.threat_band));
+const validationRoadmapP0 = validationGapRoadmap.filter(r => r.priority === 'P0');
+const validationRoadmapP1 = validationGapRoadmap.filter(r => r.priority === 'P1');
 
 const report = [];
 
@@ -166,6 +169,7 @@ report.push(`- Source expansion backlog: ${sourceExpansionBacklog.length} priori
 report.push(`- Controlled P0 external-source smoke pass: ${p0ExternalSources.length} rows, ${p0ExternalUsable.length} usable candidates, with search-engine-heavy expansion intentionally deferred.`);
 report.push(`- Chrome extension detail enrichment: ${chromeExtensionDetailOk.length}/${chromeExtensionFit.length} detail pages parsed; ${chromeExtensionStrong.length} strong and ${chromeExtensionUseful.length} useful adjacent mechanic references.`);
 report.push(`- Chrome mechanic battlecards: ${chromeExtensionBattlecards.length} browser-extension cards, ${chromeMechanicPriority.length} high/medium references for manual mechanic inspection.`);
+report.push(`- Validation gap roadmap: ${validationGapRoadmap.length} rows; ${validationRoadmapP0.length} P0 and ${validationRoadmapP1.length} P1 next validation tasks across markets, hypotheses, and cross-source checks.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
@@ -209,6 +213,36 @@ if (evidenceAudit.length) {
     { key: 'primary_metric', label: 'Primary Metric' },
     { key: 'key_gap', label: 'Key Gap' }
   ], evidenceAudit.length));
+  report.push('');
+}
+if (validationGapRoadmap.length) {
+  report.push('## 2C. Validation Gap Roadmap');
+  report.push('');
+  report.push('The research now includes a validation roadmap that turns current evidence gaps into explicit success gates. This keeps the project honest: a claim is not final merely because a table exists.');
+  report.push('');
+  report.push('Validation priority mix:');
+  report.push('');
+  report.push(bulletCounts(countBy(validationGapRoadmap, 'priority')));
+  report.push('');
+  report.push('Market-level validation roadmap:');
+  report.push('');
+  report.push(mdTable(validationGapRoadmap.filter(r => r.roadmap_type === 'market_validation'), [
+    { key: 'market', label: 'Market' },
+    { key: 'evidence_band', label: 'Evidence Band' },
+    { key: 'priority', label: 'Priority' },
+    { key: 'main_gap', label: 'Main Gap' },
+    { key: 'recommended_next_action', label: 'Next Action' },
+    { key: 'success_gate', label: 'Success Gate' }
+  ], 5));
+  report.push('');
+  report.push('P0 hypothesis gates:');
+  report.push('');
+  report.push(mdTable(validationGapRoadmap.filter(r => r.roadmap_type === 'hypothesis_validation' && r.priority === 'P0'), [
+    { key: 'roadmap_id', label: 'Hypothesis' },
+    { key: 'evidence_band', label: 'Evidence Band' },
+    { key: 'main_gap', label: 'Gap' },
+    { key: 'success_gate', label: 'Success Gate' }
+  ], 8));
   report.push('');
 }
 report.push('## 3. Dataset Overview');
@@ -672,6 +706,7 @@ report.push('- `docs/competitive/p0-external-source-collection-v1.md`');
 report.push('- `docs/competitive/chrome-extension-detail-enrichment-v1.md`');
 report.push('- `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`');
 report.push('- `docs/decision/evidence-audit-v1.md`');
+report.push('- `docs/decision/validation-gap-roadmap-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
 report.push('- `data_processed/evidence_claim_register.csv`');
@@ -679,6 +714,7 @@ report.push('- `data_processed/source_expansion_backlog.csv`');
 report.push('- `data_processed/p0_external_source_summary.csv`');
 report.push('- `data_processed/chrome_extension_fit_matrix.csv`');
 report.push('- `data_processed/chrome_extension_mechanic_battlecards.csv`');
+report.push('- `data_processed/validation_gap_roadmap.csv`');
 report.push('- `data_processed/competitor_feature_matrix.csv`');
 report.push('- `data_processed/audience_signal_matrix.csv`');
 report.push('- `data_processed/whitespace_signal_matrix.csv`');
@@ -745,6 +781,7 @@ status.push(mdTable([
   { requirement: 'Controlled P0 external-source smoke pass', evidence: 'data_raw/expanded/p0_external_sources_raw.csv; data_processed/p0_external_source_summary.csv; docs/competitive/p0-external-source-collection-v1.md', status: 'done v1; small by design; Chrome Web Store yielded usable candidates, Product Hunt/AlternativeTo attempts retained as empty-source evidence' },
   { requirement: 'Chrome extension detail enrichment', evidence: 'data_raw/chrome_extension_detail_raw.csv; data_processed/chrome_extension_fit_matrix.csv; docs/competitive/chrome-extension-detail-enrichment-v1.md', status: 'done v1; detail pages parsed for known Chrome candidates only, producing fit bands and mechanic tags without broad search expansion' },
   { requirement: 'Chrome extension mechanic battlecards', evidence: 'data_processed/chrome_extension_mechanic_battlecards.csv; docs/competitive/chrome-extension-mechanic-battlecards-v1.md', status: 'done v1; converts enriched Chrome candidates into mechanic lessons, whitespace implications, and validation tasks' },
+  { requirement: 'Validation gap roadmap', evidence: 'data_processed/validation_gap_roadmap.csv; docs/decision/validation-gap-roadmap-v1.md', status: 'done v1; maps five markets and H1-H6 gaps into P0/P1 success gates' },
   { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; data_processed/tam_sam_som_model.csv', status: 'done v1' },
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
@@ -787,3 +824,4 @@ console.log(`chrome_extension_detail_rows=${chromeExtensionFit.length}`);
 console.log(`chrome_extension_strong=${chromeExtensionStrong.length}`);
 console.log(`chrome_extension_battlecards=${chromeExtensionBattlecards.length}`);
 console.log(`chrome_extension_priority=${chromeMechanicPriority.length}`);
+console.log(`validation_gap_rows=${validationGapRoadmap.length}`);
