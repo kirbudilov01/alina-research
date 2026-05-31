@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T08:19:18.273Z
+Generated: 2026-05-31T08:25:50.845Z
 
 ## 1. Executive Summary
 
@@ -24,8 +24,8 @@ Key quantified signals:
 - Web paywall screenshot capture: 29/29 queued screenshots captured for manual interpretation.
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
-- Evidence audit register: 17 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 239 artifacts tracked, 60 CSV artifacts, 162151 tracked CSV rows, 0 missing required artifacts.
+- Evidence audit register: 18 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
+- Evidence package manifest: 294 artifacts tracked, 61 CSV artifacts, 162203 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -44,6 +44,7 @@ Key quantified signals:
 - P0 validation field guide: 8 script/protocol sections for walkthroughs, paid-flow signoff, ICP interviews, prototype sessions, and rebuild/commit hygiene.
 - Validation evidence workspace: 5 lane folders/index rows with local templates for screenshots, notes, quotes, and scorecard calculations.
 - Validation Batch 01: 6 prefilled blocker-note files ready for first observed validation tranche.
+- Validation Batch 02: 52 prefilled P0-breadth note files for manual walkthrough, paid-flow signoff, ICP interviews, prototype sessions, and scorecard gates.
 - Validation capture sheets: 276 fillable capture rows across manual walkthrough, paid-flow, ICP interview, and prototype-session evidence.
 - Market source confidence review: 12 sources graded; 3 high-use anchors and 4 range-only/context sources.
 - Market sizing stress test: 6 assumption-risk rows and 6 bottom-up stress scenarios.
@@ -86,6 +87,7 @@ Evidence status mix:
 - proved_v1_execution_scripts_ready_open_gates: 1
 - proved_v1_intake_workspace_ready_open_gates: 1
 - proved_v1_batch_ready_open_gates: 1
+- proved_v1_p0_breadth_batch_ready_open_gates: 1
 - substantial_v1_not_50k_dedup: 1
 - public_listing_inspected_walkthrough_open: 1
 - supported_with_ranges_stress_test_and_bottom_up_proxy: 1
@@ -101,13 +103,14 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 16 validation roadmap rows; 11 execution tasks | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 239 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 294 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_hypothesis_decision_matrix | proved_v1_open_validation_decisions | high | 6 hypothesis decision rows; 6 hold/validate; 0 go; 0 stop/pivot | Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open. |
 | REQ_p0_validation_command_center | proved_v1_operator_ready_open_gates | high | 75 command rows; 6 blocker rows; 52 P0 rows | The command center is operational scaffolding; it still requires actual screenshots, participant evidence, paywall signoff, and updated verdicts. |
 | REQ_p0_validation_field_guide | proved_v1_execution_scripts_ready_open_gates | high | 8 field guide sections; 75 command rows referenced | Field guide is still an execution artifact, not observed validation evidence. |
 | REQ_validation_evidence_workspace | proved_v1_intake_workspace_ready_open_gates | high | 5 workspace lanes; output/validation README and templates generated | Workspace is empty until real screenshots, notes, quotes, and calculations are captured. |
 | REQ_validation_batch_01 | proved_v1_batch_ready_open_gates | high | 6 batch rows; 6 not started | Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts. |
+| REQ_validation_batch_02 | proved_v1_p0_breadth_batch_ready_open_gates | high | 52 batch rows; 52 not started | Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 38240 cross-source raw rows; 22769 cross-source dedup rows; 34 coverage cells; 10 strong and 12 medium source/market cells | Cross-source dedup universe is substantial but still below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | H1_product_shape_exists | public_listing_inspected_walkthrough_open | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Strict full loop is rare and still needs actual app/onboarding screenshots to confirm or downgrade public listing claims. |
 | H2_markets_have_money | supported_with_ranges_stress_test_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, manual in-app paywall validation, and willingness-to-pay prototype evidence for final investor-grade claims. |
@@ -224,11 +227,78 @@ Batch 01 pre-creates note files for every P0 blocker command. These notes are th
 | 5 | P0_PROTO_ICP_A_S06_AVATAR_CHANGE | prototype_user_validation | Spiritual self-improvers / S06_AVATAR_CHANGE | output/validation/2026-05-31/prototype_user_validation/batch01_05__P0_PROTO_ICP_A_S06_AVATAR_CHANGE__spiritual-self-improvers-s06-avatar-change__notes.md |
 | 6 | P0_PROTO_ICP_D_S06_AVATAR_CHANGE | prototype_user_validation | Habit and progress users / S06_AVATAR_CHANGE | output/validation/2026-05-31/prototype_user_validation/batch01_06__P0_PROTO_ICP_D_S06_AVATAR_CHANGE__habit-and-progress-users-s06-avatar-change__notes.md |
 
-## 2H. Evidence Package Manifest
+## 2H. Validation Batch 02
+
+Batch 02 pre-creates note files for every non-blocker P0 command. It expands the workbench from six blocker gates into the full P0 breadth while still keeping every row in not_started until observed evidence is captured.
+
+Rows by lane:
+
+- prototype_user_validation: 14
+- icp_interviews: 12
+- paid_flow_validation: 12
+- manual_competitor_walkthrough: 11
+- prototype_scorecard_gate: 3
+
+| # | Command | Lane | Target | Note Path |
+| ---: | --- | --- | --- | --- |
+| 1 | P0_ICP_ICP_A_T01 | icp_interviews | Spiritual self-improvers / screener | output/validation/2026-05-31/icp_interviews/batch02_01__P0_ICP_ICP_A_T01__spiritual-self-improvers-screener__notes.md |
+| 2 | P0_ICP_ICP_A_T02 | icp_interviews | Spiritual self-improvers / problem_interview | output/validation/2026-05-31/icp_interviews/batch02_02__P0_ICP_ICP_A_T02__spiritual-self-improvers-problem-interview__notes.md |
+| 3 | P0_ICP_ICP_A_T03 | icp_interviews | Spiritual self-improvers / prototype_loop | output/validation/2026-05-31/icp_interviews/batch02_03__P0_ICP_ICP_A_T03__spiritual-self-improvers-prototype-loop__notes.md |
+| 4 | P0_ICP_ICP_A_T04 | icp_interviews | Spiritual self-improvers / positioning_test | output/validation/2026-05-31/icp_interviews/batch02_04__P0_ICP_ICP_A_T04__spiritual-self-improvers-positioning-test__notes.md |
+| 5 | P0_ICP_ICP_A_T05 | icp_interviews | Spiritual self-improvers / willingness_to_pay | output/validation/2026-05-31/icp_interviews/batch02_05__P0_ICP_ICP_A_T05__spiritual-self-improvers-willingness-to-pay__notes.md |
+| 6 | P0_ICP_ICP_A_T06 | icp_interviews | Spiritual self-improvers / disconfirmation | output/validation/2026-05-31/icp_interviews/batch02_06__P0_ICP_ICP_A_T06__spiritual-self-improvers-disconfirmation__notes.md |
+| 7 | P0_ICP_ICP_D_T01 | icp_interviews | Habit and progress users / screener | output/validation/2026-05-31/icp_interviews/batch02_07__P0_ICP_ICP_D_T01__habit-and-progress-users-screener__notes.md |
+| 8 | P0_ICP_ICP_D_T02 | icp_interviews | Habit and progress users / problem_interview | output/validation/2026-05-31/icp_interviews/batch02_08__P0_ICP_ICP_D_T02__habit-and-progress-users-problem-interview__notes.md |
+| 9 | P0_ICP_ICP_D_T03 | icp_interviews | Habit and progress users / prototype_loop | output/validation/2026-05-31/icp_interviews/batch02_09__P0_ICP_ICP_D_T03__habit-and-progress-users-prototype-loop__notes.md |
+| 10 | P0_ICP_ICP_D_T04 | icp_interviews | Habit and progress users / positioning_test | output/validation/2026-05-31/icp_interviews/batch02_10__P0_ICP_ICP_D_T04__habit-and-progress-users-positioning-test__notes.md |
+| 11 | P0_ICP_ICP_D_T05 | icp_interviews | Habit and progress users / willingness_to_pay | output/validation/2026-05-31/icp_interviews/batch02_11__P0_ICP_ICP_D_T05__habit-and-progress-users-willingness-to-pay__notes.md |
+| 12 | P0_ICP_ICP_D_T06 | icp_interviews | Habit and progress users / disconfirmation | output/validation/2026-05-31/icp_interviews/batch02_12__P0_ICP_ICP_D_T06__habit-and-progress-users-disconfirmation__notes.md |
+| 13 | P0_MANUAL_02 | manual_competitor_walkthrough | Zing AI: Home & Gym Workouts | output/validation/2026-05-31/manual_competitor_walkthrough/batch02_13__P0_MANUAL_02__zing-ai-home-gym-workouts__notes.md |
+| 14 | P0_MANUAL_03 | manual_competitor_walkthrough | Miracle Morning Routine | output/validation/2026-05-31/manual_competitor_walkthrough/batch02_14__P0_MANUAL_03__miracle-morning-routine__notes.md |
+| 15 | P0_MANUAL_04 | manual_competitor_walkthrough | EVOLVE: Transform Your Life | output/validation/2026-05-31/manual_competitor_walkthrough/batch02_15__P0_MANUAL_04__evolve-transform-your-life__notes.md |
+| 16 | P0_MANUAL_05 | manual_competitor_walkthrough | Daily Yoga: Yoga for Fitness® | output/validation/2026-05-31/manual_competitor_walkthrough/batch02_16__P0_MANUAL_05__daily-yoga-yoga-for-fitness__notes.md |
+| 17 | P0_MANUAL_06 | manual_competitor_walkthrough | Daily Burn: Workout Coach | output/validation/2026-05-31/manual_competitor_walkthrough/batch02_17__P0_MANUAL_06__daily-burn-workout-coach__notes.md |
+| 18 | P0_MANUAL_07 | manual_competitor_walkthrough | Myla : Manifest & Vision Board | output/validation/2026-05-31/manual_competitor_walkthrough/batch02_18__P0_MANUAL_07__myla-manifest-vision-board__notes.md |
+| 19 | P0_MANUAL_08 | manual_competitor_walkthrough | Rosebud: AI Journal & Diary | output/validation/2026-05-31/manual_competitor_walkthrough/batch02_19__P0_MANUAL_08__rosebud-ai-journal-diary__notes.md |
+| 20 | P0_MANUAL_09 | manual_competitor_walkthrough | Habit Tracker : Haby | output/validation/2026-05-31/manual_competitor_walkthrough/batch02_20__P0_MANUAL_09__habit-tracker-haby__notes.md |
+| 21 | P0_MANUAL_10 | manual_competitor_walkthrough | Goddess・Women's Wellness Coach | output/validation/2026-05-31/manual_competitor_walkthrough/batch02_21__P0_MANUAL_10__goddess-women-s-wellness-coach__notes.md |
+| 22 | P0_MANUAL_11 | manual_competitor_walkthrough | LifeWheel Goal Habit Tracker | output/validation/2026-05-31/manual_competitor_walkthrough/batch02_22__P0_MANUAL_11__lifewheel-goal-habit-tracker__notes.md |
+| 23 | P0_MANUAL_12 | manual_competitor_walkthrough | Habit Tracker | output/validation/2026-05-31/manual_competitor_walkthrough/batch02_23__P0_MANUAL_12__habit-tracker__notes.md |
+| 24 | P0_PAYWALL_02 | paid_flow_validation | Character AI: Chat, Talk, Text | output/validation/2026-05-31/paid_flow_validation/batch02_24__P0_PAYWALL_02__character-ai-chat-talk-text__notes.md |
+| 25 | P0_PAYWALL_03 | paid_flow_validation | Headspace: Sleep & Meditate | output/validation/2026-05-31/paid_flow_validation/batch02_25__P0_PAYWALL_03__headspace-sleep-meditate__notes.md |
+| 26 | P0_PAYWALL_04 | paid_flow_validation | Meditopia: Sleep & Meditation | output/validation/2026-05-31/paid_flow_validation/batch02_26__P0_PAYWALL_04__meditopia-sleep-meditation__notes.md |
+| 27 | P0_PAYWALL_05 | paid_flow_validation | Nebula: Spiritual Guidance | output/validation/2026-05-31/paid_flow_validation/batch02_27__P0_PAYWALL_05__nebula-spiritual-guidance__notes.md |
+| 28 | P0_PAYWALL_08 | paid_flow_validation | Carrom Pool: Disc Game | output/validation/2026-05-31/paid_flow_validation/batch02_28__P0_PAYWALL_08__carrom-pool-disc-game__notes.md |
+| 29 | P0_PAYWALL_13 | paid_flow_validation | Avatar World ® | output/validation/2026-05-31/paid_flow_validation/batch02_29__P0_PAYWALL_13__avatar-world__notes.md |
+| 30 | P0_PAYWALL_15 | paid_flow_validation | AstroSage Kundli: AI Astrology | output/validation/2026-05-31/paid_flow_validation/batch02_30__P0_PAYWALL_15__astrosage-kundli-ai-astrology__notes.md |
+| 31 | P0_PAYWALL_17 | paid_flow_validation | NBA 2K Mobile Basketball Game | output/validation/2026-05-31/paid_flow_validation/batch02_31__P0_PAYWALL_17__nba-2k-mobile-basketball-game__notes.md |
+| 32 | P0_PAYWALL_21 | paid_flow_validation | Everskies: Virtual Dress up | output/validation/2026-05-31/paid_flow_validation/batch02_32__P0_PAYWALL_21__everskies-virtual-dress-up__notes.md |
+| 33 | P0_PAYWALL_25 | paid_flow_validation | Mindfulness with Petit BamBou | output/validation/2026-05-31/paid_flow_validation/batch02_33__P0_PAYWALL_25__mindfulness-with-petit-bambou__notes.md |
+| 34 | P0_PAYWALL_28 | paid_flow_validation | Monster Girl Maker 2 | output/validation/2026-05-31/paid_flow_validation/batch02_34__P0_PAYWALL_28__monster-girl-maker-2__notes.md |
+| 35 | P0_PAYWALL_29 | paid_flow_validation | Monster Girl Maker | output/validation/2026-05-31/paid_flow_validation/batch02_35__P0_PAYWALL_29__monster-girl-maker__notes.md |
+| 36 | P0_SCORE_PVS_M02 | prototype_scorecard_gate | two_minute_completion | output/validation/2026-05-31/prototype_scorecard_gate/batch02_36__P0_SCORE_PVS_M02__two-minute-completion__notes.md |
+| 37 | P0_SCORE_PVS_M03 | prototype_scorecard_gate | meaning_lift | output/validation/2026-05-31/prototype_scorecard_gate/batch02_37__P0_SCORE_PVS_M03__meaning-lift__notes.md |
+| 38 | P0_SCORE_PVS_M06 | prototype_scorecard_gate | paid_depth | output/validation/2026-05-31/prototype_scorecard_gate/batch02_38__P0_SCORE_PVS_M06__paid-depth__notes.md |
+| 39 | P0_PROTO_ICP_A_S01_ENTRY | prototype_user_validation | Spiritual self-improvers / S01_ENTRY | output/validation/2026-05-31/prototype_user_validation/batch02_39__P0_PROTO_ICP_A_S01_ENTRY__spiritual-self-improvers-s01-entry__notes.md |
+| 40 | P0_PROTO_ICP_A_S02_REFLECTION | prototype_user_validation | Spiritual self-improvers / S02_REFLECTION | output/validation/2026-05-31/prototype_user_validation/batch02_40__P0_PROTO_ICP_A_S02_REFLECTION__spiritual-self-improvers-s02-reflection__notes.md |
+| 41 | P0_PROTO_ICP_A_S03_ACTION_CARD | prototype_user_validation | Spiritual self-improvers / S03_ACTION_CARD | output/validation/2026-05-31/prototype_user_validation/batch02_41__P0_PROTO_ICP_A_S03_ACTION_CARD__spiritual-self-improvers-s03-action-card__notes.md |
+| 42 | P0_PROTO_ICP_A_S04_RESET | prototype_user_validation | Spiritual self-improvers / S04_RESET | output/validation/2026-05-31/prototype_user_validation/batch02_42__P0_PROTO_ICP_A_S04_RESET__spiritual-self-improvers-s04-reset__notes.md |
+| 43 | P0_PROTO_ICP_A_S05_COMPLETION | prototype_user_validation | Spiritual self-improvers / S05_COMPLETION | output/validation/2026-05-31/prototype_user_validation/batch02_43__P0_PROTO_ICP_A_S05_COMPLETION__spiritual-self-improvers-s05-completion__notes.md |
+| 44 | P0_PROTO_ICP_A_S07_TOMORROW_HOOK | prototype_user_validation | Spiritual self-improvers / S07_TOMORROW_HOOK | output/validation/2026-05-31/prototype_user_validation/batch02_44__P0_PROTO_ICP_A_S07_TOMORROW_HOOK__spiritual-self-improvers-s07-tomorrow-hook__notes.md |
+| 45 | P0_PROTO_ICP_A_S08_VALUE_CHECK | prototype_user_validation | Spiritual self-improvers / S08_VALUE_CHECK | output/validation/2026-05-31/prototype_user_validation/batch02_45__P0_PROTO_ICP_A_S08_VALUE_CHECK__spiritual-self-improvers-s08-value-check__notes.md |
+| 46 | P0_PROTO_ICP_D_S01_ENTRY | prototype_user_validation | Habit and progress users / S01_ENTRY | output/validation/2026-05-31/prototype_user_validation/batch02_46__P0_PROTO_ICP_D_S01_ENTRY__habit-and-progress-users-s01-entry__notes.md |
+| 47 | P0_PROTO_ICP_D_S02_REFLECTION | prototype_user_validation | Habit and progress users / S02_REFLECTION | output/validation/2026-05-31/prototype_user_validation/batch02_47__P0_PROTO_ICP_D_S02_REFLECTION__habit-and-progress-users-s02-reflection__notes.md |
+| 48 | P0_PROTO_ICP_D_S03_ACTION_CARD | prototype_user_validation | Habit and progress users / S03_ACTION_CARD | output/validation/2026-05-31/prototype_user_validation/batch02_48__P0_PROTO_ICP_D_S03_ACTION_CARD__habit-and-progress-users-s03-action-card__notes.md |
+| 49 | P0_PROTO_ICP_D_S04_RESET | prototype_user_validation | Habit and progress users / S04_RESET | output/validation/2026-05-31/prototype_user_validation/batch02_49__P0_PROTO_ICP_D_S04_RESET__habit-and-progress-users-s04-reset__notes.md |
+| 50 | P0_PROTO_ICP_D_S05_COMPLETION | prototype_user_validation | Habit and progress users / S05_COMPLETION | output/validation/2026-05-31/prototype_user_validation/batch02_50__P0_PROTO_ICP_D_S05_COMPLETION__habit-and-progress-users-s05-completion__notes.md |
+| 51 | P0_PROTO_ICP_D_S07_TOMORROW_HOOK | prototype_user_validation | Habit and progress users / S07_TOMORROW_HOOK | output/validation/2026-05-31/prototype_user_validation/batch02_51__P0_PROTO_ICP_D_S07_TOMORROW_HOOK__habit-and-progress-users-s07-tomorrow-hook__notes.md |
+| 52 | P0_PROTO_ICP_D_S08_VALUE_CHECK | prototype_user_validation | Habit and progress users / S08_VALUE_CHECK | output/validation/2026-05-31/prototype_user_validation/batch02_52__P0_PROTO_ICP_D_S08_VALUE_CHECK__habit-and-progress-users-s08-value-check__notes.md |
+
+## 2I. Evidence Package Manifest
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 239 artifacts; 60 CSV artifacts; 162151 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 294 artifacts; 61 CSV artifacts; 162203 tracked CSV rows; 0 missing required artifacts.
 
 Largest tracked CSV artifacts:
 
@@ -247,7 +317,7 @@ Largest tracked CSV artifacts:
 | data_raw/app_store_top_candidate_reviews.csv | audience_icp | 2294 | 2294 | 3fb11211b91b48b3 |
 | data_raw/web_paywall_discovery_raw.csv | market_money | 560 | 560 | 3416403392840293 |
 
-## 2I. Research Completion Audit
+## 2J. Research Completion Audit
 
 The completion audit maps the original objective to current proof. It is intentionally conservative: several requirements are strong enough for continued validation, but not yet final enough to call the whole goal complete.
 
@@ -267,18 +337,18 @@ Objective readiness matrix:
 
 | Requirement | Status | Strength | Proof | Remaining Gap |
 | --- | --- | --- | --- | --- |
-| REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=16; execution_dashboard_rows=11; hypothesis_decision_rows=6; p0_command_rows=75; p0_field_guide_sections=8; validation_workspace_lanes=5; validation_batch01_rows=6 | Keep refreshing as validation results change. |
+| REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=16; execution_dashboard_rows=11; hypothesis_decision_rows=6; p0_command_rows=75; p0_field_guide_sections=8; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52 | Keep refreshing as validation results change. |
 | REQ_02_COMPETITOR_UNIVERSE | proved_scale_target_cross_source_normalized | medium_high | dedup=12552; cross_source_raw=38240; cross_source_dedup=22769; cross_source_summary_rows=14; coverage_cells=34; coverage_strong=10; coverage_medium=12; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; desktop_store_rows=6942; chrome_extension_rows=252; known_raw_total=37989; itch_ok=6973; steam_tag_ok=6000; desktop_store_ok=6938; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | Cross-source dedup is substantial but still below the aspirational 30k-50k dedup target; Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
 | REQ_04_MARKET_MONEY | supported_with_stress_test_and_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; assumption_audit_rows=6; stress_scenarios=6; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing is stress-tested and range-based, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall validation are still needed for final investor-grade claims. |
 | REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; cross_source_saturation_markets=6; cross_source_primary_high_opportunity=0; cross_source_benchmark_markets=2; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_walkthrough_capture_rows=60; manual_app_walkthrough_done=0 | Cross-source saturation now keeps gaming/progression as benchmark-only and finds no primary market opportunity strong enough to upgrade without manual walkthrough; app/onboarding screenshots are still required. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36; icp_capture_rows=96 | Segments are directional and need interviews/prototype/WTP validation. |
-| REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=17; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. |
+| REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=18; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=239; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
-| REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; p0_command_rows=75; p0_command_blockers=6; p0_command_p0=52; p0_field_guide_sections=8; validation_workspace_lanes=5; validation_batch01_rows=6; hypothesis_decision_rows=6; hypothesis_hold=6; hypothesis_go=0; hypothesis_stop=0; capture_rows=276; manual_capture_rows=60; paid_capture_rows=40; icp_capture_rows=96; prototype_capture_rows=80; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=294; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; p0_command_rows=75; p0_command_blockers=6; p0_command_p0=52; p0_field_guide_sections=8; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; hypothesis_decision_rows=6; hypothesis_hold=6; hypothesis_go=0; hypothesis_stop=0; capture_rows=276; manual_capture_rows=60; paid_capture_rows=40; icp_capture_rows=96; prototype_capture_rows=80; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
-## 2J. Validation Gap Roadmap
+## 2K. Validation Gap Roadmap
 
 The research now includes a validation roadmap that turns current evidence gaps into explicit success gates. This keeps the project honest: a claim is not final merely because a table exists.
 
@@ -1251,7 +1321,7 @@ Remaining proof required:
 ## 11. Source and Claim Layer
 
 Market claims currently normalized: 14.
-Claim audit rows currently normalized: 17.
+Claim audit rows currently normalized: 18.
 
 | Claim ID | Market | Value | Period | Confidence | Source |
 | --- | --- | ---: | --- | --- | --- |
@@ -1310,6 +1380,7 @@ Claim audit rows currently normalized: 17.
 - `docs/decision/p0-validation-field-guide-v1.md`
 - `docs/decision/validation-evidence-workspace-v1.md`
 - `docs/decision/validation-batch-01-v1.md`
+- `docs/decision/validation-batch-02-v1.md`
 - `docs/decision/validation-gap-roadmap-v1.md`
 - `docs/decision/validation-execution-dashboard-v1.md`
 - `docs/product/product-core-evidence-v1.md`
@@ -1326,6 +1397,7 @@ Claim audit rows currently normalized: 17.
 - `data_processed/p0_validation_field_guide.csv`
 - `data_processed/validation_evidence_workspace_index.csv`
 - `data_processed/validation_batch_01_index.csv`
+- `data_processed/validation_batch_02_index.csv`
 - `data_processed/source_expansion_backlog.csv`
 - `data_processed/p0_external_source_summary.csv`
 - `data_processed/itch_source_summary.csv`

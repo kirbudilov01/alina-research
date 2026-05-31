@@ -135,6 +135,7 @@ const p0CommandCenter = csv('data_processed/p0_validation_command_center.csv');
 const p0FieldGuide = csv('data_processed/p0_validation_field_guide.csv');
 const validationWorkspace = csv('data_processed/validation_evidence_workspace_index.csv');
 const validationBatch01 = csv('data_processed/validation_batch_01_index.csv');
+const validationBatch02 = csv('data_processed/validation_batch_02_index.csv');
 const evidenceManifest = csv('data_processed/evidence_artifact_manifest.csv');
 const completionAudit = csv('data_processed/research_completion_audit.csv');
 const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv');
@@ -293,6 +294,19 @@ const rows = [
     strongest_support: 'Batch 01 creates prefilled notes for every P0 blocker command and links each note to command_id, gate, source files, and output files to update.',
     key_gap: 'Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts.',
     next_action: 'Fill Batch 01 notes before upgrading or downgrading H1/H3/H4/H6.'
+  },
+  {
+    claim_id: 'REQ_validation_batch_02',
+    claim_type: 'project_requirement',
+    claim: 'The full non-blocker P0 validation breadth has prefilled local note files.',
+    evidence_status: validationBatch02.length ? 'proved_v1_p0_breadth_batch_ready_open_gates' : 'missing',
+    confidence: validationBatch02.length ? 'high' : 'low',
+    primary_metric: `${validationBatch02.length} batch rows; ${validationBatch02.filter(row => row.status === 'not_started').length} not started`,
+    quantitative_evidence: `batch_rows=${validationBatch02.length}; p0_rows=${p0CommandRows.length}; note_files=${validationBatch02.length}`,
+    evidence_files: 'data_processed/validation_batch_02_index.csv;docs/decision/validation-batch-02-v1.md;output/validation/2026-05-31',
+    strongest_support: 'Batch 02 creates prefilled notes for every non-blocker P0 command across manual walkthrough, paid-flow signoff, ICP interviews, prototype sessions, and scorecard gates.',
+    key_gap: 'Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts.',
+    next_action: 'Work through Batch 02 after blocker notes or in parallel where the evidence lane is independent.'
   },
   {
     claim_id: 'REQ_competitor_universe',
@@ -454,6 +468,7 @@ lines.push('- Execution layer: P0 validation command center translates open gate
 lines.push('- Field layer: P0 validation field guide provides scripts, evidence naming, and post-validation rebuild protocol.');
 lines.push('- Intake layer: validation evidence workspace creates local folders and templates for screenshots, notes, quotes, and scorecard calculations.');
 lines.push('- Batch layer: validation Batch 01 pre-creates note files for all P0 blocker commands.');
+lines.push('- Breadth layer: validation Batch 02 pre-creates note files for all non-blocker P0 commands.');
 lines.push('- Strongest product evidence: adjacent markets are monetized; the user language around daily ritual/progress is real; strict behavior-tied avatar progression remains narrow in current metadata.');
 lines.push('- Weakest remaining proof: human validation of competitors, actual in-app paywall/onboarding flows, real user prototype response, and final source-by-source market sizing review.');
 lines.push('- Current decision should remain conditional-go for validation, not full product-build go.');
