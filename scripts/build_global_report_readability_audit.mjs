@@ -39,6 +39,8 @@ function csvRowCount(file) {
 const text = fs.existsSync(REPORT) ? fs.readFileSync(REPORT, 'utf8') : '';
 const storylineRows = csvRowCount('data_processed/russian_sequential_storyline.csv');
 const dashboardRows = csvRowCount('data_processed/russian_frontmatter_dashboard.csv');
+const readerGlossaryRows = csvRowCount('data_processed/russian_reader_glossary.csv');
+const readerReportExists = fs.existsSync('reports/alina-global-reader-report-v1.md');
 const sections = [...text.matchAll(/^##\s+(.+)$/gm)].map(match => clean(match[1]));
 const tableRows = text.split('\n').filter(line => /^\|.+\|$/.test(line)).length;
 const technicalEnglishHits = (text.match(/\b(?:meaning|action|reset|visible|progress|avatar|workflow|scorecard|walkthrough|paywall|prototype|gate|hold_validate|queued_not_applied|source|dedup|raw|benchmark|claim)\b/g) || []).length;
@@ -168,6 +170,17 @@ const rows = [
     recommendation_ru: 'Оставлять frontmatter dashboard в начале полного отчета и executive narrative; тяжелые детализации держать ниже.',
     target_file: 'data_processed/russian_frontmatter_dashboard.csv',
     claim_boundary_ru: 'Dashboard показывает навигационные числа, но не апгрейдит гипотезы.'
+  },
+  {
+    audit_id: 'READ_10_READER_LAYER',
+    report_area_ru: 'Легкая reader-версия и glossary',
+    readability_status_ru: readerReportExists && readerGlossaryRows >= 10 ? 'смягчено отдельным reader layer' : 'нужна правка',
+    severity_ru: readerReportExists && readerGlossaryRows >= 10 ? 'низкая' : 'средняя',
+    evidence_seen_ru: `reader_report=${readerReportExists ? 'yes' : 'no'}; glossary_rows=${readerGlossaryRows}`,
+    issue_ru: 'Полный отчет остается тяжелым evidence pack. Для внешнего чтения нужен отдельный слой, который объясняет термины и оставляет только ключевые числа без потери границ доказательств.',
+    recommendation_ru: 'Использовать reader report как первый документ для чтения, а полный hypothesis report и manifest как доказательное приложение.',
+    target_file: 'reports/alina-global-reader-report-v1.md',
+    claim_boundary_ru: 'Reader layer улучшает форму подачи, но не закрывает validation gates.'
   }
 ];
 
@@ -194,7 +207,7 @@ lines.push('Этот аудит отвечает на вопрос: складн
 lines.push('');
 lines.push('## Краткий вывод');
 lines.push('');
-lines.push('Текущая версия читается последовательно: продуктовая идея ведет к рынкам, рынки к конкурентам, конкуренты к whitespace, затем к аудитории, MVP и validation queue. Narrative-spine слой фиксирует вопрос читателя и переход для каждого крупного блока, а frontmatter dashboard выносит ключевые счетчики до длинных таблиц. Главная слабость остается в плотности таблиц и большом количестве технических EN labels. Для рабочего evidence pack это допустимо; для внешнего PDF позже нужен облегченный executive narrative и тяжелое приложение.');
+lines.push('Текущая версия читается последовательно: продуктовая идея ведет к рынкам, рынки к конкурентам, конкуренты к whitespace, затем к аудитории, MVP и validation queue. Narrative-spine слой фиксирует вопрос читателя и переход для каждого крупного блока, а frontmatter dashboard выносит ключевые счетчики до длинных таблиц. Главная слабость остается в плотности таблиц и большом количестве технических EN labels. Для рабочего evidence pack это допустимо; для внешнего чтения добавляется отдельный reader/glossary layer, а тяжелые таблицы остаются приложением.');
 lines.push('');
 lines.push('## Audit Table');
 lines.push('');

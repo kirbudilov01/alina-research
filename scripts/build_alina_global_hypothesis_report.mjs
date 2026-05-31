@@ -215,6 +215,7 @@ const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv
 const marketSources = csv('data_processed/market_source_registry.csv');
 const nextValidationBacklog = csv('data_processed/global_next_validation_backlog.csv');
 const p0ValidationExecutionSlice = csv('data_processed/p0_validation_execution_slice.csv');
+const readerGlossary = csv('data_processed/russian_reader_glossary.csv');
 const reportReadabilityAudit = csv('data_processed/global_report_readability_audit.csv');
 const sourceQualityAudit = csv('data_processed/global_source_quality_gap_audit.csv');
 const marketSizingMethodology = csv('data_processed/global_market_sizing_methodology.csv');
@@ -518,6 +519,15 @@ const sourceAppendix = [
     primary_metric: `${p0ValidationExecutionSlice.length} execution-slice rows`,
     evidence_files: 'data_processed/p0_validation_execution_slice.csv;docs/decision/p0-validation-execution-slice-v1.md;data_processed/global_next_validation_backlog.csv;data_processed/p0_validation_command_center.csv',
     source_boundary_ru: 'Execution slice показывает порядок действий; он не апгрейдит H1-H6 без заполненных observed rows.'
+  },
+  {
+    claim_id: 'SRC_17_READER_GLOSSARY',
+    report_section: 'Проверка складности и читаемости отчета',
+    claim_ru: 'Для внешнего чтения добавлена русская reader-версия и glossary, которые объясняют технические labels без потери claim boundaries.',
+    evidence_status_ru: 'проверено как readability layer, не market proof',
+    primary_metric: `${readerGlossary.length} glossary rows`,
+    evidence_files: 'reports/alina-global-reader-report-v1.md;data_processed/russian_reader_glossary.csv;docs/decision/russian-reader-glossary-v1.md;data_processed/global_report_readability_audit.csv',
+    source_boundary_ru: 'Reader/glossary слой улучшает форму подачи; он не закрывает H1-H6 и не заменяет observed validation.'
   }
 ];
 
@@ -1181,13 +1191,16 @@ lines.push('## Локальные файлы');
 lines.push('');
 lines.push('- `reports/alina-global-hypothesis-report-v1.md`');
 lines.push('- `reports/alina-global-executive-narrative-v1.md`');
+lines.push('- `reports/alina-global-reader-report-v1.md`');
 lines.push('- `output/pdf/alina-global-hypothesis-report-v1.pdf`');
 lines.push('- `output/pdf/alina-global-executive-narrative-v1.pdf`');
+lines.push('- `output/pdf/alina-global-reader-report-v1.pdf`');
 lines.push('- `data_processed/global_hypothesis_source_appendix.csv`');
 lines.push('- `data_processed/global_hypothesis_validation_questionnaire.csv`');
 lines.push('- `data_processed/global_hypothesis_gate_snapshot.csv`');
 lines.push('- `data_processed/global_next_validation_backlog.csv`');
 lines.push('- `data_processed/p0_validation_execution_slice.csv`');
+lines.push('- `data_processed/russian_reader_glossary.csv`');
 lines.push('- `data_processed/global_report_readability_audit.csv`');
 lines.push('- `data_processed/global_source_quality_gap_audit.csv`');
 lines.push('- `data_processed/russian_sequential_storyline.csv`');

@@ -45,6 +45,11 @@ DOCUMENTS = [
         OUTPUT_DIR / "alina-global-executive-narrative-v1.pdf",
         "Alina Research - executive narrative",
     ),
+    (
+        ROOT / "reports" / "alina-global-reader-report-v1.md",
+        OUTPUT_DIR / "alina-global-reader-report-v1.pdf",
+        "Alina Research - reader version",
+    ),
 ]
 
 

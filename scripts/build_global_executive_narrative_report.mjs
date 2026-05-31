@@ -306,19 +306,22 @@ lines.push(mdTable(nextBacklog.slice(0, 8).map(row => ({
 lines.push('');
 lines.push('## Как читать этот документ');
 lines.push('');
-lines.push(`Это executive narrative поверх полного evidence pack. Он специально короче основного отчета, потому что readability audit показал: полный документ логичен, но перегружен таблицами (${tableDensity.evidence_seen_ru || 'table density high'}). Для решений использовать эту версию как входную историю, а полный отчет, manifest, source appendix и capture sheets - как доказательную базу.`);
+lines.push(`Это executive narrative поверх полного evidence pack. Он специально короче основного отчета, потому что readability audit показал: полный документ логичен, но перегружен таблицами (${tableDensity.evidence_seen_ru || 'table density high'}). Для самого мягкого первого чтения использовать reader version, для управленческого чтения - эту executive narrative, а полный отчет, manifest, source appendix и capture sheets - как доказательную базу.`);
 lines.push('');
 lines.push('## Файлы');
 lines.push('');
 lines.push('- `reports/alina-global-executive-narrative-v1.md`');
+lines.push('- `reports/alina-global-reader-report-v1.md`');
 lines.push('- `reports/alina-global-hypothesis-report-v1.md`');
 lines.push('- `output/pdf/alina-global-executive-narrative-v1.pdf`');
+lines.push('- `output/pdf/alina-global-reader-report-v1.pdf`');
 lines.push('- `data_processed/evidence_artifact_manifest.csv`');
 lines.push('- `data_processed/global_report_readability_audit.csv`');
 lines.push('- `data_processed/russian_sequential_storyline.csv`');
 lines.push('- `data_processed/russian_frontmatter_dashboard.csv`');
 lines.push('- `data_processed/niche_count_reconciliation.csv`');
 lines.push('- `data_processed/p0_validation_execution_slice.csv`');
+lines.push('- `data_processed/russian_reader_glossary.csv`');
 
 fs.writeFileSync(OUT, `${lines.join('\n')}\n`);
 

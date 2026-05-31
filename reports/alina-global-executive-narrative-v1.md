@@ -6,7 +6,7 @@
 
 Alina стоит дальше проверять как мировую consumer-app гипотезу на пересечении personal meaning, tiny action, short reset и visible progress. Сейчас это не доказанный продукт и не финальный инвестиционный claim. Это большой evidence-first пакет, который показывает: вокруг идеи есть пять платежеспособных adjacent-направлений, заметная конкурентная плотность, рабочая TAM/SAM/SOM методология, предварительное whitespace-окно и понятная P0-очередь валидации.
 
-Масштаб базы сейчас: 67,525 сырьевых source-строк, 36,694 уникализированных строк и 510 локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.
+Масштаб базы сейчас: 67,525 сырьевых source-строк, 36,694 уникализированных строк и 515 локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.
 
 ## Главные числа
 
@@ -131,16 +131,19 @@ P0 execution slice для первой рабочей сессии:
 
 ## Как читать этот документ
 
-Это executive narrative поверх полного evidence pack. Он специально короче основного отчета, потому что readability audit показал: полный документ логичен, но перегружен таблицами (markdown_table_rows=277). Для решений использовать эту версию как входную историю, а полный отчет, manifest, source appendix и capture sheets - как доказательную базу.
+Это executive narrative поверх полного evidence pack. Он специально короче основного отчета, потому что readability audit показал: полный документ логичен, но перегружен таблицами (markdown_table_rows=279). Для самого мягкого первого чтения использовать reader version, для управленческого чтения - эту executive narrative, а полный отчет, manifest, source appendix и capture sheets - как доказательную базу.
 
 ## Файлы
 
 - `reports/alina-global-executive-narrative-v1.md`
+- `reports/alina-global-reader-report-v1.md`
 - `reports/alina-global-hypothesis-report-v1.md`
 - `output/pdf/alina-global-executive-narrative-v1.pdf`
+- `output/pdf/alina-global-reader-report-v1.pdf`
 - `data_processed/evidence_artifact_manifest.csv`
 - `data_processed/global_report_readability_audit.csv`
 - `data_processed/russian_sequential_storyline.csv`
 - `data_processed/russian_frontmatter_dashboard.csv`
 - `data_processed/niche_count_reconciliation.csv`
 - `data_processed/p0_validation_execution_slice.csv`
+- `data_processed/russian_reader_glossary.csv`
