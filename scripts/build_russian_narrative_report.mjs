@@ -137,6 +137,7 @@ const prototypeSessionDossiers = csv('data_processed/russian_prototype_session_d
 const validationGateCards = csv('data_processed/russian_validation_gate_cards.csv');
 const p0ExecutionPacket = csv('data_processed/russian_p0_execution_packet.csv');
 const observedEvidenceLadder = csv('data_processed/russian_observed_evidence_ladder.csv');
+const validationRunway = csv('data_processed/russian_validation_runway.csv');
 const p0WalkthroughDossiers = csv('data_processed/russian_p0_walkthrough_dossiers.csv');
 const paidFlowDossiers = csv('data_processed/russian_paid_flow_dossiers.csv');
 const validationCaptureRows =
@@ -520,6 +521,29 @@ if (observedEvidenceLadder.length) {
   lines.push('Этот слой особенно важен для финального PDF: он не дает красивому повествованию случайно превратить незавершенную проверку в доказанный вывод.');
   lines.push('');
 }
+if (validationRunway.length) {
+  lines.push('## 8.3. Русский validation runway');
+  lines.push('');
+  lines.push(`Чтобы dossier-слои не жили отдельно, добавлен validation runway на ${validationRunway.length} workstreams. Он задает порядок: hidden-clone walkthrough, paid-flow signoff, ICP interviews, prototype sessions, затем decision rebuild/PDF refresh.`);
+  lines.push('');
+  lines.push(mdTable(validationRunway, [
+    { key: 'runway_order', label: '#' },
+    { key: 'workstream_id', label: 'ID' },
+    { key: 'workstream_ru', label: 'Workstream' },
+    { key: 'linked_hypotheses', label: 'H' },
+    { key: 'unit_count', label: 'Units', align: 'right' },
+    { key: 'required_capture_rows', label: 'Need', align: 'right' },
+    { key: 'completed_capture_rows', label: 'Done', align: 'right' },
+    { key: 'p0_focus_ru', label: 'P0 focus' }
+  ], validationRunway.length));
+  lines.push('');
+  for (const row of validationRunway) {
+    lines.push(`**${row.runway_order}. ${row.workstream_id}: ${row.workstream_ru}.** Pass: ${row.pass_rule_ru} Downgrade: ${row.downgrade_rule_ru}`);
+    lines.push('');
+  }
+  lines.push('Граница runway: он не создает observed evidence, а превращает весь пакет в последовательную программу ручной проверки.');
+  lines.push('');
+}
 lines.push('## 9. Следующие действия');
 lines.push('');
 lines.push(`Все H1-H6 validation gates сейчас требуют наблюдаемой валидации. Not-started gates: ${notStartedGates.length}. Это не провал, а честная граница исследования: локальная evidence base готова, но реальные решения должны приниматься после ручного walkthrough и пользовательских сессий.`);
@@ -680,6 +704,7 @@ lines.push('- `data_processed/russian_prototype_session_dossiers.csv`');
 lines.push('- `data_processed/russian_validation_gate_cards.csv`');
 lines.push('- `data_processed/russian_p0_execution_packet.csv`');
 lines.push('- `data_processed/russian_observed_evidence_ladder.csv`');
+lines.push('- `data_processed/russian_validation_runway.csv`');
 lines.push('- `data_processed/russian_p0_walkthrough_dossiers.csv`');
 lines.push('- `data_processed/russian_validation_fieldbook.csv`');
 lines.push('- `data_processed/validation_tranche_planner.csv`');

@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T13:04:21.592Z
+Собрано: 2026-05-31T13:14:08.303Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 423 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 426 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 423 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 426 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -413,6 +413,30 @@ Product-core evidence и prototype stimulus переводят исследов�
 
 Этот слой особенно важен для финального PDF: он не дает красивому повествованию случайно превратить незавершенную проверку в доказанный вывод.
 
+## 8.3. Русский validation runway
+
+Чтобы dossier-слои не жили отдельно, добавлен validation runway на 5 workstreams. Он задает порядок: hidden-clone walkthrough, paid-flow signoff, ICP interviews, prototype sessions, затем decision rebuild/PDF refresh.
+
+| # | ID | Workstream | H | Units | Need | Done | P0 focus |
+| --- | --- | --- | --- | ---: | ---: | ---: | --- |
+| 1 | WS_COMPETITOR_HIDDEN_CLONE | P0 competitor walkthrough | H1/H3 | 12 | 60 | 0 | 1. Shepherd: Spiritual Bible BFF / 2. Zing AI: Home & Gym Workouts / 3. Miracle Morning Routine |
+| 2 | WS_PAID_FLOW_SIGNOFF | Paid-flow signoff | H2 | 10 | 40 | 0 | 1. Character AI: Chat, Talk, Text / 2. Meditopia: Sleep & Meditation / 3. Carrom Pool: Disc Game |
+| 3 | WS_ICP_INTERVIEWS | ICP interviews | H5/H6 | 6 | 96 | 0 | ICP_A. Spiritual self-improvers / ICP_D. Habit and progress users |
+| 4 | WS_PROTOTYPE_SESSIONS | Prototype sessions | H4/H6/H5/H2 | 2 | 80 | 0 | ICP_A. Spiritual self-improvers / ICP_D. Habit and progress users |
+| 5 | WS_DECISION_REBUILD | Decision rebuild and PDF refresh | H1/H2/H3/H4/H5/H6 | 6 | 0 | 0 | H1/H2/H3/H4/H5/H6 |
+
+**1. WS_COMPETITOR_HIDDEN_CLONE: P0 competitor walkthrough.** Pass: 5 P0 продуктов имеют сопоставимые listing/onboarding/action/progress/paywall screenshots, и полный hidden direct clone не подтвержден. Downgrade: если walkthrough показывает полную петлю meaning -> action -> reset -> causally changing identity/avatar/progress -> next-day hook, H3 downgrade обязателен.
+
+**2. WS_PAID_FLOW_SIGNOFF: Paid-flow signoff.** Pass: visible price/trial, product-match, unlock depth и first meaningful paywall boundary подтверждены человеком для strongest paid-flow rows. Downgrade: если price относится к parent/B2B/unrelated/login-only flow, источник уходит из сильной H2 опоры.
+
+**3. WS_ICP_INTERVIEWS: ICP interviews.** Pass: P0 участники называют recent behavior, specific episode, current workaround, language resonance, paid depth и отсутствие fatal objection. Downgrade: если участники не называют recent behavior или paid depth/fatal objection ломают сегмент, ICP нельзя выбирать как primary.
+
+**4. WS_PROTOTYPE_SESSIONS: Prototype sessions.** Pass: scorecard проходит comprehension, two-minute completion, meaning lift, differentiation, trust/safety и paid-depth gates. Downgrade: если flow читается как generic habit tracker/vague reading/manipulative gamification/unsafe guidance, H4/H6 downgrade.
+
+**5. WS_DECISION_REBUILD: Decision rebuild and PDF refresh.** Pass: claim statuses меняются только после заполненных capture rows и пересборки evidence package. Downgrade: если observed evidence противоречит desk claim, отчет должен стать слабее, а не красивее.
+
+Граница runway: он не создает observed evidence, а превращает весь пакет в последовательную программу ручной проверки.
+
 ## 9. Следующие действия
 
 Все H1-H6 validation gates сейчас требуют наблюдаемой валидации. Not-started gates: 6. Это не провал, а честная граница исследования: локальная evidence base готова, но реальные решения должны приниматься после ручного walkthrough и пользовательских сессий.
@@ -609,6 +633,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_validation_gate_cards.csv`
 - `data_processed/russian_p0_execution_packet.csv`
 - `data_processed/russian_observed_evidence_ladder.csv`
+- `data_processed/russian_validation_runway.csv`
 - `data_processed/russian_p0_walkthrough_dossiers.csv`
 - `data_processed/russian_validation_fieldbook.csv`
 - `data_processed/validation_tranche_planner.csv`
