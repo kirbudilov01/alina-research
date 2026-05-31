@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T11:55:44.167Z
+Собрано: 2026-05-31T12:02:03.013Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 393 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 396 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 393 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 396 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -194,6 +194,39 @@ Product-core evidence и prototype stimulus переводят исследов�
 
 У этой петли есть сильная сторона: она объединяет meaning, action, reset и visible progress. Но у нее есть и риски. Если guidance будет слишком эзотерическим, появится недоверие. Если avatar будет декоративным, петля развалится. Если progression будет похож на game chores, пользователь почувствует манипуляцию. Если paywall появится до первого понятного value moment, доверие может не возникнуть.
 
+## 7.1. Русские карточки продуктовой петли
+
+Чтобы продуктовая гипотеза читалась последовательно, добавлены русские карточки 8 экранов MVP-петли. Они показывают не только экран и текст, но роль каждого шага в доказательной логике: где возникает личный смысл, где он превращается в действие, где снижается трение, где фиксируется completion, где проверяется action -> identity/avatar causality и где нельзя усиливать H4/H6 без наблюдаемого prototype evidence.
+
+| Шаг | Экран | Роль | Gate | Sec |
+| --- | --- | --- | --- | ---: |
+| 1 | Daily meaning entry | Вход в личный смысл: пользователь должен почувствовать, что это не generic motivation и не жесткое предсказание. | H6: coherence of MVP loop | 20 |
+| 2 | Tiny context prompt | Минимальный контекст: петля получает живую точку дня, но не превращается в длинный onboarding. | H6: coherence of MVP loop | 20 |
+| 3 | One grounded action | Перевод смысла в действие: центральная проверка, что Alina не остается чтением или дневником. | H6: coherence of MVP loop | 20 |
+| 4 | Short reset | Снижение трения: reset должен помогать начать действие, а не выглядеть как отдельная медитация ради медитации. | H6: coherence of MVP loop | 20 |
+| 5 | Action evidence | Легкое доказательство действия: self-report должен быть достаточным и не ощущаться как контроль. | H6/H2: доказательство действия и paid-depth boundary | 20 |
+| 6 | Identity/avatar feedback | Причинная видимость прогресса: ключевой момент H4/H6, где действие должно объяснять изменение identity/avatar. | H4/H6: конкурентное преимущество и продуктовая причинность | 20 |
+| 7 | Next-day hook | Возврат без наказания: continuity должен поддерживать привычку без streak anxiety. | H6: return intent без punitive streak | 15 |
+| 8 | Immediate value check | Проверка понимания: пользователь должен назвать интегрированную петлю своими словами. | H4/H5/H6: понимание, ICP resonance и итоговая ценность | 25 |
+
+**1. Daily meaning entry.** Вход в личный смысл: пользователь должен почувствовать, что это не generic motivation и не жесткое предсказание. Успех: Participant can explain why this is personal rather than generic content. Провал: Participant reads it as vague astrology, generic motivation, or unsafe certainty.
+
+**2. Tiny context prompt.** Минимальный контекст: петля получает живую точку дня, но не превращается в длинный onboarding. Успех: Participant supplies a concrete lived moment or emotional target. Провал: Participant skips because the prompt feels too broad, exposing, or irrelevant.
+
+**3. One grounded action.** Перевод смысла в действие: центральная проверка, что Alina не остается чтением или дневником. Успех: Participant sees the action as doable and causally linked to the chosen theme. Провал: Participant sees it as a random task, chore list, or generic habit tracker.
+
+**4. Short reset.** Снижение трения: reset должен помогать начать действие, а не выглядеть как отдельная медитация ради медитации. Успех: Participant feels the reset makes action easier without feeling clinical. Провал: Participant thinks the reset is filler or clashes with the progress mechanic.
+
+**5. Action evidence.** Легкое доказательство действия: self-report должен быть достаточным и не ощущаться как контроль. Успех: Participant accepts lightweight self-report as enough evidence. Провал: Participant wants objective tracking, rejects proof language, or feels judged.
+
+**6. Identity/avatar feedback.** Причинная видимость прогресса: ключевой момент H4/H6, где действие должно объяснять изменение identity/avatar. Успех: Participant understands action -> identity/avatar causality. Провал: Participant sees avatar as decoration, reward spam, or unrelated game skin.
+
+**7. Next-day hook.** Возврат без наказания: continuity должен поддерживать привычку без streak anxiety. Успех: Participant wants to return and understands continuity. Провал: Participant feels manipulated, infantilized, or indifferent.
+
+**8. Immediate value check.** Проверка понимания: пользователь должен назвать интегрированную петлю своими словами. Успех: Participant names the integrated loop in their own words. Провал: Participant cannot distinguish it from a generic habit tracker, meditation app, or horoscope.
+
+Граница этого слоя: это stimulus design, а не результат пользовательской валидации. Он делает H4/H6 проверяемыми, но не закрывает их.
+
 ## 8. Что уже доказано, а что еще нельзя утверждать
 
 На текущем этапе доказано не "Alina точно сработает", а другое: есть достаточно большой и платежеспособный adjacent landscape; есть повторяющиеся боли и jobs-to-be-done; есть narrow whitespace hypothesis; есть операционная система источников, матриц, claim boundaries, capture sheets и PDF/report artifacts. Не доказано: что пользователи действительно предпочитают эту петлю существующим решениям, что они понимают avatar/progress causality, что они готовы платить за paid depth, и что конкуренты не закрывают этот loop внутри onboarding.
@@ -338,6 +371,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_source_provenance_index.csv`
 - `data_processed/russian_competitor_battlecards.csv`
 - `data_processed/russian_icp_battlecards.csv`
+- `data_processed/russian_product_loop_cards.csv`
 - `data_processed/russian_validation_fieldbook.csv`
 - `data_processed/validation_tranche_planner.csv`
 - `data_processed/validation_tranche_briefing_index.csv`

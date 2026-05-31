@@ -129,6 +129,7 @@ const claimAppendix = csv('data_processed/russian_claim_evidence_appendix.csv');
 const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv');
 const competitorBattlecards = csv('data_processed/russian_competitor_battlecards.csv');
 const icpBattlecards = csv('data_processed/russian_icp_battlecards.csv');
+const productLoopCards = csv('data_processed/russian_product_loop_cards.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -332,6 +333,26 @@ lines.push(`Product-core evidence и prototype stimulus переводят ис�
 lines.push('');
 lines.push('У этой петли есть сильная сторона: она объединяет meaning, action, reset и visible progress. Но у нее есть и риски. Если guidance будет слишком эзотерическим, появится недоверие. Если avatar будет декоративным, петля развалится. Если progression будет похож на game chores, пользователь почувствует манипуляцию. Если paywall появится до первого понятного value moment, доверие может не возникнуть.');
 lines.push('');
+if (productLoopCards.length) {
+  lines.push('## 7.1. Русские карточки продуктовой петли');
+  lines.push('');
+  lines.push(`Чтобы продуктовая гипотеза читалась последовательно, добавлены русские карточки ${productLoopCards.length} экранов MVP-петли. Они показывают не только экран и текст, но роль каждого шага в доказательной логике: где возникает личный смысл, где он превращается в действие, где снижается трение, где фиксируется completion, где проверяется action -> identity/avatar causality и где нельзя усиливать H4/H6 без наблюдаемого prototype evidence.`);
+  lines.push('');
+  lines.push(mdTable(productLoopCards, [
+    { key: 'step', label: 'Шаг' },
+    { key: 'screen_name', label: 'Экран' },
+    { key: 'role_ru', label: 'Роль' },
+    { key: 'linked_gate_ru', label: 'Gate' },
+    { key: 'max_seconds', label: 'Sec', align: 'right' }
+  ], productLoopCards.length));
+  lines.push('');
+  for (const row of productLoopCards) {
+    lines.push(`**${row.step}. ${row.screen_name}.** ${row.role_ru} Успех: ${row.expected_signal_ru} Провал: ${row.failure_signal_ru}`);
+    lines.push('');
+  }
+  lines.push('Граница этого слоя: это stimulus design, а не результат пользовательской валидации. Он делает H4/H6 проверяемыми, но не закрывает их.');
+  lines.push('');
+}
 lines.push('## 8. Что уже доказано, а что еще нельзя утверждать');
 lines.push('');
 lines.push('На текущем этапе доказано не "Alina точно сработает", а другое: есть достаточно большой и платежеспособный adjacent landscape; есть повторяющиеся боли и jobs-to-be-done; есть narrow whitespace hypothesis; есть операционная система источников, матриц, claim boundaries, capture sheets и PDF/report artifacts. Не доказано: что пользователи действительно предпочитают эту петлю существующим решениям, что они понимают avatar/progress causality, что они готовы платить за paid depth, и что конкуренты не закрывают этот loop внутри onboarding.');
@@ -452,6 +473,7 @@ lines.push('- `data_processed/russian_claim_evidence_appendix.csv`');
 lines.push('- `data_processed/russian_source_provenance_index.csv`');
 lines.push('- `data_processed/russian_competitor_battlecards.csv`');
 lines.push('- `data_processed/russian_icp_battlecards.csv`');
+lines.push('- `data_processed/russian_product_loop_cards.csv`');
 lines.push('- `data_processed/russian_validation_fieldbook.csv`');
 lines.push('- `data_processed/validation_tranche_planner.csv`');
 lines.push('- `data_processed/validation_tranche_briefing_index.csv`');
