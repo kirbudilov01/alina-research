@@ -208,6 +208,8 @@ const requiredArtifacts = [
   'data_processed/desktop_store_source_summary.csv',
   'data_processed/chrome_webstore_source_expansion_summary.csv',
   'data_processed/reddit_competitor_mentions_summary.csv',
+  'data_processed/reddit_mention_signal_matrix.csv',
+  'data_processed/reddit_mention_app_summary.csv',
   'data_processed/top100_competitor_review_scorecard.csv',
   'data_processed/top100_human_validation_queue.csv',
   'data_processed/manual_competitor_inspection_packet.csv',

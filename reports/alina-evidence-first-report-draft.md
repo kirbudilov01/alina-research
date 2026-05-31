@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T10:03:01.976Z
+Generated: 2026-05-31T10:15:05.936Z
 
 ## 1. Executive Summary
 
@@ -25,7 +25,7 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 22 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 337 artifacts tracked, 75 CSV artifacts, 213298 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 346 artifacts tracked, 80 CSV artifacts, 223418 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -33,6 +33,7 @@ Key quantified signals:
 - Source-native Steam tag expansion: 18569 rows, 17954 OK rows, adding PC progression/cozy/avatar mechanic references.
 - Source-native desktop store expansion: 15397 Mac App Store rows, 15394 OK rows, adding desktop wellness/productivity/avatar/game references without search-engine crawling.
 - Source-native Reddit forum mention expansion: 2339 old.reddit rows, 940 known-app mention rows, adding forum competitor/need signals without search-engine crawling.
+- Reddit mention signal coding: 2339 coded qualitative rows, 9 signal groups, 940 known-app signal rows, and 1202 app summaries.
 - Cross-source universe normalization: 61345 normalized raw rows and 33718 dedup rows across core app stores, Google Play fallback, itch.io, Steam, Mac desktop store, Chrome, and Reddit forum mentions.
 - Cross-source coverage matrix: 39 source/market cells, 11 strong and 12 medium coverage cells.
 - Cross-source saturation/whitespace matrix: 6 markets scored; 2 benchmark-only markets and 0 primary high-opportunity markets before manual validation.
@@ -66,7 +67,7 @@ Key quantified signals:
 - Community/referral evidence matrix: 294 local review/forum signal rows across 6 signal kinds.
 - Forum/source evidence map: 18 qualitative rows across 5 market pillars.
 - Forum quote coding layer: 72 snippet rows across 18 sources.
-- Reddit competitor mention layer: 2339 source-native forum rows across 25 subreddits and 8 mention types.
+- Reddit competitor mention layer: 2339 source-native forum rows across 25 subreddits and 8 mention types; coded into 2339 signal rows for audience, competitor, and whitespace use.
 - Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, web paywall discovery, and forum quote coding.
 - Visual PDF companion: native ReportLab charts embedded in a separate visual report.
 - Polished evidence pack: generated as a publication-ready evidence draft with validation caveats.
@@ -80,7 +81,7 @@ Key quantified signals:
 | H2 | Markets have money | supported with ranges | TAM/SAM/SOM model and 14 market claims across gaming, astrology, avatar, coaching, mindfulness. |
 | H3 | Whitespace exists | narrowed | Broad space is crowded; strict behavior-tied avatar progression appears rare in top-100 metadata. |
 | H4 | Competitive advantage is plausible | unproven but sharpened | Moat candidate is integrated daily transformation loop, not any single feature. |
-| H5 | Shared audience exists | directionally supported | Audience matrix plus 2288 review-language signals and 6 ICP segment hypotheses point to digital ritual users across spirituality, identity, self-improvement, calm, and cozy progress. |
+| H5 | Shared audience exists | directionally supported | Audience matrix plus 2288 review-language signals, 2339 coded Reddit signals, and 6 ICP segment hypotheses point to digital ritual users across spirituality, identity, self-improvement, calm, and cozy progress. |
 | H6 | Product core can be defined | supported for MVP framing | Product-core evidence defines target loop and MVP testable claim. |
 
 ## 2B. Evidence Audit Register
@@ -116,7 +117,7 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 16 validation roadmap rows; 11 execution tasks | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 337 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 346 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_hypothesis_decision_matrix | proved_v1_open_validation_decisions | high | 6 hypothesis decision rows; 6 hold/validate; 0 go; 0 stop/pivot | Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open. |
 | REQ_market_money_triangulation | proved_v1_triangulated_proxy_not_final | medium_high | 6 market rows; 3 strong and 1 medium directional money cases | This is public-evidence triangulation, not final revenue proof. H2 still needs paid-flow human signoff, product-match notes, and WTP evidence from prototype/ICP sessions. |
@@ -134,7 +135,7 @@ Claim-level audit snapshot:
 | H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require human sign-off/in-app inspection. |
 | H3_whitespace_exists | narrow_supported_public_listing_inspected_walkthrough_open | medium | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Actual app/onboarding inspection results are still missing; public listings and cross-source text rules can overstate or hide in-app loops. |
 | H4_competitive_advantage_plausible | prototype_stimulus_ready_unvalidated | medium | 1 direct reference competitor; 45 high-threat competitors; 8 prototype screens; 6 success/kill metrics | No human prototype session yet proves users understand, prefer, or value the integrated loop. |
-| H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 294 community/referral rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Keyword/OCR/forum coding and directional ICP recruiting assets need human validation, interviews, and prototype tests. |
+| H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Keyword/OCR/forum coding and directional ICP recruiting assets need human validation, interviews, and prototype tests. |
 | H6_product_core_defined | supported_for_mvp_framing | medium | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
 | REQ_final_artifacts_versioned | proved_active | high | current branch pushed through latest commit | Final polished investor/user-facing PDF is still draft-level, not final designed publication. |
 
@@ -379,14 +380,14 @@ Status summary:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 337 artifacts; 75 CSV artifacts; 213298 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 346 artifacts; 80 CSV artifacts; 223418 tracked CSV rows; 0 missing required artifacts.
 Validation note artifact links: 29 existing local artifacts linked inside batch notes.
 
 Largest tracked CSV artifacts:
 
 | File | Role | Rows | Source Ref Rows | Hash |
 | --- | --- | ---: | ---: | --- |
-| data_processed/cross_source_universe_dedup.csv | source_claim | 31866 | 31866 | e4d4022a5d7da545 |
+| data_processed/cross_source_universe_dedup.csv | source_claim | 33718 | 33718 | 2297ed0fb71c4bc4 |
 | data_processed/audience_signal_matrix.csv | audience_icp | 20492 | 20492 | 865f8a0de8b075d7 |
 | data_raw/expanded_steam_tags_raw.csv | competitor_universe | 18569 | 18569 | f25dd9ba823cab15 |
 | data_raw/expanded/all_expanded_raw.csv | competitor_universe | 17490 | 17490 | 8479ff977b44a132 |
@@ -394,7 +395,7 @@ Largest tracked CSV artifacts:
 | data_processed/cross_source_universe_raw_parts/part_001.csv | source_claim | 15000 | 15000 | 388be0deca7a34ae |
 | data_processed/cross_source_universe_raw_parts/part_002.csv | source_claim | 15000 | 15000 | 5e1e76d633a2922b |
 | data_processed/cross_source_universe_raw_parts/part_003.csv | source_claim | 15000 | 15000 | 62bd8d6b72f73d1c |
-| data_processed/cross_source_universe_raw_parts/part_004.csv | source_claim | 14006 | 14006 | 4bcf357ad50b3cb1 |
+| data_processed/cross_source_universe_raw_parts/part_004.csv | source_claim | 15000 | 15000 | bfb792f79e300f50 |
 | data_processed/competitor_feature_matrix.csv | supporting | 12552 | 12552 | b285aff3873487bc |
 | data_processed/whitespace_signal_matrix.csv | competitive_whitespace | 12552 | 12552 | d12826260e643b15 |
 | data_raw/expanded/all_expanded_dedup.csv | competitor_universe | 12552 | 12552 | db5e87665dbf3b53 |
@@ -420,14 +421,14 @@ Objective readiness matrix:
 | Requirement | Status | Strength | Proof | Remaining Gap |
 | --- | --- | --- | --- | --- |
 | REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=16; execution_dashboard_rows=11; hypothesis_decision_rows=6; p0_command_rows=75; p0_field_guide_sections=8; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_batch_local_artifact_links=29; validation_rollup_rows=75 | Keep refreshing as validation results change. |
-| REQ_02_COMPETITOR_UNIVERSE | proved_30k_plus_cross_source_dedup | medium_high | dedup=12552; cross_source_raw=61345; cross_source_dedup=33718; cross_source_summary_rows=15; coverage_cells=39; coverage_strong=11; coverage_medium=12; raw_core=17490; itch_rows=7047; steam_tag_rows=18569; desktop_store_rows=15397; chrome_extension_rows=252; reddit_mention_rows=2339; reddit_mention_ok=940; reddit_mention_summary_rows=42; known_raw_total=61094; itch_ok=6973; steam_tag_ok=17954; desktop_store_ok=15394; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | The 30k lower-bound dedup target is now met; the remaining expansion gap is the upper 50k aspiration plus Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and additional source-native coverage. |
+| REQ_02_COMPETITOR_UNIVERSE | proved_30k_plus_cross_source_dedup | medium_high | dedup=12552; cross_source_raw=61345; cross_source_dedup=33718; cross_source_summary_rows=15; coverage_cells=39; coverage_strong=11; coverage_medium=12; raw_core=17490; itch_rows=7047; steam_tag_rows=18569; desktop_store_rows=15397; chrome_extension_rows=252; reddit_mention_rows=2339; reddit_mention_ok=940; reddit_mention_summary_rows=42; reddit_signal_rows=2339; reddit_signal_groups=9; reddit_known_signal_rows=940; reddit_app_summary_rows=1202; known_raw_total=61094; itch_ok=6973; steam_tag_ok=17954; desktop_store_ok=15394; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | The 30k lower-bound dedup target is now met; the remaining expansion gap is the upper 50k aspiration plus Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and additional source-native coverage. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
 | REQ_04_MARKET_MONEY | supported_with_triangulated_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; assumption_audit_rows=6; stress_scenarios=6; strong_paid_proxy_markets=4/5; market_money_triangulation_rows=6; market_money_triangulation_verdicts=4; strong_triangulated_markets=3; medium_triangulated_markets=1; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing is stress-tested and triangulated, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall/WTP validation are still needed for final investor-grade claims. |
 | REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; cross_source_saturation_markets=6; cross_source_primary_high_opportunity=0; cross_source_benchmark_markets=2; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_walkthrough_capture_rows=60; manual_app_walkthrough_done=0 | Cross-source saturation now keeps gaming/progression as benchmark-only and finds no primary market opportunity strong enough to upgrade without manual walkthrough; app/onboarding screenshots are still required. |
-| REQ_06_AUDIENCE_ICP | directionally_supported_recruiting_ready | medium | audience_rows=20492; community_referral_rows=294; community_referral_signals=6; icp_segments=6; icp_validation_tests=36; icp_recruiting_bridge_rows=24; icp_recruiting_message_rows=24; icp_capture_rows=96 | Segments and recruiting assets are directional and need actual interviews/prototype/WTP validation. |
+| REQ_06_AUDIENCE_ICP | directionally_supported_recruiting_ready | medium | audience_rows=20492; community_referral_rows=294; community_referral_signals=6; reddit_signal_rows=2339; reddit_signal_groups=9; reddit_medium_plus_signals=940; reddit_app_summary_rows=1202; icp_segments=6; icp_validation_tests=36; icp_recruiting_bridge_rows=24; icp_recruiting_message_rows=24; icp_capture_rows=96 | Segments and recruiting assets are directional and need actual interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=22; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=337; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=346; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; p0_command_rows=75; p0_command_blockers=6; p0_command_p0=52; p0_field_guide_sections=8; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_rollup_rows=75; validation_rollup_missing=0; validation_gate_rows=6; validation_gate_status_rows=1; validation_gates_passed=0; validation_gates_not_started=6; validation_batch_local_artifact_links=29; hypothesis_decision_rows=6; hypothesis_hold=6; hypothesis_go=0; hypothesis_stop=0; capture_rows=276; manual_capture_rows=60; paid_capture_rows=40; icp_capture_rows=96; prototype_capture_rows=80; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
 ## 2N. Validation Gap Roadmap
@@ -708,6 +709,47 @@ Reddit mention summary:
 | subreddit | CharacterAI | 126 |
 | subreddit | Replika | 156 |
 | subreddit | aiArt | 134 |
+
+### Reddit Mention Signal Coding
+
+The Reddit raw layer is now coded into 2339 qualitative signal rows and 1202 app summaries. The coding routes threads into competitor substitution, pain/rejection, habit-progress, identity/avatar, emotional reset, spiritual guidance, gamified progression, pricing sensitivity, and unclassified-context buckets. This keeps the layer useful for ICP scripts and whitespace analysis while preserving the boundary that Reddit rows are not representative demand proof.
+
+Coded Reddit signal groups:
+
+- alternative_or_tool_switching_request: 875
+- habit_accountability_and_progress_need: 388
+- identity_companion_or_avatar_need: 385
+- pain_or_rejection_of_overbuilt_systems: 373
+- reset_mindfulness_or_emotional_regulation_need: 207
+- unclassified_context_language: 63
+- spiritual_guidance_or_meaning_need: 32
+- pricing_or_subscription_sensitivity: 8
+- gamified_progression_or_reward_need: 8
+
+Top Reddit app mention summaries:
+
+| App | Rows | Subreddits | Top Signals | Evidence Strength |
+| --- | ---: | ---: | --- | --- |
+| Habit Tracker | 323 | 10 | alternative_or_tool_switching_request:151/habit_accountability_and_progress_need:119/pain_or_rejection_of_overbuilt_systems:52/reset_mindfulness_or_emotional_regulation_need:1 | strong_qualitative_attention |
+| Replika | 103 | 3 | identity_companion_or_avatar_need:67/alternative_or_tool_switching_request:28/pain_or_rejection_of_overbuilt_systems:6/pricing_or_subscription_sensitivity:1/reset_mindfulness_or_emotional_regulation_need:1 | strong_qualitative_attention |
+| Calm | 86 | 7 | alternative_or_tool_switching_request:35/pain_or_rejection_of_overbuilt_systems:27/reset_mindfulness_or_emotional_regulation_need:21/habit_accountability_and_progress_need:2/identity_companion_or_avatar_need:1 | strong_qualitative_attention |
+| Journey | 75 | 13 | alternative_or_tool_switching_request:28/habit_accountability_and_progress_need:20/pain_or_rejection_of_overbuilt_systems:10/reset_mindfulness_or_emotional_regulation_need:9/identity_companion_or_avatar_need:7 | strong_qualitative_attention |
+| Headspace | 67 | 6 | alternative_or_tool_switching_request:36/pain_or_rejection_of_overbuilt_systems:15/reset_mindfulness_or_emotional_regulation_need:11/habit_accountability_and_progress_need:4/identity_companion_or_avatar_need:1 | strong_qualitative_attention |
+| Waking Up | 50 | 8 | alternative_or_tool_switching_request:23/pain_or_rejection_of_overbuilt_systems:13/habit_accountability_and_progress_need:9/reset_mindfulness_or_emotional_regulation_need:5 | strong_qualitative_attention |
+| Streaks | 48 | 7 | pain_or_rejection_of_overbuilt_systems:18/alternative_or_tool_switching_request:17/habit_accountability_and_progress_need:13 | strong_qualitative_attention |
+| Character AI | 32 | 2 | identity_companion_or_avatar_need:17/alternative_or_tool_switching_request:11/pain_or_rejection_of_overbuilt_systems:4 | strong_qualitative_attention |
+| Notion | 24 | 7 | pain_or_rejection_of_overbuilt_systems:8/alternative_or_tool_switching_request:7/habit_accountability_and_progress_need:6/identity_companion_or_avatar_need:1/reset_mindfulness_or_emotional_regulation_need:1 | strong_qualitative_attention |
+| Habitica | 19 | 5 | habit_accountability_and_progress_need:7/alternative_or_tool_switching_request:6/pain_or_rejection_of_overbuilt_systems:6 | strong_qualitative_attention |
+| Insight Timer | 19 | 6 | alternative_or_tool_switching_request:12/reset_mindfulness_or_emotional_regulation_need:4/pain_or_rejection_of_overbuilt_systems:3 | strong_qualitative_attention |
+| Motivate | 16 | 5 | alternative_or_tool_switching_request:8/habit_accountability_and_progress_need:7/pain_or_rejection_of_overbuilt_systems:1 | strong_qualitative_attention |
+| Balance | 14 | 8 | pain_or_rejection_of_overbuilt_systems:6/alternative_or_tool_switching_request:4/habit_accountability_and_progress_need:1/identity_companion_or_avatar_need:1/pricing_or_subscription_sensitivity:1 | strong_qualitative_attention |
+| Finch | 14 | 4 | alternative_or_tool_switching_request:7/habit_accountability_and_progress_need:5/pain_or_rejection_of_overbuilt_systems:2 | strong_qualitative_attention |
+| Todoist | 9 | 4 | alternative_or_tool_switching_request:4/habit_accountability_and_progress_need:2/pain_or_rejection_of_overbuilt_systems:2/unclassified_context_language:1 | medium_qualitative_attention |
+| Medito | 8 | 2 | alternative_or_tool_switching_request:5/pain_or_rejection_of_overbuilt_systems:2/reset_mindfulness_or_emotional_regulation_need:1 | medium_qualitative_attention |
+| Stoic | 8 | 3 | alternative_or_tool_switching_request:6/habit_accountability_and_progress_need:1/pain_or_rejection_of_overbuilt_systems:1 | medium_qualitative_attention |
+| The Pattern | 8 | 2 | habit_accountability_and_progress_need:3/pain_or_rejection_of_overbuilt_systems:3/alternative_or_tool_switching_request:2 | medium_qualitative_attention |
+| Reddit r/astrology: no extracted results | 6 | 1 | spiritual_guidance_or_meaning_need:6 | manual_check_needed |
+| Reddit r/cozygamers: no extracted results | 6 | 1 | habit_accountability_and_progress_need:3/alternative_or_tool_switching_request:1/gamified_progression_or_reward_need:1/unclassified_context_language:1 | manual_check_needed |
 
 ### Cross-Source Universe Normalization
 
@@ -1335,7 +1377,7 @@ Audience signal counts:
 
 ### ICP Segment Matrix
 
-The ICP layer converts audience-signal rows, review JTBD/pain clusters, forum quote coding, and monetization proxies into testable segment hypotheses. It is directional evidence, not a final persona decision.
+The ICP layer converts audience-signal rows, review JTBD/pain clusters, forum quote coding, coded Reddit mention signals, and monetization proxies into testable segment hypotheses. It is directional evidence, not a final persona decision.
 
 | Segment | Evidence Band | Audience Rows | Review Rows | Forum Rows | Core Job | Positioning Angle | Validation Gate |
 | --- | --- | ---: | ---: | ---: | --- | --- | --- |
@@ -1347,6 +1389,19 @@ The ICP layer converts audience-signal rows, review JTBD/pain clusters, forum qu
 | Coaching professionals and structured growth users | strong_directional_icp | 4999 | 2038 | 20 | Get structured guidance that turns intention into accountable practice. | A personal daily ritual coach rather than enterprise/career coaching software. | Evidence separates consumer daily ritual use from B2B/career coaching demand. |
 
 Current ICP read: "Spiritual self-improvers" is the strongest directional starting segment, but the decision should remain open until interviews/prototype tests compare at least the top two segments.
+
+### Reddit Signals for ICP and Audience
+
+Coded Reddit rows add 2339 thread-level signals, including 940 medium-or-stronger qualitative rows. These are useful for recruiting copy, screener language, prototype objections, and manual competitor-read queues; they do not replace interviews or representative survey data.
+
+Linked ICP segments from Reddit coding:
+
+- ICP_D: 1891
+- ICP_F: 1477
+- ICP_C: 1010
+- ICP_A: 922
+- ICP_E: 666
+- ICP_B: 663
 
 ### ICP Validation Packet
 

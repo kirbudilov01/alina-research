@@ -311,6 +311,8 @@ def main() -> None:
     desktop = read_csv("data_raw/expanded_desktop_store_raw.csv")
     chrome_raw = read_csv("data_raw/expanded_chrome_extensions_raw.csv")
     reddit_mentions = read_csv("data_raw/expanded_reddit_competitor_mentions_raw.csv")
+    reddit_signal_matrix = read_csv("data_processed/reddit_mention_signal_matrix.csv")
+    reddit_app_summary = read_csv("data_processed/reddit_mention_app_summary.csv")
     cross_source_raw = read_csv("data_processed/cross_source_universe_raw.csv")
     cross_source_dedup = read_csv("data_processed/cross_source_universe_dedup.csv")
     cross_source_coverage = read_csv("data_processed/cross_source_coverage_matrix.csv")
@@ -523,6 +525,8 @@ def main() -> None:
                 ["Chrome Web Store raw rows", len(chrome_raw), "Source-native browser-extension expansion across five markets."],
                 ["Desktop store raw rows", len(desktop), "Source-native Mac App Store desktop/wellness/productivity/game expansion."],
                 ["Reddit mention rows", len(reddit_mentions), "Source-native old.reddit competitor/need mention expansion across five markets."],
+                ["Reddit coded signal rows", len(reddit_signal_matrix), "Qualitative Reddit rows coded into audience, competitor, ICP, and whitespace signals."],
+                ["Reddit app summaries", len(reddit_app_summary), "App-level summaries routing mention clusters into manual reading queues."],
                 ["Chrome detail pages parsed", len([row for row in chrome_fit if row.get("detail_status") == "ok"]), "Fit bands, users, tags, and mechanic evidence."],
                 ["Chrome mechanic battlecards", len(chrome_battlecards), "Browser-extension mechanics translated into whitespace lessons."],
                 ["Market assumption audit", len(market_assumptions), "TAM/SAM/SOM risk rows by market and intersection."],

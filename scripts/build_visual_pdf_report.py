@@ -238,6 +238,8 @@ def main():
     gplay = read_csv("data_raw/google_play_pricing_raw.csv")
     web_paywalls = read_csv("data_processed/web_paywall_signal_matrix.csv")
     reddit_mentions = read_csv("data_raw/expanded_reddit_competitor_mentions_raw.csv")
+    reddit_signal_matrix = read_csv("data_processed/reddit_mention_signal_matrix.csv")
+    reddit_app_summary = read_csv("data_processed/reddit_mention_app_summary.csv")
     reviews = read_csv("data_processed/review_jtbd_cluster_summary.csv")
     community_referral = read_csv("data_processed/community_referral_signal_rows.csv")
     community_referral_summary = read_csv("data_processed/community_referral_summary.csv")
@@ -287,6 +289,8 @@ def main():
                 ["Web screenshot queue", number(str(len(web_queue)))],
                 ["Market-money rows", number(str(len(market_money)))],
                 ["Reddit mention rows", number(str(len(reddit_mentions)))],
+                ["Reddit coded signal rows", number(str(len(reddit_signal_matrix)))],
+                ["Reddit app summaries", number(str(len(reddit_app_summary)))],
                 ["Forum quote-coding rows", number(str(len(forum)))],
                 ["Community/referral rows", number(str(len(community_referral)))],
                 ["ICP segment hypotheses", number(str(len(icp)))],
@@ -468,6 +472,13 @@ def main():
         )
     )
     story.append(Spacer(1, 0.12 * inch))
+    story.append(
+        BarChart(
+            "Reddit Coded Signal Groups",
+            [(k, float(v)) for k, v in count_by(reddit_signal_matrix, "signal_group").most_common(8)],
+        )
+    )
+    story.append(Spacer(1, 0.12 * inch))
     tag_counts = split_tag_counts(forum, "coding_tags")
     story.append(
         BarChart(
@@ -484,7 +495,7 @@ def main():
     )
     story.append(
         para(
-            "Review and forum language converge on a small daily anchor, concrete action, visible progress, subscription sensitivity, safety boundaries, and recovery from missed days.",
+            "Review, forum, and coded Reddit language converge on a small daily anchor, concrete action, visible progress, subscription sensitivity, safety boundaries, alternatives requests, and recovery from missed days.",
             STYLES["Body"],
         )
     )
