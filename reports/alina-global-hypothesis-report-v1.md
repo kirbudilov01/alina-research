@@ -1,6 +1,6 @@
 # Alina Research. Мировой рынок и логика гипотез
 
-Собрано: 2026-05-31T15:13:25.939Z
+Собрано: 2026-05-31T15:19:47.884Z
 
 ## ОПИСАНИЕ ПРОЕКТА И ГИПОТЕЗА #1
 
@@ -10,7 +10,7 @@
 
 Гипотеза №1: на мировом consumer-app рынке есть место для приложения, которое объединяет личный смысл, короткое действие, reset и причинно видимый прогресс в одну ежедневную петлю. Эта гипотеза пока не доказана как product-market fit, но уже поддержана масштабной картой соседних рынков и конкурентных сигналов.
 
-На текущем этапе собрано 67,525 сырьевых source-строк, 36,694 уникализированных строк и 459 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
+На текущем этапе собрано 67,525 сырьевых source-строк, 36,694 уникализированных строк и 462 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
 
 ## ТЕКУЩИЙ СТАТУС ДОКАЗАТЕЛЬСТВ
 
@@ -50,6 +50,32 @@
 | Gaming / progression benchmark | $671M | деньги видны, но это benchmark, не прямой TAM | 7 | Нельзя считать прямым рынком Alina без доказанного ritual/self-improvement overlap; использовать как механику прогресса и retention. |
 
 Intersection SAM в текущей модели равен $202M. Это рабочая мировая рамка для дальнейшей проверки, а не обещание revenue. Локальный paid-flow signoff сейчас заполнен на 8 строках; H2 gate имеет статус in_progress_insufficient_evidence, потому что нужны еще in-app paywall walkthrough и willingness-to-pay evidence.
+
+## МЕТОДОЛОГИЯ TAM/SAM/SOM
+
+Рыночная модель Alina намеренно построена как диапазон, а не как одна “красивая” цифра. Она разделяет широкий TAM, serviceable SAM, confidence-weighted SAM и bottom-up stress-сценарии. Такой подход нужен, потому что Alina находится на пересечении нескольких adjacent-рынков, а не внутри одной готовой категории market report.
+
+Базовая формула top-down: TAM base умножается на serviceable share и дает SAM base. Затем SAM дополнительно умножается на confidence/directness weight, чтобы не смешивать прямые adjacent-рынки, широкие adjacent-рынки и benchmark-механику. Отдельно используется bottom-up stress: reachable users * activation rate * paid conversion * ARPPU. Этот слой нужен не для прогноза выручки, а для проверки, какой масштаб начинает иметь смысл при разных уровнях distribution, retention и willingness-to-pay.
+
+| Pillar | Какой тип рынка | SAM base | Weighted SAM | Риск модели | Как читать |
+| --- | --- | ---: | ---: | --- | --- |
+| gaming | benchmark механик, не прямой TAM | $671M | $470M | не считать прямым рынком Alina | использовать только как benchmark retention/progression/monetization mechanics, не включать в прямой TAM Alina |
+| astrology_esoterics | прямой adjacent-рынок | $374M | $262M | поддержано proxy, но нужен ручной paid-flow/WTP | использовать как directional market-money anchor до ручного paywall, ICP и WTP evidence |
+| avatar_identity | широкий adjacent-рынок с сильным consumer-discount | $420M | $294M | поддержано proxy, но нужен ручной paid-flow/WTP | использовать как money context с сильным consumer/self-improvement discount |
+| coaching | прямой adjacent-рынок | $300M | $210M | широкий диапазон источников, нужен conservative range | использовать как directional market-money anchor до ручного paywall, ICP и WTP evidence |
+| mindfulness | прямой adjacent-рынок | $252M | $176M | поддержано proxy, но нужен ручной paid-flow/WTP | использовать как directional market-money anchor до ручного paywall, ICP и WTP evidence |
+| intersection | расчетное пересечение Alina | $202M | $80.8M | модельное пересечение, высокий риск завысить claim | читать как рабочий modeled SAM для проверки, а не как прогноз выручки или investor-grade market claim |
+
+Для H2 это означает жесткую границу: TAM/SAM/SOM доказывает, что рынок достаточно интересен для проверки, но не доказывает, что Alina заработает эти деньги. H2 можно усиливать только после product-matched paid-flow signoff, willingness-to-pay в ICP-интервью и paid-depth signal в прототипных сессиях.
+
+| Сценарий | Reachable users | Activation | Paid conv | ARPPU | Annual revenue | Как читать |
+| --- | ---: | --- | --- | --- | ---: | --- |
+| defensive | 100,000 | 25% | 2% | $50 | $25,000 | маленький validation business, полезен для проверки, но не для venture claim |
+| conservative | 250,000 | 32% | 3% | $60 | $144,000 | ранний нишевый бизнес, имеет смысл при сильной удерживаемости |
+| base | 1,000,000 | 40% | 5% | $80 | $1.6M | ранний нишевый бизнес, имеет смысл при сильной удерживаемости |
+| strong_niche | 2,500,000 | 45% | 7% | $95 | $7.5M | venture-relevant только если retention и paid depth реально работают |
+| upside | 5,000,000 | 50% | 9% | $110 | $24.8M | крупный outcome требует доказанного distribution, retention и WTP |
+| breakout | 10,000,000 | 55% | 11% | $125 | $75.6M | крупный outcome требует доказанного distribution, retention и WTP |
 
 ## СЦЕНАРИИ ВХОДА КАК СВЯЗУЮЩЕЕ ЗВЕНО
 
@@ -198,7 +224,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | SRC_04_WHITESPACE | Где дыры и возможность отличиться | поддержано направленно, но не финально доказано | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Whitespace нельзя апгрейдить без manual walkthrough и final verdict_after_inspection. |
 | SRC_05_AUDIENCE | Аудитория, интервью и гипотеза #4 | поддержано направленно, но не финально доказано | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Audience rows и Reddit/forum signals не являются representative survey и не заменяют recent-behavior interviews. |
 | SRC_06_PRODUCT_CORE | Итоговая модель продукта и гипотеза #5 | поддержано направленно, но не финально доказано | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | Product core не считается доказанным без заполненных prototype_session_capture_sheet и scorecard. |
-| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 459 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
+| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 462 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
 
 ## БЫСТРЫЕ ВЫВОДЫ ДЛЯ СТРАТЕГИИ
 
@@ -216,6 +242,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 - `data_processed/global_hypothesis_validation_questionnaire.csv`
 - `data_processed/global_hypothesis_gate_snapshot.csv`
 - `data_processed/global_next_validation_backlog.csv`
+- `data_processed/global_market_sizing_methodology.csv`
 - `reports/alina-russian-readable-report-v2.md`
 - `data_processed/russian_readable_niche_summary.csv`
 - `data_processed/validation_gate_calculator.csv`

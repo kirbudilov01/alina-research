@@ -169,6 +169,15 @@ function nextActionRu(value) {
   })[v] || v;
 }
 
+function stressReadRu(value) {
+  return ({
+    tiny_validation_business: 'маленький validation business, полезен для проверки, но не для venture claim',
+    niche_early_business: 'ранний нишевый бизнес, имеет смысл при сильной удерживаемости',
+    venture_relevant_if_retention_works: 'venture-relevant только если retention и paid depth реально работают',
+    large_outcome_requires_distribution_and_retention_proof: 'крупный outcome требует доказанного distribution, retention и WTP'
+  })[clean(value)] || clean(value);
+}
+
 function by(rows, key, value) {
   return rows.find(row => row[key] === value) || {};
 }
@@ -201,6 +210,8 @@ const claimAppendix = csv('data_processed/russian_claim_evidence_appendix.csv');
 const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv');
 const marketSources = csv('data_processed/market_source_registry.csv');
 const nextValidationBacklog = csv('data_processed/global_next_validation_backlog.csv');
+const marketSizingMethodology = csv('data_processed/global_market_sizing_methodology.csv');
+const marketStressScenarios = csv('data_processed/market_sizing_stress_test.csv');
 
 const intersection = by(tam, 'pillar', 'intersection');
 const p0Icp = icp.filter(row => clean(row.priority_ru).startsWith('P0'));
@@ -501,6 +512,48 @@ lines.push(mdTable(marketDeepDives.map(row => ({
 lines.push('');
 lines.push(`Intersection SAM в текущей модели равен ${money(intersection.samBase)}. Это рабочая мировая рамка для дальнейшей проверки, а не обещание revenue. Локальный paid-flow signoff сейчас заполнен на ${fmt(paidSignoff.length)} строках; H2 gate имеет статус ${h2.gate_status || 'unknown'}, потому что нужны еще in-app paywall walkthrough и willingness-to-pay evidence.`);
 lines.push('');
+lines.push('## МЕТОДОЛОГИЯ TAM/SAM/SOM');
+lines.push('');
+lines.push('Рыночная модель Alina намеренно построена как диапазон, а не как одна “красивая” цифра. Она разделяет широкий TAM, serviceable SAM, confidence-weighted SAM и bottom-up stress-сценарии. Такой подход нужен, потому что Alina находится на пересечении нескольких adjacent-рынков, а не внутри одной готовой категории market report.');
+lines.push('');
+lines.push('Базовая формула top-down: TAM base умножается на serviceable share и дает SAM base. Затем SAM дополнительно умножается на confidence/directness weight, чтобы не смешивать прямые adjacent-рынки, широкие adjacent-рынки и benchmark-механику. Отдельно используется bottom-up stress: reachable users * activation rate * paid conversion * ARPPU. Этот слой нужен не для прогноза выручки, а для проверки, какой масштаб начинает иметь смысл при разных уровнях distribution, retention и willingness-to-pay.');
+lines.push('');
+lines.push(mdTable(marketSizingMethodology.map(row => ({
+  pillar: row.pillar,
+  direct: row.directness_ru,
+  sam: row.sam_base,
+  weighted: row.weighted_sam_base,
+  risk: row.model_risk_ru,
+  read: row.read_rule_ru
+})), [
+  { key: 'pillar', label: 'Pillar' },
+  { key: 'direct', label: 'Какой тип рынка' },
+  { key: 'sam', label: 'SAM base', align: 'right' },
+  { key: 'weighted', label: 'Weighted SAM', align: 'right' },
+  { key: 'risk', label: 'Риск модели' },
+  { key: 'read', label: 'Как читать' }
+]));
+lines.push('');
+lines.push('Для H2 это означает жесткую границу: TAM/SAM/SOM доказывает, что рынок достаточно интересен для проверки, но не доказывает, что Alina заработает эти деньги. H2 можно усиливать только после product-matched paid-flow signoff, willingness-to-pay в ICP-интервью и paid-depth signal в прототипных сессиях.');
+lines.push('');
+lines.push(mdTable(marketStressScenarios.map(row => ({
+  scenario: row.scenario_family,
+  reachable: fmt(row.reachable_users),
+  activation: `${(num(row.activation_rate) * 100).toFixed(0)}%`,
+  paid: `${(num(row.paid_conversion) * 100).toFixed(0)}%`,
+  arppu: money(row.arppu_year),
+  revenue: money(row.annual_revenue),
+  read: stressReadRu(row.stress_read)
+})), [
+  { key: 'scenario', label: 'Сценарий' },
+  { key: 'reachable', label: 'Reachable users', align: 'right' },
+  { key: 'activation', label: 'Activation' },
+  { key: 'paid', label: 'Paid conv' },
+  { key: 'arppu', label: 'ARPPU' },
+  { key: 'revenue', label: 'Annual revenue', align: 'right' },
+  { key: 'read', label: 'Как читать' }
+]));
+lines.push('');
 lines.push('## СЦЕНАРИИ ВХОДА КАК СВЯЗУЮЩЕЕ ЗВЕНО');
 lines.push('');
 lines.push('Сценарии входа для Alina не завязаны на один канал. Логичнее рассматривать несколько мировых consumer-entry сценариев. Первый сценарий - пользователь приходит из состояния тревоги, усталости или перегруза и ищет короткий reset. Второй сценарий - пользователь приходит из self-improvement контекста: он хочет двигаться вперед, но устал от жестких streak и сложных систем. Третий сценарий - пользователь приходит из spiritual/meaning контекста и хочет не просто читать интерпретацию, а превратить ее в действие. Четвертый сценарий - пользователь приходит через avatar/identity интерес и хочет видеть, что версия себя меняется. Пятый сценарий - пользователь возвращается через мягкую progression-механику, если она не выглядит как манипулятивная игра.');
@@ -682,6 +735,7 @@ lines.push('- `data_processed/global_hypothesis_source_appendix.csv`');
 lines.push('- `data_processed/global_hypothesis_validation_questionnaire.csv`');
 lines.push('- `data_processed/global_hypothesis_gate_snapshot.csv`');
 lines.push('- `data_processed/global_next_validation_backlog.csv`');
+lines.push('- `data_processed/global_market_sizing_methodology.csv`');
 lines.push('- `reports/alina-russian-readable-report-v2.md`');
 lines.push('- `data_processed/russian_readable_niche_summary.csv`');
 lines.push('- `data_processed/validation_gate_calculator.csv`');
