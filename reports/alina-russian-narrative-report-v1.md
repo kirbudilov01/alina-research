@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T13:22:11.976Z
+Собрано: 2026-05-31T13:30:30.359Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 429 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 434 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 429 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 434 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -306,6 +306,29 @@ Review/JTBD слой показывает повторяющиеся работ�
 **VOC_TRUST_SAFETY.** Возможность: Если Alina честно ограничивает обещания и дает контролируемое мягкое guidance, она может избежать части риска spiritual/AI/self-help продуктов. Риск: Любое ощущение диагноза, предсказания судьбы, манипуляции или небезопасного совета должно останавливать claim upgrade. Downgrade: Ослабить H4/H6 немедленно, если возникает повторяющийся fatal trust/safety objection.
 
 Граница этого слоя: VOC карта задает язык интервью, prototype sessions и paid-depth checks, но не апгрейдит H5/H6/H4 без заполненных capture rows.
+
+## 5.4. Русский field session kit
+
+Чтобы перейти от "у нас есть capture sheets" к реальной исполнимой сессии, добавлен русский field session kit: 14 шагов на P0 сегменты ICP_A, ICP_D, примерно 120 минут операторского времени. Kit соединяет consent, recent-behavior screener, problem story, VOC objections, prototype walkthrough, WTP/referral language, scorecard и rebuild hygiene.
+
+| Step | ICP | Phase | Min | H | Evidence |
+| --- | --- | --- | ---: | --- | --- |
+| ICP_A_CONSENT | ICP_A | Consent и рамка безопасности | 3 | H5/H6 | consent_yes_no/recording_permission/quote_permission/participant_boundaries |
+| ICP_A_SCREENER | ICP_A | Recent behavior screener | 7 | H5 | recent_behavior_match/current_tool/trigger_of_last_use/segment_fit_yes_no |
+| ICP_A_PROBLEM_STORY | ICP_A | Problem story и current workaround | 12 | H5/H3 | specific_episode/workaround/pain_intensity_1_5/verbatim_language/rejected_patterns |
+| ICP_A_VOC_OBJECTIONS | ICP_A | VOC objections и disconfirmation | 10 | H2/H4/H5/H6 | top_objection/trust_boundary/streak_or_pressure_reaction/personalization_reaction/paid_depth_reaction |
+| ICP_A_PROTOTYPE_WALKTHROUGH | ICP_A | Prototype walkthrough | 15 | H4/H6/H5 | completion_time_seconds/comprehension_yes_no/meaning_lift_1_5/differentiation_1_5/return_intent_1_5/verbatim_quote/fatal_objection |
+| ICP_A_VALUE_WTP | ICP_A | Value, paid depth и referral language | 8 | H2/H5/H6 | free_value_moment/paid_depth_feature/acceptable_price_range/friend_explanation/return_trigger |
+| ICP_A_SCORE_REBUILD | ICP_A | Scorecard и rebuild hygiene | 5 | H1/H2/H3/H4/H5/H6 | scorecard_metric_values/claim_update_needed/source_file_updated/rebuild_commit_hash |
+| ICP_D_CONSENT | ICP_D | Consent и рамка безопасности | 3 | H5/H6 | consent_yes_no/recording_permission/quote_permission/participant_boundaries |
+| ICP_D_SCREENER | ICP_D | Recent behavior screener | 7 | H5 | recent_behavior_match/current_tool/trigger_of_last_use/segment_fit_yes_no |
+| ICP_D_PROBLEM_STORY | ICP_D | Problem story и current workaround | 12 | H5/H3 | specific_episode/workaround/pain_intensity_1_5/verbatim_language/rejected_patterns |
+| ICP_D_VOC_OBJECTIONS | ICP_D | VOC objections и disconfirmation | 10 | H2/H4/H5/H6 | top_objection/trust_boundary/streak_or_pressure_reaction/personalization_reaction/paid_depth_reaction |
+| ICP_D_PROTOTYPE_WALKTHROUGH | ICP_D | Prototype walkthrough | 15 | H4/H6/H5 | completion_time_seconds/comprehension_yes_no/meaning_lift_1_5/differentiation_1_5/return_intent_1_5/verbatim_quote/fatal_objection |
+| ICP_D_VALUE_WTP | ICP_D | Value, paid depth и referral language | 8 | H2/H5/H6 | free_value_moment/paid_depth_feature/acceptable_price_range/friend_explanation/return_trigger |
+| ICP_D_SCORE_REBUILD | ICP_D | Scorecard и rebuild hygiene | 5 | H1/H2/H3/H4/H5/H6 | scorecard_metric_values/claim_update_needed/source_file_updated/rebuild_commit_hash |
+
+Граница этого слоя: session kit не является validation evidence. Он становится evidence только после заполненных source capture rows, цитат/скриншотов/scorecard values, пересборки gates/report/PDF/manifest и commit/push.
 
 Reddit source-native слой сейчас содержит 2339 coded qualitative signal rows. Из них 1852 уникальных тредов поставлены в manual reading queue, 336 имеют P0_read_first, 238 - P1_read_next. Для P0/P1 создан capture sheet на 574 строк. Все строки по умолчанию имеют статус unread_do_not_upgrade: это специально защищает отчет от преждевременного апгрейда claims.
 
@@ -656,6 +679,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_icp_battlecards.csv`
 - `data_processed/russian_icp_interview_dossiers.csv`
 - `data_processed/russian_voc_objection_map.csv`
+- `data_processed/russian_field_session_kit.csv`
 - `data_processed/russian_product_loop_cards.csv`
 - `data_processed/russian_prototype_session_dossiers.csv`
 - `data_processed/russian_validation_gate_cards.csv`

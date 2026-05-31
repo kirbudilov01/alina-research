@@ -133,6 +133,7 @@ const competitorBattlecards = csv('data_processed/russian_competitor_battlecards
 const icpBattlecards = csv('data_processed/russian_icp_battlecards.csv');
 const icpInterviewDossiers = csv('data_processed/russian_icp_interview_dossiers.csv');
 const vocObjectionMap = csv('data_processed/russian_voc_objection_map.csv');
+const fieldSessionKit = csv('data_processed/russian_field_session_kit.csv');
 const productLoopCards = csv('data_processed/russian_product_loop_cards.csv');
 const prototypeSessionDossiers = csv('data_processed/russian_prototype_session_dossiers.csv');
 const validationGateCards = csv('data_processed/russian_validation_gate_cards.csv');
@@ -436,6 +437,25 @@ if (vocObjectionMap.length) {
   lines.push('Граница этого слоя: VOC карта задает язык интервью, prototype sessions и paid-depth checks, но не апгрейдит H5/H6/H4 без заполненных capture rows.');
   lines.push('');
 }
+if (fieldSessionKit.length) {
+  lines.push('## 5.4. Русский field session kit');
+  lines.push('');
+  const segments = Array.from(new Set(fieldSessionKit.map(row => row.segment_id))).join(', ');
+  const minutes = fieldSessionKit.reduce((sum, row) => sum + Number(row.minutes || 0), 0);
+  lines.push(`Чтобы перейти от "у нас есть capture sheets" к реальной исполнимой сессии, добавлен русский field session kit: ${fieldSessionKit.length} шагов на P0 сегменты ${segments}, примерно ${minutes} минут операторского времени. Kit соединяет consent, recent-behavior screener, problem story, VOC objections, prototype walkthrough, WTP/referral language, scorecard и rebuild hygiene.`);
+  lines.push('');
+  lines.push(mdTable(fieldSessionKit, [
+    { key: 'step_id', label: 'Step' },
+    { key: 'segment_id', label: 'ICP' },
+    { key: 'phase_ru', label: 'Phase' },
+    { key: 'minutes', label: 'Min', align: 'right' },
+    { key: 'linked_hypotheses', label: 'H' },
+    { key: 'evidence_to_capture_ru', label: 'Evidence' }
+  ], fieldSessionKit.length));
+  lines.push('');
+  lines.push('Граница этого слоя: session kit не является validation evidence. Он становится evidence только после заполненных source capture rows, цитат/скриншотов/scorecard values, пересборки gates/report/PDF/manifest и commit/push.');
+  lines.push('');
+}
 lines.push(`Reddit source-native слой сейчас содержит ${redditSignals.length} coded qualitative signal rows. Из них ${redditQueue.length} уникальных тредов поставлены в manual reading queue, ${p0Reddit.length} имеют P0_read_first, ${p1Reddit.length} - P1_read_next. Для P0/P1 создан capture sheet на ${redditCapture.length} строк. Все строки по умолчанию имеют статус unread_do_not_upgrade: это специально защищает отчет от преждевременного апгрейда claims.`);
 lines.push('');
 lines.push('## 6. Что говорит Reddit/forum слой человеческим языком');
@@ -724,6 +744,7 @@ lines.push('- `data_processed/russian_competitor_battlecards.csv`');
 lines.push('- `data_processed/russian_icp_battlecards.csv`');
 lines.push('- `data_processed/russian_icp_interview_dossiers.csv`');
 lines.push('- `data_processed/russian_voc_objection_map.csv`');
+lines.push('- `data_processed/russian_field_session_kit.csv`');
 lines.push('- `data_processed/russian_product_loop_cards.csv`');
 lines.push('- `data_processed/russian_prototype_session_dossiers.csv`');
 lines.push('- `data_processed/russian_validation_gate_cards.csv`');
