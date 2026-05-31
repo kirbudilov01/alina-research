@@ -1,6 +1,6 @@
 # Evidence Package Manifest V1
 
-Generated: 2026-05-31T18:52:44.390Z
+Generated: 2026-05-31T18:55:44.859Z
 
 ## Purpose
 
@@ -87,7 +87,7 @@ Evidence roles:
 | --- | --- | ---: | ---: | --- |
 | docs/competitive/human-validation-guide-v1.md | research_doc | 91 | 12102 | b85e6b5dd29fcb2f |
 | docs/decision/evidence-audit-v1.md | research_doc | 87 | 9758 | 28cfc31515e5905e |
-| docs/decision/evidence-package-manifest-v1.md | research_doc | 131 | 8953 | 1a6ce53eec35cacb |
+| docs/decision/evidence-package-manifest-v1.md | research_doc | 131 | 8953 | aca22e84de5d41e5 |
 | docs/decision/global-goal-evidence-coverage-v1.md | research_doc | 31 | 6149 | d32e797b63ba8926 |
 | docs/decision/global-next-validation-backlog-v1.md | research_doc | 62 | 11960 | 2112606516152be7 |
 | docs/decision/global-report-readability-audit-v1.md | research_doc | 31 | 5768 | fd9fcd8f80a04b98 |

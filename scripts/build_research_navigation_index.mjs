@@ -77,6 +77,11 @@ function countBy(rows, key) {
   return out;
 }
 
+function num(value) {
+  const n = Number(String(value ?? '').replace(/[^\d.-]/g, ''));
+  return Number.isFinite(n) ? n : 0;
+}
+
 function firstExisting(files) {
   return files.split(';').map(clean).find(file => file && fs.existsSync(file)) || '';
 }
@@ -99,7 +104,10 @@ for (const gate of gates) {
 }
 
 const trancheByGate = new Map();
-for (const tranche of tranches) {
+const operationalTranches = [...tranches]
+  .filter(tranche => tranche.tranche_id !== 'TRANCHE_00_STOP_RULES')
+  .sort((a, b) => num(a.sequence) - num(b.sequence));
+for (const tranche of operationalTranches) {
   for (const gate of clean(tranche.linked_gates).split('|').filter(Boolean)) {
     if (!trancheByGate.has(gate)) trancheByGate.set(gate, tranche);
   }
@@ -153,6 +161,8 @@ const claimRows = claims.map((claim, index) => {
     linked_hypothesis: hypothesis,
     linked_gate: gate?.gate_id || '',
     gate_status: gate?.gate_status || '',
+    progress: gate ? `${gate.completed_rows || 0}/${gate.required_capture_rows || 0}; success ${gate.success_rows || 0}/${gate.min_success_threshold || gate.success_threshold || 0}` : '',
+    decision_effect: gate?.current_decision_effect || '',
     linked_tranche: tranche?.tranche_id || '',
     briefing_path: briefing?.briefing_path || '',
     primary_file: primaryFile,
@@ -174,6 +184,8 @@ const completionRows = completion.map((row, index) => ({
   linked_hypothesis: '',
   linked_gate: '',
   gate_status: '',
+  progress: '',
+  decision_effect: '',
   linked_tranche: '',
   briefing_path: '',
   primary_file: firstExisting(row.evidence_files),
@@ -197,6 +209,8 @@ const gateRows = gates.map((gate, index) => {
     linked_hypothesis: gate.linked_hypotheses,
     linked_gate: gate.gate_id,
     gate_status: gate.gate_status,
+    progress: `${gate.completed_rows || 0}/${gate.required_capture_rows || 0}; success ${gate.success_rows || 0}/${gate.min_success_threshold || gate.success_threshold || 0}`,
+    decision_effect: gate.current_decision_effect,
     linked_tranche: tranche?.tranche_id || '',
     briefing_path: briefing?.briefing_path || '',
     primary_file: gate.output_file_to_update,
@@ -220,6 +234,8 @@ writeCsv(OUT, rows, [
   'linked_hypothesis',
   'linked_gate',
   'gate_status',
+  'progress',
+  'decision_effect',
   'linked_tranche',
   'briefing_path',
   'primary_file',
@@ -233,11 +249,11 @@ lines.push('# Research Navigation Index V1');
 lines.push('');
 lines.push(`Generated: ${new Date().toISOString()}`);
 lines.push('');
-lines.push('## Purpose');
+lines.push('## Что это');
 lines.push('');
-lines.push('This index is the map for the whole evidence package. It links requirements, claims, gates, tranches, briefing files, source files, next actions, and claim boundaries so the research can be navigated without opening dozens of CSVs first.');
+lines.push('Это навигационная карта всего evidence package. Она связывает требования, claims, validation gates, tranches, briefing-файлы, source-файлы, следующие действия и границы утверждений, чтобы исследование можно было вести ночью без ручного поиска по десяткам CSV.');
 lines.push('');
-lines.push('## Package Snapshot');
+lines.push('## Снимок пакета');
 lines.push('');
 lines.push(`- Navigation rows: ${rows.length}`);
 lines.push(`- Claim rows: ${claimRows.length}`);
@@ -251,30 +267,58 @@ lines.push('Navigation tiers:');
 lines.push('');
 lines.push(Object.entries(countBy(rows, 'navigation_tier')).sort((a, b) => b[1] - a[1]).map(([key, value]) => `- ${key}: ${value}`).join('\n'));
 lines.push('');
-lines.push('## Open Validation Route');
+lines.push('## Рабочий маршрут validation');
 lines.push('');
 lines.push(mdTable(rows.filter(row => row.nav_type === 'gate'), [
   { key: 'label', label: 'Gate' },
   { key: 'linked_hypothesis', label: 'Hypothesis' },
   { key: 'status', label: 'Status' },
+  { key: 'progress', label: 'Progress' },
+  { key: 'decision_effect', label: 'Decision' },
   { key: 'linked_tranche', label: 'Tranche' },
   { key: 'briefing_path', label: 'Briefing' },
   { key: 'next_action', label: 'Next Action' }
 ], gateRows.length));
 lines.push('');
-lines.push('## Highest-Leverage Claims');
+lines.push('## Очередь на ближайшие 12 часов');
+lines.push('');
+lines.push('Эта очередь не усиливает claims сама по себе. Она показывает, какие рабочие tranches надо выполнять первыми, чтобы перевести отчет из desk/source evidence в observed validation: screenshots, notes, interview quotes, paywall checks и prototype scores.');
+lines.push('');
+lines.push(mdTable(operationalTranches.map(tranche => {
+  const briefing = briefingByTranche.get(tranche.tranche_id) || {};
+  return {
+    id: tranche.tranche_id,
+    priority: tranche.priority,
+    scope: tranche.target_scope,
+    goal: tranche.operator_goal_ru,
+    evidence: tranche.evidence_to_capture_ru,
+    output: tranche.output_files_to_update,
+    briefing: briefing.briefing_path || ''
+  };
+}), [
+  { key: 'id', label: 'Tranche' },
+  { key: 'priority', label: 'Priority' },
+  { key: 'scope', label: 'Scope' },
+  { key: 'goal', label: 'Цель оператора' },
+  { key: 'evidence', label: 'Что сохранить' },
+  { key: 'output', label: 'Куда писать' },
+  { key: 'briefing', label: 'Briefing' }
+], 8));
+lines.push('');
+lines.push('## Главные claims, которые нельзя апгрейдить без evidence');
 lines.push('');
 lines.push(mdTable(rows.filter(row => row.nav_type === 'claim' && row.navigation_tier !== 'reference_anchor'), [
   { key: 'label', label: 'Claim' },
   { key: 'status', label: 'Status' },
   { key: 'confidence', label: 'Confidence' },
   { key: 'linked_gate', label: 'Gate' },
+  { key: 'progress', label: 'Gate progress' },
   { key: 'linked_tranche', label: 'Tranche' },
   { key: 'primary_file', label: 'Primary File' },
   { key: 'boundary', label: 'Boundary' }
 ], 20));
 lines.push('');
-lines.push('## Requirement Map');
+lines.push('## Карта требований');
 lines.push('');
 lines.push(mdTable(completionRows, [
   { key: 'label', label: 'Requirement' },
@@ -284,9 +328,9 @@ lines.push(mdTable(completionRows, [
   { key: 'next_action', label: 'Next Action' }
 ], completionRows.length));
 lines.push('');
-lines.push('## Claim Boundary');
+lines.push('## Граница claims');
 lines.push('');
-lines.push('This is a navigation artifact, not new evidence. It must not upgrade a claim. It tells the operator where evidence lives, what remains open, and which tranche or briefing should be executed before any claim is strengthened.');
+lines.push('Это навигационный артефакт, а не новое рыночное доказательство. Он не апгрейдит ни одну гипотезу. Его задача - показать, где лежит evidence, что остается открытым и какой tranche/briefing нужно выполнить перед усилением любого вывода.');
 lines.push('');
 lines.push('## Files');
 lines.push('');
