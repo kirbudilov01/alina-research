@@ -128,6 +128,7 @@ const marketDeepDives = csv('data_processed/russian_market_deep_dives.csv');
 const claimAppendix = csv('data_processed/russian_claim_evidence_appendix.csv');
 const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv');
 const competitorBattlecards = csv('data_processed/russian_competitor_battlecards.csv');
+const icpBattlecards = csv('data_processed/russian_icp_battlecards.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -295,6 +296,28 @@ lines.push(mdTable(icp, [
   { key: 'validation_gate', label: 'Validation gate' }
 ], icp.length));
 lines.push('');
+if (icpBattlecards.length) {
+  lines.push('## 5.1. Русские ICP battlecards');
+  lines.push('');
+  lines.push(`Чтобы аудиторная часть была не набором сегментов, а рабочей картой клиента, добавлены русские ICP battlecards на ${icpBattlecards.length} сегментов. Они последовательно отвечают на вопросы: кто этот пользователь, какую работу он уже делает, почему это важно для Alina, где его искать, как его отсечь на screener, что показать в прототипе, какой WTP-вопрос задать и по какому сигналу сегмент усилить или отбросить.`);
+  lines.push('');
+  lines.push(mdTable(icpBattlecards, [
+    { key: 'segment_id', label: 'ICP' },
+    { key: 'segment_name', label: 'Сегмент' },
+    { key: 'priority_ru', label: 'Приоритет' },
+    { key: 'evidence_score', label: 'Score', align: 'right' },
+    { key: 'audience_signal_rows', label: 'Audience rows', align: 'right' },
+    { key: 'reddit_signal_rows', label: 'Reddit rows', align: 'right' },
+    { key: 'core_job_ru', label: 'Core job' }
+  ], icpBattlecards.length));
+  lines.push('');
+  for (const row of icpBattlecards.slice(0, 4)) {
+    lines.push(`**${row.segment_name}.** ${row.why_it_matters_ru} Позиционирование: ${row.positioning_angle_ru}. Следующий шаг: ${row.next_action_ru}`);
+    lines.push('');
+  }
+  lines.push('Граница этого слоя принципиальна: карточки помогают начать fieldwork, но не выбирают ICP вместо реальных интервью, прототипных сессий и WTP/fatal-objection capture.');
+  lines.push('');
+}
 lines.push(`Reddit source-native слой сейчас содержит ${redditSignals.length} coded qualitative signal rows. Из них ${redditQueue.length} уникальных тредов поставлены в manual reading queue, ${p0Reddit.length} имеют P0_read_first, ${p1Reddit.length} - P1_read_next. Для P0/P1 создан capture sheet на ${redditCapture.length} строк. Все строки по умолчанию имеют статус unread_do_not_upgrade: это специально защищает отчет от преждевременного апгрейда claims.`);
 lines.push('');
 lines.push('## 6. Что говорит Reddit/forum слой человеческим языком');
@@ -428,6 +451,7 @@ lines.push('- `data_processed/russian_market_deep_dives.csv`');
 lines.push('- `data_processed/russian_claim_evidence_appendix.csv`');
 lines.push('- `data_processed/russian_source_provenance_index.csv`');
 lines.push('- `data_processed/russian_competitor_battlecards.csv`');
+lines.push('- `data_processed/russian_icp_battlecards.csv`');
 lines.push('- `data_processed/russian_validation_fieldbook.csv`');
 lines.push('- `data_processed/validation_tranche_planner.csv`');
 lines.push('- `data_processed/validation_tranche_briefing_index.csv`');

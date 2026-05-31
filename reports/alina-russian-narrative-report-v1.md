@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T11:48:20.404Z
+Собрано: 2026-05-31T11:55:44.167Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 390 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 393 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 390 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 393 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -156,6 +156,29 @@ Review/JTBD слой показывает повторяющиеся работ�
 | ICP_D | Habit and progress users | strong_directional_icp | Make vague growth concrete and keep momentum without streak anxiety. | Users prefer action-tied progress/identity feedback over a plain checklist or streak counter. |
 | ICP_E | Cozy/casual progression users | strong_directional_icp | Return because progress feels gentle, visible, and emotionally rewarding. | Users read progression as self-growth feedback, not game chores or retention tricks. |
 | ICP_F | Coaching professionals and structured growth users | strong_directional_icp | Get structured guidance that turns intention into accountable practice. | Evidence separates consumer daily ritual use from B2B/career coaching demand. |
+
+## 5.1. Русские ICP battlecards
+
+Чтобы аудиторная часть была не набором сегментов, а рабочей картой клиента, добавлены русские ICP battlecards на 6 сегментов. Они последовательно отвечают на вопросы: кто этот пользователь, какую работу он уже делает, почему это важно для Alina, где его искать, как его отсечь на screener, что показать в прототипе, какой WTP-вопрос задать и по какому сигналу сегмент усилить или отбросить.
+
+| ICP | Сегмент | Приоритет | Score | Audience rows | Reddit rows | Core job |
+| --- | --- | --- | ---: | ---: | ---: | --- |
+| ICP_A | Spiritual self-improvers | P0: начинать интервью и прототип с этого сегмента | 10 | 9045 | 922 | Turn symbolic/personal meaning into one grounded action today. |
+| ICP_D | Habit and progress users | P0: начинать интервью и прототип с этого сегмента | 10 | 8444 | 1891 | Make vague growth concrete and keep momentum without streak anxiety. |
+| ICP_C | Anxious daily reset users | P1: использовать как сравнение после P0 | 9 | 8444 | 1010 | Calm down quickly and return to the day with one manageable next step. |
+| ICP_E | Cozy/casual progression users | P1: использовать как сравнение после P0 | 9 | 7426 | 666 | Return because progress feels gentle, visible, and emotionally rewarding. |
+| ICP_F | Coaching professionals and structured growth users | P1: использовать как сравнение после P0 | 9 | 4423 | 1477 | Get structured guidance that turns intention into accountable practice. |
+| ICP_B | Avatar identity builders | P1: использовать как сравнение после P0 | 8 | 7794 | 663 | See a version of myself change as I make progress. |
+
+**Spiritual self-improvers.** Это люди, которые уже ищут личный смысл, символическое отражение дня, дневниковые практики, spiritual guidance или мягкий self-improvement. Для Alina это самый естественный вход: смысл должен быстро превращаться в одно реальное действие. Позиционирование: Personal guidance that becomes action, not another vague reading.. Следующий шаг: Набрать 8 интервью и 5 прототипных сессий, фиксируя recent behavior, конкретный эпизод, понимание петли, meaning lift и paid-depth сигнал.
+
+**Habit and progress users.** Это люди, которым не хватает не еще одного списка задач, а более мягкого способа видеть движение вперед. Для Alina это проверка, может ли action-tied прогресс заменить жесткий streak pressure. Позиционирование: One meaningful action with forgiving visible progress, not another task manager.. Следующий шаг: Набрать 8 интервью и 5 прототипных сессий, фиксируя recent behavior, конкретный эпизод, понимание петли, meaning lift и paid-depth сигнал.
+
+**Anxious daily reset users.** Это пользователи коротких reset, calm, sleep, breathwork и mood tools. Для Alina они важны как проверка: reset должен не просто успокоить, а вернуть человека к одному посильному следующему шагу. Позиционирование: A two-minute reset connected to meaning and progress, not a generic meditation library.. Следующий шаг: Использовать после первых P0-сессий как compare-сегмент: проверить, является ли потребность шире одного рынка или распадается на разные продукты.
+
+**Cozy/casual progression users.** Это люди, которым близки мягкие игровые циклы, коллекционирование, daily rewards и уютная progression. Для Alina это источник языка возвращения, но есть риск выглядеть как манипулятивная retention-механика. Позиционирование: Borrow cozy progression, but avoid manipulative daily-claim monetization.. Следующий шаг: Использовать после первых P0-сессий как compare-сегмент: проверить, является ли потребность шире одного рынка или распадается на разные продукты.
+
+Граница этого слоя принципиальна: карточки помогают начать fieldwork, но не выбирают ICP вместо реальных интервью, прототипных сессий и WTP/fatal-objection capture.
 
 Reddit source-native слой сейчас содержит 2339 coded qualitative signal rows. Из них 1852 уникальных тредов поставлены в manual reading queue, 336 имеют P0_read_first, 238 - P1_read_next. Для P0/P1 создан capture sheet на 574 строк. Все строки по умолчанию имеют статус unread_do_not_upgrade: это специально защищает отчет от преждевременного апгрейда claims.
 
@@ -314,6 +337,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_claim_evidence_appendix.csv`
 - `data_processed/russian_source_provenance_index.csv`
 - `data_processed/russian_competitor_battlecards.csv`
+- `data_processed/russian_icp_battlecards.csv`
 - `data_processed/russian_validation_fieldbook.csv`
 - `data_processed/validation_tranche_planner.csv`
 - `data_processed/validation_tranche_briefing_index.csv`
