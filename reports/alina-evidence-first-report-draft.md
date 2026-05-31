@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T04:42:48.762Z
+Generated: 2026-05-31T04:47:32.641Z
 
 ## 1. Executive Summary
 
@@ -22,10 +22,11 @@ Key quantified signals:
 - Web paywall screenshot capture: 29/29 queued screenshots captured for manual interpretation.
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Evidence audit register: 12 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 143 artifacts tracked, 25 CSV artifacts, 79747 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 147 artifacts tracked, 27 CSV artifacts, 81400 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 6 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
+- Source-native itch.io expansion: 1650 rows, 1643 OK rows, adding web-game/mechanic references without broad search-engine crawling.
 - Chrome extension detail enrichment: 23/23 detail pages parsed; 3 strong and 10 useful adjacent mechanic references.
 - Chrome mechanic battlecards: 23 browser-extension cards, 9 high/medium references for manual mechanic inspection.
 - Validation gap roadmap: 14 rows; 5 P0 and 9 P1 next validation tasks across markets, hypotheses, and cross-source checks.
@@ -78,7 +79,7 @@ Claim-level audit snapshot:
 | REQ_plan | proved_v1 | high | master plan exists; 14 validation roadmap rows | Needs periodic refresh as validation findings change. |
 | REQ_evidence_package_traceability | proved_v1 | high | 143 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 6 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
-| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; P0 external pass is intentionally small, with Product Hunt/AlternativeTo still needing source-native or curated collection. |
+| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 1643 usable itch rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper itch/Steam expansion remain backlog. |
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
 | H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 4/5 strong monetization proxy markets | Market sizing still needs competitor revenue/proxy review and additional triangulation for thin/contextual markets. |
 | H2_paywall_visible_evidence | supported_narrowly | medium_low | 2/29 screenshots confirm visible public pricing | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. |
@@ -92,7 +93,7 @@ Claim-level audit snapshot:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 143 artifacts; 25 CSV artifacts; 79747 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 147 artifacts; 27 CSV artifacts; 81400 tracked CSV rows; 0 missing required artifacts.
 
 Largest tracked CSV artifacts:
 
@@ -104,12 +105,12 @@ Largest tracked CSV artifacts:
 | data_processed/whitespace_signal_matrix.csv | competitive_whitespace | 12552 | 12552 | d12826260e643b15 |
 | data_raw/expanded/all_expanded_dedup.csv | competitor_universe | 12552 | 12552 | db5e87665dbf3b53 |
 | data_raw/app_store_top_candidate_reviews.csv | audience_icp | 2294 | 2294 | 3fb11211b91b48b3 |
+| data_raw/expanded_itch_raw.csv | competitor_universe | 1650 | 1650 | 38cd47b3df77f674 |
 | data_raw/web_paywall_discovery_raw.csv | market_money | 560 | 560 | 3416403392840293 |
 | data_raw/app_store_iap_pricing_raw.csv | market_money | 498 | 498 | 37f37b15c4554c62 |
 | data_raw/google_play_pricing_raw.csv | market_money | 250 | 250 | 268def050a974daa |
 | data_processed/top100_competitor_review_scorecard.csv | competitive_whitespace | 100 | 100 | 925db07b8f5323d7 |
 | data_processed/top100_human_validation_queue.csv | competitive_whitespace | 90 | 90 | 91356a9f07233a37 |
-| data_processed/forum_quote_coding_matrix.csv | audience_icp | 72 | 72 | f2fb0ab869195b97 |
 
 ## 2E. Research Completion Audit
 
@@ -132,7 +133,7 @@ Objective readiness matrix:
 | Requirement | Status | Strength | Proof | Remaining Gap |
 | --- | --- | --- | --- | --- |
 | REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=14 | Keep refreshing as validation results change. |
-| REQ_02_COMPETITOR_UNIVERSE | partial_substantial_not_30k_50k | medium_high | dedup=12552; raw=17490; niches=5; source_kinds=4 | Below aspirational 30k-50k raw source/app target; desktop stores, Product Hunt/AlternativeTo, B2B directories, forums, and curated lists remain backlog. |
+| REQ_02_COMPETITOR_UNIVERSE | partial_substantial_not_30k_50k | medium_high | dedup=12552; raw_core=17490; itch_rows=1650; known_raw_total=19140; itch_ok=1643; niches=5; source_kinds=4 | Below aspirational 30k-50k raw source/app target; desktop stores, Product Hunt/AlternativeTo, B2B directories, forums, and curated lists remain backlog. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
 | REQ_04_MARKET_MONEY | supported_with_ranges_not_final | medium | tam_rows=6; source_confidence_rows=12; strong_paid_proxy_markets=4/5 | Market sizing remains range-based; competitor revenue/proxy triangulation and additional credible sources are needed for final claims. |
 | REQ_05_WHITESPACE | narrow_supported_not_final | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1 | Metadata can miss hidden in-app mechanics; manual app/onboarding validation is still required. |
@@ -219,6 +220,24 @@ A small P0 pass was run to test external discovery beyond mobile stores without 
 | Product Hunt | 3 | 0 | 3 | coaching |  |
 | AlternativeTo | 3 | 0 | 3 | coaching |  |
 | Chrome Web Store | 23 | 23 | 0 | coaching | COACH by Dropzone AI/Lichess AI Coach/Made That AI Coach/Spekit — AI Sidekick: Your AI Sales Coach and Assistant/Hinty - AI Meeting Coach/Mindstone AI Coach/Reply Coach AI/AI Prompt Coach by LeadWithAI.co |
+
+### Source-Native Itch.io Expansion
+
+A controlled itch.io tag-page collector adds 1650 rows, including 1643 OK rows. This layer is useful for gaming/progression, mindfulness, and avatar/identity mechanic discovery, but it is not treated as direct market-share proof.
+
+Itch rows by market:
+
+- gaming: 792
+- mindfulness: 457
+- avatar_identity: 401
+
+Itch summary:
+
+| Market | Rows / OK | Quality |
+| --- | --- | --- |
+| gaming | rows=792; ok=792 | medium_low |
+| mindfulness | rows=457; ok=453 | medium_low |
+| avatar_identity | rows=401; ok=398 | medium_low |
 
 ### Chrome Extension Detail Enrichment
 
@@ -816,6 +835,7 @@ Claim audit rows currently normalized: 12.
 - `docs/competitive/web-paywall-screenshot-interpretation-v1.md`
 - `docs/competitive/source-expansion-backlog-v1.md`
 - `docs/competitive/p0-external-source-collection-v1.md`
+- `docs/competitive/itch-source-expansion-v1.md`
 - `docs/competitive/chrome-extension-detail-enrichment-v1.md`
 - `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`
 - `docs/decision/evidence-audit-v1.md`
@@ -833,6 +853,7 @@ Claim audit rows currently normalized: 12.
 - `data_processed/research_completion_audit.csv`
 - `data_processed/source_expansion_backlog.csv`
 - `data_processed/p0_external_source_summary.csv`
+- `data_processed/itch_source_summary.csv`
 - `data_processed/chrome_extension_fit_matrix.csv`
 - `data_processed/chrome_extension_mechanic_battlecards.csv`
 - `data_processed/validation_gap_roadmap.csv`
@@ -861,6 +882,7 @@ Claim audit rows currently normalized: 12.
 - `data_raw/forum_evidence_signals.csv`
 - `data_raw/forum_quote_evidence_raw.csv`
 - `data_raw/expanded/p0_external_sources_raw.csv`
+- `data_raw/expanded_itch_raw.csv`
 - `data_raw/expanded_chrome_extensions_raw.csv`
 - `data_raw/chrome_extension_detail_raw.csv`
 - `data_processed/forum_quote_coding_matrix.csv`

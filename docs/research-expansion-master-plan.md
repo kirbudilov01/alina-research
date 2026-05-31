@@ -204,6 +204,7 @@ Current evidence:
 - Current source map: `docs/competitive/expanded-source-map.md`.
 - Next source expansion backlog: `docs/competitive/source-expansion-backlog-v1.md`.
 - Controlled P0 external source smoke pass: `docs/competitive/p0-external-source-collection-v1.md`.
+- Source-native itch.io expansion: `docs/competitive/itch-source-expansion-v1.md`.
 - Chrome extension detail enrichment: `docs/competitive/chrome-extension-detail-enrichment-v1.md`.
 - Chrome extension mechanic battlecards: `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`.
 - Validation gap roadmap: `docs/decision/validation-gap-roadmap-v1.md`.
