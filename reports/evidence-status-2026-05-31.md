@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T04:28:31.303Z
+Generated: 2026-05-31T04:32:29.177Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -15,6 +15,7 @@ Generated: 2026-05-31T04:28:31.303Z
 | Whitespace matrices | data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md | done v1 |
 | Audience matrices | data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md | done v1 |
 | ICP / audience segment matrix | data_processed/icp_segment_matrix.csv; docs/audience/icp-segment-matrix-v1.md | done v1; maps audience/review/forum/monetization evidence into testable ICP hypotheses |
+| ICP validation packet | data_processed/icp_validation_test_plan.csv; docs/audience/icp-validation-packet-v1.md | done v1; interview/prototype/WTP/disconfirmation protocol created for top ICP selection |
 | Versioned on GitHub | git log through current commit after push | active |
 | Final PDF | output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf | draft evidence PDF and visual PDF companion done |
 | Visual charts | docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf | draft chart pack and embedded visual PDF done |

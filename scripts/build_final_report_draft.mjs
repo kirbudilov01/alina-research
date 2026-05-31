@@ -97,6 +97,7 @@ const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
 const forumSignals = csv('data_raw/forum_evidence_signals.csv');
 const forumQuoteCoding = csv('data_processed/forum_quote_coding_matrix.csv');
 const icpSegments = csv('data_processed/icp_segment_matrix.csv');
+const icpValidationPlan = csv('data_processed/icp_validation_test_plan.csv');
 const top100Review = csv('data_processed/top100_competitor_review_scorecard.csv');
 const humanValidationQueue = csv('data_processed/top100_human_validation_queue.csv');
 const iapRaw = csv('data_raw/app_store_iap_pricing_raw.csv');
@@ -183,6 +184,7 @@ report.push(`- Validation gap roadmap: ${validationGapRoadmap.length} rows; ${va
 report.push(`- Market source confidence review: ${marketSourceConfidence.length} sources graded; ${highUseMarketSources.length} high-use anchors and ${rangeOnlyMarketSources.length} range-only/context sources.`);
 report.push(`- Monetization proxy matrix: ${monetizationProxy.length} markets covered; ${strongMonetizationMarkets.length} strong and ${mediumMonetizationMarkets.length} medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.`);
 report.push(`- ICP segment matrix: ${icpSegments.length} segment hypotheses; strongest current directional ICP is "${strongestIcpSegment.segment_name || 'n/a'}".`);
+report.push(`- ICP validation packet: ${icpValidationPlan.length} interview/prototype test rows for selecting one primary and one secondary ICP.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
@@ -660,6 +662,16 @@ if (icpSegments.length) {
   report.push(`Current ICP read: "${strongestIcpSegment.segment_name || 'n/a'}" is the strongest directional starting segment, but the decision should remain open until interviews/prototype tests compare at least the top two segments.`);
   report.push('');
 }
+if (icpValidationPlan.length) {
+  report.push('### ICP Validation Packet');
+  report.push('');
+  report.push(`The ICP validation packet adds ${icpValidationPlan.length} concrete tests across screener, problem interview, prototype loop, positioning, willingness-to-pay, and disconfirmation checks. This is the immediate P0 path for choosing a primary ICP without adding broad source collection.`);
+  report.push('');
+  report.push('Validation test types:');
+  report.push('');
+  report.push(bulletCounts(countBy(icpValidationPlan, 'validation_type')));
+  report.push('');
+}
 report.push('### App Store Review Language');
 report.push('');
 report.push(`Recent public App Store reviews were collected for top intersection candidates. Coverage is ${rawReviews.length} deduplicated reviews across ${reviewApps} apps, converted into keyword-based signal rows. This is not final sentiment modeling, but it is useful evidence for user language, delight, objections, and churn risk.`);
@@ -779,6 +791,7 @@ report.push('- `docs/market/monetization-proxy-matrix-v1.md`');
 report.push('- `docs/intersections/whitespace-map-v2.md`');
 report.push('- `docs/audience/audience-segmentation-v1.md`');
 report.push('- `docs/audience/icp-segment-matrix-v1.md`');
+report.push('- `docs/audience/icp-validation-packet-v1.md`');
 report.push('- `docs/audience/review-language-synthesis-v1.md`');
 report.push('- `docs/audience/review-jtbd-clusters-v1.md`');
 report.push('- `docs/audience/forum-evidence-synthesis-v1.md`');
@@ -814,6 +827,7 @@ report.push('- `data_processed/validation_gap_roadmap.csv`');
 report.push('- `data_processed/competitor_feature_matrix.csv`');
 report.push('- `data_processed/audience_signal_matrix.csv`');
 report.push('- `data_processed/icp_segment_matrix.csv`');
+report.push('- `data_processed/icp_validation_test_plan.csv`');
 report.push('- `data_processed/whitespace_signal_matrix.csv`');
 report.push('- `data_processed/top_intersection_review_prefill.csv`');
 report.push('- `data_processed/top100_competitor_review_scorecard.csv`');
@@ -884,6 +898,7 @@ status.push(mdTable([
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
   { requirement: 'ICP / audience segment matrix', evidence: 'data_processed/icp_segment_matrix.csv; docs/audience/icp-segment-matrix-v1.md', status: 'done v1; maps audience/review/forum/monetization evidence into testable ICP hypotheses' },
+  { requirement: 'ICP validation packet', evidence: 'data_processed/icp_validation_test_plan.csv; docs/audience/icp-validation-packet-v1.md', status: 'done v1; interview/prototype/WTP/disconfirmation protocol created for top ICP selection' },
   { requirement: 'Versioned on GitHub', evidence: 'git log through current commit after push', status: 'active' },
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft evidence PDF and visual PDF companion done' },
   { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft chart pack and embedded visual PDF done' },
@@ -903,6 +918,7 @@ console.log(`status=${STATUS_OUT}`);
 console.log(`expanded_rows=${expanded.length}`);
 console.log(`audience_rows=${audience.length}`);
 console.log(`icp_segments=${icpSegments.length}`);
+console.log(`icp_validation_tests=${icpValidationPlan.length}`);
 console.log(`market_claims=${claims.length}`);
 console.log(`review_rows=${rawReviews.length}`);
 console.log(`review_signal_rows=${reviewSignals.length}`);

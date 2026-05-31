@@ -109,6 +109,7 @@ const googlePricing = csv('data_raw/google_play_pricing_raw.csv');
 const forumQuotes = csv('data_processed/forum_quote_coding_matrix.csv');
 const chromeBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
 const icpSegments = csv('data_processed/icp_segment_matrix.csv');
+const icpValidationPlan = csv('data_processed/icp_validation_test_plan.csv');
 const evidence = csv('data_processed/evidence_claim_register.csv');
 const strongIcpSegments = icpSegments.filter(row => row.evidence_band === 'strong_directional_icp');
 
@@ -240,11 +241,11 @@ const rows = [
     label: 'ICP segment validation',
     evidence_band: `${icpSegments.length} directional ICP hypotheses`,
     priority: 'P0',
-    current_evidence: `${icpSegments.length} segments; ${strongIcpSegments.length} strong_directional_icp`,
+    current_evidence: `${icpSegments.length} segments; ${strongIcpSegments.length} strong_directional_icp; ${icpValidationPlan.length} validation tests`,
     main_gap: 'directional segments have not been validated with interviews, prototype response, or willingness-to-pay checks',
-    recommended_next_action: 'Interview or prototype-test the top two ICP segments, compare language resonance, loop completion, return intent, and willingness to pay.',
+    recommended_next_action: 'Run the ICP validation packet for the top two segments, compare language resonance, loop completion, return intent, and willingness to pay.',
     success_gate: 'One primary ICP and one secondary ICP are selected with validated language, top pains, activation trigger, and willingness-to-pay evidence.',
-    source_files: 'data_processed/icp_segment_matrix.csv;docs/audience/icp-segment-matrix-v1.md'
+    source_files: 'data_processed/icp_segment_matrix.csv;data_processed/icp_validation_test_plan.csv;docs/audience/icp-segment-matrix-v1.md;docs/audience/icp-validation-packet-v1.md'
   }
 ];
 

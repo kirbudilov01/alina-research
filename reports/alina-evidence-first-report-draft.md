@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T04:28:31.291Z
+Generated: 2026-05-31T04:32:29.165Z
 
 ## 1. Executive Summary
 
@@ -30,6 +30,7 @@ Key quantified signals:
 - Market source confidence review: 12 sources graded; 3 high-use anchors and 4 range-only/context sources.
 - Monetization proxy matrix: 5 markets covered; 4 strong and 1 medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.
 - ICP segment matrix: 6 segment hypotheses; strongest current directional ICP is "Spiritual self-improvers".
+- ICP validation packet: 36 interview/prototype test rows for selecting one primary and one secondary ICP.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
@@ -78,7 +79,7 @@ Claim-level audit snapshot:
 | H2_paywall_visible_evidence | supported_narrowly | medium_low | 2/29 screenshots confirm visible public pricing | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. |
 | H3_whitespace_exists | narrow_supported_not_final | medium | 1/100 strict behavior-tied progression signals; 9 Chrome mechanic references to inspect | Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors. |
 | H4_competitive_advantage_plausible | plausible_unproven | medium_low | 1 direct reference competitor; 45 high-threat competitors; 23 Chrome mechanic battlecards | No human validation or prototype test yet proves users value the loop. |
-| H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 6 ICP segment hypotheses | Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. |
+| H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 6 ICP segment hypotheses; 36 ICP validation tests | Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. |
 | H6_product_core_defined | supported_for_mvp_framing | medium | 12552 feature matrix rows; 100 product-core rows | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
 | REQ_final_artifacts_versioned | proved_active | high | current branch pushed through latest commit | Final polished investor/user-facing PDF is still draft-level, not final designed publication. |
 
@@ -571,6 +572,19 @@ The ICP layer converts audience-signal rows, review JTBD/pain clusters, forum qu
 
 Current ICP read: "Spiritual self-improvers" is the strongest directional starting segment, but the decision should remain open until interviews/prototype tests compare at least the top two segments.
 
+### ICP Validation Packet
+
+The ICP validation packet adds 36 concrete tests across screener, problem interview, prototype loop, positioning, willingness-to-pay, and disconfirmation checks. This is the immediate P0 path for choosing a primary ICP without adding broad source collection.
+
+Validation test types:
+
+- screener: 6
+- problem_interview: 6
+- prototype_loop: 6
+- positioning_test: 6
+- willingness_to_pay: 6
+- disconfirmation: 6
+
 ### App Store Review Language
 
 Recent public App Store reviews were collected for top intersection candidates. Coverage is 2294 deduplicated reviews across 78 apps, converted into keyword-based signal rows. This is not final sentiment modeling, but it is useful evidence for user language, delight, objections, and churn risk.
@@ -726,6 +740,7 @@ Claim audit rows currently normalized: 10.
 - `docs/intersections/whitespace-map-v2.md`
 - `docs/audience/audience-segmentation-v1.md`
 - `docs/audience/icp-segment-matrix-v1.md`
+- `docs/audience/icp-validation-packet-v1.md`
 - `docs/audience/review-language-synthesis-v1.md`
 - `docs/audience/review-jtbd-clusters-v1.md`
 - `docs/audience/forum-evidence-synthesis-v1.md`
@@ -761,6 +776,7 @@ Claim audit rows currently normalized: 10.
 - `data_processed/competitor_feature_matrix.csv`
 - `data_processed/audience_signal_matrix.csv`
 - `data_processed/icp_segment_matrix.csv`
+- `data_processed/icp_validation_test_plan.csv`
 - `data_processed/whitespace_signal_matrix.csv`
 - `data_processed/top_intersection_review_prefill.csv`
 - `data_processed/top100_competitor_review_scorecard.csv`

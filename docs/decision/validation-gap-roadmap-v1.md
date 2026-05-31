@@ -1,6 +1,6 @@
 # Validation Gap Roadmap V1
 
-Generated: 2026-05-31T04:26:43.021Z
+Generated: 2026-05-31T04:32:19.111Z
 
 ## Purpose
 
@@ -30,7 +30,7 @@ This roadmap converts the current evidence base into the next validation queue. 
 | H2_paywall_visible_evidence | supported_narrowly/medium_low | P0 | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. | Human screenshot review classifies public pricing/paywall evidence as confirm/partial/reject. |
 | H3_whitespace_exists | narrow_supported_not_final/medium | P0 | Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors. | Manual app/onboarding inspection confirms action -> identity/avatar causality remains rare. |
 | H4_competitive_advantage_plausible | plausible_unproven/medium_low | P0 | No human validation or prototype test yet proves users value the loop. | Prototype or user test shows the integrated loop is understood and preferred over generic habit/coach alternatives. |
-| H5_shared_audience_exists | directionally_supported/medium | P1 | Keyword/OCR/forum coding needs human validation and real user interviews. | User interviews or validated quotes confirm one audience segment with shared language and willingness to use/pay. |
+| H5_shared_audience_exists | directionally_supported/medium | P1 | Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. | User interviews or validated quotes confirm one audience segment with shared language and willingness to use/pay. |
 | H6_product_core_defined | supported_for_mvp_framing/medium | P1 | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. | Prototype test validates comprehension, emotional value, and next-day return intent. |
 
 ## Cross-Source Tasks
@@ -46,9 +46,9 @@ This roadmap converts the current evidence base into the next validation queue. 
 ### ICP segment validation
 
 - Priority: P0
-- Current evidence: 6 segments; 6 strong_directional_icp
+- Current evidence: 6 segments; 6 strong_directional_icp; 36 validation tests
 - Gap: directional segments have not been validated with interviews, prototype response, or willingness-to-pay checks
-- Next action: Interview or prototype-test the top two ICP segments, compare language resonance, loop completion, return intent, and willingness to pay.
+- Next action: Run the ICP validation packet for the top two segments, compare language resonance, loop completion, return intent, and willingness to pay.
 - Success gate: One primary ICP and one secondary ICP are selected with validated language, top pains, activation trigger, and willingness-to-pay evidence.
 
 ## Files
