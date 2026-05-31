@@ -25,6 +25,8 @@ npm run build:pdf
   - TAM/SAM/SOM
   - Observed App Store IAP Pricing
   - Observed price bands
+  - Google Play Pricing Validation
+  - Android pricing model counts
   - AI-Assisted Top-100 Competitor Review
   - Competitor verdict counts
   - Highest-threat primary competitors
@@ -39,7 +41,7 @@ npm run build:pdf
 - Visual render check:
   - Rendered all pages to PNG with PyMuPDF in a temporary venv under `tmp/`.
   - Inspected representative pages 1, 2, 3, 4, 6, 7, and 8.
-  - Pages 3-4 contain the observed IAP pricing section and AI-assisted top-100 competitor review, and render cleanly.
+  - Pages 3-4 contain observed App Store IAP pricing, Google Play pricing validation, and AI-assisted top-100 competitor review, and render cleanly.
   - Page 6 contains the App Store review-language section and renders cleanly.
   - Pages 7-8 contain the forum/source-map and forum quote-coding sections, and render cleanly.
   - No clipped tables, overlapping text, or unreadable sections found.

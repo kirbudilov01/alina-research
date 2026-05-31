@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T02:48:53.121Z
+Generated: 2026-05-31T02:54:49.771Z
 
 ## 1. Executive Summary
 
@@ -16,12 +16,13 @@ Key quantified signals:
 - Top-100 intersection candidates enriched from App Store metadata: 100/100.
 - AI-assisted top-100 competitor review: 100 rows, 90 unique primary apps, 45 high-threat apps, 1 direct reference competitor.
 - App Store IAP pricing layer: 498 observed purchase rows across 80 apps; observed price range $0.00-$549.99.
+- Google Play pricing validation: 247/250 successful Android lookups; 191 apps offer IAP.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
 - Forum/source evidence map: 18 qualitative rows across 5 market pillars.
 - Forum quote coding layer: 72 snippet rows across 18 sources.
-- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, and forum quote coding.
+- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, and forum quote coding.
 - Modeled direct intersection SAM base: USD 201960000.
 
 ## 2. Product Hypotheses
@@ -127,6 +128,29 @@ Highest observed IAP ceilings:
 | Eylo: AI Weight Loss Coach | 5 | 4.99 | 179.99 | unclear_iap:3/subscription_like:2 |
 | MindFi: Mind Fitness for All | 3 | 5.99 | 174.99 | subscription_like:2/lifetime_like:1 |
 | Yoga International | 2 | 19.99 | 169.00 | subscription_like:2 |
+
+### Google Play Pricing Validation
+
+Google Play metadata was collected for 250 Android package rows across the five market pillars. Successful lookups: 247. Apps offering IAP: 191; ad-supported apps: 85; paid download apps: 3.
+
+Android pricing model counts:
+
+- free_download|offers_iap: 114
+- free_download|offers_iap|ad_supported: 72
+- free_download: 45
+- free_download|ad_supported: 11
+- paid_download|offers_iap: 3
+- free_download|offers_iap|ad_supported|play_pass: 2
+
+Android pricing summary by market:
+
+| Market | OK | Free | Paid | IAP | Ads | Dev Website |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| gaming | 48 | 48 | 0 | 48 | 31 | 46 |
+| astrology_esoterics | 50 | 48 | 2 | 43 | 15 | 49 |
+| avatar_identity | 50 | 49 | 1 | 36 | 32 | 48 |
+| coaching | 49 | 49 | 0 | 24 | 1 | 42 |
+| mindfulness | 50 | 50 | 0 | 40 | 6 | 45 |
 
 ### Retention Signals
 
@@ -320,7 +344,7 @@ Remaining proof required:
 - Human validation of AI-assisted battlecards and scorecard verdicts.
 - Forum evidence and deeper manual clustering of reviews for user pain language and subscription objections.
 - Human validation of forum/source quote coding before external-facing use.
-- Deeper pricing validation for web/Android products and paywall screenshots where accessible.
+- Web/paywall screenshots and trial-term validation where accessible.
 - Prototype test of the two-minute daily loop.
 
 ## 11. Source and Claim Layer
@@ -357,6 +381,7 @@ Market claims currently normalized: 14.
 - `docs/competitive/top100-competitor-review-v1.md`
 - `docs/competitive/top100-competitor-battlecards-v1.md`
 - `docs/competitive/app-store-iap-pricing-v1.md`
+- `docs/competitive/google-play-pricing-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
 - `data_processed/competitor_feature_matrix.csv`
@@ -365,6 +390,7 @@ Market claims currently normalized: 14.
 - `data_processed/top_intersection_review_prefill.csv`
 - `data_processed/top100_competitor_review_scorecard.csv`
 - `data_processed/app_store_iap_pricing_summary.csv`
+- `data_processed/google_play_pricing_summary.csv`
 - `data_processed/pricing_retention_matrix.csv`
 - `data_processed/product_core_evidence_matrix.csv`
 - `data_processed/review_signal_matrix.csv`
@@ -372,6 +398,7 @@ Market claims currently normalized: 14.
 - `data_processed/review_jtbd_cluster_rows.csv`
 - `data_raw/app_store_top_candidate_reviews.csv`
 - `data_raw/app_store_iap_pricing_raw.csv`
+- `data_raw/google_play_pricing_raw.csv`
 - `data_raw/forum_evidence_signals.csv`
 - `data_raw/forum_quote_evidence_raw.csv`
 - `data_processed/forum_quote_coding_matrix.csv`
@@ -384,12 +411,14 @@ Market claims currently normalized: 14.
 - `output/charts/top100-competitor-verdicts.svg`
 - `output/charts/top100-threat-scores.svg`
 - `output/charts/iap-price-bands.svg`
+- `output/charts/google-play-pricing-models.svg`
+- `output/charts/google-play-iap-by-market.svg`
 
 ## 13. Next Work
 
 1. Human-validate the AI-assisted top-100 competitor scorecard and battlecards.
 2. Manually validate the highest-signal review clusters and extract exact user language for positioning.
-3. Validate pricing beyond App Store web-page IAP rows: Android, websites, paywall screenshots, and trial terms.
+3. Validate pricing beyond App Store/Google Play metadata: websites, paywall screenshots, and trial terms.
 4. Build visual charts and render the PDF version.
 5. Human-validate retrieval-assisted Reddit/forum/website quote coding.
 6. Update go/no-go decision after manual review and user validation.

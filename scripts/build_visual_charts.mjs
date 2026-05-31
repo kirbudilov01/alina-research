@@ -112,6 +112,9 @@ const top100Review = fs.existsSync('data_processed/top100_competitor_review_scor
 const iapRows = fs.existsSync('data_raw/app_store_iap_pricing_raw.csv')
   ? csv('data_raw/app_store_iap_pricing_raw.csv')
   : [];
+const googlePlayPricing = fs.existsSync('data_raw/google_play_pricing_raw.csv')
+  ? csv('data_raw/google_play_pricing_raw.csv')
+  : [];
 
 horizontalBarChart({
   title: 'Whitespace Bands Across Expanded Competitor Universe',
@@ -203,6 +206,30 @@ if (forumQuoteCoding.length) {
   });
 }
 
+if (googlePlayPricing.length) {
+  const okRows = googlePlayPricing.filter(row => row.collection_status === 'ok');
+  horizontalBarChart({
+    title: 'Google Play Pricing Models',
+    subtitle: 'Android metadata from top market-pillar package rows.',
+    rows: Object.entries(countBy(okRows, 'pricing_model'))
+      .sort((a, b) => b[1] - a[1])
+      .map(([label, value]) => ({ label, value })),
+    file: 'google-play-pricing-models.svg'
+  });
+
+  horizontalBarChart({
+    title: 'Google Play IAP Apps by Market',
+    subtitle: 'Count of successful Android lookups with offersIAP=true.',
+    rows: Object.entries(
+      okRows.filter(row => row.offers_iap === 'yes').reduce((acc, row) => {
+        acc[row.niche] = (acc[row.niche] || 0) + 1;
+        return acc;
+      }, {})
+    ).sort((a, b) => b[1] - a[1]).map(([label, value]) => ({ label, value })),
+    file: 'google-play-iap-by-market.svg'
+  });
+}
+
 const lines = [];
 lines.push('# Chart Index V1');
 lines.push('');
@@ -221,6 +248,10 @@ if (top100Review.length) {
 }
 if (iapRows.length) lines.push('- `output/charts/iap-price-bands.svg`');
 if (forumQuoteCoding.length) lines.push('- `output/charts/forum-quote-coding-tags.svg`');
+if (googlePlayPricing.length) {
+  lines.push('- `output/charts/google-play-pricing-models.svg`');
+  lines.push('- `output/charts/google-play-iap-by-market.svg`');
+}
 lines.push('');
 lines.push('## Notes');
 lines.push('');

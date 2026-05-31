@@ -95,6 +95,8 @@ const forumQuoteCoding = csv('data_processed/forum_quote_coding_matrix.csv');
 const top100Review = csv('data_processed/top100_competitor_review_scorecard.csv');
 const iapRaw = csv('data_raw/app_store_iap_pricing_raw.csv');
 const iapSummary = csv('data_processed/app_store_iap_pricing_summary.csv');
+const googlePlayPricing = csv('data_raw/google_play_pricing_raw.csv');
+const googlePlayPricingSummary = csv('data_processed/google_play_pricing_summary.csv');
 
 const highWhitespace = whitespace.filter(r => r.whitespace_band === 'high').length;
 const mediumWhitespace = whitespace.filter(r => r.whitespace_band === 'medium').length;
@@ -111,6 +113,7 @@ const highThreatCompetitors = primaryCompetitors.filter(r => Number(r.competitiv
 const directReferenceCompetitors = primaryCompetitors.filter(r => r.competitive_verdict === 'direct_reference_competitor');
 const appsWithIap = new Set(iapRaw.map(r => r.app_store_id).filter(Boolean)).size;
 const iapPrices = iapRaw.map(r => Number(r.price_usd)).filter(Number.isFinite);
+const googlePlayOk = googlePlayPricing.filter(r => r.collection_status === 'ok');
 
 const report = [];
 
@@ -132,12 +135,13 @@ report.push(`- High whitespace candidates: ${highWhitespace}; medium: ${mediumWh
 report.push(`- Top-100 intersection candidates enriched from App Store metadata: ${prefill.length}/100.`);
 report.push(`- AI-assisted top-100 competitor review: ${top100Review.length} rows, ${primaryCompetitors.length} unique primary apps, ${highThreatCompetitors.length} high-threat apps, ${directReferenceCompetitors.length} direct reference competitor.`);
 report.push(`- App Store IAP pricing layer: ${iapRaw.length} observed purchase rows across ${appsWithIap} apps; observed price range ${iapPrices.length ? `$${Math.min(...iapPrices).toFixed(2)}-$${Math.max(...iapPrices).toFixed(2)}` : 'n/a'}.`);
+report.push(`- Google Play pricing validation: ${googlePlayOk.length}/${googlePlayPricing.length} successful Android lookups; ${googlePlayOk.filter(r => r.offers_iap === 'yes').length} apps offer IAP.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
 report.push(`- Forum/source evidence map: ${forumSignals.length} qualitative rows across ${Object.keys(countBy(forumSignals, 'market')).length} market pillars.`);
 report.push(`- Forum quote coding layer: ${forumQuoteCoding.length} snippet rows across ${new Set(forumQuoteCoding.map(r => r.source_id)).size} sources.`);
-report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, and forum quote coding.');
+report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, and forum quote coding.');
 report.push(`- Modeled direct intersection SAM base: USD ${baseIntersection.samBase || 'n/a'}.`);
 report.push('');
 report.push('## 2. Product Hypotheses');
@@ -231,6 +235,28 @@ if (iapRaw.length) {
       { key: 'max_price_usd', label: 'Max', align: 'right' },
       { key: 'product_tags', label: 'Product Tags' }
     ], 8));
+  report.push('');
+}
+if (googlePlayPricing.length) {
+  report.push('### Google Play Pricing Validation');
+  report.push('');
+  report.push(`Google Play metadata was collected for ${googlePlayPricing.length} Android package rows across the five market pillars. Successful lookups: ${googlePlayOk.length}. Apps offering IAP: ${googlePlayOk.filter(r => r.offers_iap === 'yes').length}; ad-supported apps: ${googlePlayOk.filter(r => r.ad_supported === 'yes').length}; paid download apps: ${googlePlayOk.filter(r => r.free === 'no').length}.`);
+  report.push('');
+  report.push('Android pricing model counts:');
+  report.push('');
+  report.push(bulletCounts(countBy(googlePlayOk, 'pricing_model')));
+  report.push('');
+  report.push('Android pricing summary by market:');
+  report.push('');
+  report.push(mdTable(googlePlayPricingSummary, [
+    { key: 'niche', label: 'Market' },
+    { key: 'successful_rows', label: 'OK', align: 'right' },
+    { key: 'free_download_apps', label: 'Free', align: 'right' },
+    { key: 'paid_download_apps', label: 'Paid', align: 'right' },
+    { key: 'offers_iap_apps', label: 'IAP', align: 'right' },
+    { key: 'ad_supported_apps', label: 'Ads', align: 'right' },
+    { key: 'apps_with_developer_website', label: 'Dev Website', align: 'right' }
+  ], googlePlayPricingSummary.length));
   report.push('');
 }
 report.push('### Retention Signals');
@@ -386,7 +412,7 @@ report.push('- Manual validation of the top-100 candidates.');
 report.push('- Human validation of AI-assisted battlecards and scorecard verdicts.');
 report.push('- Forum evidence and deeper manual clustering of reviews for user pain language and subscription objections.');
 report.push('- Human validation of forum/source quote coding before external-facing use.');
-report.push('- Deeper pricing validation for web/Android products and paywall screenshots where accessible.');
+report.push('- Web/paywall screenshots and trial-term validation where accessible.');
 report.push('- Prototype test of the two-minute daily loop.');
 report.push('');
 report.push('## 11. Source and Claim Layer');
@@ -417,6 +443,7 @@ report.push('- `docs/competitive/top-intersection-review-synthesis-v1.md`');
 report.push('- `docs/competitive/top100-competitor-review-v1.md`');
 report.push('- `docs/competitive/top100-competitor-battlecards-v1.md`');
 report.push('- `docs/competitive/app-store-iap-pricing-v1.md`');
+report.push('- `docs/competitive/google-play-pricing-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
 report.push('- `data_processed/competitor_feature_matrix.csv`');
@@ -425,6 +452,7 @@ report.push('- `data_processed/whitespace_signal_matrix.csv`');
 report.push('- `data_processed/top_intersection_review_prefill.csv`');
 report.push('- `data_processed/top100_competitor_review_scorecard.csv`');
 report.push('- `data_processed/app_store_iap_pricing_summary.csv`');
+report.push('- `data_processed/google_play_pricing_summary.csv`');
 report.push('- `data_processed/pricing_retention_matrix.csv`');
 report.push('- `data_processed/product_core_evidence_matrix.csv`');
 report.push('- `data_processed/review_signal_matrix.csv`');
@@ -432,6 +460,7 @@ report.push('- `data_processed/review_jtbd_cluster_summary.csv`');
 report.push('- `data_processed/review_jtbd_cluster_rows.csv`');
 report.push('- `data_raw/app_store_top_candidate_reviews.csv`');
 report.push('- `data_raw/app_store_iap_pricing_raw.csv`');
+report.push('- `data_raw/google_play_pricing_raw.csv`');
 report.push('- `data_raw/forum_evidence_signals.csv`');
 report.push('- `data_raw/forum_quote_evidence_raw.csv`');
 report.push('- `data_processed/forum_quote_coding_matrix.csv`');
@@ -444,12 +473,14 @@ report.push('- `output/charts/forum-quote-coding-tags.svg`');
 report.push('- `output/charts/top100-competitor-verdicts.svg`');
 report.push('- `output/charts/top100-threat-scores.svg`');
 report.push('- `output/charts/iap-price-bands.svg`');
+report.push('- `output/charts/google-play-pricing-models.svg`');
+report.push('- `output/charts/google-play-iap-by-market.svg`');
 report.push('');
 report.push('## 13. Next Work');
 report.push('');
 report.push('1. Human-validate the AI-assisted top-100 competitor scorecard and battlecards.');
 report.push('2. Manually validate the highest-signal review clusters and extract exact user language for positioning.');
-report.push('3. Validate pricing beyond App Store web-page IAP rows: Android, websites, paywall screenshots, and trial terms.');
+report.push('3. Validate pricing beyond App Store/Google Play metadata: websites, paywall screenshots, and trial terms.');
 report.push('4. Build visual charts and render the PDF version.');
 report.push('5. Human-validate retrieval-assisted Reddit/forum/website quote coding.');
 report.push('6. Update go/no-go decision after manual review and user validation.');
@@ -471,7 +502,7 @@ status.push(mdTable([
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf', status: 'draft PDF done' },
   { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg', status: 'draft chart pack done' },
   { requirement: 'Manual review of top 100', evidence: 'data_processed/top100_competitor_review_scorecard.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md', status: 'AI-assisted review done v1; human validation pending' },
-  { requirement: 'Detailed pricing/IAP extraction', evidence: 'data_raw/app_store_iap_pricing_raw.csv; data_processed/app_store_iap_pricing_summary.csv; docs/competitive/app-store-iap-pricing-v1.md', status: 'App Store web IAP extraction done v1; Android/web/paywall validation pending' },
+  { requirement: 'Detailed pricing/IAP extraction', evidence: 'data_raw/app_store_iap_pricing_raw.csv; data_processed/app_store_iap_pricing_summary.csv; docs/competitive/app-store-iap-pricing-v1.md; data_raw/google_play_pricing_raw.csv; data_processed/google_play_pricing_summary.csv; docs/competitive/google-play-pricing-v1.md', status: 'App Store web IAP extraction and Google Play pricing validation done v1; web/paywall screenshot validation pending' },
   { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_raw/forum_quote_evidence_raw.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; data_processed/forum_quote_coding_matrix.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md; docs/audience/forum-quote-coding-v1.md', status: 'App Store review extraction, JTBD clustering, forum source map, and retrieval-assisted quote coding done v1; human validation pending' }
 ], [
   { key: 'requirement', label: 'Requirement' },
@@ -491,3 +522,4 @@ console.log(`review_clusters=${reviewClusters.length}`);
 console.log(`forum_signal_rows=${forumSignals.length}`);
 console.log(`forum_quote_rows=${forumQuoteCoding.length}`);
 console.log(`iap_rows=${iapRaw.length}`);
+console.log(`google_play_pricing_rows=${googlePlayPricing.length}`);

@@ -1,6 +1,6 @@
 # Chart Index V1
 
-Generated: 2026-05-31T02:48:51.942Z
+Generated: 2026-05-31T02:54:48.866Z
 
 ## Charts
 
@@ -13,6 +13,8 @@ Generated: 2026-05-31T02:48:51.942Z
 - `output/charts/top100-threat-scores.svg`
 - `output/charts/iap-price-bands.svg`
 - `output/charts/forum-quote-coding-tags.svg`
+- `output/charts/google-play-pricing-models.svg`
+- `output/charts/google-play-iap-by-market.svg`
 
 ## Notes
 
