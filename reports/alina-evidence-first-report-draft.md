@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T06:17:20.525Z
+Generated: 2026-05-31T06:24:01.598Z
 
 ## 1. Executive Summary
 
@@ -17,6 +17,7 @@ Key quantified signals:
 - AI-assisted top-100 competitor review: 100 rows, 90 unique primary apps, 45 high-threat apps, 1 direct reference competitor.
 - Human validation packet: 90 primary apps queued; 21 P0 and 24 P1 validation targets.
 - Manual competitor inspection packet: 12 first-wave P0 apps, 6 rubric dimensions, 7 strong-money targets.
+- P0 public listing inspection: 12/12 public listings inspected, 1 visible action-to-avatar causality read, 1 high public hidden-clone risk case.
 - App Store IAP pricing layer: 498 observed purchase rows across 80 apps; observed price range $0.00-$549.99.
 - Google Play pricing validation: 247/250 successful Android lookups; 191 apps offer IAP.
 - Developer website paywall discovery: 560 fetched URL rows across 70 app/domain rows; 29 domains queued for screenshot validation.
@@ -24,7 +25,7 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 12 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 170 artifacts tracked, 37 CSV artifacts, 93227 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 174 artifacts tracked, 39 CSV artifacts, 93248 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -69,10 +70,10 @@ Evidence status mix:
 - proved_v1: 2
 - proved_v1_open_requirements: 1
 - substantial_v1_not_50k_dedup: 1
-- manual_inspection_packet_ready: 1
+- public_listing_inspected_walkthrough_open: 1
 - supported_with_ranges_and_bottom_up_proxy: 1
 - supported_narrowly_with_visual_adjudication: 1
-- narrow_supported_inspection_packet_ready: 1
+- narrow_supported_public_listing_inspected_walkthrough_open: 1
 - prototype_stimulus_ready_unvalidated: 1
 - directionally_supported: 1
 - supported_for_mvp_framing: 1
@@ -83,13 +84,13 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 14 validation roadmap rows | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 170 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 174 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 6973 usable itch rows; 6000 usable Steam tag rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
-| H1_product_shape_exists | manual_inspection_packet_ready | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets | Strict full loop is rare and still needs actual manual product/onboarding inspection. |
+| H1_product_shape_exists | public_listing_inspected_walkthrough_open | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Strict full loop is rare and still needs actual app/onboarding screenshots to confirm or downgrade public listing claims. |
 | H2_markets_have_money | supported_with_ranges_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 4/5 strong market-level monetization proxies; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, or manual in-app paywall validation for final investor-grade claims. |
 | H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require human sign-off/in-app inspection. |
-| H3_whitespace_exists | narrow_supported_inspection_packet_ready | medium | 1/100 strict behavior-tied progression signals; 12 P0 apps queued for causality inspection | Actual app/onboarding inspection results are still missing; metadata can under-detect hidden loops. |
+| H3_whitespace_exists | narrow_supported_public_listing_inspected_walkthrough_open | medium | 1/100 strict behavior-tied progression signals; 12 P0 apps queued; 1 public listing visible causality case | Actual app/onboarding inspection results are still missing; public listings can overstate or hide in-app loops. |
 | H4_competitive_advantage_plausible | prototype_stimulus_ready_unvalidated | medium | 1 direct reference competitor; 45 high-threat competitors; 8 prototype screens; 6 success/kill metrics | No human prototype session yet proves users understand, prefer, or value the integrated loop. |
 | H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 6 ICP segment hypotheses; 36 ICP validation tests | Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. |
 | H6_product_core_defined | supported_for_mvp_framing | medium | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
@@ -99,7 +100,7 @@ Claim-level audit snapshot:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 170 artifacts; 37 CSV artifacts; 93227 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 174 artifacts; 39 CSV artifacts; 93248 tracked CSV rows; 0 missing required artifacts.
 
 Largest tracked CSV artifacts:
 
@@ -127,7 +128,7 @@ Completion status mix:
 - proved_v1: 2
 - proved_scale_target: 1
 - supported_with_bottom_up_proxy_not_final: 1
-- narrow_supported_inspection_ready_not_final: 1
+- narrow_supported_public_listing_inspected_walkthrough_open: 1
 - directionally_supported_validation_ready: 1
 - prototype_stimulus_ready_not_validated: 1
 - polished_evidence_draft_done_not_validated_final: 1
@@ -142,12 +143,12 @@ Objective readiness matrix:
 | REQ_02_COMPETITOR_UNIVERSE | proved_scale_target | medium_high | dedup=12552; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; known_raw_total=30795; itch_ok=6973; steam_tag_ok=6000; niches=5; source_kinds=4 | Below aspirational 30k-50k raw source/app target; desktop stores, Product Hunt/AlternativeTo, B2B directories, forums, and curated lists remain backlog. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
 | REQ_04_MARKET_MONEY | supported_with_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing remains range-based; actual revenue estimates and manual in-app paywall validation are needed for final investor-grade claims. |
-| REQ_05_WHITESPACE | narrow_supported_inspection_ready_not_final | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; manual_inspection_done=0 | Metadata can miss hidden in-app mechanics; manual app/onboarding inspection results are still required. |
+| REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_app_walkthrough_done=0 | Public listings for the P0 wave are inspected, but metadata/public copy can miss hidden in-app mechanics; app/onboarding walkthrough screenshots are still required. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36 | Segments are directional and need interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=12; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6 | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=170; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
-| REQ_10_VALIDATION_GATES | proved_v1_open_gates | strong | roadmap_rows=14; p0=5; p1=9; human_confirmed=0; manual_inspection_targets=12; manual_inspection_done=0 | Open P0 gates remain: manual competitor inspection execution, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=174; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_10_VALIDATION_GATES | proved_v1_open_gates | strong | roadmap_rows=14; p0=5; p1=9; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
 ## 2C. Validation Gap Roadmap
 
@@ -742,6 +743,27 @@ Inspection rubric dimensions:
 | positioning_overlap | Public/onboarding copy directly targets daily transformation, identity, ritual, emotional reset, or guided action. | Copy is generic wellness, content library, one-off avatar generation, or broad coaching without daily ritual. | Refines competitive messaging and ICP fit. |
 | safety_and_trust | Claims are framed softly with user agency and no deterministic/clinical overclaim. | Manipulative streak pressure, spiritual certainty, unsafe advice, or deceptive pricing. | Feeds product safety boundaries and differentiation. |
 | hidden_clone_risk | No inspected P0 app fully owns the same integrated loop with strong execution. | A competitor already delivers the full Alina loop with clear action->identity feedback. | If triggered, H3/H4 must be downgraded and positioning/product core revised. |
+
+### P0 Public Listing Inspection
+
+The first inspection execution layer now reviews the public App Store listing excerpts for 12 P0 competitors without broad search-engine expansion. This is not a completed app walkthrough: onboarding, first action, progress/avatar feedback, and paywall screenshots remain open.
+
+Public listing read: 1 visible action-to-avatar causality case and 1 high public hidden-clone risk case. The correct interpretation is targeted walkthrough priority, not final whitespace proof.
+
+| Rank | App | Public Verdict | Causality Read | Clone Risk | H3 Implication |
+| ---: | --- | --- | --- | --- | --- |
+| 1 | Shepherd: Spiritual Bible BFF | public_listing_supports_strict_loop_claim | visible_in_public_copy | high_hidden_clone_risk_requires_app_walkthrough | downgrade_whitespace_if_walkthrough_confirms_full_loop |
+| 2 | Zing AI: Home & Gym Workouts | public_listing_supports_adjacent_loop_not_causality | inferred_from_public_copy_not_causal | medium_adjacency_risk | whitespace_survives_public_listing_but_requires_walkthrough |
+| 3 | Miracle Morning Routine | public_listing_supports_adjacent_loop_not_causality | not_visible_public_listing | low_public_listing_directness_risk | whitespace_survives_public_listing_but_requires_walkthrough |
+| 4 | EVOLVE: Transform Your Life | public_listing_supports_strict_loop_claim | decorative_or_progress_only_possible | medium_adjacency_risk | whitespace_survives_public_listing_but_requires_walkthrough |
+| 5 | Daily Yoga: Yoga for Fitness® | public_listing_supports_adjacent_loop_not_causality | not_visible_public_listing | low_public_listing_directness_risk | whitespace_survives_public_listing_but_requires_walkthrough |
+| 6 | Daily Burn: Workout Coach | public_listing_supports_strict_loop_claim | decorative_or_progress_only_possible | medium_adjacency_risk | whitespace_survives_public_listing_but_requires_walkthrough |
+| 7 | Myla : Manifest & Vision Board | public_listing_supports_adjacent_loop_not_causality | inferred_from_public_copy_not_causal | medium_adjacency_risk | whitespace_survives_public_listing_but_requires_walkthrough |
+| 8 | Rosebud: AI Journal & Diary | public_listing_supports_adjacent_loop_not_causality | decorative_or_progress_only_possible | medium_adjacency_risk | whitespace_survives_public_listing_but_requires_walkthrough |
+| 9 | Habit Tracker : Haby | public_listing_supports_adjacent_loop_not_causality | decorative_or_progress_only_possible | medium_adjacency_risk | whitespace_survives_public_listing_but_requires_walkthrough |
+| 10 | Goddess・Women's Wellness Coach | public_listing_supports_adjacent_loop_not_causality | not_visible_public_listing | low_public_listing_directness_risk | whitespace_survives_public_listing_but_requires_walkthrough |
+| 11 | LifeWheel Goal Habit Tracker | public_listing_supports_adjacent_loop_not_causality | decorative_or_progress_only_possible | medium_adjacency_risk | whitespace_survives_public_listing_but_requires_walkthrough |
+| 12 | Habit Tracker | public_listing_supports_adjacent_loop_not_causality | decorative_or_progress_only_possible | medium_adjacency_risk | whitespace_survives_public_listing_but_requires_walkthrough |
 
 ## 6. Whitespace Analysis
 

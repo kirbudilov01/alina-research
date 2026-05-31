@@ -1,0 +1,10 @@
+summary_type,bucket,count
+"public_listing_verdict","public_listing_supports_strict_loop_claim","3"
+"public_listing_verdict","public_listing_supports_adjacent_loop_not_causality","9"
+"causality_public_read","visible_in_public_copy","1"
+"causality_public_read","inferred_from_public_copy_not_causal","2"
+"causality_public_read","not_visible_public_listing","3"
+"causality_public_read","decorative_or_progress_only_possible","6"
+"hidden_clone_risk_public_read","high_hidden_clone_risk_requires_app_walkthrough","1"
+"hidden_clone_risk_public_read","medium_adjacency_risk","8"
+"hidden_clone_risk_public_read","low_public_listing_directness_risk","3"

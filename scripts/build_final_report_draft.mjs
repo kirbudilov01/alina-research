@@ -104,6 +104,8 @@ const top100Review = csv('data_processed/top100_competitor_review_scorecard.csv'
 const humanValidationQueue = csv('data_processed/top100_human_validation_queue.csv');
 const manualInspectionPacket = csv('data_processed/manual_competitor_inspection_packet.csv');
 const manualInspectionRubric = csv('data_processed/manual_competitor_inspection_rubric.csv');
+const publicListingInspection = csv('data_processed/public_listing_inspection_results.csv');
+const publicListingSummary = csv('data_processed/public_listing_inspection_summary.csv');
 const iapRaw = csv('data_raw/app_store_iap_pricing_raw.csv');
 const iapSummary = csv('data_processed/app_store_iap_pricing_summary.csv');
 const googlePlayPricing = csv('data_raw/google_play_pricing_raw.csv');
@@ -147,6 +149,9 @@ const p0HumanValidation = humanValidationQueue.filter(r => r.priority_band === '
 const p1HumanValidation = humanValidationQueue.filter(r => r.priority_band === 'P1_high');
 const manualInspectionStrongMoney = manualInspectionPacket.filter(r => r.revenue_proxy_band === 'strong_bottom_up_money_proxy');
 const manualInspectionBehaviorPrefill = manualInspectionPacket.filter(r => r.behavior_tied_progression_prefill === 'yes');
+const publicListingInspected = publicListingInspection.filter(r => r.public_listing_inspection_status === 'public_listing_inspected');
+const publicListingVisibleCausality = publicListingInspection.filter(r => r.action_to_avatar_causality_public_read === 'visible_in_public_copy');
+const publicListingHighCloneRisk = publicListingInspection.filter(r => r.hidden_clone_risk_public_read === 'high_hidden_clone_risk_requires_app_walkthrough');
 const appsWithIap = new Set(iapRaw.map(r => r.app_store_id).filter(Boolean)).size;
 const iapPrices = iapRaw.map(r => Number(r.price_usd)).filter(Number.isFinite);
 const googlePlayOk = googlePlayPricing.filter(r => r.collection_status === 'ok');
@@ -199,6 +204,7 @@ report.push(`- Top-100 intersection candidates enriched from App Store metadata:
 report.push(`- AI-assisted top-100 competitor review: ${top100Review.length} rows, ${primaryCompetitors.length} unique primary apps, ${highThreatCompetitors.length} high-threat apps, ${directReferenceCompetitors.length} direct reference competitor.`);
 report.push(`- Human validation packet: ${humanValidationQueue.length} primary apps queued; ${p0HumanValidation.length} P0 and ${p1HumanValidation.length} P1 validation targets.`);
 report.push(`- Manual competitor inspection packet: ${manualInspectionPacket.length} first-wave P0 apps, ${manualInspectionRubric.length} rubric dimensions, ${manualInspectionStrongMoney.length} strong-money targets.`);
+report.push(`- P0 public listing inspection: ${publicListingInspected.length}/${manualInspectionPacket.length} public listings inspected, ${publicListingVisibleCausality.length} visible action-to-avatar causality read, ${publicListingHighCloneRisk.length} high public hidden-clone risk case.`);
 report.push(`- App Store IAP pricing layer: ${iapRaw.length} observed purchase rows across ${appsWithIap} apps; observed price range ${iapPrices.length ? `$${Math.min(...iapPrices).toFixed(2)}-$${Math.max(...iapPrices).toFixed(2)}` : 'n/a'}.`);
 report.push(`- Google Play pricing validation: ${googlePlayOk.length}/${googlePlayPricing.length} successful Android lookups; ${googlePlayOk.filter(r => r.offers_iap === 'yes').length} apps offer IAP.`);
 report.push(`- Developer website paywall discovery: ${webPaywallRaw.length} fetched URL rows across ${webPaywallSignals.length} app/domain rows; ${webPaywallScreenshotQueue.length} domains queued for screenshot validation.`);
@@ -823,6 +829,23 @@ if (manualInspectionPacket.length) {
   ], manualInspectionRubric.length));
   report.push('');
 }
+if (publicListingInspection.length) {
+  report.push('### P0 Public Listing Inspection');
+  report.push('');
+  report.push(`The first inspection execution layer now reviews the public App Store listing excerpts for ${publicListingInspection.length} P0 competitors without broad search-engine expansion. This is not a completed app walkthrough: onboarding, first action, progress/avatar feedback, and paywall screenshots remain open.`);
+  report.push('');
+  report.push(`Public listing read: ${publicListingVisibleCausality.length} visible action-to-avatar causality case and ${publicListingHighCloneRisk.length} high public hidden-clone risk case. The correct interpretation is targeted walkthrough priority, not final whitespace proof.`);
+  report.push('');
+  report.push(mdTable(publicListingInspection, [
+    { key: 'inspection_rank', label: 'Rank', align: 'right' },
+    { key: 'app_name', label: 'App' },
+    { key: 'public_listing_verdict', label: 'Public Verdict' },
+    { key: 'action_to_avatar_causality_public_read', label: 'Causality Read' },
+    { key: 'hidden_clone_risk_public_read', label: 'Clone Risk' },
+    { key: 'implication_for_h3_whitespace', label: 'H3 Implication' }
+  ], 12));
+  report.push('');
+}
 report.push('## 6. Whitespace Analysis');
 report.push('');
 report.push('Broad whitespace is weak: the market already has many products that combine meaning, habits, AI, mindfulness, and identity language. Narrow whitespace is stronger: top-100 metadata shows only one strict signal of behavior-tied avatar progression.');
@@ -1193,6 +1216,8 @@ console.log(`web_paywall_visual_partial=${partialVisualPaidSurface.length}`);
 console.log(`human_validation_queue_rows=${humanValidationQueue.length}`);
 console.log(`manual_inspection_targets=${manualInspectionPacket.length}`);
 console.log(`manual_inspection_rubric=${manualInspectionRubric.length}`);
+console.log(`public_listing_inspection_rows=${publicListingInspection.length}`);
+console.log(`public_listing_visible_causality=${publicListingVisibleCausality.length}`);
 console.log(`evidence_audit_rows=${evidenceAudit.length}`);
 console.log(`evidence_manifest_rows=${evidenceManifest.length}`);
 console.log(`completion_audit_rows=${completionAudit.length}`);

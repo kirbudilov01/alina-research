@@ -196,6 +196,8 @@ const requiredArtifacts = [
   'data_processed/top100_human_validation_queue.csv',
   'data_processed/manual_competitor_inspection_packet.csv',
   'data_processed/manual_competitor_inspection_rubric.csv',
+  'data_processed/public_listing_inspection_results.csv',
+  'data_processed/public_listing_inspection_summary.csv',
   'data_processed/review_jtbd_cluster_summary.csv',
   'data_processed/forum_quote_coding_matrix.csv',
   'data_processed/icp_segment_matrix.csv',

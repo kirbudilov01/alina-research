@@ -291,6 +291,7 @@ def main() -> None:
     revenue_summary = read_csv("data_processed/competitor_revenue_proxy_market_summary.csv")
     manual = read_csv("data_processed/manual_competitor_inspection_packet.csv")
     manual_rubric = read_csv("data_processed/manual_competitor_inspection_rubric.csv")
+    public_listing = read_csv("data_processed/public_listing_inspection_results.csv")
     paywall = read_csv("data_processed/web_paywall_visual_adjudication.csv")
     prototype = read_csv("data_processed/prototype_validation_stimulus_flow.csv")
     prototype_scorecard = read_csv("data_processed/prototype_validation_scorecard.csv")
@@ -320,6 +321,15 @@ def main() -> None:
     prototype_segments = {row.get("segment_id") for row in prototype if row.get("segment_id")}
     primary_top100 = [row for row in top100 if row.get("duplicate_flag") == "primary_app_entry"]
     behavior_tied = [row for row in top100 if row.get("behavior_tied_progression") == "yes"]
+    public_listing_inspected = [
+        row for row in public_listing if row.get("public_listing_inspection_status") == "public_listing_inspected"
+    ]
+    public_listing_visible_causality = [
+        row for row in public_listing if row.get("action_to_avatar_causality_public_read") == "visible_in_public_copy"
+    ]
+    public_listing_high_clone_risk = [
+        row for row in public_listing if row.get("hidden_clone_risk_public_read") == "high_hidden_clone_risk_requires_app_walkthrough"
+    ]
     p0_roadmap = [row for row in roadmap if row.get("priority") == "P0"]
     p1_roadmap = [row for row in roadmap if row.get("priority") == "P1"]
 
@@ -408,6 +418,8 @@ def main() -> None:
                 ["Manifest source-like refs", source_refs, "Rows with URLs, package IDs, domains, source IDs, or comparable identifiers."],
                 ["Top-100 primary apps", len(primary_top100), "Human-facing competitor review layer."],
                 ["Behavior-tied progression signals", len(behavior_tied), "Strict signal is rare in metadata, hence manual inspection is critical."],
+                ["P0 public listings inspected", len(public_listing_inspected), "No-broad-search inspection of existing App Store listing excerpts."],
+                ["Visible public causality cases", len(public_listing_visible_causality), "Highest-priority walkthrough target; not final clone proof."],
                 ["Manual rubric dimensions", len(manual_rubric), "Dimensions for causality, hidden clone risk, paywall, and final verdict."],
                 ["ICP segments", len(icp), "Segment hypotheses to test before product commitment."],
                 ["Prototype scorecard metrics", len(prototype_scorecard), "Success/kill metrics for the two-minute loop."],
@@ -491,6 +503,17 @@ def main() -> None:
                 for row in manual[:12]
             ],
             [0.42 * inch, 1.55 * inch, 1.45 * inch, 1.42 * inch, 2.26 * inch],
+        ),
+        Spacer(1, 0.12 * inch),
+        table(
+            [["Public listing execution", "Count", "Read"]]
+            + [
+                ["P0 public listings inspected", len(public_listing_inspected), "Public App Store copy/excerpts reviewed without broad search."],
+                ["Visible action-to-avatar causality", len(public_listing_visible_causality), "High-risk case for immediate walkthrough."],
+                ["High public hidden-clone risk", len(public_listing_high_clone_risk), "Requires onboarding/action/progress screenshots before H3 is upgraded or downgraded."],
+            ],
+            [2.45 * inch, 0.75 * inch, 3.9 * inch],
+            small=False,
         ),
         Spacer(1, 0.12 * inch),
         table(
