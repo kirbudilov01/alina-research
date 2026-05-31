@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T02:23:31.658Z
+Generated: 2026-05-31T02:26:55.844Z
 
 ## 1. Executive Summary
 
@@ -16,6 +16,7 @@ Key quantified signals:
 - Top-100 intersection candidates enriched from App Store metadata: 100/100.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
+- Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
 - Modeled direct intersection SAM base: USD 201960000.
 
 ## 2. Product Hypotheses
@@ -155,6 +156,21 @@ Review signal counts:
 
 Interpretation: users respond strongly to daily ritual loops, emotional support, and visible progress/identity mechanics; recurring objections cluster around content depth, subscription value, bugs, trust/accuracy, and safety/privacy.
 
+### JTBD and Pain Clusters from Reviews
+
+| Cluster | Type | Rows | Apps | Avg Rating | Product Implication |
+| --- | --- | ---: | ---: | ---: | --- |
+| Users want more depth, options, or customization | pain | 612 | 69 | 3.72 | Depth should be earned after the core loop, especially custom rituals, richer avatar choices, and accessibility options. |
+| Give me a daily anchor I can return to | jtbd | 415 | 58 | 4.21 | Alina needs one obvious recurring ritual, not a menu of disconnected features. |
+| Turn vague self-improvement into concrete actions | jtbd | 371 | 54 | 4.24 | The product should translate identity/guidance into one small completed action per day. |
+| Subscription or paywall does not feel worth it | pain | 367 | 60 | 2.51 | The free loop must demonstrate value before asking for deeper paid analysis or personalization. |
+| Show me visible progress so effort feels real | jtbd | 308 | 61 | 4.06 | The avatar/progress object should act as proof of effort, not decoration. |
+| Signup, access, or device friction blocks activation | pain | 230 | 55 | 2.77 | Avoid unnecessary phone-number gates and preserve low-friction first-use flow. |
+| Feel accompanied or accountable | jtbd | 168 | 51 | 4.47 | Companion energy can be useful, but social/community features should not precede the solo daily loop. |
+| Help me calm down or reset quickly | jtbd | 162 | 45 | 4.54 | A two-minute reset is a plausible core unit if it produces relief without feeling clinical or generic. |
+
+The strongest product read: Alina should start as one daily ritual that turns personal meaning into one concrete action, then makes the effort visible through progress/avatar feedback. The strongest risk read: subscription gates, broken streak/reward mechanics, vague content, and unsafe overclaiming can destroy trust quickly.
+
 ## 8. Product Core
 
 Target loop: personal meaning -> one daily action -> short reset -> avatar/identity feedback -> visible progression -> next-day hook.
@@ -216,6 +232,7 @@ Market claims currently normalized: 14.
 - `docs/intersections/whitespace-map-v2.md`
 - `docs/audience/audience-segmentation-v1.md`
 - `docs/audience/review-language-synthesis-v1.md`
+- `docs/audience/review-jtbd-clusters-v1.md`
 - `docs/competitive/top-intersection-review-synthesis-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
@@ -226,12 +243,14 @@ Market claims currently normalized: 14.
 - `data_processed/pricing_retention_matrix.csv`
 - `data_processed/product_core_evidence_matrix.csv`
 - `data_processed/review_signal_matrix.csv`
+- `data_processed/review_jtbd_cluster_summary.csv`
+- `data_processed/review_jtbd_cluster_rows.csv`
 - `data_raw/app_store_top_candidate_reviews.csv`
 
 ## 13. Next Work
 
 1. Complete manual review of top 100 intersection candidates.
-2. Manually cluster the highest-signal app reviews into exact Jobs To Be Done / pain language.
+2. Manually validate the highest-signal review clusters and extract exact user language for positioning.
 3. Extract detailed IAP/subscription pricing where accessible.
 4. Build visual charts and render the PDF version.
 5. Add Reddit/forum/website evidence beyond App Store reviews.

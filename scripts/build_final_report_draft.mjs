@@ -89,6 +89,7 @@ const pricing = csv('data_processed/pricing_retention_matrix.csv');
 const core = csv('data_processed/product_core_evidence_matrix.csv');
 const reviewSignals = csv('data_processed/review_signal_matrix.csv');
 const rawReviews = csv('data_raw/app_store_top_candidate_reviews.csv');
+const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
 
 const highWhitespace = whitespace.filter(r => r.whitespace_band === 'high').length;
 const mediumWhitespace = whitespace.filter(r => r.whitespace_band === 'medium').length;
@@ -121,6 +122,7 @@ report.push(`- High whitespace candidates: ${highWhitespace}; medium: ${mediumWh
 report.push(`- Top-100 intersection candidates enriched from App Store metadata: ${prefill.length}/100.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
+report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
 report.push(`- Modeled direct intersection SAM base: USD ${baseIntersection.samBase || 'n/a'}.`);
 report.push('');
 report.push('## 2. Product Hypotheses');
@@ -235,6 +237,19 @@ report.push(bulletCounts(reviewSignalCounts));
 report.push('');
 report.push('Interpretation: users respond strongly to daily ritual loops, emotional support, and visible progress/identity mechanics; recurring objections cluster around content depth, subscription value, bugs, trust/accuracy, and safety/privacy.');
 report.push('');
+report.push('### JTBD and Pain Clusters from Reviews');
+report.push('');
+report.push(mdTable(reviewClusters.slice(0, 8), [
+  { key: 'cluster_label', label: 'Cluster' },
+  { key: 'cluster_type', label: 'Type' },
+  { key: 'review_rows', label: 'Rows', align: 'right' },
+  { key: 'app_count', label: 'Apps', align: 'right' },
+  { key: 'avg_rating', label: 'Avg Rating', align: 'right' },
+  { key: 'product_implication', label: 'Product Implication' }
+], 8));
+report.push('');
+report.push('The strongest product read: Alina should start as one daily ritual that turns personal meaning into one concrete action, then makes the effort visible through progress/avatar feedback. The strongest risk read: subscription gates, broken streak/reward mechanics, vague content, and unsafe overclaiming can destroy trust quickly.');
+report.push('');
 report.push('## 8. Product Core');
 report.push('');
 report.push('Target loop: personal meaning -> one daily action -> short reset -> avatar/identity feedback -> visible progression -> next-day hook.');
@@ -294,6 +309,7 @@ report.push('- `docs/market/tam-sam-som-model-v1.md`');
 report.push('- `docs/intersections/whitespace-map-v2.md`');
 report.push('- `docs/audience/audience-segmentation-v1.md`');
 report.push('- `docs/audience/review-language-synthesis-v1.md`');
+report.push('- `docs/audience/review-jtbd-clusters-v1.md`');
 report.push('- `docs/competitive/top-intersection-review-synthesis-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
@@ -304,12 +320,14 @@ report.push('- `data_processed/top_intersection_review_prefill.csv`');
 report.push('- `data_processed/pricing_retention_matrix.csv`');
 report.push('- `data_processed/product_core_evidence_matrix.csv`');
 report.push('- `data_processed/review_signal_matrix.csv`');
+report.push('- `data_processed/review_jtbd_cluster_summary.csv`');
+report.push('- `data_processed/review_jtbd_cluster_rows.csv`');
 report.push('- `data_raw/app_store_top_candidate_reviews.csv`');
 report.push('');
 report.push('## 13. Next Work');
 report.push('');
 report.push('1. Complete manual review of top 100 intersection candidates.');
-report.push('2. Manually cluster the highest-signal app reviews into exact Jobs To Be Done / pain language.');
+report.push('2. Manually validate the highest-signal review clusters and extract exact user language for positioning.');
 report.push('3. Extract detailed IAP/subscription pricing where accessible.');
 report.push('4. Build visual charts and render the PDF version.');
 report.push('5. Add Reddit/forum/website evidence beyond App Store reviews.');
@@ -331,7 +349,7 @@ status.push(mdTable([
   { requirement: 'Versioned on GitHub', evidence: 'git log through current commit after push', status: 'active' },
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf', status: 'draft PDF done' },
   { requirement: 'Manual review of top 100', evidence: 'data_processed/top_intersection_review_prefill.csv', status: 'prefilled, not manually completed' },
-  { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_processed/review_signal_matrix.csv; docs/audience/review-language-synthesis-v1.md', status: 'App Store review extraction done v1; forums pending' }
+  { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; docs/audience/review-language-synthesis-v1.md', status: 'App Store review extraction and JTBD clustering done v1; forums pending' }
 ], [
   { key: 'requirement', label: 'Requirement' },
   { key: 'evidence', label: 'Evidence' },
@@ -346,3 +364,4 @@ console.log(`audience_rows=${audience.length}`);
 console.log(`market_claims=${claims.length}`);
 console.log(`review_rows=${rawReviews.length}`);
 console.log(`review_signal_rows=${reviewSignals.length}`);
+console.log(`review_clusters=${reviewClusters.length}`);
