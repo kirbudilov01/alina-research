@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T10:34:16.751Z
+Generated: 2026-05-31T10:41:10.786Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -37,6 +37,7 @@ Generated: 2026-05-31T10:34:16.751Z
 | Prototype validation stimulus | data_processed/prototype_validation_stimulus_flow.csv; data_processed/prototype_validation_scorecard.csv; docs/product/prototype-validation-stimulus-v1.md | done v1; two-minute loop stimulus, top-ICP comparison flow, and success/kill metrics ready; participant results pending |
 | Versioned on GitHub | git log through current commit after push | active |
 | Final PDF | output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf | draft evidence PDF and visual PDF companion done |
+| Russian narrative document | reports/alina-russian-narrative-report-v1.md; output/pdf/alina-russian-narrative-report-v1.pdf | done v1; sequential Russian-language narrative report generated from evidence warehouse |
 | Visual charts | docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf | draft chart pack and embedded visual PDF done |
 | Evidence audit / claim register | data_processed/evidence_claim_register.csv; docs/decision/evidence-audit-v1.md | done v1; proof status, confidence, gaps, and next actions explicit |
 | Evidence package manifest | data_processed/evidence_artifact_manifest.csv; docs/decision/evidence-package-manifest-v1.md | done v1; tracks key artifacts with row counts, source-reference coverage, sizes, and short hashes |

@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T10:34:16.700Z
+Generated: 2026-05-31T10:41:10.690Z
 
 ## 1. Executive Summary
 
@@ -25,7 +25,7 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 22 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 353 artifacts tracked, 83 CSV artifacts, 225853 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 357 artifacts tracked, 83 CSV artifacts, 225853 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -74,6 +74,7 @@ Key quantified signals:
 - Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, web paywall discovery, and forum quote coding.
 - Visual PDF companion: native ReportLab charts embedded in a separate visual report.
 - Polished evidence pack: generated as a publication-ready evidence draft with validation caveats.
+- Russian narrative report: generated as a sequential Russian-language narrative PDF.
 - Modeled direct intersection SAM base: USD 201960000.
 
 ## 2. Product Hypotheses
@@ -383,7 +384,7 @@ Status summary:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 353 artifacts; 83 CSV artifacts; 225853 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 357 artifacts; 83 CSV artifacts; 225853 tracked CSV rows; 0 missing required artifacts.
 Validation note artifact links: 29 existing local artifacts linked inside batch notes.
 
 Largest tracked CSV artifacts:
@@ -415,7 +416,7 @@ Completion status mix:
 - narrow_supported_public_listing_inspected_walkthrough_open: 1
 - directionally_supported_recruiting_ready: 1
 - prototype_stimulus_ready_not_validated: 1
-- polished_evidence_draft_done_not_validated_final: 1
+- polished_and_russian_narrative_drafts_done_not_validated_final: 1
 - proved_active: 1
 - proved_v1_open_gates_capture_ready: 1
 
@@ -430,8 +431,8 @@ Objective readiness matrix:
 | REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; cross_source_saturation_markets=6; cross_source_primary_high_opportunity=0; cross_source_benchmark_markets=2; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_walkthrough_capture_rows=60; manual_app_walkthrough_done=0 | Cross-source saturation now keeps gaming/progression as benchmark-only and finds no primary market opportunity strong enough to upgrade without manual walkthrough; app/onboarding screenshots are still required. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_recruiting_ready | medium | audience_rows=20492; community_referral_rows=294; community_referral_signals=6; reddit_signal_rows=2339; reddit_signal_groups=9; reddit_medium_plus_signals=940; reddit_app_summary_rows=1202; reddit_manual_queue_rows=1852; reddit_manual_p0=336; reddit_manual_p1=238; reddit_prompt_rows=9; reddit_manual_capture_rows=574; reddit_manual_capture_p0=336; reddit_manual_capture_completed=0; icp_segments=6; icp_validation_tests=36; icp_recruiting_bridge_rows=24; icp_recruiting_message_rows=24; icp_capture_rows=96 | Segments and recruiting assets are directional and need actual interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=22; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. |
-| REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=353; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_08_REPORT_PDF | polished_and_russian_narrative_drafts_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true; russian_narrative_report=true; russian_narrative_pdf=true | Polished evidence PDF and Russian narrative PDF exist as publication-ready drafts, but they are not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=357; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; p0_command_rows=75; p0_command_blockers=6; p0_command_p0=52; p0_field_guide_sections=8; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_rollup_rows=75; validation_rollup_missing=0; validation_gate_rows=6; validation_gate_status_rows=1; validation_gates_passed=0; validation_gates_not_started=6; validation_batch_local_artifact_links=29; hypothesis_decision_rows=6; hypothesis_hold=6; hypothesis_go=0; hypothesis_stop=0; capture_rows=850; manual_capture_rows=60; paid_capture_rows=40; icp_capture_rows=96; prototype_capture_rows=80; reddit_manual_capture_rows=574; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
 ## 2N. Validation Gap Roadmap
