@@ -23,9 +23,19 @@ from reportlab.platypus import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "reports" / "alina-russian-narrative-report-v1.md"
 OUTPUT_DIR = ROOT / "output" / "pdf"
-OUTPUT = OUTPUT_DIR / "alina-russian-narrative-report-v1.pdf"
+DOCUMENTS = [
+    (
+        ROOT / "reports" / "alina-russian-narrative-report-v1.md",
+        OUTPUT_DIR / "alina-russian-narrative-report-v1.pdf",
+        "Alina Research - русский narrative report",
+    ),
+    (
+        ROOT / "reports" / "alina-russian-readable-report-v2.md",
+        OUTPUT_DIR / "alina-russian-readable-report-v2.pdf",
+        "Alina Research - читаемая русская версия V2",
+    ),
+]
 
 
 FONT_CANDIDATES = [
@@ -80,7 +90,7 @@ def page_number(canvas, doc):
     canvas.saveState()
     canvas.setFont(REGULAR_FONT, 8)
     canvas.setFillColor(colors.HexColor("#667085"))
-    canvas.drawString(doc.leftMargin, 0.9 * cm, "Alina Research - русский narrative report")
+    canvas.drawString(doc.leftMargin, 0.9 * cm, doc.title or "Alina Research")
     canvas.drawRightString(doc.pagesize[0] - doc.rightMargin, 0.9 * cm, f"Страница {doc.page}")
     canvas.restoreState()
 
@@ -253,18 +263,23 @@ def build_story(markdown: str):
 
 def main() -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    markdown = SOURCE.read_text(encoding="utf-8")
-    doc = SimpleDocTemplate(
-        str(OUTPUT),
-        pagesize=A4,
-        rightMargin=1.8 * cm,
-        leftMargin=1.8 * cm,
-        topMargin=1.7 * cm,
-        bottomMargin=1.5 * cm,
-        title="Alina Research - русский narrative report",
-    )
-    doc.build(build_story(markdown), onFirstPage=page_number, onLaterPages=page_number)
-    print(OUTPUT)
+    built = []
+    for source, output, title in DOCUMENTS:
+        if not source.exists():
+            continue
+        markdown = source.read_text(encoding="utf-8")
+        doc = SimpleDocTemplate(
+            str(output),
+            pagesize=A4,
+            rightMargin=1.8 * cm,
+            leftMargin=1.8 * cm,
+            topMargin=1.7 * cm,
+            bottomMargin=1.5 * cm,
+            title=title,
+        )
+        doc.build(build_story(markdown), onFirstPage=page_number, onLaterPages=page_number)
+        built.append(str(output))
+    print("\n".join(built))
 
 
 if __name__ == "__main__":
