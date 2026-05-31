@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T12:02:03.013Z
+Собрано: 2026-05-31T12:07:39.947Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 396 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 399 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 396 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 399 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -244,6 +244,33 @@ Product-core evidence и prototype stimulus переводят исследов�
 | REQ_09_VERSIONING_PROVENANCE | proved_active | high | Manifest must be regenerated after future evidence changes. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
+## 8.1. Русские карточки H1-H6 validation gates
+
+Чтобы не потерять строгость в момент перехода от desk research к ручной работе, добавлены русские карточки 6 validation gates. Они показывают по каждой гипотезе: что уже поддерживает claim, почему его нельзя апгрейдить, какой evidence надо собрать, какой результат даст GO и какой результат заставит downgradе/kill.
+
+| H | Гипотеза | Workstream | Status | Required | Done | Success min |
+| --- | --- | --- | --- | ---: | ---: | ---: |
+| H1 | Product shape exists | ручной walkthrough конкурентов | not_started | 60 | 0 | 25 |
+| H2 | Markets have money | ручная проверка paywall/paid-flow | not_started | 40 | 0 | 12 |
+| H3 | Whitespace exists | ручной walkthrough конкурентов | not_started | 60 | 0 | 25 |
+| H4 | Competitive advantage is plausible | прототипные сессии и scorecard | not_started | 80 | 0 | 32 |
+| H5 | Shared audience exists | интервью ICP и проверка recent behavior | not_started | 96 | 0 | 30 |
+| H6 | Product core can be defined | прототипные сессии и scorecard | not_started | 80 | 0 | 32 |
+
+**H1. Product shape exists.** Нельзя апгрейдить, потому что: No observed capture rows yet. Strict full loop is rare and still needs actual app/onboarding screenshots to confirm or downgrade public listing claims. Следующее действие: Capture onboarding, first action, progress/avatar feedback, and paywall screenshots for the highest-risk public-listing rows.
+
+**H2. Markets have money.** Нельзя апгрейдить, потому что: No observed capture rows yet. Market sizing still needs actual revenue estimates, paid intelligence, manual in-app paywall validation, and willingness-to-pay prototype evidence for final investor-grade claims. Следующее действие: Use stress-test risk rows to prioritize paid-flow inspection and prototype willingness-to-pay questions.
+
+**H3. Whitespace exists.** Нельзя апгрейдить, потому что: No observed capture rows yet. Actual app/onboarding inspection results are still missing; public listings and cross-source text rules can overstate or hide in-app loops. Следующее действие: Use the public-listing risk read to classify action->avatar causality in walkthrough as visible, inferred, absent, or blocked.
+
+**H4. Competitive advantage is plausible.** Нельзя апгрейдить, потому что: No observed capture rows yet. No human prototype session yet proves users understand, prefer, or value the integrated loop. Следующее действие: Run prototype sessions with the top two ICP segments and fill the scorecard with observed results.
+
+**H5. Shared audience exists.** Нельзя апгрейдить, потому что: No observed capture rows yet. Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. Следующее действие: Execute the ICP validation packet for the top two segments, then update segment status and selected primary ICP.
+
+**H6. Product core can be defined.** Нельзя апгрейдить, потому что: No observed capture rows yet. No user prototype evidence yet confirms comprehension, emotional value, or retention impact. Следующее действие: Run prototype sessions and measure loop completion, comprehension, meaning lift, return intent, and paid-depth interest.
+
+Практический смысл этого слоя простой: пока completed_rows и success_rows равны нулю, отчет может быть большим и хорошо структурированным, но claims остаются в hold_validate.
+
 ## 9. Следующие действия
 
 Все H1-H6 validation gates сейчас требуют наблюдаемой валидации. Not-started gates: 6. Это не провал, а честная граница исследования: локальная evidence base готова, но реальные решения должны приниматься после ручного walkthrough и пользовательских сессий.
@@ -372,6 +399,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_competitor_battlecards.csv`
 - `data_processed/russian_icp_battlecards.csv`
 - `data_processed/russian_product_loop_cards.csv`
+- `data_processed/russian_validation_gate_cards.csv`
 - `data_processed/russian_validation_fieldbook.csv`
 - `data_processed/validation_tranche_planner.csv`
 - `data_processed/validation_tranche_briefing_index.csv`

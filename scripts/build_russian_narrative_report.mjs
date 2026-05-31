@@ -130,6 +130,7 @@ const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv
 const competitorBattlecards = csv('data_processed/russian_competitor_battlecards.csv');
 const icpBattlecards = csv('data_processed/russian_icp_battlecards.csv');
 const productLoopCards = csv('data_processed/russian_product_loop_cards.csv');
+const validationGateCards = csv('data_processed/russian_validation_gate_cards.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -364,6 +365,28 @@ lines.push(mdTable(completion, [
   { key: 'remaining_gap', label: 'Открытый gap' }
 ], completion.length));
 lines.push('');
+if (validationGateCards.length) {
+  lines.push('## 8.1. Русские карточки H1-H6 validation gates');
+  lines.push('');
+  lines.push(`Чтобы не потерять строгость в момент перехода от desk research к ручной работе, добавлены русские карточки ${validationGateCards.length} validation gates. Они показывают по каждой гипотезе: что уже поддерживает claim, почему его нельзя апгрейдить, какой evidence надо собрать, какой результат даст GO и какой результат заставит downgradе/kill.`);
+  lines.push('');
+  lines.push(mdTable(validationGateCards, [
+    { key: 'hypothesis_id', label: 'H' },
+    { key: 'hypothesis_ru', label: 'Гипотеза' },
+    { key: 'workstream_ru', label: 'Workstream' },
+    { key: 'gate_status', label: 'Status' },
+    { key: 'required_capture_rows', label: 'Required', align: 'right' },
+    { key: 'completed_rows', label: 'Done', align: 'right' },
+    { key: 'min_success_threshold', label: 'Success min', align: 'right' }
+  ], validationGateCards.length));
+  lines.push('');
+  for (const row of validationGateCards) {
+    lines.push(`**${row.hypothesis_id}. ${row.hypothesis_ru}.** Нельзя апгрейдить, потому что: ${row.why_not_upgrade_ru} Следующее действие: ${row.next_action_ru}`);
+    lines.push('');
+  }
+  lines.push('Практический смысл этого слоя простой: пока completed_rows и success_rows равны нулю, отчет может быть большим и хорошо структурированным, но claims остаются в hold_validate.');
+  lines.push('');
+}
 lines.push('## 9. Следующие действия');
 lines.push('');
 lines.push(`Все H1-H6 validation gates сейчас требуют наблюдаемой валидации. Not-started gates: ${notStartedGates.length}. Это не провал, а честная граница исследования: локальная evidence base готова, но реальные решения должны приниматься после ручного walkthrough и пользовательских сессий.`);
@@ -474,6 +497,7 @@ lines.push('- `data_processed/russian_source_provenance_index.csv`');
 lines.push('- `data_processed/russian_competitor_battlecards.csv`');
 lines.push('- `data_processed/russian_icp_battlecards.csv`');
 lines.push('- `data_processed/russian_product_loop_cards.csv`');
+lines.push('- `data_processed/russian_validation_gate_cards.csv`');
 lines.push('- `data_processed/russian_validation_fieldbook.csv`');
 lines.push('- `data_processed/validation_tranche_planner.csv`');
 lines.push('- `data_processed/validation_tranche_briefing_index.csv`');
