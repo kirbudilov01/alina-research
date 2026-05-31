@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T12:07:39.947Z
+Собрано: 2026-05-31T12:13:10.058Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 399 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 402 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 399 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 402 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -307,6 +307,33 @@ Product-core evidence и prototype stimulus переводят исследов�
 | 7 | TRANCHE_07_EXPAND_AFTER_SPIKES | P1_after_spikes | 236 | Расширять объем только после первых spikes. Если первые партии противоречат гипотезам, сначала обновить позиционирование и вопросы. | Do not continue broad capture if early evidence shows the core loop is misunderstood or already owned. |
 | 8 | TRANCHE_08_PUBLICATION_REBUILD | P0_after_observed_evidence | 0 | Закрыть цикл evidence-first: результаты должны попасть в claims, русский отчет, PDF, manifest и GitHub. | If reports do not reflect changed evidence, publication is stale and cannot be used externally. |
 
+## 9.2.1. Русский P0 execution packet
+
+Чтобы следующий шаг был исполнимым, добавлен P0 execution packet на 6 рабочих пакетов. Он переводит tranche planner в утреннюю очередность: какой блок открыть первым, какие evidence fields заполнить, что считается success, что вызывает downgrade и какие файлы пересобрать после наблюдаемого результата.
+
+| Seq | Tranche | Target | Rows | Minutes | Сделать сейчас |
+| --- | --- | --- | ---: | --- | --- |
+| 1 | TRANCHE_01_HIDDEN_CLONE_SPIKE | Shepherd: Spiritual Bible BFF | 5 | 45-75 | Открыть Shepherd первым и заполнить 5 walkthrough slots до любых расширений. |
+| 2 | TRANCHE_02_MANUAL_TOP5 | Shepherd: Spiritual Bible BFF/Zing AI: Home & Gym Workouts/Miracle Morning Routine/EVOLVE: Transform Your Life/Daily Yoga: Yoga for Fitness® | 25 | 180-300 | После Shepherd закрыть top-5 конкурентов одинаковой рубрикой, чтобы H1/H3 получили сопоставимый evidence. |
+| 3 | TRANCHE_03_PAID_CONFIRMED_SPIKE | Character AI: Chat, Talk, Text/Meditopia: Sleep & Meditation | 8 | 60-90 | Проверить только product-matched paid surfaces; не усиливать H2 по parent/OCR/noise pages. |
+| 4 | TRANCHE_04_ICP_PILOT | ICP_A and ICP_D / participants P01-P02 | 24 | 120-180 | Провести по 2 участника в ICP_A и ICP_D, записывая recent behavior и exact language. |
+| 5 | TRANCHE_05_PROTOTYPE_PILOT | ICP_A and ICP_D / participants P01-P02 / screens S01-S08 | 32 | 90-150 | Показать 8 экранов петли и особенно проверить S06 action -> avatar/progress causality. |
+| 6 | TRANCHE_06_REDDIT_TOP25_LANGUAGE | Top 25 P0 Reddit/manual reading rows | 25 | 150-240 | Прочитать top-25 тредов как словарь проблем, не как количественное доказательство спроса. |
+
+**TRANCHE_01_HIDDEN_CLONE_SPIKE.** Открыть Shepherd первым и заполнить 5 walkthrough slots до любых расширений. Success: Shepherd классифицирован как full loop, adjacent loop, weak adjacency, blocked или hidden direct clone. Stop/downgrade: Если Shepherd полностью владеет Alina loop с action->identity/avatar causality, H1/H3 немедленно downgrade до narrow/pivot wording.
+
+**TRANCHE_02_MANUAL_TOP5.** После Shepherd закрыть top-5 конкурентов одинаковой рубрикой, чтобы H1/H3 получили сопоставимый evidence. Success: Все 25 строк имеют observed answer, directness label, causality label, paywall label и notes. Stop/downgrade: Любой full-loop competitor переводит whitespace claim в narrower/pivot language.
+
+**TRANCHE_03_PAID_CONFIRMED_SPIKE.** Проверить только product-matched paid surfaces; не усиливать H2 по parent/OCR/noise pages. Success: Не меньше 6/8 строк получают confirm или conservative partial с human notes. Stop/downgrade: Если confirmed rows оказываются unrelated/parent-only/OCR noise, H2 остается proxy-only и market-money wording сужается.
+
+**TRANCHE_04_ICP_PILOT.** Провести по 2 участника в ICP_A и ICP_D, записывая recent behavior и exact language. Success: Хотя бы один участник в каждом сегменте дает concrete recent behavior и понятный language resonance. Stop/downgrade: Если оба сегмента говорят только абстрактно или отвергают action-tied identity/progress, ICP claim не усиливается.
+
+**TRANCHE_05_PROTOTYPE_PILOT.** Показать 8 экранов петли и особенно проверить S06 action -> avatar/progress causality. Success: PVS_M01/PVS_M04/PVS_M05 не получают kill evidence; участники понимают S06 causality без объяснения. Stop/downgrade: Если avatar/progress читается как декоративная игра или манипуляция, H4/H6 остаются hold или pivot.
+
+**TRANCHE_06_REDDIT_TOP25_LANGUAGE.** Прочитать top-25 тредов как словарь проблем, не как количественное доказательство спроса. Success: 25 rows read; at least 10 useful language/pain insights with quote-use status explicitly set. Stop/downgrade: Если top threads показывают, что users reject gamified identity/progress, prototype positioning must change before more sessions.
+
+Этот packet не усиливает claims сам по себе. Он только делает ручную валидацию исполнимой и защищает отчет от stale publication после новых evidence.
+
 ## 9.3. Briefing-пакеты для первых tranches
 
 Чтобы оператор не прыгал между десятками CSV, создано 6 briefing-пакетов. Каждый пакет связывает одну tranche с конкретными capture rows, linked gates, success criteria, stop/downgrade rule и файлами, куда нужно записать результат. Это все еще не validation evidence, а рабочий маршрут для получения evidence.
@@ -400,6 +427,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_icp_battlecards.csv`
 - `data_processed/russian_product_loop_cards.csv`
 - `data_processed/russian_validation_gate_cards.csv`
+- `data_processed/russian_p0_execution_packet.csv`
 - `data_processed/russian_validation_fieldbook.csv`
 - `data_processed/validation_tranche_planner.csv`
 - `data_processed/validation_tranche_briefing_index.csv`

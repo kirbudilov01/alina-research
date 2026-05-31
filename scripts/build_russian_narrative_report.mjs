@@ -131,6 +131,7 @@ const competitorBattlecards = csv('data_processed/russian_competitor_battlecards
 const icpBattlecards = csv('data_processed/russian_icp_battlecards.csv');
 const productLoopCards = csv('data_processed/russian_product_loop_cards.csv');
 const validationGateCards = csv('data_processed/russian_validation_gate_cards.csv');
+const p0ExecutionPacket = csv('data_processed/russian_p0_execution_packet.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -421,6 +422,27 @@ if (tranchePlanner.length) {
   ], tranchePlanner.length));
   lines.push('');
 }
+if (p0ExecutionPacket.length) {
+  lines.push('## 9.2.1. Русский P0 execution packet');
+  lines.push('');
+  lines.push(`Чтобы следующий шаг был исполнимым, добавлен P0 execution packet на ${p0ExecutionPacket.length} рабочих пакетов. Он переводит tranche planner в утреннюю очередность: какой блок открыть первым, какие evidence fields заполнить, что считается success, что вызывает downgrade и какие файлы пересобрать после наблюдаемого результата.`);
+  lines.push('');
+  lines.push(mdTable(p0ExecutionPacket, [
+    { key: 'sequence', label: 'Seq' },
+    { key: 'tranche_id', label: 'Tranche' },
+    { key: 'target_scope', label: 'Target' },
+    { key: 'row_count', label: 'Rows', align: 'right' },
+    { key: 'operator_minutes', label: 'Minutes' },
+    { key: 'next_action_ru', label: 'Сделать сейчас' }
+  ], p0ExecutionPacket.length));
+  lines.push('');
+  for (const row of p0ExecutionPacket) {
+    lines.push(`**${row.tranche_id}.** ${row.next_action_ru} Success: ${row.success_threshold_ru} Stop/downgrade: ${row.stop_or_downgrade_rule_ru}`);
+    lines.push('');
+  }
+  lines.push('Этот packet не усиливает claims сам по себе. Он только делает ручную валидацию исполнимой и защищает отчет от stale publication после новых evidence.');
+  lines.push('');
+}
 if (trancheBriefings.length) {
   lines.push('## 9.3. Briefing-пакеты для первых tranches');
   lines.push('');
@@ -498,6 +520,7 @@ lines.push('- `data_processed/russian_competitor_battlecards.csv`');
 lines.push('- `data_processed/russian_icp_battlecards.csv`');
 lines.push('- `data_processed/russian_product_loop_cards.csv`');
 lines.push('- `data_processed/russian_validation_gate_cards.csv`');
+lines.push('- `data_processed/russian_p0_execution_packet.csv`');
 lines.push('- `data_processed/russian_validation_fieldbook.csv`');
 lines.push('- `data_processed/validation_tranche_planner.csv`');
 lines.push('- `data_processed/validation_tranche_briefing_index.csv`');
