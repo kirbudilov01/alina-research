@@ -91,6 +91,7 @@ const reviewSignals = csv('data_processed/review_signal_matrix.csv');
 const rawReviews = csv('data_raw/app_store_top_candidate_reviews.csv');
 const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
 const forumSignals = csv('data_raw/forum_evidence_signals.csv');
+const forumQuoteCoding = csv('data_processed/forum_quote_coding_matrix.csv');
 const top100Review = csv('data_processed/top100_competitor_review_scorecard.csv');
 const iapRaw = csv('data_raw/app_store_iap_pricing_raw.csv');
 const iapSummary = csv('data_processed/app_store_iap_pricing_summary.csv');
@@ -135,7 +136,8 @@ report.push(`- Strict behavior-tied avatar progression signal in top-100: ${beha
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
 report.push(`- Forum/source evidence map: ${forumSignals.length} qualitative rows across ${Object.keys(countBy(forumSignals, 'market')).length} market pillars.`);
-report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, and IAP price bands.');
+report.push(`- Forum quote coding layer: ${forumQuoteCoding.length} snippet rows across ${new Set(forumQuoteCoding.map(r => r.source_id)).size} sources.`);
+report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, and forum quote coding.');
 report.push(`- Modeled direct intersection SAM base: USD ${baseIntersection.samBase || 'n/a'}.`);
 report.push('');
 report.push('## 2. Product Hypotheses');
@@ -331,6 +333,18 @@ report.push('Forum signals by type:');
 report.push('');
 report.push(bulletCounts(countBy(forumSignals, 'signal_type')));
 report.push('');
+if (forumQuoteCoding.length) {
+  report.push('Forum quote coding tags:');
+  report.push('');
+  const forumQuoteTagCounts = {};
+  for (const row of forumQuoteCoding) {
+    for (const tag of String(row.coding_tags || '').split('|').filter(Boolean)) {
+      forumQuoteTagCounts[tag] = (forumQuoteTagCounts[tag] || 0) + 1;
+    }
+  }
+  report.push(bulletCounts(forumQuoteTagCounts));
+  report.push('');
+}
 report.push('Cross-source read: daily anchors and visible progress are attractive, but users push back against generic guidance, hard paywalls, strict streak punishment, noisy gamification, and spiritual/AI overclaiming.');
 report.push('');
 report.push('## 8. Product Core');
@@ -371,7 +385,7 @@ report.push('');
 report.push('- Manual validation of the top-100 candidates.');
 report.push('- Human validation of AI-assisted battlecards and scorecard verdicts.');
 report.push('- Forum evidence and deeper manual clustering of reviews for user pain language and subscription objections.');
-report.push('- Manual quote-level coding of forum/source rows.');
+report.push('- Human validation of forum/source quote coding before external-facing use.');
 report.push('- Deeper pricing validation for web/Android products and paywall screenshots where accessible.');
 report.push('- Prototype test of the two-minute daily loop.');
 report.push('');
@@ -397,6 +411,7 @@ report.push('- `docs/audience/audience-segmentation-v1.md`');
 report.push('- `docs/audience/review-language-synthesis-v1.md`');
 report.push('- `docs/audience/review-jtbd-clusters-v1.md`');
 report.push('- `docs/audience/forum-evidence-synthesis-v1.md`');
+report.push('- `docs/audience/forum-quote-coding-v1.md`');
 report.push('- `docs/visuals/chart-index-v1.md`');
 report.push('- `docs/competitive/top-intersection-review-synthesis-v1.md`');
 report.push('- `docs/competitive/top100-competitor-review-v1.md`');
@@ -418,11 +433,14 @@ report.push('- `data_processed/review_jtbd_cluster_rows.csv`');
 report.push('- `data_raw/app_store_top_candidate_reviews.csv`');
 report.push('- `data_raw/app_store_iap_pricing_raw.csv`');
 report.push('- `data_raw/forum_evidence_signals.csv`');
+report.push('- `data_raw/forum_quote_evidence_raw.csv`');
+report.push('- `data_processed/forum_quote_coding_matrix.csv`');
 report.push('- `output/charts/whitespace-bands.svg`');
 report.push('- `output/charts/review-jtbd-clusters.svg`');
 report.push('- `output/charts/sam-base-by-pillar.svg`');
 report.push('- `output/charts/som-scenarios.svg`');
 report.push('- `output/charts/forum-signals-by-market.svg`');
+report.push('- `output/charts/forum-quote-coding-tags.svg`');
 report.push('- `output/charts/top100-competitor-verdicts.svg`');
 report.push('- `output/charts/top100-threat-scores.svg`');
 report.push('- `output/charts/iap-price-bands.svg`');
@@ -433,7 +451,7 @@ report.push('1. Human-validate the AI-assisted top-100 competitor scorecard and 
 report.push('2. Manually validate the highest-signal review clusters and extract exact user language for positioning.');
 report.push('3. Validate pricing beyond App Store web-page IAP rows: Android, websites, paywall screenshots, and trial terms.');
 report.push('4. Build visual charts and render the PDF version.');
-report.push('5. Manually code Reddit/forum/website evidence beyond the current source map.');
+report.push('5. Human-validate retrieval-assisted Reddit/forum/website quote coding.');
 report.push('6. Update go/no-go decision after manual review and user validation.');
 
 fs.writeFileSync(OUT, `${report.join('\n')}\n`);
@@ -454,7 +472,7 @@ status.push(mdTable([
   { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg', status: 'draft chart pack done' },
   { requirement: 'Manual review of top 100', evidence: 'data_processed/top100_competitor_review_scorecard.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md', status: 'AI-assisted review done v1; human validation pending' },
   { requirement: 'Detailed pricing/IAP extraction', evidence: 'data_raw/app_store_iap_pricing_raw.csv; data_processed/app_store_iap_pricing_summary.csv; docs/competitive/app-store-iap-pricing-v1.md', status: 'App Store web IAP extraction done v1; Android/web/paywall validation pending' },
-  { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md', status: 'App Store review extraction, JTBD clustering, and forum source map done v1; quote-level forum coding pending' }
+  { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_raw/forum_quote_evidence_raw.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; data_processed/forum_quote_coding_matrix.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md; docs/audience/forum-quote-coding-v1.md', status: 'App Store review extraction, JTBD clustering, forum source map, and retrieval-assisted quote coding done v1; human validation pending' }
 ], [
   { key: 'requirement', label: 'Requirement' },
   { key: 'evidence', label: 'Evidence' },
@@ -471,4 +489,5 @@ console.log(`review_rows=${rawReviews.length}`);
 console.log(`review_signal_rows=${reviewSignals.length}`);
 console.log(`review_clusters=${reviewClusters.length}`);
 console.log(`forum_signal_rows=${forumSignals.length}`);
+console.log(`forum_quote_rows=${forumQuoteCoding.length}`);
 console.log(`iap_rows=${iapRaw.length}`);

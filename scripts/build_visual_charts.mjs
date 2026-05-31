@@ -103,6 +103,9 @@ const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
 const tam = csv('data_processed/tam_sam_som_model.csv');
 const som = csv('data_processed/som_sensitivity_scenarios.csv');
 const forum = csv('data_raw/forum_evidence_signals.csv');
+const forumQuoteCoding = fs.existsSync('data_processed/forum_quote_coding_matrix.csv')
+  ? csv('data_processed/forum_quote_coding_matrix.csv')
+  : [];
 const top100Review = fs.existsSync('data_processed/top100_competitor_review_scorecard.csv')
   ? csv('data_processed/top100_competitor_review_scorecard.csv')
   : [];
@@ -183,6 +186,23 @@ if (iapRows.length) {
   });
 }
 
+if (forumQuoteCoding.length) {
+  const forumTagCounts = {};
+  for (const row of forumQuoteCoding) {
+    for (const tag of String(row.coding_tags || '').split('|').filter(Boolean)) {
+      forumTagCounts[tag] = (forumTagCounts[tag] || 0) + 1;
+    }
+  }
+  horizontalBarChart({
+    title: 'Forum Quote Coding Tags',
+    subtitle: 'Retrieval-assisted qualitative coding from public forum/source snippets.',
+    rows: Object.entries(forumTagCounts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([label, value]) => ({ label, value })),
+    file: 'forum-quote-coding-tags.svg'
+  });
+}
+
 const lines = [];
 lines.push('# Chart Index V1');
 lines.push('');
@@ -200,6 +220,7 @@ if (top100Review.length) {
   lines.push('- `output/charts/top100-threat-scores.svg`');
 }
 if (iapRows.length) lines.push('- `output/charts/iap-price-bands.svg`');
+if (forumQuoteCoding.length) lines.push('- `output/charts/forum-quote-coding-tags.svg`');
 lines.push('');
 lines.push('## Notes');
 lines.push('');

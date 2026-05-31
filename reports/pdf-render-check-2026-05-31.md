@@ -19,7 +19,7 @@ npm run build:pdf
 
 - PDF generated successfully with ReportLab.
 - File header is `%PDF-1.4`.
-- Page count: 10.
+- Page count: 11.
 - Text extraction found required sections:
   - Executive Summary
   - TAM/SAM/SOM
@@ -32,14 +32,16 @@ npm run build:pdf
   - Review signal counts
   - JTBD and Pain Clusters from Reviews
   - Forum and External Discussion Signals
+  - Forum quote coding tags
   - Behavior-tied progression
   - Go/No-Go Status
   - Next Work
 - Visual render check:
   - Rendered all pages to PNG with PyMuPDF in a temporary venv under `tmp/`.
-  - Inspected representative pages 1, 2, 3, 4, 5, and 6.
+  - Inspected representative pages 1, 2, 3, 4, 6, 7, and 8.
   - Pages 3-4 contain the observed IAP pricing section and AI-assisted top-100 competitor review, and render cleanly.
   - Page 6 contains the App Store review-language section and renders cleanly.
+  - Pages 7-8 contain the forum/source-map and forum quote-coding sections, and render cleanly.
   - No clipped tables, overlapping text, or unreadable sections found.
 
 ## Known Draft Limitation

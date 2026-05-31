@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T02:42:34.445Z
+Generated: 2026-05-31T02:48:53.121Z
 
 ## 1. Executive Summary
 
@@ -20,7 +20,8 @@ Key quantified signals:
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
 - Forum/source evidence map: 18 qualitative rows across 5 market pillars.
-- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, and IAP price bands.
+- Forum quote coding layer: 72 snippet rows across 18 sources.
+- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, and forum quote coding.
 - Modeled direct intersection SAM base: USD 201960000.
 
 ## 2. Product Hypotheses
@@ -269,6 +270,19 @@ Forum signals by type:
 - retention_mechanics: 1
 - daily_loops: 1
 
+Forum quote coding tags:
+
+- streaks_can_create_anxiety: 38
+- wants_low_friction_daily_use: 35
+- streaks_can_motivate: 30
+- rejects_hard_paywall: 22
+- wants_emotional_support: 19
+- wants_accuracy_explanation: 18
+- wants_visible_progression: 18
+- safety_boundary_needed: 14
+- wants_recovery_or_forgiveness: 6
+- rejects_manipulative_gamification: 4
+
 Cross-source read: daily anchors and visible progress are attractive, but users push back against generic guidance, hard paywalls, strict streak punishment, noisy gamification, and spiritual/AI overclaiming.
 
 ## 8. Product Core
@@ -305,7 +319,7 @@ Remaining proof required:
 - Manual validation of the top-100 candidates.
 - Human validation of AI-assisted battlecards and scorecard verdicts.
 - Forum evidence and deeper manual clustering of reviews for user pain language and subscription objections.
-- Manual quote-level coding of forum/source rows.
+- Human validation of forum/source quote coding before external-facing use.
 - Deeper pricing validation for web/Android products and paywall screenshots where accessible.
 - Prototype test of the two-minute daily loop.
 
@@ -337,6 +351,7 @@ Market claims currently normalized: 14.
 - `docs/audience/review-language-synthesis-v1.md`
 - `docs/audience/review-jtbd-clusters-v1.md`
 - `docs/audience/forum-evidence-synthesis-v1.md`
+- `docs/audience/forum-quote-coding-v1.md`
 - `docs/visuals/chart-index-v1.md`
 - `docs/competitive/top-intersection-review-synthesis-v1.md`
 - `docs/competitive/top100-competitor-review-v1.md`
@@ -358,11 +373,14 @@ Market claims currently normalized: 14.
 - `data_raw/app_store_top_candidate_reviews.csv`
 - `data_raw/app_store_iap_pricing_raw.csv`
 - `data_raw/forum_evidence_signals.csv`
+- `data_raw/forum_quote_evidence_raw.csv`
+- `data_processed/forum_quote_coding_matrix.csv`
 - `output/charts/whitespace-bands.svg`
 - `output/charts/review-jtbd-clusters.svg`
 - `output/charts/sam-base-by-pillar.svg`
 - `output/charts/som-scenarios.svg`
 - `output/charts/forum-signals-by-market.svg`
+- `output/charts/forum-quote-coding-tags.svg`
 - `output/charts/top100-competitor-verdicts.svg`
 - `output/charts/top100-threat-scores.svg`
 - `output/charts/iap-price-bands.svg`
@@ -373,5 +391,5 @@ Market claims currently normalized: 14.
 2. Manually validate the highest-signal review clusters and extract exact user language for positioning.
 3. Validate pricing beyond App Store web-page IAP rows: Android, websites, paywall screenshots, and trial terms.
 4. Build visual charts and render the PDF version.
-5. Manually code Reddit/forum/website evidence beyond the current source map.
+5. Human-validate retrieval-assisted Reddit/forum/website quote coding.
 6. Update go/no-go decision after manual review and user validation.
