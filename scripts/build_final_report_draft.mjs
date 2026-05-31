@@ -142,6 +142,7 @@ report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top c
 report.push(`- Forum/source evidence map: ${forumSignals.length} qualitative rows across ${Object.keys(countBy(forumSignals, 'market')).length} market pillars.`);
 report.push(`- Forum quote coding layer: ${forumQuoteCoding.length} snippet rows across ${new Set(forumQuoteCoding.map(r => r.source_id)).size} sources.`);
 report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, and forum quote coding.');
+report.push('- Visual PDF companion: native ReportLab charts embedded in a separate 7-page visual report.');
 report.push(`- Modeled direct intersection SAM base: USD ${baseIntersection.samBase || 'n/a'}.`);
 report.push('');
 report.push('## 2. Product Hypotheses');
@@ -475,13 +476,15 @@ report.push('- `output/charts/top100-threat-scores.svg`');
 report.push('- `output/charts/iap-price-bands.svg`');
 report.push('- `output/charts/google-play-pricing-models.svg`');
 report.push('- `output/charts/google-play-iap-by-market.svg`');
+report.push('- `output/pdf/alina-evidence-first-report-draft.pdf`');
+report.push('- `output/pdf/alina-evidence-visual-report-v1.pdf`');
 report.push('');
 report.push('## 13. Next Work');
 report.push('');
 report.push('1. Human-validate the AI-assisted top-100 competitor scorecard and battlecards.');
 report.push('2. Manually validate the highest-signal review clusters and extract exact user language for positioning.');
 report.push('3. Validate pricing beyond App Store/Google Play metadata: websites, paywall screenshots, and trial terms.');
-report.push('4. Build visual charts and render the PDF version.');
+report.push('4. Polish final designed PDF and add web/paywall screenshots where useful.');
 report.push('5. Human-validate retrieval-assisted Reddit/forum/website quote coding.');
 report.push('6. Update go/no-go decision after manual review and user validation.');
 
@@ -499,8 +502,8 @@ status.push(mdTable([
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
   { requirement: 'Versioned on GitHub', evidence: 'git log through current commit after push', status: 'active' },
-  { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf', status: 'draft PDF done' },
-  { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg', status: 'draft chart pack done' },
+  { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft evidence PDF and visual PDF companion done' },
+  { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft chart pack and embedded visual PDF done' },
   { requirement: 'Manual review of top 100', evidence: 'data_processed/top100_competitor_review_scorecard.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md', status: 'AI-assisted review done v1; human validation pending' },
   { requirement: 'Detailed pricing/IAP extraction', evidence: 'data_raw/app_store_iap_pricing_raw.csv; data_processed/app_store_iap_pricing_summary.csv; docs/competitive/app-store-iap-pricing-v1.md; data_raw/google_play_pricing_raw.csv; data_processed/google_play_pricing_summary.csv; docs/competitive/google-play-pricing-v1.md', status: 'App Store web IAP extraction and Google Play pricing validation done v1; web/paywall screenshot validation pending' },
   { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_raw/forum_quote_evidence_raw.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; data_processed/forum_quote_coding_matrix.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md; docs/audience/forum-quote-coding-v1.md', status: 'App Store review extraction, JTBD clustering, forum source map, and retrieval-assisted quote coding done v1; human validation pending' }

@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T02:54:49.771Z
+Generated: 2026-05-31T02:59:35.480Z
 
 ## 1. Executive Summary
 
@@ -23,6 +23,7 @@ Key quantified signals:
 - Forum/source evidence map: 18 qualitative rows across 5 market pillars.
 - Forum quote coding layer: 72 snippet rows across 18 sources.
 - Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, and forum quote coding.
+- Visual PDF companion: native ReportLab charts embedded in a separate 7-page visual report.
 - Modeled direct intersection SAM base: USD 201960000.
 
 ## 2. Product Hypotheses
@@ -413,12 +414,14 @@ Market claims currently normalized: 14.
 - `output/charts/iap-price-bands.svg`
 - `output/charts/google-play-pricing-models.svg`
 - `output/charts/google-play-iap-by-market.svg`
+- `output/pdf/alina-evidence-first-report-draft.pdf`
+- `output/pdf/alina-evidence-visual-report-v1.pdf`
 
 ## 13. Next Work
 
 1. Human-validate the AI-assisted top-100 competitor scorecard and battlecards.
 2. Manually validate the highest-signal review clusters and extract exact user language for positioning.
 3. Validate pricing beyond App Store/Google Play metadata: websites, paywall screenshots, and trial terms.
-4. Build visual charts and render the PDF version.
+4. Polish final designed PDF and add web/paywall screenshots where useful.
 5. Human-validate retrieval-assisted Reddit/forum/website quote coding.
 6. Update go/no-go decision after manual review and user validation.
