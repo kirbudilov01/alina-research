@@ -108,7 +108,9 @@ const pricing = csv('data_raw/app_store_iap_pricing_raw.csv');
 const googlePricing = csv('data_raw/google_play_pricing_raw.csv');
 const forumQuotes = csv('data_processed/forum_quote_coding_matrix.csv');
 const chromeBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
+const icpSegments = csv('data_processed/icp_segment_matrix.csv');
 const evidence = csv('data_processed/evidence_claim_register.csv');
+const strongIcpSegments = icpSegments.filter(row => row.evidence_band === 'strong_directional_icp');
 
 const marketNames = {
   coaching: 'Coaching / self-improvement',
@@ -230,6 +232,19 @@ const rows = [
     recommended_next_action: 'Capture screenshots for priority Chrome mechanic references and classify progress as numeric, emotional, behavioral, or identity/avatar-linked.',
     success_gate: 'Priority Chrome references are classified and either strengthen or weaken the narrow whitespace claim.',
     source_files: 'data_processed/chrome_extension_mechanic_battlecards.csv;docs/competitive/chrome-extension-mechanic-battlecards-v1.md'
+  },
+  {
+    roadmap_id: 'XR_ICP_SEGMENT_VALIDATION',
+    roadmap_type: 'cross_source_validation',
+    market: 'all',
+    label: 'ICP segment validation',
+    evidence_band: `${icpSegments.length} directional ICP hypotheses`,
+    priority: 'P0',
+    current_evidence: `${icpSegments.length} segments; ${strongIcpSegments.length} strong_directional_icp`,
+    main_gap: 'directional segments have not been validated with interviews, prototype response, or willingness-to-pay checks',
+    recommended_next_action: 'Interview or prototype-test the top two ICP segments, compare language resonance, loop completion, return intent, and willingness to pay.',
+    success_gate: 'One primary ICP and one secondary ICP are selected with validated language, top pains, activation trigger, and willingness-to-pay evidence.',
+    source_files: 'data_processed/icp_segment_matrix.csv;docs/audience/icp-segment-matrix-v1.md'
   }
 ];
 

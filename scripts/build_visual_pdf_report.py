@@ -218,6 +218,7 @@ def main():
     web_paywalls = read_csv("data_processed/web_paywall_signal_matrix.csv")
     reviews = read_csv("data_processed/review_jtbd_cluster_summary.csv")
     forum = read_csv("data_processed/forum_quote_coding_matrix.csv")
+    icp = read_csv("data_processed/icp_segment_matrix.csv")
 
     primary = [r for r in top100 if r.get("duplicate_flag") == "primary_app_entry"]
     direct_ref = [r for r in primary if r.get("competitive_verdict") == "direct_reference_competitor"]
@@ -247,6 +248,7 @@ def main():
                 ["Web paywall domains", number(str(len(web_paywalls)))],
                 ["Web screenshot queue", number(str(len(web_queue)))],
                 ["Forum quote-coding rows", number(str(len(forum)))],
+                ["ICP segment hypotheses", number(str(len(icp)))],
             ],
             [2.8 * inch, 2.0 * inch],
         )
@@ -401,6 +403,40 @@ def main():
     story.append(
         para(
             "Review and forum language converge on a small daily anchor, concrete action, visible progress, subscription sensitivity, safety boundaries, and recovery from missed days.",
+            STYLES["Body"],
+        )
+    )
+
+    story.append(PageBreak())
+    story.append(para("5B. ICP Segment Hypotheses", STYLES["H1"]))
+    story.append(
+        BarChart(
+            "ICP Segment Evidence Scores",
+            [
+                (r["segment_name"], float(r.get("evidence_score") or 0))
+                for r in sorted(icp, key=lambda r: float(r.get("evidence_score") or 0), reverse=True)
+            ],
+            formatter=lambda v: f"{v:.0f}",
+        )
+    )
+    story.append(Spacer(1, 0.12 * inch))
+    story.append(
+        table(
+            [["Segment", "Core Job", "Validation Gate"]]
+            + [
+                [
+                    r.get("segment_name", ""),
+                    r.get("core_job", ""),
+                    r.get("validation_gate", ""),
+                ]
+                for r in sorted(icp, key=lambda r: float(r.get("evidence_score") or 0), reverse=True)[:6]
+            ],
+            [1.6 * inch, 2.3 * inch, 3.0 * inch],
+        )
+    )
+    story.append(
+        para(
+            "These are directional hypotheses, not final personas. The next gate is to validate the top two segments with interviews, prototype response, return intent, and willingness-to-pay evidence.",
             STYLES["Body"],
         )
     )

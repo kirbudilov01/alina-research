@@ -96,6 +96,7 @@ const rawReviews = csv('data_raw/app_store_top_candidate_reviews.csv');
 const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
 const forumSignals = csv('data_raw/forum_evidence_signals.csv');
 const forumQuoteCoding = csv('data_processed/forum_quote_coding_matrix.csv');
+const icpSegments = csv('data_processed/icp_segment_matrix.csv');
 const top100Review = csv('data_processed/top100_competitor_review_scorecard.csv');
 const humanValidationQueue = csv('data_processed/top100_human_validation_queue.csv');
 const iapRaw = csv('data_raw/app_store_iap_pricing_raw.csv');
@@ -146,6 +147,7 @@ const highUseMarketSources = marketSourceConfidence.filter(r => r.confidence_rev
 const rangeOnlyMarketSources = marketSourceConfidence.filter(r => ['low_use_range_only', 'context_only'].includes(r.confidence_review_band));
 const strongMonetizationMarkets = monetizationProxy.filter(r => r.monetization_proxy_band === 'strong_paid_behavior_proxy');
 const mediumMonetizationMarkets = monetizationProxy.filter(r => r.monetization_proxy_band === 'medium_paid_behavior_proxy');
+const strongestIcpSegment = [...icpSegments].sort((a, b) => Number(b.evidence_score || 0) - Number(a.evidence_score || 0))[0] || {};
 
 const report = [];
 
@@ -180,6 +182,7 @@ report.push(`- Chrome mechanic battlecards: ${chromeExtensionBattlecards.length}
 report.push(`- Validation gap roadmap: ${validationGapRoadmap.length} rows; ${validationRoadmapP0.length} P0 and ${validationRoadmapP1.length} P1 next validation tasks across markets, hypotheses, and cross-source checks.`);
 report.push(`- Market source confidence review: ${marketSourceConfidence.length} sources graded; ${highUseMarketSources.length} high-use anchors and ${rangeOnlyMarketSources.length} range-only/context sources.`);
 report.push(`- Monetization proxy matrix: ${monetizationProxy.length} markets covered; ${strongMonetizationMarkets.length} strong and ${mediumMonetizationMarkets.length} medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.`);
+report.push(`- ICP segment matrix: ${icpSegments.length} segment hypotheses; strongest current directional ICP is "${strongestIcpSegment.segment_name || 'n/a'}".`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
@@ -196,7 +199,7 @@ report.push(mdTable([
   { id: 'H2', hypothesis: 'Markets have money', status: 'supported with ranges', evidence: `TAM/SAM/SOM model and ${claims.length} market claims across gaming, astrology, avatar, coaching, mindfulness.` },
   { id: 'H3', hypothesis: 'Whitespace exists', status: 'narrowed', evidence: 'Broad space is crowded; strict behavior-tied avatar progression appears rare in top-100 metadata.' },
   { id: 'H4', hypothesis: 'Competitive advantage is plausible', status: 'unproven but sharpened', evidence: 'Moat candidate is integrated daily transformation loop, not any single feature.' },
-  { id: 'H5', hypothesis: 'Shared audience exists', status: 'directionally supported', evidence: `Audience matrix plus ${reviewSignals.length} review-language signals point to digital ritual users across spirituality, identity, self-improvement, calm, and cozy progress.` },
+  { id: 'H5', hypothesis: 'Shared audience exists', status: 'directionally supported', evidence: `Audience matrix plus ${reviewSignals.length} review-language signals and ${icpSegments.length} ICP segment hypotheses point to digital ritual users across spirituality, identity, self-improvement, calm, and cozy progress.` },
   { id: 'H6', hypothesis: 'Product core can be defined', status: 'supported for MVP framing', evidence: 'Product-core evidence defines target loop and MVP testable claim.' }
 ], [
   { key: 'id', label: 'ID' },
@@ -638,6 +641,25 @@ report.push('Audience signal counts:');
 report.push('');
 report.push(bulletCounts(countBy(audience, 'audience_tag')));
 report.push('');
+if (icpSegments.length) {
+  report.push('### ICP Segment Matrix');
+  report.push('');
+  report.push('The ICP layer converts audience-signal rows, review JTBD/pain clusters, forum quote coding, and monetization proxies into testable segment hypotheses. It is directional evidence, not a final persona decision.');
+  report.push('');
+  report.push(mdTable(icpSegments, [
+    { key: 'segment_name', label: 'Segment' },
+    { key: 'evidence_band', label: 'Evidence Band' },
+    { key: 'audience_signal_rows', label: 'Audience Rows', align: 'right' },
+    { key: 'review_cluster_rows', label: 'Review Rows', align: 'right' },
+    { key: 'forum_quote_rows', label: 'Forum Rows', align: 'right' },
+    { key: 'core_job', label: 'Core Job' },
+    { key: 'positioning_angle', label: 'Positioning Angle' },
+    { key: 'validation_gate', label: 'Validation Gate' }
+  ], icpSegments.length));
+  report.push('');
+  report.push(`Current ICP read: "${strongestIcpSegment.segment_name || 'n/a'}" is the strongest directional starting segment, but the decision should remain open until interviews/prototype tests compare at least the top two segments.`);
+  report.push('');
+}
 report.push('### App Store Review Language');
 report.push('');
 report.push(`Recent public App Store reviews were collected for top intersection candidates. Coverage is ${rawReviews.length} deduplicated reviews across ${reviewApps} apps, converted into keyword-based signal rows. This is not final sentiment modeling, but it is useful evidence for user language, delight, objections, and churn risk.`);
@@ -756,6 +778,7 @@ report.push('- `docs/market/market-source-confidence-review-v1.md`');
 report.push('- `docs/market/monetization-proxy-matrix-v1.md`');
 report.push('- `docs/intersections/whitespace-map-v2.md`');
 report.push('- `docs/audience/audience-segmentation-v1.md`');
+report.push('- `docs/audience/icp-segment-matrix-v1.md`');
 report.push('- `docs/audience/review-language-synthesis-v1.md`');
 report.push('- `docs/audience/review-jtbd-clusters-v1.md`');
 report.push('- `docs/audience/forum-evidence-synthesis-v1.md`');
@@ -790,6 +813,7 @@ report.push('- `data_processed/chrome_extension_mechanic_battlecards.csv`');
 report.push('- `data_processed/validation_gap_roadmap.csv`');
 report.push('- `data_processed/competitor_feature_matrix.csv`');
 report.push('- `data_processed/audience_signal_matrix.csv`');
+report.push('- `data_processed/icp_segment_matrix.csv`');
 report.push('- `data_processed/whitespace_signal_matrix.csv`');
 report.push('- `data_processed/top_intersection_review_prefill.csv`');
 report.push('- `data_processed/top100_competitor_review_scorecard.csv`');
@@ -820,6 +844,7 @@ report.push('- `output/charts/sam-base-by-pillar.svg`');
 report.push('- `output/charts/som-scenarios.svg`');
 report.push('- `output/charts/forum-signals-by-market.svg`');
 report.push('- `output/charts/forum-quote-coding-tags.svg`');
+report.push('- `output/charts/icp-segment-evidence-scores.svg`');
 report.push('- `output/charts/top100-competitor-verdicts.svg`');
 report.push('- `output/charts/top100-threat-scores.svg`');
 report.push('- `output/charts/iap-price-bands.svg`');
@@ -858,6 +883,7 @@ status.push(mdTable([
   { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv', status: 'done v1; source confidence and monetization proxy layers added, model remains range-based and not final forecast' },
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
+  { requirement: 'ICP / audience segment matrix', evidence: 'data_processed/icp_segment_matrix.csv; docs/audience/icp-segment-matrix-v1.md', status: 'done v1; maps audience/review/forum/monetization evidence into testable ICP hypotheses' },
   { requirement: 'Versioned on GitHub', evidence: 'git log through current commit after push', status: 'active' },
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft evidence PDF and visual PDF companion done' },
   { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft chart pack and embedded visual PDF done' },
@@ -876,6 +902,7 @@ console.log(`report=${OUT}`);
 console.log(`status=${STATUS_OUT}`);
 console.log(`expanded_rows=${expanded.length}`);
 console.log(`audience_rows=${audience.length}`);
+console.log(`icp_segments=${icpSegments.length}`);
 console.log(`market_claims=${claims.length}`);
 console.log(`review_rows=${rawReviews.length}`);
 console.log(`review_signal_rows=${reviewSignals.length}`);

@@ -1,6 +1,6 @@
 # Validation Gap Roadmap V1
 
-Generated: 2026-05-31T04:21:12.966Z
+Generated: 2026-05-31T04:26:43.021Z
 
 ## Purpose
 
@@ -9,7 +9,7 @@ This roadmap converts the current evidence base into the next validation queue. 
 ## Priority Mix
 
 - P1: 9
-- P0: 4
+- P0: 5
 
 ## Market Validation
 
@@ -42,6 +42,14 @@ This roadmap converts the current evidence base into the next validation queue. 
 - Gap: screenshots/onboarding may reveal hidden identity metaphors or richer loops than metadata shows
 - Next action: Capture screenshots for priority Chrome mechanic references and classify progress as numeric, emotional, behavioral, or identity/avatar-linked.
 - Success gate: Priority Chrome references are classified and either strengthen or weaken the narrow whitespace claim.
+
+### ICP segment validation
+
+- Priority: P0
+- Current evidence: 6 segments; 6 strong_directional_icp
+- Gap: directional segments have not been validated with interviews, prototype response, or willingness-to-pay checks
+- Next action: Interview or prototype-test the top two ICP segments, compare language resonance, loop completion, return intent, and willingness to pay.
+- Success gate: One primary ICP and one secondary ICP are selected with validated language, top pains, activation trigger, and willingness-to-pay evidence.
 
 ## Files
 

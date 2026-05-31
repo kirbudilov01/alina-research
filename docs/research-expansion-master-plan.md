@@ -133,7 +133,9 @@ Output:
 
 - `docs/audience/audience-segmentation-v1.md`
 - `docs/audience/icp-v1.md`
+- `docs/audience/icp-segment-matrix-v1.md`
 - `data_processed/audience_signal_matrix.csv`
+- `data_processed/icp_segment_matrix.csv`
 
 ### H6. Product Core Can Be Defined
 
@@ -205,6 +207,7 @@ Current evidence:
 - Validation gap roadmap: `docs/decision/validation-gap-roadmap-v1.md`.
 - Market source confidence review: `docs/market/market-source-confidence-review-v1.md`.
 - Monetization proxy matrix: `docs/market/monetization-proxy-matrix-v1.md`.
+- ICP segment matrix: `docs/audience/icp-segment-matrix-v1.md`.
 
 Next collector priority:
 

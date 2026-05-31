@@ -1,6 +1,6 @@
 # Chart Index V1
 
-Generated: 2026-05-31T03:24:47.118Z
+Generated: 2026-05-31T04:28:28.247Z
 
 ## Charts
 
@@ -17,6 +17,7 @@ Generated: 2026-05-31T03:24:47.118Z
 - `output/charts/google-play-iap-by-market.svg`
 - `output/charts/web-paywall-signal-strength.svg`
 - `output/charts/web-paywall-screenshot-queue-by-market.svg`
+- `output/charts/icp-segment-evidence-scores.svg`
 
 ## Notes
 

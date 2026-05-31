@@ -102,6 +102,7 @@ const reviewSignals = csv('data_processed/review_signal_matrix.csv');
 const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
 const forumSources = csv('data_raw/forum_evidence_signals.csv');
 const forumQuotes = csv('data_processed/forum_quote_coding_matrix.csv');
+const icpSegments = csv('data_processed/icp_segment_matrix.csv');
 const productCore = csv('data_processed/product_core_evidence_matrix.csv');
 const p0External = csv('data_raw/expanded/p0_external_sources_raw.csv');
 const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv');
@@ -124,6 +125,7 @@ const p0 = validationQueue.filter(row => row.priority_band === 'P0_validate_firs
 const p1 = validationQueue.filter(row => row.priority_band === 'P1_high');
 const reviewApps = new Set(reviews.map(row => row.app_store_id).filter(Boolean)).size;
 const forumSourceCount = new Set(forumQuotes.map(row => row.source_id).filter(Boolean)).size;
+const strongIcpSegments = icpSegments.filter(row => row.evidence_band === 'strong_directional_icp');
 const intersection = tam.find(row => row.pillar === 'intersection') || {};
 const p0ExternalUsable = p0External.filter(row => row.collection_status === 'ok');
 const chromeExtensionDetailOk = chromeExtensionFit.filter(row => row.detail_status === 'ok');
@@ -229,12 +231,12 @@ const rows = [
     claim: 'A shared audience exists around digital rituals for identity, emotional regulation, self-improvement, and visible progress.',
     evidence_status: 'directionally_supported',
     confidence: 'medium',
-    primary_metric: `${audience.length} audience signal rows`,
-    quantitative_evidence: `reviews=${reviews.length}; review_apps=${reviewApps}; review_signals=${reviewSignals.length}; review_clusters=${reviewClusters.length}; forum_quote_rows=${forumQuotes.length}`,
-    evidence_files: 'data_processed/audience_signal_matrix.csv;data_raw/app_store_top_candidate_reviews.csv;data_processed/review_signal_matrix.csv;data_processed/review_jtbd_cluster_summary.csv;data_processed/forum_quote_coding_matrix.csv;docs/audience/review-language-synthesis-v1.md;docs/audience/forum-quote-coding-v1.md',
-    strongest_support: 'Reviews and forum snippets converge on daily anchors, visible progress, emotional support, pricing sensitivity, and safety boundaries.',
-    key_gap: 'Keyword/OCR/forum coding needs human validation and real user interviews.',
-    next_action: 'Human-validate quote coding and run target user interviews/prototype tests.'
+    primary_metric: `${audience.length} audience signal rows; ${icpSegments.length} ICP segment hypotheses`,
+    quantitative_evidence: `reviews=${reviews.length}; review_apps=${reviewApps}; review_signals=${reviewSignals.length}; review_clusters=${reviewClusters.length}; forum_quote_rows=${forumQuotes.length}; icp_segments=${icpSegments.length}; strong_icp=${strongIcpSegments.length}`,
+    evidence_files: 'data_processed/audience_signal_matrix.csv;data_raw/app_store_top_candidate_reviews.csv;data_processed/review_signal_matrix.csv;data_processed/review_jtbd_cluster_summary.csv;data_processed/forum_quote_coding_matrix.csv;data_processed/icp_segment_matrix.csv;docs/audience/review-language-synthesis-v1.md;docs/audience/forum-quote-coding-v1.md;docs/audience/icp-segment-matrix-v1.md',
+    strongest_support: 'Reviews and forum snippets converge on daily anchors, visible progress, emotional support, pricing sensitivity, and safety boundaries; the ICP segment matrix converts those signals into testable primary-segment hypotheses.',
+    key_gap: 'Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests.',
+    next_action: 'Human-validate quote coding and test the top two ICP segments with interviews/prototype loops.'
   },
   {
     claim_id: 'H6_product_core_defined',

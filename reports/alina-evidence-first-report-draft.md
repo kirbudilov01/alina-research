@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T04:21:13.060Z
+Generated: 2026-05-31T04:28:31.291Z
 
 ## 1. Executive Summary
 
@@ -26,9 +26,10 @@ Key quantified signals:
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
 - Chrome extension detail enrichment: 23/23 detail pages parsed; 3 strong and 10 useful adjacent mechanic references.
 - Chrome mechanic battlecards: 23 browser-extension cards, 9 high/medium references for manual mechanic inspection.
-- Validation gap roadmap: 13 rows; 4 P0 and 9 P1 next validation tasks across markets, hypotheses, and cross-source checks.
+- Validation gap roadmap: 14 rows; 5 P0 and 9 P1 next validation tasks across markets, hypotheses, and cross-source checks.
 - Market source confidence review: 12 sources graded; 3 high-use anchors and 4 range-only/context sources.
 - Monetization proxy matrix: 5 markets covered; 4 strong and 1 medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.
+- ICP segment matrix: 6 segment hypotheses; strongest current directional ICP is "Spiritual self-improvers".
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
@@ -46,7 +47,7 @@ Key quantified signals:
 | H2 | Markets have money | supported with ranges | TAM/SAM/SOM model and 14 market claims across gaming, astrology, avatar, coaching, mindfulness. |
 | H3 | Whitespace exists | narrowed | Broad space is crowded; strict behavior-tied avatar progression appears rare in top-100 metadata. |
 | H4 | Competitive advantage is plausible | unproven but sharpened | Moat candidate is integrated daily transformation loop, not any single feature. |
-| H5 | Shared audience exists | directionally supported | Audience matrix plus 2288 review-language signals point to digital ritual users across spirituality, identity, self-improvement, calm, and cozy progress. |
+| H5 | Shared audience exists | directionally supported | Audience matrix plus 2288 review-language signals and 6 ICP segment hypotheses point to digital ritual users across spirituality, identity, self-improvement, calm, and cozy progress. |
 | H6 | Product core can be defined | supported for MVP framing | Product-core evidence defines target loop and MVP testable claim. |
 
 ## 2B. Evidence Audit Register
@@ -70,14 +71,14 @@ Claim-level audit snapshot:
 
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
-| REQ_plan | proved_v1 | high | master plan exists; 13 validation roadmap rows | Needs periodic refresh as validation findings change. |
+| REQ_plan | proved_v1 | high | master plan exists; 14 validation roadmap rows | Needs periodic refresh as validation findings change. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; P0 external pass is intentionally small, with Product Hunt/AlternativeTo still needing source-native or curated collection. |
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
 | H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 4/5 strong monetization proxy markets | Market sizing still needs competitor revenue/proxy review and additional triangulation for thin/contextual markets. |
 | H2_paywall_visible_evidence | supported_narrowly | medium_low | 2/29 screenshots confirm visible public pricing | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. |
 | H3_whitespace_exists | narrow_supported_not_final | medium | 1/100 strict behavior-tied progression signals; 9 Chrome mechanic references to inspect | Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors. |
 | H4_competitive_advantage_plausible | plausible_unproven | medium_low | 1 direct reference competitor; 45 high-threat competitors; 23 Chrome mechanic battlecards | No human validation or prototype test yet proves users value the loop. |
-| H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows | Keyword/OCR/forum coding needs human validation and real user interviews. |
+| H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 6 ICP segment hypotheses | Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. |
 | H6_product_core_defined | supported_for_mvp_framing | medium | 12552 feature matrix rows; 100 product-core rows | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
 | REQ_final_artifacts_versioned | proved_active | high | current branch pushed through latest commit | Final polished investor/user-facing PDF is still draft-level, not final designed publication. |
 
@@ -88,7 +89,7 @@ The research now includes a validation roadmap that turns current evidence gaps 
 Validation priority mix:
 
 - P1: 9
-- P0: 4
+- P0: 5
 
 Market-level validation roadmap:
 
@@ -555,6 +556,21 @@ Audience signal counts:
 - spiritual_seekers: 2569
 - coaching_professionals: 932
 
+### ICP Segment Matrix
+
+The ICP layer converts audience-signal rows, review JTBD/pain clusters, forum quote coding, and monetization proxies into testable segment hypotheses. It is directional evidence, not a final persona decision.
+
+| Segment | Evidence Band | Audience Rows | Review Rows | Forum Rows | Core Job | Positioning Angle | Validation Gate |
+| --- | --- | ---: | ---: | ---: | --- | --- | --- |
+| Spiritual self-improvers | strong_directional_icp | 6636 | 1951 | 36 | Turn symbolic/personal meaning into one grounded action today. | Personal guidance that becomes action, not another vague reading. | 5 interviews or manual sessions show users trust the daily guidance enough to act on it. |
+| Avatar identity builders | strong_directional_icp | 9821 | 1321 | 8 | See a version of myself change as I make progress. | An identity object that responds to completed action, not a one-off avatar generator. | Manual inspection confirms avatar/identity products rarely make the visual self causally respond to a daily action. |
+| Anxious daily reset users | strong_directional_icp | 7139 | 1690 | 12 | Calm down quickly and return to the day with one manageable next step. | A two-minute reset connected to meaning and progress, not a generic meditation library. | Prototype users complete the reset without feeling gamified, pressured, or clinically generic. |
+| Habit and progress users | strong_directional_icp | 7139 | 1653 | 20 | Make vague growth concrete and keep momentum without streak anxiety. | One meaningful action with forgiving visible progress, not another task manager. | Users prefer action-tied progress/identity feedback over a plain checklist or streak counter. |
+| Cozy/casual progression users | strong_directional_icp | 9852 | 1450 | 24 | Return because progress feels gentle, visible, and emotionally rewarding. | Borrow cozy progression, but avoid manipulative daily-claim monetization. | Users read progression as self-growth feedback, not game chores or retention tricks. |
+| Coaching professionals and structured growth users | strong_directional_icp | 4999 | 2038 | 20 | Get structured guidance that turns intention into accountable practice. | A personal daily ritual coach rather than enterprise/career coaching software. | Evidence separates consumer daily ritual use from B2B/career coaching demand. |
+
+Current ICP read: "Spiritual self-improvers" is the strongest directional starting segment, but the decision should remain open until interviews/prototype tests compare at least the top two segments.
+
 ### App Store Review Language
 
 Recent public App Store reviews were collected for top intersection candidates. Coverage is 2294 deduplicated reviews across 78 apps, converted into keyword-based signal rows. This is not final sentiment modeling, but it is useful evidence for user language, delight, objections, and churn risk.
@@ -709,6 +725,7 @@ Claim audit rows currently normalized: 10.
 - `docs/market/monetization-proxy-matrix-v1.md`
 - `docs/intersections/whitespace-map-v2.md`
 - `docs/audience/audience-segmentation-v1.md`
+- `docs/audience/icp-segment-matrix-v1.md`
 - `docs/audience/review-language-synthesis-v1.md`
 - `docs/audience/review-jtbd-clusters-v1.md`
 - `docs/audience/forum-evidence-synthesis-v1.md`
@@ -743,6 +760,7 @@ Claim audit rows currently normalized: 10.
 - `data_processed/validation_gap_roadmap.csv`
 - `data_processed/competitor_feature_matrix.csv`
 - `data_processed/audience_signal_matrix.csv`
+- `data_processed/icp_segment_matrix.csv`
 - `data_processed/whitespace_signal_matrix.csv`
 - `data_processed/top_intersection_review_prefill.csv`
 - `data_processed/top100_competitor_review_scorecard.csv`
@@ -773,6 +791,7 @@ Claim audit rows currently normalized: 10.
 - `output/charts/som-scenarios.svg`
 - `output/charts/forum-signals-by-market.svg`
 - `output/charts/forum-quote-coding-tags.svg`
+- `output/charts/icp-segment-evidence-scores.svg`
 - `output/charts/top100-competitor-verdicts.svg`
 - `output/charts/top100-threat-scores.svg`
 - `output/charts/iap-price-bands.svg`

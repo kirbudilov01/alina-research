@@ -118,6 +118,9 @@ const googlePlayPricing = fs.existsSync('data_raw/google_play_pricing_raw.csv')
 const webPaywallSignals = fs.existsSync('data_processed/web_paywall_signal_matrix.csv')
   ? csv('data_processed/web_paywall_signal_matrix.csv')
   : [];
+const icpSegments = fs.existsSync('data_processed/icp_segment_matrix.csv')
+  ? csv('data_processed/icp_segment_matrix.csv')
+  : [];
 
 horizontalBarChart({
   title: 'Whitespace Bands Across Expanded Competitor Universe',
@@ -256,6 +259,19 @@ if (webPaywallSignals.length) {
   });
 }
 
+if (icpSegments.length) {
+  horizontalBarChart({
+    title: 'ICP Segment Evidence Scores',
+    subtitle: 'Directional segment hypotheses from audience, review, forum, and monetization evidence.',
+    rows: icpSegments
+      .slice()
+      .sort((a, b) => Number(b.evidence_score) - Number(a.evidence_score))
+      .map(row => ({ label: row.segment_name, value: row.evidence_score })),
+    file: 'icp-segment-evidence-scores.svg',
+    valueLabel: value => String(value)
+  });
+}
+
 const lines = [];
 lines.push('# Chart Index V1');
 lines.push('');
@@ -282,6 +298,7 @@ if (webPaywallSignals.length) {
   lines.push('- `output/charts/web-paywall-signal-strength.svg`');
   lines.push('- `output/charts/web-paywall-screenshot-queue-by-market.svg`');
 }
+if (icpSegments.length) lines.push('- `output/charts/icp-segment-evidence-scores.svg`');
 lines.push('');
 lines.push('## Notes');
 lines.push('');

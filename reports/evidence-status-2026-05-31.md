@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T04:21:13.075Z
+Generated: 2026-05-31T04:28:31.303Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -14,6 +14,7 @@ Generated: 2026-05-31T04:21:13.075Z
 | 5-market TAM/SAM/SOM method | docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv | done v1; source confidence and monetization proxy layers added, model remains range-based and not final forecast |
 | Whitespace matrices | data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md | done v1 |
 | Audience matrices | data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md | done v1 |
+| ICP / audience segment matrix | data_processed/icp_segment_matrix.csv; docs/audience/icp-segment-matrix-v1.md | done v1; maps audience/review/forum/monetization evidence into testable ICP hypotheses |
 | Versioned on GitHub | git log through current commit after push | active |
 | Final PDF | output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf | draft evidence PDF and visual PDF companion done |
 | Visual charts | docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf | draft chart pack and embedded visual PDF done |
