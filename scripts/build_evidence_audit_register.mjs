@@ -94,6 +94,8 @@ const competitorRevenueProxy = csv('data_processed/competitor_revenue_proxy_revi
 const competitorRevenueProxySummary = csv('data_processed/competitor_revenue_proxy_market_summary.csv');
 const top100 = csv('data_processed/top100_competitor_review_scorecard.csv');
 const validationQueue = csv('data_processed/top100_human_validation_queue.csv');
+const manualInspectionPacket = csv('data_processed/manual_competitor_inspection_packet.csv');
+const manualInspectionRubric = csv('data_processed/manual_competitor_inspection_rubric.csv');
 const iap = csv('data_raw/app_store_iap_pricing_raw.csv');
 const googlePlay = csv('data_raw/google_play_pricing_raw.csv');
 const webPaywalls = csv('data_processed/web_paywall_signal_matrix.csv');
@@ -139,6 +141,8 @@ const webVisualPartial = webPaywallVisualAdjudication.filter(row => ['confirmed_
 const webVisualWeakened = webPaywallVisualAdjudication.filter(row => row.visual_adjudication === 'reject_or_weaken_public_page_signal');
 const p0 = validationQueue.filter(row => row.priority_band === 'P0_validate_first');
 const p1 = validationQueue.filter(row => row.priority_band === 'P1_high');
+const manualInspectionStrongMoney = manualInspectionPacket.filter(row => row.revenue_proxy_band === 'strong_bottom_up_money_proxy');
+const manualInspectionBehaviorPrefill = manualInspectionPacket.filter(row => row.behavior_tied_progression_prefill === 'yes');
 const reviewApps = new Set(reviews.map(row => row.app_store_id).filter(Boolean)).size;
 const forumSourceCount = new Set(forumQuotes.map(row => row.source_id).filter(Boolean)).size;
 const strongIcpSegments = icpSegments.filter(row => row.evidence_band === 'strong_directional_icp');
@@ -214,14 +218,14 @@ const rows = [
     claim_id: 'H1_product_shape_exists',
     claim_type: 'product_hypothesis',
     claim: 'The proposed product shape exists as an intersection of meaning, daily action, reset, identity/avatar feedback, and progression.',
-    evidence_status: 'partially_supported',
+    evidence_status: 'manual_inspection_packet_ready',
     confidence: 'medium',
-    primary_metric: `${top100.length} top-candidate rows; ${primary.length} primary apps`,
-    quantitative_evidence: `primary_apps=${primary.length}; high_threat=${highThreat.length}; direct_reference=${direct.length}; behavior_tied=${behaviorTied.length}`,
-    evidence_files: 'data_processed/top100_competitor_review_scorecard.csv;docs/competitive/top100-competitor-review-v1.md;docs/product/product-core-evidence-v1.md',
-    strongest_support: 'Top-100 scorecard shows many adjacent products combining several required primitives.',
-    key_gap: 'Strict full loop is rare and needs manual product/onboarding validation.',
-    next_action: 'Execute P0/P1 human validation queue and inspect app flows/screenshots.'
+    primary_metric: `${top100.length} top-candidate rows; ${primary.length} primary apps; ${manualInspectionPacket.length} P0 inspection targets`,
+    quantitative_evidence: `primary_apps=${primary.length}; high_threat=${highThreat.length}; direct_reference=${direct.length}; behavior_tied=${behaviorTied.length}; manual_inspection_targets=${manualInspectionPacket.length}; manual_inspection_rubric=${manualInspectionRubric.length}; inspection_strong_money=${manualInspectionStrongMoney.length}`,
+    evidence_files: 'data_processed/top100_competitor_review_scorecard.csv;data_processed/manual_competitor_inspection_packet.csv;data_processed/manual_competitor_inspection_rubric.csv;docs/competitive/top100-competitor-review-v1.md;docs/competitive/manual-competitor-inspection-packet-v1.md;docs/product/product-core-evidence-v1.md',
+    strongest_support: 'Top-100 scorecard shows many adjacent products combining required primitives, and the P0 inspection packet now defines exactly how to confirm or downgrade the strict loop.',
+    key_gap: 'Strict full loop is rare and still needs actual manual product/onboarding inspection.',
+    next_action: 'Inspect the 12 P0 apps, capture required screenshots, and update final verdicts.'
   },
   {
     claim_id: 'H2_markets_have_money',
@@ -253,14 +257,14 @@ const rows = [
     claim_id: 'H3_whitespace_exists',
     claim_type: 'product_hypothesis',
     claim: 'There is a narrow whitespace around behavior-tied avatar/identity progression caused by a daily action.',
-    evidence_status: 'narrow_supported_not_final',
+    evidence_status: 'narrow_supported_inspection_packet_ready',
     confidence: 'medium',
-    primary_metric: `${behaviorTied.length}/100 strict behavior-tied progression signals; ${chromeMechanicPriority.length} Chrome mechanic references to inspect`,
-    quantitative_evidence: `high_whitespace=${highWhitespace.length}; medium_whitespace=${whitespace.filter(row => row.whitespace_band === 'medium').length}; low_whitespace=${whitespace.filter(row => row.whitespace_band === 'low').length}; chrome_battlecards=${chromeExtensionBattlecards.length}; chrome_priority_mechanics=${chromeMechanicPriority.length}`,
-    evidence_files: 'data_processed/whitespace_signal_matrix.csv;data_processed/product_core_evidence_matrix.csv;data_processed/chrome_extension_mechanic_battlecards.csv;docs/intersections/whitespace-map-v2.md;docs/product/product-core-evidence-v1.md;docs/competitive/chrome-extension-mechanic-battlecards-v1.md',
-    strongest_support: 'Broad adjacent market is crowded; Chrome battlecards show habit/progress/accountability mechanics exist, while strict behavior-tied avatar progression still appears rare in current metadata.',
-    key_gap: 'Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors.',
-    next_action: 'Validate P0/P1 competitors and Chrome mechanic references for actual in-app progression and identity/avatar causality.'
+    primary_metric: `${behaviorTied.length}/100 strict behavior-tied progression signals; ${manualInspectionPacket.length} P0 apps queued for causality inspection`,
+    quantitative_evidence: `high_whitespace=${highWhitespace.length}; medium_whitespace=${whitespace.filter(row => row.whitespace_band === 'medium').length}; low_whitespace=${whitespace.filter(row => row.whitespace_band === 'low').length}; chrome_battlecards=${chromeExtensionBattlecards.length}; chrome_priority_mechanics=${chromeMechanicPriority.length}; manual_inspection_targets=${manualInspectionPacket.length}; inspection_behavior_prefill=${manualInspectionBehaviorPrefill.length}; inspection_rubric_dimensions=${manualInspectionRubric.length}`,
+    evidence_files: 'data_processed/whitespace_signal_matrix.csv;data_processed/product_core_evidence_matrix.csv;data_processed/chrome_extension_mechanic_battlecards.csv;data_processed/manual_competitor_inspection_packet.csv;data_processed/manual_competitor_inspection_rubric.csv;docs/intersections/whitespace-map-v2.md;docs/product/product-core-evidence-v1.md;docs/competitive/chrome-extension-mechanic-battlecards-v1.md;docs/competitive/manual-competitor-inspection-packet-v1.md',
+    strongest_support: 'Broad adjacent market is crowded; strict behavior-tied avatar progression appears rare in metadata; manual packet now targets the highest-risk apps where hidden directness could invalidate the whitespace.',
+    key_gap: 'Actual app/onboarding inspection results are still missing; metadata can under-detect hidden loops.',
+    next_action: 'Use the inspection packet to classify action->avatar causality as visible, inferred, absent, or blocked.'
   },
   {
     claim_id: 'H4_competitive_advantage_plausible',

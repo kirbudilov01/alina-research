@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T06:03:31.248Z
+Generated: 2026-05-31T06:08:57.282Z
 
 ## 1. Executive Summary
 
@@ -16,6 +16,7 @@ Key quantified signals:
 - Top-100 intersection candidates enriched from App Store metadata: 100/100.
 - AI-assisted top-100 competitor review: 100 rows, 90 unique primary apps, 45 high-threat apps, 1 direct reference competitor.
 - Human validation packet: 90 primary apps queued; 21 P0 and 24 P1 validation targets.
+- Manual competitor inspection packet: 12 first-wave P0 apps, 6 rubric dimensions, 7 strong-money targets.
 - App Store IAP pricing layer: 498 observed purchase rows across 80 apps; observed price range $0.00-$549.99.
 - Google Play pricing validation: 247/250 successful Android lookups; 191 apps offer IAP.
 - Developer website paywall discovery: 560 fetched URL rows across 70 app/domain rows; 29 domains queued for screenshot validation.
@@ -23,7 +24,7 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 12 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 163 artifacts tracked, 35 CSV artifacts, 93209 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 167 artifacts tracked, 37 CSV artifacts, 93227 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -67,10 +68,10 @@ Evidence status mix:
 - proved_v1: 2
 - proved_v1_open_requirements: 1
 - substantial_v1_not_50k_dedup: 1
-- partially_supported: 1
+- manual_inspection_packet_ready: 1
 - supported_with_ranges_and_bottom_up_proxy: 1
 - supported_narrowly_with_visual_adjudication: 1
-- narrow_supported_not_final: 1
+- narrow_supported_inspection_packet_ready: 1
 - prototype_stimulus_ready_unvalidated: 1
 - directionally_supported: 1
 - supported_for_mvp_framing: 1
@@ -81,13 +82,13 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 14 validation roadmap rows | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 159 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 163 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 6973 usable itch rows; 6000 usable Steam tag rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
-| H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
+| H1_product_shape_exists | manual_inspection_packet_ready | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets | Strict full loop is rare and still needs actual manual product/onboarding inspection. |
 | H2_markets_have_money | supported_with_ranges_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 4/5 strong market-level monetization proxies; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, or manual in-app paywall validation for final investor-grade claims. |
 | H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require human sign-off/in-app inspection. |
-| H3_whitespace_exists | narrow_supported_not_final | medium | 1/100 strict behavior-tied progression signals; 9 Chrome mechanic references to inspect | Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors. |
+| H3_whitespace_exists | narrow_supported_inspection_packet_ready | medium | 1/100 strict behavior-tied progression signals; 12 P0 apps queued for causality inspection | Actual app/onboarding inspection results are still missing; metadata can under-detect hidden loops. |
 | H4_competitive_advantage_plausible | prototype_stimulus_ready_unvalidated | medium | 1 direct reference competitor; 45 high-threat competitors; 8 prototype screens; 6 success/kill metrics | No human prototype session yet proves users understand, prefer, or value the integrated loop. |
 | H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 6 ICP segment hypotheses; 36 ICP validation tests | Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. |
 | H6_product_core_defined | supported_for_mvp_framing | medium | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
@@ -97,7 +98,7 @@ Claim-level audit snapshot:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 163 artifacts; 35 CSV artifacts; 93209 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 167 artifacts; 37 CSV artifacts; 93227 tracked CSV rows; 0 missing required artifacts.
 
 Largest tracked CSV artifacts:
 
@@ -125,7 +126,7 @@ Completion status mix:
 - proved_v1: 2
 - proved_scale_target: 1
 - supported_with_bottom_up_proxy_not_final: 1
-- narrow_supported_not_final: 1
+- narrow_supported_inspection_ready_not_final: 1
 - directionally_supported_validation_ready: 1
 - prototype_stimulus_ready_not_validated: 1
 - draft_done_not_polished_final: 1
@@ -140,12 +141,12 @@ Objective readiness matrix:
 | REQ_02_COMPETITOR_UNIVERSE | proved_scale_target | medium_high | dedup=12552; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; known_raw_total=30795; itch_ok=6973; steam_tag_ok=6000; niches=5; source_kinds=4 | Below aspirational 30k-50k raw source/app target; desktop stores, Product Hunt/AlternativeTo, B2B directories, forums, and curated lists remain backlog. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
 | REQ_04_MARKET_MONEY | supported_with_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing remains range-based; actual revenue estimates and manual in-app paywall validation are needed for final investor-grade claims. |
-| REQ_05_WHITESPACE | narrow_supported_not_final | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1 | Metadata can miss hidden in-app mechanics; manual app/onboarding validation is still required. |
+| REQ_05_WHITESPACE | narrow_supported_inspection_ready_not_final | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; manual_inspection_done=0 | Metadata can miss hidden in-app mechanics; manual app/onboarding inspection results are still required. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36 | Segments are directional and need interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=12; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6 | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | draft_done_not_polished_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true | PDF is draft evidence/reporting artifact, not final polished investor/user-facing publication. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=159; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
-| REQ_10_VALIDATION_GATES | proved_v1_open_gates | strong | roadmap_rows=14; p0=5; p1=9; human_confirmed=0 | Open P0 gates remain: manual competitor validation, paywall review, whitespace validation, competitive advantage prototype, ICP validation. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=163; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_10_VALIDATION_GATES | proved_v1_open_gates | strong | roadmap_rows=14; p0=5; p1=9; human_confirmed=0; manual_inspection_targets=12; manual_inspection_done=0 | Open P0 gates remain: manual competitor inspection execution, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
 ## 2C. Validation Gap Roadmap
 
@@ -708,6 +709,38 @@ P0 validation targets:
 | 10 | Goddess・Women's Wellness Coach | high_priority_close_substitute | 95.8 | no | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language/check_safety_and_overclaiming |
 | 11 | LifeWheel Goal Habit Tracker | high_priority_close_substitute | 95.4 | no | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language/check_safety_and_overclaiming |
 | 12 | Habit Tracker | high_priority_close_substitute | 94 | no | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language/check_safety_and_overclaiming |
+
+### Manual Competitor Inspection Packet
+
+The broad human validation queue now has a first-wave inspection packet: 12 P0 apps, 6 rubric dimensions, 7 strong-money targets, and 1 prefilled behavior-tied progression claim. This is execution scaffolding, not completed human review.
+
+First-wave inspection targets:
+
+| Rank | App | Prefill Verdict | Money Proxy | Behavior-Tied? | Why Inspect |
+| ---: | --- | --- | --- | --- | --- |
+| 1 | Shepherd: Spiritual Bible BFF | direct_reference_competitor | strong_bottom_up_money_proxy | yes | only_current_direct_reference/top_p0_validation_score/strong_money_proxy/metadata_claims_behavior_tied_progression/deep_review_language |
+| 2 | Zing AI: Home & Gym Workouts | high_priority_close_substitute | strong_bottom_up_money_proxy | no | top_p0_validation_score/strong_money_proxy/deep_review_language |
+| 3 | Miracle Morning Routine | high_priority_close_substitute | strong_bottom_up_money_proxy | no | top_p0_validation_score/strong_money_proxy/deep_review_language |
+| 4 | EVOLVE: Transform Your Life | high_priority_close_substitute | strong_bottom_up_money_proxy | no | top_p0_validation_score/strong_money_proxy/deep_review_language |
+| 5 | Daily Yoga: Yoga for Fitness® | high_priority_close_substitute | strong_bottom_up_money_proxy | no | strong_money_proxy |
+| 6 | Daily Burn: Workout Coach | high_priority_close_substitute | strong_bottom_up_money_proxy | no | strong_money_proxy/deep_review_language |
+| 7 | Myla : Manifest & Vision Board | high_priority_close_substitute | medium_bottom_up_money_proxy | no | deep_review_language |
+| 8 | Rosebud: AI Journal & Diary | high_priority_close_substitute | medium_bottom_up_money_proxy | no | deep_review_language |
+| 9 | Habit Tracker : Haby | high_priority_close_substitute | medium_bottom_up_money_proxy | no | p0_queue_priority |
+| 10 | Goddess・Women's Wellness Coach | high_priority_close_substitute | medium_bottom_up_money_proxy | no | deep_review_language |
+| 11 | LifeWheel Goal Habit Tracker | high_priority_close_substitute | medium_bottom_up_money_proxy | no | p0_queue_priority |
+| 12 | Habit Tracker | high_priority_close_substitute | strong_bottom_up_money_proxy | no | strong_money_proxy/deep_review_language |
+
+Inspection rubric dimensions:
+
+| Dimension | Pass Definition | Downgrade Trigger | Claim Effect |
+| --- | --- | --- | --- |
+| directness | App clearly combines personal meaning, one daily action, short reset/reflection, progress or identity feedback, and next-day hook. | Only one or two primitives are visible, or the loop is scattered across unrelated features. | Confirming directness strengthens H1/H3; downgrading protects whitespace from overclaim. |
+| action_to_avatar_causality | Completed user action visibly changes avatar, identity object, future-self state, or progress representation. | Avatar/progress is decorative, static, generic, or only a profile asset. | This is the core whitespace test for behavior-tied avatar progression. |
+| first_value_before_paywall | User can experience meaningful loop value before subscription, credits, trial wall, or account lock. | Paywall blocks first meaningful output or hides the loop. | Feeds monetization/readiness risk and prototype pricing strategy. |
+| positioning_overlap | Public/onboarding copy directly targets daily transformation, identity, ritual, emotional reset, or guided action. | Copy is generic wellness, content library, one-off avatar generation, or broad coaching without daily ritual. | Refines competitive messaging and ICP fit. |
+| safety_and_trust | Claims are framed softly with user agency and no deterministic/clinical overclaim. | Manipulative streak pressure, spiritual certainty, unsafe advice, or deceptive pricing. | Feeds product safety boundaries and differentiation. |
+| hidden_clone_risk | No inspected P0 app fully owns the same integrated loop with strong execution. | A competitor already delivers the full Alina loop with clear action->identity feedback. | If triggered, H3/H4 must be downgraded and positioning/product core revised. |
 
 ## 6. Whitespace Analysis
 

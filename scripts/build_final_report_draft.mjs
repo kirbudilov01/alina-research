@@ -102,6 +102,8 @@ const prototypeStimulusFlow = csv('data_processed/prototype_validation_stimulus_
 const prototypeScorecard = csv('data_processed/prototype_validation_scorecard.csv');
 const top100Review = csv('data_processed/top100_competitor_review_scorecard.csv');
 const humanValidationQueue = csv('data_processed/top100_human_validation_queue.csv');
+const manualInspectionPacket = csv('data_processed/manual_competitor_inspection_packet.csv');
+const manualInspectionRubric = csv('data_processed/manual_competitor_inspection_rubric.csv');
 const iapRaw = csv('data_raw/app_store_iap_pricing_raw.csv');
 const iapSummary = csv('data_processed/app_store_iap_pricing_summary.csv');
 const googlePlayPricing = csv('data_raw/google_play_pricing_raw.csv');
@@ -143,6 +145,8 @@ const highThreatCompetitors = primaryCompetitors.filter(r => Number(r.competitiv
 const directReferenceCompetitors = primaryCompetitors.filter(r => r.competitive_verdict === 'direct_reference_competitor');
 const p0HumanValidation = humanValidationQueue.filter(r => r.priority_band === 'P0_validate_first');
 const p1HumanValidation = humanValidationQueue.filter(r => r.priority_band === 'P1_high');
+const manualInspectionStrongMoney = manualInspectionPacket.filter(r => r.revenue_proxy_band === 'strong_bottom_up_money_proxy');
+const manualInspectionBehaviorPrefill = manualInspectionPacket.filter(r => r.behavior_tied_progression_prefill === 'yes');
 const appsWithIap = new Set(iapRaw.map(r => r.app_store_id).filter(Boolean)).size;
 const iapPrices = iapRaw.map(r => Number(r.price_usd)).filter(Number.isFinite);
 const googlePlayOk = googlePlayPricing.filter(r => r.collection_status === 'ok');
@@ -194,6 +198,7 @@ report.push(`- High whitespace candidates: ${highWhitespace}; medium: ${mediumWh
 report.push(`- Top-100 intersection candidates enriched from App Store metadata: ${prefill.length}/100.`);
 report.push(`- AI-assisted top-100 competitor review: ${top100Review.length} rows, ${primaryCompetitors.length} unique primary apps, ${highThreatCompetitors.length} high-threat apps, ${directReferenceCompetitors.length} direct reference competitor.`);
 report.push(`- Human validation packet: ${humanValidationQueue.length} primary apps queued; ${p0HumanValidation.length} P0 and ${p1HumanValidation.length} P1 validation targets.`);
+report.push(`- Manual competitor inspection packet: ${manualInspectionPacket.length} first-wave P0 apps, ${manualInspectionRubric.length} rubric dimensions, ${manualInspectionStrongMoney.length} strong-money targets.`);
 report.push(`- App Store IAP pricing layer: ${iapRaw.length} observed purchase rows across ${appsWithIap} apps; observed price range ${iapPrices.length ? `$${Math.min(...iapPrices).toFixed(2)}-$${Math.max(...iapPrices).toFixed(2)}` : 'n/a'}.`);
 report.push(`- Google Play pricing validation: ${googlePlayOk.length}/${googlePlayPricing.length} successful Android lookups; ${googlePlayOk.filter(r => r.offers_iap === 'yes').length} apps offer IAP.`);
 report.push(`- Developer website paywall discovery: ${webPaywallRaw.length} fetched URL rows across ${webPaywallSignals.length} app/domain rows; ${webPaywallScreenshotQueue.length} domains queued for screenshot validation.`);
@@ -791,6 +796,32 @@ if (humanValidationQueue.length) {
   ], 12));
   report.push('');
 }
+if (manualInspectionPacket.length) {
+  report.push('### Manual Competitor Inspection Packet');
+  report.push('');
+  report.push(`The broad human validation queue now has a first-wave inspection packet: ${manualInspectionPacket.length} P0 apps, ${manualInspectionRubric.length} rubric dimensions, ${manualInspectionStrongMoney.length} strong-money targets, and ${manualInspectionBehaviorPrefill.length} prefilled behavior-tied progression claim. This is execution scaffolding, not completed human review.`);
+  report.push('');
+  report.push('First-wave inspection targets:');
+  report.push('');
+  report.push(mdTable(manualInspectionPacket, [
+    { key: 'inspection_rank', label: 'Rank', align: 'right' },
+    { key: 'app_name', label: 'App' },
+    { key: 'competitive_verdict_prefill', label: 'Prefill Verdict' },
+    { key: 'revenue_proxy_band', label: 'Money Proxy' },
+    { key: 'behavior_tied_progression_prefill', label: 'Behavior-Tied?' },
+    { key: 'priority_reason', label: 'Why Inspect' }
+  ], 12));
+  report.push('');
+  report.push('Inspection rubric dimensions:');
+  report.push('');
+  report.push(mdTable(manualInspectionRubric, [
+    { key: 'inspection_dimension', label: 'Dimension' },
+    { key: 'pass_definition', label: 'Pass Definition' },
+    { key: 'downgrade_trigger', label: 'Downgrade Trigger' },
+    { key: 'effect_on_claims', label: 'Claim Effect' }
+  ], manualInspectionRubric.length));
+  report.push('');
+}
 report.push('## 6. Whitespace Analysis');
 report.push('');
 report.push('Broad whitespace is weak: the market already has many products that combine meaning, habits, AI, mindfulness, and identity language. Narrow whitespace is stronger: top-100 metadata shows only one strict signal of behavior-tied avatar progression.');
@@ -1122,7 +1153,7 @@ status.push(mdTable([
   { requirement: 'Evidence audit / claim register', evidence: 'data_processed/evidence_claim_register.csv; docs/decision/evidence-audit-v1.md', status: 'done v1; proof status, confidence, gaps, and next actions explicit' },
   { requirement: 'Evidence package manifest', evidence: 'data_processed/evidence_artifact_manifest.csv; docs/decision/evidence-package-manifest-v1.md', status: 'done v1; tracks key artifacts with row counts, source-reference coverage, sizes, and short hashes' },
   { requirement: 'Completion/readiness audit', evidence: 'data_processed/research_completion_audit.csv; docs/decision/research-completion-audit-v1.md', status: 'done v1; maps original objective to proved, partial, draft, and validation-ready requirements' },
-  { requirement: 'Manual review of top 100', evidence: 'data_processed/top100_competitor_review_scorecard.csv; data_processed/top100_human_validation_queue.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md; docs/competitive/human-validation-guide-v1.md', status: 'AI-assisted review and ranked human validation packet done v1; human execution pending' },
+  { requirement: 'Manual review of top 100', evidence: 'data_processed/top100_competitor_review_scorecard.csv; data_processed/top100_human_validation_queue.csv; data_processed/manual_competitor_inspection_packet.csv; data_processed/manual_competitor_inspection_rubric.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md; docs/competitive/human-validation-guide-v1.md; docs/competitive/manual-competitor-inspection-packet-v1.md', status: 'AI-assisted review, ranked human validation queue, and first-wave manual inspection packet done v1; human execution pending' },
   { requirement: 'Detailed pricing/IAP extraction', evidence: 'data_raw/app_store_iap_pricing_raw.csv; data_processed/app_store_iap_pricing_summary.csv; docs/competitive/app-store-iap-pricing-v1.md; data_raw/google_play_pricing_raw.csv; data_processed/google_play_pricing_summary.csv; docs/competitive/google-play-pricing-v1.md; data_raw/web_paywall_discovery_raw.csv; data_processed/web_paywall_signal_matrix.csv; docs/competitive/web-paywall-validation-v1.md; data_processed/web_paywall_screenshot_validation.csv; data_processed/web_paywall_screenshot_interpretation.csv; data_processed/web_paywall_visual_adjudication.csv; data_processed/web_paywall_visual_adjudication_summary.csv; docs/competitive/web-paywall-screenshot-validation-v1.md; docs/competitive/web-paywall-screenshot-interpretation-v1.md; docs/competitive/web-paywall-visual-adjudication-v1.md; output/paywall_screenshots/*.png', status: 'App Store web IAP extraction, Google Play pricing validation, developer website paywall discovery, screenshot capture, OCR interpretation, and conservative visual adjudication done v1; human paywall sign-off pending' },
   { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_raw/forum_quote_evidence_raw.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; data_processed/forum_quote_coding_matrix.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md; docs/audience/forum-quote-coding-v1.md', status: 'App Store review extraction, JTBD clustering, forum source map, and retrieval-assisted quote coding done v1; human validation pending' }
 ], [
@@ -1159,6 +1190,8 @@ console.log(`web_paywall_visual_adjudications=${webPaywallVisualAdjudication.len
 console.log(`web_paywall_visual_confirmed=${confirmedVisualPricing.length}`);
 console.log(`web_paywall_visual_partial=${partialVisualPaidSurface.length}`);
 console.log(`human_validation_queue_rows=${humanValidationQueue.length}`);
+console.log(`manual_inspection_targets=${manualInspectionPacket.length}`);
+console.log(`manual_inspection_rubric=${manualInspectionRubric.length}`);
 console.log(`evidence_audit_rows=${evidenceAudit.length}`);
 console.log(`evidence_manifest_rows=${evidenceManifest.length}`);
 console.log(`completion_audit_rows=${completionAudit.length}`);

@@ -103,6 +103,8 @@ const roadmap = csv('data_processed/validation_gap_roadmap.csv');
 const manifest = csv('data_processed/evidence_artifact_manifest.csv');
 const top100 = csv('data_processed/top100_competitor_review_scorecard.csv');
 const validationQueue = csv('data_processed/top100_human_validation_queue.csv');
+const manualInspectionPacket = csv('data_processed/manual_competitor_inspection_packet.csv');
+const manualInspectionRubric = csv('data_processed/manual_competitor_inspection_rubric.csv');
 const icpSegments = csv('data_processed/icp_segment_matrix.csv');
 const icpValidation = csv('data_processed/icp_validation_test_plan.csv');
 const prototypeStimulusFlow = csv('data_processed/prototype_validation_stimulus_flow.csv');
@@ -111,6 +113,7 @@ const prototypeScorecard = csv('data_processed/prototype_validation_scorecard.cs
 const p0Roadmap = roadmap.filter(row => row.priority === 'P0');
 const p1Roadmap = roadmap.filter(row => row.priority === 'P1');
 const humanConfirmed = validationQueue.filter(row => !['', 'not_started'].includes(row.validation_status)).length;
+const manualInspectionDone = manualInspectionPacket.filter(row => !['', 'not_started'].includes(row.inspection_status)).length;
 const manifestMissing = manifest.filter(row => row.exists !== 'yes').length;
 const primaryApps = top100.filter(row => row.duplicate_flag === 'primary_app_entry').length;
 const prototypeScreens = new Set(prototypeStimulusFlow.map(row => row.screen_id).filter(Boolean)).size;
@@ -173,12 +176,12 @@ const requirements = [
     requirement_id: 'REQ_05_WHITESPACE',
     requirement: 'Whitespace/competitor gap analysis exists and identifies whether a narrow opening is plausible.',
     objective_source: 'User asked to prove a white spot among markets/apps and absence or weakness of existing solutions.',
-    status: whitespace.length && top100.length ? 'narrow_supported_not_final' : 'missing',
+    status: whitespace.length && manualInspectionPacket.length ? 'narrow_supported_inspection_ready_not_final' : 'missing',
     evidence_strength: 'medium',
-    proof: `whitespace_rows=${whitespace.length}; high_ws=${whitespace.filter(row => row.whitespace_band === 'high').length}; top100=${top100.length}; behavior_tied=${top100.filter(row => row.behavior_tied_progression === 'yes').length}`,
-    evidence_files: 'data_processed/whitespace_signal_matrix.csv;data_processed/top100_competitor_review_scorecard.csv;docs/intersections/whitespace-map-v2.md;docs/competitive/top100-competitor-review-v1.md',
-    remaining_gap: 'Metadata can miss hidden in-app mechanics; manual app/onboarding validation is still required.',
-    next_action: 'Execute P0/P1 human validation queue and Chrome mechanic validation.'
+    proof: `whitespace_rows=${whitespace.length}; high_ws=${whitespace.filter(row => row.whitespace_band === 'high').length}; top100=${top100.length}; behavior_tied=${top100.filter(row => row.behavior_tied_progression === 'yes').length}; manual_inspection_targets=${manualInspectionPacket.length}; manual_inspection_rubric=${manualInspectionRubric.length}; manual_inspection_done=${manualInspectionDone}`,
+    evidence_files: 'data_processed/whitespace_signal_matrix.csv;data_processed/top100_competitor_review_scorecard.csv;data_processed/manual_competitor_inspection_packet.csv;data_processed/manual_competitor_inspection_rubric.csv;docs/intersections/whitespace-map-v2.md;docs/competitive/top100-competitor-review-v1.md;docs/competitive/manual-competitor-inspection-packet-v1.md',
+    remaining_gap: 'Metadata can miss hidden in-app mechanics; manual app/onboarding inspection results are still required.',
+    next_action: 'Inspect the 12 P0 apps and update action->avatar causality, hidden clone risk, paywall boundary, and final verdict fields.'
   },
   {
     requirement_id: 'REQ_06_AUDIENCE_ICP',
@@ -230,10 +233,10 @@ const requirements = [
     objective_source: 'User wanted critical thinking and continued work when information is missing.',
     status: roadmap.length ? 'proved_v1_open_gates' : 'missing',
     evidence_strength: 'strong',
-    proof: `roadmap_rows=${roadmap.length}; p0=${p0Roadmap.length}; p1=${p1Roadmap.length}; human_confirmed=${humanConfirmed}`,
-    evidence_files: 'data_processed/validation_gap_roadmap.csv;docs/decision/validation-gap-roadmap-v1.md;data_processed/top100_human_validation_queue.csv',
-    remaining_gap: 'Open P0 gates remain: manual competitor validation, paywall review, whitespace validation, competitive advantage prototype, ICP validation.',
-    next_action: 'Work P0 roadmap rows in order.'
+    proof: `roadmap_rows=${roadmap.length}; p0=${p0Roadmap.length}; p1=${p1Roadmap.length}; human_confirmed=${humanConfirmed}; manual_inspection_targets=${manualInspectionPacket.length}; manual_inspection_done=${manualInspectionDone}`,
+    evidence_files: 'data_processed/validation_gap_roadmap.csv;docs/decision/validation-gap-roadmap-v1.md;data_processed/top100_human_validation_queue.csv;data_processed/manual_competitor_inspection_packet.csv;docs/competitive/manual-competitor-inspection-packet-v1.md',
+    remaining_gap: 'Open P0 gates remain: manual competitor inspection execution, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation.',
+    next_action: 'Work P0 manual inspection and prototype sessions in order, then update statuses and final verdicts.'
   }
 ];
 
