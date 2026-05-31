@@ -2,6 +2,7 @@ import fs from 'fs';
 
 const OUT = 'reports/alina-global-hypothesis-report-v1.md';
 const SOURCE_APPENDIX_OUT = 'data_processed/global_hypothesis_source_appendix.csv';
+const VALIDATION_QUESTIONNAIRE_OUT = 'data_processed/global_hypothesis_validation_questionnaire.csv';
 
 for (const dir of ['reports', 'data_processed']) fs.mkdirSync(dir, { recursive: true });
 
@@ -111,6 +112,9 @@ const icp = csv('data_processed/russian_icp_battlecards.csv');
 const voc = csv('data_processed/russian_voc_objection_map.csv');
 const productLoop = csv('data_processed/russian_product_loop_cards.csv');
 const gates = csv('data_processed/validation_gate_calculator.csv');
+const gateCards = csv('data_processed/russian_validation_gate_cards.csv');
+const fieldSessionKit = csv('data_processed/russian_field_session_kit.csv');
+const prototypeScorecard = csv('data_processed/prototype_validation_scorecard.csv');
 const paidSignoff = csv('data_processed/paid_flow_local_signoff.csv');
 const tam = csv('data_processed/tam_sam_som_model.csv');
 const manifest = csv('data_processed/evidence_artifact_manifest.csv');
@@ -125,6 +129,115 @@ const h2 = by(gates, 'gate_id', 'GATE_H2_PAID_FLOW');
 const claimById = Object.fromEntries(claimAppendix.map(row => [row.claim_id, row]));
 const provByLayer = Object.fromEntries(sourceProvenance.map(row => [row.layer, row]));
 const marketSourceIds = marketSources.map(row => row.source_id).join('|');
+
+const gateByHypothesis = Object.fromEntries(gateCards.map(row => [row.hypothesis_id, row]));
+const fieldByStep = Object.fromEntries(fieldSessionKit.map(row => [row.step_id, row]));
+const prototypeMetricById = Object.fromEntries(prototypeScorecard.map(row => [row.metric_id, row]));
+const vocByTheme = Object.fromEntries(voc.map(row => [row.theme_id, row]));
+
+const validationQuestionnaire = [
+  {
+    block_id: 'VQ_H1_01',
+    hypothesis_id: 'H1',
+    block_ru: 'Форма продукта и hidden-clone риск',
+    question_ru: 'Открой P0-конкурента от первого экрана до первого value moment: есть ли там связка личный смысл -> маленькое действие -> reset -> видимый progress/avatar feedback?',
+    what_it_tests_ru: 'Проверяет, существует ли уже полный аналог Alina внутри onboarding, а не только в публичном описании приложения.',
+    evidence_to_capture_ru: gateByHypothesis.H1?.exact_evidence_to_collect_ru || 'listing screenshot | onboarding first value | first action | progress/avatar feedback | paywall/free boundary | inspector notes',
+    pass_signal_ru: 'Минимум пять P0-приложений вручную прошли все walkthrough-слоты, и полный скрытый клон Alina не найден.',
+    downgrade_signal_ru: 'Любой P0-конкурент уже владеет полной петлей Alina с причинностью action -> identity/avatar.'
+  },
+  {
+    block_id: 'VQ_H2_01',
+    hypothesis_id: 'H2',
+    block_ru: 'Деньги и willingness-to-pay',
+    question_ru: 'В каждом high-money конкуренте зафиксируй, где появляется первый честный paywall: до value moment или после него, какая цена, trial, годовая скидка и какая именно depth продается.',
+    what_it_tests_ru: 'Отделяет общий факт подписок в adjacent-рынках от product-matched paid evidence для Alina.',
+    evidence_to_capture_ru: gateByHypothesis.H2?.exact_evidence_to_collect_ru || 'public pricing screenshot | app/product match | trial length | monthly/annual price | first meaningful paywall boundary',
+    pass_signal_ru: 'Для high-money конкурентов подтверждены цена, trial, граница paywall и связь платной глубины с похожей пользовательской работой.',
+    downgrade_signal_ru: 'Платные сигналы относятся к нерелевантным продуктам, parent pages, login-gated страницам или paywall появляется до понятной ценности.'
+  },
+  {
+    block_id: 'VQ_H2_02',
+    hypothesis_id: 'H2',
+    block_ru: 'Деньги и willingness-to-pay',
+    question_ru: vocByTheme.VOC_SUBSCRIPTION_VALUE?.interview_probe_ru || 'За что ты уже платишь в этой зоне и что должно случиться бесплатно, чтобы подписка стала честной?',
+    what_it_tests_ru: 'Проверяет, возникает ли платная глубина из языка пользователя, а не из желания исследователя монетизировать продукт.',
+    evidence_to_capture_ru: fieldByStep.ICP_A_VALUE_WTP?.evidence_to_capture_ru || 'free_value_moment|paid_depth_feature|acceptable_price_range|friend_explanation|return_trigger',
+    pass_signal_ru: fieldByStep.ICP_A_VALUE_WTP?.pass_signal_ru || 'Участник называет paid depth после понятного free value moment.',
+    downgrade_signal_ru: fieldByStep.ICP_A_VALUE_WTP?.downgrade_signal_ru || 'Вся ценность ожидается бесплатно или paid depth не связана с core loop.'
+  },
+  {
+    block_id: 'VQ_H3_01',
+    hypothesis_id: 'H3',
+    block_ru: 'Белое пятно и отличие',
+    question_ru: 'После walkthrough конкурента выпиши, что именно он закрывает: meaning, action, reset, visual progress, identity/avatar, causality. Где петля разрывается?',
+    what_it_tests_ru: 'Делает whitespace узким и проверяемым: не “конкурентов нет”, а “нет причинной связки action -> identity/progress”.',
+    evidence_to_capture_ru: gateByHypothesis.H3?.exact_evidence_to_collect_ru || 'listing screenshot | onboarding first value | first action | progress/avatar feedback | paywall/free boundary | inspector notes',
+    pass_signal_ru: 'Ручной walkthrough подтверждает, что behavior-tied identity/avatar progression остается редкой среди high-risk substitutes.',
+    downgrade_signal_ru: 'Walkthrough показывает распространенные full-loop substitutes или подтверждает скрытый клон.'
+  },
+  {
+    block_id: 'VQ_H4_01',
+    hypothesis_id: 'H4',
+    block_ru: 'Конкурентное преимущество в прототипе',
+    question_ru: 'На экране изменения спросить: что изменилось, почему это изменилось и какое действие это вызвало?',
+    what_it_tests_ru: 'Проверяет, считывает ли пользователь причинность, без которой avatar/progress превращается в декорацию.',
+    evidence_to_capture_ru: 'completion_time_seconds|comprehension_yes_no|meaning_lift_1_5|differentiation_1_5|return_intent_1_5|verbatim_quote|fatal_objection',
+    pass_signal_ru: 'Не менее 80% участников прототипа правильно объясняют причинность personal meaning -> action -> avatar/progress.',
+    downgrade_signal_ru: 'Менее 50% участников могут объяснить причинную петлю без подсказки.'
+  },
+  {
+    block_id: 'VQ_H5_01',
+    hypothesis_id: 'H5',
+    block_ru: 'Аудитория и recent behavior',
+    question_ru: 'Какие приложения, ритуалы, дневники, игры, guidance tools, коучи или avatar-продукты ты реально использовал за последние 30 дней, и что запустило последнее использование?',
+    what_it_tests_ru: 'Отсекает абстрактный интерес от реального поведения в последние 30 дней.',
+    evidence_to_capture_ru: fieldByStep.ICP_A_SCREENER?.evidence_to_capture_ru || 'recent_behavior_match|current_tool|trigger_of_last_use|segment_fit_yes_no',
+    pass_signal_ru: fieldByStep.ICP_A_SCREENER?.pass_signal_ru || 'Есть recent behavior и конкретный триггер последнего использования.',
+    downgrade_signal_ru: fieldByStep.ICP_A_SCREENER?.downgrade_signal_ru || 'Поведение абстрактное, давно не было или сегмент выбран по вкусу исследователя.'
+  },
+  {
+    block_id: 'VQ_H5_02',
+    hypothesis_id: 'H5',
+    block_ru: 'Аудитория и current workaround',
+    question_ru: 'Расскажи про последний реальный момент, когда тебе нужно было превратить личный смысл, состояние или внутренний сигнал в одно приземленное действие на сегодня.',
+    what_it_tests_ru: 'Проверяет силу job-to-be-done и текущие обходные решения пользователя.',
+    evidence_to_capture_ru: fieldByStep.ICP_A_PROBLEM_STORY?.evidence_to_capture_ru || 'specific_episode|workaround|pain_intensity_1_5|verbatim_language|rejected_patterns',
+    pass_signal_ru: fieldByStep.ICP_A_PROBLEM_STORY?.pass_signal_ru || 'Участник рассказывает конкретный эпизод, current workaround и язык боли без наводки.',
+    downgrade_signal_ru: fieldByStep.ICP_A_PROBLEM_STORY?.downgrade_signal_ru || 'Участник рассуждает теоретически или проблема слабее текущих альтернатив.'
+  },
+  {
+    block_id: 'VQ_H6_01',
+    hypothesis_id: 'H6',
+    block_ru: 'MVP-петля и продуктовое ядро',
+    question_ru: 'Пройди прототип от entry до tomorrow hook и попроси участника своими словами назвать продукт: что это, зачем он нужен и почему он может быть нужен завтра?',
+    what_it_tests_ru: 'Проверяет, собирается ли MVP в один понятный продукт, а не в набор разрозненных экранов.',
+    evidence_to_capture_ru: fieldByStep.ICP_A_PROTOTYPE_WALKTHROUGH?.evidence_to_capture_ru || 'completion_time_seconds|comprehension_yes_no|meaning_lift_1_5|differentiation_1_5|return_intent_1_5|verbatim_quote|fatal_objection',
+    pass_signal_ru: 'MVP-петля остается понятной после прототипных сессий и обновления конкурентных walkthrough.',
+    downgrade_signal_ru: 'Петля требует слишком много трения или контента, либо пользователи не могут объяснить причинность.'
+  },
+  {
+    block_id: 'VQ_RISK_01',
+    hypothesis_id: 'H4|H5|H6',
+    block_ru: 'Trust, safety и границы обещания',
+    question_ru: vocByTheme.VOC_TRUST_SAFETY?.interview_probe_ru || 'Что сделало бы такой продукт небезопасным, cringe, манипулятивным или не для тебя?',
+    what_it_tests_ru: 'Проверяет, не ломает ли spiritual/AI/identity слой доверие еще до проверки retention.',
+    evidence_to_capture_ru: 'top_objection|trust_boundary|unsafe_phrase|manipulation_signal|participant_control_needed',
+    pass_signal_ru: vocByTheme.VOC_TRUST_SAFETY?.opportunity_ru || 'Пользователь принимает мягкое guidance при ясных ограничениях и контроле.',
+    downgrade_signal_ru: vocByTheme.VOC_TRUST_SAFETY?.downgrade_rule_ru || 'Повторяется fatal trust/safety objection.'
+  }
+];
+
+writeCsv(VALIDATION_QUESTIONNAIRE_OUT, validationQuestionnaire, [
+  'block_id',
+  'hypothesis_id',
+  'block_ru',
+  'question_ru',
+  'what_it_tests_ru',
+  'evidence_to_capture_ru',
+  'pass_signal_ru',
+  'downgrade_signal_ru'
+]);
 
 const sourceAppendix = [
   {
@@ -256,7 +369,7 @@ lines.push(`Intersection SAM в текущей модели равен ${money(i
 lines.push('');
 lines.push('## СЦЕНАРИИ ВХОДА КАК СВЯЗУЮЩЕЕ ЗВЕНО');
 lines.push('');
-lines.push('В отличие от образца по Telegram-mini-app, здесь сценарии входа не завязаны на один канал. Для Alina логичнее рассматривать несколько мировых consumer-entry сценариев. Первый сценарий - пользователь приходит из состояния тревоги, усталости или перегруза и ищет короткий reset. Второй сценарий - пользователь приходит из self-improvement контекста: он хочет двигаться вперед, но устал от жестких streak и сложных систем. Третий сценарий - пользователь приходит из spiritual/meaning контекста и хочет не просто читать интерпретацию, а превратить ее в действие. Четвертый сценарий - пользователь приходит через avatar/identity интерес и хочет видеть, что версия себя меняется. Пятый сценарий - пользователь возвращается через мягкую progression-механику, если она не выглядит как манипулятивная игра.');
+lines.push('Сценарии входа для Alina не завязаны на один канал. Логичнее рассматривать несколько мировых consumer-entry сценариев. Первый сценарий - пользователь приходит из состояния тревоги, усталости или перегруза и ищет короткий reset. Второй сценарий - пользователь приходит из self-improvement контекста: он хочет двигаться вперед, но устал от жестких streak и сложных систем. Третий сценарий - пользователь приходит из spiritual/meaning контекста и хочет не просто читать интерпретацию, а превратить ее в действие. Четвертый сценарий - пользователь приходит через avatar/identity интерес и хочет видеть, что версия себя меняется. Пятый сценарий - пользователь возвращается через мягкую progression-механику, если она не выглядит как манипулятивная игра.');
 lines.push('');
 lines.push('Таким образом, рынок Alina должен рассматриваться не по одному каналу входа, а как пересечение потребностей: состояние, смысл, действие, видимость прогресса и возвращаемость.');
 lines.push('');
@@ -357,6 +470,28 @@ lines.push('Первый столп уверенности - масштаб ми
 lines.push('');
 lines.push('Главные риски остаются открытыми. P0-конкуренты могут закрывать петлю внутри onboarding. Пользователи могут прочитать avatar/progress как детскую декорацию. Spiritual/meaning layer может вызвать недоверие или safety objection. Paywall может быть понятен в соседних рынках, но не в Alina. Поэтому следующий этап должен не украшать отчет, а собирать observed evidence.');
 lines.push('');
+lines.push('## СПИСОК ВОПРОСОВ И ПРОВЕРОК ДЛЯ СЛЕДУЮЩЕГО ЭТАПА');
+lines.push('');
+lines.push('Следующий слой исследования должен собираться как evidence protocol. По каждой гипотезе нужно заранее определить вопрос, наблюдение, артефакт и правило понижения уверенности. Если нет capture row, скриншота, цитаты, цены, walkthrough-заметки или scorecard-метрики, то гипотеза не апгрейдится.');
+lines.push('');
+lines.push(mdTable(validationQuestionnaire.map(row => ({
+  h: row.hypothesis_id,
+  block: row.block_ru,
+  question: row.question_ru,
+  evidence: row.evidence_to_capture_ru,
+  pass: row.pass_signal_ru,
+  down: row.downgrade_signal_ru
+})), [
+  { key: 'h', label: 'Гипотеза' },
+  { key: 'block', label: 'Блок' },
+  { key: 'question', label: 'Вопрос / проверка' },
+  { key: 'evidence', label: 'Что сохранить' },
+  { key: 'pass', label: 'Сигнал усиления' },
+  { key: 'down', label: 'Сигнал ослабления' }
+]));
+lines.push('');
+lines.push('Такой порядок удерживает исследование от преждевременного вывода: сначала формулируется гипотеза, затем показывается рынок, затем конкуренты, затем открытые сомнения, затем интервью/прототип и только после этого обновляется решение. Для мирового рынка это особенно важно: объем данных большой, но решение должно приниматься не по размеру базы, а по тому, выдерживает ли продуктовая петля ручные проверки.');
+lines.push('');
 lines.push('## ИСТОЧНИКИ И ГРАНИЦЫ ДОКАЗАТЕЛЬСТВ');
 lines.push('');
 lines.push('Ниже зафиксирована короткая связка claim -> evidence -> boundary для этой мировой версии отчета. Это не полный manifest всех файлов, а читательский слой: он показывает, какие утверждения можно читать как desk/source support, а какие нельзя усиливать без ручных walkthrough, интервью, прототипных сессий или WTP-проверки.');
@@ -381,13 +516,14 @@ lines.push('1. Мировой рынок вокруг Alina есть, но ег�
 lines.push('2. Продуктовая ставка должна быть узкой: ежедневная причинная петля, а не комбайн функций.');
 lines.push('3. Самые важные проверки - hidden-clone walkthrough, paid-flow signoff, P0 ICP interviews и prototype sessions.');
 lines.push('4. Отчет должен оставаться на русском языке, но описывать мировой рынок и глобальные consumer-app категории.');
-lines.push('5. Финальный документ можно собирать в стиле предоставленного образца: гипотеза -> рынки -> конкуренты -> интервью -> уточнение гипотезы -> MVP -> вопросы -> вывод.');
+lines.push('5. Дальше исследование должно идти в строгой последовательности: гипотеза -> рынки -> конкуренты -> интервью -> уточнение гипотезы -> MVP -> вопросы -> вывод.');
 lines.push('');
 lines.push('## Локальные файлы');
 lines.push('');
 lines.push('- `reports/alina-global-hypothesis-report-v1.md`');
 lines.push('- `output/pdf/alina-global-hypothesis-report-v1.pdf`');
 lines.push('- `data_processed/global_hypothesis_source_appendix.csv`');
+lines.push('- `data_processed/global_hypothesis_validation_questionnaire.csv`');
 lines.push('- `reports/alina-russian-readable-report-v2.md`');
 lines.push('- `data_processed/russian_readable_niche_summary.csv`');
 lines.push('- `data_processed/validation_gate_calculator.csv`');
