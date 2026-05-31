@@ -296,6 +296,7 @@ def main() -> None:
     market_stress = read_csv("data_processed/market_sizing_stress_test.csv")
     evidence = read_csv("data_processed/evidence_claim_register.csv")
     completion = read_csv("data_processed/research_completion_audit.csv")
+    hypothesis_decisions = read_csv("data_processed/hypothesis_decision_matrix.csv")
     manifest = read_csv("data_processed/evidence_artifact_manifest.csv")
     revenue = read_csv("data_processed/competitor_revenue_proxy_review.csv")
     revenue_summary = read_csv("data_processed/competitor_revenue_proxy_market_summary.csv")
@@ -350,6 +351,9 @@ def main() -> None:
     p0_execution = [row for row in execution_dashboard if row.get("priority") == "P0"]
     p1_execution = [row for row in execution_dashboard if row.get("priority") == "P1"]
     capture_rows = len(manual_capture) + len(paid_capture) + len(icp_capture) + len(prototype_capture)
+    hold_hypotheses = [row for row in hypothesis_decisions if row.get("current_decision") == "hold_validate"]
+    go_hypotheses = [row for row in hypothesis_decisions if row.get("current_decision") == "go_for_next_phase"]
+    stop_hypotheses = [row for row in hypothesis_decisions if row.get("current_decision") == "stop_or_pivot"]
 
     metrics = {
         "Known raw source/app rows": number(known_raw_total),
@@ -361,6 +365,7 @@ def main() -> None:
         "Tracked CSV rows": number(csv_rows),
         "Competitor revenue proxy rows": number(len(revenue)),
         "Manual P0 inspection targets": number(len(manual)),
+        "Hypothesis decision rows": number(len(hypothesis_decisions)),
         "Validation capture rows": number(capture_rows),
     }
     build_doc_note(metrics)
@@ -450,6 +455,7 @@ def main() -> None:
                 ["Chrome mechanic battlecards", len(chrome_battlecards), "Browser-extension mechanics translated into whitespace lessons."],
                 ["Market assumption audit", len(market_assumptions), "TAM/SAM/SOM risk rows by market and intersection."],
                 ["Market stress scenarios", len(market_stress), "Bottom-up sensitivity cases for reachable users, conversion, and ARPPU."],
+                ["Hypothesis decision rows", len(hypothesis_decisions), "H1-H6 operating gates with go/hold/kill criteria and next validation actions."],
                 ["Manifest source-like refs", source_refs, "Rows with URLs, package IDs, domains, source IDs, or comparable identifiers."],
                 ["Top-100 primary apps", len(primary_top100), "Human-facing competitor review layer."],
                 ["Behavior-tied progression signals", len(behavior_tied), "Strict signal is rare in metadata, hence manual inspection is critical."],
@@ -487,6 +493,37 @@ def main() -> None:
         ),
         Spacer(1, 0.14 * inch),
         BarChart("Completion audit status mix", [(k, v) for k, v in count_by(completion, "status").most_common()]),
+        Spacer(1, 0.14 * inch),
+        para("Hypothesis Decision Matrix", "H2"),
+        para(
+            "H1-H6 are not promoted from metadata alone. The matrix keeps hypotheses in hold/validate until walkthrough, paywall, ICP, or prototype evidence closes the relevant gate.",
+            "Body",
+        ),
+        table(
+            [["ID", "Decision", "Confidence", "Key gap", "Next action"]]
+            + [
+                [
+                    row.get("hypothesis_id"),
+                    row.get("current_decision"),
+                    row.get("confidence"),
+                    short(row.get("key_gap"), 115),
+                    short(row.get("next_action"), 115),
+                ]
+                for row in hypothesis_decisions
+            ],
+            [0.45 * inch, 1.15 * inch, 0.85 * inch, 2.25 * inch, 2.4 * inch],
+        ),
+        Spacer(1, 0.12 * inch),
+        table(
+            [
+                ["Decision state", "Rows", "Read"],
+                ["Hold / validate", len(hold_hypotheses), "Open evidence burden is explicit; this is the current dominant state."],
+                ["Go for next phase", len(go_hypotheses), "Only allowed after supporting evidence and confidence clear the gate."],
+                ["Stop or pivot", len(stop_hypotheses), "Triggered only by missing/weak/fatal evidence states or kill-gate evidence."],
+            ],
+            [1.65 * inch, 0.75 * inch, 4.7 * inch],
+            small=False,
+        ),
         PageBreak(),
         para("Market-Money Proxy Read", "H1"),
         para(
@@ -658,6 +695,7 @@ def main() -> None:
                 ["Audience", "data_processed/icp_segment_matrix.csv; data_processed/icp_validation_test_plan.csv"],
                 ["Prototype", "data_processed/prototype_validation_stimulus_flow.csv; data_processed/prototype_validation_scorecard.csv"],
                 ["Validation capture", "data_processed/manual_walkthrough_capture_sheet.csv; data_processed/paid_flow_capture_sheet.csv; data_processed/icp_interview_capture_sheet.csv; data_processed/prototype_session_capture_sheet.csv"],
+                ["Decision gates", "data_processed/hypothesis_decision_matrix.csv; docs/decision/hypothesis-decision-matrix-v1.md"],
                 ["Audit/provenance", "data_processed/evidence_claim_register.csv; data_processed/research_completion_audit.csv; data_processed/evidence_artifact_manifest.csv"],
             ],
             [1.7 * inch, 5.4 * inch],

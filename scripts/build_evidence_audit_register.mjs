@@ -133,6 +133,7 @@ const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
 const validationExecutionDashboard = csv('data_processed/validation_execution_dashboard.csv');
 const evidenceManifest = csv('data_processed/evidence_artifact_manifest.csv');
 const completionAudit = csv('data_processed/research_completion_audit.csv');
+const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv');
 const highUseMarketSources = marketSourceConfidence.filter(row => row.confidence_review_band === 'high_use');
 const rangeOnlyMarketSources = marketSourceConfidence.filter(row => ['low_use_range_only', 'context_only'].includes(row.confidence_review_band));
 const strongMonetizationMarkets = monetizationProxy.filter(row => row.monetization_proxy_band === 'strong_paid_behavior_proxy');
@@ -178,6 +179,9 @@ const manifestMissing = evidenceManifest.filter(row => row.exists !== 'yes');
 const manifestCsvRows = evidenceManifest.filter(row => row.file_path.endsWith('.csv'));
 const manifestTrackedRows = manifestCsvRows.reduce((sum, row) => sum + Number(row.row_count || 0), 0);
 const completionOpen = completionAudit.filter(row => !/^proved/.test(row.status));
+const holdHypothesisDecisions = hypothesisDecisions.filter(row => row.current_decision === 'hold_validate').length;
+const goHypothesisDecisions = hypothesisDecisions.filter(row => row.current_decision === 'go_for_next_phase').length;
+const stopHypothesisDecisions = hypothesisDecisions.filter(row => row.current_decision === 'stop_or_pivot').length;
 
 const rows = [
   {
@@ -218,6 +222,19 @@ const rows = [
     strongest_support: 'Completion audit maps the user objective to current proof, remaining gaps, and next actions, including scale, validation, and final PDF gaps.',
     key_gap: 'Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete.',
     next_action: 'Use completion audit to prioritize P0 validation and source expansion before any final completion claim.'
+  },
+  {
+    claim_id: 'REQ_hypothesis_decision_matrix',
+    claim_type: 'project_requirement',
+    claim: 'H1-H6 are translated into explicit go/hold/kill operating decisions.',
+    evidence_status: hypothesisDecisions.length ? 'proved_v1_open_validation_decisions' : 'missing',
+    confidence: hypothesisDecisions.length ? 'high' : 'low',
+    primary_metric: `${hypothesisDecisions.length} hypothesis decision rows; ${holdHypothesisDecisions} hold/validate; ${goHypothesisDecisions} go; ${stopHypothesisDecisions} stop/pivot`,
+    quantitative_evidence: `decision_rows=${hypothesisDecisions.length}; hold_validate=${holdHypothesisDecisions}; go_for_next_phase=${goHypothesisDecisions}; stop_or_pivot=${stopHypothesisDecisions}`,
+    evidence_files: 'data_processed/hypothesis_decision_matrix.csv;docs/decision/hypothesis-decision-matrix-v1.md',
+    strongest_support: 'Decision matrix links H1-H6 to current evidence status, confidence, go gates, hold gates, kill/pivot gates, next actions, workstreams, and capture rows.',
+    key_gap: 'Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open.',
+    next_action: 'Use the hold/validate rows as the next execution order and update decisions only after observed evidence is captured.'
   },
   {
     claim_id: 'REQ_competitor_universe',
@@ -374,6 +391,7 @@ lines.push('');
 lines.push('- Strongest proved project layers: plan/backlog, TAM/SAM/SOM v1, matrices, saved artifacts, PDF rendering, and GitHub versioning.');
 lines.push('- Traceability layer: evidence package manifest tracks raw/processed data, docs, reports, charts, PDFs, and generator scripts with row counts and short hashes.');
 lines.push('- Readiness layer: completion audit maps the original objective to proved, partial, draft, and validation-ready requirements.');
+lines.push('- Decision layer: hypothesis decision matrix converts H1-H6 into go/hold/kill gates and keeps open validation burden visible.');
 lines.push('- Strongest product evidence: adjacent markets are monetized; the user language around daily ritual/progress is real; strict behavior-tied avatar progression remains narrow in current metadata.');
 lines.push('- Weakest remaining proof: human validation of competitors, actual in-app paywall/onboarding flows, real user prototype response, and final source-by-source market sizing review.');
 lines.push('- Current decision should remain conditional-go for validation, not full product-build go.');

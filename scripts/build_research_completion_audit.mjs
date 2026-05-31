@@ -127,12 +127,16 @@ const manualWalkthroughCapture = csv('data_processed/manual_walkthrough_capture_
 const paidFlowCapture = csv('data_processed/paid_flow_capture_sheet.csv');
 const icpInterviewCapture = csv('data_processed/icp_interview_capture_sheet.csv');
 const prototypeSessionCapture = csv('data_processed/prototype_session_capture_sheet.csv');
+const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv');
 
 const p0Roadmap = roadmap.filter(row => row.priority === 'P0');
 const p1Roadmap = roadmap.filter(row => row.priority === 'P1');
 const p0ExecutionTasks = validationExecutionDashboard.filter(row => row.priority === 'P0');
 const p1ExecutionTasks = validationExecutionDashboard.filter(row => row.priority === 'P1');
 const validationCaptureRows = manualWalkthroughCapture.length + paidFlowCapture.length + icpInterviewCapture.length + prototypeSessionCapture.length;
+const holdHypothesisDecisions = hypothesisDecisions.filter(row => row.current_decision === 'hold_validate').length;
+const goHypothesisDecisions = hypothesisDecisions.filter(row => row.current_decision === 'go_for_next_phase').length;
+const stopHypothesisDecisions = hypothesisDecisions.filter(row => row.current_decision === 'stop_or_pivot').length;
 const humanConfirmed = validationQueue.filter(row => !['', 'not_started'].includes(row.validation_status)).length;
 const manualInspectionDone = manualInspectionPacket.filter(row => !['', 'not_started'].includes(row.inspection_status)).length;
 const publicListingInspected = publicListingInspection.filter(row => row.public_listing_inspection_status === 'public_listing_inspected').length;
@@ -165,8 +169,8 @@ const requirements = [
     objective_source: 'User requested a large plan and autonomous execution path.',
     status: fs.existsSync('docs/research-expansion-master-plan.md') && roadmap.length ? 'proved_v1' : 'missing',
     evidence_strength: 'strong',
-    proof: `master_plan=${fs.existsSync('docs/research-expansion-master-plan.md')}; roadmap_rows=${roadmap.length}; execution_dashboard_rows=${validationExecutionDashboard.length}`,
-    evidence_files: 'docs/research-expansion-master-plan.md;data_processed/validation_gap_roadmap.csv;data_processed/validation_execution_dashboard.csv;docs/decision/validation-gap-roadmap-v1.md;docs/decision/validation-execution-dashboard-v1.md',
+    proof: `master_plan=${fs.existsSync('docs/research-expansion-master-plan.md')}; roadmap_rows=${roadmap.length}; execution_dashboard_rows=${validationExecutionDashboard.length}; hypothesis_decision_rows=${hypothesisDecisions.length}`,
+    evidence_files: 'docs/research-expansion-master-plan.md;data_processed/validation_gap_roadmap.csv;data_processed/validation_execution_dashboard.csv;data_processed/hypothesis_decision_matrix.csv;docs/decision/validation-gap-roadmap-v1.md;docs/decision/validation-execution-dashboard-v1.md;docs/decision/hypothesis-decision-matrix-v1.md',
     remaining_gap: 'Keep refreshing as validation results change.',
     next_action: 'Update after any manual validation/prototype result.'
   },
@@ -264,8 +268,8 @@ const requirements = [
     objective_source: 'User wanted critical thinking and continued work when information is missing.',
     status: roadmap.length && validationExecutionDashboard.length && validationCaptureRows ? 'proved_v1_open_gates_capture_ready' : (roadmap.length && validationExecutionDashboard.length ? 'proved_v1_open_gates_execution_dashboard_ready' : (roadmap.length ? 'proved_v1_open_gates' : 'missing')),
     evidence_strength: 'strong',
-    proof: `roadmap_rows=${roadmap.length}; p0=${p0Roadmap.length}; p1=${p1Roadmap.length}; execution_tasks=${validationExecutionDashboard.length}; execution_p0=${p0ExecutionTasks.length}; execution_p1=${p1ExecutionTasks.length}; capture_rows=${validationCaptureRows}; manual_capture_rows=${manualWalkthroughCapture.length}; paid_capture_rows=${paidFlowCapture.length}; icp_capture_rows=${icpInterviewCapture.length}; prototype_capture_rows=${prototypeSessionCapture.length}; human_confirmed=${humanConfirmed}; manual_inspection_targets=${manualInspectionPacket.length}; public_listing_inspected=${publicListingInspected}; manual_app_walkthrough_done=${manualInspectionDone}`,
-    evidence_files: 'data_processed/validation_gap_roadmap.csv;data_processed/validation_execution_dashboard.csv;data_processed/manual_walkthrough_capture_sheet.csv;data_processed/paid_flow_capture_sheet.csv;data_processed/icp_interview_capture_sheet.csv;data_processed/prototype_session_capture_sheet.csv;docs/decision/validation-gap-roadmap-v1.md;docs/decision/validation-execution-dashboard-v1.md;docs/decision/validation-capture-sheets-v1.md;data_processed/top100_human_validation_queue.csv;data_processed/manual_competitor_inspection_packet.csv;data_processed/public_listing_inspection_results.csv;docs/competitive/manual-competitor-inspection-packet-v1.md;docs/competitive/public-listing-inspection-v1.md',
+    proof: `roadmap_rows=${roadmap.length}; p0=${p0Roadmap.length}; p1=${p1Roadmap.length}; execution_tasks=${validationExecutionDashboard.length}; execution_p0=${p0ExecutionTasks.length}; execution_p1=${p1ExecutionTasks.length}; hypothesis_decision_rows=${hypothesisDecisions.length}; hypothesis_hold=${holdHypothesisDecisions}; hypothesis_go=${goHypothesisDecisions}; hypothesis_stop=${stopHypothesisDecisions}; capture_rows=${validationCaptureRows}; manual_capture_rows=${manualWalkthroughCapture.length}; paid_capture_rows=${paidFlowCapture.length}; icp_capture_rows=${icpInterviewCapture.length}; prototype_capture_rows=${prototypeSessionCapture.length}; human_confirmed=${humanConfirmed}; manual_inspection_targets=${manualInspectionPacket.length}; public_listing_inspected=${publicListingInspected}; manual_app_walkthrough_done=${manualInspectionDone}`,
+    evidence_files: 'data_processed/validation_gap_roadmap.csv;data_processed/validation_execution_dashboard.csv;data_processed/hypothesis_decision_matrix.csv;data_processed/manual_walkthrough_capture_sheet.csv;data_processed/paid_flow_capture_sheet.csv;data_processed/icp_interview_capture_sheet.csv;data_processed/prototype_session_capture_sheet.csv;docs/decision/validation-gap-roadmap-v1.md;docs/decision/validation-execution-dashboard-v1.md;docs/decision/hypothesis-decision-matrix-v1.md;docs/decision/validation-capture-sheets-v1.md;data_processed/top100_human_validation_queue.csv;data_processed/manual_competitor_inspection_packet.csv;data_processed/public_listing_inspection_results.csv;docs/competitive/manual-competitor-inspection-packet-v1.md;docs/competitive/public-listing-inspection-v1.md',
     remaining_gap: 'Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation.',
     next_action: 'Execute P0 rows in the validation execution dashboard, then update source CSVs and final verdicts.'
   }

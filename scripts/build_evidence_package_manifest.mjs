@@ -95,7 +95,7 @@ function evidenceRole(file) {
   if (/tam|som|market|monetization|pricing|iap|paywall/.test(file)) return 'market_money';
   if (/whitespace|product_core|battlecard|top100/.test(file)) return 'competitive_whitespace';
   if (/audience|review|forum|icp/.test(file)) return 'audience_icp';
-  if (/evidence|validation|roadmap|status|report|pdf|chart/.test(file)) return 'decision_artifact';
+  if (/evidence|validation|roadmap|status|report|pdf|chart|hypothesis/.test(file)) return 'decision_artifact';
   if (/source|registry|claim/.test(file)) return 'source_claim';
   return 'supporting';
 }
@@ -215,6 +215,7 @@ const requiredArtifacts = [
   'data_processed/icp_validation_test_plan.csv',
   'data_processed/prototype_validation_stimulus_flow.csv',
   'data_processed/prototype_validation_scorecard.csv',
+  'data_processed/hypothesis_decision_matrix.csv',
   'data_processed/evidence_claim_register.csv',
   'data_processed/validation_gap_roadmap.csv',
   'data_processed/validation_execution_dashboard.csv',

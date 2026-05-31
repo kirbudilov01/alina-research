@@ -137,6 +137,7 @@ const crossSourceCoverage = csv('data_processed/cross_source_coverage_matrix.csv
 const crossSourceSaturation = csv('data_processed/cross_source_market_saturation_matrix.csv');
 const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
 const validationExecutionDashboard = csv('data_processed/validation_execution_dashboard.csv');
+const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv');
 const manualWalkthroughCapture = csv('data_processed/manual_walkthrough_capture_sheet.csv');
 const paidFlowCapture = csv('data_processed/paid_flow_capture_sheet.csv');
 const icpInterviewCapture = csv('data_processed/icp_interview_capture_sheet.csv');
@@ -200,6 +201,9 @@ const manifestMissing = evidenceManifest.filter(r => r.exists !== 'yes');
 const manifestCsvRows = evidenceManifest.filter(r => r.file_path.endsWith('.csv'));
 const manifestTrackedRows = manifestCsvRows.reduce((sum, row) => sum + Number(row.row_count || 0), 0);
 const completionOpen = completionAudit.filter(r => !/^proved/.test(r.status));
+const holdHypothesisDecisions = hypothesisDecisions.filter(r => r.current_decision === 'hold_validate');
+const goHypothesisDecisions = hypothesisDecisions.filter(r => r.current_decision === 'go_for_next_phase');
+const stopHypothesisDecisions = hypothesisDecisions.filter(r => r.current_decision === 'stop_or_pivot');
 
 const report = [];
 
@@ -244,6 +248,7 @@ report.push(`- Chrome extension detail enrichment: ${chromeExtensionDetailOk.len
 report.push(`- Chrome mechanic battlecards: ${chromeExtensionBattlecards.length} browser-extension cards, ${chromeMechanicPriority.length} high/medium references for manual mechanic inspection.`);
 report.push(`- Validation gap roadmap: ${validationGapRoadmap.length} rows; ${validationRoadmapP0.length} P0 and ${validationRoadmapP1.length} P1 next validation tasks across markets, hypotheses, and cross-source checks.`);
 report.push(`- Validation execution dashboard: ${validationExecutionDashboard.length} concrete execution tasks; ${validationExecutionP0.length} P0 and ${validationExecutionP1.length} P1.`);
+report.push(`- H1-H6 hypothesis decision matrix: ${hypothesisDecisions.length} rows; ${holdHypothesisDecisions.length} hold/validate, ${goHypothesisDecisions.length} go, ${stopHypothesisDecisions.length} stop/pivot.`);
 report.push(`- Validation capture sheets: ${validationCaptureRows} fillable capture rows across manual walkthrough, paid-flow, ICP interview, and prototype-session evidence.`);
 report.push(`- Market source confidence review: ${marketSourceConfidence.length} sources graded; ${highUseMarketSources.length} high-use anchors and ${rangeOnlyMarketSources.length} range-only/context sources.`);
 report.push(`- Market sizing stress test: ${marketAssumptionAudit.length} assumption-risk rows and ${marketStressTest.length} bottom-up stress scenarios.`);
@@ -298,6 +303,35 @@ if (evidenceAudit.length) {
   ], evidenceAudit.length));
   report.push('');
 }
+if (hypothesisDecisions.length) {
+  report.push('## 2C. Hypothesis Decision Matrix');
+  report.push('');
+  report.push('The H1-H6 decision matrix converts the claim register into operating gates. It is deliberately conservative: open manual walkthrough, paid-flow, ICP, and prototype evidence keeps hypotheses in hold/validate instead of allowing metadata-only graduation.');
+  report.push('');
+  report.push('Decision mix:');
+  report.push('');
+  report.push(bulletCounts(countBy(hypothesisDecisions, 'current_decision')));
+  report.push('');
+  report.push(mdTable(hypothesisDecisions, [
+    { key: 'hypothesis_id', label: 'ID' },
+    { key: 'hypothesis', label: 'Hypothesis' },
+    { key: 'current_decision', label: 'Decision' },
+    { key: 'confidence', label: 'Confidence' },
+    { key: 'primary_metric', label: 'Primary Metric' },
+    { key: 'key_gap', label: 'Key Gap' },
+    { key: 'next_action', label: 'Next Action' }
+  ], hypothesisDecisions.length));
+  report.push('');
+  report.push('Go/hold/kill gate snapshot:');
+  report.push('');
+  report.push(mdTable(hypothesisDecisions, [
+    { key: 'hypothesis_id', label: 'ID' },
+    { key: 'go_gate', label: 'Go Gate' },
+    { key: 'hold_gate', label: 'Hold Gate' },
+    { key: 'kill_gate', label: 'Kill/Pivot Gate' }
+  ], hypothesisDecisions.length));
+  report.push('');
+}
 if (evidenceManifest.length) {
   report.push('## 2D. Evidence Package Manifest');
   report.push('');
@@ -340,7 +374,7 @@ if (completionAudit.length) {
   report.push('');
 }
 if (validationGapRoadmap.length) {
-  report.push('## 2C. Validation Gap Roadmap');
+  report.push('## 2F. Validation Gap Roadmap');
   report.push('');
   report.push('The research now includes a validation roadmap that turns current evidence gaps into explicit success gates. This keeps the project honest: a claim is not final merely because a table exists.');
   report.push('');
@@ -1247,6 +1281,7 @@ report.push('- `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`');
 report.push('- `docs/decision/evidence-audit-v1.md`');
 report.push('- `docs/decision/evidence-package-manifest-v1.md`');
 report.push('- `docs/decision/research-completion-audit-v1.md`');
+report.push('- `docs/decision/hypothesis-decision-matrix-v1.md`');
 report.push('- `docs/decision/validation-gap-roadmap-v1.md`');
 report.push('- `docs/decision/validation-execution-dashboard-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
@@ -1258,6 +1293,7 @@ report.push('- `data_processed/monetization_proxy_examples.csv`');
 report.push('- `data_processed/evidence_claim_register.csv`');
 report.push('- `data_processed/evidence_artifact_manifest.csv`');
 report.push('- `data_processed/research_completion_audit.csv`');
+report.push('- `data_processed/hypothesis_decision_matrix.csv`');
 report.push('- `data_processed/source_expansion_backlog.csv`');
 report.push('- `data_processed/p0_external_source_summary.csv`');
 report.push('- `data_processed/itch_source_summary.csv`');
@@ -1352,6 +1388,7 @@ status.push(mdTable([
   { requirement: 'Chrome extension mechanic battlecards', evidence: 'data_processed/chrome_extension_mechanic_battlecards.csv; docs/competitive/chrome-extension-mechanic-battlecards-v1.md', status: 'done v1; converts enriched Chrome candidates into mechanic lessons, whitespace implications, and validation tasks' },
   { requirement: 'Validation gap roadmap', evidence: 'data_processed/validation_gap_roadmap.csv; docs/decision/validation-gap-roadmap-v1.md', status: 'done v1; maps five markets and H1-H6 gaps into P0/P1 success gates' },
   { requirement: 'Validation execution dashboard', evidence: 'data_processed/validation_execution_dashboard.csv; docs/decision/validation-execution-dashboard-v1.md', status: 'done v1; converts open gates into ranked execution tasks, exact evidence requirements, success gates, and downgrade gates' },
+  { requirement: 'H1-H6 hypothesis decision matrix', evidence: 'data_processed/hypothesis_decision_matrix.csv; docs/decision/hypothesis-decision-matrix-v1.md', status: `done v1; ${holdHypothesisDecisions.length} hold/validate rows keep open gates explicit before final go/no-go` },
   { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; docs/market/competitor-revenue-proxy-review-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv; data_processed/competitor_revenue_proxy_review.csv; data_processed/competitor_revenue_proxy_market_summary.csv', status: 'done v1; source confidence, market monetization proxy, and bottom-up competitor revenue proxy layers added; model remains range-based and not final forecast' },
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
@@ -1408,6 +1445,7 @@ console.log(`public_listing_visible_causality=${publicListingVisibleCausality.le
 console.log(`evidence_audit_rows=${evidenceAudit.length}`);
 console.log(`evidence_manifest_rows=${evidenceManifest.length}`);
 console.log(`completion_audit_rows=${completionAudit.length}`);
+console.log(`hypothesis_decision_rows=${hypothesisDecisions.length}`);
 console.log(`source_expansion_backlog_rows=${sourceExpansionBacklog.length}`);
 console.log(`p0_external_rows=${p0ExternalSources.length}`);
 console.log(`p0_external_usable=${p0ExternalUsable.length}`);
