@@ -6,7 +6,7 @@
 
 Alina стоит дальше проверять как мировую consumer-app гипотезу на пересечении personal meaning, tiny action, short reset и visible progress. Сейчас это не доказанный продукт и не финальный инвестиционный claim. Это большой evidence-first пакет, который показывает: вокруг идеи есть пять платежеспособных adjacent-направлений, заметная конкурентная плотность, рабочая TAM/SAM/SOM методология, предварительное whitespace-окно и понятная P0-очередь валидации.
 
-Масштаб базы сейчас: 67,525 сырьевых source-строк, 36,694 уникализированных строк и 515 локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.
+Масштаб базы сейчас: 67,525 сырьевых source-строк, 36,694 уникализированных строк и 518 локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.
 
 ## Главные числа
 
@@ -118,6 +118,8 @@ P0 execution slice для первой рабочей сессии:
 | 11 | Затем ICP recent behavior | P0_ICP_ICP_A_T01 | Spiritual self-improvers / screener | H5/H6 | data_processed/icp_validation_test_plan.csv |
 | 12 | Затем ICP recent behavior | P0_ICP_ICP_A_T02 | Spiritual self-improvers / problem_interview | H5/H6 | data_processed/icp_validation_test_plan.csv |
 
+Observed evidence intake: 18 P0 задач уже связаны с конкретными capture IDs и полями для заполнения. Это не доказательство, а входная карта для фактического observed evidence.
+
 | ID | H | Следующий шаг | Куда писать evidence |
 | --- | --- | --- | --- |
 | P0_MANUAL_01 | H1/H3 | открыть listing/app, сохранить 5 слотов скриншотов, записать full-loop/directness/causality verdict | data_processed/manual_competitor_inspection_packet.csv |
@@ -146,4 +148,5 @@ P0 execution slice для первой рабочей сессии:
 - `data_processed/russian_frontmatter_dashboard.csv`
 - `data_processed/niche_count_reconciliation.csv`
 - `data_processed/p0_validation_execution_slice.csv`
+- `data_processed/p0_observed_evidence_intake.csv`
 - `data_processed/russian_reader_glossary.csv`

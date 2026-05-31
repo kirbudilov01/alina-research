@@ -382,6 +382,7 @@ reportLines.push('- `data_processed/russian_reader_glossary.csv`');
 reportLines.push('- `docs/decision/russian-reader-glossary-v1.md`');
 reportLines.push('- `data_processed/evidence_artifact_manifest.csv`');
 reportLines.push('- `data_processed/p0_validation_execution_slice.csv`');
+reportLines.push('- `data_processed/p0_observed_evidence_intake.csv`');
 
 fs.writeFileSync(REPORT_OUT, `${reportLines.join('\n')}\n`);
 

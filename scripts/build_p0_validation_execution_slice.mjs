@@ -215,6 +215,7 @@ lines.push('');
 lines.push('## Files');
 lines.push('');
 lines.push(`- \`${OUT}\``);
+lines.push('- `data_processed/p0_observed_evidence_intake.csv`');
 lines.push('- `data_processed/global_next_validation_backlog.csv`');
 lines.push('- `data_processed/p0_validation_command_center.csv`');
 

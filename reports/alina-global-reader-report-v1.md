@@ -10,7 +10,7 @@
 
 ## Сначала числа, чтобы не потеряться
 
-Собрано 67,525 сырьевых строк и 36,694 global dedup строк. В manifest сейчас 515 локальных артефактов; missing=0. По пяти нишам direct app-store слой дает 13,117 строк, а all-source niche слой дает 43,144 строк. Эти числа отвечают на разные вопросы и не складываются в одно “количество приложений”.
+Собрано 67,525 сырьевых строк и 36,694 global dedup строк. В manifest сейчас 518 локальных артефактов; missing=0. По пяти нишам direct app-store слой дает 13,117 строк, а all-source niche слой дает 43,144 строк. Эти числа отвечают на разные вопросы и не складываются в одно “количество приложений”.
 
 | Направление | Роль в гипотезе Alina | Сколько данных | Как читать осторожно |
 | --- | --- | --- | --- |
@@ -120,3 +120,4 @@ MVP должен проверить не весь будущий продукт,
 - `docs/decision/russian-reader-glossary-v1.md`
 - `data_processed/evidence_artifact_manifest.csv`
 - `data_processed/p0_validation_execution_slice.csv`
+- `data_processed/p0_observed_evidence_intake.csv`

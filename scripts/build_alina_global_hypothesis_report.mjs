@@ -215,6 +215,7 @@ const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv
 const marketSources = csv('data_processed/market_source_registry.csv');
 const nextValidationBacklog = csv('data_processed/global_next_validation_backlog.csv');
 const p0ValidationExecutionSlice = csv('data_processed/p0_validation_execution_slice.csv');
+const p0ObservedEvidenceIntake = csv('data_processed/p0_observed_evidence_intake.csv');
 const readerGlossary = csv('data_processed/russian_reader_glossary.csv');
 const reportReadabilityAudit = csv('data_processed/global_report_readability_audit.csv');
 const sourceQualityAudit = csv('data_processed/global_source_quality_gap_audit.csv');
@@ -528,6 +529,15 @@ const sourceAppendix = [
     primary_metric: `${readerGlossary.length} glossary rows`,
     evidence_files: 'reports/alina-global-reader-report-v1.md;data_processed/russian_reader_glossary.csv;docs/decision/russian-reader-glossary-v1.md;data_processed/global_report_readability_audit.csv',
     source_boundary_ru: 'Reader/glossary слой улучшает форму подачи; он не закрывает H1-H6 и не заменяет observed validation.'
+  },
+  {
+    claim_id: 'SRC_18_P0_OBSERVED_INTAKE',
+    report_section: 'Ближайшая очередь валидации',
+    claim_ru: 'Для первых P0 задач добавлен intake-ledger: каждая задача связана с точными capture IDs, полями для заполнения и rebuild rule.',
+    evidence_status_ru: 'доказано как intake routing, не observed validation',
+    primary_metric: `${p0ObservedEvidenceIntake.length} intake rows`,
+    evidence_files: 'data_processed/p0_observed_evidence_intake.csv;docs/decision/p0-observed-evidence-intake-v1.md;data_processed/p0_validation_execution_slice.csv;data_processed/manual_walkthrough_capture_sheet.csv;data_processed/paid_flow_capture_sheet.csv;data_processed/icp_interview_capture_sheet.csv;data_processed/prototype_session_capture_sheet.csv',
+    source_boundary_ru: 'Intake-ledger приближает ручную работу к source capture rows; он не апгрейдит H1-H6 без заполненных observed answers/screenshots/quotes/scores.'
   }
 ];
 
@@ -1200,6 +1210,7 @@ lines.push('- `data_processed/global_hypothesis_validation_questionnaire.csv`');
 lines.push('- `data_processed/global_hypothesis_gate_snapshot.csv`');
 lines.push('- `data_processed/global_next_validation_backlog.csv`');
 lines.push('- `data_processed/p0_validation_execution_slice.csv`');
+lines.push('- `data_processed/p0_observed_evidence_intake.csv`');
 lines.push('- `data_processed/russian_reader_glossary.csv`');
 lines.push('- `data_processed/global_report_readability_audit.csv`');
 lines.push('- `data_processed/global_source_quality_gap_audit.csv`');

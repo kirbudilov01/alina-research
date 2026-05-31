@@ -116,6 +116,7 @@ const validationRollup = csv('data_processed/global_validation_executive_rollup.
 const russianStoryline = csv('data_processed/russian_sequential_storyline.csv');
 const frontmatterDashboard = csv('data_processed/russian_frontmatter_dashboard.csv');
 const p0ValidationExecutionSlice = csv('data_processed/p0_validation_execution_slice.csv');
+const p0ObservedEvidenceIntake = csv('data_processed/p0_observed_evidence_intake.csv');
 
 const intersection = by(tam, 'pillar', 'intersection');
 const holdGates = gates.filter(row => clean(row.decision_ru) === 'оставить hold_validate');
@@ -292,6 +293,10 @@ if (p0ValidationExecutionSlice.length) {
   ]));
   lines.push('');
 }
+if (p0ObservedEvidenceIntake.length) {
+  lines.push(`Observed evidence intake: ${p0ObservedEvidenceIntake.length} P0 задач уже связаны с конкретными capture IDs и полями для заполнения. Это не доказательство, а входная карта для фактического observed evidence.`);
+  lines.push('');
+}
 lines.push(mdTable(nextBacklog.slice(0, 8).map(row => ({
   id: row.command_id || row.task_id || row.backlog_id,
   h: row.linked_hypotheses || row.hypothesis_id,
@@ -321,6 +326,7 @@ lines.push('- `data_processed/russian_sequential_storyline.csv`');
 lines.push('- `data_processed/russian_frontmatter_dashboard.csv`');
 lines.push('- `data_processed/niche_count_reconciliation.csv`');
 lines.push('- `data_processed/p0_validation_execution_slice.csv`');
+lines.push('- `data_processed/p0_observed_evidence_intake.csv`');
 lines.push('- `data_processed/russian_reader_glossary.csv`');
 
 fs.writeFileSync(OUT, `${lines.join('\n')}\n`);
