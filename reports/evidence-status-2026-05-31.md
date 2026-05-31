@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T07:11:24.926Z
+Generated: 2026-05-31T07:19:32.837Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -11,6 +11,7 @@ Generated: 2026-05-31T07:11:24.926Z
 | Source-native itch.io expansion | data_raw/expanded_itch_raw.csv; data_processed/itch_source_summary.csv; docs/competitive/itch-source-expansion-v1.md | done v1; adds web-game/mechanic discovery rows for gaming, mindfulness, and avatar/identity without broad search-engine crawling |
 | Source-native Steam tag expansion | data_raw/expanded_steam_tags_raw.csv; data_processed/steam_tag_source_summary.csv; docs/competitive/steam-tag-expansion-v1.md | done v1; adds PC progression/cozy/avatar mechanic benchmarks without broad search-engine crawling |
 | Source-native desktop store expansion | data_raw/expanded_desktop_store_raw.csv; data_processed/desktop_store_source_summary.csv; docs/competitive/desktop-store-expansion-v1.md | done v1; adds Mac App Store desktop wellness/productivity/avatar/game references through a source-native API, not broad search crawling |
+| Cross-source universe normalization | data_processed/cross_source_universe_raw.csv; data_processed/cross_source_universe_dedup.csv; data_processed/cross_source_universe_summary.csv; docs/competitive/cross-source-universe-v1.md | done v1; normalizes core app-store, Google Play fallback, itch.io, Steam, desktop store, and Chrome rows into one provenance-preserving universe |
 | Chrome extension detail enrichment | data_raw/chrome_extension_detail_raw.csv; data_processed/chrome_extension_fit_matrix.csv; docs/competitive/chrome-extension-detail-enrichment-v1.md | done v1; detail pages parsed for known Chrome candidates only, producing fit bands and mechanic tags without broad search expansion |
 | Chrome extension mechanic battlecards | data_processed/chrome_extension_mechanic_battlecards.csv; docs/competitive/chrome-extension-mechanic-battlecards-v1.md | done v1; converts enriched Chrome candidates into mechanic lessons, whitespace implications, and validation tasks |
 | Validation gap roadmap | data_processed/validation_gap_roadmap.csv; docs/decision/validation-gap-roadmap-v1.md | done v1; maps five markets and H1-H6 gaps into P0/P1 success gates |
