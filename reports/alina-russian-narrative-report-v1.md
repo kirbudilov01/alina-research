@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T12:33:20.667Z
+Собрано: 2026-05-31T12:39:49.260Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 411 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 414 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 411 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 414 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -413,6 +413,39 @@ Product-core evidence и prototype stimulus переводят исследов�
 
 Этот packet не усиливает claims сам по себе. Он только делает ручную валидацию исполнимой и защищает отчет от stale publication после новых evidence.
 
+## 9.2.2. Русские P0 competitor walkthrough dossiers
+
+Чтобы первый ручной walkthrough был не абстрактным "посмотреть конкурентов", добавлены P0 dossiers на 12 конкурентов. Каждый dossier связывает public listing risk, hidden-clone риск, 5 обязательных screenshot slots, decisive questions и правило изменения H1/H3/H2 после проверки.
+
+| # | Конкурент | Риск | Slots | Done | Как меняет claim |
+| --- | --- | --- | ---: | ---: | --- |
+| 1 | Shepherd: Spiritual Bible BFF | красный риск: возможный скрытый прямой клон полной петли | 5 | 0 | если walkthrough подтверждает полный цикл, H3 надо ослабить и явно признать direct clone risk; если нет, Shepherd остается важным reference competitor, но whitespace survives narrower. |
+| 2 | Zing AI: Home & Gym Workouts | средний риск: adjacent loop может оказаться близким после onboarding | 5 | 0 | если onboarding не показывает causality, использовать как adjacent benchmark; если неожиданно есть action -> identity/progress, поднять в hidden-clone review. |
+| 3 | Miracle Morning Routine | низкий публичный риск: листинг поддерживает adjacency, но не доказывает full-loop clone | 5 | 0 | если onboarding не показывает causality, использовать как adjacent benchmark; если неожиданно есть action -> identity/progress, поднять в hidden-clone review. |
+| 4 | EVOLVE: Transform Your Life | желтый риск: публичный текст похож на строгую петлю, но причинность надо увидеть в приложении | 5 | 0 | если causality видна в first session, H1/H3 получают сильный competitor boundary; если нет, downgrade public-listing claim до adjacent/progression only. |
+| 5 | Daily Yoga: Yoga for Fitness® | низкий публичный риск: листинг поддерживает adjacency, но не доказывает full-loop clone | 5 | 0 | если onboarding не показывает causality, использовать как adjacent benchmark; если неожиданно есть action -> identity/progress, поднять в hidden-clone review. |
+| 6 | Daily Burn: Workout Coach | желтый риск: публичный текст похож на строгую петлю, но причинность надо увидеть в приложении | 5 | 0 | если causality видна в first session, H1/H3 получают сильный competitor boundary; если нет, downgrade public-listing claim до adjacent/progression only. |
+| 7 | Myla : Manifest & Vision Board | средний риск: adjacent loop может оказаться близким после onboarding | 5 | 0 | если onboarding не показывает causality, использовать как adjacent benchmark; если неожиданно есть action -> identity/progress, поднять в hidden-clone review. |
+| 8 | Rosebud: AI Journal & Diary | средний риск: adjacent loop может оказаться близким после onboarding | 5 | 0 | если onboarding не показывает causality, использовать как adjacent benchmark; если неожиданно есть action -> identity/progress, поднять в hidden-clone review. |
+| 9 | Habit Tracker : Haby | средний риск: adjacent loop может оказаться близким после onboarding | 5 | 0 | если onboarding не показывает causality, использовать как adjacent benchmark; если неожиданно есть action -> identity/progress, поднять в hidden-clone review. |
+| 10 | Goddess・Women's Wellness Coach | низкий публичный риск: листинг поддерживает adjacency, но не доказывает full-loop clone | 5 | 0 | если onboarding не показывает causality, использовать как adjacent benchmark; если неожиданно есть action -> identity/progress, поднять в hidden-clone review. |
+| 11 | LifeWheel Goal Habit Tracker | средний риск: adjacent loop может оказаться близким после onboarding | 5 | 0 | если onboarding не показывает causality, использовать как adjacent benchmark; если неожиданно есть action -> identity/progress, поднять в hidden-clone review. |
+| 12 | Habit Tracker | средний риск: adjacent loop может оказаться близким после onboarding | 5 | 0 | если onboarding не показывает causality, использовать как adjacent benchmark; если неожиданно есть action -> identity/progress, поднять в hidden-clone review. |
+
+**1. Shepherd: Spiritual Bible BFF.** красный риск: возможный скрытый прямой клон полной петли Сначала сохранить: output/manual_validation/01-shepherd-spiritual-bible-bff-app_store_listing_or_public_positioning.png|output/manual_validation/01-shepherd-spiritual-bible-bff-onboarding_first_value_screen.png|output/manual_validation/01-shepherd-spiritual-bible-bff-first_daily_action_or_task_screen.png|output/manual_validation/01-shepherd-spiritual-bible-bff-progress_avatar_identity_feedback_screen.png|output/manual_validation/01-shepherd-spiritual-bible-bff-first_paywall_or_iap_terms_screen.png. После walkthrough: если walkthrough подтверждает полный цикл, H3 надо ослабить и явно признать direct clone risk; если нет, Shepherd остается важным reference competitor, но whitespace survives narrower.
+
+**2. Zing AI: Home & Gym Workouts.** средний риск: adjacent loop может оказаться близким после onboarding Сначала сохранить: output/manual_validation/02-zing-ai-home-gym-workouts-app_store_listing_or_public_positioning.png|output/manual_validation/02-zing-ai-home-gym-workouts-onboarding_first_value_screen.png|output/manual_validation/02-zing-ai-home-gym-workouts-first_daily_action_or_task_screen.png|output/manual_validation/02-zing-ai-home-gym-workouts-progress_avatar_identity_feedback_screen.png|output/manual_validation/02-zing-ai-home-gym-workouts-first_paywall_or_iap_terms_screen.png. После walkthrough: если onboarding не показывает causality, использовать как adjacent benchmark; если неожиданно есть action -> identity/progress, поднять в hidden-clone review.
+
+**3. Miracle Morning Routine.** низкий публичный риск: листинг поддерживает adjacency, но не доказывает full-loop clone Сначала сохранить: output/manual_validation/03-miracle-morning-routine-app_store_listing_or_public_positioning.png|output/manual_validation/03-miracle-morning-routine-onboarding_first_value_screen.png|output/manual_validation/03-miracle-morning-routine-first_daily_action_or_task_screen.png|output/manual_validation/03-miracle-morning-routine-progress_avatar_identity_feedback_screen.png|output/manual_validation/03-miracle-morning-routine-first_paywall_or_iap_terms_screen.png. После walkthrough: если onboarding не показывает causality, использовать как adjacent benchmark; если неожиданно есть action -> identity/progress, поднять в hidden-clone review.
+
+**4. EVOLVE: Transform Your Life.** желтый риск: публичный текст похож на строгую петлю, но причинность надо увидеть в приложении Сначала сохранить: output/manual_validation/04-evolve-transform-your-life-app_store_listing_or_public_positioning.png|output/manual_validation/04-evolve-transform-your-life-onboarding_first_value_screen.png|output/manual_validation/04-evolve-transform-your-life-first_daily_action_or_task_screen.png|output/manual_validation/04-evolve-transform-your-life-progress_avatar_identity_feedback_screen.png|output/manual_validation/04-evolve-transform-your-life-first_paywall_or_iap_terms_screen.png. После walkthrough: если causality видна в first session, H1/H3 получают сильный competitor boundary; если нет, downgrade public-listing claim до adjacent/progression only.
+
+**5. Daily Yoga: Yoga for Fitness®.** низкий публичный риск: листинг поддерживает adjacency, но не доказывает full-loop clone Сначала сохранить: output/manual_validation/05-daily-yoga-yoga-for-fitness-app_store_listing_or_public_positioning.png|output/manual_validation/05-daily-yoga-yoga-for-fitness-onboarding_first_value_screen.png|output/manual_validation/05-daily-yoga-yoga-for-fitness-first_daily_action_or_task_screen.png|output/manual_validation/05-daily-yoga-yoga-for-fitness-progress_avatar_identity_feedback_screen.png|output/manual_validation/05-daily-yoga-yoga-for-fitness-first_paywall_or_iap_terms_screen.png. После walkthrough: если onboarding не показывает causality, использовать как adjacent benchmark; если неожиданно есть action -> identity/progress, поднять в hidden-clone review.
+
+**6. Daily Burn: Workout Coach.** желтый риск: публичный текст похож на строгую петлю, но причинность надо увидеть в приложении Сначала сохранить: output/manual_validation/06-daily-burn-workout-coach-app_store_listing_or_public_positioning.png|output/manual_validation/06-daily-burn-workout-coach-onboarding_first_value_screen.png|output/manual_validation/06-daily-burn-workout-coach-first_daily_action_or_task_screen.png|output/manual_validation/06-daily-burn-workout-coach-progress_avatar_identity_feedback_screen.png|output/manual_validation/06-daily-burn-workout-coach-first_paywall_or_iap_terms_screen.png. После walkthrough: если causality видна в first session, H1/H3 получают сильный competitor boundary; если нет, downgrade public-listing claim до adjacent/progression only.
+
+Этот слой по-прежнему не закрывает H1/H3 сам по себе: он нужен, чтобы captured screenshots и labels были сопоставимыми между конкурентами.
+
 ## 9.3. Briefing-пакеты для первых tranches
 
 Чтобы оператор не прыгал между десятками CSV, создано 6 briefing-пакетов. Каждый пакет связывает одну tranche с конкретными capture rows, linked gates, success criteria, stop/downgrade rule и файлами, куда нужно записать результат. Это все еще не validation evidence, а рабочий маршрут для получения evidence.
@@ -510,6 +543,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_validation_gate_cards.csv`
 - `data_processed/russian_p0_execution_packet.csv`
 - `data_processed/russian_observed_evidence_ladder.csv`
+- `data_processed/russian_p0_walkthrough_dossiers.csv`
 - `data_processed/russian_validation_fieldbook.csv`
 - `data_processed/validation_tranche_planner.csv`
 - `data_processed/validation_tranche_briefing_index.csv`

@@ -135,6 +135,7 @@ const productLoopCards = csv('data_processed/russian_product_loop_cards.csv');
 const validationGateCards = csv('data_processed/russian_validation_gate_cards.csv');
 const p0ExecutionPacket = csv('data_processed/russian_p0_execution_packet.csv');
 const observedEvidenceLadder = csv('data_processed/russian_observed_evidence_ladder.csv');
+const p0WalkthroughDossiers = csv('data_processed/russian_p0_walkthrough_dossiers.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -506,6 +507,27 @@ if (p0ExecutionPacket.length) {
   lines.push('Этот packet не усиливает claims сам по себе. Он только делает ручную валидацию исполнимой и защищает отчет от stale publication после новых evidence.');
   lines.push('');
 }
+if (p0WalkthroughDossiers.length) {
+  lines.push('## 9.2.2. Русские P0 competitor walkthrough dossiers');
+  lines.push('');
+  lines.push(`Чтобы первый ручной walkthrough был не абстрактным "посмотреть конкурентов", добавлены P0 dossiers на ${p0WalkthroughDossiers.length} конкурентов. Каждый dossier связывает public listing risk, hidden-clone риск, 5 обязательных screenshot slots, decisive questions и правило изменения H1/H3/H2 после проверки.`);
+  lines.push('');
+  lines.push(mdTable(p0WalkthroughDossiers, [
+    { key: 'dossier_rank', label: '#' },
+    { key: 'app_name', label: 'Конкурент' },
+    { key: 'risk_read_ru', label: 'Риск' },
+    { key: 'required_slots_count', label: 'Slots', align: 'right' },
+    { key: 'completed_slots_count', label: 'Done', align: 'right' },
+    { key: 'claim_update_after_walkthrough_ru', label: 'Как меняет claim' }
+  ], p0WalkthroughDossiers.length));
+  lines.push('');
+  for (const row of p0WalkthroughDossiers.slice(0, 6)) {
+    lines.push(`**${row.dossier_rank}. ${row.app_name}.** ${row.risk_read_ru} Сначала сохранить: ${row.required_filename_stubs}. После walkthrough: ${row.claim_update_after_walkthrough_ru}`);
+    lines.push('');
+  }
+  lines.push('Этот слой по-прежнему не закрывает H1/H3 сам по себе: он нужен, чтобы captured screenshots и labels были сопоставимыми между конкурентами.');
+  lines.push('');
+}
 if (trancheBriefings.length) {
   lines.push('## 9.3. Briefing-пакеты для первых tranches');
   lines.push('');
@@ -587,6 +609,7 @@ lines.push('- `data_processed/russian_product_loop_cards.csv`');
 lines.push('- `data_processed/russian_validation_gate_cards.csv`');
 lines.push('- `data_processed/russian_p0_execution_packet.csv`');
 lines.push('- `data_processed/russian_observed_evidence_ladder.csv`');
+lines.push('- `data_processed/russian_p0_walkthrough_dossiers.csv`');
 lines.push('- `data_processed/russian_validation_fieldbook.csv`');
 lines.push('- `data_processed/validation_tranche_planner.csv`');
 lines.push('- `data_processed/validation_tranche_briefing_index.csv`');
