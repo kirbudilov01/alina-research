@@ -86,6 +86,8 @@ const som = csv('data_processed/som_sensitivity_scenarios.csv');
 const claims = csv('data_processed/market_claims.csv');
 const marketSourceConfidence = csv('data_processed/market_source_confidence_review.csv');
 const marketConfidenceSummary = csv('data_processed/market_confidence_summary.csv');
+const monetizationProxy = csv('data_processed/market_monetization_proxy_matrix.csv');
+const monetizationExamples = csv('data_processed/monetization_proxy_examples.csv');
 const prefill = csv('data_processed/top_intersection_review_prefill.csv');
 const pricing = csv('data_processed/pricing_retention_matrix.csv');
 const core = csv('data_processed/product_core_evidence_matrix.csv');
@@ -142,6 +144,8 @@ const validationRoadmapP0 = validationGapRoadmap.filter(r => r.priority === 'P0'
 const validationRoadmapP1 = validationGapRoadmap.filter(r => r.priority === 'P1');
 const highUseMarketSources = marketSourceConfidence.filter(r => r.confidence_review_band === 'high_use');
 const rangeOnlyMarketSources = marketSourceConfidence.filter(r => ['low_use_range_only', 'context_only'].includes(r.confidence_review_band));
+const strongMonetizationMarkets = monetizationProxy.filter(r => r.monetization_proxy_band === 'strong_paid_behavior_proxy');
+const mediumMonetizationMarkets = monetizationProxy.filter(r => r.monetization_proxy_band === 'medium_paid_behavior_proxy');
 
 const report = [];
 
@@ -175,6 +179,7 @@ report.push(`- Chrome extension detail enrichment: ${chromeExtensionDetailOk.len
 report.push(`- Chrome mechanic battlecards: ${chromeExtensionBattlecards.length} browser-extension cards, ${chromeMechanicPriority.length} high/medium references for manual mechanic inspection.`);
 report.push(`- Validation gap roadmap: ${validationGapRoadmap.length} rows; ${validationRoadmapP0.length} P0 and ${validationRoadmapP1.length} P1 next validation tasks across markets, hypotheses, and cross-source checks.`);
 report.push(`- Market source confidence review: ${marketSourceConfidence.length} sources graded; ${highUseMarketSources.length} high-use anchors and ${rangeOnlyMarketSources.length} range-only/context sources.`);
+report.push(`- Monetization proxy matrix: ${monetizationProxy.length} markets covered; ${strongMonetizationMarkets.length} strong and ${mediumMonetizationMarkets.length} medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
@@ -379,6 +384,34 @@ if (marketConfidenceSummary.length) {
       { key: 'confidence_review_score', label: 'Score', align: 'right' },
       { key: 'model_role', label: 'Model Role' }
     ], 8));
+  report.push('');
+}
+if (monetizationProxy.length) {
+  report.push('### Monetization Proxy Matrix');
+  report.push('');
+  report.push('Market reports show top-down demand, but H2 also needs bottom-up evidence that adjacent users encounter paid surfaces. This matrix summarizes observed App Store IAP, Google Play IAP, and public web paywall signals from the current competitor evidence.');
+  report.push('');
+  report.push(mdTable(monetizationProxy, [
+    { key: 'market', label: 'Market' },
+    { key: 'monetization_proxy_band', label: 'Proxy Band' },
+    { key: 'app_store_iap_apps', label: 'App Store IAP Apps', align: 'right' },
+    { key: 'app_store_subscription_like_apps', label: 'Subscription-like', align: 'right' },
+    { key: 'google_play_iap_apps', label: 'Google Play IAP', align: 'right' },
+    { key: 'web_medium_high_paywall_domains', label: 'Web Paywall Domains', align: 'right' },
+    { key: 'max_observed_price_usd', label: 'Max Observed Price', align: 'right' },
+    { key: 'interpretation', label: 'Interpretation' }
+  ], monetizationProxy.length));
+  report.push('');
+  report.push('Highest-signal monetization examples:');
+  report.push('');
+  report.push(mdTable(monetizationExamples.slice(0, 12), [
+    { key: 'source_layer', label: 'Layer' },
+    { key: 'market', label: 'Market' },
+    { key: 'app_name', label: 'App' },
+    { key: 'observed_price_signal', label: 'Price Signal' },
+    { key: 'evidence_quality', label: 'Evidence' },
+    { key: 'interpretation', label: 'Interpretation' }
+  ], 12));
   report.push('');
 }
 report.push('### SOM Sensitivity');
@@ -720,6 +753,7 @@ report.push('');
 report.push('- `docs/research-expansion-master-plan.md`');
 report.push('- `docs/market/tam-sam-som-model-v1.md`');
 report.push('- `docs/market/market-source-confidence-review-v1.md`');
+report.push('- `docs/market/monetization-proxy-matrix-v1.md`');
 report.push('- `docs/intersections/whitespace-map-v2.md`');
 report.push('- `docs/audience/audience-segmentation-v1.md`');
 report.push('- `docs/audience/review-language-synthesis-v1.md`');
@@ -746,6 +780,8 @@ report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
 report.push('- `data_processed/market_source_confidence_review.csv`');
 report.push('- `data_processed/market_confidence_summary.csv`');
+report.push('- `data_processed/market_monetization_proxy_matrix.csv`');
+report.push('- `data_processed/monetization_proxy_examples.csv`');
 report.push('- `data_processed/evidence_claim_register.csv`');
 report.push('- `data_processed/source_expansion_backlog.csv`');
 report.push('- `data_processed/p0_external_source_summary.csv`');
@@ -819,7 +855,7 @@ status.push(mdTable([
   { requirement: 'Chrome extension detail enrichment', evidence: 'data_raw/chrome_extension_detail_raw.csv; data_processed/chrome_extension_fit_matrix.csv; docs/competitive/chrome-extension-detail-enrichment-v1.md', status: 'done v1; detail pages parsed for known Chrome candidates only, producing fit bands and mechanic tags without broad search expansion' },
   { requirement: 'Chrome extension mechanic battlecards', evidence: 'data_processed/chrome_extension_mechanic_battlecards.csv; docs/competitive/chrome-extension-mechanic-battlecards-v1.md', status: 'done v1; converts enriched Chrome candidates into mechanic lessons, whitespace implications, and validation tasks' },
   { requirement: 'Validation gap roadmap', evidence: 'data_processed/validation_gap_roadmap.csv; docs/decision/validation-gap-roadmap-v1.md', status: 'done v1; maps five markets and H1-H6 gaps into P0/P1 success gates' },
-  { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv', status: 'done v1; source confidence review added, model remains range-based and not final forecast' },
+  { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv', status: 'done v1; source confidence and monetization proxy layers added, model remains range-based and not final forecast' },
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
   { requirement: 'Versioned on GitHub', evidence: 'git log through current commit after push', status: 'active' },

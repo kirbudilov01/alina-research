@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T04:16:03.986Z
+Generated: 2026-05-31T04:21:13.075Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -11,7 +11,7 @@ Generated: 2026-05-31T04:16:03.986Z
 | Chrome extension detail enrichment | data_raw/chrome_extension_detail_raw.csv; data_processed/chrome_extension_fit_matrix.csv; docs/competitive/chrome-extension-detail-enrichment-v1.md | done v1; detail pages parsed for known Chrome candidates only, producing fit bands and mechanic tags without broad search expansion |
 | Chrome extension mechanic battlecards | data_processed/chrome_extension_mechanic_battlecards.csv; docs/competitive/chrome-extension-mechanic-battlecards-v1.md | done v1; converts enriched Chrome candidates into mechanic lessons, whitespace implications, and validation tasks |
 | Validation gap roadmap | data_processed/validation_gap_roadmap.csv; docs/decision/validation-gap-roadmap-v1.md | done v1; maps five markets and H1-H6 gaps into P0/P1 success gates |
-| 5-market TAM/SAM/SOM method | docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv | done v1; source confidence review added, model remains range-based and not final forecast |
+| 5-market TAM/SAM/SOM method | docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv | done v1; source confidence and monetization proxy layers added, model remains range-based and not final forecast |
 | Whitespace matrices | data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md | done v1 |
 | Audience matrices | data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md | done v1 |
 | Versioned on GitHub | git log through current commit after push | active |

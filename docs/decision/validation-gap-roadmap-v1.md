@@ -1,6 +1,6 @@
 # Validation Gap Roadmap V1
 
-Generated: 2026-05-31T04:15:47.744Z
+Generated: 2026-05-31T04:21:12.966Z
 
 ## Purpose
 
@@ -26,7 +26,7 @@ This roadmap converts the current evidence base into the next validation queue. 
 | Hypothesis | Evidence Band | Priority | Gap | Success Gate |
 | --- | --- | --- | --- | --- |
 | H1_product_shape_exists | partially_supported/medium | P0 | Strict full loop is rare and needs manual product/onboarding validation. | Human validation confirms at least 5 close substitutes and no hidden direct clone invalidates the loop. |
-| H2_markets_have_money | supported_with_ranges/medium | P1 | Market sizing is modeled from public claims and needs source-by-source confidence review. | Market source confidence review adds credible low/base/high ranges and revenue/pricing proxy checks by direct market. |
+| H2_markets_have_money | supported_with_ranges/medium | P1 | Market sizing still needs competitor revenue/proxy review and additional triangulation for thin/contextual markets. | Market source confidence review adds credible low/base/high ranges and revenue/pricing proxy checks by direct market. |
 | H2_paywall_visible_evidence | supported_narrowly/medium_low | P0 | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. | Human screenshot review classifies public pricing/paywall evidence as confirm/partial/reject. |
 | H3_whitespace_exists | narrow_supported_not_final/medium | P0 | Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors. | Manual app/onboarding inspection confirms action -> identity/avatar causality remains rare. |
 | H4_competitive_advantage_plausible | plausible_unproven/medium_low | P0 | No human validation or prototype test yet proves users value the loop. | Prototype or user test shows the integrated loop is understood and preferred over generic habit/coach alternatives. |

@@ -122,6 +122,16 @@ The TAM/SAM/SOM model now has a separate source-confidence review:
 
 This layer does not turn the model into a final forecast. It grades each existing source by source type, directness to Alina, methodology visibility, variance risk, and recommended model role. Broad or indirect sources can support ranges and context, but should not become precise final claims without competitor revenue proxies and human validation.
 
+## Monetization Proxy Layer
+
+The model also has a bottom-up monetization proxy layer:
+
+- `docs/market/monetization-proxy-matrix-v1.md`
+- `data_processed/market_monetization_proxy_matrix.csv`
+- `data_processed/monetization_proxy_examples.csv`
+
+This layer uses observed App Store IAP metadata, Google Play IAP metadata, and public web paywall/screenshot signals. It supports the claim that adjacent markets have paid behavior, but it does not estimate competitor revenue and does not prove Alina-specific willingness to pay.
+
 ## First Public Source Anchors
 
 These are starting anchors, not final answers.

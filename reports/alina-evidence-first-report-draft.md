@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T04:16:03.974Z
+Generated: 2026-05-31T04:21:13.060Z
 
 ## 1. Executive Summary
 
@@ -28,6 +28,7 @@ Key quantified signals:
 - Chrome mechanic battlecards: 23 browser-extension cards, 9 high/medium references for manual mechanic inspection.
 - Validation gap roadmap: 13 rows; 4 P0 and 9 P1 next validation tasks across markets, hypotheses, and cross-source checks.
 - Market source confidence review: 12 sources graded; 3 high-use anchors and 4 range-only/context sources.
+- Monetization proxy matrix: 5 markets covered; 4 strong and 1 medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
@@ -72,7 +73,7 @@ Claim-level audit snapshot:
 | REQ_plan | proved_v1 | high | master plan exists; 13 validation roadmap rows | Needs periodic refresh as validation findings change. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; P0 external pass is intentionally small, with Product Hunt/AlternativeTo still needing source-native or curated collection. |
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
-| H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed | Market sizing still needs competitor revenue/proxy review and additional triangulation for thin/contextual markets. |
+| H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 4/5 strong monetization proxy markets | Market sizing still needs competitor revenue/proxy review and additional triangulation for thin/contextual markets. |
 | H2_paywall_visible_evidence | supported_narrowly | medium_low | 2/29 screenshots confirm visible public pricing | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. |
 | H3_whitespace_exists | narrow_supported_not_final | medium | 1/100 strict behavior-tied progression signals; 9 Chrome mechanic references to inspect | Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors. |
 | H4_competitive_advantage_plausible | plausible_unproven | medium_low | 1 direct reference competitor; 45 high-threat competitors; 23 Chrome mechanic battlecards | No human validation or prototype test yet proves users value the loop. |
@@ -256,6 +257,35 @@ Highest-use market sources:
 | SRC-MKT-0006 | astrology_esoterics | Research and Markets | medium_use | 6 | direct_adjacent_tam_anchor_requires_variance_review |
 | SRC-MKT-0007 | astrology_esoterics | Econ Market Research | medium_use | 6 | direct_adjacent_tam_anchor_requires_variance_review |
 | SRC-MKT-0008 | astrology_esoterics | Global Growth Insights | medium_use | 6 | direct_adjacent_tam_anchor_requires_variance_review |
+
+### Monetization Proxy Matrix
+
+Market reports show top-down demand, but H2 also needs bottom-up evidence that adjacent users encounter paid surfaces. This matrix summarizes observed App Store IAP, Google Play IAP, and public web paywall signals from the current competitor evidence.
+
+| Market | Proxy Band | App Store IAP Apps | Subscription-like | Google Play IAP | Web Paywall Domains | Max Observed Price | Interpretation |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
+| coaching | strong_paid_behavior_proxy | 10 | 9 | 24 | 1 | 129.99 | Paid behavior exists in coaching/habit/self-improvement apps, but consumer daily ritual overlap needs manual validation. |
+| mindfulness | strong_paid_behavior_proxy | 8 | 5 | 40 | 6 | 169 | Subscription willingness exists in reset/wellness apps; calm UX and paywall timing remain validation risks. |
+| avatar_identity | strong_paid_behavior_proxy | 22 | 19 | 36 | 7 | 509 | Paid behavior exists across avatar/companion/identity tools, but recurring identity value must be separated from novelty generation. |
+| astrology_esoterics | strong_paid_behavior_proxy | 39 | 32 | 43 | 3 | 549.99 | Strong subscription/IAP proxy for spiritual and manifestation categories; paywall screenshots still need human review. |
+| gaming | medium_paid_behavior_proxy | 1 | 1 | 48 | 12 | 1.99 | Very strong IAP monetization proxy, but use as retention/payment benchmark rather than direct Alina spend. |
+
+Highest-signal monetization examples:
+
+| Layer | Market | App | Price Signal | Evidence | Interpretation |
+| --- | --- | --- | --- | --- | --- |
+| app_store_iap | astrology_esoterics | Shepherd: Spiritual Bible BFF | 4.99-59.99 | medium_high | Observed subscription-like IAP metadata supports paid behavior proxy. |
+| app_store_iap | coaching | Pitstop: Scale Human Potential | 14.99-99.99 | medium_high | Observed subscription-like IAP metadata supports paid behavior proxy. |
+| app_store_iap | coaching | Pitstop: Scale Human Potential | 14.99-99.99 | medium_high | Observed subscription-like IAP metadata supports paid behavior proxy. |
+| app_store_iap | astrology_esoterics | ModernSam: LVL up your life | 2.99-35.90 | medium_high | Observed subscription-like IAP metadata supports paid behavior proxy. |
+| app_store_iap | astrology_esoterics | Muna: Astrology & Horoscope | 0.99-99.99 | medium_high | Observed IAP metadata supports paid behavior proxy, but product type may be consumable/unclassified. |
+| app_store_iap | astrology_esoterics | yap: astrology & dream journal | 1.99-99.99 | medium_high | Observed subscription-like IAP metadata supports paid behavior proxy. |
+| app_store_iap | astrology_esoterics | Lunaria AI - Soulmate Drawing | 4.99-39.99 | medium_high | Observed subscription-like IAP metadata supports paid behavior proxy. |
+| app_store_iap | astrology_esoterics | Law of Attraction Toolbox | 2.99-99.99 | medium_high | Observed subscription-like IAP metadata supports paid behavior proxy. |
+| app_store_iap | astrology_esoterics | Vision Board ++ Maker Manifest | 2.99-29.99 | medium_high | Observed subscription-like IAP metadata supports paid behavior proxy. |
+| app_store_iap | mindfulness | 369 Manifestation & Meditation | 0.99-6.99 | medium_high | Observed IAP metadata supports paid behavior proxy, but product type may be consumable/unclassified. |
+| app_store_iap | astrology_esoterics | Zodya Tarot Coffee Reading AI | 7.99-49.99 | medium_high | Observed subscription-like IAP metadata supports paid behavior proxy. |
+| app_store_iap | avatar_identity | LunaMate: AI Fanstasy Roleplay | 14.99-79.99 | medium_high | Observed subscription-like IAP metadata supports paid behavior proxy. |
 
 ### SOM Sensitivity
 
@@ -676,6 +706,7 @@ Claim audit rows currently normalized: 10.
 - `docs/research-expansion-master-plan.md`
 - `docs/market/tam-sam-som-model-v1.md`
 - `docs/market/market-source-confidence-review-v1.md`
+- `docs/market/monetization-proxy-matrix-v1.md`
 - `docs/intersections/whitespace-map-v2.md`
 - `docs/audience/audience-segmentation-v1.md`
 - `docs/audience/review-language-synthesis-v1.md`
@@ -702,6 +733,8 @@ Claim audit rows currently normalized: 10.
 - `data_processed/tam_sam_som_model.csv`
 - `data_processed/market_source_confidence_review.csv`
 - `data_processed/market_confidence_summary.csv`
+- `data_processed/market_monetization_proxy_matrix.csv`
+- `data_processed/monetization_proxy_examples.csv`
 - `data_processed/evidence_claim_register.csv`
 - `data_processed/source_expansion_backlog.csv`
 - `data_processed/p0_external_source_summary.csv`

@@ -204,6 +204,7 @@ Current evidence:
 - Chrome extension mechanic battlecards: `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`.
 - Validation gap roadmap: `docs/decision/validation-gap-roadmap-v1.md`.
 - Market source confidence review: `docs/market/market-source-confidence-review-v1.md`.
+- Monetization proxy matrix: `docs/market/monetization-proxy-matrix-v1.md`.
 
 Next collector priority:
 

@@ -1,6 +1,6 @@
 # TAM/SAM/SOM Model V1
 
-Generated: 2026-05-31T04:15:38.144Z
+Generated: 2026-05-31T04:21:02.357Z
 
 ## Status
 
@@ -37,6 +37,20 @@ A separate confidence review grades the source base behind the model. It does no
 
 Source review rows: 12. See `docs/market/market-source-confidence-review-v1.md`.
 
+## Monetization Proxy Review
+
+The model is also supported by observed monetization proxies from App Store IAP metadata, Google Play IAP metadata, and public web paywall signals. These proxies support paid behavior across adjacent markets; they do not estimate competitor revenue or prove Alina-specific willingness to pay.
+
+| Market | Proxy Band | App Store IAP Apps | Google Play IAP Apps | Web Paywall Domains | Max Observed Price | Interpretation |
+|---|---|---:|---:|---:|---:|---|
+| coaching | strong_paid_behavior_proxy | 10 | 24 | 1 | 129.99 | Paid behavior exists in coaching/habit/self-improvement apps, but consumer daily ritual overlap needs manual validation. |
+| mindfulness | strong_paid_behavior_proxy | 8 | 40 | 6 | 169 | Subscription willingness exists in reset/wellness apps; calm UX and paywall timing remain validation risks. |
+| avatar_identity | strong_paid_behavior_proxy | 22 | 36 | 7 | 509 | Paid behavior exists across avatar/companion/identity tools, but recurring identity value must be separated from novelty generation. |
+| astrology_esoterics | strong_paid_behavior_proxy | 39 | 43 | 3 | 549.99 | Strong subscription/IAP proxy for spiritual and manifestation categories; paywall screenshots still need human review. |
+| gaming | medium_paid_behavior_proxy | 1 | 48 | 12 | 1.99 | Very strong IAP monetization proxy, but use as retention/payment benchmark rather than direct Alina spend. |
+
+See `docs/market/monetization-proxy-matrix-v1.md` for example-level evidence.
+
 ## SOM Scenarios
 
 | Scenario | Reachable users | Activation | Paid conversion | ARPPU/year | Paid users | Annual revenue | Share of base SAM |
@@ -57,6 +71,7 @@ The market exists, but the current evidence is stronger for adjacent demand than
 - `data_processed/top_intersection_review_candidates.csv`
 - `data_processed/market_confidence_summary.csv`
 - `data_processed/market_source_confidence_review.csv`
+- `data_processed/market_monetization_proxy_matrix.csv`
 
 ## Caveats
 

@@ -6,6 +6,7 @@ const OUT_REVIEW = 'data_processed/top_intersection_review_candidates.csv';
 const OUT_SUMMARY = 'docs/market/tam-sam-som-model-v1.md';
 const MARKET_CONFIDENCE = 'data_processed/market_confidence_summary.csv';
 const MARKET_SOURCE_CONFIDENCE = 'data_processed/market_source_confidence_review.csv';
+const MONETIZATION_PROXY = 'data_processed/market_monetization_proxy_matrix.csv';
 
 const CATEGORY_MARKETS = [
   {
@@ -197,6 +198,7 @@ writeCsv(OUT_SCENARIOS, scenarioRows, [
 
 const marketConfidence = csvIfExists(MARKET_CONFIDENCE);
 const marketSourceConfidence = csvIfExists(MARKET_SOURCE_CONFIDENCE);
+const monetizationProxy = csvIfExists(MONETIZATION_PROXY);
 
 const whitespaceRows = parseCsv(fs.readFileSync('data_processed/whitespace_signal_matrix.csv', 'utf8'));
 const featureRows = parseCsv(fs.readFileSync('data_processed/competitor_feature_matrix.csv', 'utf8'));
@@ -280,6 +282,20 @@ if (marketConfidence.length) {
   lines.push(`Source review rows: ${marketSourceConfidence.length}. See \`docs/market/market-source-confidence-review-v1.md\`.`);
   lines.push('');
 }
+if (monetizationProxy.length) {
+  lines.push('## Monetization Proxy Review');
+  lines.push('');
+  lines.push('The model is also supported by observed monetization proxies from App Store IAP metadata, Google Play IAP metadata, and public web paywall signals. These proxies support paid behavior across adjacent markets; they do not estimate competitor revenue or prove Alina-specific willingness to pay.');
+  lines.push('');
+  lines.push('| Market | Proxy Band | App Store IAP Apps | Google Play IAP Apps | Web Paywall Domains | Max Observed Price | Interpretation |');
+  lines.push('|---|---|---:|---:|---:|---:|---|');
+  for (const r of monetizationProxy) {
+    lines.push(`| ${r.market} | ${r.monetization_proxy_band} | ${r.app_store_iap_apps} | ${r.google_play_iap_apps} | ${r.web_medium_high_paywall_domains} | ${r.max_observed_price_usd} | ${r.interpretation} |`);
+  }
+  lines.push('');
+  lines.push('See `docs/market/monetization-proxy-matrix-v1.md` for example-level evidence.');
+  lines.push('');
+}
 lines.push('## SOM Scenarios');
 lines.push('');
 lines.push('| Scenario | Reachable users | Activation | Paid conversion | ARPPU/year | Paid users | Annual revenue | Share of base SAM |');
@@ -299,6 +315,7 @@ lines.push(`- \`${OUT_SCENARIOS}\``);
 lines.push(`- \`${OUT_REVIEW}\``);
 if (marketConfidence.length) lines.push(`- \`${MARKET_CONFIDENCE}\``);
 if (marketSourceConfidence.length) lines.push(`- \`${MARKET_SOURCE_CONFIDENCE}\``);
+if (monetizationProxy.length) lines.push(`- \`${MONETIZATION_PROXY}\``);
 lines.push('');
 lines.push('## Caveats');
 lines.push('');
