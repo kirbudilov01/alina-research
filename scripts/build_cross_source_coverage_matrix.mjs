@@ -56,7 +56,16 @@ function parseCsv(text) {
 }
 
 function csv(file) {
+  if (!fs.existsSync(file) && file === 'data_processed/cross_source_universe_raw.csv') {
+    return csvShards('data_processed/cross_source_universe_raw_index.csv');
+  }
   return fs.existsSync(file) ? parseCsv(fs.readFileSync(file, 'utf8')) : [];
+}
+
+function csvShards(indexFile) {
+  if (!fs.existsSync(indexFile)) return [];
+  return parseCsv(fs.readFileSync(indexFile, 'utf8'))
+    .flatMap(row => fs.existsSync(row.file_path) ? parseCsv(fs.readFileSync(row.file_path, 'utf8')) : []);
 }
 
 function writeCsv(file, rows, headers) {

@@ -1,6 +1,6 @@
 # Research Completion Audit V1
 
-Generated: 2026-05-31T09:13:33.226Z
+Generated: 2026-05-31T09:20:20.224Z
 
 ## Purpose
 
@@ -37,7 +37,7 @@ This audit maps the original user objective to current evidence. It prevents the
 | REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36; icp_capture_rows=96 | Segments are directional and need interviews/prototype/WTP validation. | Run ICP validation packet for top two segments. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=20; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. | Run prototype sessions with the top two ICP segments and record comprehension, meaning lift, differentiation, return intent, and paid-depth signals. |
 | REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. | After manual inspection and prototype sessions, update the pack with validated screenshots, scorecards, and final claim statuses. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=317; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. | Regenerate manifest and commit after each major layer. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=321; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. | Regenerate manifest and commit after each major layer. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; p0_command_rows=75; p0_command_blockers=6; p0_command_p0=52; p0_field_guide_sections=8; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_rollup_rows=75; validation_rollup_missing=0; validation_batch_local_artifact_links=29; hypothesis_decision_rows=6; hypothesis_hold=6; hypothesis_go=0; hypothesis_stop=0; capture_rows=276; manual_capture_rows=60; paid_capture_rows=40; icp_capture_rows=96; prototype_capture_rows=80; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. | Execute P0 rows in the validation execution dashboard, then update source CSVs and final verdicts. |
 
 ## Decision Read

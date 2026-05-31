@@ -1,6 +1,6 @@
 # Cross-Source Universe V1
 
-Generated: 2026-05-31T09:07:42.566Z
+Generated: 2026-05-31T09:18:11.907Z
 
 ## Purpose
 
@@ -10,6 +10,7 @@ This layer normalizes the major source-native collections into one auditable uni
 
 - Cross-source raw rows: 59006
 - Cross-source dedup rows: 31866
+- Raw shard files: 4
 - Source groups: 8
 - Niches represented: 6
 - Rows with source URLs: 59006
@@ -57,6 +58,8 @@ Dedup rows by primary source group:
 
 ## Files
 
-- `data_processed/cross_source_universe_raw.csv`
+- `data_processed/cross_source_universe_raw_index.csv`
+- `data_processed/cross_source_universe_raw_parts/part_*.csv`
+- `data_processed/cross_source_universe_raw.csv` (local generated full file; ignored by Git to avoid large-file warnings)
 - `data_processed/cross_source_universe_dedup.csv`
 - `data_processed/cross_source_universe_summary.csv`

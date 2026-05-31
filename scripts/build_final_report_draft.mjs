@@ -49,7 +49,16 @@ function read(file) {
 }
 
 function csv(file) {
+  if (!fs.existsSync(file) && file === 'data_processed/cross_source_universe_raw.csv') {
+    return csvShards('data_processed/cross_source_universe_raw_index.csv');
+  }
   return parseCsv(read(file));
+}
+
+function csvShards(indexFile) {
+  if (!fs.existsSync(indexFile)) return [];
+  return parseCsv(read(indexFile))
+    .flatMap(row => fs.existsSync(row.file_path) ? parseCsv(read(row.file_path)) : []);
 }
 
 function clean(value) {
@@ -1462,7 +1471,8 @@ report.push('- `data_processed/p0_external_source_summary.csv`');
 report.push('- `data_processed/itch_source_summary.csv`');
 report.push('- `data_processed/steam_tag_source_summary.csv`');
 report.push('- `data_processed/desktop_store_source_summary.csv`');
-report.push('- `data_processed/cross_source_universe_raw.csv`');
+report.push('- `data_processed/cross_source_universe_raw_index.csv`');
+report.push('- `data_processed/cross_source_universe_raw_parts/part_*.csv`');
 report.push('- `data_processed/cross_source_universe_dedup.csv`');
 report.push('- `data_processed/cross_source_universe_summary.csv`');
 report.push('- `data_processed/cross_source_coverage_matrix.csv`');
@@ -1544,7 +1554,7 @@ status.push(mdTable([
   { requirement: 'Source-native itch.io expansion', evidence: 'data_raw/expanded_itch_raw.csv; data_processed/itch_source_summary.csv; docs/competitive/itch-source-expansion-v1.md', status: 'done v1; adds web-game/mechanic discovery rows for gaming, mindfulness, and avatar/identity without broad search-engine crawling' },
   { requirement: 'Source-native Steam tag expansion', evidence: 'data_raw/expanded_steam_tags_raw.csv; data_processed/steam_tag_source_summary.csv; docs/competitive/steam-tag-expansion-v1.md', status: 'done v1; adds PC progression/cozy/avatar mechanic benchmarks without broad search-engine crawling' },
   { requirement: 'Source-native desktop store expansion', evidence: 'data_raw/expanded_desktop_store_raw.csv; data_processed/desktop_store_source_summary.csv; docs/competitive/desktop-store-expansion-v1.md', status: 'done v1; adds Mac App Store desktop wellness/productivity/avatar/game references through a source-native API, not broad search crawling' },
-  { requirement: 'Cross-source universe normalization', evidence: 'data_processed/cross_source_universe_raw.csv; data_processed/cross_source_universe_dedup.csv; data_processed/cross_source_universe_summary.csv; docs/competitive/cross-source-universe-v1.md', status: 'done v1; normalizes core app-store, Google Play fallback, itch.io, Steam, desktop store, and Chrome rows into one provenance-preserving universe' },
+  { requirement: 'Cross-source universe normalization', evidence: 'data_processed/cross_source_universe_raw_index.csv;data_processed/cross_source_universe_raw_parts/part_*.csv; data_processed/cross_source_universe_dedup.csv; data_processed/cross_source_universe_summary.csv; docs/competitive/cross-source-universe-v1.md', status: 'done v1; normalizes core app-store, Google Play fallback, itch.io, Steam, desktop store, and Chrome rows into one provenance-preserving universe' },
   { requirement: 'Cross-source coverage matrix', evidence: 'data_processed/cross_source_coverage_matrix.csv; docs/competitive/cross-source-coverage-matrix-v1.md', status: 'done v1; grades source-by-market cells into strong, medium, thin, and context-only coverage for safer interpretation' },
   { requirement: 'Cross-source saturation/whitespace read', evidence: 'data_processed/cross_source_market_saturation_matrix.csv; docs/intersections/cross-source-saturation-whitespace-v1.md', status: 'done v1; scores market saturation and keeps gaming/progression benchmark-only rather than overclaiming primary-market whitespace' },
   { requirement: 'Chrome extension detail enrichment', evidence: 'data_raw/chrome_extension_detail_raw.csv; data_processed/chrome_extension_fit_matrix.csv; docs/competitive/chrome-extension-detail-enrichment-v1.md', status: 'done v1; detail pages parsed for known Chrome candidates only, producing fit bands and mechanic tags without broad search expansion' },

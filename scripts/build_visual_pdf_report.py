@@ -26,8 +26,26 @@ OUT = ROOT / "output" / "pdf" / "alina-evidence-visual-report-v1.pdf"
 
 
 def read_csv(path: str) -> list[dict[str, str]]:
-    with (ROOT / path).open(newline="", encoding="utf-8") as f:
+    file = ROOT / path
+    if not file.exists() and path == "data_processed/cross_source_universe_raw.csv":
+        return read_csv_shards("data_processed/cross_source_universe_raw_index.csv")
+    with file.open(newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
+
+
+def read_csv_shards(index_path: str) -> list[dict[str, str]]:
+    index_file = ROOT / index_path
+    if not index_file.exists():
+        return []
+    rows: list[dict[str, str]] = []
+    with index_file.open(newline="", encoding="utf-8") as f:
+        for shard in csv.DictReader(f):
+            shard_file = ROOT / clean(shard.get("file_path"))
+            if not shard_file.exists():
+                continue
+            with shard_file.open(newline="", encoding="utf-8") as sf:
+                rows.extend(csv.DictReader(sf))
+    return rows
 
 
 def count_by(rows: list[dict[str, str]], key: str) -> Counter:

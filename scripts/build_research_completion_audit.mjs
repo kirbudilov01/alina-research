@@ -54,7 +54,16 @@ function parseCsv(text) {
 }
 
 function csv(file) {
+  if (!fs.existsSync(file) && file === 'data_processed/cross_source_universe_raw.csv') {
+    return csvShards('data_processed/cross_source_universe_raw_index.csv');
+  }
   return fs.existsSync(file) ? parseCsv(fs.readFileSync(file, 'utf8')) : [];
+}
+
+function csvShards(indexFile) {
+  if (!fs.existsSync(indexFile)) return [];
+  return parseCsv(fs.readFileSync(indexFile, 'utf8'))
+    .flatMap(row => fs.existsSync(row.file_path) ? parseCsv(fs.readFileSync(row.file_path, 'utf8')) : []);
 }
 
 function writeCsv(file, rows, headers) {
@@ -198,7 +207,7 @@ const requirements = [
     status: crossSourceScaleStatus,
     evidence_strength: expanded.length >= 10000 ? 'medium_high' : 'medium',
     proof: `dedup=${expanded.length}; cross_source_raw=${crossSourceRaw.length}; cross_source_dedup=${crossSourceDedup.length}; cross_source_summary_rows=${crossSourceSummary.length}; coverage_cells=${crossSourceCoverage.length}; coverage_strong=${crossSourceCoverage.filter(row => row.coverage_band === 'strong_coverage').length}; coverage_medium=${crossSourceCoverage.filter(row => row.coverage_band === 'medium_coverage').length}; raw_core=${expandedRaw.length}; itch_rows=${itchRows.length}; steam_tag_rows=${steamTagRows.length}; desktop_store_rows=${desktopStoreRows.length}; chrome_extension_rows=${chromeExtensionRows.length}; known_raw_total=${expandedRawWithKnownExternal}; itch_ok=${itchOk.length}; steam_tag_ok=${steamTagOk.length}; desktop_store_ok=${desktopStoreOk.length}; chrome_extension_ok=${chromeExtensionOk.length}; chrome_detail_ok=${chromeExtensionDetailOk.length}; chrome_strong_adjacent=${chromeExtensionStrong.length}; chrome_priority_mechanics=${chromeMechanicPriority.length}; niches=${Object.keys(countBy(expanded, 'niche')).length}; source_kinds=${Object.keys(countBy(expanded, 'source_kind')).length}`,
-    evidence_files: 'data_raw/expanded/all_expanded_raw.csv;data_raw/expanded/all_expanded_dedup.csv;data_raw/expanded_itch_raw.csv;data_raw/expanded_steam_tags_raw.csv;data_raw/expanded_desktop_store_raw.csv;data_raw/expanded_chrome_extensions_raw.csv;data_raw/chrome_extension_detail_raw.csv;data_processed/cross_source_universe_raw.csv;data_processed/cross_source_universe_dedup.csv;data_processed/cross_source_universe_summary.csv;data_processed/cross_source_coverage_matrix.csv;data_processed/desktop_store_source_summary.csv;data_processed/chrome_extension_fit_matrix.csv;data_processed/chrome_extension_mechanic_battlecards.csv;data_processed/competitor_feature_matrix.csv;docs/competitive/cross-source-universe-v1.md;docs/competitive/cross-source-coverage-matrix-v1.md;docs/competitive/expanded-source-map.md;docs/competitive/source-expansion-backlog-v1.md;docs/competitive/itch-source-expansion-v1.md;docs/competitive/steam-tag-expansion-v1.md;docs/competitive/desktop-store-expansion-v1.md;docs/competitive/chrome-webstore-source-expansion-v1.md;docs/competitive/chrome-extension-detail-enrichment-v1.md;docs/competitive/chrome-extension-mechanic-battlecards-v1.md',
+    evidence_files: 'data_raw/expanded/all_expanded_raw.csv;data_raw/expanded/all_expanded_dedup.csv;data_raw/expanded_itch_raw.csv;data_raw/expanded_steam_tags_raw.csv;data_raw/expanded_desktop_store_raw.csv;data_raw/expanded_chrome_extensions_raw.csv;data_raw/chrome_extension_detail_raw.csv;data_processed/cross_source_universe_raw_index.csv;data_processed/cross_source_universe_raw_parts/part_*.csv;data_processed/cross_source_universe_dedup.csv;data_processed/cross_source_universe_summary.csv;data_processed/cross_source_coverage_matrix.csv;data_processed/desktop_store_source_summary.csv;data_processed/chrome_extension_fit_matrix.csv;data_processed/chrome_extension_mechanic_battlecards.csv;data_processed/competitor_feature_matrix.csv;docs/competitive/cross-source-universe-v1.md;docs/competitive/cross-source-coverage-matrix-v1.md;docs/competitive/expanded-source-map.md;docs/competitive/source-expansion-backlog-v1.md;docs/competitive/itch-source-expansion-v1.md;docs/competitive/steam-tag-expansion-v1.md;docs/competitive/desktop-store-expansion-v1.md;docs/competitive/chrome-webstore-source-expansion-v1.md;docs/competitive/chrome-extension-detail-enrichment-v1.md;docs/competitive/chrome-extension-mechanic-battlecards-v1.md',
     remaining_gap: crossSourceScaleGap,
     next_action: 'Run next non-search-heavy collectors from source expansion backlog, prioritizing sources that return public HTML without Cloudflare/search-engine dependency.'
   },

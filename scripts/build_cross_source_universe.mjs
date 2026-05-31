@@ -2,11 +2,14 @@ import fs from 'fs';
 import crypto from 'crypto';
 
 const OUT_RAW = 'data_processed/cross_source_universe_raw.csv';
+const OUT_RAW_SHARD_DIR = 'data_processed/cross_source_universe_raw_parts';
+const OUT_RAW_SHARD_INDEX = 'data_processed/cross_source_universe_raw_index.csv';
 const OUT_DEDUP = 'data_processed/cross_source_universe_dedup.csv';
 const OUT_SUMMARY = 'data_processed/cross_source_universe_summary.csv';
 const OUT_DOC = 'docs/competitive/cross-source-universe-v1.md';
+const RAW_SHARD_ROWS = Number(process.env.CROSS_SOURCE_RAW_SHARD_ROWS || 15000);
 
-for (const dir of ['data_processed', 'docs/competitive']) fs.mkdirSync(dir, { recursive: true });
+for (const dir of ['data_processed', OUT_RAW_SHARD_DIR, 'docs/competitive']) fs.mkdirSync(dir, { recursive: true });
 
 function clean(value) {
   return String(value ?? '').replace(/\s+/g, ' ').trim();
@@ -64,6 +67,35 @@ function csv(file) {
 
 function writeCsv(file, rows, headers) {
   fs.writeFileSync(file, [headers.join(','), ...rows.map(row => headers.map(h => csvEscape(row[h])).join(','))].join('\n'));
+}
+
+function sha256(file) {
+  return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex').slice(0, 16);
+}
+
+function writeCsvShards(dir, indexFile, rows, headers, rowsPerShard) {
+  fs.rmSync(dir, { recursive: true, force: true });
+  fs.mkdirSync(dir, { recursive: true });
+  const shards = [];
+  for (let start = 0; start < rows.length; start += rowsPerShard) {
+    const partRows = rows.slice(start, start + rowsPerShard);
+    const partNumber = shards.length + 1;
+    const filePath = `${dir}/part_${String(partNumber).padStart(3, '0')}.csv`;
+    writeCsv(filePath, partRows, headers);
+    shards.push({
+      part_number: partNumber,
+      file_path: filePath,
+      row_count: partRows.length,
+      first_universe_row_id: partRows[0]?.universe_row_id || '',
+      last_universe_row_id: partRows[partRows.length - 1]?.universe_row_id || '',
+      sha256: sha256(filePath)
+    });
+  }
+  writeCsv(indexFile, shards, [
+    'part_number', 'file_path', 'row_count',
+    'first_universe_row_id', 'last_universe_row_id', 'sha256'
+  ]);
+  return shards;
 }
 
 function countBy(rows, key) {
@@ -238,6 +270,7 @@ const headers = [
   'merged_source_groups', 'cross_source_priority_score'
 ];
 
+const rawShards = writeCsvShards(OUT_RAW_SHARD_DIR, OUT_RAW_SHARD_INDEX, rawRows, headers, RAW_SHARD_ROWS);
 writeCsv(OUT_RAW, rawRows, headers);
 writeCsv(OUT_DEDUP, dedupRows, headers);
 
@@ -289,6 +322,7 @@ lines.push('## Summary');
 lines.push('');
 lines.push(`- Cross-source raw rows: ${rawRows.length}`);
 lines.push(`- Cross-source dedup rows: ${dedupRows.length}`);
+lines.push(`- Raw shard files: ${rawShards.length}`);
 lines.push(`- Source groups: ${Object.keys(countBy(rawRows, 'source_group')).length}`);
 lines.push(`- Niches represented: ${Object.keys(countBy(rawRows, 'niche')).length}`);
 lines.push(`- Rows with source URLs: ${rawRows.filter(row => row.source_url).length}`);
@@ -319,13 +353,17 @@ lines.push('- Source-specific interpretation caveats still apply: Steam/itch are
 lines.push('');
 lines.push('## Files');
 lines.push('');
-lines.push(`- \`${OUT_RAW}\``);
+lines.push(`- \`${OUT_RAW_SHARD_INDEX}\``);
+lines.push(`- \`${OUT_RAW_SHARD_DIR}/part_*.csv\``);
+lines.push(`- \`${OUT_RAW}\` (local generated full file; ignored by Git to avoid large-file warnings)`);
 lines.push(`- \`${OUT_DEDUP}\``);
 lines.push(`- \`${OUT_SUMMARY}\``);
 
 fs.writeFileSync(OUT_DOC, `${lines.join('\n')}\n`);
 
 console.log(`raw=${OUT_RAW}`);
+console.log(`raw_shard_index=${OUT_RAW_SHARD_INDEX}`);
+console.log(`raw_shards=${rawShards.length}`);
 console.log(`dedup=${OUT_DEDUP}`);
 console.log(`summary=${OUT_SUMMARY}`);
 console.log(`doc=${OUT_DOC}`);

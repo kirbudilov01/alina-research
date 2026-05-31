@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T09:13:02.574Z
+Generated: 2026-05-31T09:20:28.849Z
 
 ## 1. Executive Summary
 
@@ -25,7 +25,7 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 20 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 317 artifacts tracked, 63 CSV artifacts, 212927 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 321 artifacts tracked, 67 CSV artifacts, 212931 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -108,7 +108,7 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 16 validation roadmap rows; 11 execution tasks | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 317 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 321 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_hypothesis_decision_matrix | proved_v1_open_validation_decisions | high | 6 hypothesis decision rows; 6 hold/validate; 0 go; 0 stop/pivot | Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open. |
 | REQ_p0_validation_command_center | proved_v1_operator_ready_open_gates | high | 75 command rows; 6 blocker rows; 52 P0 rows | The command center is operational scaffolding; it still requires actual screenshots, participant evidence, paywall signoff, and updated verdicts. |
@@ -346,25 +346,25 @@ Evidence state mix:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 317 artifacts; 63 CSV artifacts; 212927 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 321 artifacts; 67 CSV artifacts; 212931 tracked CSV rows; 0 missing required artifacts.
 Validation note artifact links: 29 existing local artifacts linked inside batch notes.
 
 Largest tracked CSV artifacts:
 
 | File | Role | Rows | Source Ref Rows | Hash |
 | --- | --- | ---: | ---: | --- |
-| data_processed/cross_source_universe_raw.csv | source_claim | 59006 | 59006 | 4c5f2eabe70bb666 |
 | data_processed/cross_source_universe_dedup.csv | source_claim | 31866 | 31866 | e4d4022a5d7da545 |
 | data_processed/audience_signal_matrix.csv | audience_icp | 20492 | 20492 | 865f8a0de8b075d7 |
 | data_raw/expanded_steam_tags_raw.csv | competitor_universe | 18569 | 18569 | f25dd9ba823cab15 |
 | data_raw/expanded/all_expanded_raw.csv | competitor_universe | 17490 | 17490 | 8479ff977b44a132 |
 | data_raw/expanded_desktop_store_raw.csv | competitor_universe | 15397 | 15397 | df65eb63023078f3 |
+| data_processed/cross_source_universe_raw_parts/part_001.csv | source_claim | 15000 | 15000 | 388be0deca7a34ae |
+| data_processed/cross_source_universe_raw_parts/part_002.csv | source_claim | 15000 | 15000 | 5e1e76d633a2922b |
+| data_processed/cross_source_universe_raw_parts/part_003.csv | source_claim | 15000 | 15000 | 62bd8d6b72f73d1c |
+| data_processed/cross_source_universe_raw_parts/part_004.csv | source_claim | 14006 | 14006 | 4bcf357ad50b3cb1 |
 | data_processed/competitor_feature_matrix.csv | supporting | 12552 | 12552 | b285aff3873487bc |
 | data_processed/whitespace_signal_matrix.csv | competitive_whitespace | 12552 | 12552 | d12826260e643b15 |
 | data_raw/expanded/all_expanded_dedup.csv | competitor_universe | 12552 | 12552 | db5e87665dbf3b53 |
-| data_raw/expanded_itch_raw.csv | competitor_universe | 7047 | 7047 | e1a25dd31f49cc5e |
-| data_raw/app_store_top_candidate_reviews.csv | audience_icp | 2294 | 2294 | 3fb11211b91b48b3 |
-| data_raw/web_paywall_discovery_raw.csv | market_money | 560 | 560 | 3416403392840293 |
 
 ## 2L. Research Completion Audit
 
@@ -394,7 +394,7 @@ Objective readiness matrix:
 | REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36; icp_capture_rows=96 | Segments are directional and need interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=20; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=317; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=321; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; p0_command_rows=75; p0_command_blockers=6; p0_command_p0=52; p0_field_guide_sections=8; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_rollup_rows=75; validation_rollup_missing=0; validation_batch_local_artifact_links=29; hypothesis_decision_rows=6; hypothesis_hold=6; hypothesis_go=0; hypothesis_stop=0; capture_rows=276; manual_capture_rows=60; paid_capture_rows=40; icp_capture_rows=96; prototype_capture_rows=80; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
 ## 2M. Validation Gap Roadmap
@@ -1456,7 +1456,8 @@ Claim audit rows currently normalized: 20.
 - `data_processed/itch_source_summary.csv`
 - `data_processed/steam_tag_source_summary.csv`
 - `data_processed/desktop_store_source_summary.csv`
-- `data_processed/cross_source_universe_raw.csv`
+- `data_processed/cross_source_universe_raw_index.csv`
+- `data_processed/cross_source_universe_raw_parts/part_*.csv`
 - `data_processed/cross_source_universe_dedup.csv`
 - `data_processed/cross_source_universe_summary.csv`
 - `data_processed/cross_source_coverage_matrix.csv`

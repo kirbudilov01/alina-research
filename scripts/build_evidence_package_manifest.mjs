@@ -182,7 +182,7 @@ const requiredArtifacts = [
   'data_raw/web_paywall_discovery_raw.csv',
   'data_raw/forum_quote_evidence_raw.csv',
   'data_processed/competitor_feature_matrix.csv',
-  'data_processed/cross_source_universe_raw.csv',
+  'data_processed/cross_source_universe_raw_index.csv',
   'data_processed/cross_source_universe_dedup.csv',
   'data_processed/cross_source_universe_summary.csv',
   'data_processed/cross_source_coverage_matrix.csv',
@@ -245,6 +245,7 @@ const requiredArtifacts = [
 ];
 
 const discoveredArtifacts = [
+  ...listFiles('data_processed/cross_source_universe_raw_parts', file => /\.csv$/i.test(file)),
   ...listFiles('docs', file => /\.(md)$/i.test(file)),
   ...listFiles('reports', file => /\.(md)$/i.test(file)),
   ...listFiles('output/charts', file => /\.(svg)$/i.test(file)),

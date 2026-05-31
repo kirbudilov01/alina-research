@@ -32,10 +32,27 @@ def clean(value: object) -> str:
 
 def read_csv(path: str) -> list[dict[str, str]]:
     file = ROOT / path
+    if not file.exists() and path == "data_processed/cross_source_universe_raw.csv":
+        return read_csv_shards("data_processed/cross_source_universe_raw_index.csv")
     if not file.exists():
         return []
     with file.open(newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
+
+
+def read_csv_shards(index_path: str) -> list[dict[str, str]]:
+    index_file = ROOT / index_path
+    if not index_file.exists():
+        return []
+    rows: list[dict[str, str]] = []
+    with index_file.open(newline="", encoding="utf-8") as f:
+        for shard in csv.DictReader(f):
+            shard_file = ROOT / clean(shard.get("file_path"))
+            if not shard_file.exists():
+                continue
+            with shard_file.open(newline="", encoding="utf-8") as sf:
+                rows.extend(csv.DictReader(sf))
+    return rows
 
 
 def count_by(rows: list[dict[str, str]], key: str) -> Counter:
@@ -858,7 +875,7 @@ def main() -> None:
             [
                 ["Evidence group", "Primary files"],
                 ["Universe", "data_raw/expanded/*; data_raw/expanded_itch_raw.csv; data_raw/expanded_steam_tags_raw.csv; data_raw/expanded_desktop_store_raw.csv"],
-                ["Cross-source universe", "data_processed/cross_source_universe_raw.csv; data_processed/cross_source_universe_dedup.csv; data_processed/cross_source_universe_summary.csv"],
+                ["Cross-source universe", "data_processed/cross_source_universe_raw_index.csv;data_processed/cross_source_universe_raw_parts/part_*.csv; data_processed/cross_source_universe_dedup.csv; data_processed/cross_source_universe_summary.csv"],
                 ["Coverage matrix", "data_processed/cross_source_coverage_matrix.csv; docs/competitive/cross-source-coverage-matrix-v1.md"],
                 ["Saturation whitespace", "data_processed/cross_source_market_saturation_matrix.csv; docs/intersections/cross-source-saturation-whitespace-v1.md"],
                 ["Market money", "data_processed/tam_sam_som_model.csv; data_processed/competitor_revenue_proxy_review.csv"],

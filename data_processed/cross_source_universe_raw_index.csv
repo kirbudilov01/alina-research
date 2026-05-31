@@ -1,0 +1,5 @@
+part_number,file_path,row_count,first_universe_row_id,last_universe_row_id,sha256
+"1","data_processed/cross_source_universe_raw_parts/part_001.csv","15000","66b078839cda","d9fe24fa9259","388be0deca7a34ae"
+"2","data_processed/cross_source_universe_raw_parts/part_002.csv","15000","4674f2f14740","6c4d2ef2d185","5e1e76d633a2922b"
+"3","data_processed/cross_source_universe_raw_parts/part_003.csv","15000","6e42deaa96ca","25035961c88f","62bd8d6b72f73d1c"
+"4","data_processed/cross_source_universe_raw_parts/part_004.csv","14006","ad0104d61033","8c3189e89f4a","4bcf357ad50b3cb1"
