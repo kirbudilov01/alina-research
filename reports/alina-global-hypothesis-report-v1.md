@@ -1,6 +1,6 @@
 # Alina Research. Мировой рынок и логика гипотез
 
-Собрано: 2026-05-31T14:47:49.952Z
+Собрано: 2026-05-31T14:58:04.771Z
 
 ## ОПИСАНИЕ ПРОЕКТА И ГИПОТЕЗА #1
 
@@ -10,7 +10,7 @@
 
 Гипотеза №1: на мировом consumer-app рынке есть место для приложения, которое объединяет личный смысл, короткое действие, reset и причинно видимый прогресс в одну ежедневную петлю. Эта гипотеза пока не доказана как product-market fit, но уже поддержана масштабной картой соседних рынков и конкурентных сигналов.
 
-На текущем этапе собрано 67,525 raw source rows, 36,694 dedup rows и 451 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
+На текущем этапе собрано 67,525 raw source rows, 36,694 dedup rows и 454 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
 
 ## ОПРЕДЕЛЕНИЕ МИРОВЫХ ЦЕЛЕВЫХ РЫНКОВ И ГИПОТЕЗА #2
 
@@ -130,6 +130,20 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 
 Главные риски остаются открытыми. P0-конкуренты могут закрывать петлю внутри onboarding. Пользователи могут прочитать avatar/progress как детскую декорацию. Spiritual/meaning layer может вызвать недоверие или safety objection. Paywall может быть понятен в соседних рынках, но не в Alina. Поэтому следующий этап должен не украшать отчет, а собирать observed evidence.
 
+## ИСТОЧНИКИ И ГРАНИЦЫ ДОКАЗАТЕЛЬСТВ
+
+Ниже зафиксирована короткая связка claim -> evidence -> boundary для этой мировой версии отчета. Это не полный manifest всех файлов, а читательский слой: он показывает, какие утверждения можно читать как desk/source support, а какие нельзя усиливать без ручных walkthrough, интервью, прототипных сессий или WTP-проверки.
+
+| Claim | Раздел | Статус | Метрика | Граница |
+| --- | --- | --- | --- | --- |
+| SRC_01_PROJECT_AND_SCALE | Описание проекта и гипотеза #1 | доказано как исследовательский слой | 67525 cross-source raw rows; 36694 cross-source dedup rows; 39 coverage cells; 11 strong and 12 medium source/market cells | Это source/discovery coverage, а не ручная проверка каждого конкурента и не proof спроса. |
+| SRC_02_MARKET_SIZING | Определение мировых целевых рынков и гипотеза #2 | поддержано направленно, но не финальный revenue/WTP proof | 6 market rows; 3 strong and 1 medium directional money cases | Market reports часто broad-category/paywalled; использовать как range-based sizing, не как прогноз выручки Alina. |
+| SRC_03_COMPETITORS | Определение конкурентов и гипотеза #3 | готово к проверке, gate открыт | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Public listings и scorecards не заменяют app/onboarding walkthrough screenshots. |
+| SRC_04_WHITESPACE | Где дыры и возможность отличиться | поддержано направленно, но не финально доказано | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Whitespace нельзя апгрейдить без manual walkthrough и final verdict_after_inspection. |
+| SRC_05_AUDIENCE | Аудитория, интервью и гипотеза #4 | поддержано направленно, но не финально доказано | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Audience rows и Reddit/forum signals не являются representative survey и не заменяют recent-behavior interviews. |
+| SRC_06_PRODUCT_CORE | Итоговая модель продукта и гипотеза #5 | поддержано направленно, но не финально доказано | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | Product core не считается доказанным без заполненных prototype_session_capture_sheet и scorecard. |
+| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 454 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
+
 ## БЫСТРЫЕ ВЫВОДЫ ДЛЯ СТРАТЕГИИ
 
 1. Мировой рынок вокруг Alina есть, но его нельзя сводить к одному TAM: это пересечение mindfulness, coaching, astrology/spiritual guidance, avatar/identity и progression mechanics.
@@ -142,6 +156,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 
 - `reports/alina-global-hypothesis-report-v1.md`
 - `output/pdf/alina-global-hypothesis-report-v1.pdf`
+- `data_processed/global_hypothesis_source_appendix.csv`
 - `reports/alina-russian-readable-report-v2.md`
 - `data_processed/russian_readable_niche_summary.csv`
 - `data_processed/validation_gate_calculator.csv`

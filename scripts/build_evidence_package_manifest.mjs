@@ -241,6 +241,7 @@ const requiredArtifacts = [
   'data_processed/russian_market_sizing_playbook.csv',
   'data_processed/russian_market_deep_dives.csv',
   'data_processed/russian_readable_niche_summary.csv',
+  'data_processed/global_hypothesis_source_appendix.csv',
   'data_processed/russian_whitespace_decision_map.csv',
   'data_processed/russian_claim_evidence_appendix.csv',
   'data_processed/russian_source_provenance_index.csv',

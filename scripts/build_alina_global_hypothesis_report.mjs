@@ -1,8 +1,9 @@
 import fs from 'fs';
 
 const OUT = 'reports/alina-global-hypothesis-report-v1.md';
+const SOURCE_APPENDIX_OUT = 'data_processed/global_hypothesis_source_appendix.csv';
 
-for (const dir of ['reports']) fs.mkdirSync(dir, { recursive: true });
+for (const dir of ['reports', 'data_processed']) fs.mkdirSync(dir, { recursive: true });
 
 function parseCsv(text) {
   const rows = [];
@@ -58,6 +59,14 @@ function clean(value) {
   return String(value ?? '').replace(/\s+/g, ' ').trim();
 }
 
+function csvEscape(value) {
+  return `"${clean(value).replace(/"/g, '""')}"`;
+}
+
+function writeCsv(file, rows, headers) {
+  fs.writeFileSync(file, [headers.join(','), ...rows.map(row => headers.map(h => csvEscape(row[h])).join(','))].join('\n'));
+}
+
 function num(value) {
   const n = Number(String(value ?? '').replace(/[^\d.-]/g, ''));
   return Number.isFinite(n) ? n : 0;
@@ -105,11 +114,93 @@ const gates = csv('data_processed/validation_gate_calculator.csv');
 const paidSignoff = csv('data_processed/paid_flow_local_signoff.csv');
 const tam = csv('data_processed/tam_sam_som_model.csv');
 const manifest = csv('data_processed/evidence_artifact_manifest.csv');
+const claimAppendix = csv('data_processed/russian_claim_evidence_appendix.csv');
+const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv');
+const marketSources = csv('data_processed/market_source_registry.csv');
 
 const intersection = by(tam, 'pillar', 'intersection');
 const p0Icp = icp.filter(row => clean(row.priority_ru).startsWith('P0'));
 const topCompetitors = competitors.slice(0, 12);
 const h2 = by(gates, 'gate_id', 'GATE_H2_PAID_FLOW');
+const claimById = Object.fromEntries(claimAppendix.map(row => [row.claim_id, row]));
+const provByLayer = Object.fromEntries(sourceProvenance.map(row => [row.layer, row]));
+const marketSourceIds = marketSources.map(row => row.source_id).join('|');
+
+const sourceAppendix = [
+  {
+    claim_id: 'SRC_01_PROJECT_AND_SCALE',
+    report_section: 'Описание проекта и гипотеза #1',
+    claim_ru: 'Alina проверяется как мировая consumer-app гипотеза на пересечении meaning, action, reset и visible progress; масштаб source base достаточен для desk research, но не для финального PMF claim.',
+    evidence_status_ru: claimById.REQ_competitor_universe?.status_ru || 'доказано как исследовательский слой',
+    primary_metric: claimById.REQ_competitor_universe?.primary_metric || `${fmt(rawRows.length)} raw rows; ${fmt(dedupRows.length)} dedup rows`,
+    evidence_files: 'data_processed/cross_source_universe_raw_index.csv;data_processed/cross_source_universe_dedup.csv;data_processed/russian_readable_niche_summary.csv',
+    source_boundary_ru: 'Это source/discovery coverage, а не ручная проверка каждого конкурента и не proof спроса.'
+  },
+  {
+    claim_id: 'SRC_02_MARKET_SIZING',
+    report_section: 'Определение мировых целевых рынков и гипотеза #2',
+    claim_ru: 'Пять мировых adjacent-направлений имеют достаточный market-money context для дальнейшей проверки Alina.',
+    evidence_status_ru: 'поддержано направленно, но не финальный revenue/WTP proof',
+    primary_metric: claimById.REQ_market_money_triangulation?.primary_metric || `market sources=${marketSources.length}; intersection SAM=${money(intersection.samBase)}`,
+    evidence_files: `data_processed/tam_sam_som_model.csv;data_processed/market_money_triangulation.csv;data_processed/market_source_registry.csv;source_ids=${marketSourceIds}`,
+    source_boundary_ru: 'Market reports часто broad-category/paywalled; использовать как range-based sizing, не как прогноз выручки Alina.'
+  },
+  {
+    claim_id: 'SRC_03_COMPETITORS',
+    report_section: 'Определение конкурентов и гипотеза #3',
+    claim_ru: 'Конкуренты закрывают отдельные части петли; P0 список нужен для проверки hidden-clone риска.',
+    evidence_status_ru: claimById.H1_product_shape_exists?.status_ru || 'готово к проверке, gate открыт',
+    primary_metric: claimById.H1_product_shape_exists?.primary_metric || `${topCompetitors.length} P0 competitors`,
+    evidence_files: 'data_processed/russian_competitor_battlecards.csv;data_processed/top100_competitor_review_scorecard.csv;data_processed/manual_competitor_inspection_packet.csv',
+    source_boundary_ru: 'Public listings и scorecards не заменяют app/onboarding walkthrough screenshots.'
+  },
+  {
+    claim_id: 'SRC_04_WHITESPACE',
+    report_section: 'Где дыры и возможность отличиться',
+    claim_ru: 'Белое пятно формулируется как узкая причинная петля, а не как отсутствие wellness/coaching/avatar конкурентов.',
+    evidence_status_ru: claimById.H3_whitespace_exists?.status_ru || 'поддержано направленно, но не финально доказано',
+    primary_metric: claimById.H3_whitespace_exists?.primary_metric || 'full-loop rates by five markets',
+    evidence_files: 'data_processed/russian_whitespace_decision_map.csv;data_processed/cross_source_market_saturation_matrix.csv;data_processed/whitespace_signal_matrix.csv',
+    source_boundary_ru: 'Whitespace нельзя апгрейдить без manual walkthrough и final verdict_after_inspection.'
+  },
+  {
+    claim_id: 'SRC_05_AUDIENCE',
+    report_section: 'Аудитория, интервью и гипотеза #4',
+    claim_ru: 'Digital ritual users являются directional ICP, но primary ICP выбирается только после interviews/prototype sessions.',
+    evidence_status_ru: claimById.H5_shared_audience_exists?.status_ru || 'поддержано направленно, но не финально доказано',
+    primary_metric: claimById.H5_shared_audience_exists?.primary_metric || `${icp.length} ICP hypotheses`,
+    evidence_files: 'data_processed/russian_icp_battlecards.csv;data_processed/audience_signal_matrix.csv;data_processed/russian_voc_objection_map.csv',
+    source_boundary_ru: 'Audience rows и Reddit/forum signals не являются representative survey и не заменяют recent-behavior interviews.'
+  },
+  {
+    claim_id: 'SRC_06_PRODUCT_CORE',
+    report_section: 'Итоговая модель продукта и гипотеза #5',
+    claim_ru: 'MVP-петля описана как stimulus design и должна пройти prototype comprehension, differentiation, trust and WTP checks.',
+    evidence_status_ru: claimById.H6_product_core_defined?.status_ru || 'поддержано направленно, но не финально доказано',
+    primary_metric: claimById.H6_product_core_defined?.primary_metric || `${productLoop.length} product-loop screens`,
+    evidence_files: 'data_processed/russian_product_loop_cards.csv;data_processed/prototype_validation_stimulus_flow.csv;data_processed/prototype_validation_scorecard.csv',
+    source_boundary_ru: 'Product core не считается доказанным без заполненных prototype_session_capture_sheet и scorecard.'
+  },
+  {
+    claim_id: 'SRC_07_PROVENANCE',
+    report_section: 'Источники и границы доказательств',
+    claim_ru: 'Пакет трассируем локально через manifest/provenance; missing artifacts отсутствуют после пересборки.',
+    evidence_status_ru: claimById.REQ_evidence_package_traceability?.status_ru || 'доказано как исследовательский слой',
+    primary_metric: `${fmt(manifest.length)} manifest artifacts; missing=${manifest.filter(row => row.exists !== 'yes').length}`,
+    evidence_files: `${provByLayer.artifact_manifest?.main_files || 'data_processed/evidence_artifact_manifest.csv;docs/decision/evidence-package-manifest-v1.md'}`,
+    source_boundary_ru: 'Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims.'
+  }
+];
+
+writeCsv(SOURCE_APPENDIX_OUT, sourceAppendix, [
+  'claim_id',
+  'report_section',
+  'claim_ru',
+  'evidence_status_ru',
+  'primary_metric',
+  'evidence_files',
+  'source_boundary_ru'
+]);
 
 const lines = [];
 
@@ -266,6 +357,24 @@ lines.push('Первый столп уверенности - масштаб ми
 lines.push('');
 lines.push('Главные риски остаются открытыми. P0-конкуренты могут закрывать петлю внутри onboarding. Пользователи могут прочитать avatar/progress как детскую декорацию. Spiritual/meaning layer может вызвать недоверие или safety objection. Paywall может быть понятен в соседних рынках, но не в Alina. Поэтому следующий этап должен не украшать отчет, а собирать observed evidence.');
 lines.push('');
+lines.push('## ИСТОЧНИКИ И ГРАНИЦЫ ДОКАЗАТЕЛЬСТВ');
+lines.push('');
+lines.push('Ниже зафиксирована короткая связка claim -> evidence -> boundary для этой мировой версии отчета. Это не полный manifest всех файлов, а читательский слой: он показывает, какие утверждения можно читать как desk/source support, а какие нельзя усиливать без ручных walkthrough, интервью, прототипных сессий или WTP-проверки.');
+lines.push('');
+lines.push(mdTable(sourceAppendix.map(row => ({
+  claim: row.claim_id,
+  section: row.report_section,
+  status: row.evidence_status_ru,
+  metric: row.primary_metric,
+  boundary: row.source_boundary_ru
+})), [
+  { key: 'claim', label: 'Claim' },
+  { key: 'section', label: 'Раздел' },
+  { key: 'status', label: 'Статус' },
+  { key: 'metric', label: 'Метрика' },
+  { key: 'boundary', label: 'Граница' }
+]));
+lines.push('');
 lines.push('## БЫСТРЫЕ ВЫВОДЫ ДЛЯ СТРАТЕГИИ');
 lines.push('');
 lines.push('1. Мировой рынок вокруг Alina есть, но его нельзя сводить к одному TAM: это пересечение mindfulness, coaching, astrology/spiritual guidance, avatar/identity и progression mechanics.');
@@ -278,6 +387,7 @@ lines.push('## Локальные файлы');
 lines.push('');
 lines.push('- `reports/alina-global-hypothesis-report-v1.md`');
 lines.push('- `output/pdf/alina-global-hypothesis-report-v1.pdf`');
+lines.push('- `data_processed/global_hypothesis_source_appendix.csv`');
 lines.push('- `reports/alina-russian-readable-report-v2.md`');
 lines.push('- `data_processed/russian_readable_niche_summary.csv`');
 lines.push('- `data_processed/validation_gate_calculator.csv`');
@@ -285,6 +395,7 @@ lines.push('- `data_processed/validation_gate_calculator.csv`');
 fs.writeFileSync(OUT, `${lines.join('\n')}\n`);
 
 console.log(`global_hypothesis_report=${OUT}`);
+console.log(`global_hypothesis_source_appendix=${SOURCE_APPENDIX_OUT}`);
 console.log(`raw_rows=${rawRows.length}`);
 console.log(`dedup_rows=${dedupRows.length}`);
 console.log(`markets=${nicheSummary.length}`);
