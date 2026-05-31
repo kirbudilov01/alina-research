@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T03:24:48.040Z
+Generated: 2026-05-31T03:28:10.729Z
 
 ## 1. Executive Summary
 
@@ -15,6 +15,7 @@ Key quantified signals:
 - High whitespace candidates: 593; medium: 4040; low: 7919.
 - Top-100 intersection candidates enriched from App Store metadata: 100/100.
 - AI-assisted top-100 competitor review: 100 rows, 90 unique primary apps, 45 high-threat apps, 1 direct reference competitor.
+- Human validation packet: 90 primary apps queued; 21 P0 and 24 P1 validation targets.
 - App Store IAP pricing layer: 498 observed purchase rows across 80 apps; observed price range $0.00-$549.99.
 - Google Play pricing validation: 247/250 successful Android lookups; 191 apps offer IAP.
 - Developer website paywall discovery: 560 fetched URL rows across 70 app/domain rows; 29 domains queued for screenshot validation.
@@ -223,6 +224,34 @@ Highest-threat primary competitors:
 
 Competitive interpretation: the field is full of close substitutes, but only one direct reference competitor currently shows strict behavior-tied avatar/identity progression. That keeps the whitespace narrow but real.
 
+### Human Validation Queue
+
+The AI-assisted top-100 review now has a ranked human validation queue covering 90 primary app entries. P0/P1 apps should be manually checked before external-facing claims are treated as confirmed.
+
+Validation priority bands:
+
+- P3_backlog: 35
+- P1_high: 24
+- P0_validate_first: 21
+- P2_medium: 10
+
+P0 validation targets:
+
+| Rank | App | Verdict | Priority | Behavior Claim | Manual Checks |
+| ---: | --- | --- | ---: | --- | --- |
+| 1 | Shepherd: Spiritual Bible BFF | direct_reference_competitor | 162.8 | yes | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language/check_safety_and_overclaiming |
+| 2 | Zing AI: Home & Gym Workouts | high_priority_close_substitute | 112 | no | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language/check_safety_and_overclaiming |
+| 3 | Miracle Morning Routine | high_priority_close_substitute | 111.4 | no | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language |
+| 4 | EVOLVE: Transform Your Life | high_priority_close_substitute | 106 | no | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language/check_safety_and_overclaiming |
+| 5 | Daily Yoga: Yoga for Fitness® | high_priority_close_substitute | 99.2 | no | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language/check_safety_and_overclaiming |
+| 6 | Daily Burn: Workout Coach | high_priority_close_substitute | 98 | no | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language/check_safety_and_overclaiming |
+| 7 | Myla : Manifest & Vision Board | high_priority_close_substitute | 97.6 | no | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language/check_safety_and_overclaiming |
+| 8 | Rosebud: AI Journal & Diary | high_priority_close_substitute | 97 | no | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language/check_safety_and_overclaiming |
+| 9 | Habit Tracker : Haby | high_priority_close_substitute | 95.8 | no | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language |
+| 10 | Goddess・Women's Wellness Coach | high_priority_close_substitute | 95.8 | no | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language/check_safety_and_overclaiming |
+| 11 | LifeWheel Goal Habit Tracker | high_priority_close_substitute | 95.4 | no | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language/check_safety_and_overclaiming |
+| 12 | Habit Tracker | high_priority_close_substitute | 94 | no | confirm_app_store_metadata/inspect_onboarding_and_first_session/verify_core_feature_claims/verify_pricing_iap_and_trial_terms/capture_3_to_5_screenshots/record_positioning_language/verify_behavior_tied_avatar_progression/sample_reviews_for_user_language/check_safety_and_overclaiming |
+
 ## 6. Whitespace Analysis
 
 Broad whitespace is weak: the market already has many products that combine meaning, habits, AI, mindfulness, and identity language. Narrow whitespace is stronger: top-100 metadata shows only one strict signal of behavior-tied avatar progression.
@@ -371,6 +400,7 @@ Remaining proof required:
 
 - Manual validation of the top-100 candidates.
 - Human validation of AI-assisted battlecards and scorecard verdicts.
+- Completion of P0/P1 human validation queue and status updates in `data_processed/top100_human_validation_queue.csv`.
 - Forum evidence and deeper manual clustering of reviews for user pain language and subscription objections.
 - Human validation of forum/source quote coding before external-facing use.
 - Web/paywall screenshots and trial-term validation where accessible.
@@ -409,6 +439,7 @@ Market claims currently normalized: 14.
 - `docs/competitive/top-intersection-review-synthesis-v1.md`
 - `docs/competitive/top100-competitor-review-v1.md`
 - `docs/competitive/top100-competitor-battlecards-v1.md`
+- `docs/competitive/human-validation-guide-v1.md`
 - `docs/competitive/app-store-iap-pricing-v1.md`
 - `docs/competitive/google-play-pricing-v1.md`
 - `docs/competitive/web-paywall-validation-v1.md`
@@ -419,6 +450,7 @@ Market claims currently normalized: 14.
 - `data_processed/whitespace_signal_matrix.csv`
 - `data_processed/top_intersection_review_prefill.csv`
 - `data_processed/top100_competitor_review_scorecard.csv`
+- `data_processed/top100_human_validation_queue.csv`
 - `data_processed/app_store_iap_pricing_summary.csv`
 - `data_processed/google_play_pricing_summary.csv`
 - `data_processed/web_paywall_signal_matrix.csv`
@@ -452,7 +484,7 @@ Market claims currently normalized: 14.
 
 ## 13. Next Work
 
-1. Human-validate the AI-assisted top-100 competitor scorecard and battlecards.
+1. Human-validate the P0/P1 queue from `data_processed/top100_human_validation_queue.csv` and update validation statuses.
 2. Manually validate the highest-signal review clusters and extract exact user language for positioning.
 3. Screenshot-validate the website paywall queue and verify trial terms / first meaningful paywall location.
 4. Polish final designed PDF and add web/paywall screenshots where useful.

@@ -93,6 +93,7 @@ const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
 const forumSignals = csv('data_raw/forum_evidence_signals.csv');
 const forumQuoteCoding = csv('data_processed/forum_quote_coding_matrix.csv');
 const top100Review = csv('data_processed/top100_competitor_review_scorecard.csv');
+const humanValidationQueue = csv('data_processed/top100_human_validation_queue.csv');
 const iapRaw = csv('data_raw/app_store_iap_pricing_raw.csv');
 const iapSummary = csv('data_processed/app_store_iap_pricing_summary.csv');
 const googlePlayPricing = csv('data_raw/google_play_pricing_raw.csv');
@@ -113,6 +114,8 @@ const reviewSignalCounts = countBy(reviewSignals, 'signal');
 const primaryCompetitors = top100Review.filter(r => r.duplicate_flag === 'primary_app_entry');
 const highThreatCompetitors = primaryCompetitors.filter(r => Number(r.competitive_threat_score) >= 24);
 const directReferenceCompetitors = primaryCompetitors.filter(r => r.competitive_verdict === 'direct_reference_competitor');
+const p0HumanValidation = humanValidationQueue.filter(r => r.priority_band === 'P0_validate_first');
+const p1HumanValidation = humanValidationQueue.filter(r => r.priority_band === 'P1_high');
 const appsWithIap = new Set(iapRaw.map(r => r.app_store_id).filter(Boolean)).size;
 const iapPrices = iapRaw.map(r => Number(r.price_usd)).filter(Number.isFinite);
 const googlePlayOk = googlePlayPricing.filter(r => r.collection_status === 'ok');
@@ -137,6 +140,7 @@ report.push(`- Audience signal rows: ${audience.length}.`);
 report.push(`- High whitespace candidates: ${highWhitespace}; medium: ${mediumWhitespace}; low: ${lowWhitespace}.`);
 report.push(`- Top-100 intersection candidates enriched from App Store metadata: ${prefill.length}/100.`);
 report.push(`- AI-assisted top-100 competitor review: ${top100Review.length} rows, ${primaryCompetitors.length} unique primary apps, ${highThreatCompetitors.length} high-threat apps, ${directReferenceCompetitors.length} direct reference competitor.`);
+report.push(`- Human validation packet: ${humanValidationQueue.length} primary apps queued; ${p0HumanValidation.length} P0 and ${p1HumanValidation.length} P1 validation targets.`);
 report.push(`- App Store IAP pricing layer: ${iapRaw.length} observed purchase rows across ${appsWithIap} apps; observed price range ${iapPrices.length ? `$${Math.min(...iapPrices).toFixed(2)}-$${Math.max(...iapPrices).toFixed(2)}` : 'n/a'}.`);
 report.push(`- Google Play pricing validation: ${googlePlayOk.length}/${googlePlayPricing.length} successful Android lookups; ${googlePlayOk.filter(r => r.offers_iap === 'yes').length} apps offer IAP.`);
 report.push(`- Developer website paywall discovery: ${webPaywallRaw.length} fetched URL rows across ${webPaywallSignals.length} app/domain rows; ${webPaywallScreenshotQueue.length} domains queued for screenshot validation.`);
@@ -317,6 +321,27 @@ if (top100Review.length) {
   report.push('Competitive interpretation: the field is full of close substitutes, but only one direct reference competitor currently shows strict behavior-tied avatar/identity progression. That keeps the whitespace narrow but real.');
   report.push('');
 }
+if (humanValidationQueue.length) {
+  report.push('### Human Validation Queue');
+  report.push('');
+  report.push(`The AI-assisted top-100 review now has a ranked human validation queue covering ${humanValidationQueue.length} primary app entries. P0/P1 apps should be manually checked before external-facing claims are treated as confirmed.`);
+  report.push('');
+  report.push('Validation priority bands:');
+  report.push('');
+  report.push(bulletCounts(countBy(humanValidationQueue, 'priority_band')));
+  report.push('');
+  report.push('P0 validation targets:');
+  report.push('');
+  report.push(mdTable(p0HumanValidation.slice(0, 12), [
+    { key: 'validation_rank', label: 'Rank', align: 'right' },
+    { key: 'app_name', label: 'App' },
+    { key: 'competitive_verdict', label: 'Verdict' },
+    { key: 'validation_priority_score', label: 'Priority', align: 'right' },
+    { key: 'behavior_tied_progression_claim', label: 'Behavior Claim' },
+    { key: 'manual_checks', label: 'Manual Checks' }
+  ], 12));
+  report.push('');
+}
 report.push('## 6. Whitespace Analysis');
 report.push('');
 report.push('Broad whitespace is weak: the market already has many products that combine meaning, habits, AI, mindfulness, and identity language. Narrow whitespace is stronger: top-100 metadata shows only one strict signal of behavior-tied avatar progression.');
@@ -435,6 +460,7 @@ report.push('Remaining proof required:');
 report.push('');
 report.push('- Manual validation of the top-100 candidates.');
 report.push('- Human validation of AI-assisted battlecards and scorecard verdicts.');
+report.push('- Completion of P0/P1 human validation queue and status updates in `data_processed/top100_human_validation_queue.csv`.');
 report.push('- Forum evidence and deeper manual clustering of reviews for user pain language and subscription objections.');
 report.push('- Human validation of forum/source quote coding before external-facing use.');
 report.push('- Web/paywall screenshots and trial-term validation where accessible.');
@@ -467,6 +493,7 @@ report.push('- `docs/visuals/chart-index-v1.md`');
 report.push('- `docs/competitive/top-intersection-review-synthesis-v1.md`');
 report.push('- `docs/competitive/top100-competitor-review-v1.md`');
 report.push('- `docs/competitive/top100-competitor-battlecards-v1.md`');
+report.push('- `docs/competitive/human-validation-guide-v1.md`');
 report.push('- `docs/competitive/app-store-iap-pricing-v1.md`');
 report.push('- `docs/competitive/google-play-pricing-v1.md`');
 report.push('- `docs/competitive/web-paywall-validation-v1.md`');
@@ -477,6 +504,7 @@ report.push('- `data_processed/audience_signal_matrix.csv`');
 report.push('- `data_processed/whitespace_signal_matrix.csv`');
 report.push('- `data_processed/top_intersection_review_prefill.csv`');
 report.push('- `data_processed/top100_competitor_review_scorecard.csv`');
+report.push('- `data_processed/top100_human_validation_queue.csv`');
 report.push('- `data_processed/app_store_iap_pricing_summary.csv`');
 report.push('- `data_processed/google_play_pricing_summary.csv`');
 report.push('- `data_processed/web_paywall_signal_matrix.csv`');
@@ -510,7 +538,7 @@ report.push('- `output/pdf/alina-evidence-visual-report-v1.pdf`');
 report.push('');
 report.push('## 13. Next Work');
 report.push('');
-report.push('1. Human-validate the AI-assisted top-100 competitor scorecard and battlecards.');
+report.push('1. Human-validate the P0/P1 queue from `data_processed/top100_human_validation_queue.csv` and update validation statuses.');
 report.push('2. Manually validate the highest-signal review clusters and extract exact user language for positioning.');
 report.push('3. Screenshot-validate the website paywall queue and verify trial terms / first meaningful paywall location.');
 report.push('4. Polish final designed PDF and add web/paywall screenshots where useful.');
@@ -533,7 +561,7 @@ status.push(mdTable([
   { requirement: 'Versioned on GitHub', evidence: 'git log through current commit after push', status: 'active' },
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft evidence PDF and visual PDF companion done' },
   { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft chart pack and embedded visual PDF done' },
-  { requirement: 'Manual review of top 100', evidence: 'data_processed/top100_competitor_review_scorecard.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md', status: 'AI-assisted review done v1; human validation pending' },
+  { requirement: 'Manual review of top 100', evidence: 'data_processed/top100_competitor_review_scorecard.csv; data_processed/top100_human_validation_queue.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md; docs/competitive/human-validation-guide-v1.md', status: 'AI-assisted review and ranked human validation packet done v1; human execution pending' },
   { requirement: 'Detailed pricing/IAP extraction', evidence: 'data_raw/app_store_iap_pricing_raw.csv; data_processed/app_store_iap_pricing_summary.csv; docs/competitive/app-store-iap-pricing-v1.md; data_raw/google_play_pricing_raw.csv; data_processed/google_play_pricing_summary.csv; docs/competitive/google-play-pricing-v1.md; data_raw/web_paywall_discovery_raw.csv; data_processed/web_paywall_signal_matrix.csv; docs/competitive/web-paywall-validation-v1.md', status: 'App Store web IAP extraction, Google Play pricing validation, and developer website paywall discovery done v1; screenshot/manual paywall validation pending' },
   { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_raw/forum_quote_evidence_raw.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; data_processed/forum_quote_coding_matrix.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md; docs/audience/forum-quote-coding-v1.md', status: 'App Store review extraction, JTBD clustering, forum source map, and retrieval-assisted quote coding done v1; human validation pending' }
 ], [
@@ -557,3 +585,4 @@ console.log(`iap_rows=${iapRaw.length}`);
 console.log(`google_play_pricing_rows=${googlePlayPricing.length}`);
 console.log(`web_paywall_rows=${webPaywallRaw.length}`);
 console.log(`web_paywall_domains=${webPaywallSignals.length}`);
+console.log(`human_validation_queue_rows=${humanValidationQueue.length}`);
