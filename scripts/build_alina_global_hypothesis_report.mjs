@@ -214,6 +214,7 @@ const marketSizingMethodology = csv('data_processed/global_market_sizing_methodo
 const marketStressScenarios = csv('data_processed/market_sizing_stress_test.csv');
 const whitespaceAudienceSynthesis = csv('data_processed/global_whitespace_audience_synthesis.csv');
 const goalEvidenceCoverage = csv('data_processed/global_goal_evidence_coverage.csv');
+const validationExecutiveRollup = csv('data_processed/global_validation_executive_rollup.csv');
 
 const intersection = by(tam, 'pillar', 'intersection');
 const p0Icp = icp.filter(row => clean(row.priority_ru).startsWith('P0'));
@@ -484,6 +485,28 @@ const h4Gate = gateSnapshot.find(row => row.hypothesis_id === 'H4') || {};
 const h6Gate = gateSnapshot.find(row => row.hypothesis_id === 'H6') || {};
 lines.push(`Практически это означает следующее: H1 и H3 уже имеют по ${h1Gate.completed_vs_required || h3Gate.completed_vs_required || '0 / 0'} listing-only строк, но ${h1Gate.success_vs_threshold || h3Gate.success_vs_threshold || '0 / 0'} успешных app-walkthrough строк, поэтому hidden-clone риск остается открытым. H2 имеет ${h2Gate.completed_vs_required || '0 / 0'} заполненных paid-flow строк и ${h2Gate.success_vs_threshold || '0 / 0'} успешных строк, но тоже ниже минимального порога. H5 имеет ${h5Gate.completed_vs_required || '0 / 0'} secondary VOC строк и ${h5Gate.success_vs_threshold || '0 / 0'} успешных interview строк: это контекст для рекрутинга, а не доказательство аудитории. H4 и H6 имеют по ${h4Gate.completed_vs_required || h6Gate.completed_vs_required || '0 / 0'} prototype-readiness строк, но ${h4Gate.success_vs_threshold || h6Gate.success_vs_threshold || '0 / 0'} успешных user-session строк. Это не слабость отчета, а защита от преждевременного вывода: большой массив конкурентов и источников показывает, куда идти, но не заменяет walkthrough, интервью и прототипные сессии.`);
 lines.push('');
+if (validationExecutiveRollup.length) {
+  lines.push('### Управленческий rollup по validation evidence');
+  lines.push('');
+  lines.push('Чтобы не путать подготовленный research layer с реальной валидацией, ниже сведены типы evidence по каждому gate. Важная граница: listing-only, secondary VOC и prototype-readiness помогают запускать проверку, но не апгрейдят гипотезы без наблюдаемых walkthrough/interview/session результатов.');
+  lines.push('');
+  lines.push(mdTable(validationExecutiveRollup.map(row => ({
+    h: row.linked_hypotheses,
+    type: row.evidence_type_ru,
+    rows: row.completed_vs_required,
+    success: row.success_vs_threshold,
+    gap: row.min_success_gap,
+    next: row.next_real_validation_ru
+  })), [
+    { key: 'h', label: 'H' },
+    { key: 'type', label: 'Тип evidence сейчас' },
+    { key: 'rows', label: 'Rows' },
+    { key: 'success', label: 'Success' },
+    { key: 'gap', label: 'Success gap', align: 'right' },
+    { key: 'next', label: 'Следующий реальный validation step' }
+  ]));
+  lines.push('');
+}
 lines.push('## ОПРЕДЕЛЕНИЕ МИРОВЫХ ЦЕЛЕВЫХ РЫНКОВ И ГИПОТЕЗА #2');
 lines.push('');
 lines.push('Для проверки первой гипотезы исследование выделяет пять мировых направлений. Они не равны пяти отдельным продуктам: каждое направление отвечает за один слой будущей ценности Alina. Mindfulness дает reset и привычку платить за эмоциональное состояние. Coaching/self-improvement дает действие, структуру роста и язык прогресса. Astrology/esoterics дает личный смысл, символический контекст и willingness-to-pay за персональные интерпретации. Avatar/identity дает видимое отражение изменения. Gaming/progression используется как benchmark механик возврата, награды и прогресса, но не как прямой рынок Alina.');

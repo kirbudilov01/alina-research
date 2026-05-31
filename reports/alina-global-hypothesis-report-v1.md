@@ -1,6 +1,6 @@
 # Alina Research. Мировой рынок и логика гипотез
 
-Собрано: 2026-05-31T15:57:13.799Z
+Собрано: 2026-05-31T16:00:41.327Z
 
 ## ОПИСАНИЕ ПРОЕКТА И ГИПОТЕЗА #1
 
@@ -26,6 +26,19 @@
 | H6 | продуктовое ядро можно определить | прототипные сессии и scorecard | начато, но доказательств недостаточно | 16 / 80 | 0 / 32 | оставить hold_validate |
 
 Практически это означает следующее: H1 и H3 уже имеют по 12 / 60 listing-only строк, но 0 / 25 успешных app-walkthrough строк, поэтому hidden-clone риск остается открытым. H2 имеет 28 / 40 заполненных paid-flow строк и 8 / 12 успешных строк, но тоже ниже минимального порога. H5 имеет 12 / 96 secondary VOC строк и 0 / 30 успешных interview строк: это контекст для рекрутинга, а не доказательство аудитории. H4 и H6 имеют по 16 / 80 prototype-readiness строк, но 0 / 32 успешных user-session строк. Это не слабость отчета, а защита от преждевременного вывода: большой массив конкурентов и источников показывает, куда идти, но не заменяет walkthrough, интервью и прототипные сессии.
+
+### Управленческий rollup по validation evidence
+
+Чтобы не путать подготовленный research layer с реальной валидацией, ниже сведены типы evidence по каждому gate. Важная граница: listing-only, secondary VOC и prototype-readiness помогают запускать проверку, но не апгрейдят гипотезы без наблюдаемых walkthrough/interview/session результатов.
+
+| H | Тип evidence сейчас | Rows | Success | Success gap | Следующий реальный validation step |
+| --- | --- | --- | --- | ---: | --- |
+| H1 | listing-only evidence | 12 / 60 | 0 / 25 | 25 | пройти первые 5 P0-приложений от listing до onboarding, first action, avatar/progress feedback и paywall boundary |
+| H3 | listing-only whitespace risk evidence | 12 / 60 | 0 / 25 | 25 | для тех же 5 P0-приложений классифицировать full_loop / adjacent_loop / weak_adjacency и action->avatar causality |
+| H2 | paid-flow signoff evidence | 28 / 40 | 8 / 12 | 4 | добрать product-matched paid-flow rows с чистой ценой, trial/plan depth и first-value/paywall boundary |
+| H5 | secondary VOC evidence | 12 / 96 | 0 / 30 | 30 | провести первые P0-интервью ICP_A/ICP_D и заменить secondary VOC rows реальными participant answers |
+| H4 | prototype-readiness evidence | 16 / 80 | 0 / 32 | 32 | запустить prototype sessions и измерить comprehension, differentiation, meaning lift, trust/safety и return intent |
+| H6 | prototype-readiness evidence | 16 / 80 | 0 / 32 | 32 | после prototype sessions обновить MVP loop и проверить, могут ли участники назвать продукт и причинность своими словами |
 
 ## ОПРЕДЕЛЕНИЕ МИРОВЫХ ЦЕЛЕВЫХ РЫНКОВ И ГИПОТЕЗА #2
 

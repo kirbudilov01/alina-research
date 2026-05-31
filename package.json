@@ -92,6 +92,7 @@
     "build:paid-flow-local-signoff": "node scripts/build_paid_flow_local_signoff.mjs",
     "build:icp-secondary-voc-signoff": "node scripts/build_icp_secondary_voc_signoff.mjs",
     "build:prototype-readiness-signoff": "node scripts/build_prototype_readiness_signoff.mjs",
+    "build:global-validation-rollup": "node scripts/build_global_validation_executive_rollup.mjs",
     "build:hypothesis-decision": "node scripts/build_hypothesis_decision_matrix.mjs",
     "build:p0-command-center": "node scripts/build_p0_validation_command_center.mjs",
     "build:p0-field-guide": "node scripts/build_p0_validation_field_guide.mjs",
