@@ -212,6 +212,7 @@ const marketSources = csv('data_processed/market_source_registry.csv');
 const nextValidationBacklog = csv('data_processed/global_next_validation_backlog.csv');
 const marketSizingMethodology = csv('data_processed/global_market_sizing_methodology.csv');
 const marketStressScenarios = csv('data_processed/market_sizing_stress_test.csv');
+const whitespaceAudienceSynthesis = csv('data_processed/global_whitespace_audience_synthesis.csv');
 
 const intersection = by(tam, 'pillar', 'intersection');
 const p0Icp = icp.filter(row => clean(row.priority_ru).startsWith('P0'));
@@ -599,6 +600,26 @@ lines.push(mdTable(marketDeepDives.map(row => {
 lines.push('');
 lines.push('Наиболее перспективная формулировка белого пятна: не “новый wellness app”, а короткая трансформационная петля с причинным visual feedback. Если прогресс меняется произвольно, продукт станет декоративным avatar toy. Если действие никак не связано со смыслом, продукт станет обычным habit tracker. Если reset живет отдельно, продукт станет библиотекой практик. Поэтому отличие должно проверяться именно на связке, а не на отдельных функциях.');
 lines.push('');
+lines.push('## СВЯЗКА WHITESPACE И АУДИТОРИИ');
+lines.push('');
+lines.push('Белое пятно нельзя оценивать отдельно от аудитории. Даже если full-loop candidates редки, это становится продуктовой возможностью только там, где есть люди с recent behavior, current workaround и языком боли. Поэтому следующий слой соединяет H3 и H5: по каждому мировому направлению видно, какой разрыв найден в конкурентной среде, какой ICP туда ложится и какой первый validation move нужен.');
+lines.push('');
+lines.push(mdTable(whitespaceAudienceSynthesis.map(row => ({
+  market: row.market_ru,
+  loop: row.full_loop_rate_pct,
+  read: row.whitespace_read_ru,
+  icp: row.primary_icp_segments_ru,
+  move: row.first_validation_move_ru
+})), [
+  { key: 'market', label: 'Рынок' },
+  { key: 'loop', label: 'Full-loop rate' },
+  { key: 'read', label: 'Whitespace read' },
+  { key: 'icp', label: 'ICP fit' },
+  { key: 'move', label: 'Первый validation move' }
+]));
+lines.push('');
+lines.push('Практический вывод: mindfulness и avatar/identity выглядят как самые чистые whitespace-поля по редкости full-loop candidates, но они все равно требуют walkthrough. Astrology/esoterics и coaching дают сильную аудиторию и деньги, но full-loop rate выше, поэтому claim о белом пятне там слабее. Gaming остается benchmark механик, а не прямой рынок.');
+lines.push('');
 lines.push('## АУДИТОРИЯ, ИНТЕРВЬЮ И ГИПОТЕЗА #4');
 lines.push('');
 lines.push('На текущем этапе аудитория описывается не демографией, а поведением. Рабочее название - digital ritual users: люди, которые уже используют приложения, чтобы регулировать состояние, видеть движение вперед, получать личный смысл, возвращаться к практике и иногда платить за персонализацию, глубину или поддержку.');
@@ -736,6 +757,7 @@ lines.push('- `data_processed/global_hypothesis_validation_questionnaire.csv`');
 lines.push('- `data_processed/global_hypothesis_gate_snapshot.csv`');
 lines.push('- `data_processed/global_next_validation_backlog.csv`');
 lines.push('- `data_processed/global_market_sizing_methodology.csv`');
+lines.push('- `data_processed/global_whitespace_audience_synthesis.csv`');
 lines.push('- `reports/alina-russian-readable-report-v2.md`');
 lines.push('- `data_processed/russian_readable_niche_summary.csv`');
 lines.push('- `data_processed/validation_gate_calculator.csv`');

@@ -1,6 +1,6 @@
 # Alina Research. Мировой рынок и логика гипотез
 
-Собрано: 2026-05-31T15:19:47.884Z
+Собрано: 2026-05-31T15:23:55.851Z
 
 ## ОПИСАНИЕ ПРОЕКТА И ГИПОТЕЗА #1
 
@@ -10,7 +10,7 @@
 
 Гипотеза №1: на мировом consumer-app рынке есть место для приложения, которое объединяет личный смысл, короткое действие, reset и причинно видимый прогресс в одну ежедневную петлю. Эта гипотеза пока не доказана как product-market fit, но уже поддержана масштабной картой соседних рынков и конкурентных сигналов.
 
-На текущем этапе собрано 67,525 сырьевых source-строк, 36,694 уникализированных строк и 462 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
+На текущем этапе собрано 67,525 сырьевых source-строк, 36,694 уникализированных строк и 465 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
 
 ## ТЕКУЩИЙ СТАТУС ДОКАЗАТЕЛЬСТВ
 
@@ -115,6 +115,20 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | Gaming / progression benchmark | 1.03% | механический benchmark, не основной whitespace | Не использовать как H3 proof. Это источник механик, а не доказательство рынка Alina. |
 
 Наиболее перспективная формулировка белого пятна: не “новый wellness app”, а короткая трансформационная петля с причинным visual feedback. Если прогресс меняется произвольно, продукт станет декоративным avatar toy. Если действие никак не связано со смыслом, продукт станет обычным habit tracker. Если reset живет отдельно, продукт станет библиотекой практик. Поэтому отличие должно проверяться именно на связке, а не на отдельных функциях.
+
+## СВЯЗКА WHITESPACE И АУДИТОРИИ
+
+Белое пятно нельзя оценивать отдельно от аудитории. Даже если full-loop candidates редки, это становится продуктовой возможностью только там, где есть люди с recent behavior, current workaround и языком боли. Поэтому следующий слой соединяет H3 и H5: по каждому мировому направлению видно, какой разрыв найден в конкурентной среде, какой ICP туда ложится и какой первый validation move нужен.
+
+| Рынок | Full-loop rate | Whitespace read | ICP fit | Первый validation move |
+| --- | --- | --- | --- | --- |
+| Mindfulness / reset | 3.82% | узкое белое пятно выглядит правдоподобно: full-loop candidates редки, но нужен P0 walkthrough | ICP_D: Habit and progress users / ICP_C: Anxious daily reset users | сначала проверить P0-аудиторию через recent behavior интервью, затем walkthrough high-risk конкурентов |
+| Avatar / identity | 2.83% | узкое белое пятно выглядит правдоподобно: full-loop candidates редки, но нужен P0 walkthrough | ICP_E: Cozy/casual progression users / ICP_B: Avatar identity builders | использовать как compare-сегмент после P0 ICP и high-risk competitor walkthrough |
+| Gaming / progression benchmark | 1.03% | использовать как источник механик прогресса и возврата, но не как прямое доказательство whitespace Alina | ICP_E: Cozy/casual progression users | взять progression/avatar/retention паттерны в прототип, но не использовать gaming как H3 proof |
+| Coaching / self-improvement | 13.02% | рынок видим и плотен; whitespace claim слабый без нового ручного evidence | ICP_A: Spiritual self-improvers / ICP_D: Habit and progress users | сначала проверить P0-аудиторию через recent behavior интервью, затем walkthrough high-risk конкурентов |
+| Astrology / esoterics | 13.70% | рынок видим и плотен; whitespace claim слабый без нового ручного evidence | ICP_A: Spiritual self-improvers | сначала проверить P0-аудиторию через recent behavior интервью, затем walkthrough high-risk конкурентов |
+
+Практический вывод: mindfulness и avatar/identity выглядят как самые чистые whitespace-поля по редкости full-loop candidates, но они все равно требуют walkthrough. Astrology/esoterics и coaching дают сильную аудиторию и деньги, но full-loop rate выше, поэтому claim о белом пятне там слабее. Gaming остается benchmark механик, а не прямой рынок.
 
 ## АУДИТОРИЯ, ИНТЕРВЬЮ И ГИПОТЕЗА #4
 
@@ -224,7 +238,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | SRC_04_WHITESPACE | Где дыры и возможность отличиться | поддержано направленно, но не финально доказано | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Whitespace нельзя апгрейдить без manual walkthrough и final verdict_after_inspection. |
 | SRC_05_AUDIENCE | Аудитория, интервью и гипотеза #4 | поддержано направленно, но не финально доказано | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Audience rows и Reddit/forum signals не являются representative survey и не заменяют recent-behavior interviews. |
 | SRC_06_PRODUCT_CORE | Итоговая модель продукта и гипотеза #5 | поддержано направленно, но не финально доказано | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | Product core не считается доказанным без заполненных prototype_session_capture_sheet и scorecard. |
-| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 462 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
+| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 465 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
 
 ## БЫСТРЫЕ ВЫВОДЫ ДЛЯ СТРАТЕГИИ
 
@@ -243,6 +257,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 - `data_processed/global_hypothesis_gate_snapshot.csv`
 - `data_processed/global_next_validation_backlog.csv`
 - `data_processed/global_market_sizing_methodology.csv`
+- `data_processed/global_whitespace_audience_synthesis.csv`
 - `reports/alina-russian-readable-report-v2.md`
 - `data_processed/russian_readable_niche_summary.csv`
 - `data_processed/validation_gate_calculator.csv`
