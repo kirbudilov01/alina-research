@@ -1,0 +1,6 @@
+niche,source_count,claim_count,market_size_claims,min_market_size_claim,max_market_size_claim,avg_confidence_score,confidence_band_mix,market_confidence_summary,sam_base,key_interpretation
+"gaming","2","2","2","113000000000","166000000000","5.8","high=1;medium=0;low=0;context=1","thin_or_contextual","671100000","Strong monetization benchmark but weak directness; keep outside direct Alina TAM."
+"mindfulness","1","2","2","1680000000","4620000000","8","high=1;medium=0;low=0;context=0","thin_or_contextual","252000000","Closest reset-market anchor, but source base is thin and should be triangulated."
+"avatar_identity","1","2","2","8400000000","93400000000","6","high=0;medium=1;low=0;context=0","thin_but_usable","420000000","Large broad TAM with consumer-recurring-use uncertainty; discount heavily."
+"coaching","4","5","3","4220000000","6690000000","6.3","high=1;medium=0;low=3;context=0","thin_or_contextual","300000000","Several sources support coaching demand, but enterprise/career definitions need consumer filtering."
+"astrology_esoterics","4","3","3","5690000000","16070000000","6.3","high=0;medium=4;low=0;context=0","moderate_source_base","374400000","Direct adjacent app category but public values vary widely; range-only until triangulated."

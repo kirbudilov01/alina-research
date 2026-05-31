@@ -87,6 +87,8 @@ const whitespace = csv('data_processed/whitespace_signal_matrix.csv');
 const tam = csv('data_processed/tam_sam_som_model.csv');
 const som = csv('data_processed/som_sensitivity_scenarios.csv');
 const claims = csv('data_processed/market_claims.csv');
+const marketSourceConfidence = csv('data_processed/market_source_confidence_review.csv');
+const marketConfidenceSummary = csv('data_processed/market_confidence_summary.csv');
 const top100 = csv('data_processed/top100_competitor_review_scorecard.csv');
 const validationQueue = csv('data_processed/top100_human_validation_queue.csv');
 const iap = csv('data_raw/app_store_iap_pricing_raw.csv');
@@ -104,6 +106,8 @@ const p0External = csv('data_raw/expanded/p0_external_sources_raw.csv');
 const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv');
 const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
 const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
+const highUseMarketSources = marketSourceConfidence.filter(row => row.confidence_review_band === 'high_use');
+const rangeOnlyMarketSources = marketSourceConfidence.filter(row => ['low_use_range_only', 'context_only'].includes(row.confidence_review_band));
 
 const primary = top100.filter(row => row.duplicate_flag === 'primary_app_entry');
 const highThreat = primary.filter(row => Number(row.competitive_threat_score || 0) >= 24);
@@ -171,12 +175,12 @@ const rows = [
     claim: 'The five adjacent markets contain monetizable demand and paid behavior.',
     evidence_status: 'supported_with_ranges',
     confidence: 'medium',
-    primary_metric: `intersection SAM base USD ${intersection.samBase || 'n/a'}`,
-    quantitative_evidence: `market_claims=${claims.length}; SOM scenarios=${som.length}; App Store IAP rows=${iap.length}; Google Play IAP apps=${googleOk.filter(row => row.offers_iap === 'yes').length}`,
-    evidence_files: 'data_processed/tam_sam_som_model.csv;data_processed/som_sensitivity_scenarios.csv;data_processed/market_claims.csv;data_raw/app_store_iap_pricing_raw.csv;data_raw/google_play_pricing_raw.csv;docs/market/tam-sam-som-model-v1.md',
-    strongest_support: 'TAM/SAM/SOM model and observed IAP metadata show paid depth across adjacent categories.',
-    key_gap: 'Market sizing is modeled from public claims and needs source-by-source confidence review.',
-    next_action: 'Add more primary market research sources and update sensitivity ranges.'
+    primary_metric: `intersection SAM base USD ${intersection.samBase || 'n/a'}; ${marketSourceConfidence.length} market sources confidence-reviewed`,
+    quantitative_evidence: `market_claims=${claims.length}; SOM scenarios=${som.length}; market_source_reviews=${marketSourceConfidence.length}; high_use_sources=${highUseMarketSources.length}; range_only_or_context=${rangeOnlyMarketSources.length}; App Store IAP rows=${iap.length}; Google Play IAP apps=${googleOk.filter(row => row.offers_iap === 'yes').length}`,
+    evidence_files: 'data_processed/tam_sam_som_model.csv;data_processed/som_sensitivity_scenarios.csv;data_processed/market_claims.csv;data_processed/market_source_confidence_review.csv;data_processed/market_confidence_summary.csv;data_raw/app_store_iap_pricing_raw.csv;data_raw/google_play_pricing_raw.csv;docs/market/tam-sam-som-model-v1.md;docs/market/market-source-confidence-review-v1.md',
+    strongest_support: 'TAM/SAM/SOM model, observed IAP metadata, and source confidence review show paid depth while preserving range and source-quality caveats.',
+    key_gap: 'Market sizing still needs competitor revenue/proxy review and additional triangulation for thin/contextual markets.',
+    next_action: 'Add competitor revenue/pricing proxies and refresh source confidence after any new market sources.'
   },
   {
     claim_id: 'H2_paywall_visible_evidence',

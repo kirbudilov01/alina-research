@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T04:10:27.099Z
+Generated: 2026-05-31T04:16:03.974Z
 
 ## 1. Executive Summary
 
@@ -27,6 +27,7 @@ Key quantified signals:
 - Chrome extension detail enrichment: 23/23 detail pages parsed; 3 strong and 10 useful adjacent mechanic references.
 - Chrome mechanic battlecards: 23 browser-extension cards, 9 high/medium references for manual mechanic inspection.
 - Validation gap roadmap: 13 rows; 4 P0 and 9 P1 next validation tasks across markets, hypotheses, and cross-source checks.
+- Market source confidence review: 12 sources graded; 3 high-use anchors and 4 range-only/context sources.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
@@ -71,7 +72,7 @@ Claim-level audit snapshot:
 | REQ_plan | proved_v1 | high | master plan exists; 13 validation roadmap rows | Needs periodic refresh as validation findings change. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; P0 external pass is intentionally small, with Product Hunt/AlternativeTo still needing source-native or curated collection. |
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
-| H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000 | Market sizing is modeled from public claims and needs source-by-source confidence review. |
+| H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed | Market sizing still needs competitor revenue/proxy review and additional triangulation for thin/contextual markets. |
 | H2_paywall_visible_evidence | supported_narrowly | medium_low | 2/29 screenshots confirm visible public pricing | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. |
 | H3_whitespace_exists | narrow_supported_not_final | medium | 1/100 strict behavior-tied progression signals; 9 Chrome mechanic references to inspect | Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors. |
 | H4_competitive_advantage_plausible | plausible_unproven | medium_low | 1 direct reference competitor; 45 high-threat competitors; 23 Chrome mechanic battlecards | No human validation or prototype test yet proves users value the loop. |
@@ -230,6 +231,31 @@ The model intentionally avoids adding five TAMs together. Gaming is treated prim
 | coaching | 4220000000 | 5000000000 | 6690000000 | 126600000 | 300000000 | 669000000 | medium |
 | mindfulness | 1680000000 | 1680000000 | 4620000000 | 134400000 | 252000000 | 1155000000 | medium |
 | intersection | 470100000 | 1346400000 | 4561400000 | 37608000 | 201960000 | 1140350000 | low |
+
+### Market Source Confidence
+
+The TAM/SAM/SOM layer now has a source-confidence review. This does not make the model final; it makes explicit which sources are direct anchors, broad benchmarks, or range-only context.
+
+| Market | Sources | Claims | Confidence Summary | Source Mix | Interpretation |
+| --- | ---: | ---: | --- | --- | --- |
+| gaming | 2 | 2 | thin_or_contextual | high=1;medium=0;low=0;context=1 | Strong monetization benchmark but weak directness; keep outside direct Alina TAM. |
+| mindfulness | 1 | 2 | thin_or_contextual | high=1;medium=0;low=0;context=0 | Closest reset-market anchor, but source base is thin and should be triangulated. |
+| avatar_identity | 1 | 2 | thin_but_usable | high=0;medium=1;low=0;context=0 | Large broad TAM with consumer-recurring-use uncertainty; discount heavily. |
+| coaching | 4 | 5 | thin_or_contextual | high=1;medium=0;low=3;context=0 | Several sources support coaching demand, but enterprise/career definitions need consumer filtering. |
+| astrology_esoterics | 4 | 3 | moderate_source_base | high=0;medium=4;low=0;context=0 | Direct adjacent app category but public values vary widely; range-only until triangulated. |
+
+Highest-use market sources:
+
+| Source | Market | Publisher | Band | Score | Model Role |
+| --- | --- | --- | --- | ---: | --- |
+| SRC-MKT-0005 | coaching | International Coaching Federation | high_use | 9.5 | supporting_context |
+| SRC-MKT-0002 | gaming | Boston Consulting Group | high_use | 8.5 | mechanic_and_monetization_benchmark_not_direct_tam |
+| SRC-MKT-0003 | mindfulness | Stratistics MRC | high_use | 8 | direct_adjacent_reset_tam_anchor |
+| SRC-MKT-0009 | astrology_esoterics | Research and Markets | medium_use | 7 | direct_adjacent_tam_anchor_requires_variance_review |
+| SRC-MKT-0004 | avatar_identity | Global Market Insights | medium_use | 6 | broad_avatar_ceiling_requires_consumer_discount |
+| SRC-MKT-0006 | astrology_esoterics | Research and Markets | medium_use | 6 | direct_adjacent_tam_anchor_requires_variance_review |
+| SRC-MKT-0007 | astrology_esoterics | Econ Market Research | medium_use | 6 | direct_adjacent_tam_anchor_requires_variance_review |
+| SRC-MKT-0008 | astrology_esoterics | Global Growth Insights | medium_use | 6 | direct_adjacent_tam_anchor_requires_variance_review |
 
 ### SOM Sensitivity
 
@@ -649,6 +675,7 @@ Claim audit rows currently normalized: 10.
 
 - `docs/research-expansion-master-plan.md`
 - `docs/market/tam-sam-som-model-v1.md`
+- `docs/market/market-source-confidence-review-v1.md`
 - `docs/intersections/whitespace-map-v2.md`
 - `docs/audience/audience-segmentation-v1.md`
 - `docs/audience/review-language-synthesis-v1.md`
@@ -673,6 +700,8 @@ Claim audit rows currently normalized: 10.
 - `docs/decision/validation-gap-roadmap-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
+- `data_processed/market_source_confidence_review.csv`
+- `data_processed/market_confidence_summary.csv`
 - `data_processed/evidence_claim_register.csv`
 - `data_processed/source_expansion_backlog.csv`
 - `data_processed/p0_external_source_summary.csv`

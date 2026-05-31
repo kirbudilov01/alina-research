@@ -112,6 +112,16 @@ Low:
 
 - SEO report pages, unsourced blog claims, AI-generated summaries, forum estimates.
 
+## Source Confidence Review Layer
+
+The TAM/SAM/SOM model now has a separate source-confidence review:
+
+- `docs/market/market-source-confidence-review-v1.md`
+- `data_processed/market_source_confidence_review.csv`
+- `data_processed/market_confidence_summary.csv`
+
+This layer does not turn the model into a final forecast. It grades each existing source by source type, directness to Alina, methodology visibility, variance risk, and recommended model role. Broad or indirect sources can support ranges and context, but should not become precise final claims without competitor revenue proxies and human validation.
+
 ## First Public Source Anchors
 
 These are starting anchors, not final answers.
@@ -142,4 +152,3 @@ For each market, collect at least:
 3. Use intersection TAM as a discounted subset, not a sum.
 4. When two markets overlap heavily, document the overlap.
 5. Keep "broad ecosystem TAM" separate from "direct spend TAM".
-

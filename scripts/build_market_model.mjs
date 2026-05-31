@@ -4,6 +4,8 @@ const OUT_TAM = 'data_processed/tam_sam_som_model.csv';
 const OUT_SCENARIOS = 'data_processed/som_sensitivity_scenarios.csv';
 const OUT_REVIEW = 'data_processed/top_intersection_review_candidates.csv';
 const OUT_SUMMARY = 'docs/market/tam-sam-som-model-v1.md';
+const MARKET_CONFIDENCE = 'data_processed/market_confidence_summary.csv';
+const MARKET_SOURCE_CONFIDENCE = 'data_processed/market_source_confidence_review.csv';
 
 const CATEGORY_MARKETS = [
   {
@@ -140,6 +142,10 @@ function parseCsv(text) {
   return rows.filter(r => r.length === header.length).map(r => Object.fromEntries(header.map((h, i) => [h, r[i] || ''])));
 }
 
+function csvIfExists(file) {
+  return fs.existsSync(file) ? parseCsv(fs.readFileSync(file, 'utf8')) : [];
+}
+
 const tamRows = CATEGORY_MARKETS.map(row => ({
   ...row,
   samLow: money(row.tamLow * row.samLowPct),
@@ -188,6 +194,9 @@ const scenarioRows = SOM_SCENARIOS.map(s => ({
 writeCsv(OUT_SCENARIOS, scenarioRows, [
   'scenario', 'reachableUsers', 'activationRate', 'paidConversion', 'arppuYear', 'paidUsers', 'annualRevenue', 'shareOfModeledSamBase'
 ]);
+
+const marketConfidence = csvIfExists(MARKET_CONFIDENCE);
+const marketSourceConfidence = csvIfExists(MARKET_SOURCE_CONFIDENCE);
 
 const whitespaceRows = parseCsv(fs.readFileSync('data_processed/whitespace_signal_matrix.csv', 'utf8'));
 const featureRows = parseCsv(fs.readFileSync('data_processed/competitor_feature_matrix.csv', 'utf8'));
@@ -257,6 +266,20 @@ lines.push(`Modeled direct intersection SAM: low ${intersection.samLow}, base ${
 lines.push('');
 lines.push('This is intentionally conservative relative to broad category TAMs because Alina is a consumer daily companion, not the entire gaming, coaching, avatar, astrology, or mindfulness market.');
 lines.push('');
+if (marketConfidence.length) {
+  lines.push('## Source Confidence Review');
+  lines.push('');
+  lines.push('A separate confidence review grades the source base behind the model. It does not change the TAM/SAM math by itself; it tells us how much trust to place in each market range and what needs triangulation.');
+  lines.push('');
+  lines.push('| Market | Sources | Claims | Confidence Summary | Source Mix | Interpretation |');
+  lines.push('|---|---:|---:|---|---|---|');
+  for (const r of marketConfidence) {
+    lines.push(`| ${r.niche} | ${r.source_count} | ${r.claim_count} | ${r.market_confidence_summary} | ${r.confidence_band_mix} | ${r.key_interpretation} |`);
+  }
+  lines.push('');
+  lines.push(`Source review rows: ${marketSourceConfidence.length}. See \`docs/market/market-source-confidence-review-v1.md\`.`);
+  lines.push('');
+}
 lines.push('## SOM Scenarios');
 lines.push('');
 lines.push('| Scenario | Reachable users | Activation | Paid conversion | ARPPU/year | Paid users | Annual revenue | Share of base SAM |');
@@ -274,6 +297,8 @@ lines.push('');
 lines.push(`- \`${OUT_TAM}\``);
 lines.push(`- \`${OUT_SCENARIOS}\``);
 lines.push(`- \`${OUT_REVIEW}\``);
+if (marketConfidence.length) lines.push(`- \`${MARKET_CONFIDENCE}\``);
+if (marketSourceConfidence.length) lines.push(`- \`${MARKET_SOURCE_CONFIDENCE}\``);
 lines.push('');
 lines.push('## Caveats');
 lines.push('');

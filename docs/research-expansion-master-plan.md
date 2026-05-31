@@ -203,6 +203,7 @@ Current evidence:
 - Chrome extension detail enrichment: `docs/competitive/chrome-extension-detail-enrichment-v1.md`.
 - Chrome extension mechanic battlecards: `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`.
 - Validation gap roadmap: `docs/decision/validation-gap-roadmap-v1.md`.
+- Market source confidence review: `docs/market/market-source-confidence-review-v1.md`.
 
 Next collector priority:
 

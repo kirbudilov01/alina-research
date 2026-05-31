@@ -1,6 +1,6 @@
 # TAM/SAM/SOM Model V1
 
-Generated: 2026-05-31T02:02:57.439Z
+Generated: 2026-05-31T04:15:38.144Z
 
 ## Status
 
@@ -23,6 +23,20 @@ Modeled direct intersection SAM: low 37608000, base 201960000, high 1140350000 U
 
 This is intentionally conservative relative to broad category TAMs because Alina is a consumer daily companion, not the entire gaming, coaching, avatar, astrology, or mindfulness market.
 
+## Source Confidence Review
+
+A separate confidence review grades the source base behind the model. It does not change the TAM/SAM math by itself; it tells us how much trust to place in each market range and what needs triangulation.
+
+| Market | Sources | Claims | Confidence Summary | Source Mix | Interpretation |
+|---|---:|---:|---|---|---|
+| gaming | 2 | 2 | thin_or_contextual | high=1;medium=0;low=0;context=1 | Strong monetization benchmark but weak directness; keep outside direct Alina TAM. |
+| mindfulness | 1 | 2 | thin_or_contextual | high=1;medium=0;low=0;context=0 | Closest reset-market anchor, but source base is thin and should be triangulated. |
+| avatar_identity | 1 | 2 | thin_but_usable | high=0;medium=1;low=0;context=0 | Large broad TAM with consumer-recurring-use uncertainty; discount heavily. |
+| coaching | 4 | 5 | thin_or_contextual | high=1;medium=0;low=3;context=0 | Several sources support coaching demand, but enterprise/career definitions need consumer filtering. |
+| astrology_esoterics | 4 | 3 | moderate_source_base | high=0;medium=4;low=0;context=0 | Direct adjacent app category but public values vary widely; range-only until triangulated. |
+
+Source review rows: 12. See `docs/market/market-source-confidence-review-v1.md`.
+
 ## SOM Scenarios
 
 | Scenario | Reachable users | Activation | Paid conversion | ARPPU/year | Paid users | Annual revenue | Share of base SAM |
@@ -41,6 +55,8 @@ The market exists, but the current evidence is stronger for adjacent demand than
 - `data_processed/tam_sam_som_model.csv`
 - `data_processed/som_sensitivity_scenarios.csv`
 - `data_processed/top_intersection_review_candidates.csv`
+- `data_processed/market_confidence_summary.csv`
+- `data_processed/market_source_confidence_review.csv`
 
 ## Caveats
 
