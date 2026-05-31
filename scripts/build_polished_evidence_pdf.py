@@ -298,6 +298,7 @@ def main() -> None:
     completion = read_csv("data_processed/research_completion_audit.csv")
     hypothesis_decisions = read_csv("data_processed/hypothesis_decision_matrix.csv")
     p0_commands = read_csv("data_processed/p0_validation_command_center.csv")
+    p0_field_guide = read_csv("data_processed/p0_validation_field_guide.csv")
     manifest = read_csv("data_processed/evidence_artifact_manifest.csv")
     revenue = read_csv("data_processed/competitor_revenue_proxy_review.csv")
     revenue_summary = read_csv("data_processed/competitor_revenue_proxy_market_summary.csv")
@@ -370,6 +371,7 @@ def main() -> None:
         "Manual P0 inspection targets": number(len(manual)),
         "Hypothesis decision rows": number(len(hypothesis_decisions)),
         "P0 command rows": number(len(p0_commands)),
+        "P0 field guide sections": number(len(p0_field_guide)),
         "Validation capture rows": number(capture_rows),
     }
     build_doc_note(metrics)
@@ -461,6 +463,7 @@ def main() -> None:
                 ["Market stress scenarios", len(market_stress), "Bottom-up sensitivity cases for reachable users, conversion, and ARPPU."],
                 ["Hypothesis decision rows", len(hypothesis_decisions), "H1-H6 operating gates with go/hold/kill criteria and next validation actions."],
                 ["P0 command center rows", len(p0_commands), "Operator-ready validation commands across walkthrough, paid-flow, ICP, and prototype lanes."],
+                ["P0 field guide sections", len(p0_field_guide), "Executable scripts, evidence naming, and post-validation rebuild protocol."],
                 ["Manifest source-like refs", source_refs, "Rows with URLs, package IDs, domains, source IDs, or comparable identifiers."],
                 ["Top-100 primary apps", len(primary_top100), "Human-facing competitor review layer."],
                 ["Behavior-tied progression signals", len(behavior_tied), "Strict signal is rare in metadata, hence manual inspection is critical."],
@@ -558,6 +561,24 @@ def main() -> None:
                 for row in blocker_commands[:6]
             ],
             [1.05 * inch, 1.45 * inch, 1.65 * inch, 2.95 * inch],
+        ),
+        Spacer(1, 0.14 * inch),
+        para("P0 Validation Field Guide", "H2"),
+        para(
+            "The field guide is the operating script for the first validation tranche: walkthroughs, paid-flow signoff, ICP interviews, prototype sessions, scorecard calculation, and rebuild/commit hygiene.",
+            "Body",
+        ),
+        table(
+            [["Section", "Lane", "Objective"]]
+            + [
+                [
+                    row.get("title"),
+                    row.get("lane"),
+                    short(row.get("objective"), 115),
+                ]
+                for row in p0_field_guide
+            ],
+            [2.1 * inch, 1.45 * inch, 3.55 * inch],
         ),
         PageBreak(),
         para("Market-Money Proxy Read", "H1"),
@@ -732,6 +753,7 @@ def main() -> None:
                 ["Validation capture", "data_processed/manual_walkthrough_capture_sheet.csv; data_processed/paid_flow_capture_sheet.csv; data_processed/icp_interview_capture_sheet.csv; data_processed/prototype_session_capture_sheet.csv"],
                 ["Decision gates", "data_processed/hypothesis_decision_matrix.csv; docs/decision/hypothesis-decision-matrix-v1.md"],
                 ["P0 command center", "data_processed/p0_validation_command_center.csv; docs/decision/p0-validation-command-center-v1.md"],
+                ["P0 field guide", "data_processed/p0_validation_field_guide.csv; docs/decision/p0-validation-field-guide-v1.md"],
                 ["Audit/provenance", "data_processed/evidence_claim_register.csv; data_processed/research_completion_audit.csv; data_processed/evidence_artifact_manifest.csv"],
             ],
             [1.7 * inch, 5.4 * inch],

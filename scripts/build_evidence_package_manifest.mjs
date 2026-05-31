@@ -220,6 +220,7 @@ const requiredArtifacts = [
   'data_processed/validation_gap_roadmap.csv',
   'data_processed/validation_execution_dashboard.csv',
   'data_processed/p0_validation_command_center.csv',
+  'data_processed/p0_validation_field_guide.csv',
   'data_processed/manual_walkthrough_capture_sheet.csv',
   'data_processed/paid_flow_capture_sheet.csv',
   'data_processed/icp_interview_capture_sheet.csv',

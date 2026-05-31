@@ -132,6 +132,7 @@ const crossSourceSaturation = csv('data_processed/cross_source_market_saturation
 const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
 const validationExecutionDashboard = csv('data_processed/validation_execution_dashboard.csv');
 const p0CommandCenter = csv('data_processed/p0_validation_command_center.csv');
+const p0FieldGuide = csv('data_processed/p0_validation_field_guide.csv');
 const evidenceManifest = csv('data_processed/evidence_artifact_manifest.csv');
 const completionAudit = csv('data_processed/research_completion_audit.csv');
 const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv');
@@ -251,6 +252,19 @@ const rows = [
     strongest_support: 'Command center expands P0 tasks into exact evidence to capture, pass gates, downgrade/kill gates, source files, output files, and notes fields to fill.',
     key_gap: 'The command center is operational scaffolding; it still requires actual screenshots, participant evidence, paywall signoff, and updated verdicts.',
     next_action: 'Execute blocker rows first: direct competitor walkthrough for Shepherd, avatar-change prototype comprehension, differentiation/trust scorecard gates, then paid-flow signoff and ICP interviews.'
+  },
+  {
+    claim_id: 'REQ_p0_validation_field_guide',
+    claim_type: 'project_requirement',
+    claim: 'P0 validation has executable field scripts and evidence-handling rules.',
+    evidence_status: p0FieldGuide.length ? 'proved_v1_execution_scripts_ready_open_gates' : 'missing',
+    confidence: p0FieldGuide.length ? 'high' : 'low',
+    primary_metric: `${p0FieldGuide.length} field guide sections; ${p0CommandCenter.length} command rows referenced`,
+    quantitative_evidence: `field_guide_sections=${p0FieldGuide.length}; command_rows=${p0CommandCenter.length}; p0_blockers=${p0CommandBlockers.length}`,
+    evidence_files: 'data_processed/p0_validation_field_guide.csv;docs/decision/p0-validation-field-guide-v1.md;data_processed/p0_validation_command_center.csv;docs/decision/p0-validation-command-center-v1.md',
+    strongest_support: 'Field guide provides scripts for competitor walkthrough, paid-flow signoff, ICP interviews, prototype sessions, scorecard calculation, evidence naming, and post-validation rebuild/commit protocol.',
+    key_gap: 'Field guide is still an execution artifact, not observed validation evidence.',
+    next_action: 'Use the scripts to run the first validation tranche and update capture sheets with screenshots, quotes, observed values, and final verdicts.'
   },
   {
     claim_id: 'REQ_competitor_universe',
@@ -409,6 +423,7 @@ lines.push('- Traceability layer: evidence package manifest tracks raw/processed
 lines.push('- Readiness layer: completion audit maps the original objective to proved, partial, draft, and validation-ready requirements.');
 lines.push('- Decision layer: hypothesis decision matrix converts H1-H6 into go/hold/kill gates and keeps open validation burden visible.');
 lines.push('- Execution layer: P0 validation command center translates open gates into operator-ready evidence capture rows.');
+lines.push('- Field layer: P0 validation field guide provides scripts, evidence naming, and post-validation rebuild protocol.');
 lines.push('- Strongest product evidence: adjacent markets are monetized; the user language around daily ritual/progress is real; strict behavior-tied avatar progression remains narrow in current metadata.');
 lines.push('- Weakest remaining proof: human validation of competitors, actual in-app paywall/onboarding flows, real user prototype response, and final source-by-source market sizing review.');
 lines.push('- Current decision should remain conditional-go for validation, not full product-build go.');
