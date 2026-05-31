@@ -338,6 +338,8 @@ def main() -> None:
     prototype = read_csv("data_processed/prototype_validation_stimulus_flow.csv")
     prototype_scorecard = read_csv("data_processed/prototype_validation_scorecard.csv")
     icp = read_csv("data_processed/icp_segment_matrix.csv")
+    community_referral = read_csv("data_processed/community_referral_signal_rows.csv")
+    community_referral_summary = read_csv("data_processed/community_referral_summary.csv")
     tam = read_csv("data_processed/tam_sam_som_model.csv")
     whitespace = read_csv("data_processed/whitespace_signal_matrix.csv")
     top100 = read_csv("data_processed/top100_competitor_review_scorecard.csv")
@@ -517,6 +519,7 @@ def main() -> None:
                 ["Visible public causality cases", len(public_listing_visible_causality), "Highest-priority walkthrough target; not final clone proof."],
                 ["Manual rubric dimensions", len(manual_rubric), "Dimensions for causality, hidden clone risk, paywall, and final verdict."],
                 ["ICP segments", len(icp), "Segment hypotheses to test before product commitment."],
+                ["Community/referral rows", len(community_referral), "Local review/forum signals for audience language and channel hypotheses."],
                 ["Prototype scorecard metrics", len(prototype_scorecard), "Success/kill metrics for the two-minute loop."],
             ],
             [2.05 * inch, 0.78 * inch, 4.25 * inch],
@@ -822,6 +825,8 @@ def main() -> None:
             [
                 ["Prototype validation asset", "Count"],
                 ["ICP segments in prototype flow", len(prototype_segments)],
+                ["Community/referral signal kinds", len(community_referral_summary)],
+                ["Community/referral signal rows", len(community_referral)],
                 ["Prototype screens", len(prototype_screens)],
                 ["Prototype flow rows", len(prototype)],
                 ["Success/kill scorecard metrics", len(prototype_scorecard)],
@@ -880,7 +885,7 @@ def main() -> None:
                 ["Saturation whitespace", "data_processed/cross_source_market_saturation_matrix.csv; docs/intersections/cross-source-saturation-whitespace-v1.md"],
                 ["Market money", "data_processed/tam_sam_som_model.csv; data_processed/competitor_revenue_proxy_review.csv"],
                 ["Whitespace", "data_processed/whitespace_signal_matrix.csv; data_processed/manual_competitor_inspection_packet.csv"],
-                ["Audience", "data_processed/icp_segment_matrix.csv; data_processed/icp_validation_test_plan.csv"],
+                ["Audience", "data_processed/icp_segment_matrix.csv; data_processed/icp_validation_test_plan.csv; data_processed/community_referral_signal_rows.csv"],
                 ["Prototype", "data_processed/prototype_validation_stimulus_flow.csv; data_processed/prototype_validation_scorecard.csv"],
                 ["Validation capture", "data_processed/manual_walkthrough_capture_sheet.csv; data_processed/paid_flow_capture_sheet.csv; data_processed/icp_interview_capture_sheet.csv; data_processed/prototype_session_capture_sheet.csv"],
                 ["Decision gates", "data_processed/hypothesis_decision_matrix.csv; docs/decision/hypothesis-decision-matrix-v1.md"],

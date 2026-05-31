@@ -237,6 +237,8 @@ def main():
     gplay = read_csv("data_raw/google_play_pricing_raw.csv")
     web_paywalls = read_csv("data_processed/web_paywall_signal_matrix.csv")
     reviews = read_csv("data_processed/review_jtbd_cluster_summary.csv")
+    community_referral = read_csv("data_processed/community_referral_signal_rows.csv")
+    community_referral_summary = read_csv("data_processed/community_referral_summary.csv")
     forum = read_csv("data_processed/forum_quote_coding_matrix.csv")
     icp = read_csv("data_processed/icp_segment_matrix.csv")
     validation_rollup = read_csv("data_processed/validation_evidence_rollup.csv")
@@ -279,6 +281,7 @@ def main():
                 ["Web paywall domains", number(str(len(web_paywalls)))],
                 ["Web screenshot queue", number(str(len(web_queue)))],
                 ["Forum quote-coding rows", number(str(len(forum)))],
+                ["Community/referral rows", number(str(len(community_referral)))],
                 ["ICP segment hypotheses", number(str(len(icp)))],
                 ["Validation rollup rows", number(str(len(validation_rollup)))],
                 ["Validation rollup local artifacts", number(str(len(rollup_linked)))],
@@ -431,6 +434,13 @@ def main():
         BarChart(
             "Forum Quote Coding Tags",
             [(k, float(v)) for k, v in tag_counts.most_common(10)],
+        )
+    )
+    story.append(Spacer(1, 0.12 * inch))
+    story.append(
+        BarChart(
+            "Community Referral Signals",
+            [(r["signal_kind"], float(r.get("row_count") or 0)) for r in community_referral_summary[:8]],
         )
     )
     story.append(

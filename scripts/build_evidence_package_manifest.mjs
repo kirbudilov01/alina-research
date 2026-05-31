@@ -211,6 +211,8 @@ const requiredArtifacts = [
   'data_processed/public_listing_inspection_results.csv',
   'data_processed/public_listing_inspection_summary.csv',
   'data_processed/review_jtbd_cluster_summary.csv',
+  'data_processed/community_referral_signal_rows.csv',
+  'data_processed/community_referral_summary.csv',
   'data_processed/forum_quote_coding_matrix.csv',
   'data_processed/icp_segment_matrix.csv',
   'data_processed/icp_validation_test_plan.csv',

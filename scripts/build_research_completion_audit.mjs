@@ -139,6 +139,8 @@ const publicListingInspection = csv('data_processed/public_listing_inspection_re
 const publicListingSummary = csv('data_processed/public_listing_inspection_summary.csv');
 const icpSegments = csv('data_processed/icp_segment_matrix.csv');
 const icpValidation = csv('data_processed/icp_validation_test_plan.csv');
+const communityReferralRows = csv('data_processed/community_referral_signal_rows.csv');
+const communityReferralSummary = csv('data_processed/community_referral_summary.csv');
 const prototypeStimulusFlow = csv('data_processed/prototype_validation_stimulus_flow.csv');
 const prototypeScorecard = csv('data_processed/prototype_validation_scorecard.csv');
 const manualWalkthroughCapture = csv('data_processed/manual_walkthrough_capture_sheet.csv');
@@ -250,8 +252,8 @@ const requirements = [
     objective_source: 'User asked for common audience, segments, customer profile, detailed matrices.',
     status: audience.length && icpSegments.length && icpValidation.length ? 'directionally_supported_validation_ready' : 'missing',
     evidence_strength: 'medium',
-    proof: `audience_rows=${audience.length}; icp_segments=${icpSegments.length}; icp_validation_tests=${icpValidation.length}; icp_capture_rows=${icpInterviewCapture.length}`,
-    evidence_files: 'data_processed/audience_signal_matrix.csv;data_processed/icp_segment_matrix.csv;data_processed/icp_validation_test_plan.csv;data_processed/icp_interview_capture_sheet.csv;docs/audience/icp-segment-matrix-v1.md;docs/audience/icp-validation-packet-v1.md;docs/decision/validation-capture-sheets-v1.md',
+    proof: `audience_rows=${audience.length}; community_referral_rows=${communityReferralRows.length}; community_referral_signals=${communityReferralSummary.length}; icp_segments=${icpSegments.length}; icp_validation_tests=${icpValidation.length}; icp_capture_rows=${icpInterviewCapture.length}`,
+    evidence_files: 'data_processed/audience_signal_matrix.csv;data_processed/community_referral_signal_rows.csv;data_processed/community_referral_summary.csv;data_processed/icp_segment_matrix.csv;data_processed/icp_validation_test_plan.csv;data_processed/icp_interview_capture_sheet.csv;docs/audience/community-referral-evidence-v1.md;docs/audience/icp-segment-matrix-v1.md;docs/audience/icp-validation-packet-v1.md;docs/decision/validation-capture-sheets-v1.md',
     remaining_gap: 'Segments are directional and need interviews/prototype/WTP validation.',
     next_action: 'Run ICP validation packet for top two segments.'
   },

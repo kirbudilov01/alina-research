@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T09:20:28.849Z
+Generated: 2026-05-31T09:27:31.350Z
 
 ## 1. Executive Summary
 
@@ -59,6 +59,7 @@ Key quantified signals:
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
+- Community/referral evidence matrix: 294 local review/forum signal rows across 6 signal kinds.
 - Forum/source evidence map: 18 qualitative rows across 5 market pillars.
 - Forum quote coding layer: 72 snippet rows across 18 sources.
 - Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, web paywall discovery, and forum quote coding.
@@ -124,7 +125,7 @@ Claim-level audit snapshot:
 | H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require human sign-off/in-app inspection. |
 | H3_whitespace_exists | narrow_supported_public_listing_inspected_walkthrough_open | medium | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Actual app/onboarding inspection results are still missing; public listings and cross-source text rules can overstate or hide in-app loops. |
 | H4_competitive_advantage_plausible | prototype_stimulus_ready_unvalidated | medium | 1 direct reference competitor; 45 high-threat competitors; 8 prototype screens; 6 success/kill metrics | No human prototype session yet proves users understand, prefer, or value the integrated loop. |
-| H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 6 ICP segment hypotheses; 36 ICP validation tests | Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. |
+| H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 294 community/referral rows; 6 ICP segment hypotheses; 36 ICP validation tests | Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. |
 | H6_product_core_defined | supported_for_mvp_framing | medium | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
 | REQ_final_artifacts_versioned | proved_active | high | current branch pushed through latest commit | Final polished investor/user-facing PDF is still draft-level, not final designed publication. |
 
@@ -391,7 +392,7 @@ Objective readiness matrix:
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
 | REQ_04_MARKET_MONEY | supported_with_stress_test_and_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; assumption_audit_rows=6; stress_scenarios=6; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing is stress-tested and range-based, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall validation are still needed for final investor-grade claims. |
 | REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; cross_source_saturation_markets=6; cross_source_primary_high_opportunity=0; cross_source_benchmark_markets=2; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_walkthrough_capture_rows=60; manual_app_walkthrough_done=0 | Cross-source saturation now keeps gaming/progression as benchmark-only and finds no primary market opportunity strong enough to upgrade without manual walkthrough; app/onboarding screenshots are still required. |
-| REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36; icp_capture_rows=96 | Segments are directional and need interviews/prototype/WTP validation. |
+| REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; community_referral_rows=294; community_referral_signals=6; icp_segments=6; icp_validation_tests=36; icp_capture_rows=96 | Segments are directional and need interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=20; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
 | REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=321; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
@@ -1281,6 +1282,19 @@ Interpretation: users respond strongly to daily ritual loops, emotional support,
 
 The strongest product read: Alina should start as one daily ritual that turns personal meaning into one concrete action, then makes the effort visible through progress/avatar feedback. The strongest risk read: subscription gates, broken streak/reward mechanics, vague content, and unsafe overclaiming can destroy trust quickly.
 
+### Community and Referral Signals
+
+A local-only community/referral matrix adds 294 signal rows from App Store review text and coded forum quotes. This is audience/channel evidence, not attribution or market-share proof.
+
+| Signal | Rows | Review Rows | Forum Rows | Apps/Sources | Implication |
+| --- | ---: | ---: | ---: | ---: | --- |
+| community_or_accountability_need | 113 | 113 | 0 | 45 | There is demand for being accompanied, but community mechanics should support the solo ritual rather than replace it. |
+| coded_forum_need_or_competitor_context | 72 | 0 | 72 | 18 | Forum-coded qualitative signals should inform ICP language, validation scripts, and competitor context. |
+| word_of_mouth_or_personal_recommendation | 70 | 70 | 0 | 39 | Personal recommendations and lightweight social proof matter; Alina should make the first value moment easy to describe. |
+| social_platform_discovery | 20 | 20 | 0 | 16 | Social platform mentions are directional channel evidence and should be validated before channel prioritization. |
+| developer_outreach_referral | 13 | 13 | 0 | 8 | Indie or early-stage products appear to recruit through direct community outreach; useful for launch-channel hypotheses and founder-led validation. |
+| reddit_or_forum_referral | 6 | 6 | 0 | 3 | Users are discovering or discussing adjacent tools in community contexts; treat as channel/audience-language evidence, not ranked acquisition proof. |
+
 ### Forum and External Discussion Signals
 
 A first public forum/source map adds 18 qualitative rows. These sources are not representative survey data, but they help triangulate language and objections outside app-store reviews.
@@ -1399,6 +1413,7 @@ Claim audit rows currently normalized: 20.
 - `docs/audience/icp-validation-packet-v1.md`
 - `docs/audience/review-language-synthesis-v1.md`
 - `docs/audience/review-jtbd-clusters-v1.md`
+- `docs/audience/community-referral-evidence-v1.md`
 - `docs/audience/forum-evidence-synthesis-v1.md`
 - `docs/audience/forum-quote-coding-v1.md`
 - `docs/visuals/chart-index-v1.md`
@@ -1484,6 +1499,8 @@ Claim audit rows currently normalized: 20.
 - `data_processed/review_signal_matrix.csv`
 - `data_processed/review_jtbd_cluster_summary.csv`
 - `data_processed/review_jtbd_cluster_rows.csv`
+- `data_processed/community_referral_signal_rows.csv`
+- `data_processed/community_referral_summary.csv`
 - `data_raw/app_store_top_candidate_reviews.csv`
 - `data_raw/app_store_iap_pricing_raw.csv`
 - `data_raw/google_play_pricing_raw.csv`

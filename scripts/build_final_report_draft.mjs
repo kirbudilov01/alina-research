@@ -105,6 +105,8 @@ const core = csv('data_processed/product_core_evidence_matrix.csv');
 const reviewSignals = csv('data_processed/review_signal_matrix.csv');
 const rawReviews = csv('data_raw/app_store_top_candidate_reviews.csv');
 const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
+const communityReferralRows = csv('data_processed/community_referral_signal_rows.csv');
+const communityReferralSummary = csv('data_processed/community_referral_summary.csv');
 const forumSignals = csv('data_raw/forum_evidence_signals.csv');
 const forumQuoteCoding = csv('data_processed/forum_quote_coding_matrix.csv');
 const icpSegments = csv('data_processed/icp_segment_matrix.csv');
@@ -288,6 +290,7 @@ report.push(`- Prototype validation stimulus: ${prototypeScreens.size} screens a
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
+report.push(`- Community/referral evidence matrix: ${communityReferralRows.length} local review/forum signal rows across ${communityReferralSummary.length} signal kinds.`);
 report.push(`- Forum/source evidence map: ${forumSignals.length} qualitative rows across ${Object.keys(countBy(forumSignals, 'market')).length} market pillars.`);
 report.push(`- Forum quote coding layer: ${forumQuoteCoding.length} snippet rows across ${new Set(forumQuoteCoding.map(r => r.source_id)).size} sources.`);
 report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, web paywall discovery, and forum quote coding.');
@@ -1315,6 +1318,21 @@ report.push(mdTable(reviewClusters.slice(0, 8), [
 report.push('');
 report.push('The strongest product read: Alina should start as one daily ritual that turns personal meaning into one concrete action, then makes the effort visible through progress/avatar feedback. The strongest risk read: subscription gates, broken streak/reward mechanics, vague content, and unsafe overclaiming can destroy trust quickly.');
 report.push('');
+if (communityReferralSummary.length) {
+  report.push('### Community and Referral Signals');
+  report.push('');
+  report.push(`A local-only community/referral matrix adds ${communityReferralRows.length} signal rows from App Store review text and coded forum quotes. This is audience/channel evidence, not attribution or market-share proof.`);
+  report.push('');
+  report.push(mdTable(communityReferralSummary, [
+    { key: 'signal_kind', label: 'Signal' },
+    { key: 'row_count', label: 'Rows', align: 'right' },
+    { key: 'review_rows', label: 'Review Rows', align: 'right' },
+    { key: 'forum_rows', label: 'Forum Rows', align: 'right' },
+    { key: 'unique_apps_or_sources', label: 'Apps/Sources', align: 'right' },
+    { key: 'implication', label: 'Implication' }
+  ], 8));
+  report.push('');
+}
 report.push('### Forum and External Discussion Signals');
 report.push('');
 report.push(`A first public forum/source map adds ${forumSignals.length} qualitative rows. These sources are not representative survey data, but they help triangulate language and objections outside app-store reviews.`);
@@ -1414,6 +1432,7 @@ report.push('- `docs/audience/icp-segment-matrix-v1.md`');
 report.push('- `docs/audience/icp-validation-packet-v1.md`');
 report.push('- `docs/audience/review-language-synthesis-v1.md`');
 report.push('- `docs/audience/review-jtbd-clusters-v1.md`');
+report.push('- `docs/audience/community-referral-evidence-v1.md`');
 report.push('- `docs/audience/forum-evidence-synthesis-v1.md`');
 report.push('- `docs/audience/forum-quote-coding-v1.md`');
 report.push('- `docs/visuals/chart-index-v1.md`');
@@ -1499,6 +1518,8 @@ report.push('- `data_processed/product_core_evidence_matrix.csv`');
 report.push('- `data_processed/review_signal_matrix.csv`');
 report.push('- `data_processed/review_jtbd_cluster_summary.csv`');
 report.push('- `data_processed/review_jtbd_cluster_rows.csv`');
+report.push('- `data_processed/community_referral_signal_rows.csv`');
+report.push('- `data_processed/community_referral_summary.csv`');
 report.push('- `data_raw/app_store_top_candidate_reviews.csv`');
 report.push('- `data_raw/app_store_iap_pricing_raw.csv`');
 report.push('- `data_raw/google_play_pricing_raw.csv`');
@@ -1583,7 +1604,7 @@ status.push(mdTable([
   { requirement: 'Completion/readiness audit', evidence: 'data_processed/research_completion_audit.csv; docs/decision/research-completion-audit-v1.md', status: 'done v1; maps original objective to proved, partial, draft, and validation-ready requirements' },
   { requirement: 'Manual review of top 100', evidence: 'data_processed/top100_competitor_review_scorecard.csv; data_processed/top100_human_validation_queue.csv; data_processed/manual_competitor_inspection_packet.csv; data_processed/manual_competitor_inspection_rubric.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md; docs/competitive/human-validation-guide-v1.md; docs/competitive/manual-competitor-inspection-packet-v1.md', status: 'AI-assisted review, ranked human validation queue, and first-wave manual inspection packet done v1; human execution pending' },
   { requirement: 'Detailed pricing/IAP extraction', evidence: 'data_raw/app_store_iap_pricing_raw.csv; data_processed/app_store_iap_pricing_summary.csv; docs/competitive/app-store-iap-pricing-v1.md; data_raw/google_play_pricing_raw.csv; data_processed/google_play_pricing_summary.csv; docs/competitive/google-play-pricing-v1.md; data_raw/web_paywall_discovery_raw.csv; data_processed/web_paywall_signal_matrix.csv; docs/competitive/web-paywall-validation-v1.md; data_processed/web_paywall_screenshot_validation.csv; data_processed/web_paywall_screenshot_interpretation.csv; data_processed/web_paywall_visual_adjudication.csv; data_processed/web_paywall_visual_adjudication_summary.csv; docs/competitive/web-paywall-screenshot-validation-v1.md; docs/competitive/web-paywall-screenshot-interpretation-v1.md; docs/competitive/web-paywall-visual-adjudication-v1.md; output/paywall_screenshots/*.png', status: 'App Store web IAP extraction, Google Play pricing validation, developer website paywall discovery, screenshot capture, OCR interpretation, and conservative visual adjudication done v1; human paywall sign-off pending' },
-  { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_raw/forum_quote_evidence_raw.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; data_processed/forum_quote_coding_matrix.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md; docs/audience/forum-quote-coding-v1.md', status: 'App Store review extraction, JTBD clustering, forum source map, and retrieval-assisted quote coding done v1; human validation pending' }
+  { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_raw/forum_quote_evidence_raw.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; data_processed/community_referral_signal_rows.csv; data_processed/forum_quote_coding_matrix.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/community-referral-evidence-v1.md; docs/audience/forum-evidence-synthesis-v1.md; docs/audience/forum-quote-coding-v1.md', status: 'App Store review extraction, JTBD clustering, community/referral mining, forum source map, and retrieval-assisted quote coding done v1; human validation pending' }
 ], [
   { key: 'requirement', label: 'Requirement' },
   { key: 'evidence', label: 'Evidence' },
@@ -1606,6 +1627,7 @@ console.log(`competitor_revenue_proxy_medium_plus=${mediumPlusRevenueProxyCompet
 console.log(`review_rows=${rawReviews.length}`);
 console.log(`review_signal_rows=${reviewSignals.length}`);
 console.log(`review_clusters=${reviewClusters.length}`);
+console.log(`community_referral_rows=${communityReferralRows.length}`);
 console.log(`forum_signal_rows=${forumSignals.length}`);
 console.log(`forum_quote_rows=${forumQuoteCoding.length}`);
 console.log(`iap_rows=${iapRaw.length}`);

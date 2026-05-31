@@ -119,6 +119,8 @@ const webPaywallVisualAdjudicationSummary = csv('data_processed/web_paywall_visu
 const reviews = csv('data_raw/app_store_top_candidate_reviews.csv');
 const reviewSignals = csv('data_processed/review_signal_matrix.csv');
 const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
+const communityReferralRows = csv('data_processed/community_referral_signal_rows.csv');
+const communityReferralSummary = csv('data_processed/community_referral_summary.csv');
 const forumSources = csv('data_raw/forum_evidence_signals.csv');
 const forumQuotes = csv('data_processed/forum_quote_coding_matrix.csv');
 const icpSegments = csv('data_processed/icp_segment_matrix.csv');
@@ -437,10 +439,10 @@ const rows = [
     claim: 'A shared audience exists around digital rituals for identity, emotional regulation, self-improvement, and visible progress.',
     evidence_status: 'directionally_supported',
     confidence: 'medium',
-    primary_metric: `${audience.length} audience signal rows; ${icpSegments.length} ICP segment hypotheses; ${icpValidationPlan.length} ICP validation tests`,
-    quantitative_evidence: `reviews=${reviews.length}; review_apps=${reviewApps}; review_signals=${reviewSignals.length}; review_clusters=${reviewClusters.length}; forum_quote_rows=${forumQuotes.length}; icp_segments=${icpSegments.length}; strong_icp=${strongIcpSegments.length}; icp_validation_tests=${icpValidationPlan.length}`,
-    evidence_files: 'data_processed/audience_signal_matrix.csv;data_raw/app_store_top_candidate_reviews.csv;data_processed/review_signal_matrix.csv;data_processed/review_jtbd_cluster_summary.csv;data_processed/forum_quote_coding_matrix.csv;data_processed/icp_segment_matrix.csv;data_processed/icp_validation_test_plan.csv;docs/audience/review-language-synthesis-v1.md;docs/audience/forum-quote-coding-v1.md;docs/audience/icp-segment-matrix-v1.md;docs/audience/icp-validation-packet-v1.md',
-    strongest_support: 'Reviews and forum snippets converge on daily anchors, visible progress, emotional support, pricing sensitivity, and safety boundaries; the ICP segment matrix converts those signals into testable primary-segment hypotheses.',
+    primary_metric: `${audience.length} audience signal rows; ${communityReferralRows.length} community/referral rows; ${icpSegments.length} ICP segment hypotheses; ${icpValidationPlan.length} ICP validation tests`,
+    quantitative_evidence: `reviews=${reviews.length}; review_apps=${reviewApps}; review_signals=${reviewSignals.length}; review_clusters=${reviewClusters.length}; community_referral_rows=${communityReferralRows.length}; community_referral_signals=${communityReferralSummary.length}; forum_quote_rows=${forumQuotes.length}; icp_segments=${icpSegments.length}; strong_icp=${strongIcpSegments.length}; icp_validation_tests=${icpValidationPlan.length}`,
+    evidence_files: 'data_processed/audience_signal_matrix.csv;data_raw/app_store_top_candidate_reviews.csv;data_processed/review_signal_matrix.csv;data_processed/review_jtbd_cluster_summary.csv;data_processed/community_referral_signal_rows.csv;data_processed/community_referral_summary.csv;data_processed/forum_quote_coding_matrix.csv;data_processed/icp_segment_matrix.csv;data_processed/icp_validation_test_plan.csv;docs/audience/review-language-synthesis-v1.md;docs/audience/community-referral-evidence-v1.md;docs/audience/forum-quote-coding-v1.md;docs/audience/icp-segment-matrix-v1.md;docs/audience/icp-validation-packet-v1.md',
+    strongest_support: 'Reviews, community/referral mentions, and forum snippets converge on daily anchors, visible progress, emotional support, pricing sensitivity, accountability/community language, and safety boundaries; the ICP segment matrix converts those signals into testable primary-segment hypotheses.',
     key_gap: 'Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests.',
     next_action: 'Execute the ICP validation packet for the top two segments, then update segment status and selected primary ICP.'
   },
