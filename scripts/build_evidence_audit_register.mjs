@@ -136,6 +136,7 @@ const p0FieldGuide = csv('data_processed/p0_validation_field_guide.csv');
 const validationWorkspace = csv('data_processed/validation_evidence_workspace_index.csv');
 const validationBatch01 = csv('data_processed/validation_batch_01_index.csv');
 const validationBatch02 = csv('data_processed/validation_batch_02_index.csv');
+const validationBatch03 = csv('data_processed/validation_batch_03_index.csv');
 const evidenceManifest = csv('data_processed/evidence_artifact_manifest.csv');
 const completionAudit = csv('data_processed/research_completion_audit.csv');
 const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv');
@@ -309,6 +310,19 @@ const rows = [
     next_action: 'Work through Batch 02 after blocker notes or in parallel where the evidence lane is independent.'
   },
   {
+    claim_id: 'REQ_validation_batch_03',
+    claim_type: 'project_requirement',
+    claim: 'All P1 context validation commands have prefilled local note files.',
+    evidence_status: validationBatch03.length ? 'proved_v1_context_batch_ready_open_gates' : 'missing',
+    confidence: validationBatch03.length ? 'high' : 'low',
+    primary_metric: `${validationBatch03.length} batch rows; ${validationBatch03.filter(row => row.status === 'not_started').length} not started`,
+    quantitative_evidence: `batch_rows=${validationBatch03.length}; p1_context_rows=${p0CommandCenter.filter(row => row.priority === 'P1_context').length}; note_files=${validationBatch03.length}`,
+    evidence_files: 'data_processed/validation_batch_03_index.csv;docs/decision/validation-batch-03-v1.md;output/validation/2026-05-31',
+    strongest_support: 'Batch 03 creates prefilled notes for every P1_context command, currently the paid-flow context checks that should improve monetization confidence without blocking hypothesis gates.',
+    key_gap: 'Batch files are prefilled context notes; they still need observed pricing/paywall checks and conservative signoff decisions.',
+    next_action: 'Use Batch 03 to confirm, weaken, or reject contextual paid-flow signals after P0 evidence is underway.'
+  },
+  {
     claim_id: 'REQ_competitor_universe',
     claim_type: 'project_requirement',
     claim: 'Competitor/source universe has been expanded across the five target markets.',
@@ -469,6 +483,7 @@ lines.push('- Field layer: P0 validation field guide provides scripts, evidence 
 lines.push('- Intake layer: validation evidence workspace creates local folders and templates for screenshots, notes, quotes, and scorecard calculations.');
 lines.push('- Batch layer: validation Batch 01 pre-creates note files for all P0 blocker commands.');
 lines.push('- Breadth layer: validation Batch 02 pre-creates note files for all non-blocker P0 commands.');
+lines.push('- Context layer: validation Batch 03 pre-creates note files for all P1 context commands.');
 lines.push('- Strongest product evidence: adjacent markets are monetized; the user language around daily ritual/progress is real; strict behavior-tied avatar progression remains narrow in current metadata.');
 lines.push('- Weakest remaining proof: human validation of competitors, actual in-app paywall/onboarding flows, real user prototype response, and final source-by-source market sizing review.');
 lines.push('- Current decision should remain conditional-go for validation, not full product-build go.');

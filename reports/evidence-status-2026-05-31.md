@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T08:25:50.863Z
+Generated: 2026-05-31T08:32:15.445Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -24,6 +24,7 @@ Generated: 2026-05-31T08:25:50.863Z
 | Validation evidence workspace | data_processed/validation_evidence_workspace_index.csv; docs/decision/validation-evidence-workspace-v1.md; output/validation/README.md; output/validation/templates/*.md | done v1; 5 lane workspaces and note templates created for observed evidence intake |
 | Validation Batch 01 | data_processed/validation_batch_01_index.csv; docs/decision/validation-batch-01-v1.md; output/validation/2026-05-31/*/batch01_*.md | done v1; 6 blocker notes prefilled for first validation tranche |
 | Validation Batch 02 | data_processed/validation_batch_02_index.csv; docs/decision/validation-batch-02-v1.md; output/validation/2026-05-31/*/batch02_*.md | done v1; 52 P0-breadth notes prefilled for non-blocker validation commands |
+| Validation Batch 03 | data_processed/validation_batch_03_index.csv; docs/decision/validation-batch-03-v1.md; output/validation/2026-05-31/*/batch03_*.md | done v1; 17 P1-context paid-flow notes prefilled for conservative monetization checks |
 | 5-market TAM/SAM/SOM method | docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; docs/market/competitor-revenue-proxy-review-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv; data_processed/competitor_revenue_proxy_review.csv; data_processed/competitor_revenue_proxy_market_summary.csv | done v1; source confidence, market monetization proxy, and bottom-up competitor revenue proxy layers added; model remains range-based and not final forecast |
 | Whitespace matrices | data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md | done v1 |
 | Audience matrices | data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md | done v1 |

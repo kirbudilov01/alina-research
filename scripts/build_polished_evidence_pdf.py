@@ -309,6 +309,7 @@ def main() -> None:
     validation_workspace = read_csv("data_processed/validation_evidence_workspace_index.csv")
     validation_batch01 = read_csv("data_processed/validation_batch_01_index.csv")
     validation_batch02 = read_csv("data_processed/validation_batch_02_index.csv")
+    validation_batch03 = read_csv("data_processed/validation_batch_03_index.csv")
     manifest = read_csv("data_processed/evidence_artifact_manifest.csv")
     revenue = read_csv("data_processed/competitor_revenue_proxy_review.csv")
     revenue_summary = read_csv("data_processed/competitor_revenue_proxy_market_summary.csv")
@@ -385,6 +386,7 @@ def main() -> None:
         "Validation workspace lanes": number(len(validation_workspace)),
         "Validation Batch 01 rows": number(len(validation_batch01)),
         "Validation Batch 02 rows": number(len(validation_batch02)),
+        "Validation Batch 03 rows": number(len(validation_batch03)),
         "Validation capture rows": number(capture_rows),
     }
     build_doc_note(metrics)
@@ -480,6 +482,7 @@ def main() -> None:
                 ["Validation workspace lanes", len(validation_workspace), "Local intake folders and note templates for screenshots, quotes, signoff, and scorecards."],
                 ["Validation Batch 01 rows", len(validation_batch01), "Prefilled blocker notes for the first observed validation tranche."],
                 ["Validation Batch 02 rows", len(validation_batch02), "Prefilled non-blocker P0 notes across the full validation breadth."],
+                ["Validation Batch 03 rows", len(validation_batch03), "Prefilled P1-context paid-flow notes for conservative monetization checks."],
                 ["Manifest source-like refs", source_refs, "Rows with URLs, package IDs, domains, source IDs, or comparable identifiers."],
                 ["Top-100 primary apps", len(primary_top100), "Human-facing competitor review layer."],
                 ["Behavior-tied progression signals", len(behavior_tied), "Strict signal is rare in metadata, hence manual inspection is critical."],
@@ -653,6 +656,23 @@ def main() -> None:
                 )
             ],
             [2.0 * inch, 0.75 * inch, 4.35 * inch],
+        ),
+        Spacer(1, 0.14 * inch),
+        para("Validation Batch 03", "H2"),
+        para(
+            "Batch 03 completes command-center note coverage by creating P1-context paid-flow intake files. These rows should refine monetization confidence without overriding P0 gates.",
+            "Body",
+        ),
+        table(
+            [["Rows", "Lane", "Example note file"]]
+            + [
+                [
+                    len(validation_batch03),
+                    validation_batch03[0].get("lane") if validation_batch03 else "",
+                    short(validation_batch03[0].get("note_path"), 92) if validation_batch03 else "",
+                ]
+            ],
+            [0.75 * inch, 1.8 * inch, 4.55 * inch],
         ),
         PageBreak(),
         para("Market-Money Proxy Read", "H1"),
@@ -831,6 +851,7 @@ def main() -> None:
                 ["Validation workspace", "data_processed/validation_evidence_workspace_index.csv; docs/decision/validation-evidence-workspace-v1.md; output/validation/README.md"],
                 ["Validation Batch 01", "data_processed/validation_batch_01_index.csv; docs/decision/validation-batch-01-v1.md; output/validation/2026-05-31/*/batch01_*.md"],
                 ["Validation Batch 02", "data_processed/validation_batch_02_index.csv; docs/decision/validation-batch-02-v1.md; output/validation/2026-05-31/*/batch02_*.md"],
+                ["Validation Batch 03", "data_processed/validation_batch_03_index.csv; docs/decision/validation-batch-03-v1.md; output/validation/2026-05-31/*/batch03_*.md"],
                 ["Audit/provenance", "data_processed/evidence_claim_register.csv; data_processed/research_completion_audit.csv; data_processed/evidence_artifact_manifest.csv"],
             ],
             [1.7 * inch, 5.4 * inch],

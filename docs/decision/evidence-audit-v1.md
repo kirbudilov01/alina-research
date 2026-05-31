@@ -1,6 +1,6 @@
 # Evidence Audit V1
 
-Generated: 2026-05-31T08:26:12.352Z
+Generated: 2026-05-31T08:32:40.085Z
 
 ## Purpose
 
@@ -16,6 +16,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 - proved_v1_intake_workspace_ready_open_gates: 1
 - proved_v1_batch_ready_open_gates: 1
 - proved_v1_p0_breadth_batch_ready_open_gates: 1
+- proved_v1_context_batch_ready_open_gates: 1
 - substantial_v1_not_50k_dedup: 1
 - public_listing_inspected_walkthrough_open: 1
 - supported_with_ranges_stress_test_and_bottom_up_proxy: 1
@@ -28,7 +29,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 
 ## Confidence Mix
 
-- high: 10
+- high: 11
 - medium: 6
 - medium_high: 1
 - medium_low: 1
@@ -38,7 +39,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 | Claim ID | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 16 validation roadmap rows; 11 execution tasks | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 294 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 314 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_hypothesis_decision_matrix | proved_v1_open_validation_decisions | high | 6 hypothesis decision rows; 6 hold/validate; 0 go; 0 stop/pivot | Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open. |
 | REQ_p0_validation_command_center | proved_v1_operator_ready_open_gates | high | 75 command rows; 6 blocker rows; 52 P0 rows | The command center is operational scaffolding; it still requires actual screenshots, participant evidence, paywall signoff, and updated verdicts. |
@@ -46,6 +47,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 | REQ_validation_evidence_workspace | proved_v1_intake_workspace_ready_open_gates | high | 5 workspace lanes; output/validation README and templates generated | Workspace is empty until real screenshots, notes, quotes, and calculations are captured. |
 | REQ_validation_batch_01 | proved_v1_batch_ready_open_gates | high | 6 batch rows; 6 not started | Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts. |
 | REQ_validation_batch_02 | proved_v1_p0_breadth_batch_ready_open_gates | high | 52 batch rows; 52 not started | Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts. |
+| REQ_validation_batch_03 | proved_v1_context_batch_ready_open_gates | high | 17 batch rows; 17 not started | Batch files are prefilled context notes; they still need observed pricing/paywall checks and conservative signoff decisions. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 38240 cross-source raw rows; 22769 cross-source dedup rows; 34 coverage cells; 10 strong and 12 medium source/market cells | Cross-source dedup universe is substantial but still below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | H1_product_shape_exists | public_listing_inspected_walkthrough_open | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Strict full loop is rare and still needs actual app/onboarding screenshots to confirm or downgrade public listing claims. |
 | H2_markets_have_money | supported_with_ranges_stress_test_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, manual in-app paywall validation, and willingness-to-pay prototype evidence for final investor-grade claims. |
@@ -67,6 +69,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 - Intake layer: validation evidence workspace creates local folders and templates for screenshots, notes, quotes, and scorecard calculations.
 - Batch layer: validation Batch 01 pre-creates note files for all P0 blocker commands.
 - Breadth layer: validation Batch 02 pre-creates note files for all non-blocker P0 commands.
+- Context layer: validation Batch 03 pre-creates note files for all P1 context commands.
 - Strongest product evidence: adjacent markets are monetized; the user language around daily ritual/progress is real; strict behavior-tied avatar progression remains narrow in current metadata.
 - Weakest remaining proof: human validation of competitors, actual in-app paywall/onboarding flows, real user prototype response, and final source-by-source market sizing review.
 - Current decision should remain conditional-go for validation, not full product-build go.
