@@ -1,6 +1,6 @@
 # Evidence Audit V1
 
-Generated: 2026-05-31T06:08:43.760Z
+Generated: 2026-05-31T06:17:19.486Z
 
 ## Purpose
 
@@ -32,7 +32,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 | Claim ID | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 14 validation roadmap rows | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 163 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 170 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 6973 usable itch rows; 6000 usable Steam tag rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | H1_product_shape_exists | manual_inspection_packet_ready | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets | Strict full loop is rare and still needs actual manual product/onboarding inspection. |

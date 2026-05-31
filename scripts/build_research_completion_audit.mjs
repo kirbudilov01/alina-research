@@ -115,6 +115,8 @@ const p1Roadmap = roadmap.filter(row => row.priority === 'P1');
 const humanConfirmed = validationQueue.filter(row => !['', 'not_started'].includes(row.validation_status)).length;
 const manualInspectionDone = manualInspectionPacket.filter(row => !['', 'not_started'].includes(row.inspection_status)).length;
 const manifestMissing = manifest.filter(row => row.exists !== 'yes').length;
+const polishedPdfExists = fs.existsSync('output/pdf/alina-polished-evidence-pack-v1.pdf');
+const polishedPdfDocExists = fs.existsSync('docs/decision/polished-evidence-pack-v1.md');
 const primaryApps = top100.filter(row => row.duplicate_flag === 'primary_app_entry').length;
 const prototypeScreens = new Set(prototypeStimulusFlow.map(row => row.screen_id).filter(Boolean)).size;
 const prototypeSegments = new Set(prototypeStimulusFlow.map(row => row.segment_id).filter(Boolean)).size;
@@ -209,12 +211,12 @@ const requirements = [
     requirement_id: 'REQ_08_REPORT_PDF',
     requirement: 'A large PDF/report artifact exists.',
     objective_source: 'User ultimately wanted a huge PDF report.',
-    status: fs.existsSync('output/pdf/alina-evidence-first-report-draft.pdf') ? 'draft_done_not_polished_final' : 'missing',
+    status: polishedPdfExists ? 'polished_evidence_draft_done_not_validated_final' : (fs.existsSync('output/pdf/alina-evidence-first-report-draft.pdf') ? 'draft_done_not_polished_final' : 'missing'),
     evidence_strength: 'medium_high',
-    proof: `report_md=${fs.existsSync('reports/alina-evidence-first-report-draft.md')}; evidence_pdf=${fs.existsSync('output/pdf/alina-evidence-first-report-draft.pdf')}; visual_pdf=${fs.existsSync('output/pdf/alina-evidence-visual-report-v1.pdf')}`,
-    evidence_files: 'reports/alina-evidence-first-report-draft.md;output/pdf/alina-evidence-first-report-draft.pdf;output/pdf/alina-evidence-visual-report-v1.pdf',
-    remaining_gap: 'PDF is draft evidence/reporting artifact, not final polished investor/user-facing publication.',
-    next_action: 'Create final designed PDF after human/prototype validation or mark as evidence draft explicitly.'
+    proof: `report_md=${fs.existsSync('reports/alina-evidence-first-report-draft.md')}; evidence_pdf=${fs.existsSync('output/pdf/alina-evidence-first-report-draft.pdf')}; visual_pdf=${fs.existsSync('output/pdf/alina-evidence-visual-report-v1.pdf')}; polished_evidence_pack_pdf=${polishedPdfExists}; polished_evidence_pack_doc=${polishedPdfDocExists}`,
+    evidence_files: 'reports/alina-evidence-first-report-draft.md;output/pdf/alina-evidence-first-report-draft.pdf;output/pdf/alina-evidence-visual-report-v1.pdf;output/pdf/alina-polished-evidence-pack-v1.pdf;docs/decision/polished-evidence-pack-v1.md',
+    remaining_gap: 'Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open.',
+    next_action: 'After manual inspection and prototype sessions, update the pack with validated screenshots, scorecards, and final claim statuses.'
   },
   {
     requirement_id: 'REQ_09_VERSIONING_PROVENANCE',
@@ -276,7 +278,7 @@ lines.push('');
 lines.push('## Decision Read');
 lines.push('');
 lines.push('- The research OS and evidence package are now strong enough for continued structured validation.');
-lines.push('- The goal is not complete because the aspirational 30k-50k source universe, human/manual competitor validation, user/prototype validation, and final polished PDF are still not fully proven.');
+lines.push('- The goal is not complete because human/manual competitor validation, in-app paywall validation, and user/prototype validation are still not fully proven.');
 lines.push('- The next highest-value work is to close P0 validation gates rather than add more unvalidated claims.');
 lines.push('');
 lines.push('## Files');

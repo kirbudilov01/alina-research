@@ -228,6 +228,7 @@ report.push(`- Forum/source evidence map: ${forumSignals.length} qualitative row
 report.push(`- Forum quote coding layer: ${forumQuoteCoding.length} snippet rows across ${new Set(forumQuoteCoding.map(r => r.source_id)).size} sources.`);
 report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, web paywall discovery, and forum quote coding.');
 report.push('- Visual PDF companion: native ReportLab charts embedded in a separate visual report.');
+report.push(`- Polished evidence pack: ${fs.existsSync('output/pdf/alina-polished-evidence-pack-v1.pdf') ? 'generated as a publication-ready evidence draft with validation caveats' : 'not generated yet'}.`);
 report.push(`- Modeled direct intersection SAM base: USD ${baseIntersection.samBase || 'n/a'}.`);
 report.push('');
 report.push('## 2. Product Hypotheses');

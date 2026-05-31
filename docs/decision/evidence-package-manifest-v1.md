@@ -1,6 +1,6 @@
 # Evidence Package Manifest V1
 
-Generated: 2026-05-31T06:08:59.636Z
+Generated: 2026-05-31T06:17:23.467Z
 
 ## Purpose
 
@@ -8,7 +8,7 @@ This manifest makes the research package auditable. It lists key raw data, proce
 
 ## Package Summary
 
-- Manifest rows: 167
+- Manifest rows: 170
 - Missing required artifacts: 0
 - CSV artifacts: 37
 - Total CSV data rows tracked: 93227
@@ -16,18 +16,18 @@ This manifest makes the research package auditable. It lists key raw data, proce
 
 Artifact types:
 
-- research_doc: 58
-- generator_script: 40
+- research_doc: 59
+- generator_script: 41
 - processed_data: 26
 - report: 16
 - chart: 14
 - raw_data: 11
-- pdf: 2
+- pdf: 3
 
 Evidence roles:
 
 - market_money: 41
-- decision_artifact: 38
+- decision_artifact: 41
 - audience_icp: 27
 - supporting: 25
 - competitor_universe: 14
@@ -42,7 +42,7 @@ Evidence roles:
 | data_processed/competitor_feature_matrix.csv | supporting | 12552 | 12552 | b285aff3873487bc |
 | data_processed/competitor_revenue_proxy_market_summary.csv | market_money | 5 | 0 | bb80578db00af2cd |
 | data_processed/competitor_revenue_proxy_review.csv | audience_icp | 90 | 90 | 168d799198a9e0de |
-| data_processed/evidence_claim_register.csv | decision_artifact | 12 | 0 | 82a5adea5936839f |
+| data_processed/evidence_claim_register.csv | decision_artifact | 12 | 0 | 8044827907d7c974 |
 | data_processed/forum_quote_coding_matrix.csv | audience_icp | 72 | 72 | f2fb0ab869195b97 |
 | data_processed/icp_segment_matrix.csv | audience_icp | 6 | 0 | da930b6880a1c41e |
 | data_processed/icp_validation_test_plan.csv | audience_icp | 36 | 36 | 403bffc6be3783b4 |
@@ -81,20 +81,22 @@ Evidence roles:
 | File | Type | Lines | Bytes | Hash |
 | --- | --- | ---: | ---: | --- |
 | docs/competitive/human-validation-guide-v1.md | research_doc | 91 | 12102 | b85e6b5dd29fcb2f |
-| docs/decision/evidence-audit-v1.md | research_doc | 58 | 4958 | 97e01e8fe69d9526 |
-| docs/decision/evidence-package-manifest-v1.md | research_doc | 109 | 6666 | f5a9b8f037f15251 |
+| docs/decision/evidence-audit-v1.md | research_doc | 58 | 4958 | e74e413813676049 |
+| docs/decision/evidence-package-manifest-v1.md | research_doc | 111 | 6849 | 0bb20e6e3e57e953 |
+| docs/decision/polished-evidence-pack-v1.md | research_doc | 21 | 637 | c1debadb70d4bed7 |
 | docs/decision/validation-gap-roadmap-v1.md | research_doc | 56 | 5654 | db39dd05e7ed6d6a |
 | docs/final-report-outline.md | research_doc | 120 | 2462 | c1f32c179799ccf1 |
 | docs/product/product-core-evidence-v1.md | research_doc | 26 | 1444 | 38d7eb6669cbc2a0 |
 | docs/product/prototype-validation-stimulus-v1.md | research_doc | 57 | 6109 | 0faba89f050d2b06 |
 | docs/strategy/validation-falsification-criteria.md | research_doc | 38 | 1152 | 310c8c3044a11540 |
 | docs/visuals/chart-index-v1.md | research_doc | 25 | 886 | 77cba8f26318bcae |
-| output/pdf/alina-evidence-first-report-draft.pdf | pdf | 773 | 103535 | e77badf195458d27 |
-| output/pdf/alina-evidence-visual-report-v1.pdf | pdf | 226 | 23504 | 14218382d98a0114 |
-| reports/alina-evidence-first-report-draft.md | report | 1082 | 80321 | 966d28e8f13d8e45 |
+| output/pdf/alina-evidence-first-report-draft.pdf | pdf | 773 | 104281 | 42ac09c58460541d |
+| output/pdf/alina-evidence-visual-report-v1.pdf | pdf | 226 | 23504 | 6457af8161bbd97a |
+| output/pdf/alina-polished-evidence-pack-v1.pdf | pdf | 194 | 22871 | 155dbb0dada639fb |
+| reports/alina-evidence-first-report-draft.md | report | 1083 | 80625 | c138649418003b7f |
 | reports/competitor-universe-expansion-2026-05-21.md | report | 17 | 371 | 6f085c07c40f01e7 |
 | reports/daily-update-template.md | report | 30 | 199 | 3f49329cf740df70 |
-| reports/evidence-status-2026-05-31.md | report | 30 | 7121 | 19f1aa0c3035a879 |
+| reports/evidence-status-2026-05-31.md | report | 30 | 7121 | 3cbe4f002c1e4538 |
 | reports/google-play-enrichment-block-2026-05-21.md | report | 13 | 471 | 8cc4d72b1b4c2a18 |
 | reports/matrix-synthesis-2026-05-31.md | report | 43 | 1009 | 939c826c2c1f40db |
 | reports/pdf-render-check-2026-05-31.md | report | 51 | 1578 | 35abeb7833564f14 |

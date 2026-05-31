@@ -1,6 +1,6 @@
 # Research Completion Audit V1
 
-Generated: 2026-05-31T06:08:43.611Z
+Generated: 2026-05-31T06:17:17.626Z
 
 ## Purpose
 
@@ -14,7 +14,7 @@ This audit maps the original user objective to current evidence. It prevents the
 - narrow_supported_inspection_ready_not_final: 1
 - directionally_supported_validation_ready: 1
 - prototype_stimulus_ready_not_validated: 1
-- draft_done_not_polished_final: 1
+- polished_evidence_draft_done_not_validated_final: 1
 - proved_active: 1
 - proved_v1_open_gates: 1
 
@@ -36,14 +36,14 @@ This audit maps the original user objective to current evidence. It prevents the
 | REQ_05_WHITESPACE | narrow_supported_inspection_ready_not_final | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; manual_inspection_done=0 | Metadata can miss hidden in-app mechanics; manual app/onboarding inspection results are still required. | Inspect the 12 P0 apps and update action->avatar causality, hidden clone risk, paywall boundary, and final verdict fields. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36 | Segments are directional and need interviews/prototype/WTP validation. | Run ICP validation packet for top two segments. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=12; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6 | No completed user/prototype sessions prove the loop is understood/preferred. | Run prototype sessions with the top two ICP segments and record comprehension, meaning lift, differentiation, return intent, and paid-depth signals. |
-| REQ_08_REPORT_PDF | draft_done_not_polished_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true | PDF is draft evidence/reporting artifact, not final polished investor/user-facing publication. | Create final designed PDF after human/prototype validation or mark as evidence draft explicitly. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=163; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. | Regenerate manifest and commit after each major layer. |
+| REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. | After manual inspection and prototype sessions, update the pack with validated screenshots, scorecards, and final claim statuses. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=170; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. | Regenerate manifest and commit after each major layer. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates | strong | roadmap_rows=14; p0=5; p1=9; human_confirmed=0; manual_inspection_targets=12; manual_inspection_done=0 | Open P0 gates remain: manual competitor inspection execution, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. | Work P0 manual inspection and prototype sessions in order, then update statuses and final verdicts. |
 
 ## Decision Read
 
 - The research OS and evidence package are now strong enough for continued structured validation.
-- The goal is not complete because the aspirational 30k-50k source universe, human/manual competitor validation, user/prototype validation, and final polished PDF are still not fully proven.
+- The goal is not complete because human/manual competitor validation, in-app paywall validation, and user/prototype validation are still not fully proven.
 - The next highest-value work is to close P0 validation gates rather than add more unvalidated claims.
 
 ## Files

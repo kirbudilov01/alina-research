@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T06:08:57.282Z
+Generated: 2026-05-31T06:17:20.525Z
 
 ## 1. Executive Summary
 
@@ -24,7 +24,7 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 12 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 167 artifacts tracked, 37 CSV artifacts, 93227 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 170 artifacts tracked, 37 CSV artifacts, 93227 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -46,6 +46,7 @@ Key quantified signals:
 - Forum quote coding layer: 72 snippet rows across 18 sources.
 - Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, web paywall discovery, and forum quote coding.
 - Visual PDF companion: native ReportLab charts embedded in a separate visual report.
+- Polished evidence pack: generated as a publication-ready evidence draft with validation caveats.
 - Modeled direct intersection SAM base: USD 201960000.
 
 ## 2. Product Hypotheses
@@ -82,7 +83,7 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 14 validation roadmap rows | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 163 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 170 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 6973 usable itch rows; 6000 usable Steam tag rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | H1_product_shape_exists | manual_inspection_packet_ready | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets | Strict full loop is rare and still needs actual manual product/onboarding inspection. |
@@ -98,7 +99,7 @@ Claim-level audit snapshot:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 167 artifacts; 37 CSV artifacts; 93227 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 170 artifacts; 37 CSV artifacts; 93227 tracked CSV rows; 0 missing required artifacts.
 
 Largest tracked CSV artifacts:
 
@@ -129,7 +130,7 @@ Completion status mix:
 - narrow_supported_inspection_ready_not_final: 1
 - directionally_supported_validation_ready: 1
 - prototype_stimulus_ready_not_validated: 1
-- draft_done_not_polished_final: 1
+- polished_evidence_draft_done_not_validated_final: 1
 - proved_active: 1
 - proved_v1_open_gates: 1
 
@@ -144,8 +145,8 @@ Objective readiness matrix:
 | REQ_05_WHITESPACE | narrow_supported_inspection_ready_not_final | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; manual_inspection_done=0 | Metadata can miss hidden in-app mechanics; manual app/onboarding inspection results are still required. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36 | Segments are directional and need interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=12; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6 | No completed user/prototype sessions prove the loop is understood/preferred. |
-| REQ_08_REPORT_PDF | draft_done_not_polished_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true | PDF is draft evidence/reporting artifact, not final polished investor/user-facing publication. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=163; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=170; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates | strong | roadmap_rows=14; p0=5; p1=9; human_confirmed=0; manual_inspection_targets=12; manual_inspection_done=0 | Open P0 gates remain: manual competitor inspection execution, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
 ## 2C. Validation Gap Roadmap

@@ -207,7 +207,8 @@ const requiredArtifacts = [
   'reports/alina-evidence-first-report-draft.md',
   'reports/evidence-status-2026-05-31.md',
   'output/pdf/alina-evidence-first-report-draft.pdf',
-  'output/pdf/alina-evidence-visual-report-v1.pdf'
+  'output/pdf/alina-evidence-visual-report-v1.pdf',
+  'output/pdf/alina-polished-evidence-pack-v1.pdf'
 ];
 
 const discoveredArtifacts = [
