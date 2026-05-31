@@ -139,8 +139,8 @@ const rows = [
     objective_part_ru: 'Подготовить рыночную методологию TAM/SAM/SOM и stress-сценарии',
     status_ru: 'покрыто как range-based methodology, не финальный revenue proof',
     evidence_strength_ru: 'средне-сильное',
-    current_evidence_ru: `${countRows('data_processed/global_market_sizing_methodology.csv')} methodology rows; ${countRows('data_processed/tam_sam_som_model.csv')} TAM/SAM/SOM rows; ${countRows('data_processed/market_sizing_stress_test.csv')} stress scenarios`,
-    key_files: 'data_processed/global_market_sizing_methodology.csv;docs/market/global-market-sizing-methodology-v1.md;data_processed/tam_sam_som_model.csv;data_processed/market_sizing_stress_test.csv',
+    current_evidence_ru: `${countRows('data_processed/global_market_sizing_methodology.csv')} methodology rows; ${countRows('data_processed/tam_sam_som_model.csv')} TAM/SAM/SOM rows; ${countRows('data_processed/market_sizing_stress_test.csv')} stress scenarios; sensitivity_rows=${countRows('data_processed/market_model_sensitivity_audit.csv')}`,
+    key_files: 'data_processed/global_market_sizing_methodology.csv;docs/market/global-market-sizing-methodology-v1.md;data_processed/tam_sam_som_model.csv;data_processed/market_sizing_stress_test.csv;data_processed/market_model_sensitivity_audit.csv;docs/market/market-model-sensitivity-audit-v1.md',
     remaining_gap_ru: 'H2 не закрыт: paid-flow signoff ниже порога, WTP и paid-depth prototype signals еще нужны',
     next_move_ru: 'добрать paid-flow capture rows и WTP вопросы из P0 backlog'
   },

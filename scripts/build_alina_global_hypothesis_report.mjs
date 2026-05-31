@@ -216,6 +216,7 @@ const nextValidationBacklog = csv('data_processed/global_next_validation_backlog
 const reportReadabilityAudit = csv('data_processed/global_report_readability_audit.csv');
 const sourceQualityAudit = csv('data_processed/global_source_quality_gap_audit.csv');
 const marketSizingMethodology = csv('data_processed/global_market_sizing_methodology.csv');
+const marketSensitivityAudit = csv('data_processed/market_model_sensitivity_audit.csv');
 const marketStressScenarios = csv('data_processed/market_sizing_stress_test.csv');
 const whitespaceAudienceSynthesis = csv('data_processed/global_whitespace_audience_synthesis.csv');
 const goalEvidenceCoverage = csv('data_processed/global_goal_evidence_coverage.csv');
@@ -468,6 +469,15 @@ const sourceAppendix = [
     primary_metric: `${sourceQualityAudit.length} market source-quality rows`,
     evidence_files: 'data_processed/global_source_quality_gap_audit.csv;docs/competitive/global-source-quality-gap-audit-v1.md;data_processed/cross_source_coverage_matrix.csv;data_processed/source_expansion_backlog.csv',
     source_boundary_ru: 'Source quality audit показывает качество coverage и next lanes; он не доказывает PMF, WTP или отсутствие hidden clone.'
+  },
+  {
+    claim_id: 'SRC_12_MARKET_SENSITIVITY',
+    report_section: 'Методология TAM/SAM/SOM',
+    claim_ru: 'TAM/SAM/SOM модель проверена на чувствительность assumptions; H2 остается range-based до paid-flow/WTP proof.',
+    evidence_status_ru: 'проверено sensitivity audit, не revenue forecast',
+    primary_metric: `${marketSensitivityAudit.length} sensitivity rows`,
+    evidence_files: 'data_processed/market_model_sensitivity_audit.csv;docs/market/market-model-sensitivity-audit-v1.md;data_processed/tam_sam_som_model.csv;data_processed/market_sizing_stress_test.csv',
+    source_boundary_ru: 'Sensitivity audit показывает хрупкость assumptions; он не доказывает выручку Alina.'
   }
 ];
 
@@ -665,6 +675,28 @@ lines.push(mdTable(marketSizingMethodology.map(row => ({
 lines.push('');
 lines.push('Для H2 это означает жесткую границу: TAM/SAM/SOM доказывает, что рынок достаточно интересен для проверки, но не доказывает, что Alina заработает эти деньги. H2 можно усиливать только после product-matched paid-flow signoff, willingness-to-pay в ICP-интервью и paid-depth signal в прототипных сессиях.');
 lines.push('');
+if (marketSensitivityAudit.length) {
+  lines.push('Чтобы H2 не опиралась на одну “красивую” рыночную цифру, отдельно добавлен sensitivity audit. Он показывает, какие assumptions двигают модель сильнее всего: ширина SAM диапазона, directness рынка, confidence weight, число источников и paid-flow/WTP evidence. Самый хрупкий слой - intersection SAM: его нельзя читать как прогноз выручки до ICP/WTP и product-matched paid-flow.');
+  lines.push('');
+  lines.push(mdTable(marketSensitivityAudit.map(row => ({
+    pillar: row.pillar,
+    sam: row.sam_base,
+    weighted: row.weighted_sam_base,
+    spread: row.sam_spread_ratio,
+    risk: row.sensitivity_risk_ru,
+    driver: row.main_sensitivity_driver_ru,
+    next: row.next_evidence_to_reduce_risk_ru
+  })), [
+    { key: 'pillar', label: 'Pillar' },
+    { key: 'sam', label: 'SAM base', align: 'right' },
+    { key: 'weighted', label: 'Weighted SAM', align: 'right' },
+    { key: 'spread', label: 'SAM spread', align: 'right' },
+    { key: 'risk', label: 'Risk' },
+    { key: 'driver', label: 'Main driver' },
+    { key: 'next', label: 'Next proof' }
+  ]));
+  lines.push('');
+}
 lines.push(mdTable(marketStressScenarios.map(row => ({
   scenario: row.scenario_family,
   reachable: fmt(row.reachable_users),
@@ -983,6 +1015,7 @@ lines.push('- `data_processed/global_next_validation_backlog.csv`');
 lines.push('- `data_processed/global_report_readability_audit.csv`');
 lines.push('- `data_processed/global_source_quality_gap_audit.csv`');
 lines.push('- `data_processed/global_market_sizing_methodology.csv`');
+lines.push('- `data_processed/market_model_sensitivity_audit.csv`');
 lines.push('- `data_processed/global_niche_count_rollup.csv`');
 lines.push('- `data_processed/global_whitespace_audience_synthesis.csv`');
 lines.push('- `data_processed/global_competitor_archetype_rollup.csv`');
