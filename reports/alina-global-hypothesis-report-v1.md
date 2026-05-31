@@ -1,6 +1,6 @@
 # Alina Research. Мировой рынок и логика гипотез
 
-Собрано: 2026-05-31T15:08:22.216Z
+Собрано: 2026-05-31T15:13:25.939Z
 
 ## ОПИСАНИЕ ПРОЕКТА И ГИПОТЕЗА #1
 
@@ -10,7 +10,7 @@
 
 Гипотеза №1: на мировом consumer-app рынке есть место для приложения, которое объединяет личный смысл, короткое действие, reset и причинно видимый прогресс в одну ежедневную петлю. Эта гипотеза пока не доказана как product-market fit, но уже поддержана масштабной картой соседних рынков и конкурентных сигналов.
 
-На текущем этапе собрано 67,525 сырьевых source-строк, 36,694 уникализированных строк и 456 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
+На текущем этапе собрано 67,525 сырьевых source-строк, 36,694 уникализированных строк и 459 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
 
 ## ТЕКУЩИЙ СТАТУС ДОКАЗАТЕЛЬСТВ
 
@@ -163,6 +163,29 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 
 Такой порядок удерживает исследование от преждевременного вывода: сначала формулируется гипотеза, затем показывается рынок, затем конкуренты, затем открытые сомнения, затем интервью/прототип и только после этого обновляется решение. Для мирового рынка это особенно важно: объем данных большой, но решение должно приниматься не по размеру базы, а по тому, выдерживает ли продуктовая петля ручные проверки.
 
+## БЛИЖАЙШАЯ ОЧЕРЕДЬ ВАЛИДАЦИИ
+
+Чтобы следующий шаг был исполнимым, из общего command center выделена короткая P0-очередь. Она начинается с hidden-clone walkthrough конкурентов, затем добирает paid-flow evidence, потом проверяет ICP recent behavior и только после этого переводит прототип в scorecard. Такой порядок сохраняет причинность исследования: сначала убираем риск “это уже существует”, затем проверяем деньги, затем аудиторию, затем преимущество продукта.
+
+| # | Поток | Цель | Гипотезы | Что сделать | Куда писать evidence |
+| --- | --- | --- | --- | --- | --- |
+| 1 | walkthrough конкурентов | Shepherd: Spiritual Bible BFF | H1/H3 | открыть listing/app, сохранить 5 слотов скриншотов, записать full-loop/directness/causality verdict | data_processed/manual_competitor_inspection_packet.csv |
+| 2 | walkthrough конкурентов | Zing AI: Home & Gym Workouts | H1/H3 | открыть listing/app, сохранить 5 слотов скриншотов, записать full-loop/directness/causality verdict | data_processed/manual_competitor_inspection_packet.csv |
+| 3 | walkthrough конкурентов | Miracle Morning Routine | H1/H3 | открыть listing/app, сохранить 5 слотов скриншотов, записать full-loop/directness/causality verdict | data_processed/manual_competitor_inspection_packet.csv |
+| 4 | walkthrough конкурентов | EVOLVE: Transform Your Life | H1/H3 | открыть listing/app, сохранить 5 слотов скриншотов, записать full-loop/directness/causality verdict | data_processed/manual_competitor_inspection_packet.csv |
+| 5 | walkthrough конкурентов | Daily Yoga: Yoga for Fitness® | H1/H3 | открыть listing/app, сохранить 5 слотов скриншотов, записать full-loop/directness/causality verdict | data_processed/manual_competitor_inspection_packet.csv |
+| 6 | paywall и деньги | Character AI: Chat, Talk, Text | H2 | проверить screenshot/source, подтвердить цену, trial, product-match и границу первого paywall | data_processed/web_paywall_visual_adjudication.csv |
+| 7 | paywall и деньги | Headspace: Sleep & Meditate | H2 | проверить screenshot/source, подтвердить цену, trial, product-match и границу первого paywall | data_processed/web_paywall_visual_adjudication.csv |
+| 8 | paywall и деньги | Meditopia: Sleep & Meditation | H2 | проверить screenshot/source, подтвердить цену, trial, product-match и границу первого paywall | data_processed/web_paywall_visual_adjudication.csv |
+| 9 | paywall и деньги | Nebula: Spiritual Guidance | H2 | проверить screenshot/source, подтвердить цену, trial, product-match и границу первого paywall | data_processed/web_paywall_visual_adjudication.csv |
+| 10 | paywall и деньги | Carrom Pool: Disc Game | H2 | проверить screenshot/source, подтвердить цену, trial, product-match и границу первого paywall | data_processed/web_paywall_visual_adjudication.csv |
+| 11 | ICP интервью | Spiritual self-improvers / screener | H5/H6 | спросить, какие приложения/ритуалы/дневники/коучи/avatar-tools участник использовал за 30 дней и что запустило последнее использование | data_processed/icp_validation_test_plan.csv |
+| 12 | ICP интервью | Spiritual self-improvers / problem_interview | H5/H6 | разобрать последний реальный эпизод, current workaround, эмоциональную ставку и точный язык боли | data_processed/icp_validation_test_plan.csv |
+| 13 | ICP интервью | Spiritual self-improvers / prototype_loop | H5/H6 | показать простую петлю meaning -> action -> reset -> avatar/progress -> tomorrow hook и попросить участника narrate flow | data_processed/icp_validation_test_plan.csv |
+| 14 | ICP интервью | Spiritual self-improvers / positioning_test | H5/H6 | сравнить current tool, generic habit/coach и Alina angle; записать, что участник выбрал бы первым и почему | data_processed/icp_validation_test_plan.csv |
+
+Эта очередь не заменяет полный validation command center. Она нужна как первый рабочий слой для следующих 12-24 часов: если заполнить хотя бы первые manual walkthrough и paid-flow задачи, отчет начнет переходить от desk evidence к наблюдаемым доказательствам.
+
 ## ИСТОЧНИКИ И ГРАНИЦЫ ДОКАЗАТЕЛЬСТВ
 
 Ниже зафиксирована короткая связка claim -> evidence -> boundary для этой мировой версии отчета. Это не полный manifest всех файлов, а читательский слой: он показывает, какие утверждения можно читать как desk/source support, а какие нельзя усиливать без ручных walkthrough, интервью, прототипных сессий или WTP-проверки.
@@ -175,7 +198,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | SRC_04_WHITESPACE | Где дыры и возможность отличиться | поддержано направленно, но не финально доказано | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Whitespace нельзя апгрейдить без manual walkthrough и final verdict_after_inspection. |
 | SRC_05_AUDIENCE | Аудитория, интервью и гипотеза #4 | поддержано направленно, но не финально доказано | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Audience rows и Reddit/forum signals не являются representative survey и не заменяют recent-behavior interviews. |
 | SRC_06_PRODUCT_CORE | Итоговая модель продукта и гипотеза #5 | поддержано направленно, но не финально доказано | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | Product core не считается доказанным без заполненных prototype_session_capture_sheet и scorecard. |
-| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 456 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
+| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 459 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
 
 ## БЫСТРЫЕ ВЫВОДЫ ДЛЯ СТРАТЕГИИ
 
@@ -192,6 +215,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 - `data_processed/global_hypothesis_source_appendix.csv`
 - `data_processed/global_hypothesis_validation_questionnaire.csv`
 - `data_processed/global_hypothesis_gate_snapshot.csv`
+- `data_processed/global_next_validation_backlog.csv`
 - `reports/alina-russian-readable-report-v2.md`
 - `data_processed/russian_readable_niche_summary.csv`
 - `data_processed/validation_gate_calculator.csv`

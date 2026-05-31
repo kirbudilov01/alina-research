@@ -200,6 +200,7 @@ const manifest = csv('data_processed/evidence_artifact_manifest.csv');
 const claimAppendix = csv('data_processed/russian_claim_evidence_appendix.csv');
 const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv');
 const marketSources = csv('data_processed/market_source_registry.csv');
+const nextValidationBacklog = csv('data_processed/global_next_validation_backlog.csv');
 
 const intersection = by(tam, 'pillar', 'intersection');
 const p0Icp = icp.filter(row => clean(row.priority_ru).startsWith('P0'));
@@ -625,6 +626,28 @@ lines.push(mdTable(validationQuestionnaire.map(row => ({
 lines.push('');
 lines.push('Такой порядок удерживает исследование от преждевременного вывода: сначала формулируется гипотеза, затем показывается рынок, затем конкуренты, затем открытые сомнения, затем интервью/прототип и только после этого обновляется решение. Для мирового рынка это особенно важно: объем данных большой, но решение должно приниматься не по размеру базы, а по тому, выдерживает ли продуктовая петля ручные проверки.');
 lines.push('');
+lines.push('## БЛИЖАЙШАЯ ОЧЕРЕДЬ ВАЛИДАЦИИ');
+lines.push('');
+lines.push('Чтобы следующий шаг был исполнимым, из общего command center выделена короткая P0-очередь. Она начинается с hidden-clone walkthrough конкурентов, затем добирает paid-flow evidence, потом проверяет ICP recent behavior и только после этого переводит прототип в scorecard. Такой порядок сохраняет причинность исследования: сначала убираем риск “это уже существует”, затем проверяем деньги, затем аудиторию, затем преимущество продукта.');
+lines.push('');
+lines.push(mdTable(nextValidationBacklog.slice(0, 14).map(row => ({
+  rank: row.backlog_rank,
+  lane: row.lane_ru,
+  target: row.target,
+  h: row.linked_hypotheses,
+  action: row.operator_action_ru,
+  file: row.output_file_to_update
+})), [
+  { key: 'rank', label: '#' },
+  { key: 'lane', label: 'Поток' },
+  { key: 'target', label: 'Цель' },
+  { key: 'h', label: 'Гипотезы' },
+  { key: 'action', label: 'Что сделать' },
+  { key: 'file', label: 'Куда писать evidence' }
+]));
+lines.push('');
+lines.push('Эта очередь не заменяет полный validation command center. Она нужна как первый рабочий слой для следующих 12-24 часов: если заполнить хотя бы первые manual walkthrough и paid-flow задачи, отчет начнет переходить от desk evidence к наблюдаемым доказательствам.');
+lines.push('');
 lines.push('## ИСТОЧНИКИ И ГРАНИЦЫ ДОКАЗАТЕЛЬСТВ');
 lines.push('');
 lines.push('Ниже зафиксирована короткая связка claim -> evidence -> boundary для этой мировой версии отчета. Это не полный manifest всех файлов, а читательский слой: он показывает, какие утверждения можно читать как desk/source support, а какие нельзя усиливать без ручных walkthrough, интервью, прототипных сессий или WTP-проверки.');
@@ -658,6 +681,7 @@ lines.push('- `output/pdf/alina-global-hypothesis-report-v1.pdf`');
 lines.push('- `data_processed/global_hypothesis_source_appendix.csv`');
 lines.push('- `data_processed/global_hypothesis_validation_questionnaire.csv`');
 lines.push('- `data_processed/global_hypothesis_gate_snapshot.csv`');
+lines.push('- `data_processed/global_next_validation_backlog.csv`');
 lines.push('- `reports/alina-russian-readable-report-v2.md`');
 lines.push('- `data_processed/russian_readable_niche_summary.csv`');
 lines.push('- `data_processed/validation_gate_calculator.csv`');
