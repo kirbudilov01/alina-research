@@ -1,6 +1,6 @@
 # Evidence Package Manifest V1
 
-Generated: 2026-05-31T15:24:01.777Z
+Generated: 2026-05-31T15:39:52.518Z
 
 ## Purpose
 
@@ -8,17 +8,17 @@ This manifest makes the research package auditable. It lists key raw data, proce
 
 ## Package Summary
 
-- Manifest rows: 465
+- Manifest rows: 468
 - Missing required artifacts: 0
-- CSV artifacts: 117
-- Total CSV data rows tracked: 241494
+- CSV artifacts: 118
+- Total CSV data rows tracked: 241502
 - CSV rows with source-like identifiers/URLs/domains/packages: 239842
 
 Artifact types:
 
-- research_doc: 113
-- processed_data: 102
-- generator_script: 100
+- research_doc: 114
+- processed_data: 103
+- generator_script: 101
 - validation_workspace: 95
 - report: 19
 - raw_data: 15
@@ -28,7 +28,7 @@ Artifact types:
 
 Evidence roles:
 
-- decision_artifact: 196
+- decision_artifact: 199
 - supporting: 73
 - market_money: 61
 - audience_icp: 57
@@ -60,8 +60,9 @@ Evidence roles:
 | data_processed/desktop_store_source_summary.csv | source_claim | 5 | 5 | c5d367149f6ca29e |
 | data_processed/evidence_claim_register.csv | decision_artifact | 22 | 0 | f53166925164b33a |
 | data_processed/forum_quote_coding_matrix.csv | audience_icp | 72 | 72 | f2fb0ab869195b97 |
+| data_processed/global_goal_evidence_coverage.csv | decision_artifact | 8 | 0 | bdfc02c5bc27ec70 |
 | data_processed/global_hypothesis_gate_snapshot.csv | decision_artifact | 6 | 0 | 6b8d33a72ad40989 |
-| data_processed/global_hypothesis_source_appendix.csv | decision_artifact | 7 | 7 | fb57269ec1c9275b |
+| data_processed/global_hypothesis_source_appendix.csv | decision_artifact | 7 | 7 | 8b45dc485eba4c1e |
 | data_processed/global_hypothesis_validation_questionnaire.csv | decision_artifact | 9 | 0 | e9cb87d734d19bbe |
 | data_processed/global_market_sizing_methodology.csv | market_money | 6 | 6 | 375ece2e2328fd3f |
 | data_processed/global_next_validation_backlog.csv | decision_artifact | 22 | 22 | a6b04e617dc51c73 |
@@ -79,7 +80,6 @@ Evidence roles:
 | data_processed/market_claims.csv | market_money | 14 | 14 | ea4d24d882cdef0e |
 | data_processed/market_monetization_proxy_matrix.csv | market_money | 5 | 5 | a252897e3d0641c6 |
 | data_processed/market_money_triangulation.csv | market_money | 6 | 6 | 3449eec6a0215fb4 |
-| data_processed/market_money_triangulation_summary.csv | market_money | 4 | 0 | c69ae58664ce660a |
 
 ## Decision Artifacts
 
@@ -87,8 +87,9 @@ Evidence roles:
 | --- | --- | ---: | ---: | --- |
 | docs/competitive/human-validation-guide-v1.md | research_doc | 91 | 12102 | b85e6b5dd29fcb2f |
 | docs/decision/evidence-audit-v1.md | research_doc | 87 | 9756 | ee273e9aa8578be7 |
-| docs/decision/evidence-package-manifest-v1.md | research_doc | 131 | 8884 | e1b78ef1d0bd0377 |
-| docs/decision/global-next-validation-backlog-v1.md | research_doc | 62 | 11696 | 70310732f44bfde3 |
+| docs/decision/evidence-package-manifest-v1.md | research_doc | 131 | 8894 | b158937419275be6 |
+| docs/decision/global-goal-evidence-coverage-v1.md | research_doc | 31 | 5456 | da2cfe9c16982f0c |
+| docs/decision/global-next-validation-backlog-v1.md | research_doc | 62 | 11696 | f49c9f5ccb5b0d96 |
 | docs/decision/hypothesis-decision-matrix-v1.md | research_doc | 51 | 4817 | baa9668809d8dc7f |
 | docs/decision/p0-validation-command-center-v1.md | research_doc | 69 | 7260 | 51d22a2990e6aaf3 |
 | docs/decision/p0-validation-field-guide-v1.md | research_doc | 136 | 12679 | 839df92dd885c73b |
@@ -117,14 +118,13 @@ Evidence roles:
 | docs/visuals/chart-index-v1.md | research_doc | 25 | 886 | 77cba8f26318bcae |
 | output/pdf/alina-evidence-first-report-draft.pdf | pdf | 1423 | 194961 | 30a3025c4818d99e |
 | output/pdf/alina-evidence-visual-report-v1.pdf | pdf | 322 | 34684 | 3fca188b99b4541c |
-| output/pdf/alina-global-hypothesis-report-v1.pdf | pdf | 691 | 127445 | c4c5a146c85a2015 |
+| output/pdf/alina-global-hypothesis-report-v1.pdf | pdf | 710 | 131782 | 836d86dea0792a99 |
 | output/pdf/alina-polished-evidence-pack-v1.pdf | pdf | 328 | 44200 | 12a59927174ba750 |
-| output/pdf/alina-russian-narrative-report-v1.pdf | pdf | 1142 | 213893 | c0db40415b077831 |
-| output/pdf/alina-russian-readable-report-v2.pdf | pdf | 542 | 100974 | 912d850192e85d6b |
+| output/pdf/alina-russian-narrative-report-v1.pdf | pdf | 1142 | 213893 | 271e3c70a4741265 |
+| output/pdf/alina-russian-readable-report-v2.pdf | pdf | 542 | 100974 | 014f006b52cd8194 |
 | reports/alina-evidence-first-report-draft.md | report | 1888 | 178806 | 6f03de0bc531a886 |
-| reports/alina-global-hypothesis-report-v1.md | report | 263 | 54378 | 9d98ebdf5596c1e7 |
+| reports/alina-global-hypothesis-report-v1.md | report | 281 | 59181 | 5410e1ecccf3ffc8 |
 | reports/alina-russian-narrative-report-v1.md | report | 725 | 148369 | c7b48f1268dcc255 |
-| reports/alina-russian-readable-report-v2.md | report | 165 | 27282 | d8324736d0a83348 |
 
 ## Files
 

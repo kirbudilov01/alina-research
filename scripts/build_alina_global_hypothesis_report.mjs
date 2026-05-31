@@ -213,6 +213,7 @@ const nextValidationBacklog = csv('data_processed/global_next_validation_backlog
 const marketSizingMethodology = csv('data_processed/global_market_sizing_methodology.csv');
 const marketStressScenarios = csv('data_processed/market_sizing_stress_test.csv');
 const whitespaceAudienceSynthesis = csv('data_processed/global_whitespace_audience_synthesis.csv');
+const goalEvidenceCoverage = csv('data_processed/global_goal_evidence_coverage.csv');
 
 const intersection = by(tam, 'pillar', 'intersection');
 const p0Icp = icp.filter(row => clean(row.priority_ru).startsWith('P0'));
@@ -722,6 +723,28 @@ lines.push(mdTable(nextValidationBacklog.slice(0, 14).map(row => ({
 lines.push('');
 lines.push('Эта очередь не заменяет полный validation command center. Она нужна как первый рабочий слой для следующих 12-24 часов: если заполнить хотя бы первые manual walkthrough и paid-flow задачи, отчет начнет переходить от desk evidence к наблюдаемым доказательствам.');
 lines.push('');
+lines.push('## ПОКРЫТИЕ ИСХОДНОЙ ЦЕЛИ ДОКАЗАТЕЛЬСТВАМИ');
+lines.push('');
+lines.push('Чтобы не смешивать “сделан исследовательский слой” и “доказана гипотеза”, ниже показано покрытие исходной задачи по частям. Это контрольная карта текущего состояния: где уже есть локальные файлы, методология и отчет, а где требуются observed rows.');
+lines.push('');
+lines.push(mdTable(goalEvidenceCoverage.map(row => ({
+  goal: row.coverage_id,
+  part: row.objective_part_ru,
+  status: row.status_ru,
+  evidence: row.current_evidence_ru,
+  gap: row.remaining_gap_ru,
+  next: row.next_move_ru
+})), [
+  { key: 'goal', label: 'ID' },
+  { key: 'part', label: 'Часть цели' },
+  { key: 'status', label: 'Статус' },
+  { key: 'evidence', label: 'Текущее evidence' },
+  { key: 'gap', label: 'Осталось' },
+  { key: 'next', label: 'Следующий ход' }
+]));
+lines.push('');
+lines.push('Главный вывод по этой карте: пакет уже масштабный и трассируемый, но не финально валидированный. Это правильное состояние для evidence-first ресерча: сильные desk/source слои готовы, а product/market claims остаются в hold_validate до ручных walkthrough, интервью, прототипа и WTP.');
+lines.push('');
 lines.push('## ИСТОЧНИКИ И ГРАНИЦЫ ДОКАЗАТЕЛЬСТВ');
 lines.push('');
 lines.push('Ниже зафиксирована короткая связка claim -> evidence -> boundary для этой мировой версии отчета. Это не полный manifest всех файлов, а читательский слой: он показывает, какие утверждения можно читать как desk/source support, а какие нельзя усиливать без ручных walkthrough, интервью, прототипных сессий или WTP-проверки.');
@@ -758,6 +781,7 @@ lines.push('- `data_processed/global_hypothesis_gate_snapshot.csv`');
 lines.push('- `data_processed/global_next_validation_backlog.csv`');
 lines.push('- `data_processed/global_market_sizing_methodology.csv`');
 lines.push('- `data_processed/global_whitespace_audience_synthesis.csv`');
+lines.push('- `data_processed/global_goal_evidence_coverage.csv`');
 lines.push('- `reports/alina-russian-readable-report-v2.md`');
 lines.push('- `data_processed/russian_readable_niche_summary.csv`');
 lines.push('- `data_processed/validation_gate_calculator.csv`');
