@@ -115,6 +115,7 @@ const p0ExternalSummary = csv('data_processed/p0_external_source_summary.csv');
 const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv');
 const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
 const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
+const evidenceManifest = csv('data_processed/evidence_artifact_manifest.csv');
 
 const highWhitespace = whitespace.filter(r => r.whitespace_band === 'high').length;
 const mediumWhitespace = whitespace.filter(r => r.whitespace_band === 'medium').length;
@@ -149,6 +150,9 @@ const rangeOnlyMarketSources = marketSourceConfidence.filter(r => ['low_use_rang
 const strongMonetizationMarkets = monetizationProxy.filter(r => r.monetization_proxy_band === 'strong_paid_behavior_proxy');
 const mediumMonetizationMarkets = monetizationProxy.filter(r => r.monetization_proxy_band === 'medium_paid_behavior_proxy');
 const strongestIcpSegment = [...icpSegments].sort((a, b) => Number(b.evidence_score || 0) - Number(a.evidence_score || 0))[0] || {};
+const manifestMissing = evidenceManifest.filter(r => r.exists !== 'yes');
+const manifestCsvRows = evidenceManifest.filter(r => r.file_path.endsWith('.csv'));
+const manifestTrackedRows = manifestCsvRows.reduce((sum, row) => sum + Number(row.row_count || 0), 0);
 
 const report = [];
 
@@ -176,6 +180,7 @@ report.push(`- Developer website paywall discovery: ${webPaywallRaw.length} fetc
 report.push(`- Web paywall screenshot capture: ${webPaywallCapturedScreenshots.length}/${webPaywallScreenshots.length} queued screenshots captured for manual interpretation.`);
 report.push(`- Web paywall OCR interpretation: ${webPaywallScreenshotInterpretation.length} screenshots interpreted; ${confirmedPublicPricingScreenshots.length} currently confirm visible public pricing, while the rest need human review or weaken the signal.`);
 report.push(`- Evidence audit register: ${evidenceAudit.length} claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.`);
+report.push(`- Evidence package manifest: ${evidenceManifest.length} artifacts tracked, ${manifestCsvRows.length} CSV artifacts, ${manifestTrackedRows} tracked CSV rows, ${manifestMissing.length} missing required artifacts.`);
 report.push(`- Source expansion backlog: ${sourceExpansionBacklog.length} prioritized collector/source tasks for the next move toward a 30k-50k raw universe.`);
 report.push(`- Controlled P0 external-source smoke pass: ${p0ExternalSources.length} rows, ${p0ExternalUsable.length} usable candidates, with search-engine-heavy expansion intentionally deferred.`);
 report.push(`- Chrome extension detail enrichment: ${chromeExtensionDetailOk.length}/${chromeExtensionFit.length} detail pages parsed; ${chromeExtensionStrong.length} strong and ${chromeExtensionUseful.length} useful adjacent mechanic references.`);
@@ -228,6 +233,27 @@ if (evidenceAudit.length) {
     { key: 'primary_metric', label: 'Primary Metric' },
     { key: 'key_gap', label: 'Key Gap' }
   ], evidenceAudit.length));
+  report.push('');
+}
+if (evidenceManifest.length) {
+  report.push('## 2D. Evidence Package Manifest');
+  report.push('');
+  report.push('The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.');
+  report.push('');
+  report.push(`Manifest snapshot: ${evidenceManifest.length} artifacts; ${manifestCsvRows.length} CSV artifacts; ${manifestTrackedRows} tracked CSV rows; ${manifestMissing.length} missing required artifacts.`);
+  report.push('');
+  report.push('Largest tracked CSV artifacts:');
+  report.push('');
+  report.push(mdTable(manifestCsvRows
+    .slice()
+    .sort((a, b) => Number(b.row_count || 0) - Number(a.row_count || 0))
+    .slice(0, 12), [
+      { key: 'file_path', label: 'File' },
+      { key: 'evidence_role', label: 'Role' },
+      { key: 'row_count', label: 'Rows', align: 'right' },
+      { key: 'source_ref_rows', label: 'Source Ref Rows', align: 'right' },
+      { key: 'sha256', label: 'Hash' }
+    ], 12));
   report.push('');
 }
 if (validationGapRoadmap.length) {
@@ -811,6 +837,7 @@ report.push('- `docs/competitive/p0-external-source-collection-v1.md`');
 report.push('- `docs/competitive/chrome-extension-detail-enrichment-v1.md`');
 report.push('- `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`');
 report.push('- `docs/decision/evidence-audit-v1.md`');
+report.push('- `docs/decision/evidence-package-manifest-v1.md`');
 report.push('- `docs/decision/validation-gap-roadmap-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
@@ -819,6 +846,7 @@ report.push('- `data_processed/market_confidence_summary.csv`');
 report.push('- `data_processed/market_monetization_proxy_matrix.csv`');
 report.push('- `data_processed/monetization_proxy_examples.csv`');
 report.push('- `data_processed/evidence_claim_register.csv`');
+report.push('- `data_processed/evidence_artifact_manifest.csv`');
 report.push('- `data_processed/source_expansion_backlog.csv`');
 report.push('- `data_processed/p0_external_source_summary.csv`');
 report.push('- `data_processed/chrome_extension_fit_matrix.csv`');
@@ -903,6 +931,7 @@ status.push(mdTable([
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft evidence PDF and visual PDF companion done' },
   { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft chart pack and embedded visual PDF done' },
   { requirement: 'Evidence audit / claim register', evidence: 'data_processed/evidence_claim_register.csv; docs/decision/evidence-audit-v1.md', status: 'done v1; proof status, confidence, gaps, and next actions explicit' },
+  { requirement: 'Evidence package manifest', evidence: 'data_processed/evidence_artifact_manifest.csv; docs/decision/evidence-package-manifest-v1.md', status: 'done v1; tracks key artifacts with row counts, source-reference coverage, sizes, and short hashes' },
   { requirement: 'Manual review of top 100', evidence: 'data_processed/top100_competitor_review_scorecard.csv; data_processed/top100_human_validation_queue.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md; docs/competitive/human-validation-guide-v1.md', status: 'AI-assisted review and ranked human validation packet done v1; human execution pending' },
   { requirement: 'Detailed pricing/IAP extraction', evidence: 'data_raw/app_store_iap_pricing_raw.csv; data_processed/app_store_iap_pricing_summary.csv; docs/competitive/app-store-iap-pricing-v1.md; data_raw/google_play_pricing_raw.csv; data_processed/google_play_pricing_summary.csv; docs/competitive/google-play-pricing-v1.md; data_raw/web_paywall_discovery_raw.csv; data_processed/web_paywall_signal_matrix.csv; docs/competitive/web-paywall-validation-v1.md; data_processed/web_paywall_screenshot_validation.csv; data_processed/web_paywall_screenshot_interpretation.csv; docs/competitive/web-paywall-screenshot-validation-v1.md; docs/competitive/web-paywall-screenshot-interpretation-v1.md; output/paywall_screenshots/*.png', status: 'App Store web IAP extraction, Google Play pricing validation, developer website paywall discovery, screenshot capture, and OCR interpretation done v1; human paywall interpretation pending' },
   { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_raw/forum_quote_evidence_raw.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; data_processed/forum_quote_coding_matrix.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md; docs/audience/forum-quote-coding-v1.md', status: 'App Store review extraction, JTBD clustering, forum source map, and retrieval-assisted quote coding done v1; human validation pending' }
@@ -933,6 +962,7 @@ console.log(`web_paywall_screenshots=${webPaywallCapturedScreenshots.length}/${w
 console.log(`web_paywall_screenshot_interpretations=${webPaywallScreenshotInterpretation.length}`);
 console.log(`human_validation_queue_rows=${humanValidationQueue.length}`);
 console.log(`evidence_audit_rows=${evidenceAudit.length}`);
+console.log(`evidence_manifest_rows=${evidenceManifest.length}`);
 console.log(`source_expansion_backlog_rows=${sourceExpansionBacklog.length}`);
 console.log(`p0_external_rows=${p0ExternalSources.length}`);
 console.log(`p0_external_usable=${p0ExternalUsable.length}`);

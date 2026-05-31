@@ -211,6 +211,7 @@ Current evidence:
 - Monetization proxy matrix: `docs/market/monetization-proxy-matrix-v1.md`.
 - ICP segment matrix: `docs/audience/icp-segment-matrix-v1.md`.
 - ICP validation packet: `docs/audience/icp-validation-packet-v1.md`.
+- Evidence package manifest: `docs/decision/evidence-package-manifest-v1.md`.
 
 Next collector priority:
 

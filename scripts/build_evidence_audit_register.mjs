@@ -109,6 +109,7 @@ const p0External = csv('data_raw/expanded/p0_external_sources_raw.csv');
 const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv');
 const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
 const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
+const evidenceManifest = csv('data_processed/evidence_artifact_manifest.csv');
 const highUseMarketSources = marketSourceConfidence.filter(row => row.confidence_review_band === 'high_use');
 const rangeOnlyMarketSources = marketSourceConfidence.filter(row => ['low_use_range_only', 'context_only'].includes(row.confidence_review_band));
 const strongMonetizationMarkets = monetizationProxy.filter(row => row.monetization_proxy_band === 'strong_paid_behavior_proxy');
@@ -133,6 +134,9 @@ const chromeExtensionDetailOk = chromeExtensionFit.filter(row => row.detail_stat
 const chromeExtensionStrong = chromeExtensionFit.filter(row => row.alina_fit_band === 'strong_adjacent');
 const chromeMechanicPriority = chromeExtensionBattlecards.filter(row => ['mechanic_threat_high', 'mechanic_threat_medium', 'mechanic_reference_high'].includes(row.threat_band));
 const validationRoadmapP0 = validationGapRoadmap.filter(row => row.priority === 'P0');
+const manifestMissing = evidenceManifest.filter(row => row.exists !== 'yes');
+const manifestCsvRows = evidenceManifest.filter(row => row.file_path.endsWith('.csv'));
+const manifestTrackedRows = manifestCsvRows.reduce((sum, row) => sum + Number(row.row_count || 0), 0);
 
 const rows = [
   {
@@ -147,6 +151,19 @@ const rows = [
     strongest_support: 'Research expansion plan, phase docs, and validation gap roadmap exist in repository.',
     key_gap: 'Needs periodic refresh as validation findings change.',
     next_action: 'Update plan after human validation and prototype testing.'
+  },
+  {
+    claim_id: 'REQ_evidence_package_traceability',
+    claim_type: 'project_requirement',
+    claim: 'The research package is traceable through a manifest of raw data, processed data, docs, reports, PDFs, charts, and generator scripts.',
+    evidence_status: manifestMissing.length ? 'manifest_has_missing_artifacts' : 'proved_v1',
+    confidence: manifestMissing.length ? 'medium' : 'high',
+    primary_metric: `${evidenceManifest.length} manifest rows; ${manifestMissing.length} missing artifacts`,
+    quantitative_evidence: `manifest_rows=${evidenceManifest.length}; csv_artifacts=${manifestCsvRows.length}; tracked_csv_rows=${manifestTrackedRows}; missing=${manifestMissing.length}`,
+    evidence_files: 'data_processed/evidence_artifact_manifest.csv;docs/decision/evidence-package-manifest-v1.md',
+    strongest_support: 'Evidence package manifest records row counts, source-reference coverage, file sizes, and short SHA-256 hashes for key research artifacts and generator scripts.',
+    key_gap: 'Manifest is a reproducibility layer, not a substitute for human validation of claims.',
+    next_action: 'Regenerate manifest after each major data/report/PDF update and before final archive.'
   },
   {
     claim_id: 'REQ_competitor_universe',
@@ -301,6 +318,7 @@ lines.push('');
 lines.push('## Audit Read');
 lines.push('');
 lines.push('- Strongest proved project layers: plan/backlog, TAM/SAM/SOM v1, matrices, saved artifacts, PDF rendering, and GitHub versioning.');
+lines.push('- Traceability layer: evidence package manifest tracks raw/processed data, docs, reports, charts, PDFs, and generator scripts with row counts and short hashes.');
 lines.push('- Strongest product evidence: adjacent markets are monetized; the user language around daily ritual/progress is real; strict behavior-tied avatar progression remains narrow in current metadata.');
 lines.push('- Weakest remaining proof: human validation of competitors, actual in-app paywall/onboarding flows, real user prototype response, and final source-by-source market sizing review.');
 lines.push('- Current decision should remain conditional-go for validation, not full product-build go.');

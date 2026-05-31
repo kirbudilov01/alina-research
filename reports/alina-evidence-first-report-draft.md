@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T04:32:29.165Z
+Generated: 2026-05-31T04:38:17.957Z
 
 ## 1. Executive Summary
 
@@ -21,7 +21,8 @@ Key quantified signals:
 - Developer website paywall discovery: 560 fetched URL rows across 70 app/domain rows; 29 domains queued for screenshot validation.
 - Web paywall screenshot capture: 29/29 queued screenshots captured for manual interpretation.
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
-- Evidence audit register: 10 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
+- Evidence audit register: 11 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
+- Evidence package manifest: 141 artifacts tracked, 25 CSV artifacts, 79746 tracked CSV rows, 0 missing required artifacts.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
 - Chrome extension detail enrichment: 23/23 detail pages parsed; 3 strong and 10 useful adjacent mechanic references.
@@ -57,7 +58,7 @@ The project now has a claim-level audit register. This conservative layer separa
 
 Evidence status mix:
 
-- proved_v1: 1
+- proved_v1: 2
 - substantial_v1_not_50k_dedup: 1
 - partially_supported: 1
 - supported_with_ranges: 1
@@ -73,6 +74,7 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 14 validation roadmap rows | Needs periodic refresh as validation findings change. |
+| REQ_evidence_package_traceability | proved_v1 | high | 141 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; P0 external pass is intentionally small, with Product Hunt/AlternativeTo still needing source-native or curated collection. |
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
 | H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 4/5 strong monetization proxy markets | Market sizing still needs competitor revenue/proxy review and additional triangulation for thin/contextual markets. |
@@ -82,6 +84,29 @@ Claim-level audit snapshot:
 | H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 6 ICP segment hypotheses; 36 ICP validation tests | Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. |
 | H6_product_core_defined | supported_for_mvp_framing | medium | 12552 feature matrix rows; 100 product-core rows | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
 | REQ_final_artifacts_versioned | proved_active | high | current branch pushed through latest commit | Final polished investor/user-facing PDF is still draft-level, not final designed publication. |
+
+## 2D. Evidence Package Manifest
+
+The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
+
+Manifest snapshot: 141 artifacts; 25 CSV artifacts; 79746 tracked CSV rows; 0 missing required artifacts.
+
+Largest tracked CSV artifacts:
+
+| File | Role | Rows | Source Ref Rows | Hash |
+| --- | --- | ---: | ---: | --- |
+| data_processed/audience_signal_matrix.csv | audience_icp | 20492 | 20492 | 865f8a0de8b075d7 |
+| data_raw/expanded/all_expanded_raw.csv | competitor_universe | 17490 | 17490 | 8479ff977b44a132 |
+| data_processed/competitor_feature_matrix.csv | supporting | 12552 | 12552 | b285aff3873487bc |
+| data_processed/whitespace_signal_matrix.csv | competitive_whitespace | 12552 | 12552 | d12826260e643b15 |
+| data_raw/expanded/all_expanded_dedup.csv | competitor_universe | 12552 | 12552 | db5e87665dbf3b53 |
+| data_raw/app_store_top_candidate_reviews.csv | audience_icp | 2294 | 2294 | 3fb11211b91b48b3 |
+| data_raw/web_paywall_discovery_raw.csv | market_money | 560 | 560 | 3416403392840293 |
+| data_raw/app_store_iap_pricing_raw.csv | market_money | 498 | 498 | 37f37b15c4554c62 |
+| data_raw/google_play_pricing_raw.csv | market_money | 250 | 250 | 268def050a974daa |
+| data_processed/top100_competitor_review_scorecard.csv | competitive_whitespace | 100 | 100 | 925db07b8f5323d7 |
+| data_processed/top100_human_validation_queue.csv | competitive_whitespace | 90 | 90 | 91356a9f07233a37 |
+| data_processed/forum_quote_coding_matrix.csv | audience_icp | 72 | 72 | f2fb0ab869195b97 |
 
 ## 2C. Validation Gap Roadmap
 
@@ -714,7 +739,7 @@ Remaining proof required:
 ## 11. Source and Claim Layer
 
 Market claims currently normalized: 14.
-Claim audit rows currently normalized: 10.
+Claim audit rows currently normalized: 11.
 
 | Claim ID | Market | Value | Period | Confidence | Source |
 | --- | --- | ---: | --- | --- | --- |
@@ -760,6 +785,7 @@ Claim audit rows currently normalized: 10.
 - `docs/competitive/chrome-extension-detail-enrichment-v1.md`
 - `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`
 - `docs/decision/evidence-audit-v1.md`
+- `docs/decision/evidence-package-manifest-v1.md`
 - `docs/decision/validation-gap-roadmap-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
@@ -768,6 +794,7 @@ Claim audit rows currently normalized: 10.
 - `data_processed/market_monetization_proxy_matrix.csv`
 - `data_processed/monetization_proxy_examples.csv`
 - `data_processed/evidence_claim_register.csv`
+- `data_processed/evidence_artifact_manifest.csv`
 - `data_processed/source_expansion_backlog.csv`
 - `data_processed/p0_external_source_summary.csv`
 - `data_processed/chrome_extension_fit_matrix.csv`

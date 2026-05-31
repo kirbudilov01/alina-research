@@ -1,6 +1,6 @@
 # Evidence Audit V1
 
-Generated: 2026-05-31T04:32:23.641Z
+Generated: 2026-05-31T04:38:16.994Z
 
 ## Purpose
 
@@ -8,7 +8,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 
 ## Status Mix
 
-- proved_v1: 1
+- proved_v1: 2
 - substantial_v1_not_50k_dedup: 1
 - partially_supported: 1
 - supported_with_ranges: 1
@@ -22,7 +22,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 ## Confidence Mix
 
 - medium: 5
-- high: 2
+- high: 3
 - medium_low: 2
 - medium_high: 1
 
@@ -31,6 +31,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 | Claim ID | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 14 validation roadmap rows | Needs periodic refresh as validation findings change. |
+| REQ_evidence_package_traceability | proved_v1 | high | 141 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; P0 external pass is intentionally small, with Product Hunt/AlternativeTo still needing source-native or curated collection. |
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
 | H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 4/5 strong monetization proxy markets | Market sizing still needs competitor revenue/proxy review and additional triangulation for thin/contextual markets. |
@@ -44,6 +45,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 ## Audit Read
 
 - Strongest proved project layers: plan/backlog, TAM/SAM/SOM v1, matrices, saved artifacts, PDF rendering, and GitHub versioning.
+- Traceability layer: evidence package manifest tracks raw/processed data, docs, reports, charts, PDFs, and generator scripts with row counts and short hashes.
 - Strongest product evidence: adjacent markets are monetized; the user language around daily ritual/progress is real; strict behavior-tied avatar progression remains narrow in current metadata.
 - Weakest remaining proof: human validation of competitors, actual in-app paywall/onboarding flows, real user prototype response, and final source-by-source market sizing review.
 - Current decision should remain conditional-go for validation, not full product-build go.
