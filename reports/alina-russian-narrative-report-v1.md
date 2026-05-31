@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T12:39:49.260Z
+Собрано: 2026-05-31T12:48:16.220Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 414 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 417 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 414 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 417 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -112,6 +112,35 @@
 **Coaching / self-improvement.** direct adjacent рынок намерений, целей, habit/action guidance и accountability. Для Alina: нужен как слой действия и структурирования, но нельзя превращать Alina в тяжелую productivity-систему или generic AI coach. Evidence: 3857 dedup rows, 7 coverage cells, 5003 audience rows, 984 Reddit/forum signals, 50 top-100 primary competitors. Граница: Можно использовать как directional evidence, но нельзя усиливать claim до product-market proof без walkthrough, paywall signoff и пользовательских сессий.
 
 **Gaming / progression benchmark.** benchmark рынок прогресса, наград, возвращаемости и avatar/progression feedback. Для Alina: нужен как библиотека механик, но не как прямой TAM: если продукт будет ощущаться как игра ради retention, личный смысл сломается. Evidence: 14304 dedup rows, 9 coverage cells, 6460 audience rows, 83 Reddit/forum signals, 8 top-100 primary competitors. Граница: Нельзя считать прямым рынком Alina без доказанного ritual/self-improvement overlap; использовать как механику прогресса и retention.
+
+## 2.2. Русские paid-flow dossiers
+
+Чтобы H2 не держалась только на TAM/SAM/SOM, IAP и web-pricing proxy, добавлены paid-flow dossiers на 10 продуктов. Они показывают, где есть public-pricing prefill, какие 4 скрина надо сохранить, как проверить product-match, где лежит first meaningful paywall boundary и когда H2 можно усилить или, наоборот, ослабить.
+
+| # | Product | Market | Prefill | Price | Slots | Done |
+| --- | --- | --- | --- | --- | ---: | ---: |
+| 1 | Character AI: Chat, Talk, Text | avatar_identity | confirmed_visible_public_pricing | $9.99/$94.99 | 4 | 0 |
+| 2 | Meditopia: Sleep & Meditation | mindfulness | confirmed_visible_public_pricing | $3.50 | 4 | 0 |
+| 3 | Carrom Pool: Disc Game | gaming | partial_paid_surface_language |  | 4 | 0 |
+| 4 | Avatar World ® | avatar_identity | partial_paid_surface_language |  | 4 | 0 |
+| 5 | AstroSage Kundli: AI Astrology | astrology_esoterics | partial_paid_surface_language |  | 4 | 0 |
+| 6 | NBA 2K Mobile Basketball Game | gaming | visible_price_context_uncertain | $20 | 4 | 0 |
+| 7 | Everskies: Virtual Dress up | avatar_identity | partial_paid_surface_language |  | 4 | 0 |
+| 8 | Mindfulness with Petit BamBou | mindfulness | partial_paid_surface_language |  | 4 | 0 |
+| 9 | Monster Girl Maker 2 | avatar_identity | visible_price_context_uncertain | $9 | 4 | 0 |
+| 10 | Monster Girl Maker | avatar_identity | visible_price_context_uncertain | $9 | 4 | 0 |
+
+**1. Character AI: Chat, Talk, Text.** сильный public-pricing сигнал, но нужен human product-match и paid-boundary signoff Upgrade: если price, product-match и paid-boundary подтверждены человеком, H2 получает stronger paid-surface support; если нет, сигнал остается public-pricing proxy.
+
+**2. Meditopia: Sleep & Meditation.** сильный public-pricing сигнал, но нужен human product-match и paid-boundary signoff Upgrade: если price, product-match и paid-boundary подтверждены человеком, H2 получает stronger paid-surface support; если нет, сигнал остается public-pricing proxy.
+
+**3. Carrom Pool: Disc Game.** слабый или смешанный public signal: использовать только как очередь для проверки, не как proof денег Upgrade: если human review не подтверждает product-match, убрать этот источник из H2 support или понизить до context-only.
+
+**4. Avatar World ®.** слабый или смешанный public signal: использовать только как очередь для проверки, не как proof денег Upgrade: если human review не подтверждает product-match, убрать этот источник из H2 support или понизить до context-only.
+
+**5. AstroSage Kundli: AI Astrology.** слабый или смешанный public signal: использовать только как очередь для проверки, не как proof денег Upgrade: если human review не подтверждает product-match, убрать этот источник из H2 support или понизить до context-only.
+
+Граница этого слоя: paid-flow dossier делает H2 проверяемой, но не заменяет human signoff. Пока completed slots равны нулю, деньги можно описывать как range/proxy-supported, а не как доказанную willingness-to-pay для Alina.
 
 ## 3. Конкурентная плотность: рынок большой, но не пустой
 
@@ -534,6 +563,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_narrative_evidence_map.csv`
 - `data_processed/russian_market_sizing_playbook.csv`
 - `data_processed/russian_market_deep_dives.csv`
+- `data_processed/russian_paid_flow_dossiers.csv`
 - `data_processed/russian_whitespace_decision_map.csv`
 - `data_processed/russian_claim_evidence_appendix.csv`
 - `data_processed/russian_source_provenance_index.csv`

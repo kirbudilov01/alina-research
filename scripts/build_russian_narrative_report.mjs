@@ -136,6 +136,7 @@ const validationGateCards = csv('data_processed/russian_validation_gate_cards.cs
 const p0ExecutionPacket = csv('data_processed/russian_p0_execution_packet.csv');
 const observedEvidenceLadder = csv('data_processed/russian_observed_evidence_ladder.csv');
 const p0WalkthroughDossiers = csv('data_processed/russian_p0_walkthrough_dossiers.csv');
+const paidFlowDossiers = csv('data_processed/russian_paid_flow_dossiers.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -262,6 +263,28 @@ if (marketDeepDives.length) {
     lines.push(`**${row.ru_name}.** ${row.role_ru}. Для Alina: ${row.alina_read_ru}. Evidence: ${row.cross_source_dedup_rows || 0} dedup rows, ${row.coverage_cells} coverage cells, ${row.audience_signal_rows} audience rows, ${row.reddit_signal_rows} Reddit/forum signals, ${row.top100_primary_competitors} top-100 primary competitors. Граница: ${row.boundary_ru}`);
     lines.push('');
   }
+}
+if (paidFlowDossiers.length) {
+  lines.push('## 2.2. Русские paid-flow dossiers');
+  lines.push('');
+  lines.push(`Чтобы H2 не держалась только на TAM/SAM/SOM, IAP и web-pricing proxy, добавлены paid-flow dossiers на ${paidFlowDossiers.length} продуктов. Они показывают, где есть public-pricing prefill, какие 4 скрина надо сохранить, как проверить product-match, где лежит first meaningful paywall boundary и когда H2 можно усилить или, наоборот, ослабить.`);
+  lines.push('');
+  lines.push(mdTable(paidFlowDossiers, [
+    { key: 'dossier_rank', label: '#' },
+    { key: 'app_name', label: 'Product' },
+    { key: 'market', label: 'Market' },
+    { key: 'visual_adjudication_prefill', label: 'Prefill' },
+    { key: 'price_evidence', label: 'Price' },
+    { key: 'required_slots_count', label: 'Slots', align: 'right' },
+    { key: 'completed_slots_count', label: 'Done', align: 'right' }
+  ], paidFlowDossiers.length));
+  lines.push('');
+  for (const row of paidFlowDossiers.slice(0, 5)) {
+    lines.push(`**${row.dossier_rank}. ${row.app_name}.** ${row.paid_signal_risk_ru} Upgrade: ${row.upgrade_rule_ru}`);
+    lines.push('');
+  }
+  lines.push('Граница этого слоя: paid-flow dossier делает H2 проверяемой, но не заменяет human signoff. Пока completed slots равны нулю, деньги можно описывать как range/proxy-supported, а не как доказанную willingness-to-pay для Alina.');
+  lines.push('');
 }
 lines.push('## 3. Конкурентная плотность: рынок большой, но не пустой');
 lines.push('');
@@ -600,6 +623,7 @@ lines.push('- `data_processed/reddit_manual_reading_capture_sheet.csv`');
 lines.push('- `data_processed/russian_narrative_evidence_map.csv`');
 lines.push('- `data_processed/russian_market_sizing_playbook.csv`');
 lines.push('- `data_processed/russian_market_deep_dives.csv`');
+lines.push('- `data_processed/russian_paid_flow_dossiers.csv`');
 lines.push('- `data_processed/russian_whitespace_decision_map.csv`');
 lines.push('- `data_processed/russian_claim_evidence_appendix.csv`');
 lines.push('- `data_processed/russian_source_provenance_index.csv`');
