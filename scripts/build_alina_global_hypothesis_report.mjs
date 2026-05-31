@@ -453,10 +453,10 @@ const sourceAppendix = [
   {
     claim_id: 'SRC_10_REPORT_READABILITY',
     report_section: 'Проверка складности и читаемости отчета',
-    claim_ru: 'Русский мировой отчет читается как последовательная гипотезная история, но остается плотным рабочим evidence pack.',
+    claim_ru: 'Русский мировой отчет читается как последовательная гипотезная история; для легкого чтения добавлена executive narrative версия.',
     evidence_status_ru: 'проверено редакционным аудитом, не market proof',
     primary_metric: `${reportReadabilityAudit.length} readability audit rows`,
-    evidence_files: 'data_processed/global_report_readability_audit.csv;docs/decision/global-report-readability-audit-v1.md',
+    evidence_files: 'data_processed/global_report_readability_audit.csv;docs/decision/global-report-readability-audit-v1.md;reports/alina-global-executive-narrative-v1.md;output/pdf/alina-global-executive-narrative-v1.pdf',
     source_boundary_ru: 'Readability audit оценивает форму и ясность текста; он не доказывает рыночные или продуктовые claims.'
   }
 ];
@@ -897,6 +897,8 @@ if (reportReadabilityAudit.length) {
   lines.push('');
   lines.push('Отдельно проверено, складно ли текущая версия читается как русский мировой отчет, а не как случайная выгрузка таблиц. Вывод такой: логика гипотез уже держится, счетчики по нишам видны, границы доказательств прописаны, но документ остается плотным рабочим evidence pack. Для внешней версии позже нужен облегченный executive narrative, а тяжелые таблицы лучше вынести в appendix.');
   lines.push('');
+  lines.push('Поэтому рядом с полным отчетом теперь собирается короткая executive-версия: `reports/alina-global-executive-narrative-v1.md` и `output/pdf/alina-global-executive-narrative-v1.pdf`. Ее задача - дать последовательное чтение без потери claim boundaries; полный отчет остается evidence pack и источником таблиц.');
+  lines.push('');
   lines.push(mdTable(reportReadabilityAudit.map(row => ({
     area: row.report_area_ru,
     status: row.readability_status_ru,
@@ -941,7 +943,9 @@ lines.push('');
 lines.push('## Локальные файлы');
 lines.push('');
 lines.push('- `reports/alina-global-hypothesis-report-v1.md`');
+lines.push('- `reports/alina-global-executive-narrative-v1.md`');
 lines.push('- `output/pdf/alina-global-hypothesis-report-v1.pdf`');
+lines.push('- `output/pdf/alina-global-executive-narrative-v1.pdf`');
 lines.push('- `data_processed/global_hypothesis_source_appendix.csv`');
 lines.push('- `data_processed/global_hypothesis_validation_questionnaire.csv`');
 lines.push('- `data_processed/global_hypothesis_gate_snapshot.csv`');
