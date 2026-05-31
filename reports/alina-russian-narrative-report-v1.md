@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T11:37:20.901Z
+Собрано: 2026-05-31T11:42:57.219Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 384 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 387 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 384 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 387 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -154,7 +154,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 | REQ_06_AUDIENCE_ICP | directionally_supported_recruiting_ready | medium | Segments and recruiting assets are directional and need actual interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | polished_and_russian_narrative_argument_map_done_not_validated_final | medium_high | Polished evidence PDF, Russian narrative PDF, and Russian argument map exist as publication-ready drafts, but they are not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
-| REQ_09_VERSIONING_PROVENANCE | partial | high | Manifest must be regenerated after future evidence changes. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | Manifest must be regenerated after future evidence changes. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
 ## 9. Следующие действия
@@ -248,6 +248,25 @@ Product-core evidence и prototype stimulus переводят исследов�
 | H6_product_core_defined | поддержано направленно, но не финально доказано | medium | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | Нельзя считать продуктовое преимущество доказанным без prototype sessions и observed scorecard. |
 | REQ_final_artifacts_versioned | доказано как исследовательский слой | high | current branch pushed through latest commit | Это provenance proof, а не содержательное доказательство спроса. |
 
+## 9.6. Source provenance index
+
+Чтобы было понятно, откуда берутся источники и какие слои можно цитировать, добавлен provenance index на 16 строк. Он связывает manifest, source-reference artifacts, market source registry и source discovery. Важно: provenance доказывает трассируемость данных, но не превращает proxy в финальное доказательство спроса.
+
+| ID | Слой / источник | Rows | Source refs | Граница |
+| --- | --- | ---: | ---: | --- |
+| PROV_001 | Локальный манифест артефактов | 387 | 224356 | Manifest доказывает наличие и форму файлов, но не доказывает, что рынок купит продукт или что гипотеза валидирована. |
+| PROV_002 | Raw/processed source-reference слой | 67 | 224356 | Source refs показывают provenance, но не заменяют ручную проверку качества страницы, скриншота, onboarding flow или participant quote. |
+| PROV_003 | Market source registry для TAM/SAM/SOM | 12 | 12 | Часть market report pages paywalled или broad-category; использовать как диапазоны и proxy, не как прогноз выручки Alina. |
+| PROV_004 | Research source discovery | 12 | 12 | Discovery row не равен подтвержденному источнику; claim можно усиливать только после extraction/confidence review. |
+| SRC_SRC-MKT-0001 | gaming / market_forecast_page | 1 | 1 | Use as cross-check, not sole source. |
+| SRC_SRC-MKT-0002 | gaming / analyst_pdf | 1 | 1 | Useful for monetization and distribution, not full Alina direct TAM. |
+| SRC_SRC-MKT-0003 | mindfulness / market_report_page | 1 | 1 | Good direct category anchor; methodology paywalled. |
+| SRC_SRC-MKT-0004 | avatar_identity / market_report_page | 1 | 1 | Broad enterprise+consumer market; must discount for consumer self-improvement/avatar app use case. |
+| SRC_SRC-MKT-0005 | coaching / industry_pdf | 1 | 1 | Trend anchor; needs separate TAM/revenue source. |
+| SRC_SRC-MKT-0006 | astrology_esoterics / market_report_page | 1 | 1 | Need direct values and cross-checks from multiple astrology sources. |
+| SRC_SRC-MKT-0007 | astrology_esoterics / market_report_page | 1 | 1 | High estimate anchor; likely broad definition. |
+| SRC_SRC-MKT-0008 | astrology_esoterics / market_report_page | 1 | 1 | Large CAGR; use for range only. |
+
 ## 10. Финальный текущий verdict
 
 Текущий verdict: продолжать, но не переобещать. Alina выглядит как исследовательски перспективная ставка на стыке digital ritual, self-improvement, reset и identity/progress feedback. Самая сильная формулировка возможности: не универсальный комбайн, а короткая ежедневная трансформационная петля, где действие меняет видимый образ прогресса. Самая большая опасность: сделать слишком широкий продукт, который будет одновременно слабым meditation app, слабым habit tracker, слабым astrology app и слабым avatar toy. Поэтому следующий этап должен быть не расширением ради расширения, а жесткой проверкой центральной петли на реальных конкурентных экранах и реальных людях.
@@ -262,6 +281,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_narrative_evidence_map.csv`
 - `data_processed/russian_market_deep_dives.csv`
 - `data_processed/russian_claim_evidence_appendix.csv`
+- `data_processed/russian_source_provenance_index.csv`
 - `data_processed/russian_validation_fieldbook.csv`
 - `data_processed/validation_tranche_planner.csv`
 - `data_processed/validation_tranche_briefing_index.csv`

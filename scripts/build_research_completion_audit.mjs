@@ -136,6 +136,7 @@ const russianValidationFieldbook = csv('data_processed/russian_validation_fieldb
 const researchNavigationIndex = csv('data_processed/research_navigation_index.csv');
 const russianMarketDeepDives = csv('data_processed/russian_market_deep_dives.csv');
 const russianClaimAppendix = csv('data_processed/russian_claim_evidence_appendix.csv');
+const russianSourceProvenance = csv('data_processed/russian_source_provenance_index.csv');
 const validationWorkspace = csv('data_processed/validation_evidence_workspace_index.csv');
 const validationBatch01 = csv('data_processed/validation_batch_01_index.csv');
 const validationBatch02 = csv('data_processed/validation_batch_02_index.csv');
@@ -307,8 +308,8 @@ const requirements = [
     objective_source: 'User ultimately wanted a huge PDF report.',
     status: polishedPdfExists && russianNarrativePdfExists && russianNarrativeMapExists ? 'polished_and_russian_narrative_argument_map_done_not_validated_final' : (polishedPdfExists && russianNarrativePdfExists ? 'polished_and_russian_narrative_drafts_done_not_validated_final' : (polishedPdfExists ? 'polished_evidence_draft_done_not_validated_final' : (fs.existsSync('output/pdf/alina-evidence-first-report-draft.pdf') ? 'draft_done_not_polished_final' : 'missing'))),
     evidence_strength: 'medium_high',
-    proof: `report_md=${fs.existsSync('reports/alina-evidence-first-report-draft.md')}; evidence_pdf=${fs.existsSync('output/pdf/alina-evidence-first-report-draft.pdf')}; visual_pdf=${fs.existsSync('output/pdf/alina-evidence-visual-report-v1.pdf')}; polished_evidence_pack_pdf=${polishedPdfExists}; polished_evidence_pack_doc=${polishedPdfDocExists}; russian_narrative_report=${russianNarrativeReportExists}; russian_narrative_pdf=${russianNarrativePdfExists}; russian_narrative_map=${russianNarrativeMapExists}; russian_market_deep_dive_rows=${russianMarketDeepDives.length}; russian_claim_appendix_rows=${russianClaimAppendix.length}`,
-    evidence_files: 'reports/alina-evidence-first-report-draft.md;reports/alina-russian-narrative-report-v1.md;data_processed/russian_narrative_evidence_map.csv;data_processed/russian_market_deep_dives.csv;data_processed/russian_claim_evidence_appendix.csv;docs/decision/russian-narrative-evidence-map-v1.md;docs/market/russian-market-deep-dives-v1.md;docs/decision/russian-claim-evidence-appendix-v1.md;output/pdf/alina-evidence-first-report-draft.pdf;output/pdf/alina-evidence-visual-report-v1.pdf;output/pdf/alina-polished-evidence-pack-v1.pdf;output/pdf/alina-russian-narrative-report-v1.pdf;docs/decision/polished-evidence-pack-v1.md',
+    proof: `report_md=${fs.existsSync('reports/alina-evidence-first-report-draft.md')}; evidence_pdf=${fs.existsSync('output/pdf/alina-evidence-first-report-draft.pdf')}; visual_pdf=${fs.existsSync('output/pdf/alina-evidence-visual-report-v1.pdf')}; polished_evidence_pack_pdf=${polishedPdfExists}; polished_evidence_pack_doc=${polishedPdfDocExists}; russian_narrative_report=${russianNarrativeReportExists}; russian_narrative_pdf=${russianNarrativePdfExists}; russian_narrative_map=${russianNarrativeMapExists}; russian_market_deep_dive_rows=${russianMarketDeepDives.length}; russian_claim_appendix_rows=${russianClaimAppendix.length}; russian_source_provenance_rows=${russianSourceProvenance.length}`,
+    evidence_files: 'reports/alina-evidence-first-report-draft.md;reports/alina-russian-narrative-report-v1.md;data_processed/russian_narrative_evidence_map.csv;data_processed/russian_market_deep_dives.csv;data_processed/russian_claim_evidence_appendix.csv;data_processed/russian_source_provenance_index.csv;docs/decision/russian-narrative-evidence-map-v1.md;docs/market/russian-market-deep-dives-v1.md;docs/decision/russian-claim-evidence-appendix-v1.md;docs/decision/russian-source-provenance-index-v1.md;output/pdf/alina-evidence-first-report-draft.pdf;output/pdf/alina-evidence-visual-report-v1.pdf;output/pdf/alina-polished-evidence-pack-v1.pdf;output/pdf/alina-russian-narrative-report-v1.pdf;docs/decision/polished-evidence-pack-v1.md',
     remaining_gap: 'Polished evidence PDF, Russian narrative PDF, and Russian argument map exist as publication-ready drafts, but they are not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open.',
     next_action: 'After manual inspection and prototype sessions, update the pack with validated screenshots, scorecards, and final claim statuses.'
   },
@@ -318,8 +319,8 @@ const requirements = [
     objective_source: 'User asked to save data locally, commit, and push so work is not lost.',
     status: manifest.length && manifestMissing === 0 ? 'proved_active' : 'partial',
     evidence_strength: 'high',
-    proof: `manifest_rows=${manifest.length}; missing_manifest=${manifestMissing}; git_versioned=active`,
-    evidence_files: 'data_processed/evidence_artifact_manifest.csv;docs/decision/evidence-package-manifest-v1.md;git log',
+    proof: `manifest_rows=${manifest.length}; missing_manifest=${manifestMissing}; russian_source_provenance_rows=${russianSourceProvenance.length}; git_versioned=active`,
+    evidence_files: 'data_processed/evidence_artifact_manifest.csv;data_processed/russian_source_provenance_index.csv;docs/decision/evidence-package-manifest-v1.md;docs/decision/russian-source-provenance-index-v1.md;git log',
     remaining_gap: 'Manifest must be regenerated after future evidence changes.',
     next_action: 'Regenerate manifest and commit after each major layer.'
   },

@@ -126,6 +126,7 @@ const trancheBriefings = csv('data_processed/validation_tranche_briefing_index.c
 const navigationIndex = csv('data_processed/research_navigation_index.csv');
 const marketDeepDives = csv('data_processed/russian_market_deep_dives.csv');
 const claimAppendix = csv('data_processed/russian_claim_evidence_appendix.csv');
+const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -377,6 +378,20 @@ if (claimAppendix.length) {
   ], claimAppendix.length));
   lines.push('');
 }
+if (sourceProvenance.length) {
+  lines.push('## 9.6. Source provenance index');
+  lines.push('');
+  lines.push(`Чтобы было понятно, откуда берутся источники и какие слои можно цитировать, добавлен provenance index на ${sourceProvenance.length} строк. Он связывает manifest, source-reference artifacts, market source registry и source discovery. Важно: provenance доказывает трассируемость данных, но не превращает proxy в финальное доказательство спроса.`);
+  lines.push('');
+  lines.push(mdTable(sourceProvenance, [
+    { key: 'provenance_id', label: 'ID' },
+    { key: 'source_family_ru', label: 'Слой / источник' },
+    { key: 'row_count', label: 'Rows', align: 'right' },
+    { key: 'source_ref_rows', label: 'Source refs', align: 'right' },
+    { key: 'boundary_ru', label: 'Граница' }
+  ], 12));
+  lines.push('');
+}
 lines.push('## 10. Финальный текущий verdict');
 lines.push('');
 lines.push('Текущий verdict: продолжать, но не переобещать. Alina выглядит как исследовательски перспективная ставка на стыке digital ritual, self-improvement, reset и identity/progress feedback. Самая сильная формулировка возможности: не универсальный комбайн, а короткая ежедневная трансформационная петля, где действие меняет видимый образ прогресса. Самая большая опасность: сделать слишком широкий продукт, который будет одновременно слабым meditation app, слабым habit tracker, слабым astrology app и слабым avatar toy. Поэтому следующий этап должен быть не расширением ради расширения, а жесткой проверкой центральной петли на реальных конкурентных экранах и реальных людях.');
@@ -391,6 +406,7 @@ lines.push('- `data_processed/reddit_manual_reading_capture_sheet.csv`');
 lines.push('- `data_processed/russian_narrative_evidence_map.csv`');
 lines.push('- `data_processed/russian_market_deep_dives.csv`');
 lines.push('- `data_processed/russian_claim_evidence_appendix.csv`');
+lines.push('- `data_processed/russian_source_provenance_index.csv`');
 lines.push('- `data_processed/russian_validation_fieldbook.csv`');
 lines.push('- `data_processed/validation_tranche_planner.csv`');
 lines.push('- `data_processed/validation_tranche_briefing_index.csv`');

@@ -177,6 +177,7 @@ const validationGateStatusSummary = csv('data_processed/validation_gate_status_s
 const researchNavigationIndex = csv('data_processed/research_navigation_index.csv');
 const russianMarketDeepDives = csv('data_processed/russian_market_deep_dives.csv');
 const russianClaimAppendix = csv('data_processed/russian_claim_evidence_appendix.csv');
+const russianSourceProvenance = csv('data_processed/russian_source_provenance_index.csv');
 const manualWalkthroughCapture = csv('data_processed/manual_walkthrough_capture_sheet.csv');
 const paidFlowCapture = csv('data_processed/paid_flow_capture_sheet.csv');
 const icpInterviewCapture = csv('data_processed/icp_interview_capture_sheet.csv');
@@ -339,7 +340,7 @@ report.push(`- Reddit manual-read routing: ${redditManualReadingQueue.length} un
 report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, web paywall discovery, and forum quote coding.');
 report.push('- Visual PDF companion: native ReportLab charts embedded in a separate visual report.');
 report.push(`- Polished evidence pack: ${fs.existsSync('output/pdf/alina-polished-evidence-pack-v1.pdf') ? 'generated as a publication-ready evidence draft with validation caveats' : 'not generated yet'}.`);
-report.push(`- Russian narrative report: ${fs.existsSync('output/pdf/alina-russian-narrative-report-v1.pdf') ? 'generated as a sequential Russian-language narrative PDF' : 'not generated yet'}; argument map: ${fs.existsSync('data_processed/russian_narrative_evidence_map.csv') ? 'generated' : 'not generated yet'}; Russian market deep dives: ${russianMarketDeepDives.length} market rows; Russian claim appendix: ${russianClaimAppendix.length} claim rows; Russian fieldbook: ${fs.existsSync('data_processed/russian_validation_fieldbook.csv') ? 'generated' : 'not generated yet'}.`);
+report.push(`- Russian narrative report: ${fs.existsSync('output/pdf/alina-russian-narrative-report-v1.pdf') ? 'generated as a sequential Russian-language narrative PDF' : 'not generated yet'}; argument map: ${fs.existsSync('data_processed/russian_narrative_evidence_map.csv') ? 'generated' : 'not generated yet'}; Russian market deep dives: ${russianMarketDeepDives.length} market rows; Russian claim appendix: ${russianClaimAppendix.length} claim rows; Russian source provenance: ${russianSourceProvenance.length} provenance rows; Russian fieldbook: ${fs.existsSync('data_processed/russian_validation_fieldbook.csv') ? 'generated' : 'not generated yet'}.`);
 report.push(`- Modeled direct intersection SAM base: USD ${baseIntersection.samBase || 'n/a'}.`);
 report.push('');
 report.push('## 2. Product Hypotheses');
@@ -1871,6 +1872,7 @@ status.push(mdTable([
   { requirement: 'Market-money triangulation', evidence: 'data_processed/market_money_triangulation.csv; data_processed/market_money_triangulation_summary.csv; docs/market/market-money-triangulation-v1.md', status: `done v1; ${marketMoneyTriangulation.length} market rows triangulate TAM/SAM/SOM, monetization proxy, competitor revenue proxy, paywall screenshots, and H2 gate status` },
   { requirement: 'Russian five-market deep dives', evidence: 'data_processed/russian_market_deep_dives.csv; docs/market/russian-market-deep-dives-v1.md; reports/alina-russian-narrative-report-v1.md', status: `done v1; ${russianMarketDeepDives.length} Russian market-by-market rows connect TAM/SAM, coverage, saturation, money, audience, and validation boundaries` },
   { requirement: 'Russian claim evidence appendix', evidence: 'data_processed/russian_claim_evidence_appendix.csv; docs/decision/russian-claim-evidence-appendix-v1.md; reports/alina-russian-narrative-report-v1.md', status: `done v1; ${russianClaimAppendix.length} claim rows connect status, confidence, metrics, boundaries, source files, and next actions` },
+  { requirement: 'Russian source provenance index', evidence: 'data_processed/russian_source_provenance_index.csv; docs/decision/russian-source-provenance-index-v1.md; reports/alina-russian-narrative-report-v1.md', status: `done v1; ${russianSourceProvenance.length} provenance rows connect manifest, source refs, market source registry, and discovery/backlog boundaries` },
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
   { requirement: 'ICP / audience segment matrix', evidence: 'data_processed/icp_segment_matrix.csv; docs/audience/icp-segment-matrix-v1.md', status: 'done v1; maps audience/review/forum/monetization evidence into testable ICP hypotheses' },
@@ -1879,7 +1881,7 @@ status.push(mdTable([
   { requirement: 'Prototype validation stimulus', evidence: 'data_processed/prototype_validation_stimulus_flow.csv; data_processed/prototype_validation_scorecard.csv; docs/product/prototype-validation-stimulus-v1.md', status: 'done v1; two-minute loop stimulus, top-ICP comparison flow, and success/kill metrics ready; participant results pending' },
   { requirement: 'Versioned on GitHub', evidence: 'git log through current commit after push', status: 'active' },
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft evidence PDF and visual PDF companion done' },
-  { requirement: 'Russian narrative document', evidence: 'reports/alina-russian-narrative-report-v1.md; output/pdf/alina-russian-narrative-report-v1.pdf; data_processed/russian_narrative_evidence_map.csv; data_processed/russian_market_deep_dives.csv; data_processed/russian_claim_evidence_appendix.csv; docs/decision/russian-narrative-evidence-map-v1.md; docs/market/russian-market-deep-dives-v1.md; docs/decision/russian-claim-evidence-appendix-v1.md', status: 'done v1; sequential Russian-language narrative report, argument map, five-market deep dives, and claim evidence appendix generated from evidence warehouse' },
+  { requirement: 'Russian narrative document', evidence: 'reports/alina-russian-narrative-report-v1.md; output/pdf/alina-russian-narrative-report-v1.pdf; data_processed/russian_narrative_evidence_map.csv; data_processed/russian_market_deep_dives.csv; data_processed/russian_claim_evidence_appendix.csv; data_processed/russian_source_provenance_index.csv; docs/decision/russian-narrative-evidence-map-v1.md; docs/market/russian-market-deep-dives-v1.md; docs/decision/russian-claim-evidence-appendix-v1.md; docs/decision/russian-source-provenance-index-v1.md', status: 'done v1; sequential Russian-language narrative report, argument map, five-market deep dives, claim evidence appendix, and source provenance index generated from evidence warehouse' },
   { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft chart pack and embedded visual PDF done' },
   { requirement: 'Evidence audit / claim register', evidence: 'data_processed/evidence_claim_register.csv; docs/decision/evidence-audit-v1.md', status: 'done v1; proof status, confidence, gaps, and next actions explicit' },
   { requirement: 'Evidence package manifest', evidence: 'data_processed/evidence_artifact_manifest.csv; docs/decision/evidence-package-manifest-v1.md', status: 'done v1; tracks key artifacts with row counts, source-reference coverage, sizes, and short hashes' },
@@ -1933,6 +1935,7 @@ console.log(`completion_audit_rows=${completionAudit.length}`);
 console.log(`research_navigation_rows=${researchNavigationIndex.length}`);
 console.log(`russian_market_deep_dive_rows=${russianMarketDeepDives.length}`);
 console.log(`russian_claim_appendix_rows=${russianClaimAppendix.length}`);
+console.log(`russian_source_provenance_rows=${russianSourceProvenance.length}`);
 console.log(`hypothesis_decision_rows=${hypothesisDecisions.length}`);
 console.log(`p0_command_rows=${p0CommandCenter.length}`);
 console.log(`p0_field_guide_sections=${p0FieldGuide.length}`);
