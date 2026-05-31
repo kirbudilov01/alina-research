@@ -1,6 +1,6 @@
 # P0 Validation Command Center V1
 
-Generated: 2026-05-31T07:53:04.295Z
+Generated: 2026-05-31T08:18:33.619Z
 
 ## Purpose
 
@@ -31,7 +31,7 @@ Rows by priority:
 
 | Command | Priority | Lane | Target | Hypotheses | Next Action |
 | --- | --- | --- | --- | --- | --- |
-| P0_MANUAL_01 | P0_blocker | manual_competitor_walkthrough | Shepherd: Spiritual Bible BFF | H1<br>H3 | Open app/listing, capture required screenshots, answer: Does onboarding show one coherent daily loop or separate feature shelves?<br>Is there a personal meaning prompt before the action?<br>Is there one concrete action that can be completed in under two minutes?<br>Does completion causally change avatar/identity/progress feedback?<br>Is paywall before or after firs... |
+| P0_MANUAL_01 | P0_blocker | manual_competitor_walkthrough | Shepherd: Spiritual Bible BFF | H1<br>H3 | Open app/listing, capture required screenshots, answer: Does onboarding show one coherent daily loop or separate feature shelves?<br>Is there a personal meaning prompt before the action?<br>Is there one concrete action that can be completed in under two minutes?<br>Does completion causally change avatar/identity/progress feedback?<br>Is paywall before or after first meaningful value?<br>Would this invalidate Alina whitespace by being a hidden direct clone? |
 | P0_SCORE_PVS_M01 | P0_blocker | prototype_scorecard_gate | comprehension | H4<br>H6 | After prototype sessions, calculate metric and update gate verdict. |
 | P0_SCORE_PVS_M04 | P0_blocker | prototype_scorecard_gate | differentiation | H4<br>H6 | After prototype sessions, calculate metric and update gate verdict. |
 | P0_SCORE_PVS_M05 | P0_blocker | prototype_scorecard_gate | trust_safety | H4<br>H6 | After prototype sessions, calculate metric and update gate verdict. |

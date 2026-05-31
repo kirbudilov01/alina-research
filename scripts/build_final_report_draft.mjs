@@ -141,6 +141,7 @@ const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv')
 const p0CommandCenter = csv('data_processed/p0_validation_command_center.csv');
 const p0FieldGuide = csv('data_processed/p0_validation_field_guide.csv');
 const validationWorkspace = csv('data_processed/validation_evidence_workspace_index.csv');
+const validationBatch01 = csv('data_processed/validation_batch_01_index.csv');
 const manualWalkthroughCapture = csv('data_processed/manual_walkthrough_capture_sheet.csv');
 const paidFlowCapture = csv('data_processed/paid_flow_capture_sheet.csv');
 const icpInterviewCapture = csv('data_processed/icp_interview_capture_sheet.csv');
@@ -257,6 +258,7 @@ report.push(`- H1-H6 hypothesis decision matrix: ${hypothesisDecisions.length} r
 report.push(`- P0 validation command center: ${p0CommandCenter.length} operator rows; ${p0CommandBlockers.length} blocker rows and ${p0CommandRows.length} P0 rows.`);
 report.push(`- P0 validation field guide: ${p0FieldGuide.length} script/protocol sections for walkthroughs, paid-flow signoff, ICP interviews, prototype sessions, and rebuild/commit hygiene.`);
 report.push(`- Validation evidence workspace: ${validationWorkspace.length} lane folders/index rows with local templates for screenshots, notes, quotes, and scorecard calculations.`);
+report.push(`- Validation Batch 01: ${validationBatch01.length} prefilled blocker-note files ready for first observed validation tranche.`);
 report.push(`- Validation capture sheets: ${validationCaptureRows} fillable capture rows across manual walkthrough, paid-flow, ICP interview, and prototype-session evidence.`);
 report.push(`- Market source confidence review: ${marketSourceConfidence.length} sources graded; ${highUseMarketSources.length} high-use anchors and ${rangeOnlyMarketSources.length} range-only/context sources.`);
 report.push(`- Market sizing stress test: ${marketAssumptionAudit.length} assumption-risk rows and ${marketStressTest.length} bottom-up stress scenarios.`);
@@ -396,8 +398,22 @@ if (validationWorkspace.length) {
   ], validationWorkspace.length));
   report.push('');
 }
+if (validationBatch01.length) {
+  report.push('## 2G. Validation Batch 01');
+  report.push('');
+  report.push('Batch 01 pre-creates note files for every P0 blocker command. These notes are the first files to fill before H1/H3/H4/H6 can be upgraded, downgraded, or killed.');
+  report.push('');
+  report.push(mdTable(validationBatch01, [
+    { key: 'batch_rank', label: '#', align: 'right' },
+    { key: 'command_id', label: 'Command' },
+    { key: 'lane', label: 'Lane' },
+    { key: 'target', label: 'Target' },
+    { key: 'note_path', label: 'Note Path' }
+  ], validationBatch01.length));
+  report.push('');
+}
 if (evidenceManifest.length) {
-  report.push('## 2G. Evidence Package Manifest');
+  report.push('## 2H. Evidence Package Manifest');
   report.push('');
   report.push('The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.');
   report.push('');
@@ -418,7 +434,7 @@ if (evidenceManifest.length) {
   report.push('');
 }
 if (completionAudit.length) {
-  report.push('## 2H. Research Completion Audit');
+  report.push('## 2I. Research Completion Audit');
   report.push('');
   report.push('The completion audit maps the original objective to current proof. It is intentionally conservative: several requirements are strong enough for continued validation, but not yet final enough to call the whole goal complete.');
   report.push('');
@@ -438,7 +454,7 @@ if (completionAudit.length) {
   report.push('');
 }
 if (validationGapRoadmap.length) {
-  report.push('## 2I. Validation Gap Roadmap');
+  report.push('## 2J. Validation Gap Roadmap');
   report.push('');
   report.push('The research now includes a validation roadmap that turns current evidence gaps into explicit success gates. This keeps the project honest: a claim is not final merely because a table exists.');
   report.push('');
@@ -1349,6 +1365,7 @@ report.push('- `docs/decision/hypothesis-decision-matrix-v1.md`');
 report.push('- `docs/decision/p0-validation-command-center-v1.md`');
 report.push('- `docs/decision/p0-validation-field-guide-v1.md`');
 report.push('- `docs/decision/validation-evidence-workspace-v1.md`');
+report.push('- `docs/decision/validation-batch-01-v1.md`');
 report.push('- `docs/decision/validation-gap-roadmap-v1.md`');
 report.push('- `docs/decision/validation-execution-dashboard-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
@@ -1364,6 +1381,7 @@ report.push('- `data_processed/hypothesis_decision_matrix.csv`');
 report.push('- `data_processed/p0_validation_command_center.csv`');
 report.push('- `data_processed/p0_validation_field_guide.csv`');
 report.push('- `data_processed/validation_evidence_workspace_index.csv`');
+report.push('- `data_processed/validation_batch_01_index.csv`');
 report.push('- `data_processed/source_expansion_backlog.csv`');
 report.push('- `data_processed/p0_external_source_summary.csv`');
 report.push('- `data_processed/itch_source_summary.csv`');
@@ -1462,6 +1480,7 @@ status.push(mdTable([
   { requirement: 'P0 validation command center', evidence: 'data_processed/p0_validation_command_center.csv; docs/decision/p0-validation-command-center-v1.md', status: `done v1; ${p0CommandCenter.length} operator rows turn open gates into exact evidence capture commands` },
   { requirement: 'P0 validation field guide', evidence: 'data_processed/p0_validation_field_guide.csv; docs/decision/p0-validation-field-guide-v1.md', status: `done v1; ${p0FieldGuide.length} scripts/protocol sections make P0 execution repeatable` },
   { requirement: 'Validation evidence workspace', evidence: 'data_processed/validation_evidence_workspace_index.csv; docs/decision/validation-evidence-workspace-v1.md; output/validation/README.md; output/validation/templates/*.md', status: `done v1; ${validationWorkspace.length} lane workspaces and note templates created for observed evidence intake` },
+  { requirement: 'Validation Batch 01', evidence: 'data_processed/validation_batch_01_index.csv; docs/decision/validation-batch-01-v1.md; output/validation/2026-05-31/*/batch01_*.md', status: `done v1; ${validationBatch01.length} blocker notes prefilled for first validation tranche` },
   { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; docs/market/competitor-revenue-proxy-review-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv; data_processed/competitor_revenue_proxy_review.csv; data_processed/competitor_revenue_proxy_market_summary.csv', status: 'done v1; source confidence, market monetization proxy, and bottom-up competitor revenue proxy layers added; model remains range-based and not final forecast' },
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
@@ -1522,6 +1541,7 @@ console.log(`hypothesis_decision_rows=${hypothesisDecisions.length}`);
 console.log(`p0_command_rows=${p0CommandCenter.length}`);
 console.log(`p0_field_guide_sections=${p0FieldGuide.length}`);
 console.log(`validation_workspace_lanes=${validationWorkspace.length}`);
+console.log(`validation_batch01_rows=${validationBatch01.length}`);
 console.log(`source_expansion_backlog_rows=${sourceExpansionBacklog.length}`);
 console.log(`p0_external_rows=${p0ExternalSources.length}`);
 console.log(`p0_external_usable=${p0ExternalUsable.length}`);

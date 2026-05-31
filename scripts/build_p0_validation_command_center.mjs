@@ -60,7 +60,7 @@ function csv(file) {
 }
 
 function writeCsv(file, rows, headers) {
-  fs.writeFileSync(file, [headers.join(','), ...rows.map(row => headers.map(h => csvEscape(row[h])).join(','))].join('\n'));
+  fs.writeFileSync(file, `${[headers.join(','), ...rows.map(row => headers.map(h => csvEscape(row[h])).join(','))].join('\n')}\n`);
 }
 
 function mdTable(rows, columns, limit = rows.length) {
@@ -149,7 +149,7 @@ for (const app of manual) {
     capture_slot_or_metric: 'listing|onboarding|first_action|progress_avatar_identity_feedback|paywall_boundary',
     source_url: app.app_store_url,
     current_evidence_read: `${listing.public_listing_verdict || app.competitive_verdict_prefill}; causality=${listing.action_to_avatar_causality_public_read || app.behavior_tied_progression_prefill}; hidden_clone_risk=${listing.hidden_clone_risk_public_read || 'unknown'}`,
-    next_operator_action: `Open app/listing, capture required screenshots, answer: ${truncate(app.core_inspection_questions, 300)}`,
+    next_operator_action: `Open app/listing, capture required screenshots, answer: ${app.core_inspection_questions}`,
     notes_field_to_fill: 'captured_screenshot_paths|inspector_notes|final_verdict_after_inspection'
   });
 }
@@ -226,7 +226,7 @@ for (const screen of prototype.filter(row => ['ICP_A', 'ICP_D'].includes(row.seg
     capture_slot_or_metric: screen.screen_id,
     source_url: '',
     current_evidence_read: `${screen.screen_name}; max_seconds=${screen.max_seconds}; question=${screen.test_question}`,
-    next_operator_action: `${screen.user_action} Copy shown: ${truncate(screen.prototype_copy, 180)}`,
+    next_operator_action: `${screen.user_action} Copy shown: ${screen.prototype_copy}`,
     notes_field_to_fill: 'completion_time_seconds|comprehension_yes_no|meaning_lift_1_5|differentiation_1_5|return_intent_1_5|verbatim_quote'
   });
 }

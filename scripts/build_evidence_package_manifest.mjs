@@ -223,6 +223,7 @@ const requiredArtifacts = [
   'data_processed/p0_validation_command_center.csv',
   'data_processed/p0_validation_field_guide.csv',
   'data_processed/validation_evidence_workspace_index.csv',
+  'data_processed/validation_batch_01_index.csv',
   'data_processed/manual_walkthrough_capture_sheet.csv',
   'data_processed/paid_flow_capture_sheet.csv',
   'data_processed/icp_interview_capture_sheet.csv',
@@ -233,7 +234,8 @@ const requiredArtifacts = [
   'output/pdf/alina-evidence-visual-report-v1.pdf',
   'output/pdf/alina-polished-evidence-pack-v1.pdf',
   'output/validation/README.md',
-  'output/validation/templates/generic-validation-note-template.md'
+  'output/validation/templates/generic-validation-note-template.md',
+  'docs/decision/validation-batch-01-v1.md'
 ];
 
 const discoveredArtifacts = [
