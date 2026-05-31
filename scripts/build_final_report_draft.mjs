@@ -106,6 +106,7 @@ const evidenceAudit = csv('data_processed/evidence_claim_register.csv');
 const sourceExpansionBacklog = csv('data_processed/source_expansion_backlog.csv');
 const p0ExternalSources = csv('data_raw/expanded/p0_external_sources_raw.csv');
 const p0ExternalSummary = csv('data_processed/p0_external_source_summary.csv');
+const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv');
 
 const highWhitespace = whitespace.filter(r => r.whitespace_band === 'high').length;
 const mediumWhitespace = whitespace.filter(r => r.whitespace_band === 'medium').length;
@@ -129,6 +130,9 @@ const webPaywallScreenshotQueue = webPaywallSignals.filter(r => r.needs_screensh
 const webPaywallCapturedScreenshots = webPaywallScreenshots.filter(r => r.screenshot_status === 'captured');
 const confirmedPublicPricingScreenshots = webPaywallScreenshotInterpretation.filter(r => r.screenshot_interpretation_verdict === 'confirms_public_pricing_signal');
 const p0ExternalUsable = p0ExternalSources.filter(r => r.collection_status === 'ok');
+const chromeExtensionDetailOk = chromeExtensionFit.filter(r => r.detail_status === 'ok');
+const chromeExtensionStrong = chromeExtensionFit.filter(r => r.alina_fit_band === 'strong_adjacent');
+const chromeExtensionUseful = chromeExtensionFit.filter(r => r.alina_fit_band === 'useful_adjacent');
 
 const report = [];
 
@@ -158,6 +162,7 @@ report.push(`- Web paywall OCR interpretation: ${webPaywallScreenshotInterpretat
 report.push(`- Evidence audit register: ${evidenceAudit.length} claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.`);
 report.push(`- Source expansion backlog: ${sourceExpansionBacklog.length} prioritized collector/source tasks for the next move toward a 30k-50k raw universe.`);
 report.push(`- Controlled P0 external-source smoke pass: ${p0ExternalSources.length} rows, ${p0ExternalUsable.length} usable candidates, with search-engine-heavy expansion intentionally deferred.`);
+report.push(`- Chrome extension detail enrichment: ${chromeExtensionDetailOk.length}/${chromeExtensionFit.length} detail pages parsed; ${chromeExtensionStrong.length} strong and ${chromeExtensionUseful.length} useful adjacent mechanic references.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
@@ -244,6 +249,28 @@ if (p0ExternalSources.length) {
     { key: 'markets', label: 'Markets' },
     { key: 'top_examples', label: 'Examples' }
   ], p0ExternalSummary.length));
+  report.push('');
+}
+if (chromeExtensionFit.length) {
+  report.push('### Chrome Extension Detail Enrichment');
+  report.push('');
+  report.push('The Chrome Web Store smoke-pass candidates were enriched from their own detail pages only. This creates a small, higher-quality browser-mechanic reference layer without broad search expansion.');
+  report.push('');
+  report.push('Fit band mix:');
+  report.push('');
+  report.push(bulletCounts(countBy(chromeExtensionFit, 'alina_fit_band')));
+  report.push('');
+  report.push(mdTable(chromeExtensionFit
+    .slice()
+    .sort((a, b) => Number(b.fit_score || 0) - Number(a.fit_score || 0))
+    .slice(0, 12), [
+      { key: 'app_name', label: 'Candidate' },
+      { key: 'alina_fit_band', label: 'Fit' },
+      { key: 'fit_score', label: 'Score', align: 'right' },
+      { key: 'users', label: 'Users', align: 'right' },
+      { key: 'rating', label: 'Rating', align: 'right' },
+      { key: 'feature_tags', label: 'Feature Tags' }
+    ], 12));
   report.push('');
 }
 report.push('## 4. Market Sizing');
@@ -617,12 +644,14 @@ report.push('- `docs/competitive/web-paywall-screenshot-validation-v1.md`');
 report.push('- `docs/competitive/web-paywall-screenshot-interpretation-v1.md`');
 report.push('- `docs/competitive/source-expansion-backlog-v1.md`');
 report.push('- `docs/competitive/p0-external-source-collection-v1.md`');
+report.push('- `docs/competitive/chrome-extension-detail-enrichment-v1.md`');
 report.push('- `docs/decision/evidence-audit-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
 report.push('- `data_processed/evidence_claim_register.csv`');
 report.push('- `data_processed/source_expansion_backlog.csv`');
 report.push('- `data_processed/p0_external_source_summary.csv`');
+report.push('- `data_processed/chrome_extension_fit_matrix.csv`');
 report.push('- `data_processed/competitor_feature_matrix.csv`');
 report.push('- `data_processed/audience_signal_matrix.csv`');
 report.push('- `data_processed/whitespace_signal_matrix.csv`');
@@ -647,6 +676,7 @@ report.push('- `data_raw/forum_evidence_signals.csv`');
 report.push('- `data_raw/forum_quote_evidence_raw.csv`');
 report.push('- `data_raw/expanded/p0_external_sources_raw.csv`');
 report.push('- `data_raw/expanded_chrome_extensions_raw.csv`');
+report.push('- `data_raw/chrome_extension_detail_raw.csv`');
 report.push('- `data_processed/forum_quote_coding_matrix.csv`');
 report.push('- `output/charts/whitespace-bands.svg`');
 report.push('- `output/charts/review-jtbd-clusters.svg`');
@@ -686,6 +716,7 @@ status.push(mdTable([
   { requirement: 'Competitor/source expansion', evidence: 'data_raw/expanded/all_expanded_raw.csv; data_raw/research_source_discovery.csv', status: 'partial but substantial' },
   { requirement: 'Next source expansion backlog', evidence: 'data_processed/source_expansion_backlog.csv; docs/competitive/source-expansion-backlog-v1.md', status: 'done v1; prioritized sources, target outputs, expected row ranges, and risks captured' },
   { requirement: 'Controlled P0 external-source smoke pass', evidence: 'data_raw/expanded/p0_external_sources_raw.csv; data_processed/p0_external_source_summary.csv; docs/competitive/p0-external-source-collection-v1.md', status: 'done v1; small by design; Chrome Web Store yielded usable candidates, Product Hunt/AlternativeTo attempts retained as empty-source evidence' },
+  { requirement: 'Chrome extension detail enrichment', evidence: 'data_raw/chrome_extension_detail_raw.csv; data_processed/chrome_extension_fit_matrix.csv; docs/competitive/chrome-extension-detail-enrichment-v1.md', status: 'done v1; detail pages parsed for known Chrome candidates only, producing fit bands and mechanic tags without broad search expansion' },
   { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; data_processed/tam_sam_som_model.csv', status: 'done v1' },
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
@@ -724,3 +755,5 @@ console.log(`evidence_audit_rows=${evidenceAudit.length}`);
 console.log(`source_expansion_backlog_rows=${sourceExpansionBacklog.length}`);
 console.log(`p0_external_rows=${p0ExternalSources.length}`);
 console.log(`p0_external_usable=${p0ExternalUsable.length}`);
+console.log(`chrome_extension_detail_rows=${chromeExtensionFit.length}`);
+console.log(`chrome_extension_strong=${chromeExtensionStrong.length}`);

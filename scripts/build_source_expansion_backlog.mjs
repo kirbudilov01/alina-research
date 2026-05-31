@@ -63,12 +63,12 @@ const rows = [
     source_bucket: 'Chrome Web Store / browser extensions',
     markets: 'coaching|mindfulness|avatar_identity',
     gap_closed: 'browser-based productivity, focus, journaling, mood, avatar and AI assistant tools',
-    collection_method: 'web search targeted to chromewebstore.google.com plus extension detail page extraction',
+    collection_method: 'controlled Chrome Web Store search/detail extraction with small batches before any broader expansion',
     target_output: 'data_raw/expanded_chrome_extensions_raw.csv',
     expected_raw_rows: '1000-3000',
     expected_evidence_quality: 'medium',
-    command_or_next_step: 'Create collect_chrome_extension_candidates.mjs using DuckDuckGo site search for focus timer, habit, meditation, AI coach, avatar, journal.',
-    risk_or_blocker: 'Chrome Web Store native search is dynamic; use search-engine indexed pages first.'
+    command_or_next_step: 'Run collect:p0-external and enrich:chrome-extensions, then detail-fetch only high-signal extension candidates.',
+    risk_or_blocker: 'Chrome Web Store native search is dynamic; keep batches small and avoid search-engine-heavy expansion unless explicitly needed.'
   },
   {
     backlog_id: 'SRC-004',
@@ -192,8 +192,8 @@ for (const row of rows) {
 lines.push('');
 lines.push('## Recommended Next Run Order');
 lines.push('');
-lines.push('1. Product Hunt + AlternativeTo to add web app / AI tool competitors.');
-lines.push('2. Chrome Web Store + desktop stores to reduce mobile-store bias.');
+lines.push('1. Detail-fetch the controlled Chrome Web Store smoke-pass candidates and use them as browser-mechanic references.');
+lines.push('2. Product Hunt + AlternativeTo via source-native/curated-list approaches to add web app / AI tool competitors.');
 lines.push('3. Reddit competitor mentions to capture user-named alternatives and pain language.');
 lines.push('4. Company positioning pages for P0/P1 competitors to improve moat and paywall evidence.');
 lines.push('5. Market report source expansion to strengthen TAM/SAM/SOM confidence.');

@@ -172,7 +172,7 @@ Tasks:
 
 ### Block B. Source Expansion
 
-Status: partial/substantial v1 complete; next collector backlog defined; controlled P0 external smoke pass completed
+Status: partial/substantial v1 complete; next collector backlog defined; controlled P0 external smoke pass and Chrome detail enrichment completed
 
 Target sources:
 
@@ -199,10 +199,11 @@ Current evidence:
 - Current source map: `docs/competitive/expanded-source-map.md`.
 - Next source expansion backlog: `docs/competitive/source-expansion-backlog-v1.md`.
 - Controlled P0 external source smoke pass: `docs/competitive/p0-external-source-collection-v1.md`.
+- Chrome extension detail enrichment: `docs/competitive/chrome-extension-detail-enrichment-v1.md`.
 
 Next collector priority:
 
-1. Detail-fetch usable Chrome Web Store/browser-extension candidates from the P0 smoke pass.
+1. Human-review the strong/useful Chrome Web Store mechanic references from the detail enrichment.
 2. Desktop stores, itch.io, B2B review directories, and Reddit competitor mentions.
 3. Product Hunt and AlternativeTo through source-native, curated-list, or export-style discovery rather than broad search-engine crawling.
 4. Company positioning pages, Steam deep tag expansion, and market-report source expansion.

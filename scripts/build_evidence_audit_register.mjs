@@ -101,6 +101,7 @@ const forumSources = csv('data_raw/forum_evidence_signals.csv');
 const forumQuotes = csv('data_processed/forum_quote_coding_matrix.csv');
 const productCore = csv('data_processed/product_core_evidence_matrix.csv');
 const p0External = csv('data_raw/expanded/p0_external_sources_raw.csv');
+const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv');
 
 const primary = top100.filter(row => row.duplicate_flag === 'primary_app_entry');
 const highThreat = primary.filter(row => Number(row.competitive_threat_score || 0) >= 24);
@@ -117,6 +118,8 @@ const reviewApps = new Set(reviews.map(row => row.app_store_id).filter(Boolean))
 const forumSourceCount = new Set(forumQuotes.map(row => row.source_id).filter(Boolean)).size;
 const intersection = tam.find(row => row.pillar === 'intersection') || {};
 const p0ExternalUsable = p0External.filter(row => row.collection_status === 'ok');
+const chromeExtensionDetailOk = chromeExtensionFit.filter(row => row.detail_status === 'ok');
+const chromeExtensionStrong = chromeExtensionFit.filter(row => row.alina_fit_band === 'strong_adjacent');
 
 const rows = [
   {
@@ -138,10 +141,10 @@ const rows = [
     claim: 'Competitor/source universe has been expanded across the five target markets.',
     evidence_status: 'substantial_v1_not_50k_dedup',
     confidence: 'medium_high',
-    primary_metric: `${expanded.length} dedup rows; ${expandedRaw.length} raw expanded rows; ${p0ExternalUsable.length} usable P0 external smoke rows`,
-    quantitative_evidence: `niches=${Object.keys(countBy(expanded, 'niche')).length}; source_kinds=${Object.keys(countBy(expanded, 'source_kind')).length}; p0_external_rows=${p0External.length}; p0_external_usable=${p0ExternalUsable.length}`,
-    evidence_files: 'data_raw/expanded/all_expanded_raw.csv;data_raw/expanded/all_expanded_dedup.csv;data_raw/expanded/p0_external_sources_raw.csv;data_processed/p0_external_source_summary.csv;data_processed/competitor_feature_matrix.csv;docs/competitive/expanded-source-map.md;docs/competitive/p0-external-source-collection-v1.md',
-    strongest_support: 'Large normalized universe exists across App Store, Steam, Google Play fallback, and web search rows; a controlled P0 external smoke pass added browser-extension candidates.',
+    primary_metric: `${expanded.length} dedup rows; ${expandedRaw.length} raw expanded rows; ${p0ExternalUsable.length} usable P0 external smoke rows; ${chromeExtensionDetailOk.length} Chrome detail pages`,
+    quantitative_evidence: `niches=${Object.keys(countBy(expanded, 'niche')).length}; source_kinds=${Object.keys(countBy(expanded, 'source_kind')).length}; p0_external_rows=${p0External.length}; p0_external_usable=${p0ExternalUsable.length}; chrome_detail_ok=${chromeExtensionDetailOk.length}; chrome_strong_adjacent=${chromeExtensionStrong.length}`,
+    evidence_files: 'data_raw/expanded/all_expanded_raw.csv;data_raw/expanded/all_expanded_dedup.csv;data_raw/expanded/p0_external_sources_raw.csv;data_raw/chrome_extension_detail_raw.csv;data_processed/p0_external_source_summary.csv;data_processed/chrome_extension_fit_matrix.csv;data_processed/competitor_feature_matrix.csv;docs/competitive/expanded-source-map.md;docs/competitive/p0-external-source-collection-v1.md;docs/competitive/chrome-extension-detail-enrichment-v1.md',
+    strongest_support: 'Large normalized universe exists across App Store, Steam, Google Play fallback, and web search rows; a controlled P0 external smoke pass added browser-extension candidates, then detail-enriched known Chrome candidates.',
     key_gap: 'Deduped universe is below the aspirational 30k-50k app target; P0 external pass is intentionally small, with Product Hunt/AlternativeTo still needing source-native or curated collection.',
     next_action: 'Detail-fetch usable Chrome Web Store candidates, then continue source expansion through curated/non-search-heavy directories, desktop apps, forums, Product Hunt exports/lists, and subreddit/wiki lists.'
   },

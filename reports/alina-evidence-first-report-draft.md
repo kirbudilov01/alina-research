@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T03:56:39.896Z
+Generated: 2026-05-31T04:01:40.987Z
 
 ## 1. Executive Summary
 
@@ -24,6 +24,7 @@ Key quantified signals:
 - Evidence audit register: 10 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
+- Chrome extension detail enrichment: 23/23 detail pages parsed; 3 strong and 10 useful adjacent mechanic references.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
@@ -66,7 +67,7 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists | Needs periodic refresh as validation findings change. |
-| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 23 usable P0 external smoke rows | Deduped universe is below the aspirational 30k-50k app target; P0 external pass is intentionally small, with Product Hunt/AlternativeTo still needing source-native or curated collection. |
+| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; P0 external pass is intentionally small, with Product Hunt/AlternativeTo still needing source-native or curated collection. |
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
 | H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000 | Market sizing is modeled from public claims and needs source-by-source confidence review. |
 | H2_paywall_visible_evidence | supported_narrowly | medium_low | 2/29 screenshots confirm visible public pricing | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. |
@@ -125,6 +126,32 @@ A small P0 pass was run to test external discovery beyond mobile stores without 
 | Product Hunt | 3 | 0 | 3 | coaching |  |
 | AlternativeTo | 3 | 0 | 3 | coaching |  |
 | Chrome Web Store | 23 | 23 | 0 | coaching | COACH by Dropzone AI/Lichess AI Coach/Made That AI Coach/Spekit — AI Sidekick: Your AI Sales Coach and Assistant/Hinty - AI Meeting Coach/Mindstone AI Coach/Reply Coach AI/AI Prompt Coach by LeadWithAI.co |
+
+### Chrome Extension Detail Enrichment
+
+The Chrome Web Store smoke-pass candidates were enriched from their own detail pages only. This creates a small, higher-quality browser-mechanic reference layer without broad search expansion.
+
+Fit band mix:
+
+- useful_adjacent: 10
+- weak_adjacent: 6
+- out_of_scope_or_b2b: 4
+- strong_adjacent: 3
+
+| Candidate | Fit | Score | Users | Rating | Feature Tags |
+| --- | --- | ---: | ---: | ---: | --- |
+| Ritual — Habit Tracker | strong_adjacent | 8 | 2 | 0 | habit_tracking/progress_feedback/mood_or_reflection |
+| Accountability Shield - Free Website Blocker | strong_adjacent | 7 | 26 | 4.8 | ai_coaching/accountability/progress_feedback |
+| Habit Tracker - Track My Habit | strong_adjacent | 6 | 1000 | 4.9 | habit_tracking/progress_feedback |
+| Habit Tracker | useful_adjacent | 5 | 1000 | 4.9 | habit_tracking |
+| Habit Tracker | useful_adjacent | 5 | 4000 | 4.9 | habit_tracking/progress_feedback |
+| Time Tracker - Web Habit Builder | useful_adjacent | 5 | 20000 | 4.8 | habit_tracking/accountability |
+| Habit Squares: Bullet Journal Habit Tracker | useful_adjacent | 5 | 36 | 5 | habit_tracking/mood_or_reflection |
+| Ora - New Tab: Habit Tracker & Time Progress | useful_adjacent | 5 | 31 | 4.9 | habit_tracking/progress_feedback |
+| Habit Tracker – Progress & Stats on New Tab | useful_adjacent | 5 | 14 | 4.7 | habit_tracking/progress_feedback |
+| AI Prompt Coach by LeadWithAI.co | useful_adjacent | 4 | 76 | 4.3 | ai_coaching/progress_feedback |
+| LeetCode AI Coach | useful_adjacent | 4 | 2 | 4.6 | ai_coaching/progress_feedback/developer_or_learning_coach |
+| Daily Habit Tracker | useful_adjacent | 3 | 5 | 4.4 | habit_tracking |
 
 ## 4. Market Sizing
 
@@ -575,12 +602,14 @@ Claim audit rows currently normalized: 10.
 - `docs/competitive/web-paywall-screenshot-interpretation-v1.md`
 - `docs/competitive/source-expansion-backlog-v1.md`
 - `docs/competitive/p0-external-source-collection-v1.md`
+- `docs/competitive/chrome-extension-detail-enrichment-v1.md`
 - `docs/decision/evidence-audit-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
 - `data_processed/evidence_claim_register.csv`
 - `data_processed/source_expansion_backlog.csv`
 - `data_processed/p0_external_source_summary.csv`
+- `data_processed/chrome_extension_fit_matrix.csv`
 - `data_processed/competitor_feature_matrix.csv`
 - `data_processed/audience_signal_matrix.csv`
 - `data_processed/whitespace_signal_matrix.csv`
@@ -605,6 +634,7 @@ Claim audit rows currently normalized: 10.
 - `data_raw/forum_quote_evidence_raw.csv`
 - `data_raw/expanded/p0_external_sources_raw.csv`
 - `data_raw/expanded_chrome_extensions_raw.csv`
+- `data_raw/chrome_extension_detail_raw.csv`
 - `data_processed/forum_quote_coding_matrix.csv`
 - `output/charts/whitespace-bands.svg`
 - `output/charts/review-jtbd-clusters.svg`
