@@ -199,6 +199,20 @@ function interimConclusion(title, paragraphs) {
   }
 }
 
+function relevanceRu(app, marketId) {
+  const tags = clean(app.feature_tags).split('|').filter(Boolean);
+  const tagText = tags.length ? `видимые теги: ${tags.join(', ')}` : 'релевантность видна по названию, категории и описанию';
+  const reads = {
+    mindfulness: 'Показывает рынок короткого reset, mental health, meditation, journaling или эмоциональной саморегуляции. Для АУРЫ это источник языка спокойного входа и ежедневного ритуала.',
+    avatar_identity: 'Показывает спрос на avatar/identity/AI companion механику. Для АУРЫ важно проверить, может ли образ себя меняться не декоративно, а причинно от действия.',
+    astrology_esoterics: 'Показывает рынок personal meaning: horoscope, tarot, moon/spiritual guidance, manifestation или symbolic reflection. Для АУРЫ это источник входа через смысл, но не proof действия.',
+    coaching: 'Показывает рынок self-improvement, habit, AI coach, routine или goal guidance. Для АУРЫ это источник action layer и paid-depth, но не proof мягкого ritual experience.',
+    gaming: 'Показывает progression/quest/avatar benchmark. Для АУРЫ это не прямой TAM, а источник механик возврата, видимого прогресса и награды.',
+    gaming_progression: 'Показывает progression/quest/avatar benchmark. Для АУРЫ это не прямой TAM, а источник механик возврата, видимого прогресса и награды.'
+  };
+  return `${reads[marketId] || 'Релевантный adjacent product для проверки.'} ${tagText}.`;
+}
+
 const rawRows = csv('data_processed/cross_source_universe_raw.csv');
 const dedupRows = csv('data_processed/cross_source_universe_dedup.csv');
 const nicheSummary = csv('data_processed/russian_readable_niche_summary.csv');
@@ -240,6 +254,96 @@ const validationExecutiveRollup = csv('data_processed/global_validation_executiv
 const intersection = by(tam, 'pillar', 'intersection');
 const p0Icp = icp.filter(row => clean(row.priority_ru).startsWith('P0'));
 const topCompetitors = competitors.slice(0, 12);
+const nicheNameById = Object.fromEntries(nicheSummary.map(row => [row.market_id, row.ru_name]));
+const nicheTerms = {
+  mindfulness: ['calm', 'headspace', 'meditation', 'mindful', 'sleep', 'breath', 'relax', 'mood', 'motivation', 'affirmation', 'journal'],
+  avatar_identity: ['avatar', 'identity', 'character', 'future self', 'ai', 'companion', 'chat', 'highrise', 'zepeto', 'replika', 'face', 'persona'],
+  astrology_esoterics: ['astrology', 'horoscope', 'tarot', 'zodiac', 'moon', 'spiritual', 'psychic', 'manifest', 'affirmation', 'bible', 'birth chart'],
+  coaching: ['coach', 'coaching', 'habit', 'routine', 'self improvement', 'goals', 'productivity', 'motivation', 'therapy', 'journal', 'fitness'],
+  gaming_progression: ['quest', 'level', 'xp', 'rpg', 'avatar', 'progression', 'life simulator', 'cozy', 'habit', 'game', 'highrise', 'sims']
+};
+const excludedTopAppCategories = {
+  mindfulness: ['shopping', 'navigation', 'travel', 'finance', 'food & drink'],
+  avatar_identity: ['shopping', 'navigation', 'travel', 'finance', 'food & drink'],
+  astrology_esoterics: ['shopping', 'navigation', 'travel', 'finance', 'food & drink', 'book'],
+  coaching: ['shopping', 'navigation', 'travel', 'finance', 'food & drink'],
+  gaming_progression: []
+};
+const curatedTopAppQueries = {
+  mindfulness: ['Calm', 'Headspace', 'I am - Daily Affirmations', 'Finch', 'Insight Timer', 'BetterSleep', 'Balance', 'Fabulous', 'Breethe', 'Waking Up', 'Meditopia'],
+  avatar_identity: ['ChatGPT', 'Grok - AI Chat & Video', 'Character AI', 'ZEPETO', 'PolyBuzz', 'Lensa', 'IMVU', 'Replika', 'Highrise', 'Hotel Hideaway', 'AI Mirror', 'Kindroid', 'Nomi'],
+  astrology_esoterics: ['Bible', 'Nebula', 'Faladdin', 'CHANI', 'Kaave', 'Sanctuary', 'TimePassages', 'Daily Horoscope', 'Moonly', 'MoonX', 'The Pattern', 'Astromatrix', 'Shepherd'],
+  coaching: ['Impulse', 'Finch', 'Structured', 'Habit Tracker', 'Productive', 'Fabulous', 'Zing AI', 'Streaks', 'Do Habits', 'Miracle Morning', 'Daily Yoga', 'Habitica', 'Hapday'],
+  gaming_progression: ['Roblox', '8 Ball Pool', 'Candy Crush Saga', 'Clash Royale', 'Subway Surfers', 'MONOPOLY GO!', 'Royal Match', 'Discord', 'Call of Duty', 'Genshin Impact', 'Fortnite']
+};
+
+function pickCuratedTopApps(marketId) {
+  const queries = curatedTopAppQueries[marketId] || [];
+  const seen = new Set();
+  const picked = [];
+  for (const query of queries) {
+    const q = query.toLowerCase();
+    const hit = dedupRows
+      .filter(item => ['mobile_app_store', 'google_play_or_android', 'desktop_store', 'browser_extension'].includes(clean(item.source_group)))
+      .filter(item => clean(item.app_name).toLowerCase().includes(q))
+      .filter(item => {
+        const niches = clean(item.niche).split('|');
+        return niches.includes(marketId) || (marketId === 'gaming_progression' && niches.includes('gaming'));
+      })
+      .sort((a, b) => num(b.review_count) - num(a.review_count))[0];
+    if (!hit) continue;
+    const key = clean(hit.normalized_name || hit.app_name).toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    picked.push(hit);
+  }
+  return picked.sort((a, b) => num(b.review_count) - num(a.review_count)).slice(0, 8);
+}
+
+const topAppsByNiche = Object.fromEntries(nicheSummary.map(row => {
+  const seen = new Set();
+  const terms = nicheTerms[row.market_id] || [];
+  const scoredRows = dedupRows
+    .filter(item => {
+      const niches = clean(item.niche).split('|');
+      return niches.includes(row.market_id) || (row.market_id === 'gaming_progression' && niches.includes('gaming'));
+    })
+    .filter(item => ['mobile_app_store', 'google_play_or_android', 'desktop_store', 'browser_extension'].includes(clean(item.source_group)))
+    .filter(item => row.market_id !== 'gaming_progression' || (clean(item.source_group) === 'mobile_app_store' && (clean(item.category).toLowerCase() === 'games' || clean(item.keyword).toLowerCase().includes('game'))))
+    .filter(item => !(excludedTopAppCategories[row.market_id] || []).includes(clean(item.category).toLowerCase()))
+    .filter(item => clean(item.app_name))
+    .map(item => {
+      const haystack = clean([
+        item.app_name,
+        item.publisher,
+        item.keyword,
+        item.category,
+        item.feature_tags,
+        item.core_features,
+        item.retention_mechanics,
+        item.monetization_notes
+      ].join(' ')).toLowerCase();
+      const termScore = terms.reduce((sum, term) => sum + (haystack.includes(term) ? 1 : 0), 0);
+      const mechanicScore = clean(item.feature_tags).split('|')
+        .filter(tag => ['mindfulness', 'journaling_mood', 'habits_streaks', 'avatar_identity', 'gaming_progression', 'coaching', 'manifestation_spirituality'].includes(tag))
+        .length;
+      return { ...item, relevance_score: termScore * 10 + mechanicScore };
+    });
+  const directRows = (scoredRows.some(item => item.relevance_score > 0)
+    ? scoredRows.filter(item => item.relevance_score > 0)
+    : scoredRows)
+    .sort((a, b) => num(b.review_count) - num(a.review_count) || num(b.relevance_score) - num(a.relevance_score));
+  const unique = [];
+  for (const item of directRows) {
+    const key = clean(item.normalized_name || item.app_name).toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    unique.push(item);
+    if (unique.length >= 8) break;
+  }
+  const curated = pickCuratedTopApps(row.market_id);
+  return [row.market_id, curated.length >= 4 ? curated : unique];
+}));
 const h2 = by(gates, 'gate_id', 'GATE_H2_PAID_FLOW');
 const claimById = Object.fromEntries(claimAppendix.map(row => [row.claim_id, row]));
 const provByLayer = Object.fromEntries(sourceProvenance.map(row => [row.layer, row]));
@@ -562,7 +666,7 @@ writeCsv(SOURCE_APPENDIX_OUT, sourceAppendix, [
 
 const lines = [];
 
-lines.push('# Alina Research. Мировой рынок и логика гипотез');
+lines.push('# АУРА Research. Мировой рынок и логика гипотез');
 lines.push('');
 lines.push(`Собрано: ${new Date().toISOString()}`);
 lines.push('');
@@ -653,6 +757,54 @@ lines.push('Дальше проверка переходит к конкурен
 lines.push('');
 lines.push('Последний шаг - продуктовое ядро. Если рынки есть, конкуренты понятны, whitespace выглядит узким, а аудитория имеет recent behavior, тогда MVP должен проверять не весь возможный продукт, а одну причинную петлю: personal meaning -> tiny action -> short reset -> visible progress -> tomorrow hook. Пока эта цепочка не пройдет walkthrough, интервью и прототипные сессии, все выводы остаются evidence-first гипотезами, а не финальным go.');
 lines.push('');
+lines.push('### Цепочка проверки: как строится исследование');
+lines.push('');
+lines.push('Формат этого отчета дальше такой же, как в старом ресерче Алины: мы не просто складываем факты в папку, а идем по гипотезам. Сначала формулируем, что мы думаем. Потом объясняем, почему это вообще разумно проверять. Затем смотрим рынки, конкурентов, аудиторию и продуктовую петлю. После каждого шага фиксируем вывод и следующий вопрос.');
+lines.push('');
+lines.push(mdTable([
+  {
+    h: 'H1',
+    thought: 'Мы думаем, что АУРА может быть отдельной формой consumer-app, а не набором разрозненных функций.',
+    why: 'Потому что на пересечении meaning, action, reset и visible progress может возникать ежедневный ритуал.',
+    checked: 'Пошли смотреть соседние рынки и конкурентов: есть ли уже такая форма и насколько она занята.',
+    current: 'Форма выглядит правдоподобно, но hidden-clone риск открыт до ручных walkthrough.'
+  },
+  {
+    h: 'H2',
+    thought: 'Мы думаем, что вокруг этой формы есть деньги.',
+    why: 'Потому что mindfulness, coaching, spiritual guidance, avatar/identity и progression уже монетизируются.',
+    checked: 'Собрали TAM/SAM/SOM, paid-flow proxy, IAP/pricing и market-money triangulation.',
+    current: 'Money case сильный направленно, но это еще не revenue proof АУРЫ.'
+  },
+  {
+    h: 'H3',
+    thought: 'Мы думаем, что белое пятно есть не в отсутствии конкурентов, а в недособранной причинной петле.',
+    why: 'Многие продукты закрывают reset, смысл, действие или avatar отдельно, но не обязательно связывают их причинно.',
+    checked: 'Собрали top competitors, archetypes, whitespace map и public-listing inspection.',
+    current: 'Белое пятно узкое и интересное, но требует onboarding/app screenshots.'
+  },
+  {
+    h: 'H4/H5',
+    thought: 'Мы думаем, что у АУРЫ может быть общая аудитория с adjacent-продуктами.',
+    why: 'Пользователь уже имеет recent behavior: ритуалы, journaling, self-improvement, spiritual guidance, progress tools.',
+    checked: 'Собрали ICP-сегменты, VOC, Reddit/forum/context signals и interview probes.',
+    current: 'Лучшие первые сегменты: Spiritual self-improvers и Habit/progress users; нужны интервью.'
+  },
+  {
+    h: 'H6',
+    thought: 'Мы думаем, что продуктовое ядро должно быть одной короткой сессией, а не большим приложением.',
+    why: 'Если причинность не считывается за одну сессию, avatar/progress станет декорацией, а reset — отдельной практикой.',
+    checked: 'Собрали MVP-loop, prototype stimulus, scorecard и P0 validation queue.',
+    current: 'MVP сформулирован, но не доказан без prototype sessions.'
+  }
+], [
+  { key: 'h', label: 'Гипотеза' },
+  { key: 'thought', label: 'Что мы думаем' },
+  { key: 'why', label: 'Почему пошли проверять' },
+  { key: 'checked', label: 'Что смотрели' },
+  { key: 'current', label: 'Текущий вывод' }
+]));
+lines.push('');
 interimConclusion('Итог первого блока', [
   'На уровне идеи Alina уже сформулирована достаточно узко: это не “еще одно wellness-приложение”, а daily ritual с причинной связкой между смыслом, действием и видимым изменением. Это делает исследование проверяемым: если в конкурентах уже есть такая же связка, гипотеза слабеет; если пользователи не считывают причинность в прототипе, продуктовая ставка тоже слабеет.',
   'Следующий блок поэтому не пытается сразу доказать рынок деньгами. Он сначала показывает статус evidence: что уже собрано как desk/source layer, а что все еще требует ручных walkthrough, интервью, paywall-проверок и прототипных сессий.'
@@ -732,7 +884,7 @@ lines.push(mdTable(nicheSummary.map(row => ({
 ]));
 lines.push('');
 if (nicheCountRollup.length) {
-  lines.push(`Чтобы счетчики не терялись в приложениях, ниже отдельно показан rollup по каждой нише. Здесь важно различать three layers: all-source rows показывают ширину карты, direct app-store dedup показывает ближнее consumer-app поле, а top-100/manual targets показывают, какие конкуренты уже вынесены в более внимательный review. Эти числа не читаются как “столько прямых клонов Alina”; они показывают, какой объем данных стоит за каждым направлением. Глобальный dedup пакета сейчас ${fmt(dedupRows.length)}: построчные niche dedup нельзя просто складывать как уникальных конкурентов, потому что один продукт может попадать в несколько тематических контекстов.`);
+  lines.push(`Чтобы было понятно, что реально собрано по каждой нише, ниже отдельно показан rollup. Здесь есть три уровня: all-source rows показывают ширину карты, direct app-store dedup показывает ближнее consumer-app поле, а top-100/manual targets показывают, какие конкуренты уже вынесены в более внимательный review. Глобальный dedup пакета сейчас ${fmt(dedupRows.length)}; нишевые dedup нельзя просто складывать, потому что один продукт может попадать в несколько тематических контекстов.`);
   lines.push('');
   lines.push(mdTable(nicheCountRollup.map(row => ({
     market: row.market_ru,
@@ -755,6 +907,36 @@ if (nicheCountRollup.length) {
     { key: 'coverage', label: 'Coverage' },
     { key: 'read', label: 'Как читать' }
   ]));
+  lines.push('');
+}
+lines.push('### Что реально нашли по каждой нише: top-приложения');
+lines.push('');
+lines.push('Ниже не методология, а конкретная картина рынка: по каждой нише показаны крупнейшие direct consumer-app примеры из уже собранной базы. Это не финальный список прямых конкурентов АУРЫ, но он отвечает на практический вопрос: “какие приложения мы вообще нашли, насколько крупные они по review scale и почему эта ниша релевантна”.');
+lines.push('');
+for (const row of nicheSummary) {
+  const rollup = by(nicheCountRollup, 'market_id', row.market_id);
+  const topApps = topAppsByNiche[row.market_id] || [];
+  lines.push(`#### ${row.ru_name}`);
+  lines.push('');
+  lines.push(`${row.ru_name}: собрано ${rollup.all_source_raw_rows || row.all_source_raw_rows} raw source-строк, ${rollup.all_source_dedup_rows || row.all_source_dedup_rows} all-source dedup и ${rollup.direct_app_store_dedup_rows || row.direct_app_store_dedup_rows} direct app/store dedup. В top-100 review вынесено ${rollup.top100_primary_competitors || row.top100_primary_competitors} приложений, manual validation targets сейчас ${rollup.manual_validation_targets || row.manual_validation_targets}. Для АУРЫ эта ниша важна так: ${row.role_ru}; денежный сигнал: ${moneyVerdictRu(row.money_verdict)}; opportunity: ${row.opportunity_band}.`);
+  lines.push('');
+  lines.push(mdTable(topApps.map(app => ({
+    app: app.app_name,
+    publisher: app.publisher,
+    source: app.source_group,
+    reviews: fmt(app.review_count),
+    rating: app.rating,
+    pricing: [app.pricing_type, app.monetization_tags].map(clean).filter(Boolean).join('; ') || 'нет данных',
+    relevance: relevanceRu(app, row.market_id)
+  })), [
+    { key: 'app', label: 'Top app' },
+    { key: 'publisher', label: 'Publisher' },
+    { key: 'source', label: 'Источник' },
+    { key: 'reviews', label: 'Reviews', align: 'right' },
+    { key: 'rating', label: 'Rating' },
+    { key: 'pricing', label: 'Монетизация' },
+    { key: 'relevance', label: 'Почему важно для АУРЫ' }
+  ], 8));
   lines.push('');
 }
 if (nicheCountReconciliation.length) {
@@ -1166,6 +1348,7 @@ lines.push(mdTable(nextValidationBacklog.slice(0, 14).map(row => ({
 lines.push('');
 lines.push('Эта очередь не заменяет полный validation command center. Она нужна как первый рабочий слой для следующих 12-24 часов: если заполнить хотя бы первые manual walkthrough и paid-flow задачи, отчет начнет переходить от desk evidence к наблюдаемым доказательствам.');
 lines.push('');
+if (false) {
 lines.push('## ПОКРЫТИЕ ИСХОДНОЙ ЦЕЛИ ДОКАЗАТЕЛЬСТВАМИ');
 lines.push('');
 lines.push('Чтобы не смешивать “сделан исследовательский слой” и “доказана гипотеза”, ниже показано покрытие исходной задачи по частям. Это контрольная карта текущего состояния: где уже есть локальные файлы, методология и отчет, а где требуются observed rows.');
@@ -1188,7 +1371,8 @@ lines.push(mdTable(goalEvidenceCoverage.map(row => ({
 lines.push('');
 lines.push('Главный вывод по этой карте: пакет уже масштабный и трассируемый, но не финально валидированный. Это правильное состояние для evidence-first ресерча: сильные desk/source слои готовы, а product/market claims остаются в hold_validate до ручных walkthrough, интервью, прототипа и WTP.');
 lines.push('');
-if (russianStoryline.length) {
+}
+if (false && russianStoryline.length) {
   lines.push('## ПОВЕСТВОВАТЕЛЬНАЯ ЛОГИКА ОТЧЕТА');
   lines.push('');
   lines.push('Чтобы отчет не выглядел как набор разрозненных таблиц, отдельно зафиксирована русская storyline-карта. Она переводит образец Alina в текущий мировой research: каждый большой раздел отвечает на один вопрос читателя, сначала дает смысловой вывод, затем показывает evidence, называет границу доказательства и объясняет переход к следующей гипотезе.');
@@ -1212,7 +1396,7 @@ if (russianStoryline.length) {
   ]));
   lines.push('');
 }
-if (reportReadabilityAudit.length) {
+if (false && reportReadabilityAudit.length) {
   lines.push('## ПРОВЕРКА СКЛАДНОСТИ И ЧИТАЕМОСТИ ОТЧЕТА');
   lines.push('');
   lines.push('Отдельно проверено, складно ли текущая версия читается как русский мировой отчет, а не как случайная выгрузка таблиц. Вывод такой: логика гипотез уже держится, счетчики по нишам видны, границы доказательств прописаны, но документ остается плотным рабочим evidence pack. Для внешней версии позже нужен облегченный executive narrative, а тяжелые таблицы лучше вынести в appendix.');
@@ -1238,7 +1422,15 @@ lines.push('## ИСТОЧНИКИ И ГРАНИЦЫ ДОКАЗАТЕЛЬСТВ')
 lines.push('');
 lines.push('Ниже зафиксирована короткая связка claim -> evidence -> boundary для этой мировой версии отчета. Это не полный manifest всех файлов, а читательский слой: он показывает, какие утверждения можно читать как desk/source support, а какие нельзя усиливать без ручных walkthrough, интервью, прототипных сессий или WTP-проверки.');
 lines.push('');
-lines.push(mdTable(sourceAppendix.map(row => ({
+const readerSourceAppendix = sourceAppendix.filter(row => ![
+  'SRC_08_SAMPLE_STYLE_REFERENCE',
+  'SRC_10_REPORT_READABILITY',
+  'SRC_13_RUSSIAN_STORYLINE',
+  'SRC_14_FRONTMATTER_DASHBOARD',
+  'SRC_17_READER_GLOSSARY',
+  'SRC_18_P0_OBSERVED_INTAKE'
+].includes(row.claim_id));
+lines.push(mdTable(readerSourceAppendix.map(row => ({
   claim: row.claim_id,
   section: row.report_section,
   status: row.evidence_status_ru,
@@ -1260,6 +1452,7 @@ lines.push('3. Самые важные проверки - hidden-clone walkthrou
 lines.push('4. Отчет должен оставаться на русском языке, но описывать мировой рынок и глобальные consumer-app категории.');
 lines.push('5. Дальше исследование должно идти в строгой последовательности: гипотеза -> рынки -> конкуренты -> интервью -> уточнение гипотезы -> MVP -> вопросы -> вывод.');
 lines.push('');
+if (false) {
 lines.push('## Локальные файлы');
 lines.push('');
 lines.push('- `reports/alina-global-hypothesis-report-v1.md`');
@@ -1290,8 +1483,10 @@ lines.push('- `data_processed/global_goal_evidence_coverage.csv`');
 lines.push('- `reports/alina-russian-readable-report-v2.md`');
 lines.push('- `data_processed/russian_readable_niche_summary.csv`');
 lines.push('- `data_processed/validation_gate_calculator.csv`');
+}
 
-fs.writeFileSync(OUT, `${lines.join('\n')}\n`);
+const reportText = lines.join('\n').replace(/\bAlina\b/g, 'АУРА');
+fs.writeFileSync(OUT, `${reportText.trimEnd()}\n`);
 
 console.log(`global_hypothesis_report=${OUT}`);
 console.log(`global_hypothesis_source_appendix=${SOURCE_APPENDIX_OUT}`);

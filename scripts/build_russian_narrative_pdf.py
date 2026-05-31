@@ -38,7 +38,7 @@ DOCUMENTS = [
     (
         ROOT / "reports" / "alina-global-hypothesis-report-v1.md",
         OUTPUT_DIR / "alina-global-hypothesis-report-v1.pdf",
-        "Alina Research - мировой рынок и гипотезы",
+        "АУРА Research - мировой рынок и гипотезы",
     ),
     (
         ROOT / "reports" / "alina-global-executive-narrative-v1.md",
