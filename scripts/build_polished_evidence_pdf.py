@@ -369,6 +369,11 @@ def main() -> None:
     stop_hypotheses = [row for row in hypothesis_decisions if row.get("current_decision") == "stop_or_pivot"]
     blocker_commands = [row for row in p0_commands if row.get("priority") == "P0_blocker"]
     p0_command_rows = [row for row in p0_commands if row.get("priority") == "P0"]
+    validation_batch_local_artifacts = [
+        row
+        for row in validation_batch01 + validation_batch02 + validation_batch03
+        if row.get("prefill_status") == "existing_local_artifact_linked"
+    ]
 
     metrics = {
         "Known raw source/app rows": number(known_raw_total),
@@ -387,6 +392,7 @@ def main() -> None:
         "Validation Batch 01 rows": number(len(validation_batch01)),
         "Validation Batch 02 rows": number(len(validation_batch02)),
         "Validation Batch 03 rows": number(len(validation_batch03)),
+        "Validation note local evidence links": number(len(validation_batch_local_artifacts)),
         "Validation capture rows": number(capture_rows),
     }
     build_doc_note(metrics)
@@ -483,6 +489,7 @@ def main() -> None:
                 ["Validation Batch 01 rows", len(validation_batch01), "Prefilled blocker notes for the first observed validation tranche."],
                 ["Validation Batch 02 rows", len(validation_batch02), "Prefilled non-blocker P0 notes across the full validation breadth."],
                 ["Validation Batch 03 rows", len(validation_batch03), "Prefilled P1-context paid-flow notes for conservative monetization checks."],
+                ["Validation note local evidence links", len(validation_batch_local_artifacts), "Existing local artifacts linked into batch notes; not human signoff."],
                 ["Manifest source-like refs", source_refs, "Rows with URLs, package IDs, domains, source IDs, or comparable identifiers."],
                 ["Top-100 primary apps", len(primary_top100), "Human-facing competitor review layer."],
                 ["Behavior-tied progression signals", len(behavior_tied), "Strict signal is rare in metadata, hence manual inspection is critical."],

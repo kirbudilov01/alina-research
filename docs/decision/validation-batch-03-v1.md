@@ -1,6 +1,6 @@
 # Validation Batch 03 V1
 
-Generated: 2026-05-31T08:31:38.200Z
+Generated: 2026-05-31T08:40:01.857Z
 
 ## Purpose
 
@@ -11,6 +11,7 @@ Batch 03 pre-creates evidence notes for every P1_context command. In the current
 - Batch rows: 17
 - Workspace lanes available: 5
 - Note files created: 17
+- Existing local artifacts linked: 17
 - Batch index: `data_processed/validation_batch_03_index.csv`
 
 Rows by lane:

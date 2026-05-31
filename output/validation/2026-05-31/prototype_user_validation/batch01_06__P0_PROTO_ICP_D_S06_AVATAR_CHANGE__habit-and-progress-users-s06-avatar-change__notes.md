@@ -41,6 +41,7 @@ Observe avatar/progress change and explain what caused it. Copy shown: Your futu
 
 ## Evidence Links
 
+- prefill_status: no_local_artifact_prefill
 - screenshot_paths:
 - notes_paths:
 - participant_quote_or_visible_text:

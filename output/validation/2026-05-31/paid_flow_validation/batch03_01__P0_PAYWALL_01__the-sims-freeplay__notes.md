@@ -42,10 +42,11 @@ Review screenshot and, if needed, inspect app/web paid flow; set confirm/partial
 
 ## Evidence Links
 
-- screenshot_paths:
+- prefill_status: existing_local_artifact_linked
+- screenshot_paths: output/paywall_screenshots/01-the-sims-freeplay-high.png
 - notes_paths:
 - participant_quote_or_visible_text:
-- observed_value:
+- observed_value: reject_or_weaken_public_page_signal; confidence=medium; price=$5.99|$39.99|$16.99|$119.99
 
 ## Fields To Fill Back
 

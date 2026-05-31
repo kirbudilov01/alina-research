@@ -1,6 +1,6 @@
 # Validation Batch 01 V1
 
-Generated: 2026-05-31T08:18:33.738Z
+Generated: 2026-05-31T08:40:01.466Z
 
 ## Purpose
 
@@ -11,6 +11,7 @@ Batch 01 pre-creates evidence notes for the P0 blocker rows. These are the first
 - Batch rows: 6
 - Workspace lanes available: 5
 - Note files created: 6
+- Existing local artifacts linked: 0
 - Batch index: `data_processed/validation_batch_01_index.csv`
 
 ## Batch Rows

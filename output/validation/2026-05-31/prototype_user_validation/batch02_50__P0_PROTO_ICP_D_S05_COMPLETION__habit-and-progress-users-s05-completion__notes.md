@@ -41,6 +41,7 @@ Tap Done and select one felt-state tag. Copy shown: Proof, not perfection: tap D
 
 ## Evidence Links
 
+- prefill_status: no_local_artifact_prefill
 - screenshot_paths:
 - notes_paths:
 - participant_quote_or_visible_text:

@@ -41,6 +41,7 @@ Answer one choice and one open text question. Copy shown: What did Alina help yo
 
 ## Evidence Links
 
+- prefill_status: no_local_artifact_prefill
 - screenshot_paths:
 - notes_paths:
 - participant_quote_or_visible_text:

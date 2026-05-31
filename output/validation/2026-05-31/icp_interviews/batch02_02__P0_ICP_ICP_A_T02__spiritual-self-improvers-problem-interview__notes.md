@@ -36,6 +36,7 @@ Ask for the last real moment when they needed this job: Turn symbolic/personal m
 
 ## Evidence Links
 
+- prefill_status: no_local_artifact_prefill
 - screenshot_paths:
 - notes_paths:
 - participant_quote_or_visible_text:

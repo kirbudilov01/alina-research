@@ -137,6 +137,8 @@ const validationWorkspace = csv('data_processed/validation_evidence_workspace_in
 const validationBatch01 = csv('data_processed/validation_batch_01_index.csv');
 const validationBatch02 = csv('data_processed/validation_batch_02_index.csv');
 const validationBatch03 = csv('data_processed/validation_batch_03_index.csv');
+const validationBatchPrefilledLocalArtifacts = [...validationBatch01, ...validationBatch02, ...validationBatch03]
+  .filter(row => row.prefill_status === 'existing_local_artifact_linked').length;
 const evidenceManifest = csv('data_processed/evidence_artifact_manifest.csv');
 const completionAudit = csv('data_processed/research_completion_audit.csv');
 const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv');
@@ -289,8 +291,8 @@ const rows = [
     claim: 'The first blocker validation tranche has prefilled local note files.',
     evidence_status: validationBatch01.length ? 'proved_v1_batch_ready_open_gates' : 'missing',
     confidence: validationBatch01.length ? 'high' : 'low',
-    primary_metric: `${validationBatch01.length} batch rows; ${validationBatch01.filter(row => row.status === 'not_started').length} not started`,
-    quantitative_evidence: `batch_rows=${validationBatch01.length}; blocker_rows=${p0CommandBlockers.length}; note_files=${validationBatch01.length}`,
+    primary_metric: `${validationBatch01.length} batch rows; ${validationBatch01.filter(row => row.status === 'not_started').length} not started; ${validationBatch01.filter(row => row.prefill_status === 'existing_local_artifact_linked').length} local artifacts linked`,
+    quantitative_evidence: `batch_rows=${validationBatch01.length}; blocker_rows=${p0CommandBlockers.length}; note_files=${validationBatch01.length}; local_artifact_links=${validationBatch01.filter(row => row.prefill_status === 'existing_local_artifact_linked').length}`,
     evidence_files: 'data_processed/validation_batch_01_index.csv;docs/decision/validation-batch-01-v1.md;output/validation/2026-05-31',
     strongest_support: 'Batch 01 creates prefilled notes for every P0 blocker command and links each note to command_id, gate, source files, and output files to update.',
     key_gap: 'Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts.',
@@ -302,8 +304,8 @@ const rows = [
     claim: 'The full non-blocker P0 validation breadth has prefilled local note files.',
     evidence_status: validationBatch02.length ? 'proved_v1_p0_breadth_batch_ready_open_gates' : 'missing',
     confidence: validationBatch02.length ? 'high' : 'low',
-    primary_metric: `${validationBatch02.length} batch rows; ${validationBatch02.filter(row => row.status === 'not_started').length} not started`,
-    quantitative_evidence: `batch_rows=${validationBatch02.length}; p0_rows=${p0CommandRows.length}; note_files=${validationBatch02.length}`,
+    primary_metric: `${validationBatch02.length} batch rows; ${validationBatch02.filter(row => row.status === 'not_started').length} not started; ${validationBatch02.filter(row => row.prefill_status === 'existing_local_artifact_linked').length} local artifacts linked`,
+    quantitative_evidence: `batch_rows=${validationBatch02.length}; p0_rows=${p0CommandRows.length}; note_files=${validationBatch02.length}; local_artifact_links=${validationBatch02.filter(row => row.prefill_status === 'existing_local_artifact_linked').length}`,
     evidence_files: 'data_processed/validation_batch_02_index.csv;docs/decision/validation-batch-02-v1.md;output/validation/2026-05-31',
     strongest_support: 'Batch 02 creates prefilled notes for every non-blocker P0 command across manual walkthrough, paid-flow signoff, ICP interviews, prototype sessions, and scorecard gates.',
     key_gap: 'Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts.',
@@ -315,8 +317,8 @@ const rows = [
     claim: 'All P1 context validation commands have prefilled local note files.',
     evidence_status: validationBatch03.length ? 'proved_v1_context_batch_ready_open_gates' : 'missing',
     confidence: validationBatch03.length ? 'high' : 'low',
-    primary_metric: `${validationBatch03.length} batch rows; ${validationBatch03.filter(row => row.status === 'not_started').length} not started`,
-    quantitative_evidence: `batch_rows=${validationBatch03.length}; p1_context_rows=${p0CommandCenter.filter(row => row.priority === 'P1_context').length}; note_files=${validationBatch03.length}`,
+    primary_metric: `${validationBatch03.length} batch rows; ${validationBatch03.filter(row => row.status === 'not_started').length} not started; ${validationBatch03.filter(row => row.prefill_status === 'existing_local_artifact_linked').length} local artifacts linked`,
+    quantitative_evidence: `batch_rows=${validationBatch03.length}; p1_context_rows=${p0CommandCenter.filter(row => row.priority === 'P1_context').length}; note_files=${validationBatch03.length}; local_artifact_links=${validationBatch03.filter(row => row.prefill_status === 'existing_local_artifact_linked').length}`,
     evidence_files: 'data_processed/validation_batch_03_index.csv;docs/decision/validation-batch-03-v1.md;output/validation/2026-05-31',
     strongest_support: 'Batch 03 creates prefilled notes for every P1_context command, currently the paid-flow context checks that should improve monetization confidence without blocking hypothesis gates.',
     key_gap: 'Batch files are prefilled context notes; they still need observed pricing/paywall checks and conservative signoff decisions.',
@@ -484,6 +486,7 @@ lines.push('- Intake layer: validation evidence workspace creates local folders 
 lines.push('- Batch layer: validation Batch 01 pre-creates note files for all P0 blocker commands.');
 lines.push('- Breadth layer: validation Batch 02 pre-creates note files for all non-blocker P0 commands.');
 lines.push('- Context layer: validation Batch 03 pre-creates note files for all P1 context commands.');
+lines.push(`- Existing evidence link layer: ${validationBatchPrefilledLocalArtifacts} batch notes now point at local artifacts, mainly captured paywall screenshots; these links do not equal human signoff.`);
 lines.push('- Strongest product evidence: adjacent markets are monetized; the user language around daily ritual/progress is real; strict behavior-tied avatar progression remains narrow in current metadata.');
 lines.push('- Weakest remaining proof: human validation of competitors, actual in-app paywall/onboarding flows, real user prototype response, and final source-by-source market sizing review.');
 lines.push('- Current decision should remain conditional-go for validation, not full product-build go.');

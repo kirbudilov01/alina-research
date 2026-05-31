@@ -78,7 +78,23 @@ function mdTable(rows, columns, limit = rows.length) {
   return [header, sep, ...body].join('\n');
 }
 
+function evidencePrefill(row) {
+  const slot = clean(row.capture_slot_or_metric);
+  const paths = slot.startsWith('output/') && fs.existsSync(slot) ? [slot] : [];
+  return {
+    prefill_status: paths.length ? 'existing_local_artifact_linked' : 'no_local_artifact_prefill',
+    prefilled_evidence_paths: paths.join(';'),
+    observed_value: paths.length ? row.current_evidence_read : ''
+  };
+}
+
+function fieldLine(label, value) {
+  const text = clean(value);
+  return text ? `- ${label}: ${text}` : `- ${label}:`;
+}
+
 function noteFor(row) {
+  const prefill = evidencePrefill(row);
   const lines = [];
   lines.push(`# Validation Batch 01 Note: ${row.command_id}`);
   lines.push('');
@@ -123,10 +139,11 @@ function noteFor(row) {
   lines.push('');
   lines.push('## Evidence Links');
   lines.push('');
-  lines.push('- screenshot_paths:');
+  lines.push(`- prefill_status: ${prefill.prefill_status}`);
+  lines.push(fieldLine('screenshot_paths', prefill.prefilled_evidence_paths));
   lines.push('- notes_paths:');
   lines.push('- participant_quote_or_visible_text:');
-  lines.push('- observed_value:');
+  lines.push(fieldLine('observed_value', prefill.observed_value));
   lines.push('');
   lines.push('## Fields To Fill Back');
   lines.push('');
@@ -150,6 +167,7 @@ const rows = blockers.map((row, index) => {
   const dir = `${ROOT}/${row.lane}`;
   fs.mkdirSync(dir, { recursive: true });
   const notePath = `${dir}/batch01_${String(index + 1).padStart(2, '0')}__${row.command_id}__${slug(row.target)}__notes.md`;
+  const prefill = evidencePrefill(row);
   fs.writeFileSync(notePath, noteFor(row));
   return {
     batch_id: 'BATCH_01',
@@ -161,6 +179,9 @@ const rows = blockers.map((row, index) => {
     linked_hypotheses: row.linked_hypotheses,
     note_path: notePath,
     source_url: row.source_url,
+    capture_slot_or_metric: row.capture_slot_or_metric,
+    prefill_status: prefill.prefill_status,
+    prefilled_evidence_paths: prefill.prefilled_evidence_paths,
     pass_gate: row.pass_gate,
     downgrade_or_kill_gate: row.downgrade_or_kill_gate,
     status: 'not_started',
@@ -171,7 +192,8 @@ const rows = blockers.map((row, index) => {
 
 writeCsv(OUT, rows, [
   'batch_id', 'batch_rank', 'command_id', 'priority', 'lane', 'target', 'linked_hypotheses',
-  'note_path', 'source_url', 'pass_gate', 'downgrade_or_kill_gate', 'status', 'workspace_dir',
+  'note_path', 'source_url', 'capture_slot_or_metric', 'prefill_status', 'prefilled_evidence_paths',
+  'pass_gate', 'downgrade_or_kill_gate', 'status', 'workspace_dir',
   'output_file_to_update'
 ]);
 
@@ -189,6 +211,7 @@ lines.push('');
 lines.push(`- Batch rows: ${rows.length}`);
 lines.push(`- Workspace lanes available: ${workspace.length}`);
 lines.push(`- Note files created: ${rows.length}`);
+lines.push(`- Existing local artifacts linked: ${rows.filter(row => row.prefill_status === 'existing_local_artifact_linked').length}`);
 lines.push(`- Batch index: \`${OUT}\``);
 lines.push('');
 lines.push('## Batch Rows');

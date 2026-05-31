@@ -42,10 +42,11 @@ Review screenshot and, if needed, inspect app/web paid flow; set confirm/partial
 
 ## Evidence Links
 
-- screenshot_paths:
+- prefill_status: existing_local_artifact_linked
+- screenshot_paths: output/paywall_screenshots/17-nba-2k-mobile-basketball-game-medium.png
 - notes_paths:
 - participant_quote_or_visible_text:
-- observed_value:
+- observed_value: visible_price_context_uncertain; confidence=low_medium; price=$20
 
 ## Fields To Fill Back
 

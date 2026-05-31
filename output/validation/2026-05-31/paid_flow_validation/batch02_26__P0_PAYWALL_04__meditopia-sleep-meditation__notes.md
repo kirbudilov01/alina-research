@@ -42,10 +42,11 @@ Review screenshot and, if needed, inspect app/web paid flow; set confirm/partial
 
 ## Evidence Links
 
-- screenshot_paths:
+- prefill_status: existing_local_artifact_linked
+- screenshot_paths: output/paywall_screenshots/04-meditopia-sleep-meditation-high.png
 - notes_paths:
 - participant_quote_or_visible_text:
-- observed_value:
+- observed_value: confirmed_visible_public_pricing; confidence=high; price=$3.50
 
 ## Fields To Fill Back
 

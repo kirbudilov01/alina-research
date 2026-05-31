@@ -1,6 +1,6 @@
 # Validation Batch 02 V1
 
-Generated: 2026-05-31T08:25:05.534Z
+Generated: 2026-05-31T08:40:01.658Z
 
 ## Purpose
 
@@ -11,6 +11,7 @@ Batch 02 pre-creates evidence notes for every non-blocker P0 command. It expands
 - Batch rows: 52
 - Workspace lanes available: 5
 - Note files created: 52
+- Existing local artifacts linked: 12
 - Batch index: `data_processed/validation_batch_02_index.csv`
 
 Rows by lane:

@@ -36,6 +36,7 @@ Ask directly: "What would make this feel unsafe, cringe, manipulative, generic, 
 
 ## Evidence Links
 
+- prefill_status: no_local_artifact_prefill
 - screenshot_paths:
 - notes_paths:
 - participant_quote_or_visible_text:

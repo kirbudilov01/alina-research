@@ -45,6 +45,7 @@ Strict full loop is rare and still needs actual app/onboarding screenshots to co
 
 ## Evidence Links
 
+- prefill_status: no_local_artifact_prefill
 - screenshot_paths:
 - notes_paths:
 - participant_quote_or_visible_text:

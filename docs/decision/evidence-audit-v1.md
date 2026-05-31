@@ -1,6 +1,6 @@
 # Evidence Audit V1
 
-Generated: 2026-05-31T08:32:40.085Z
+Generated: 2026-05-31T08:41:07.720Z
 
 ## Purpose
 
@@ -45,9 +45,9 @@ This register turns the large research corpus into an auditable claim map. Each 
 | REQ_p0_validation_command_center | proved_v1_operator_ready_open_gates | high | 75 command rows; 6 blocker rows; 52 P0 rows | The command center is operational scaffolding; it still requires actual screenshots, participant evidence, paywall signoff, and updated verdicts. |
 | REQ_p0_validation_field_guide | proved_v1_execution_scripts_ready_open_gates | high | 8 field guide sections; 75 command rows referenced | Field guide is still an execution artifact, not observed validation evidence. |
 | REQ_validation_evidence_workspace | proved_v1_intake_workspace_ready_open_gates | high | 5 workspace lanes; output/validation README and templates generated | Workspace is empty until real screenshots, notes, quotes, and calculations are captured. |
-| REQ_validation_batch_01 | proved_v1_batch_ready_open_gates | high | 6 batch rows; 6 not started | Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts. |
-| REQ_validation_batch_02 | proved_v1_p0_breadth_batch_ready_open_gates | high | 52 batch rows; 52 not started | Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts. |
-| REQ_validation_batch_03 | proved_v1_context_batch_ready_open_gates | high | 17 batch rows; 17 not started | Batch files are prefilled context notes; they still need observed pricing/paywall checks and conservative signoff decisions. |
+| REQ_validation_batch_01 | proved_v1_batch_ready_open_gates | high | 6 batch rows; 6 not started; 0 local artifacts linked | Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts. |
+| REQ_validation_batch_02 | proved_v1_p0_breadth_batch_ready_open_gates | high | 52 batch rows; 52 not started; 12 local artifacts linked | Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts. |
+| REQ_validation_batch_03 | proved_v1_context_batch_ready_open_gates | high | 17 batch rows; 17 not started; 17 local artifacts linked | Batch files are prefilled context notes; they still need observed pricing/paywall checks and conservative signoff decisions. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 38240 cross-source raw rows; 22769 cross-source dedup rows; 34 coverage cells; 10 strong and 12 medium source/market cells | Cross-source dedup universe is substantial but still below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | H1_product_shape_exists | public_listing_inspected_walkthrough_open | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Strict full loop is rare and still needs actual app/onboarding screenshots to confirm or downgrade public listing claims. |
 | H2_markets_have_money | supported_with_ranges_stress_test_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, manual in-app paywall validation, and willingness-to-pay prototype evidence for final investor-grade claims. |
@@ -70,6 +70,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 - Batch layer: validation Batch 01 pre-creates note files for all P0 blocker commands.
 - Breadth layer: validation Batch 02 pre-creates note files for all non-blocker P0 commands.
 - Context layer: validation Batch 03 pre-creates note files for all P1 context commands.
+- Existing evidence link layer: 29 batch notes now point at local artifacts, mainly captured paywall screenshots; these links do not equal human signoff.
 - Strongest product evidence: adjacent markets are monetized; the user language around daily ritual/progress is real; strict behavior-tied avatar progression remains narrow in current metadata.
 - Weakest remaining proof: human validation of competitors, actual in-app paywall/onboarding flows, real user prototype response, and final source-by-source market sizing review.
 - Current decision should remain conditional-go for validation, not full product-build go.

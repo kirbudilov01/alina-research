@@ -144,6 +144,8 @@ const validationWorkspace = csv('data_processed/validation_evidence_workspace_in
 const validationBatch01 = csv('data_processed/validation_batch_01_index.csv');
 const validationBatch02 = csv('data_processed/validation_batch_02_index.csv');
 const validationBatch03 = csv('data_processed/validation_batch_03_index.csv');
+const validationBatchPrefilledLocalArtifacts = [...validationBatch01, ...validationBatch02, ...validationBatch03]
+  .filter(row => row.prefill_status === 'existing_local_artifact_linked').length;
 const manualWalkthroughCapture = csv('data_processed/manual_walkthrough_capture_sheet.csv');
 const paidFlowCapture = csv('data_processed/paid_flow_capture_sheet.csv');
 const icpInterviewCapture = csv('data_processed/icp_interview_capture_sheet.csv');
@@ -263,6 +265,7 @@ report.push(`- Validation evidence workspace: ${validationWorkspace.length} lane
 report.push(`- Validation Batch 01: ${validationBatch01.length} prefilled blocker-note files ready for first observed validation tranche.`);
 report.push(`- Validation Batch 02: ${validationBatch02.length} prefilled P0-breadth note files for manual walkthrough, paid-flow signoff, ICP interviews, prototype sessions, and scorecard gates.`);
 report.push(`- Validation Batch 03: ${validationBatch03.length} prefilled P1-context paid-flow note files to keep weaker monetization signals conservative.`);
+report.push(`- Validation note local evidence links: ${validationBatchPrefilledLocalArtifacts} batch notes now point at existing local artifacts, mainly captured paywall screenshots; these are evidence links, not human signoff.`);
 report.push(`- Validation capture sheets: ${validationCaptureRows} fillable capture rows across manual walkthrough, paid-flow, ICP interview, and prototype-session evidence.`);
 report.push(`- Market source confidence review: ${marketSourceConfidence.length} sources graded; ${highUseMarketSources.length} high-use anchors and ${rangeOnlyMarketSources.length} range-only/context sources.`);
 report.push(`- Market sizing stress test: ${marketAssumptionAudit.length} assumption-risk rows and ${marketStressTest.length} bottom-up stress scenarios.`);
@@ -454,6 +457,7 @@ if (evidenceManifest.length) {
   report.push('The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.');
   report.push('');
   report.push(`Manifest snapshot: ${evidenceManifest.length} artifacts; ${manifestCsvRows.length} CSV artifacts; ${manifestTrackedRows} tracked CSV rows; ${manifestMissing.length} missing required artifacts.`);
+  report.push(`Validation note artifact links: ${validationBatchPrefilledLocalArtifacts} existing local artifacts linked inside batch notes.`);
   report.push('');
   report.push('Largest tracked CSV artifacts:');
   report.push('');
@@ -1586,6 +1590,7 @@ console.log(`validation_workspace_lanes=${validationWorkspace.length}`);
 console.log(`validation_batch01_rows=${validationBatch01.length}`);
 console.log(`validation_batch02_rows=${validationBatch02.length}`);
 console.log(`validation_batch03_rows=${validationBatch03.length}`);
+console.log(`validation_batch_local_artifact_links=${validationBatchPrefilledLocalArtifacts}`);
 console.log(`source_expansion_backlog_rows=${sourceExpansionBacklog.length}`);
 console.log(`p0_external_rows=${p0ExternalSources.length}`);
 console.log(`p0_external_usable=${p0ExternalUsable.length}`);

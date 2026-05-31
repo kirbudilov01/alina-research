@@ -42,10 +42,11 @@ Review screenshot and, if needed, inspect app/web paid flow; set confirm/partial
 
 ## Evidence Links
 
-- screenshot_paths:
+- prefill_status: existing_local_artifact_linked
+- screenshot_paths: output/paywall_screenshots/26-hallow-prayer-meditation-medium.png
 - notes_paths:
 - participant_quote_or_visible_text:
-- observed_value:
+- observed_value: login_gate_or_app_store_redirect; confidence=low_medium; price=none
 
 ## Fields To Fill Back
 

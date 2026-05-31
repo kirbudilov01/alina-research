@@ -41,6 +41,7 @@ Type or speak one short sentence. Copy shown: One sentence only: what do you wan
 
 ## Evidence Links
 
+- prefill_status: no_local_artifact_prefill
 - screenshot_paths:
 - notes_paths:
 - participant_quote_or_visible_text:
