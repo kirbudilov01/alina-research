@@ -1,6 +1,6 @@
 # Top-100 Competitor Battlecards V1
 
-Generated: 2026-05-31T02:37:09.103Z
+Generated: 2026-05-31T02:42:31.758Z
 
 ## Scope
 
@@ -15,6 +15,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 6/6; behavior-tied progression: yes
 - Retention tags: daily_loop|streaks|xp_levels|avatar_feedback|journaling_reflection|social|reminders_habits
 - Pricing tags: credits_or_consumables
+- Observed IAP: 6 rows; range 4.99-59.99 USD; tags subscription_like:1|trial_like:1|consumable_or_unlock:2|unclear_iap:3
 - Review signals: content_depth_request:20|loves_daily_loop:10|quality_bug_complaint:8|loves_emotional_support:7|loves_avatar_progress:6
 - JTBD clusters: jtbd_daily_anchor:19|jtbd_belonging_accountability:7|jtbd_make_growth_visible:6|jtbd_fast_emotional_reset:4
 - Pain clusters: pain_content_depth_customization:20|pain_signup_access_friction:9|pain_reliability_breaks_ritual:8|pain_subscription_value:2
@@ -30,6 +31,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|xp_levels|quests_challenges|avatar_feedback|journaling_reflection|social|reminders_habits
 - Pricing tags: none detected
+- Observed IAP: 6 rows; range 18.99-59.99 USD; tags subscription_like:5|unclear_iap:1
 - Review signals: content_depth_request:16|loves_daily_loop:8|pricing_complaint:8|loves_avatar_progress:6|loves_emotional_support:4
 - JTBD clusters: jtbd_make_growth_visible:6|jtbd_daily_anchor:6|jtbd_structure_self_improvement:6|jtbd_feel_seen_personalized:5
 - Pain clusters: pain_content_depth_customization:16|pain_subscription_value:8|pain_trust_accuracy_safety:4|pain_reliability_breaks_ritual:1
@@ -45,6 +47,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|xp_levels|quests_challenges|avatar_feedback|journaling_reflection|social|reminders_habits
 - Pricing tags: none detected
+- Observed IAP: 8 rows; range 12.99-99.99 USD; tags subscription_like:7|unclear_iap:1
 - Review signals: loves_daily_loop:17|content_depth_request:13|loves_avatar_progress:9|loves_emotional_support:6|pricing_complaint:5
 - JTBD clusters: jtbd_daily_anchor:20|jtbd_make_growth_visible:9|jtbd_structure_self_improvement:8|jtbd_belonging_accountability:5
 - Pain clusters: pain_content_depth_customization:13|pain_subscription_value:5|pain_signup_access_friction:4|pain_reliability_breaks_ritual:2
@@ -60,6 +63,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|quests_challenges|avatar_feedback|social|reminders_habits
 - Pricing tags: subscription|credits_or_consumables
+- Observed IAP: 10 rows; range 9.99-69.99 USD; tags unclear_iap:3|subscription_like:7
 - Review signals: loves_avatar_progress:6|loves_daily_loop:6|content_depth_request:6|loves_emotional_support:5|pricing_complaint:5
 - JTBD clusters: jtbd_make_growth_visible:6|jtbd_daily_anchor:6|jtbd_structure_self_improvement:3|jtbd_belonging_accountability:3
 - Pain clusters: pain_content_depth_customization:6|pain_subscription_value:5|pain_signup_access_friction:1
@@ -75,6 +79,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: streaks|xp_levels|quests_challenges|avatar_feedback|social|reminders_habits
 - Pricing tags: none detected
+- Observed IAP: 0 rows; range n/a-n/a USD; tags none observed
 - Review signals: content_depth_request:18|churn_signal:11|pricing_complaint:9|loves_avatar_progress:7|quality_bug_complaint:5
 - JTBD clusters: jtbd_make_growth_visible:7|jtbd_structure_self_improvement:5|jtbd_daily_anchor:4|jtbd_belonging_accountability:4
 - Pain clusters: pain_content_depth_customization:18|pain_subscription_value:9|pain_trust_accuracy_safety:8|pain_signup_access_friction:6
@@ -90,6 +95,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|xp_levels|avatar_feedback|social|reminders_habits
 - Pricing tags: none detected
+- Observed IAP: 8 rows; range 9.99-149.99 USD; tags unclear_iap:3|subscription_like:5
 - Review signals: loves_daily_loop:16|content_depth_request:15|pricing_complaint:14|loves_avatar_progress:6|churn_signal:6
 - JTBD clusters: jtbd_daily_anchor:14|jtbd_make_growth_visible:6|jtbd_belonging_accountability:4|jtbd_structure_self_improvement:4
 - Pain clusters: pain_content_depth_customization:18|pain_subscription_value:14|pain_signup_access_friction:7|pain_reliability_breaks_ritual:2
@@ -105,6 +111,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|avatar_feedback|journaling_reflection|reminders_habits
 - Pricing tags: free_entry
+- Observed IAP: 9 rows; range 9.99-99.99 USD; tags subscription_like:9
 - Review signals: loves_daily_loop:13|pricing_complaint:11|content_depth_request:10|loves_avatar_progress:8|churn_signal:6
 - JTBD clusters: jtbd_structure_self_improvement:15|jtbd_daily_anchor:15|jtbd_make_growth_visible:8|jtbd_belonging_accountability:1
 - Pain clusters: pain_subscription_value:11|pain_content_depth_customization:10|pain_reliability_breaks_ritual:5|pain_trust_accuracy_safety:3
@@ -120,6 +127,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|xp_levels|avatar_feedback|journaling_reflection|social|reminders_habits
 - Pricing tags: none detected
+- Observed IAP: 4 rows; range 11.99-399.99 USD; tags subscription_like:4|lifetime_like:1
 - Review signals: loves_emotional_support:12|pricing_complaint:11|content_depth_request:10|loves_daily_loop:7|churn_signal:6
 - JTBD clusters: jtbd_daily_anchor:9|jtbd_belonging_accountability:4|jtbd_make_growth_visible:3|jtbd_structure_self_improvement:2
 - Pain clusters: pain_subscription_value:11|pain_content_depth_customization:10|pain_signup_access_friction:7|pain_reliability_breaks_ritual:5
@@ -135,6 +143,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|xp_levels|quests_challenges|avatar_feedback|journaling_reflection|social|reminders_habits
 - Pricing tags: free_entry|trial
+- Observed IAP: 2 rows; range 19.99-169.00 USD; tags subscription_like:2
 - Review signals: pricing_complaint:24|content_depth_request:19|churn_signal:17|quality_bug_complaint:12|loves_avatar_progress:10
 - JTBD clusters: jtbd_make_growth_visible:10|jtbd_belonging_accountability:3|jtbd_daily_anchor:3|jtbd_feel_seen_personalized:2
 - Pain clusters: pain_subscription_value:24|pain_content_depth_customization:19|pain_reliability_breaks_ritual:11|pain_signup_access_friction:9
@@ -150,6 +159,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|xp_levels|quests_challenges|avatar_feedback|journaling_reflection|social|reminders_habits
 - Pricing tags: none detected
+- Observed IAP: 3 rows; range 12.99-69.99 USD; tags unclear_iap:3
 - Review signals: loves_emotional_support:11|loves_daily_loop:10|content_depth_request:5|loves_avatar_progress:4|pricing_complaint:3
 - JTBD clusters: jtbd_fast_emotional_reset:13|jtbd_daily_anchor:8|jtbd_make_growth_visible:4|jtbd_structure_self_improvement:3
 - Pain clusters: pain_content_depth_customization:5|pain_subscription_value:3|pain_signup_access_friction:1
@@ -165,6 +175,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|xp_levels|journaling_reflection|reminders_habits
 - Pricing tags: none detected
+- Observed IAP: 4 rows; range 11.00-107.99 USD; tags unclear_iap:4
 - Review signals: content_depth_request:17|loves_emotional_support:13|pricing_complaint:9|loves_avatar_progress:7|loves_daily_loop:4
 - JTBD clusters: jtbd_structure_self_improvement:21|jtbd_belonging_accountability:10|jtbd_make_growth_visible:7|jtbd_daily_anchor:6
 - Pain clusters: pain_content_depth_customization:18|pain_subscription_value:9|pain_trust_accuracy_safety:2|pain_signup_access_friction:1
@@ -180,6 +191,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|xp_levels|journaling_reflection|social|reminders_habits
 - Pricing tags: none detected
+- Observed IAP: 4 rows; range 1.99-119.99 USD; tags subscription_like:3|lifetime_like:1
 - Review signals: content_depth_request:12|loves_avatar_progress:6|loves_emotional_support:6|pricing_complaint:3|trust_accuracy_complaint:2
 - JTBD clusters: jtbd_make_growth_visible:6|jtbd_fast_emotional_reset:6|jtbd_belonging_accountability:3|jtbd_daily_anchor:3
 - Pain clusters: pain_content_depth_customization:12|pain_subscription_value:3|pain_signup_access_friction:2|pain_trust_accuracy_safety:2
@@ -195,6 +207,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: streaks|xp_levels|avatar_feedback|journaling_reflection|reminders_habits
 - Pricing tags: premium|subscription
+- Observed IAP: 8 rows; range 0.00-89.99 USD; tags subscription_like:8|lifetime_like:4
 - Review signals: loves_daily_loop:15|content_depth_request:10|pricing_complaint:9|loves_avatar_progress:4|quality_bug_complaint:2
 - JTBD clusters: jtbd_structure_self_improvement:15|jtbd_daily_anchor:14|jtbd_make_growth_visible:4
 - Pain clusters: pain_content_depth_customization:10|pain_subscription_value:9|pain_signup_access_friction:8|pain_reliability_breaks_ritual:2
@@ -210,6 +223,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|xp_levels|avatar_feedback|journaling_reflection|social|reminders_habits
 - Pricing tags: none detected
+- Observed IAP: 10 rows; range 6.99-54.90 USD; tags subscription_like:8|unclear_iap:2
 - Review signals: content_depth_request:12|pricing_complaint:10|loves_emotional_support:9|loves_avatar_progress:7|churn_signal:4
 - JTBD clusters: jtbd_fast_emotional_reset:8|jtbd_make_growth_visible:7|jtbd_daily_anchor:4|jtbd_belonging_accountability:3
 - Pain clusters: pain_content_depth_customization:12|pain_subscription_value:10|pain_trust_accuracy_safety:3|pain_reliability_breaks_ritual:3
@@ -225,6 +239,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|xp_levels|quests_challenges|avatar_feedback|journaling_reflection|reminders_habits
 - Pricing tags: none detected
+- Observed IAP: 9 rows; range 5.99-79.99 USD; tags unclear_iap:7|lifetime_like:1|subscription_like:1
 - Review signals: content_depth_request:12|loves_daily_loop:10|pricing_complaint:6|loves_avatar_progress:6|trust_accuracy_complaint:4
 - JTBD clusters: jtbd_daily_anchor:11|jtbd_structure_self_improvement:11|jtbd_make_growth_visible:6|jtbd_belonging_accountability:3
 - Pain clusters: pain_content_depth_customization:12|pain_subscription_value:6|pain_trust_accuracy_safety:6|pain_signup_access_friction:1
@@ -240,6 +255,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|xp_levels|avatar_feedback|reminders_habits
 - Pricing tags: free_entry
+- Observed IAP: 1 rows; range 1.99-1.99 USD; tags subscription_like:1
 - Review signals: content_depth_request:26|loves_avatar_progress:21|pricing_complaint:13|loves_daily_loop:5|quality_bug_complaint:3
 - JTBD clusters: jtbd_make_growth_visible:23|jtbd_fast_emotional_reset:15|jtbd_daily_anchor:6|jtbd_belonging_accountability:3
 - Pain clusters: pain_content_depth_customization:26|pain_subscription_value:13|pain_signup_access_friction:4|pain_reliability_breaks_ritual:3
@@ -255,6 +271,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|xp_levels|quests_challenges|avatar_feedback|social|reminders_habits
 - Pricing tags: free_entry|credits_or_consumables
+- Observed IAP: 10 rows; range 0.99-99.99 USD; tags subscription_like:3|unclear_iap:6|lifetime_like:1
 - Review signals: loves_avatar_progress:12|loves_daily_loop:4|content_depth_request:1|loves_emotional_support:1|privacy_safety_signal:1
 - JTBD clusters: jtbd_make_growth_visible:12|jtbd_daily_anchor:4|jtbd_belonging_accountability:1|jtbd_fast_emotional_reset:1
 - Pain clusters: pain_unclear_game_loop:3|pain_content_depth_customization:1|pain_trust_accuracy_safety:1
@@ -270,6 +287,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|avatar_feedback|journaling_reflection|social|reminders_habits
 - Pricing tags: free_entry|subscription
+- Observed IAP: 6 rows; range 4.99-12.99 USD; tags lifetime_like:2|unclear_iap:1|subscription_like:3
 - Review signals: loves_daily_loop:13|pricing_complaint:13|content_depth_request:13|loves_emotional_support:5|loves_avatar_progress:5
 - JTBD clusters: jtbd_structure_self_improvement:18|jtbd_daily_anchor:14|jtbd_make_growth_visible:5|jtbd_belonging_accountability:2
 - Pain clusters: pain_subscription_value:13|pain_content_depth_customization:13|pain_signup_access_friction:8|pain_reliability_breaks_ritual:1
@@ -285,6 +303,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: streaks|xp_levels|quests_challenges|avatar_feedback|journaling_reflection|social|reminders_habits
 - Pricing tags: free_entry|premium
+- Observed IAP: 7 rows; range 2.99-35.90 USD; tags subscription_like:2|consumable_or_unlock:5
 - Review signals: content_depth_request:17|loves_emotional_support:11|loves_avatar_progress:10|loves_daily_loop:6|pricing_complaint:1
 - JTBD clusters: jtbd_structure_self_improvement:18|jtbd_make_growth_visible:13|jtbd_daily_anchor:10|jtbd_belonging_accountability:6
 - Pain clusters: pain_content_depth_customization:18|pain_unclear_game_loop:11|pain_signup_access_friction:3|pain_subscription_value:1
@@ -300,6 +319,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: streaks|avatar_feedback|social|reminders_habits
 - Pricing tags: credits_or_consumables
+- Observed IAP: 8 rows; range 19.99-399.00 USD; tags unclear_iap:7|subscription_like:1
 - Review signals: loves_avatar_progress:15|content_depth_request:12|pricing_complaint:11|quality_bug_complaint:6|churn_signal:6
 - JTBD clusters: jtbd_make_growth_visible:15|jtbd_belonging_accountability:5|jtbd_daily_anchor:5|jtbd_fast_emotional_reset:1
 - Pain clusters: pain_content_depth_customization:12|pain_subscription_value:11|pain_signup_access_friction:8|pain_reliability_breaks_ritual:6
@@ -315,6 +335,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|avatar_feedback|journaling_reflection|reminders_habits
 - Pricing tags: none detected
+- Observed IAP: 2 rows; range 15.99-99.99 USD; tags subscription_like:2
 - Review signals: content_depth_request:24|pricing_complaint:11|churn_signal:8|loves_daily_loop:6|quality_bug_complaint:5
 - JTBD clusters: jtbd_structure_self_improvement:7|jtbd_daily_anchor:6|jtbd_make_growth_visible:6|jtbd_feel_seen_personalized:4
 - Pain clusters: pain_content_depth_customization:24|pain_subscription_value:11|pain_signup_access_friction:6|pain_trust_accuracy_safety:6
@@ -330,6 +351,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: streaks|xp_levels|avatar_feedback|journaling_reflection|social|reminders_habits
 - Pricing tags: none detected
+- Observed IAP: 3 rows; range 5.99-129.99 USD; tags unclear_iap:2|lifetime_like:1
 - Review signals: loves_daily_loop:11|loves_avatar_progress:4|loves_emotional_support:3|content_depth_request:3|pricing_complaint:1
 - JTBD clusters: jtbd_structure_self_improvement:14|jtbd_daily_anchor:11|jtbd_make_growth_visible:4|jtbd_fast_emotional_reset:1
 - Pain clusters: pain_signup_access_friction:3|pain_content_depth_customization:3|pain_subscription_value:1|pain_reliability_breaks_ritual:1
@@ -345,6 +367,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: streaks|xp_levels|avatar_feedback|journaling_reflection|social|reminders_habits
 - Pricing tags: none detected
+- Observed IAP: 0 rows; range n/a-n/a USD; tags none observed
 - Review signals: quality_bug_complaint:8|content_depth_request:6|pricing_complaint:4|loves_avatar_progress:3|trust_accuracy_complaint:2
 - JTBD clusters: jtbd_make_growth_visible:3|jtbd_belonging_accountability:2
 - Pain clusters: pain_signup_access_friction:14|pain_reliability_breaks_ritual:8|pain_content_depth_customization:6|pain_subscription_value:4
@@ -360,6 +383,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 5/6; behavior-tied progression: no
 - Retention tags: daily_loop|streaks|avatar_feedback|reminders_habits
 - Pricing tags: premium
+- Observed IAP: 24 rows; range 15.99-74.99 USD; tags subscription_like:18|lifetime_like:6
 - Review signals: pricing_complaint:15|content_depth_request:15|churn_signal:6|loves_emotional_support:5|privacy_safety_signal:5
 - JTBD clusters: jtbd_structure_self_improvement:8|jtbd_daily_anchor:4|jtbd_fast_emotional_reset:4|jtbd_make_growth_visible:3
 - Pain clusters: pain_subscription_value:15|pain_content_depth_customization:15|pain_trust_accuracy_safety:9|pain_signup_access_friction:9
@@ -375,6 +399,7 @@ AI-assisted battlecards for the highest-priority unique apps in the top-100 inte
 - Core score: 4/6; behavior-tied progression: no
 - Retention tags: xp_levels|avatar_feedback|journaling_reflection|social
 - Pricing tags: none detected
+- Observed IAP: 9 rows; range 6.99-79.99 USD; tags subscription_like:2|unclear_iap:6|lifetime_like:1
 - Review signals: pricing_complaint:7|content_depth_request:6|loves_avatar_progress:1
 - JTBD clusters: jtbd_make_growth_visible:1
 - Pain clusters: pain_subscription_value:7|pain_content_depth_customization:6|pain_signup_access_friction:3

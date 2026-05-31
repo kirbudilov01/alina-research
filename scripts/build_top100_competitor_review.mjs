@@ -5,6 +5,7 @@ const CORE = 'data_processed/product_core_evidence_matrix.csv';
 const PRICING = 'data_processed/pricing_retention_matrix.csv';
 const REVIEW_SIGNALS = 'data_processed/review_signal_matrix.csv';
 const JTBD_ROWS = 'data_processed/review_jtbd_cluster_rows.csv';
+const IAP_SUMMARY = 'data_processed/app_store_iap_pricing_summary.csv';
 
 const OUT_SCORECARD = 'data_processed/top100_competitor_review_scorecard.csv';
 const OUT_BATTLECARDS = 'docs/competitive/top100-competitor-battlecards-v1.md';
@@ -124,6 +125,7 @@ function alinaOpening(row) {
 const prefill = csv(PREFILL);
 const core = idxBy(csv(CORE), 'app_name');
 const pricing = idxBy(csv(PRICING), 'app_name');
+const iapSummary = fs.existsSync(IAP_SUMMARY) ? idxBy(csv(IAP_SUMMARY), 'app_store_id') : new Map();
 const reviewSignals = csv(REVIEW_SIGNALS);
 const jtbdRows = csv(JTBD_ROWS);
 
@@ -149,6 +151,7 @@ for (const row of prefill) {
   const appNameKey = row.app_name;
   const c = core.get(appNameKey) || {};
   const p = pricing.get(appNameKey) || {};
+  const iap = iapSummary.get(appKey) || {};
   const signals = signalByApp.get(appKey) || signalByApp.get(appNameKey) || [];
   const jtbd = jtbdByApp.get(appKey) || jtbdByApp.get(appNameKey) || [];
   const jtbdOnly = jtbd.filter(r => r.cluster_type === 'jtbd');
@@ -178,6 +181,10 @@ for (const row of prefill) {
     behavior_tied_progression: c.behavior_tied_progression || '',
     next_day_hook: c.next_day_hook || '',
     pricing_tags: p.pricing_tags || '',
+    observed_iap_count: iap.iap_count || '',
+    observed_min_iap_price_usd: iap.min_price_usd || '',
+    observed_max_iap_price_usd: iap.max_price_usd || '',
+    observed_iap_product_tags: iap.product_tags || '',
     retention_tags: p.retention_tags || '',
     review_signal_rows: signals.length,
     top_review_signals: topCounts(signals, 'signal', 5),
@@ -202,7 +209,8 @@ writeCsv(OUT_SCORECARD, scoreRows, [
   'review_count', 'alina_closeness', 'alina_core_score', 'competitive_threat_score',
   'competitive_verdict', 'personal_meaning', 'one_daily_action', 'short_reset',
   'avatar_or_identity', 'behavior_tied_progression', 'next_day_hook', 'pricing_tags',
-  'retention_tags', 'review_signal_rows', 'top_review_signals', 'jtbd_cluster_rows',
+  'observed_iap_count', 'observed_min_iap_price_usd', 'observed_max_iap_price_usd',
+  'observed_iap_product_tags', 'retention_tags', 'review_signal_rows', 'top_review_signals', 'jtbd_cluster_rows',
   'pain_cluster_rows', 'top_review_jtbd', 'top_review_pains', 'alina_opening',
   'app_store_url', 'source_evidence_excerpt'
 ]);
@@ -231,6 +239,7 @@ for (const row of topBattlecards) {
   battle.push(`- Core score: ${row.alina_core_score}/6; behavior-tied progression: ${row.behavior_tied_progression}`);
   battle.push(`- Retention tags: ${row.retention_tags || 'none detected'}`);
   battle.push(`- Pricing tags: ${row.pricing_tags || 'none detected'}`);
+  battle.push(`- Observed IAP: ${row.observed_iap_count || 0} rows; range ${row.observed_min_iap_price_usd || 'n/a'}-${row.observed_max_iap_price_usd || 'n/a'} USD; tags ${row.observed_iap_product_tags || 'none observed'}`);
   battle.push(`- Review signals: ${row.top_review_signals || 'none collected'}`);
   battle.push(`- JTBD clusters: ${row.top_review_jtbd || 'none collected'}`);
   battle.push(`- Pain clusters: ${row.top_review_pains || 'none collected'}`);
@@ -261,6 +270,7 @@ lines.push(`- Top-100 rows reviewed: ${scoreRows.length}`);
 lines.push(`- Unique primary app entries: ${primaryRows.length}`);
 lines.push(`- Duplicate app entries: ${scoreRows.length - primaryRows.length}`);
 lines.push(`- Apps with public review signals: ${primaryRows.filter(r => Number(r.review_signal_rows) > 0).length}`);
+lines.push(`- Apps with observed IAP pricing: ${primaryRows.filter(r => Number(r.observed_iap_count) > 0).length}`);
 lines.push(`- High-threat unique apps (score >= 24): ${highThreat.length}`);
 lines.push(`- Direct reference competitors with behavior-tied progression evidence: ${directReference.length}`);
 lines.push('');

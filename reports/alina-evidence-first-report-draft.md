@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T02:37:10.148Z
+Generated: 2026-05-31T02:42:34.445Z
 
 ## 1. Executive Summary
 
@@ -15,11 +15,12 @@ Key quantified signals:
 - High whitespace candidates: 593; medium: 4040; low: 7919.
 - Top-100 intersection candidates enriched from App Store metadata: 100/100.
 - AI-assisted top-100 competitor review: 100 rows, 90 unique primary apps, 45 high-threat apps, 1 direct reference competitor.
+- App Store IAP pricing layer: 498 observed purchase rows across 80 apps; observed price range $0.00-$549.99.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
 - Forum/source evidence map: 18 qualitative rows across 5 market pillars.
-- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, and top-100 competitor verdicts.
+- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, and IAP price bands.
 - Modeled direct intersection SAM base: USD 201960000.
 
 ## 2. Product Hypotheses
@@ -92,6 +93,39 @@ The model intentionally avoids adding five TAMs together. Gaming is treated prim
 - premium: 7
 - enterprise_or_human_service: 2
 - trial: 2
+
+### Observed App Store IAP Pricing
+
+Public App Store pages exposed 498 in-app purchase rows across 80 top-candidate apps. This is observed webpage pricing, not guaranteed complete backend IAP catalog data.
+
+Observed price bands:
+
+- 15_to_49_99: 191
+- 5_to_14_99: 132
+- 50_to_99_99: 81
+- under_5: 74
+- 100_plus: 20
+
+Observed IAP product tags:
+
+- subscription_like: 287
+- unclear_iap: 161
+- consumable_or_unlock: 34
+- lifetime_like: 27
+- trial_like: 10
+
+Highest observed IAP ceilings:
+
+| App | IAP Rows | Min | Max | Product Tags |
+| --- | ---: | ---: | ---: | --- |
+| Awaken: AI Coach & Inner Guide | 9 | 4.99 | 549.99 | unclear_iap:7/subscription_like:2 |
+| Ask Nithyananda AI | 3 | 54.00 | 509.00 | unclear_iap:3 |
+| Motivate: Daily Motivation | 4 | 11.99 | 399.99 | subscription_like:4/lifetime_like:1 |
+| Mindvalley: Self Improvement | 8 | 19.99 | 399.00 | unclear_iap:7/subscription_like:1 |
+| Mia Adora | 10 | 1.00 | 334.99 | unclear_iap:6/consumable_or_unlock:3/subscription_like:1 |
+| Eylo: AI Weight Loss Coach | 5 | 4.99 | 179.99 | unclear_iap:3/subscription_like:2 |
+| MindFi: Mind Fitness for All | 3 | 5.99 | 174.99 | subscription_like:2/lifetime_like:1 |
+| Yoga International | 2 | 19.99 | 169.00 | subscription_like:2 |
 
 ### Retention Signals
 
@@ -272,7 +306,7 @@ Remaining proof required:
 - Human validation of AI-assisted battlecards and scorecard verdicts.
 - Forum evidence and deeper manual clustering of reviews for user pain language and subscription objections.
 - Manual quote-level coding of forum/source rows.
-- Pricing/IAP extraction beyond App Store metadata.
+- Deeper pricing validation for web/Android products and paywall screenshots where accessible.
 - Prototype test of the two-minute daily loop.
 
 ## 11. Source and Claim Layer
@@ -307,6 +341,7 @@ Market claims currently normalized: 14.
 - `docs/competitive/top-intersection-review-synthesis-v1.md`
 - `docs/competitive/top100-competitor-review-v1.md`
 - `docs/competitive/top100-competitor-battlecards-v1.md`
+- `docs/competitive/app-store-iap-pricing-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
 - `data_processed/competitor_feature_matrix.csv`
@@ -314,12 +349,14 @@ Market claims currently normalized: 14.
 - `data_processed/whitespace_signal_matrix.csv`
 - `data_processed/top_intersection_review_prefill.csv`
 - `data_processed/top100_competitor_review_scorecard.csv`
+- `data_processed/app_store_iap_pricing_summary.csv`
 - `data_processed/pricing_retention_matrix.csv`
 - `data_processed/product_core_evidence_matrix.csv`
 - `data_processed/review_signal_matrix.csv`
 - `data_processed/review_jtbd_cluster_summary.csv`
 - `data_processed/review_jtbd_cluster_rows.csv`
 - `data_raw/app_store_top_candidate_reviews.csv`
+- `data_raw/app_store_iap_pricing_raw.csv`
 - `data_raw/forum_evidence_signals.csv`
 - `output/charts/whitespace-bands.svg`
 - `output/charts/review-jtbd-clusters.svg`
@@ -328,12 +365,13 @@ Market claims currently normalized: 14.
 - `output/charts/forum-signals-by-market.svg`
 - `output/charts/top100-competitor-verdicts.svg`
 - `output/charts/top100-threat-scores.svg`
+- `output/charts/iap-price-bands.svg`
 
 ## 13. Next Work
 
 1. Human-validate the AI-assisted top-100 competitor scorecard and battlecards.
 2. Manually validate the highest-signal review clusters and extract exact user language for positioning.
-3. Extract detailed IAP/subscription pricing where accessible.
+3. Validate pricing beyond App Store web-page IAP rows: Android, websites, paywall screenshots, and trial terms.
 4. Build visual charts and render the PDF version.
 5. Manually code Reddit/forum/website evidence beyond the current source map.
 6. Update go/no-go decision after manual review and user validation.

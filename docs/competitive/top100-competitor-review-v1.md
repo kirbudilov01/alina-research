@@ -1,6 +1,6 @@
 # Top-100 Competitor Review V1
 
-Generated: 2026-05-31T02:37:09.104Z
+Generated: 2026-05-31T02:42:31.759Z
 
 ## Scope
 
@@ -12,6 +12,7 @@ This is an AI-assisted competitor review pass over the top-100 intersection cand
 - Unique primary app entries: 90
 - Duplicate app entries: 10
 - Apps with public review signals: 75
+- Apps with observed IAP pricing: 80
 - High-threat unique apps (score >= 24): 45
 - Direct reference competitors with behavior-tied progression evidence: 1
 

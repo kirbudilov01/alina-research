@@ -92,6 +92,8 @@ const rawReviews = csv('data_raw/app_store_top_candidate_reviews.csv');
 const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
 const forumSignals = csv('data_raw/forum_evidence_signals.csv');
 const top100Review = csv('data_processed/top100_competitor_review_scorecard.csv');
+const iapRaw = csv('data_raw/app_store_iap_pricing_raw.csv');
+const iapSummary = csv('data_processed/app_store_iap_pricing_summary.csv');
 
 const highWhitespace = whitespace.filter(r => r.whitespace_band === 'high').length;
 const mediumWhitespace = whitespace.filter(r => r.whitespace_band === 'medium').length;
@@ -106,6 +108,8 @@ const reviewSignalCounts = countBy(reviewSignals, 'signal');
 const primaryCompetitors = top100Review.filter(r => r.duplicate_flag === 'primary_app_entry');
 const highThreatCompetitors = primaryCompetitors.filter(r => Number(r.competitive_threat_score) >= 24);
 const directReferenceCompetitors = primaryCompetitors.filter(r => r.competitive_verdict === 'direct_reference_competitor');
+const appsWithIap = new Set(iapRaw.map(r => r.app_store_id).filter(Boolean)).size;
+const iapPrices = iapRaw.map(r => Number(r.price_usd)).filter(Number.isFinite);
 
 const report = [];
 
@@ -126,11 +130,12 @@ report.push(`- Audience signal rows: ${audience.length}.`);
 report.push(`- High whitespace candidates: ${highWhitespace}; medium: ${mediumWhitespace}; low: ${lowWhitespace}.`);
 report.push(`- Top-100 intersection candidates enriched from App Store metadata: ${prefill.length}/100.`);
 report.push(`- AI-assisted top-100 competitor review: ${top100Review.length} rows, ${primaryCompetitors.length} unique primary apps, ${highThreatCompetitors.length} high-threat apps, ${directReferenceCompetitors.length} direct reference competitor.`);
+report.push(`- App Store IAP pricing layer: ${iapRaw.length} observed purchase rows across ${appsWithIap} apps; observed price range ${iapPrices.length ? `$${Math.min(...iapPrices).toFixed(2)}-$${Math.max(...iapPrices).toFixed(2)}` : 'n/a'}.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
 report.push(`- Forum/source evidence map: ${forumSignals.length} qualitative rows across ${Object.keys(countBy(forumSignals, 'market')).length} market pillars.`);
-report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, and top-100 competitor verdicts.');
+report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, and IAP price bands.');
 report.push(`- Modeled direct intersection SAM base: USD ${baseIntersection.samBase || 'n/a'}.`);
 report.push('');
 report.push('## 2. Product Hypotheses');
@@ -197,6 +202,35 @@ const pricingTags = {};
 for (const row of pricing) for (const tag of String(row.pricing_tags || '').split('|').filter(Boolean)) pricingTags[tag] = (pricingTags[tag] || 0) + 1;
 report.push(bulletCounts(pricingTags));
 report.push('');
+if (iapRaw.length) {
+  report.push('### Observed App Store IAP Pricing');
+  report.push('');
+  report.push(`Public App Store pages exposed ${iapRaw.length} in-app purchase rows across ${appsWithIap} top-candidate apps. This is observed webpage pricing, not guaranteed complete backend IAP catalog data.`);
+  report.push('');
+  report.push('Observed price bands:');
+  report.push('');
+  report.push(bulletCounts(countBy(iapRaw, 'price_band')));
+  report.push('');
+  const iapTagCounts = {};
+  for (const row of iapRaw) for (const tag of String(row.product_tags || '').split('|').filter(Boolean)) iapTagCounts[tag] = (iapTagCounts[tag] || 0) + 1;
+  report.push('Observed IAP product tags:');
+  report.push('');
+  report.push(bulletCounts(iapTagCounts));
+  report.push('');
+  report.push('Highest observed IAP ceilings:');
+  report.push('');
+  report.push(mdTable([...iapSummary]
+    .filter(r => Number(r.iap_count) > 0)
+    .sort((a, b) => Number(b.max_price_usd) - Number(a.max_price_usd))
+    .slice(0, 8), [
+      { key: 'app_name', label: 'App' },
+      { key: 'iap_count', label: 'IAP Rows', align: 'right' },
+      { key: 'min_price_usd', label: 'Min', align: 'right' },
+      { key: 'max_price_usd', label: 'Max', align: 'right' },
+      { key: 'product_tags', label: 'Product Tags' }
+    ], 8));
+  report.push('');
+}
 report.push('### Retention Signals');
 report.push('');
 const retentionTags = {};
@@ -338,7 +372,7 @@ report.push('- Manual validation of the top-100 candidates.');
 report.push('- Human validation of AI-assisted battlecards and scorecard verdicts.');
 report.push('- Forum evidence and deeper manual clustering of reviews for user pain language and subscription objections.');
 report.push('- Manual quote-level coding of forum/source rows.');
-report.push('- Pricing/IAP extraction beyond App Store metadata.');
+report.push('- Deeper pricing validation for web/Android products and paywall screenshots where accessible.');
 report.push('- Prototype test of the two-minute daily loop.');
 report.push('');
 report.push('## 11. Source and Claim Layer');
@@ -367,6 +401,7 @@ report.push('- `docs/visuals/chart-index-v1.md`');
 report.push('- `docs/competitive/top-intersection-review-synthesis-v1.md`');
 report.push('- `docs/competitive/top100-competitor-review-v1.md`');
 report.push('- `docs/competitive/top100-competitor-battlecards-v1.md`');
+report.push('- `docs/competitive/app-store-iap-pricing-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
 report.push('- `data_processed/competitor_feature_matrix.csv`');
@@ -374,12 +409,14 @@ report.push('- `data_processed/audience_signal_matrix.csv`');
 report.push('- `data_processed/whitespace_signal_matrix.csv`');
 report.push('- `data_processed/top_intersection_review_prefill.csv`');
 report.push('- `data_processed/top100_competitor_review_scorecard.csv`');
+report.push('- `data_processed/app_store_iap_pricing_summary.csv`');
 report.push('- `data_processed/pricing_retention_matrix.csv`');
 report.push('- `data_processed/product_core_evidence_matrix.csv`');
 report.push('- `data_processed/review_signal_matrix.csv`');
 report.push('- `data_processed/review_jtbd_cluster_summary.csv`');
 report.push('- `data_processed/review_jtbd_cluster_rows.csv`');
 report.push('- `data_raw/app_store_top_candidate_reviews.csv`');
+report.push('- `data_raw/app_store_iap_pricing_raw.csv`');
 report.push('- `data_raw/forum_evidence_signals.csv`');
 report.push('- `output/charts/whitespace-bands.svg`');
 report.push('- `output/charts/review-jtbd-clusters.svg`');
@@ -388,12 +425,13 @@ report.push('- `output/charts/som-scenarios.svg`');
 report.push('- `output/charts/forum-signals-by-market.svg`');
 report.push('- `output/charts/top100-competitor-verdicts.svg`');
 report.push('- `output/charts/top100-threat-scores.svg`');
+report.push('- `output/charts/iap-price-bands.svg`');
 report.push('');
 report.push('## 13. Next Work');
 report.push('');
 report.push('1. Human-validate the AI-assisted top-100 competitor scorecard and battlecards.');
 report.push('2. Manually validate the highest-signal review clusters and extract exact user language for positioning.');
-report.push('3. Extract detailed IAP/subscription pricing where accessible.');
+report.push('3. Validate pricing beyond App Store web-page IAP rows: Android, websites, paywall screenshots, and trial terms.');
 report.push('4. Build visual charts and render the PDF version.');
 report.push('5. Manually code Reddit/forum/website evidence beyond the current source map.');
 report.push('6. Update go/no-go decision after manual review and user validation.');
@@ -415,6 +453,7 @@ status.push(mdTable([
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf', status: 'draft PDF done' },
   { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg', status: 'draft chart pack done' },
   { requirement: 'Manual review of top 100', evidence: 'data_processed/top100_competitor_review_scorecard.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md', status: 'AI-assisted review done v1; human validation pending' },
+  { requirement: 'Detailed pricing/IAP extraction', evidence: 'data_raw/app_store_iap_pricing_raw.csv; data_processed/app_store_iap_pricing_summary.csv; docs/competitive/app-store-iap-pricing-v1.md', status: 'App Store web IAP extraction done v1; Android/web/paywall validation pending' },
   { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md', status: 'App Store review extraction, JTBD clustering, and forum source map done v1; quote-level forum coding pending' }
 ], [
   { key: 'requirement', label: 'Requirement' },
@@ -432,3 +471,4 @@ console.log(`review_rows=${rawReviews.length}`);
 console.log(`review_signal_rows=${reviewSignals.length}`);
 console.log(`review_clusters=${reviewClusters.length}`);
 console.log(`forum_signal_rows=${forumSignals.length}`);
+console.log(`iap_rows=${iapRaw.length}`);

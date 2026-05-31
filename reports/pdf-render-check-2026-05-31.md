@@ -19,10 +19,12 @@ npm run build:pdf
 
 - PDF generated successfully with ReportLab.
 - File header is `%PDF-1.4`.
-- Page count: 9.
+- Page count: 10.
 - Text extraction found required sections:
   - Executive Summary
   - TAM/SAM/SOM
+  - Observed App Store IAP Pricing
+  - Observed price bands
   - AI-Assisted Top-100 Competitor Review
   - Competitor verdict counts
   - Highest-threat primary competitors
@@ -36,9 +38,8 @@ npm run build:pdf
 - Visual render check:
   - Rendered all pages to PNG with PyMuPDF in a temporary venv under `tmp/`.
   - Inspected representative pages 1, 2, 3, 4, 5, and 6.
-  - Pages 3-4 contain the AI-assisted top-100 competitor review and highest-threat table, and render cleanly.
-  - Page 5 contains the App Store review-language section and renders cleanly.
-  - Page 6 contains the JTBD/pain cluster table and forum/source-map section start, and renders cleanly.
+  - Pages 3-4 contain the observed IAP pricing section and AI-assisted top-100 competitor review, and render cleanly.
+  - Page 6 contains the App Store review-language section and renders cleanly.
   - No clipped tables, overlapping text, or unreadable sections found.
 
 ## Known Draft Limitation

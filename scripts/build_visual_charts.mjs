@@ -106,6 +106,9 @@ const forum = csv('data_raw/forum_evidence_signals.csv');
 const top100Review = fs.existsSync('data_processed/top100_competitor_review_scorecard.csv')
   ? csv('data_processed/top100_competitor_review_scorecard.csv')
   : [];
+const iapRows = fs.existsSync('data_raw/app_store_iap_pricing_raw.csv')
+  ? csv('data_raw/app_store_iap_pricing_raw.csv')
+  : [];
 
 horizontalBarChart({
   title: 'Whitespace Bands Across Expanded Competitor Universe',
@@ -169,6 +172,17 @@ if (top100Review.length) {
   });
 }
 
+if (iapRows.length) {
+  horizontalBarChart({
+    title: 'Observed App Store IAP Price Bands',
+    subtitle: 'Publicly visible in-app purchase prices from top intersection candidates.',
+    rows: Object.entries(countBy(iapRows, 'price_band'))
+      .sort((a, b) => b[1] - a[1])
+      .map(([label, value]) => ({ label, value })),
+    file: 'iap-price-bands.svg'
+  });
+}
+
 const lines = [];
 lines.push('# Chart Index V1');
 lines.push('');
@@ -185,6 +199,7 @@ if (top100Review.length) {
   lines.push('- `output/charts/top100-competitor-verdicts.svg`');
   lines.push('- `output/charts/top100-threat-scores.svg`');
 }
+if (iapRows.length) lines.push('- `output/charts/iap-price-bands.svg`');
 lines.push('');
 lines.push('## Notes');
 lines.push('');

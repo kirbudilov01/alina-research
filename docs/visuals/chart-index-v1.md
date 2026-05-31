@@ -1,6 +1,6 @@
 # Chart Index V1
 
-Generated: 2026-05-31T02:37:09.296Z
+Generated: 2026-05-31T02:42:31.976Z
 
 ## Charts
 
@@ -11,6 +11,7 @@ Generated: 2026-05-31T02:37:09.296Z
 - `output/charts/forum-signals-by-market.svg`
 - `output/charts/top100-competitor-verdicts.svg`
 - `output/charts/top100-threat-scores.svg`
+- `output/charts/iap-price-bands.svg`
 
 ## Notes
 
