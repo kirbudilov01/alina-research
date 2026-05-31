@@ -58,6 +58,14 @@ function clean(value) {
   return String(value ?? '').replace(/\s+/g, ' ').trim();
 }
 
+function pick(row, keys) {
+  for (const key of keys) {
+    const value = clean(row[key]);
+    if (value) return value;
+  }
+  return '';
+}
+
 function countBy(rows, key) {
   const out = {};
   for (const row of rows) out[row[key] || 'unknown'] = (out[row[key] || 'unknown'] || 0) + 1;
@@ -163,6 +171,16 @@ if (narrativeMap.length) {
   ], narrativeMap.length));
   lines.push('');
 }
+lines.push('## 0. Исполнительный рассказ');
+lines.push('');
+lines.push(`Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили ${crossSourceDedup.length} dedup rows в cross-source universe, ${top100.length} строк top-candidate review, ${audience.length} audience signal rows и ${manifest.length} локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.`);
+lines.push('');
+lines.push(`Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено ${behaviorTied.length}/100 строгих behavior-tied progression signals, но ${manualPacket.length} P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.`);
+lines.push('');
+lines.push(`Деньги в adjacent landscape видны, но их нужно держать честно. В market-money layer сейчас ${strongMoneyMarkets.length} strong directional cases, ${mediumMoneyMarkets.length} medium directional case и ${strongRevenue.length} strong competitor revenue proxies. Базовый intersection SAM в модели равен ${money(intersection.samBase)}. Это не прогноз выручки Alina и не обещание спроса; это аргумент, что рядом существуют платные привычки пользователей, которые стоит проверить через paid-flow signoff и willingness-to-pay вопросы.`);
+lines.push('');
+lines.push(`Аудиторно наиболее полезная формулировка сейчас не демографическая, а поведенческая: digital ritual users. Это люди, которые уже используют приложения, чтобы регулировать состояние, видеть прогресс, поддерживать идентичность и возвращаться к ощущению изменения. Самый сильный directional ICP сейчас - ${strongestIcp.segment_name || 'нет данных'}, но ни один ICP нельзя считать выбранным до интервью и прототипных сессий. Поэтому финальный смысл текущего пакета простой: у нас есть масштабная карта, гипотезы, источники, матрицы и рабочая validation system; следующий скачок качества появится только после наблюдаемого evidence на экранах конкурентов и у живых пользователей.`);
+lines.push('');
 lines.push('## 1. Откуда мы начали');
 lines.push('');
 lines.push('Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.');
@@ -189,7 +207,7 @@ lines.push('');
 lines.push(mdTable(marketMoney, [
   { key: 'market', label: 'Рынок' },
   { key: 'money_triangulation_verdict', label: 'Вердикт денег' },
-  { key: 'directional_money_score', label: 'Score', align: 'right' },
+  { key: 'total_money_evidence_score', label: 'Score', align: 'right' },
   { key: 'claim_boundary', label: 'Граница утверждения' }
 ], 8));
 lines.push('');
@@ -209,10 +227,16 @@ lines.push('Белое пятно не в том, что нет медитаци
 lines.push('');
 lines.push(`В whitespace matrix сейчас ${whitespace.length} строк. Cross-source saturation держит gaming/progression скорее как benchmark, а не как прямой основной рынок. Это здоровая осторожность: игровые механики полезны как язык мотивации, но если Alina будет выглядеть как retention-game без личного смысла, гипотеза сломается.`);
 lines.push('');
-lines.push(mdTable(saturation, [
-  { key: 'market', label: 'Рынок' },
+lines.push(mdTable(saturation.map(row => ({
+  market_label: pick(row, ['market', 'niche', 'pillar']),
+  opportunity_band: row.opportunity_band,
+  interpretation: row.interpretation,
+  next_validation_move: row.next_validation_move
+})), [
+  { key: 'market_label', label: 'Рынок' },
   { key: 'opportunity_band', label: 'Opportunity band' },
-  { key: 'interpretation', label: 'Интерпретация' }
+  { key: 'interpretation', label: 'Интерпретация' },
+  { key: 'next_validation_move', label: 'Следующий шаг' }
 ], 8));
 lines.push('');
 lines.push('## 5. Аудитория: не "люди из пяти рынков", а digital ritual users');

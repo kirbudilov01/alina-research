@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T11:17:50.893Z
+Собрано: 2026-05-31T11:22:46.252Z
 
 ## Как читать этот документ
 
@@ -21,10 +21,20 @@
 | 05_audience_icp | Общая аудитория - digital ritual users: люди, которые используют приложения для состояния, идентичности, прогресса и надежды на изменение. | 20492 audience rows; 6 ICP segments; 2339 coded Reddit rows; 574 Reddit capture rows | Это directional ICP, не финальная персона; Reddit rows не являются representative survey. |
 | 06_reddit_language | Reddit/forum слой нужен как язык боли и альтернатив: overload, streak anxiety, repetitive content, weak personalization, unclear value before paid. | 2339 coded signals; 1852 unique thread reads; 336 P0 and 238 P1 reads; 574 unread/do-not-upgrade capture rows | Пока capture_status=not_started, нельзя цитировать треды во внешнем документе и нельзя усиливать claims. |
 | 07_product_core | Проверяемая MVP-петля: персональное отражение дня, одно действие, короткий reset, завершение, причинное изменение прогресса/аватара и мягкий next-day hook. | 16 prototype stimulus rows; 6 scorecard metrics | Петля описана и подготовлена к тесту, но нет completed participant evidence. |
-| 08_claim_status | Текущий честный verdict: продолжать исследование, но не переобещать. Evidence base сильная как подготовка, но не финальная validation proof. | 10 completion requirements; 5 not fully proved/final; 6 validation gates; 6 not started gates; 357 manifest artifacts | Не отмечать цель complete: manual competitor walkthroughs, paid signoff, ICP interviews and prototype sessions remain open. |
+| 08_claim_status | Текущий честный verdict: продолжать исследование, но не переобещать. Evidence base сильная как подготовка, но не финальная validation proof. | 10 completion requirements; 5 not fully proved/final; 6 validation gates; 6 not started gates; 378 manifest artifacts | Не отмечать цель complete: manual competitor walkthroughs, paid signoff, ICP interviews and prototype sessions remain open. |
 | 09_validation_operating_system | Исследование уже превращено в операционную систему проверки: гипотезы, gates, capture sheets и dashboard показывают, какие claims можно усиливать, а какие нужно держать. | 6 validation gates; 6 not-started gates; 10 completion audit rows | Наличие validation OS не равно завершенной валидации; это подготовка к disciplined execution. |
-| 10_provenance_and_versioning | Все ключевые данные должны оставаться локально воспроизводимыми и версионированными, иначе большой ресерч быстро превращается в набор непроверяемых утверждений. | 357 manifest rows; local artifact hashes and row counts tracked; GitHub push used as persistence layer | Manifest подтверждает наличие и форму артефактов, но не заменяет human validation содержательных выводов. |
+| 10_provenance_and_versioning | Все ключевые данные должны оставаться локально воспроизводимыми и версионированными, иначе большой ресерч быстро превращается в набор непроверяемых утверждений. | 378 manifest rows; local artifact hashes and row counts tracked; GitHub push used as persistence layer | Manifest подтверждает наличие и форму артефактов, но не заменяет human validation содержательных выводов. |
 | 11_report_style | Финальный документ должен читаться как русское последовательное повествование: данные идут внутри рассказа, а не заменяют его. | Russian narrative report generated; evidence map is used as the chapter-level argument backbone; PDF output exists through the report pipeline | Красивый русский текст не должен усиливать недоказанные claims; каждое сильное утверждение остается связано с boundary. |
+
+## 0. Исполнительный рассказ
+
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 378 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+
+Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
+
+Деньги в adjacent landscape видны, но их нужно держать честно. В market-money layer сейчас 3 strong directional cases, 1 medium directional case и 22 strong competitor revenue proxies. Базовый intersection SAM в модели равен $201,960,000. Это не прогноз выручки Alina и не обещание спроса; это аргумент, что рядом существуют платные привычки пользователей, которые стоит проверить через paid-flow signoff и willingness-to-pay вопросы.
+
+Аудиторно наиболее полезная формулировка сейчас не демографическая, а поведенческая: digital ritual users. Это люди, которые уже используют приложения, чтобы регулировать состояние, видеть прогресс, поддерживать идентичность и возвращаться к ощущению изменения. Самый сильный directional ICP сейчас - Spiritual self-improvers, но ни один ICP нельзя считать выбранным до интервью и прототипных сессий. Поэтому финальный смысл текущего пакета простой: у нас есть масштабная карта, гипотезы, источники, матрицы и рабочая validation system; следующий скачок качества появится только после наблюдаемого evidence на экранах конкурентов и у живых пользователей.
 
 ## 1. Откуда мы начали
 
@@ -47,12 +57,12 @@
 
 | Рынок | Вердикт денег | Score | Граница утверждения |
 | --- | --- | ---: | --- |
-| mobile gaming | benchmark_money_visible_not_direct_tam |  |  |
-| astrology apps | strong_directional_money_case |  |  |
-| AI avatars | strong_directional_money_case |  |  |
-| digital coaching and AI coaching | medium_directional_money_case |  |  |
-| meditation and mindfulness apps | strong_directional_money_case |  |  |
-| Alina direct intersection SAM | insufficient_money_case |  |  |
+| mobile gaming | benchmark_money_visible_not_direct_tam | 7 |  |
+| astrology apps | strong_directional_money_case | 9 |  |
+| AI avatars | strong_directional_money_case | 10 |  |
+| digital coaching and AI coaching | medium_directional_money_case | 8 |  |
+| meditation and mindfulness apps | strong_directional_money_case | 9 |  |
+| Alina direct intersection SAM | insufficient_money_case | 1 |  |
 
 Для intersection-модели базовый SAM в текущей модели: $201,960,000. Эту цифру нельзя читать как прогноз выручки. Ее корректнее читать как рамку: если удастся доказать продуктовую петлю, есть достаточно большой соседний платежный контекст, чтобы продолжать работу.
 
@@ -70,14 +80,14 @@ Manual inspection packet уже выделяет 12 P0 приложений дл
 
 В whitespace matrix сейчас 12552 строк. Cross-source saturation держит gaming/progression скорее как benchmark, а не как прямой основной рынок. Это здоровая осторожность: игровые механики полезны как язык мотивации, но если Alina будет выглядеть как retention-game без личного смысла, гипотеза сломается.
 
-| Рынок | Opportunity band | Интерпретация |
-| --- | --- | --- |
-|  | medium_opportunity_needs_sampling | Plausible whitespace, but needs sampled competitor inspection before claim upgrade. |
-|  | medium_opportunity_needs_sampling | Plausible whitespace, but needs sampled competitor inspection before claim upgrade. |
-|  | mechanic_benchmark_not_primary_market | Strong mechanic/saturation benchmark, but not a primary Alina consumer market without direct ritual/self-improvement overlap. |
-|  | mechanic_benchmark_not_primary_market | Strong mechanic/saturation benchmark, but not a primary Alina consumer market without direct ritual/self-improvement overlap. |
-|  | crowded_or_unclear_context | Market is visible but either crowded, indirect, or weakly tied to the full Alina loop. |
-|  | crowded_or_unclear_context | Market is visible but either crowded, indirect, or weakly tied to the full Alina loop. |
+| Рынок | Opportunity band | Интерпретация | Следующий шаг |
+| --- | --- | --- | --- |
+| mindfulness | medium_opportunity_needs_sampling | Plausible whitespace, but needs sampled competitor inspection before claim upgrade. | Sample top direct consumer-app and desktop rows, then compare against prototype scorecard. |
+| avatar_identity | medium_opportunity_needs_sampling | Plausible whitespace, but needs sampled competitor inspection before claim upgrade. | Sample top direct consumer-app and desktop rows, then compare against prototype scorecard. |
+| gaming | mechanic_benchmark_not_primary_market | Strong mechanic/saturation benchmark, but not a primary Alina consumer market without direct ritual/self-improvement overlap. | Use for progression/avatar/retention mechanics only; do not treat as direct market proof. |
+| gaming_progression | mechanic_benchmark_not_primary_market | Strong mechanic/saturation benchmark, but not a primary Alina consumer market without direct ritual/self-improvement overlap. | Use for progression/avatar/retention mechanics only; do not treat as direct market proof. |
+| coaching | crowded_or_unclear_context | Market is visible but either crowded, indirect, or weakly tied to the full Alina loop. | Use only as support/context unless new source-native evidence is added. |
+| astrology_esoterics | crowded_or_unclear_context | Market is visible but either crowded, indirect, or weakly tied to the full Alina loop. | Use only as support/context unless new source-native evidence is added. |
 
 ## 5. Аудитория: не "люди из пяти рынков", а digital ritual users
 
