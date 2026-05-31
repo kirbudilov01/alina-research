@@ -97,6 +97,7 @@ function money(value) {
 const expanded = csv('data_raw/expanded/all_expanded_dedup.csv');
 const crossSourceRaw = csv('data_processed/cross_source_universe_raw.csv');
 const crossSourceDedup = csv('data_processed/cross_source_universe_dedup.csv');
+const sourceScaleMilestone = csv('data_processed/source_scale_milestone.csv');
 const coverage = csv('data_processed/cross_source_coverage_matrix.csv');
 const saturation = csv('data_processed/cross_source_market_saturation_matrix.csv');
 const tam = csv('data_processed/tam_sam_som_model.csv');
@@ -216,6 +217,21 @@ lines.push(mdTable([
   { key: 'meaning', label: 'Что это значит' }
 ]));
 lines.push('');
+if (sourceScaleMilestone.length) {
+  lines.push('## 1.1. Масштаб источников: что уже закрыто, а что нет');
+  lines.push('');
+  lines.push('После Steam deep-tag expansion важно говорить точнее. Масштаб уже не выглядит маленьким: raw cross-source universe прошел 50k, а dedup universe закрыл 30k+ и находится в рабочей зоне 30k-40k. Но это не означает, что можно написать "50k уникальных конкурентов доказаны". Dedup 50k остается открытой верхней целью. Эта граница важна для честности отчета: масштаб discovery большой, но H1-H6 закрываются не количеством строк, а наблюдаемыми walkthrough, paywall signoff, интервью и прототипными сессиями.');
+  lines.push('');
+  lines.push(mdTable(sourceScaleMilestone, [
+    { key: 'milestone_id', label: 'Milestone' },
+    { key: 'status', label: 'Status' },
+    { key: 'metric_value', label: 'Metric', align: 'right' },
+    { key: 'threshold_read', label: 'Threshold' },
+    { key: 'decision_ru', label: 'Как читать' },
+    { key: 'boundary_ru', label: 'Граница' }
+  ], sourceScaleMilestone.length));
+  lines.push('');
+}
 lines.push('## 2. Рынки и деньги: почему здесь вообще может быть бизнес');
 lines.push('');
 lines.push(`Рыночная часть строится не на одной красивой цифре TAM, а на триангуляции. В модели есть TAM/SAM/SOM, source-confidence review, stress-test assumptions, IAP/Google Play/paywall evidence, competitor revenue proxy и отдельная market-money triangulation. Самая честная формулировка сейчас: в нескольких соседних рынках деньги видны направленно, но H2 все еще держится в validation, потому что нужны paid-flow walkthrough и willingness-to-pay evidence.`);
@@ -731,6 +747,7 @@ lines.push('');
 lines.push('- `data_processed/evidence_artifact_manifest.csv`');
 lines.push('- `data_processed/research_completion_audit.csv`');
 lines.push('- `data_processed/evidence_claim_register.csv`');
+lines.push('- `data_processed/source_scale_milestone.csv`');
 lines.push('- `data_processed/research_navigation_index.csv`');
 lines.push('- `data_processed/reddit_manual_reading_capture_sheet.csv`');
 lines.push('- `data_processed/russian_narrative_evidence_map.csv`');
@@ -763,5 +780,6 @@ fs.writeFileSync(OUT, `${lines.join('\n')}\n`);
 
 console.log(`russian_narrative_report=${OUT}`);
 console.log(`cross_source_dedup=${crossSourceDedup.length}`);
+console.log(`source_scale_milestones=${sourceScaleMilestone.length}`);
 console.log(`reddit_capture_rows=${redditCapture.length}`);
 console.log(`completion_rows=${completion.length}`);

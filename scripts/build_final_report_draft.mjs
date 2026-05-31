@@ -159,6 +159,7 @@ const crossSourceDedup = csv('data_processed/cross_source_universe_dedup.csv');
 const crossSourceSummary = csv('data_processed/cross_source_universe_summary.csv');
 const crossSourceCoverage = csv('data_processed/cross_source_coverage_matrix.csv');
 const crossSourceSaturation = csv('data_processed/cross_source_market_saturation_matrix.csv');
+const sourceScaleMilestone = csv('data_processed/source_scale_milestone.csv');
 const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
 const validationExecutionDashboard = csv('data_processed/validation_execution_dashboard.csv');
 const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv');
@@ -318,6 +319,7 @@ report.push(`- Reddit mention signal coding: ${redditMentionSignals.length} code
 report.push(`- Reddit manual reading queue: ${redditManualReadingQueue.length} unique threads prioritized, including ${redditManualP0.length} P0 read-first and ${redditManualP1.length} P1 read-next threads, with ${redditManualPromptBank.length} prompt-bank lanes.`);
 report.push(`- Reddit manual reading capture sheet: ${redditManualCaptureSheet.length} P0/P1 fillable rows, ${redditManualCaptureP0.length} P0 rows, ${redditManualCaptureCompleted.length} completed so far; all default to unread/do-not-upgrade.`);
 report.push(`- Cross-source universe normalization: ${crossSourceRaw.length} normalized raw rows and ${crossSourceDedup.length} dedup rows across core app stores, Google Play fallback, itch.io, Steam, Mac desktop store, Chrome, and Reddit forum mentions.`);
+report.push(`- Source scale milestone: raw 50k is ${sourceScaleMilestone.find(row => row.milestone_id === 'RAW_50K_SOURCE_SCALE')?.status || 'not_generated'}, dedup 30k lower bound is ${sourceScaleMilestone.find(row => row.milestone_id === 'DEDUP_30K_LOWER_BOUND')?.status || 'not_generated'}, dedup 30k-40k band is ${sourceScaleMilestone.find(row => row.milestone_id === 'DEDUP_30_40K_BAND')?.status || 'not_generated'}, and dedup 50k remains ${sourceScaleMilestone.find(row => row.milestone_id === 'DEDUP_50K_UPPER_ASPIRATION')?.status || 'not_generated'} rather than overclaimed.`);
 report.push(`- Cross-source coverage matrix: ${crossSourceCoverage.length} source/market cells, ${crossSourceCoverage.filter(r => r.coverage_band === 'strong_coverage').length} strong and ${crossSourceCoverage.filter(r => r.coverage_band === 'medium_coverage').length} medium coverage cells.`);
 report.push(`- Cross-source saturation/whitespace matrix: ${crossSourceSaturation.length} markets scored; ${crossSourceSaturation.filter(r => r.opportunity_band === 'mechanic_benchmark_not_primary_market').length} benchmark-only markets and ${crossSourceSaturation.filter(r => r.opportunity_band === 'high_opportunity_validate_now').length} primary high-opportunity markets before manual validation.`);
 report.push(`- Chrome extension detail enrichment: ${chromeExtensionDetailOk.length}/${chromeExtensionFit.length} detail pages parsed; ${chromeExtensionStrong.length} strong and ${chromeExtensionUseful.length} useful adjacent mechanic references.`);
@@ -1757,6 +1759,7 @@ report.push('- `docs/competitive/steam-tag-expansion-v1.md`');
 report.push('- `docs/competitive/desktop-store-expansion-v1.md`');
 report.push('- `docs/competitive/cross-source-universe-v1.md`');
 report.push('- `docs/competitive/cross-source-coverage-matrix-v1.md`');
+report.push('- `docs/competitive/source-scale-milestone-v1.md`');
 report.push('- `docs/intersections/cross-source-saturation-whitespace-v1.md`');
 report.push('- `docs/competitive/chrome-extension-detail-enrichment-v1.md`');
 report.push('- `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`');
@@ -1892,6 +1895,7 @@ status.push(mdTable([
   { requirement: 'Additive Steam deep-tag increment', evidence: 'data_raw/expanded_steam_deep_tags_raw.csv; data_processed/steam_deep_tag_source_summary.csv; docs/competitive/steam-deep-tag-increment-v1.md', status: `done v1; ${steamDeepTagRows.length} additional Steam benchmark rows extend progression, identity, narrative, and reflective mechanics without overwriting the main Steam corpus` },
   { requirement: 'Source-native desktop store expansion', evidence: 'data_raw/expanded_desktop_store_raw.csv; data_processed/desktop_store_source_summary.csv; docs/competitive/desktop-store-expansion-v1.md', status: 'done v1; adds Mac App Store desktop wellness/productivity/avatar/game references through a source-native API, not broad search crawling' },
   { requirement: 'Cross-source universe normalization', evidence: 'data_processed/cross_source_universe_raw_index.csv;data_processed/cross_source_universe_raw_parts/part_*.csv; data_processed/cross_source_universe_dedup.csv; data_processed/cross_source_universe_summary.csv; docs/competitive/cross-source-universe-v1.md', status: 'done v1; normalizes core app-store, Google Play fallback, itch.io, Steam, desktop store, and Chrome rows into one provenance-preserving universe' },
+  { requirement: 'Source scale milestone', evidence: 'data_processed/source_scale_milestone.csv; docs/competitive/source-scale-milestone-v1.md', status: 'done v1; raw 50k source scale and dedup 30k+/30k-40k band are separated from the still-open dedup 50k aspiration' },
   { requirement: 'Cross-source coverage matrix', evidence: 'data_processed/cross_source_coverage_matrix.csv; docs/competitive/cross-source-coverage-matrix-v1.md', status: 'done v1; grades source-by-market cells into strong, medium, thin, and context-only coverage for safer interpretation' },
   { requirement: 'Cross-source saturation/whitespace read', evidence: 'data_processed/cross_source_market_saturation_matrix.csv; docs/intersections/cross-source-saturation-whitespace-v1.md', status: 'done v1; scores market saturation and keeps gaming/progression benchmark-only rather than overclaiming primary-market whitespace' },
   { requirement: 'Chrome extension detail enrichment', evidence: 'data_raw/chrome_extension_detail_raw.csv; data_processed/chrome_extension_fit_matrix.csv; docs/competitive/chrome-extension-detail-enrichment-v1.md', status: 'done v1; detail pages parsed for known Chrome candidates only, producing fit bands and mechanic tags without broad search expansion' },
@@ -2040,6 +2044,7 @@ console.log(`reddit_manual_read_p0=${redditManualP0.length}`);
 console.log(`reddit_manual_capture_rows=${redditManualCaptureSheet.length}`);
 console.log(`cross_source_raw_rows=${crossSourceRaw.length}`);
 console.log(`cross_source_dedup_rows=${crossSourceDedup.length}`);
+console.log(`source_scale_milestones=${sourceScaleMilestone.length}`);
 console.log(`cross_source_coverage_cells=${crossSourceCoverage.length}`);
 console.log(`cross_source_saturation_markets=${crossSourceSaturation.length}`);
 console.log(`chrome_extension_detail_rows=${chromeExtensionFit.length}`);

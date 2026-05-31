@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T14:03:30.548Z
+Собрано: 2026-05-31T14:16:47.464Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 36694 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 438 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 36694 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 441 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 438 артефакта, missing в manifest: 0. Cross-source universe содержит 67525 нормализованных raw rows и 36694 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 441 артефакта, missing в manifest: 0. Cross-source universe содержит 67525 нормализованных raw rows и 36694 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -48,6 +48,19 @@
 | Coverage cells | 39 | покрытие рынков источниками, не один канал |
 | Top-100 reviewed rows | 100 | AI-assisted конкурентный обзор, требует manual validation |
 | Validation capture rows | 850 | готовые строки для ручной фиксации доказательств |
+
+## 1.1. Масштаб источников: что уже закрыто, а что нет
+
+После Steam deep-tag expansion важно говорить точнее. Масштаб уже не выглядит маленьким: raw cross-source universe прошел 50k, а dedup universe закрыл 30k+ и находится в рабочей зоне 30k-40k. Но это не означает, что можно написать "50k уникальных конкурентов доказаны". Dedup 50k остается открытой верхней целью. Эта граница важна для честности отчета: масштаб discovery большой, но H1-H6 закрываются не количеством строк, а наблюдаемыми walkthrough, paywall signoff, интервью и прототипными сессиями.
+
+| Milestone | Status | Metric | Threshold | Как читать | Граница |
+| --- | --- | ---: | --- | --- | --- |
+| RAW_50K_SOURCE_SCALE | proved | 67525 | >= 50000 raw normalized source rows | Raw cross-source universe уже прошел 50k: 67,525 строк. Это закрывает масштаб discovery/source-map, но не означает 67,525 уникальных прямых конкурентов. | Raw rows сохраняют повторы по источникам, странам, запросам, тегам и форумным упоминаниям; это слой покрытия, а не dedup competitor proof. |
+| DEDUP_30K_LOWER_BOUND | proved | 36694 | >= 30000 dedup competitor/source rows | Dedup cross-source universe закрыл нижнюю границу 30k: 36,694 строк. | Dedup снижает дубли, но часть строк остается benchmark/context evidence, особенно Steam/itch/gaming mechanics и Reddit mentions. |
+| DEDUP_30_40K_BAND | proved_inside_band | 36694 | 30000-40000 dedup competitor/source rows | Dedup universe сейчас находится внутри рабочей зоны 30k-40k: 36,694 строк. | Это достаточный масштаб для картирования соседних рынков, но не финальный validation proof по H1-H6. |
+| DEDUP_50K_UPPER_ASPIRATION | open | 36694 | >= 50000 dedup competitor/source rows | Dedup 50k aspiration еще открыт: 36,694 строк, gap 13,306 строк. | Нельзя писать, что 50k уникальных/dedup конкурентов уже доказаны; доказаны raw 50k и dedup 30k+. |
+| SOURCE_QUALITY_BOUNDARY | explicit | 15 summary rows; 39 coverage cells; 11 strong; 12 medium | quality boundary stated | Масштаб источников полезен для discovery, saturation и поиска белого пятна, но качество claim зависит от типа источника. | App Store/Google Play/desktop/web extensions ближе к конкурентам; Steam/itch часто benchmark/mechanic; Reddit/forum чаще VOC/context до manual read. |
+| NEXT_SOURCE_LANES | prioritized | 10 backlog lanes | non-search-heavy next expansion lanes | Следующий рост лучше делать не через широкие поисковики, а через source-native/direct lanes: B2B directories, company positioning pages, дополнительные desktop/browser stores, curated Product Hunt/AlternativeTo exports если доступны без Cloudflare-блокировки. | Product Hunt и AlternativeTo direct/sitemap попытки ранее уперлись в Cloudflare 403; этот факт не надо обходить тяжелым search-engine crawl без отдельного решения. |
 
 ## 2. Рынки и деньги: почему здесь вообще может быть бизнес
 
@@ -399,7 +412,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 | Requirement | Статус | Сила | Открытый gap |
 | --- | --- | --- | --- |
 | REQ_01_MASTER_PLAN | proved_v1 | strong | Keep refreshing as validation results change. |
-| REQ_02_COMPETITOR_UNIVERSE | proved_30k_plus_cross_source_dedup | medium_high | The 30k lower-bound dedup target is now met; the remaining expansion gap is the upper 50k aspiration plus Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and additional source-native coverage. |
+| REQ_02_COMPETITOR_UNIVERSE | proved_raw_50k_and_dedup_30k_plus_dedup_50k_open | medium_high | Raw 50k source scale is now met and the dedup 30k+/30k-40k working band is met; the remaining expansion gap is dedup 50k plus Product Hunt/AlternativeTo, B2B directories, company positioning pages, and additional source-native coverage. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
 | REQ_04_MARKET_MONEY | supported_with_triangulated_proxy_not_final | medium_high | Market sizing is stress-tested and triangulated, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall/WTP validation are still needed for final investor-grade claims. |
 | REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | Cross-source saturation now keeps gaming/progression as benchmark-only and finds no primary market opportunity strong enough to upgrade without manual walkthrough; app/onboarding screenshots are still required. |
@@ -616,7 +629,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 | Claim | Статус | Confidence | Метрика | Граница |
 | --- | --- | --- | --- | --- |
 | REQ_plan | доказано как исследовательский слой | high | master plan exists; 16 validation roadmap rows; 11 execution tasks | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | доказано как исследовательский слой | high | 434 manifest rows; 0 missing artifacts | Это provenance proof, а не содержательное доказательство спроса. |
+| REQ_evidence_package_traceability | доказано как исследовательский слой | high | 441 manifest rows; 0 missing artifacts | Это provenance proof, а не содержательное доказательство спроса. |
 | REQ_completion_readiness_audit | доказано как исследовательский слой | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_hypothesis_decision_matrix | доказано как исследовательский слой | high | 6 hypothesis decision rows; 6 hold/validate; 0 go; 0 stop/pivot | Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open. |
 | REQ_market_money_triangulation | доказано как исследовательский слой | medium_high | 6 market rows; 3 strong and 1 medium directional money cases | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |
@@ -628,7 +641,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 | REQ_validation_batch_03 | доказано как исследовательский слой | high | 17 batch rows; 17 not started; 17 local artifacts linked | Это операционная готовность, не observed validation evidence. |
 | REQ_validation_evidence_rollup | доказано как исследовательский слой | high | 75 command rows; 75 notes present; 29 local artifacts linked | Это операционная готовность, не observed validation evidence. |
 | REQ_validation_gate_calculator | доказано как исследовательский слой | high | 6 gate rows; 0 pass-ready; 0 in-progress; 6 not started; 0 downgrade/kill triggered | Это операционная готовность, не observed validation evidence. |
-| REQ_competitor_universe | доказано как исследовательский слой | medium_high | 67525 cross-source raw rows; 36694 cross-source dedup rows; 39 coverage cells; 11 strong and 12 medium source/market cells | The 30k lower-bound dedup target is met; upper-bound 50k expansion and Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and additional source-native coverage remain backlog. |
+| REQ_competitor_universe | доказано как исследовательский слой | medium_high | 67525 cross-source raw rows; 36694 cross-source dedup rows; 39 coverage cells; 11 strong and 12 medium source/market cells | Raw 50k source scale is met; dedup 30k+ and the 30k-40k working band are met; dedup 50k remains open and should not be overclaimed. |
 | H1_product_shape_exists | готово к проверке, gate открыт | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Нельзя усиливать claim без app/onboarding walkthrough и скриншотов причинной петли. |
 | H2_markets_have_money | поддержано направленно, но не финально доказано | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |
 | H2_paywall_visible_evidence | поддержано направленно, но не финально доказано | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Нельзя читать proxy как выручку Alina; нужны paid-flow signoff и WTP evidence. |
@@ -666,6 +679,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/evidence_artifact_manifest.csv`
 - `data_processed/research_completion_audit.csv`
 - `data_processed/evidence_claim_register.csv`
+- `data_processed/source_scale_milestone.csv`
 - `data_processed/research_navigation_index.csv`
 - `data_processed/reddit_manual_reading_capture_sheet.csv`
 - `data_processed/russian_narrative_evidence_map.csv`

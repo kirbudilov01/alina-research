@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T14:03:24.554Z
+Generated: 2026-05-31T14:16:39.337Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -13,6 +13,7 @@ Generated: 2026-05-31T14:03:24.554Z
 | Additive Steam deep-tag increment | data_raw/expanded_steam_deep_tags_raw.csv; data_processed/steam_deep_tag_source_summary.csv; docs/competitive/steam-deep-tag-increment-v1.md | done v1; 6180 additional Steam benchmark rows extend progression, identity, narrative, and reflective mechanics without overwriting the main Steam corpus |
 | Source-native desktop store expansion | data_raw/expanded_desktop_store_raw.csv; data_processed/desktop_store_source_summary.csv; docs/competitive/desktop-store-expansion-v1.md | done v1; adds Mac App Store desktop wellness/productivity/avatar/game references through a source-native API, not broad search crawling |
 | Cross-source universe normalization | data_processed/cross_source_universe_raw_index.csv;data_processed/cross_source_universe_raw_parts/part_*.csv; data_processed/cross_source_universe_dedup.csv; data_processed/cross_source_universe_summary.csv; docs/competitive/cross-source-universe-v1.md | done v1; normalizes core app-store, Google Play fallback, itch.io, Steam, desktop store, and Chrome rows into one provenance-preserving universe |
+| Source scale milestone | data_processed/source_scale_milestone.csv; docs/competitive/source-scale-milestone-v1.md | done v1; raw 50k source scale and dedup 30k+/30k-40k band are separated from the still-open dedup 50k aspiration |
 | Cross-source coverage matrix | data_processed/cross_source_coverage_matrix.csv; docs/competitive/cross-source-coverage-matrix-v1.md | done v1; grades source-by-market cells into strong, medium, thin, and context-only coverage for safer interpretation |
 | Cross-source saturation/whitespace read | data_processed/cross_source_market_saturation_matrix.csv; docs/intersections/cross-source-saturation-whitespace-v1.md | done v1; scores market saturation and keeps gaming/progression benchmark-only rather than overclaiming primary-market whitespace |
 | Chrome extension detail enrichment | data_raw/chrome_extension_detail_raw.csv; data_processed/chrome_extension_fit_matrix.csv; docs/competitive/chrome-extension-detail-enrichment-v1.md | done v1; detail pages parsed for known Chrome candidates only, producing fit bands and mechanic tags without broad search expansion |
