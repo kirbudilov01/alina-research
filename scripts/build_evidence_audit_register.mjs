@@ -193,6 +193,12 @@ const completionOpen = completionAudit.filter(row => !/^proved/.test(row.status)
 const holdHypothesisDecisions = hypothesisDecisions.filter(row => row.current_decision === 'hold_validate').length;
 const goHypothesisDecisions = hypothesisDecisions.filter(row => row.current_decision === 'go_for_next_phase').length;
 const stopHypothesisDecisions = hypothesisDecisions.filter(row => row.current_decision === 'stop_or_pivot').length;
+const competitorUniverseStatus = crossSourceDedup.length >= 30000
+  ? 'proved_30k_plus_cross_source_dedup_upper_bound_open'
+  : 'substantial_v1_not_50k_dedup';
+const competitorUniverseGap = crossSourceDedup.length >= 30000
+  ? 'The 30k lower-bound dedup target is met; upper-bound 50k expansion and Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and additional source-native coverage remain backlog.'
+  : 'Cross-source dedup universe is substantial but still below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog.';
 
 const rows = [
   {
@@ -342,13 +348,13 @@ const rows = [
     claim_id: 'REQ_competitor_universe',
     claim_type: 'project_requirement',
     claim: 'Competitor/source universe has been expanded across the five target markets.',
-    evidence_status: 'substantial_v1_not_50k_dedup',
+    evidence_status: competitorUniverseStatus,
     confidence: 'medium_high',
     primary_metric: `${crossSourceRaw.length} cross-source raw rows; ${crossSourceDedup.length} cross-source dedup rows; ${crossSourceCoverage.length} coverage cells; ${crossSourceCoverage.filter(row => row.coverage_band === 'strong_coverage').length} strong and ${crossSourceCoverage.filter(row => row.coverage_band === 'medium_coverage').length} medium source/market cells`,
     quantitative_evidence: `niches=${Object.keys(countBy(expanded, 'niche')).length}; source_kinds=${Object.keys(countBy(expanded, 'source_kind')).length}; cross_source_summary_rows=${crossSourceSummary.length}; coverage_cells=${crossSourceCoverage.length}; coverage_strong=${crossSourceCoverage.filter(row => row.coverage_band === 'strong_coverage').length}; coverage_medium=${crossSourceCoverage.filter(row => row.coverage_band === 'medium_coverage').length}; p0_external_rows=${p0External.length}; p0_external_usable=${p0ExternalUsable.length}; itch_rows=${itchRows.length}; itch_ok=${itchOk.length}; steam_tag_rows=${steamTagRows.length}; steam_tag_ok=${steamTagOk.length}; desktop_store_rows=${desktopStoreRows.length}; desktop_store_ok=${desktopStoreOk.length}; chrome_extension_rows=${chromeExtensionRows.length}; chrome_extension_ok=${chromeExtensionOk.length}; chrome_detail_ok=${chromeExtensionDetailOk.length}; chrome_strong_adjacent=${chromeExtensionStrong.length}; chrome_priority_mechanics=${chromeMechanicPriority.length}`,
     evidence_files: 'data_raw/expanded/all_expanded_raw.csv;data_raw/expanded/all_expanded_dedup.csv;data_raw/expanded/p0_external_sources_raw.csv;data_raw/expanded_itch_raw.csv;data_raw/expanded_steam_tags_raw.csv;data_raw/expanded_desktop_store_raw.csv;data_raw/expanded_chrome_extensions_raw.csv;data_raw/chrome_extension_detail_raw.csv;data_processed/cross_source_universe_raw.csv;data_processed/cross_source_universe_dedup.csv;data_processed/cross_source_universe_summary.csv;data_processed/cross_source_coverage_matrix.csv;data_processed/p0_external_source_summary.csv;data_processed/itch_source_summary.csv;data_processed/steam_tag_source_summary.csv;data_processed/desktop_store_source_summary.csv;data_processed/chrome_webstore_source_expansion_summary.csv;data_processed/chrome_extension_fit_matrix.csv;data_processed/chrome_extension_mechanic_battlecards.csv;data_processed/competitor_feature_matrix.csv;docs/competitive/cross-source-universe-v1.md;docs/competitive/cross-source-coverage-matrix-v1.md;docs/competitive/expanded-source-map.md;docs/competitive/p0-external-source-collection-v1.md;docs/competitive/itch-source-expansion-v1.md;docs/competitive/steam-tag-expansion-v1.md;docs/competitive/desktop-store-expansion-v1.md;docs/competitive/chrome-webstore-source-expansion-v1.md;docs/competitive/chrome-extension-detail-enrichment-v1.md;docs/competitive/chrome-extension-mechanic-battlecards-v1.md',
     strongest_support: 'Large cross-source universe exists across App Store, Steam, Google Play fallback, source-native itch.io/Steam tags, source-native Mac App Store desktop search, and Chrome Web Store expansion with detail-page enrichment and mechanic battlecards.',
-    key_gap: 'Cross-source dedup universe is substantial but still below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog.',
+    key_gap: competitorUniverseGap,
     next_action: 'Continue source-native expansion through Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and deeper itch/Steam tags while keeping evidence quality labels explicit.'
   },
   {

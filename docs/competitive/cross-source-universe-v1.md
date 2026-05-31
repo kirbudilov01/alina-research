@@ -1,6 +1,6 @@
 # Cross-Source Universe V1
 
-Generated: 2026-05-31T07:34:56.736Z
+Generated: 2026-05-31T09:07:42.566Z
 
 ## Purpose
 
@@ -8,18 +8,18 @@ This layer normalizes the major source-native collections into one auditable uni
 
 ## Summary
 
-- Cross-source raw rows: 38240
-- Cross-source dedup rows: 22769
+- Cross-source raw rows: 59006
+- Cross-source dedup rows: 31866
 - Source groups: 8
 - Niches represented: 6
-- Rows with source URLs: 38240
+- Rows with source URLs: 59006
 
 Raw rows by source group:
 
+- steam_pc: 21462
+- desktop_store: 15397
 - mobile_app_store: 12000
-- steam_pc: 9151
 - itch_web_game: 7047
-- desktop_store: 6942
 - google_play_or_android: 2527
 - browser_extension: 252
 - unknown_source: 251
@@ -27,11 +27,11 @@ Raw rows by source group:
 
 Dedup rows by primary source group:
 
+- steam_pc: 14529
 - mobile_app_store: 6958
-- steam_pc: 6384
 - itch_web_game: 5696
+- desktop_store: 2478
 - google_play_or_android: 1646
-- desktop_store: 1526
 - browser_extension: 252
 - unknown_source: 251
 - duckduckgo_search: 56
@@ -43,9 +43,9 @@ Dedup rows by primary source group:
 | mobile_app_store | 12000 | 6958 | 12000 | gaming:2400<br>astrology_esoterics:2400<br>avatar_identity:2400<br>coaching:2400<br>mindfulness:2400 |
 | google_play_or_android | 2527 | 1646 | 2527 | astrology_esoterics:577<br>avatar_identity:559<br>gaming:478<br>coaching:475<br>mindfulness:438 |
 | duckduckgo_search | 70 | 56 | 70 | gaming:70 |
-| steam_pc | 9151 | 6384 | 8893 | gaming:4285<br>mindfulness:3347<br>avatar_identity:589<br>coaching:534<br>astrology_esoterics:396 |
+| steam_pc | 21462 | 14529 | 20847 | gaming:10935<br>mindfulness:5930<br>avatar_identity:3667<br>coaching:534<br>astrology_esoterics:396 |
 | itch_web_game | 7047 | 5696 | 6973 | gaming:3816<br>avatar_identity:1721<br>mindfulness:1510 |
-| desktop_store | 6942 | 1526 | 6938 | mindfulness:1645<br>coaching:1406<br>gaming_progression:1377<br>avatar_identity:1322<br>astrology_esoterics:1192 |
+| desktop_store | 15397 | 2478 | 15394 | mindfulness:3878<br>gaming_progression:3572<br>coaching:3274<br>avatar_identity:2759<br>astrology_esoterics:1914 |
 | browser_extension | 252 | 252 | 251 | astrology_esoterics:55<br>avatar_identity:52<br>coaching:51<br>mindfulness:50<br>gaming_progression:44 |
 | unknown_source | 251 | 251 | 251 | astrology_esoterics:55<br>avatar_identity:52<br>coaching:51<br>mindfulness:50<br>gaming_progression:43 |
 

@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T08:46:34.971Z
+Generated: 2026-05-31T09:13:02.574Z
 
 ## 1. Executive Summary
 
@@ -25,15 +25,15 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 20 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 317 artifacts tracked, 63 CSV artifacts, 162297 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 317 artifacts tracked, 63 CSV artifacts, 212927 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
 - Source-native itch.io expansion: 7047 rows, 6973 OK rows, adding web-game/mechanic references without broad search-engine crawling.
-- Source-native Steam tag expansion: 6258 rows, 6000 OK rows, adding PC progression/cozy/avatar mechanic references.
-- Source-native desktop store expansion: 6942 Mac App Store rows, 6938 OK rows, adding desktop wellness/productivity/avatar/game references without search-engine crawling.
-- Cross-source universe normalization: 38240 normalized raw rows and 22769 dedup rows across core app stores, Google Play fallback, itch.io, Steam, Mac desktop store, and Chrome.
-- Cross-source coverage matrix: 34 source/market cells, 10 strong and 12 medium coverage cells.
+- Source-native Steam tag expansion: 18569 rows, 17954 OK rows, adding PC progression/cozy/avatar mechanic references.
+- Source-native desktop store expansion: 15397 Mac App Store rows, 15394 OK rows, adding desktop wellness/productivity/avatar/game references without search-engine crawling.
+- Cross-source universe normalization: 59006 normalized raw rows and 31866 dedup rows across core app stores, Google Play fallback, itch.io, Steam, Mac desktop store, and Chrome.
+- Cross-source coverage matrix: 34 source/market cells, 11 strong and 12 medium coverage cells.
 - Cross-source saturation/whitespace matrix: 6 markets scored; 2 benchmark-only markets and 0 primary high-opportunity markets before manual validation.
 - Chrome extension detail enrichment: 251/251 detail pages parsed; 9 strong and 86 useful adjacent mechanic references.
 - Chrome mechanic battlecards: 251 browser-extension cards, 41 high/medium references for manual mechanic inspection.
@@ -93,7 +93,7 @@ Evidence status mix:
 - proved_v1_p0_breadth_batch_ready_open_gates: 1
 - proved_v1_context_batch_ready_open_gates: 1
 - proved_v1_command_level_rollup_open_gates: 1
-- substantial_v1_not_50k_dedup: 1
+- proved_30k_plus_cross_source_dedup_upper_bound_open: 1
 - public_listing_inspected_walkthrough_open: 1
 - supported_with_ranges_stress_test_and_bottom_up_proxy: 1
 - supported_narrowly_with_visual_adjudication: 1
@@ -118,7 +118,7 @@ Claim-level audit snapshot:
 | REQ_validation_batch_02 | proved_v1_p0_breadth_batch_ready_open_gates | high | 52 batch rows; 52 not started; 12 local artifacts linked | Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts. |
 | REQ_validation_batch_03 | proved_v1_context_batch_ready_open_gates | high | 17 batch rows; 17 not started; 17 local artifacts linked | Batch files are prefilled context notes; they still need observed pricing/paywall checks and conservative signoff decisions. |
 | REQ_validation_evidence_rollup | proved_v1_command_level_rollup_open_gates | high | 75 command rows; 75 notes present; 29 local artifacts linked | Rollup is an intake audit, not a validation result: most rows still need observed screenshots, quotes, calculations, or human signoff. |
-| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 38240 cross-source raw rows; 22769 cross-source dedup rows; 34 coverage cells; 10 strong and 12 medium source/market cells | Cross-source dedup universe is substantial but still below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
+| REQ_competitor_universe | proved_30k_plus_cross_source_dedup_upper_bound_open | medium_high | 59006 cross-source raw rows; 31866 cross-source dedup rows; 34 coverage cells; 11 strong and 12 medium source/market cells | The 30k lower-bound dedup target is met; upper-bound 50k expansion and Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and additional source-native coverage remain backlog. |
 | H1_product_shape_exists | public_listing_inspected_walkthrough_open | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Strict full loop is rare and still needs actual app/onboarding screenshots to confirm or downgrade public listing claims. |
 | H2_markets_have_money | supported_with_ranges_stress_test_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, manual in-app paywall validation, and willingness-to-pay prototype evidence for final investor-grade claims. |
 | H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require human sign-off/in-app inspection. |
@@ -346,23 +346,23 @@ Evidence state mix:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 317 artifacts; 63 CSV artifacts; 162297 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 317 artifacts; 63 CSV artifacts; 212927 tracked CSV rows; 0 missing required artifacts.
 Validation note artifact links: 29 existing local artifacts linked inside batch notes.
 
 Largest tracked CSV artifacts:
 
 | File | Role | Rows | Source Ref Rows | Hash |
 | --- | --- | ---: | ---: | --- |
-| data_processed/cross_source_universe_raw.csv | source_claim | 38240 | 38240 | c6683592db0a1aa8 |
-| data_processed/cross_source_universe_dedup.csv | source_claim | 22769 | 22769 | cc877179565ccd3b |
+| data_processed/cross_source_universe_raw.csv | source_claim | 59006 | 59006 | 4c5f2eabe70bb666 |
+| data_processed/cross_source_universe_dedup.csv | source_claim | 31866 | 31866 | e4d4022a5d7da545 |
 | data_processed/audience_signal_matrix.csv | audience_icp | 20492 | 20492 | 865f8a0de8b075d7 |
+| data_raw/expanded_steam_tags_raw.csv | competitor_universe | 18569 | 18569 | f25dd9ba823cab15 |
 | data_raw/expanded/all_expanded_raw.csv | competitor_universe | 17490 | 17490 | 8479ff977b44a132 |
+| data_raw/expanded_desktop_store_raw.csv | competitor_universe | 15397 | 15397 | df65eb63023078f3 |
 | data_processed/competitor_feature_matrix.csv | supporting | 12552 | 12552 | b285aff3873487bc |
 | data_processed/whitespace_signal_matrix.csv | competitive_whitespace | 12552 | 12552 | d12826260e643b15 |
 | data_raw/expanded/all_expanded_dedup.csv | competitor_universe | 12552 | 12552 | db5e87665dbf3b53 |
 | data_raw/expanded_itch_raw.csv | competitor_universe | 7047 | 7047 | e1a25dd31f49cc5e |
-| data_raw/expanded_desktop_store_raw.csv | competitor_universe | 6942 | 6942 | f870d9afa8ec06dc |
-| data_raw/expanded_steam_tags_raw.csv | competitor_universe | 6258 | 6258 | cd2157e8d1eb5c87 |
 | data_raw/app_store_top_candidate_reviews.csv | audience_icp | 2294 | 2294 | 3fb11211b91b48b3 |
 | data_raw/web_paywall_discovery_raw.csv | market_money | 560 | 560 | 3416403392840293 |
 
@@ -373,7 +373,7 @@ The completion audit maps the original objective to current proof. It is intenti
 Completion status mix:
 
 - proved_v1: 2
-- proved_scale_target_cross_source_normalized: 1
+- proved_30k_plus_cross_source_dedup: 1
 - supported_with_stress_test_and_bottom_up_proxy_not_final: 1
 - narrow_supported_public_listing_inspected_walkthrough_open: 1
 - directionally_supported_validation_ready: 1
@@ -387,7 +387,7 @@ Objective readiness matrix:
 | Requirement | Status | Strength | Proof | Remaining Gap |
 | --- | --- | --- | --- | --- |
 | REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=16; execution_dashboard_rows=11; hypothesis_decision_rows=6; p0_command_rows=75; p0_field_guide_sections=8; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_batch_local_artifact_links=29; validation_rollup_rows=75 | Keep refreshing as validation results change. |
-| REQ_02_COMPETITOR_UNIVERSE | proved_scale_target_cross_source_normalized | medium_high | dedup=12552; cross_source_raw=38240; cross_source_dedup=22769; cross_source_summary_rows=14; coverage_cells=34; coverage_strong=10; coverage_medium=12; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; desktop_store_rows=6942; chrome_extension_rows=252; known_raw_total=37989; itch_ok=6973; steam_tag_ok=6000; desktop_store_ok=6938; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | Cross-source dedup is substantial but still below the aspirational 30k-50k dedup target; Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
+| REQ_02_COMPETITOR_UNIVERSE | proved_30k_plus_cross_source_dedup | medium_high | dedup=12552; cross_source_raw=59006; cross_source_dedup=31866; cross_source_summary_rows=14; coverage_cells=34; coverage_strong=11; coverage_medium=12; raw_core=17490; itch_rows=7047; steam_tag_rows=18569; desktop_store_rows=15397; chrome_extension_rows=252; known_raw_total=58755; itch_ok=6973; steam_tag_ok=17954; desktop_store_ok=15394; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | The 30k lower-bound dedup target is now met; the remaining expansion gap is the upper 50k aspiration plus Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and additional source-native coverage. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
 | REQ_04_MARKET_MONEY | supported_with_stress_test_and_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; assumption_audit_rows=6; stress_scenarios=6; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing is stress-tested and range-based, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall validation are still needed for final investor-grade claims. |
 | REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; cross_source_saturation_markets=6; cross_source_primary_high_opportunity=0; cross_source_benchmark_markets=2; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_walkthrough_capture_rows=60; manual_app_walkthrough_done=0 | Cross-source saturation now keeps gaming/progression as benchmark-only and finds no primary market opportunity strong enough to upgrade without manual walkthrough; app/onboarding screenshots are still required. |
@@ -522,47 +522,47 @@ Itch summary:
 
 ### Source-Native Steam Tag Expansion
 
-A controlled Steam tag collector adds 6258 rows, including 6000 OK rows. This layer expands PC progression, cozy, idle, RPG, avatar/identity, and relaxing-game benchmarks. It is mechanic/saturation evidence, not direct mobile wellness market proof.
+A controlled Steam tag collector adds 18569 rows, including 17954 OK rows. This layer expands PC progression, cozy, idle, RPG, avatar/identity, and relaxing-game benchmarks. It is mechanic/saturation evidence, not direct mobile wellness market proof.
 
 Steam tag rows by market:
 
-- gaming: 3441
-- mindfulness: 2745
-- avatar_identity: 72
+- gaming: 10091
+- mindfulness: 5328
+- avatar_identity: 3150
 
 Steam tag summary:
 
 | Market | Rows / OK | Quality |
 | --- | --- | --- |
-| gaming | rows=3441; ok=3300 | medium |
-| mindfulness | rows=2745; ok=2700 | medium |
-| avatar_identity | rows=72; ok=0 | medium |
+| gaming | rows=10091; ok=9754 | medium |
+| mindfulness | rows=5328; ok=5200 | medium |
+| avatar_identity | rows=3150; ok=3000 | medium |
 
 ### Source-Native Desktop Store Expansion
 
-A Mac App Store/iTunes Search API collector adds 6942 rows, including 6938 OK rows. This layer improves PC/desktop coverage for coaching, mindfulness, avatar/identity, astrology/esoterics, and gaming/progression, but it remains discovery/mechanic evidence until manual validation.
+A Mac App Store/iTunes Search API collector adds 15397 rows, including 15394 OK rows. This layer improves PC/desktop coverage for coaching, mindfulness, avatar/identity, astrology/esoterics, and gaming/progression, but it remains discovery/mechanic evidence until manual validation.
 
 Desktop rows by market:
 
-- mindfulness: 1645
-- coaching: 1406
-- gaming_progression: 1377
-- avatar_identity: 1322
-- astrology_esoterics: 1192
+- mindfulness: 3878
+- gaming_progression: 3572
+- coaching: 3274
+- avatar_identity: 2759
+- astrology_esoterics: 1914
 
 Desktop store summary:
 
 | Market | Rows / OK / Unique / Paid | Top Categories | Feature Tags |
 | --- | --- | --- | --- |
-| coaching | rows=1406; ok=1406; unique_apps=312; paid=92 | top_categories=Productivity:874/Lifestyle:200/Health & Fitness:160/Education:59/Utilities:45 | feature_tags=habit_or_goal_loop/avatar_or_identity/progression_benchmark:285/habit_or_goal_loop/mindfulness_or_reset/avatar_or_identity/progression_benchmark:269/habit_or_goal_loop/progression_benchmark:211/habit_or_goal_loop/avatar_or_identity:164/habit_or_goal_loop:113 |
-| mindfulness | rows=1645; ok=1645; unique_apps=389; paid=171 | top_categories=Health & Fitness:808/Productivity:381/Lifestyle:272/Utilities:53/Games:41 | feature_tags=habit_or_goal_loop/mindfulness_or_reset/avatar_or_identity/progression_benchmark:245/mindfulness_or_reset:240/mindfulness_or_reset/avatar_or_identity:181/habit_or_goal_loop/mindfulness_or_reset/avatar_or_identity:158/habit_or_goal_loop/mindfulness_or_reset/progression_benchmark:101 |
-| avatar_identity | rows=1322; ok=1320; unique_apps=395; paid=176 | top_categories=Photo & Video:294/Graphics & Design:232/Utilities:188/Games:172/Productivity:122 | feature_tags=avatar_or_identity:629/avatar_or_identity/progression_benchmark:234/avatar_identity_adjacent:162/mindfulness_or_reset/avatar_or_identity:83/habit_or_goal_loop/avatar_or_identity/progression_benchmark:45 |
-| astrology_esoterics | rows=1192; ok=1192; unique_apps=229; paid=468 | top_categories=Lifestyle:509/Productivity:154/Entertainment:106/Education:95/Health & Fitness:92 | feature_tags=symbolic_guidance:192/avatar_or_identity/symbolic_guidance:159/astrology_esoterics_adjacent:146/avatar_or_identity/symbolic_guidance/progression_benchmark:141/symbolic_guidance/progression_benchmark:122 |
-| gaming_progression | rows=1377; ok=1375; unique_apps=446; paid=236 | top_categories=Games:724/Productivity:305/Utilities:75/Entertainment:69/Health & Fitness:47 | feature_tags=avatar_or_identity/progression_benchmark:285/habit_or_goal_loop/avatar_or_identity/progression_benchmark:213/habit_or_goal_loop/progression_benchmark:163/progression_benchmark:141/habit_or_goal_loop/mindfulness_or_reset/avatar_or_identity/progression_benchmark:106 |
+| coaching | rows=3274; ok=3274; unique_apps=551; paid=229 | top_categories=Productivity:2078/Health & Fitness:351/Lifestyle:349/Education:142/Utilities:101 | feature_tags=habit_or_goal_loop/avatar_or_identity/progression_benchmark:706/habit_or_goal_loop/mindfulness_or_reset/avatar_or_identity/progression_benchmark:578/habit_or_goal_loop/progression_benchmark:502/habit_or_goal_loop/avatar_or_identity:362/habit_or_goal_loop:337 |
+| mindfulness | rows=3878; ok=3878; unique_apps=638; paid=543 | top_categories=Health & Fitness:1725/Productivity:1021/Lifestyle:573/Utilities:167/Games:112 | feature_tags=mindfulness_or_reset:553/habit_or_goal_loop/mindfulness_or_reset/avatar_or_identity/progression_benchmark:454/mindfulness_or_reset/avatar_or_identity:435/habit_or_goal_loop/mindfulness_or_reset/avatar_or_identity:335/habit_or_goal_loop/mindfulness_or_reset:266 |
+| avatar_identity | rows=2759; ok=2758; unique_apps=607; paid=440 | top_categories=Photo & Video:670/Graphics & Design:541/Utilities:365/Games:281/Productivity:232 | feature_tags=avatar_or_identity:1275/avatar_or_identity/progression_benchmark:475/avatar_identity_adjacent:370/mindfulness_or_reset/avatar_or_identity:197/progression_benchmark:117 |
+| astrology_esoterics | rows=1914; ok=1913; unique_apps=323; paid=811 | top_categories=Lifestyle:763/Productivity:238/Entertainment:172/Education:151/Health & Fitness:150 | feature_tags=symbolic_guidance:315/astrology_esoterics_adjacent:246/avatar_or_identity/symbolic_guidance:238/avatar_or_identity/symbolic_guidance/progression_benchmark:203/symbolic_guidance/progression_benchmark:194 |
+| gaming_progression | rows=3572; ok=3571; unique_apps=832; paid=816 | top_categories=Games:1677/Productivity:854/Utilities:276/Entertainment:182/Health & Fitness:141 | feature_tags=avatar_or_identity/progression_benchmark:679/habit_or_goal_loop/avatar_or_identity/progression_benchmark:497/progression_benchmark:440/habit_or_goal_loop/progression_benchmark:417/gaming_progression_adjacent:292 |
 
 ### Cross-Source Universe Normalization
 
-The source-native collections are now normalized into one auditable universe: 38240 raw rows and 22769 cross-source dedup rows. This protects the research from double-counting repeated country, query, and tag results while preserving provenance.
+The source-native collections are now normalized into one auditable universe: 59006 raw rows and 31866 cross-source dedup rows. This protects the research from double-counting repeated country, query, and tag results while preserving provenance.
 
 Cross-source summary:
 
@@ -571,9 +571,9 @@ Cross-source summary:
 | mobile_app_store | 12000 | 6958 | 12000 | gaming:2400/astrology_esoterics:2400/avatar_identity:2400/coaching:2400/mindfulness:2400 |
 | google_play_or_android | 2527 | 1646 | 2527 | astrology_esoterics:577/avatar_identity:559/gaming:478/coaching:475/mindfulness:438 |
 | duckduckgo_search | 70 | 56 | 70 | gaming:70 |
-| steam_pc | 9151 | 6384 | 8893 | gaming:4285/mindfulness:3347/avatar_identity:589/coaching:534/astrology_esoterics:396 |
+| steam_pc | 21462 | 14529 | 20847 | gaming:10935/mindfulness:5930/avatar_identity:3667/coaching:534/astrology_esoterics:396 |
 | itch_web_game | 7047 | 5696 | 6973 | gaming:3816/avatar_identity:1721/mindfulness:1510 |
-| desktop_store | 6942 | 1526 | 6938 | mindfulness:1645/coaching:1406/gaming_progression:1377/avatar_identity:1322/astrology_esoterics:1192 |
+| desktop_store | 15397 | 2478 | 15394 | mindfulness:3878/gaming_progression:3572/coaching:3274/avatar_identity:2759/astrology_esoterics:1914 |
 | browser_extension | 252 | 252 | 251 | astrology_esoterics:55/avatar_identity:52/coaching:51/mindfulness:50/gaming_progression:44 |
 | unknown_source | 251 | 251 | 251 | astrology_esoterics:55/avatar_identity:52/coaching:51/mindfulness:50/gaming_progression:43 |
 
@@ -584,24 +584,24 @@ The normalized universe now has a source-by-market coverage matrix. This is the 
 Coverage band mix:
 
 - medium_coverage: 12
-- strong_coverage: 10
-- thin_but_usable: 10
+- strong_coverage: 11
+- thin_but_usable: 9
 - weak_or_context_only: 2
 
 Strongest coverage cells:
 
 | Source | Market | Dedup | OK % | Role |
 | --- | --- | ---: | ---: | --- |
+| steam_pc | gaming | 8629 | 96.9 | pc_progression_and_mechanic_benchmark |
+| steam_pc | mindfulness | 5048 | 97.8 | pc_progression_and_mechanic_benchmark |
 | itch_web_game | gaming | 3292 | 100.0 | indie_mechanic_and_experiment_discovery |
-| steam_pc | gaming | 3256 | 96.7 | pc_progression_and_mechanic_benchmark |
-| steam_pc | mindfulness | 2911 | 98.7 | pc_progression_and_mechanic_benchmark |
+| steam_pc | avatar_identity | 3236 | 95.9 | pc_progression_and_mechanic_benchmark |
 | mobile_app_store | gaming | 1931 | 100.0 | direct_consumer_app_competitor_base |
 | mobile_app_store | coaching | 1679 | 100.0 | direct_consumer_app_competitor_base |
 | itch_web_game | avatar_identity | 1623 | 98.4 | indie_mechanic_and_experiment_discovery |
 | mobile_app_store | mindfulness | 1584 | 100.0 | direct_consumer_app_competitor_base |
 | itch_web_game | mindfulness | 1480 | 96.9 | indie_mechanic_and_experiment_discovery |
 | mobile_app_store | avatar_identity | 1461 | 100.0 | direct_consumer_app_competitor_base |
-| mobile_app_store | astrology_esoterics | 1448 | 100.0 | direct_consumer_app_competitor_base |
 
 ### Cross-Source Saturation And Whitespace
 
@@ -609,12 +609,12 @@ The cross-source universe now has a market-level saturation read. It deliberatel
 
 | Market | Dedup Rows | Strong/Medium Cells | Full-Loop-Like | Scarcity | Opportunity Band |
 | --- | ---: | ---: | ---: | ---: | --- |
-| gaming | 8931 | 4 | 143 | 84.0 | mechanic_benchmark_not_primary_market |
-| gaming_progression | 535 | 1 | 33 | 38.3 | mechanic_benchmark_not_primary_market |
-| mindfulness | 6742 | 5 | 331 | 50.9 | crowded_or_unclear_context |
-| avatar_identity | 4475 | 5 | 212 | 52.6 | crowded_or_unclear_context |
-| coaching | 2948 | 4 | 442 | 0.0 | crowded_or_unclear_context |
-| astrology_esoterics | 2532 | 3 | 353 | 0.0 | crowded_or_unclear_context |
+| mindfulness | 9128 | 5 | 368 | 59.7 | medium_opportunity_needs_sampling |
+| avatar_identity | 7417 | 5 | 224 | 69.8 | medium_opportunity_needs_sampling |
+| gaming | 14304 | 4 | 147 | 89.7 | mechanic_benchmark_not_primary_market |
+| gaming_progression | 920 | 1 | 63 | 31.5 | mechanic_benchmark_not_primary_market |
+| coaching | 3187 | 4 | 490 | 0.0 | crowded_or_unclear_context |
+| astrology_esoterics | 2627 | 4 | 364 | 0.0 | crowded_or_unclear_context |
 
 ### Chrome Extension Detail Enrichment
 
@@ -1152,12 +1152,12 @@ Cross-source saturation read: no primary market is upgraded to high opportunity 
 
 | Market | Directness-Weighted Rows | Full-Loop % | Opportunity | Next Validation Move |
 | --- | ---: | ---: | --- | --- |
-| gaming | 4238.6 | 1.60 | mechanic_benchmark_not_primary_market | Use for progression/avatar/retention mechanics only; do not treat as direct market proof. |
-| gaming_progression | 315.3 | 6.17 | mechanic_benchmark_not_primary_market | Use for progression/avatar/retention mechanics only; do not treat as direct market proof. |
-| mindfulness | 3489.5 | 4.91 | crowded_or_unclear_context | Use only as support/context unless new source-native evidence is added. |
-| avatar_identity | 2657.4 | 4.74 | crowded_or_unclear_context | Use only as support/context unless new source-native evidence is added. |
-| coaching | 2394.1 | 14.99 | crowded_or_unclear_context | Use only as support/context unless new source-native evidence is added. |
-| astrology_esoterics | 2077.3 | 13.94 | crowded_or_unclear_context | Use only as support/context unless new source-native evidence is added. |
+| mindfulness | 4399.3 | 4.03 | medium_opportunity_needs_sampling | Sample top direct consumer-app and desktop rows, then compare against prototype scorecard. |
+| avatar_identity | 3750.4 | 3.02 | medium_opportunity_needs_sampling | Sample top direct consumer-app and desktop rows, then compare against prototype scorecard. |
+| gaming | 6119.2 | 1.03 | mechanic_benchmark_not_primary_market | Use for progression/avatar/retention mechanics only; do not treat as direct market proof. |
+| gaming_progression | 565.5 | 6.85 | mechanic_benchmark_not_primary_market | Use for progression/avatar/retention mechanics only; do not treat as direct market proof. |
+| coaching | 2549.4 | 15.37 | crowded_or_unclear_context | Use only as support/context unless new source-native evidence is added. |
+| astrology_esoterics | 2139.1 | 13.86 | crowded_or_unclear_context | Use only as support/context unless new source-native evidence is added. |
 
 ### Product Core Signals in Top-100
 

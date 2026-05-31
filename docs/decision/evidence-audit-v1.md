@@ -1,6 +1,6 @@
 # Evidence Audit V1
 
-Generated: 2026-05-31T08:49:55.560Z
+Generated: 2026-05-31T09:13:24.178Z
 
 ## Purpose
 
@@ -18,7 +18,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 - proved_v1_p0_breadth_batch_ready_open_gates: 1
 - proved_v1_context_batch_ready_open_gates: 1
 - proved_v1_command_level_rollup_open_gates: 1
-- substantial_v1_not_50k_dedup: 1
+- proved_30k_plus_cross_source_dedup_upper_bound_open: 1
 - public_listing_inspected_walkthrough_open: 1
 - supported_with_ranges_stress_test_and_bottom_up_proxy: 1
 - supported_narrowly_with_visual_adjudication: 1
@@ -50,7 +50,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 | REQ_validation_batch_02 | proved_v1_p0_breadth_batch_ready_open_gates | high | 52 batch rows; 52 not started; 12 local artifacts linked | Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts. |
 | REQ_validation_batch_03 | proved_v1_context_batch_ready_open_gates | high | 17 batch rows; 17 not started; 17 local artifacts linked | Batch files are prefilled context notes; they still need observed pricing/paywall checks and conservative signoff decisions. |
 | REQ_validation_evidence_rollup | proved_v1_command_level_rollup_open_gates | high | 75 command rows; 75 notes present; 29 local artifacts linked | Rollup is an intake audit, not a validation result: most rows still need observed screenshots, quotes, calculations, or human signoff. |
-| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 38240 cross-source raw rows; 22769 cross-source dedup rows; 34 coverage cells; 10 strong and 12 medium source/market cells | Cross-source dedup universe is substantial but still below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
+| REQ_competitor_universe | proved_30k_plus_cross_source_dedup_upper_bound_open | medium_high | 59006 cross-source raw rows; 31866 cross-source dedup rows; 34 coverage cells; 11 strong and 12 medium source/market cells | The 30k lower-bound dedup target is met; upper-bound 50k expansion and Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and additional source-native coverage remain backlog. |
 | H1_product_shape_exists | public_listing_inspected_walkthrough_open | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Strict full loop is rare and still needs actual app/onboarding screenshots to confirm or downgrade public listing claims. |
 | H2_markets_have_money | supported_with_ranges_stress_test_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, manual in-app paywall validation, and willingness-to-pay prototype evidence for final investor-grade claims. |
 | H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require human sign-off/in-app inspection. |

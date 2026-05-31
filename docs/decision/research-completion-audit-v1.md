@@ -1,6 +1,6 @@
 # Research Completion Audit V1
 
-Generated: 2026-05-31T08:50:07.230Z
+Generated: 2026-05-31T09:13:33.226Z
 
 ## Purpose
 
@@ -9,7 +9,7 @@ This audit maps the original user objective to current evidence. It prevents the
 ## Status Mix
 
 - proved_v1: 2
-- proved_scale_target_cross_source_normalized: 1
+- proved_30k_plus_cross_source_dedup: 1
 - supported_with_stress_test_and_bottom_up_proxy_not_final: 1
 - narrow_supported_public_listing_inspected_walkthrough_open: 1
 - directionally_supported_validation_ready: 1
@@ -30,7 +30,7 @@ This audit maps the original user objective to current evidence. It prevents the
 | Requirement | Status | Strength | Proof | Remaining Gap | Next Action |
 | --- | --- | --- | --- | --- | --- |
 | REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=16; execution_dashboard_rows=11; hypothesis_decision_rows=6; p0_command_rows=75; p0_field_guide_sections=8; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_batch_local_artifact_links=29; validation_rollup_rows=75 | Keep refreshing as validation results change. | Update after any manual validation/prototype result. |
-| REQ_02_COMPETITOR_UNIVERSE | proved_scale_target_cross_source_normalized | medium_high | dedup=12552; cross_source_raw=38240; cross_source_dedup=22769; cross_source_summary_rows=14; coverage_cells=34; coverage_strong=10; coverage_medium=12; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; desktop_store_rows=6942; chrome_extension_rows=252; known_raw_total=37989; itch_ok=6973; steam_tag_ok=6000; desktop_store_ok=6938; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | Cross-source dedup is substantial but still below the aspirational 30k-50k dedup target; Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. | Run next non-search-heavy collectors from source expansion backlog, prioritizing sources that return public HTML without Cloudflare/search-engine dependency. |
+| REQ_02_COMPETITOR_UNIVERSE | proved_30k_plus_cross_source_dedup | medium_high | dedup=12552; cross_source_raw=59006; cross_source_dedup=31866; cross_source_summary_rows=14; coverage_cells=34; coverage_strong=11; coverage_medium=12; raw_core=17490; itch_rows=7047; steam_tag_rows=18569; desktop_store_rows=15397; chrome_extension_rows=252; known_raw_total=58755; itch_ok=6973; steam_tag_ok=17954; desktop_store_ok=15394; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | The 30k lower-bound dedup target is now met; the remaining expansion gap is the upper 50k aspiration plus Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and additional source-native coverage. | Run next non-search-heavy collectors from source expansion backlog, prioritizing sources that return public HTML without Cloudflare/search-engine dependency. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. | Keep market-specific validation gates explicit. |
 | REQ_04_MARKET_MONEY | supported_with_stress_test_and_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; assumption_audit_rows=6; stress_scenarios=6; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing is stress-tested and range-based, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall validation are still needed for final investor-grade claims. | Use stress-test risk rows to prioritize manual paid-flow inspection and willingness-to-pay prototype questions. |
 | REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; cross_source_saturation_markets=6; cross_source_primary_high_opportunity=0; cross_source_benchmark_markets=2; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_walkthrough_capture_rows=60; manual_app_walkthrough_done=0 | Cross-source saturation now keeps gaming/progression as benchmark-only and finds no primary market opportunity strong enough to upgrade without manual walkthrough; app/onboarding screenshots are still required. | Use the public-listing risk reads to prioritize walkthrough screenshots for onboarding, first action, progress/avatar feedback, and paywall boundary. |

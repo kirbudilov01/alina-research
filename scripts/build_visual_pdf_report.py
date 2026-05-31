@@ -209,6 +209,8 @@ def main():
     OUT.parent.mkdir(parents=True, exist_ok=True)
 
     expanded = read_csv("data_raw/expanded/all_expanded_dedup.csv")
+    cross_source_raw = read_csv("data_processed/cross_source_universe_raw.csv")
+    cross_source_dedup = read_csv("data_processed/cross_source_universe_dedup.csv")
     whitespace = read_csv("data_processed/whitespace_signal_matrix.csv")
     tam = read_csv("data_processed/tam_sam_som_model.csv")
     som = read_csv("data_processed/som_sensitivity_scenarios.csv")
@@ -249,6 +251,8 @@ def main():
             [
                 ["Metric", "Value"],
                 ["Expanded competitor universe", number(str(len(expanded)))],
+                ["Cross-source normalized raw", number(str(len(cross_source_raw)))],
+                ["Cross-source dedup universe", number(str(len(cross_source_dedup)))],
                 ["Top-100 unique primary apps", number(str(len(primary)))],
                 ["High-threat unique competitors", number(str(len(high_threat)))],
                 ["Direct reference competitors", number(str(len(direct_ref)))],
