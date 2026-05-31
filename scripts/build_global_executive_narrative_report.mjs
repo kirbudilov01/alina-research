@@ -117,6 +117,7 @@ const russianStoryline = csv('data_processed/russian_sequential_storyline.csv');
 const frontmatterDashboard = csv('data_processed/russian_frontmatter_dashboard.csv');
 const p0ValidationExecutionSlice = csv('data_processed/p0_validation_execution_slice.csv');
 const p0ObservedEvidenceIntake = csv('data_processed/p0_observed_evidence_intake.csv');
+const recommendations = csv('data_processed/russian_decision_recommendations.csv');
 
 const intersection = by(tam, 'pillar', 'intersection');
 const holdGates = gates.filter(row => clean(row.decision_ru) === 'оставить hold_validate');
@@ -297,6 +298,24 @@ if (p0ObservedEvidenceIntake.length) {
   lines.push(`Observed evidence intake: ${p0ObservedEvidenceIntake.length} P0 задач уже связаны с конкретными capture IDs и полями для заполнения. Это не доказательство, а входная карта для фактического observed evidence.`);
   lines.push('');
 }
+if (recommendations.length) {
+  lines.push('## Рекомендации');
+  lines.push('');
+  lines.push('Это управленческие рекомендации поверх текущих gates, а не claim upgrade. Смысл слоя - зафиксировать, что делать дальше и какие формулировки пока нельзя усиливать.');
+  lines.push('');
+  lines.push(mdTable(recommendations.slice(0, 8).map(row => ({
+    block: row.block_ru,
+    rec: row.recommendation_ru,
+    now: row.do_now_ru,
+    no: row.do_not_do_ru
+  })), [
+    { key: 'block', label: 'Блок' },
+    { key: 'rec', label: 'Рекомендация' },
+    { key: 'now', label: 'Делать сейчас' },
+    { key: 'no', label: 'Не делать' }
+  ]));
+  lines.push('');
+}
 lines.push(mdTable(nextBacklog.slice(0, 8).map(row => ({
   id: row.command_id || row.task_id || row.backlog_id,
   h: row.linked_hypotheses || row.hypothesis_id,
@@ -328,6 +347,7 @@ lines.push('- `data_processed/niche_count_reconciliation.csv`');
 lines.push('- `data_processed/p0_validation_execution_slice.csv`');
 lines.push('- `data_processed/p0_observed_evidence_intake.csv`');
 lines.push('- `data_processed/russian_reader_glossary.csv`');
+lines.push('- `data_processed/russian_decision_recommendations.csv`');
 
 fs.writeFileSync(OUT, `${lines.join('\n')}\n`);
 

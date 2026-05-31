@@ -1,0 +1,31 @@
+# Russian Decision Recommendations V1
+
+Generated: 2026-05-31T18:05:00.839Z
+
+## Зачем нужен этот слой
+
+Этот слой переводит evidence pack в практические рекомендации. Он не усиливает гипотезы сам по себе: каждая рекомендация сохраняет границу между directional desk evidence и observed validation.
+
+## Рекомендации
+
+| Блок | Рекомендация | Почему | Делать сейчас | Не делать |
+| --- | --- | --- | --- | --- |
+| Решение сейчас | Продолжать как validation-first проект, но не объявлять go/PMF и не продавать отчет как финальное доказательство продукта. | Все gates сейчас: H1=12 / 60, success 0 / 25; H3=12 / 60, success 0 / 25; H2=28 / 48, success 8 / 12; H5=12 / 96, success 0 / 30; H4=16 / 80, success 0 / 32; H6=16 / 80, success 0 / 32. | Использовать отчет как карту рынка и план проверки; в питче говорить “мы проверяем связку”, а не “мы доказали рынок Alina”. | Не усиливать формулировки до “PMF найден”, “конкурентов нет”, “выручка доказана” или “аудитория подтверждена”. |
+| MVP | Сузить MVP до одной причинной сессии: personal meaning -> tiny action -> reset -> visible progress/avatar feedback -> next-day hook. | H4=16 / 80, success 0 / 32; H6=16 / 80, success 0 / 32. Прототип готов к проверке, но пользовательские сессии еще не доказали петлю. | Сценарий прототипа должен проверять, понял ли человек причинность между действием и изменением progress/avatar. | Не строить большой feature set, социальные механики, сложную персонализацию или длинный контент до проверки базовой петли. |
+| Приоритет рынков | Первые product/validation гипотезы держать вокруг Mindfulness/reset + Avatar/identity; Astrology и Coaching использовать как язык аудитории и paid-depth контекст; Gaming оставить benchmark-only. | Mindfulness direct=2,550, all=9,803; Avatar direct=2,506, all=9,952; Astrology direct=2,206; Coaching direct=2,651; Gaming direct=3,204. | В отчете и прототипе объяснять Alina как трансформационную daily loop, а не как игру, трекер или astrology feed. | Не включать gaming напрямую в TAM/whitespace claim до доказанного overlap с ritual/self-improvement поведением. |
+| Белое пятно | Формулировать whitespace узко: редкая связка meaning -> action -> reset -> visible identity/progress, а не отсутствие конкурентов. | H1=12 / 60, success 0 / 25; H3=12 / 60, success 0 / 25. Public listing signoff есть, но walkthrough внутри приложений еще не выполнен. | Первые 5 walkthrough должны искать hidden clone risk: onboarding, первое действие, progress/avatar feedback и paywall boundary. | Не писать “рынок пустой” и не считать listing screenshots заменой реального первого опыта продукта. |
+| Аудитория | Первым ICP считать не демографию, а digital ritual users; стартовые сегменты для проверки: Spiritual self-improvers и Habit and progress users. | H5=12 / 96, success 0 / 30. Secondary VOC есть, но recent-behavior интервью еще не закрыты. | В интервью спрашивать последние реальные эпизоды: какие приложения открывали, зачем, что заменяли, где платили, что заставило вернуться. | Не выбирать ICP по тому, кому “нравится идея”; без recent behavior это слабый сигнал. |
+| Деньги и WTP | Использовать H2 как strongest directional gate, но добрать paid-flow boundary и WTP на самой петле Alina. | H2=28 / 48, success 8 / 12. Есть paid proxy и local signoff, но не доказана готовность платить за Alina loop. | Закрыть P0 paid-flow строки по Character AI, Headspace, Meditopia, Nebula и Carrom Pool; в prototype sessions добавить вопрос о честной платной глубине. | Не переносить подписочную выручку конкурентов напрямую на Alina без product-match и WTP evidence. |
+| Следующий sprint | Следующий sprint должен идти в порядке: Сначала hidden-clone walkthrough -> Потом paid-flow/WTP evidence -> Затем ICP recent behavior -> После этого prototype loop. | P0 intake rows=18; routed=18. Теперь для каждой P0-задачи есть место, куда заносить observed evidence. | Сначала заполнить первые 5 manual walkthrough, затем 5 paid-flow/WTP, затем ICP recent behavior, затем prototype sessions. | Не расширять desk research новым большим парсингом, пока P0 observed rows пустые: прирост качества сейчас в наблюдениях. |
+| Правила решения | Заранее держать upgrade/kill правила: усиливать claim только после наблюдаемых строк, ослаблять сразу при hidden clone, непонятной петле или отказе платить. | Это защищает отчет от красивого, но недоказанного нарратива. | После каждого validation блока пересчитать gates, reader/executive PDF, manifest и commit/push. | Не править выводы руками поверх старых CSV: сначала source/capture rows, потом генераторы. |
+
+## Evidence refs
+
+- REC_01_DECISION_POSTURE: `data_processed/global_hypothesis_gate_snapshot.csv;data_processed/validation_gate_calculator.csv`
+- REC_02_PRODUCT_SCOPE: `data_processed/prototype_validation_stimulus_flow.csv;data_processed/prototype_validation_scorecard.csv;data_processed/prototype_session_capture_sheet.csv`
+- REC_03_MARKET_PRIORITY: `data_processed/global_niche_count_rollup.csv;data_processed/global_whitespace_audience_synthesis.csv;data_processed/niche_count_reconciliation.csv`
+- REC_04_WHITESPACE_CLAIM: `data_processed/manual_walkthrough_capture_sheet.csv;data_processed/manual_competitor_inspection_packet.csv;data_processed/public_listing_inspection_results.csv`
+- REC_05_AUDIENCE: `data_processed/icp_segment_matrix.csv;data_processed/icp_validation_test_plan.csv;data_processed/icp_interview_capture_sheet.csv`
+- REC_06_PAID_FLOW: `data_processed/paid_flow_capture_sheet.csv;data_processed/web_paywall_visual_adjudication.csv;data_processed/market_money_triangulation.csv`
+- REC_07_NEXT_SPRINT: `data_processed/p0_validation_execution_slice.csv;data_processed/p0_observed_evidence_intake.csv`
+- REC_08_UPGRADE_KILL_RULES: `data_processed/validation_gate_calculator.csv;data_processed/research_completion_audit.csv;data_processed/evidence_artifact_manifest.csv`

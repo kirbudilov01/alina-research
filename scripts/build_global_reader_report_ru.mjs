@@ -136,6 +136,7 @@ const readability = csv('data_processed/global_report_readability_audit.csv');
 const p0Slice = csv('data_processed/p0_validation_execution_slice.csv');
 const whitespaceAudience = csv('data_processed/global_whitespace_audience_synthesis.csv');
 const archetypes = csv('data_processed/global_competitor_archetype_rollup.csv');
+const recommendations = csv('data_processed/russian_decision_recommendations.csv');
 
 const intersection = by(tam, 'pillar', 'intersection');
 const weighted = by(tam, 'pillar', 'confidence_weighted_intersection');
@@ -389,6 +390,24 @@ reportLines.push(mdTable(p0Slice.slice(0, 8).map(row => ({
   { key: 'file', label: 'Куда писать' }
 ]));
 reportLines.push('');
+if (recommendations.length) {
+  reportLines.push('## Рекомендации и ограничения');
+  reportLines.push('');
+  reportLines.push('Ниже не “советы из воздуха”, а управленческий слой поверх текущих gates. Главная рекомендация: двигаться validation-first, усиливать продуктовую ставку только после наблюдаемых walkthrough, interviews, prototype sessions и WTP evidence.');
+  reportLines.push('');
+  reportLines.push(mdTable(recommendations.slice(0, 8).map(row => ({
+    block: row.block_ru,
+    rec: row.recommendation_ru,
+    now: row.do_now_ru,
+    no: row.do_not_do_ru
+  })), [
+    { key: 'block', label: 'Блок' },
+    { key: 'rec', label: 'Рекомендация' },
+    { key: 'now', label: 'Делать сейчас' },
+    { key: 'no', label: 'Не делать' }
+  ]));
+  reportLines.push('');
+}
 reportLines.push('## Как читать термины');
 reportLines.push('');
 reportLines.push('Ниже короткий словарь терминов, которые оставлены в отчете как рабочие labels. Полный словарь лежит отдельным CSV/MD, чтобы внешний читатель не спотыкался о технический язык.');
@@ -415,6 +434,7 @@ reportLines.push('- `docs/decision/russian-reader-glossary-v1.md`');
 reportLines.push('- `data_processed/evidence_artifact_manifest.csv`');
 reportLines.push('- `data_processed/p0_validation_execution_slice.csv`');
 reportLines.push('- `data_processed/p0_observed_evidence_intake.csv`');
+reportLines.push('- `data_processed/russian_decision_recommendations.csv`');
 
 fs.writeFileSync(REPORT_OUT, `${reportLines.join('\n')}\n`);
 

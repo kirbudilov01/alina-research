@@ -10,7 +10,7 @@
 
 ## Сначала числа, чтобы не потеряться
 
-Собрано 67,525 сырьевых строк и 36,694 global dedup строк. В manifest сейчас 518 локальных артефактов; missing=0. По пяти нишам direct app-store слой дает 13,117 строк, а all-source niche слой дает 43,144 строк. Эти числа отвечают на разные вопросы и не складываются в одно “количество приложений”.
+Собрано 67,525 сырьевых строк и 36,694 global dedup строк. В manifest сейчас 521 локальных артефактов; missing=0. По пяти нишам direct app-store слой дает 13,117 строк, а all-source niche слой дает 43,144 строк. Эти числа отвечают на разные вопросы и не складываются в одно “количество приложений”.
 
 | Направление | Роль в гипотезе Alina | Сколько данных | Как читать осторожно |
 | --- | --- | --- | --- |
@@ -94,6 +94,21 @@ MVP должен проверить не весь будущий продукт,
 | 7 | Headspace: Sleep & Meditate | H2 | проверить screenshot/source, подтвердить цену, trial, product-match и границу первого paywall | data_processed/web_paywall_visual_adjudication.csv |
 | 8 | Meditopia: Sleep & Meditation | H2 | проверить screenshot/source, подтвердить цену, trial, product-match и границу первого paywall | data_processed/web_paywall_visual_adjudication.csv |
 
+## Рекомендации и ограничения
+
+Ниже не “советы из воздуха”, а управленческий слой поверх текущих gates. Главная рекомендация: двигаться validation-first, усиливать продуктовую ставку только после наблюдаемых walkthrough, interviews, prototype sessions и WTP evidence.
+
+| Блок | Рекомендация | Делать сейчас | Не делать |
+| --- | --- | --- | --- |
+| Решение сейчас | Продолжать как validation-first проект, но не объявлять go/PMF и не продавать отчет как финальное доказательство продукта. | Использовать отчет как карту рынка и план проверки; в питче говорить “мы проверяем связку”, а не “мы доказали рынок Alina”. | Не усиливать формулировки до “PMF найден”, “конкурентов нет”, “выручка доказана” или “аудитория подтверждена”. |
+| MVP | Сузить MVP до одной причинной сессии: personal meaning -> tiny action -> reset -> visible progress/avatar feedback -> next-day hook. | Сценарий прототипа должен проверять, понял ли человек причинность между действием и изменением progress/avatar. | Не строить большой feature set, социальные механики, сложную персонализацию или длинный контент до проверки базовой петли. |
+| Приоритет рынков | Первые product/validation гипотезы держать вокруг Mindfulness/reset + Avatar/identity; Astrology и Coaching использовать как язык аудитории и paid-depth контекст; Gaming оставить benchmark-only. | В отчете и прототипе объяснять Alina как трансформационную daily loop, а не как игру, трекер или astrology feed. | Не включать gaming напрямую в TAM/whitespace claim до доказанного overlap с ritual/self-improvement поведением. |
+| Белое пятно | Формулировать whitespace узко: редкая связка meaning -> action -> reset -> visible identity/progress, а не отсутствие конкурентов. | Первые 5 walkthrough должны искать hidden clone risk: onboarding, первое действие, progress/avatar feedback и paywall boundary. | Не писать “рынок пустой” и не считать listing screenshots заменой реального первого опыта продукта. |
+| Аудитория | Первым ICP считать не демографию, а digital ritual users; стартовые сегменты для проверки: Spiritual self-improvers и Habit and progress users. | В интервью спрашивать последние реальные эпизоды: какие приложения открывали, зачем, что заменяли, где платили, что заставило вернуться. | Не выбирать ICP по тому, кому “нравится идея”; без recent behavior это слабый сигнал. |
+| Деньги и WTP | Использовать H2 как strongest directional gate, но добрать paid-flow boundary и WTP на самой петле Alina. | Закрыть P0 paid-flow строки по Character AI, Headspace, Meditopia, Nebula и Carrom Pool; в prototype sessions добавить вопрос о честной платной глубине. | Не переносить подписочную выручку конкурентов напрямую на Alina без product-match и WTP evidence. |
+| Следующий sprint | Следующий sprint должен идти в порядке: Сначала hidden-clone walkthrough -> Потом paid-flow/WTP evidence -> Затем ICP recent behavior -> После этого prototype loop. | Сначала заполнить первые 5 manual walkthrough, затем 5 paid-flow/WTP, затем ICP recent behavior, затем prototype sessions. | Не расширять desk research новым большим парсингом, пока P0 observed rows пустые: прирост качества сейчас в наблюдениях. |
+| Правила решения | Заранее держать upgrade/kill правила: усиливать claim только после наблюдаемых строк, ослаблять сразу при hidden clone, непонятной петле или отказе платить. | После каждого validation блока пересчитать gates, reader/executive PDF, manifest и commit/push. | Не править выводы руками поверх старых CSV: сначала source/capture rows, потом генераторы. |
+
 ## Как читать термины
 
 Ниже короткий словарь терминов, которые оставлены в отчете как рабочие labels. Полный словарь лежит отдельным CSV/MD, чтобы внешний читатель не спотыкался о технический язык.
@@ -121,3 +136,4 @@ MVP должен проверить не весь будущий продукт,
 - `data_processed/evidence_artifact_manifest.csv`
 - `data_processed/p0_validation_execution_slice.csv`
 - `data_processed/p0_observed_evidence_intake.csv`
+- `data_processed/russian_decision_recommendations.csv`

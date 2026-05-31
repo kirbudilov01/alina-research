@@ -1,6 +1,6 @@
 # Evidence Package Manifest V1
 
-Generated: 2026-05-31T17:59:46.492Z
+Generated: 2026-05-31T18:07:47.449Z
 
 ## Purpose
 
@@ -8,17 +8,17 @@ This manifest makes the research package auditable. It lists key raw data, proce
 
 ## Package Summary
 
-- Manifest rows: 518
+- Manifest rows: 521
 - Missing required artifacts: 0
-- CSV artifacts: 130
-- Total CSV data rows tracked: 241665
+- CSV artifacts: 131
+- Total CSV data rows tracked: 241673
 - CSV rows with source-like identifiers/URLs/domains/packages: 239936
 
 Artifact types:
 
-- research_doc: 131
-- generator_script: 118
-- processed_data: 115
+- research_doc: 132
+- generator_script: 119
+- processed_data: 116
 - validation_workspace: 95
 - report: 21
 - raw_data: 15
@@ -29,7 +29,7 @@ Artifact types:
 Evidence roles:
 
 - decision_artifact: 216
-- supporting: 98
+- supporting: 101
 - market_money: 64
 - audience_icp: 59
 - source_claim: 38
@@ -62,12 +62,12 @@ Evidence roles:
 | data_processed/evidence_claim_register.csv | decision_artifact | 22 | 0 | f53166925164b33a |
 | data_processed/forum_quote_coding_matrix.csv | audience_icp | 72 | 72 | f2fb0ab869195b97 |
 | data_processed/global_competitor_archetype_rollup.csv | supporting | 7 | 0 | 48cb0525926238b5 |
-| data_processed/global_goal_evidence_coverage.csv | decision_artifact | 8 | 0 | aeef45ff6a4d53d4 |
+| data_processed/global_goal_evidence_coverage.csv | decision_artifact | 8 | 0 | 3061740a403efbee |
 | data_processed/global_hypothesis_gate_snapshot.csv | decision_artifact | 6 | 0 | 93be1bc96ec5e946 |
-| data_processed/global_hypothesis_source_appendix.csv | decision_artifact | 18 | 18 | 0241c975332d5643 |
+| data_processed/global_hypothesis_source_appendix.csv | decision_artifact | 18 | 18 | 4fabc96d5a5dd84f |
 | data_processed/global_hypothesis_validation_questionnaire.csv | decision_artifact | 9 | 0 | e9cb87d734d19bbe |
 | data_processed/global_market_sizing_methodology.csv | market_money | 6 | 6 | 375ece2e2328fd3f |
-| data_processed/global_next_validation_backlog.csv | decision_artifact | 22 | 22 | 76ee9806d087bf91 |
+| data_processed/global_next_validation_backlog.csv | decision_artifact | 22 | 22 | 3d5175a0d7c04e56 |
 | data_processed/global_niche_count_rollup.csv | supporting | 5 | 5 | fc3c161f80079e67 |
 | data_processed/global_report_readability_audit.csv | decision_artifact | 10 | 0 | dc7e72fc491363a3 |
 | data_processed/global_source_quality_gap_audit.csv | source_claim | 5 | 5 | 2c90cbd734c93dd4 |
@@ -87,11 +87,11 @@ Evidence roles:
 | --- | --- | ---: | ---: | --- |
 | docs/competitive/human-validation-guide-v1.md | research_doc | 91 | 12102 | b85e6b5dd29fcb2f |
 | docs/decision/evidence-audit-v1.md | research_doc | 87 | 9756 | ee273e9aa8578be7 |
-| docs/decision/evidence-package-manifest-v1.md | research_doc | 131 | 8947 | 7c0d925e609e0ab6 |
-| docs/decision/global-goal-evidence-coverage-v1.md | research_doc | 31 | 6149 | 17a682d8ba5d593c |
-| docs/decision/global-next-validation-backlog-v1.md | research_doc | 62 | 11798 | 9cff4e6c347d8c75 |
+| docs/decision/evidence-package-manifest-v1.md | research_doc | 131 | 8949 | 98269aa455214c8b |
+| docs/decision/global-goal-evidence-coverage-v1.md | research_doc | 31 | 6149 | 7d2639dcd829a055 |
+| docs/decision/global-next-validation-backlog-v1.md | research_doc | 62 | 11960 | 2112606516152be7 |
 | docs/decision/global-report-readability-audit-v1.md | research_doc | 31 | 5768 | 4ce3c203af12d16f |
-| docs/decision/global-validation-executive-rollup-v1.md | research_doc | 31 | 3880 | a9560b35f56c740e |
+| docs/decision/global-validation-executive-rollup-v1.md | research_doc | 31 | 3880 | 46476652018afc06 |
 | docs/decision/hypothesis-decision-matrix-v1.md | research_doc | 51 | 4817 | baa9668809d8dc7f |
 | docs/decision/p0-observed-evidence-intake-v1.md | research_doc | 55 | 9100 | 34de89d985279897 |
 | docs/decision/p0-validation-command-center-v1.md | research_doc | 69 | 7260 | 51d22a2990e6aaf3 |
@@ -122,9 +122,9 @@ Evidence roles:
 | docs/visuals/chart-index-v1.md | research_doc | 25 | 886 | 77cba8f26318bcae |
 | output/pdf/alina-evidence-first-report-draft.pdf | pdf | 1423 | 194961 | 30a3025c4818d99e |
 | output/pdf/alina-evidence-visual-report-v1.pdf | pdf | 322 | 34684 | 3fca188b99b4541c |
-| output/pdf/alina-global-executive-narrative-v1.pdf | pdf | 514 | 98107 | 04da1a7fd1a3c143 |
-| output/pdf/alina-global-hypothesis-report-v1.pdf | pdf | 990 | 193272 | f26f19adf81b3f30 |
-| output/pdf/alina-global-reader-report-v1.pdf | pdf | 506 | 89169 | 85a4b0b4b9fa3fc0 |
+| output/pdf/alina-global-executive-narrative-v1.pdf | pdf | 576 | 104421 | c188fa2ee58d3c7a |
+| output/pdf/alina-global-hypothesis-report-v1.pdf | pdf | 990 | 193267 | 4d80f588ce7cf1f1 |
+| output/pdf/alina-global-reader-report-v1.pdf | pdf | 525 | 94938 | 2dcc97369f5a14d9 |
 
 ## Files
 

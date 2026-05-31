@@ -6,7 +6,7 @@
 
 Alina стоит дальше проверять как мировую consumer-app гипотезу на пересечении personal meaning, tiny action, short reset и visible progress. Сейчас это не доказанный продукт и не финальный инвестиционный claim. Это большой evidence-first пакет, который показывает: вокруг идеи есть пять платежеспособных adjacent-направлений, заметная конкурентная плотность, рабочая TAM/SAM/SOM методология, предварительное whitespace-окно и понятная P0-очередь валидации.
 
-Масштаб базы сейчас: 67,525 сырьевых source-строк, 36,694 уникализированных строк и 518 локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.
+Масштаб базы сейчас: 67,525 сырьевых source-строк, 36,694 уникализированных строк и 521 локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.
 
 ## Главные числа
 
@@ -14,7 +14,7 @@ Alina стоит дальше проверять как мировую consumer-
 
 | Метрика | Значение | Как читать | Граница |
 | --- | --- | --- | --- |
-| Масштаб evidence base | 67,525 raw source-строк; 36,694 global dedup; 518 manifest artifacts | Пакет уже большой как карта рынка и конкурентов. | Масштаб строк не равен доказанному спросу или числу прямых клонов. |
+| Масштаб evidence base | 67,525 raw source-строк; 36,694 global dedup; 521 manifest artifacts | Пакет уже большой как карта рынка и конкурентов. | Масштаб строк не равен доказанному спросу или числу прямых клонов. |
 | Покрытие пяти направлений | 5 market rows; 13,117 direct app dedup rows by niche; 43,144 all-source dedup rows by niche | По каждой нише видно, сколько данных лежит под выводами. | Niche dedup rows нельзя складывать как уникальные продукты: один продукт может жить в нескольких контекстах. |
 | Денежная рамка H2 | intersection SAM $202M; weighted SAM $80.8M; sensitivity high-or-above 4/6 | Денежная зона выглядит достаточно большой, чтобы продолжать проверку. | Это range-based sizing, не revenue forecast и не закрытый H2 gate. |
 | Статус гипотез | 6/6 gates hold_validate; H1 12 / 60; success 0 / 25; H2 28 / 48; success 8 / 12; H5 12 / 96; success 0 / 30 | Исследование готово к ручной проверке, но еще не готово к claim upgrade. | Listing-only, secondary VOC и prototype-readiness не заменяют observed walkthrough/interview/session evidence. |
@@ -120,6 +120,21 @@ P0 execution slice для первой рабочей сессии:
 
 Observed evidence intake: 18 P0 задач уже связаны с конкретными capture IDs и полями для заполнения. Это не доказательство, а входная карта для фактического observed evidence.
 
+## Рекомендации
+
+Это управленческие рекомендации поверх текущих gates, а не claim upgrade. Смысл слоя - зафиксировать, что делать дальше и какие формулировки пока нельзя усиливать.
+
+| Блок | Рекомендация | Делать сейчас | Не делать |
+| --- | --- | --- | --- |
+| Решение сейчас | Продолжать как validation-first проект, но не объявлять go/PMF и не продавать отчет как финальное доказательство продукта. | Использовать отчет как карту рынка и план проверки; в питче говорить “мы проверяем связку”, а не “мы доказали рынок Alina”. | Не усиливать формулировки до “PMF найден”, “конкурентов нет”, “выручка доказана” или “аудитория подтверждена”. |
+| MVP | Сузить MVP до одной причинной сессии: personal meaning -> tiny action -> reset -> visible progress/avatar feedback -> next-day hook. | Сценарий прототипа должен проверять, понял ли человек причинность между действием и изменением progress/avatar. | Не строить большой feature set, социальные механики, сложную персонализацию или длинный контент до проверки базовой петли. |
+| Приоритет рынков | Первые product/validation гипотезы держать вокруг Mindfulness/reset + Avatar/identity; Astrology и Coaching использовать как язык аудитории и paid-depth контекст; Gaming оставить benchmark-only. | В отчете и прототипе объяснять Alina как трансформационную daily loop, а не как игру, трекер или astrology feed. | Не включать gaming напрямую в TAM/whitespace claim до доказанного overlap с ritual/self-improvement поведением. |
+| Белое пятно | Формулировать whitespace узко: редкая связка meaning -> action -> reset -> visible identity/progress, а не отсутствие конкурентов. | Первые 5 walkthrough должны искать hidden clone risk: onboarding, первое действие, progress/avatar feedback и paywall boundary. | Не писать “рынок пустой” и не считать listing screenshots заменой реального первого опыта продукта. |
+| Аудитория | Первым ICP считать не демографию, а digital ritual users; стартовые сегменты для проверки: Spiritual self-improvers и Habit and progress users. | В интервью спрашивать последние реальные эпизоды: какие приложения открывали, зачем, что заменяли, где платили, что заставило вернуться. | Не выбирать ICP по тому, кому “нравится идея”; без recent behavior это слабый сигнал. |
+| Деньги и WTP | Использовать H2 как strongest directional gate, но добрать paid-flow boundary и WTP на самой петле Alina. | Закрыть P0 paid-flow строки по Character AI, Headspace, Meditopia, Nebula и Carrom Pool; в prototype sessions добавить вопрос о честной платной глубине. | Не переносить подписочную выручку конкурентов напрямую на Alina без product-match и WTP evidence. |
+| Следующий sprint | Следующий sprint должен идти в порядке: Сначала hidden-clone walkthrough -> Потом paid-flow/WTP evidence -> Затем ICP recent behavior -> После этого prototype loop. | Сначала заполнить первые 5 manual walkthrough, затем 5 paid-flow/WTP, затем ICP recent behavior, затем prototype sessions. | Не расширять desk research новым большим парсингом, пока P0 observed rows пустые: прирост качества сейчас в наблюдениях. |
+| Правила решения | Заранее держать upgrade/kill правила: усиливать claim только после наблюдаемых строк, ослаблять сразу при hidden clone, непонятной петле или отказе платить. | После каждого validation блока пересчитать gates, reader/executive PDF, manifest и commit/push. | Не править выводы руками поверх старых CSV: сначала source/capture rows, потом генераторы. |
+
 | ID | H | Следующий шаг | Куда писать evidence |
 | --- | --- | --- | --- |
 | P0_MANUAL_01 | H1/H3 | открыть listing/app, сохранить 5 слотов скриншотов, записать full-loop/directness/causality verdict | data_processed/manual_competitor_inspection_packet.csv |
@@ -150,3 +165,4 @@ Observed evidence intake: 18 P0 задач уже связаны с конкре
 - `data_processed/p0_validation_execution_slice.csv`
 - `data_processed/p0_observed_evidence_intake.csv`
 - `data_processed/russian_reader_glossary.csv`
+- `data_processed/russian_decision_recommendations.csv`
