@@ -213,6 +213,7 @@ const claimAppendix = csv('data_processed/russian_claim_evidence_appendix.csv');
 const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv');
 const marketSources = csv('data_processed/market_source_registry.csv');
 const nextValidationBacklog = csv('data_processed/global_next_validation_backlog.csv');
+const reportReadabilityAudit = csv('data_processed/global_report_readability_audit.csv');
 const marketSizingMethodology = csv('data_processed/global_market_sizing_methodology.csv');
 const marketStressScenarios = csv('data_processed/market_sizing_stress_test.csv');
 const whitespaceAudienceSynthesis = csv('data_processed/global_whitespace_audience_synthesis.csv');
@@ -448,6 +449,15 @@ const sourceAppendix = [
     primary_metric: `${nicheCountRollup.length} niche rows; file=data_processed/global_niche_count_rollup.csv`,
     evidence_files: 'data_processed/global_niche_count_rollup.csv;docs/competitive/global-niche-count-rollup-v1.md;data_processed/russian_readable_niche_summary.csv;data_processed/cross_source_coverage_matrix.csv',
     source_boundary_ru: 'Niche count rollup показывает масштаб source discovery по рынкам; он не доказывает спрос, WTP или отсутствие скрытого full-loop конкурента.'
+  },
+  {
+    claim_id: 'SRC_10_REPORT_READABILITY',
+    report_section: 'Проверка складности и читаемости отчета',
+    claim_ru: 'Русский мировой отчет читается как последовательная гипотезная история, но остается плотным рабочим evidence pack.',
+    evidence_status_ru: 'проверено редакционным аудитом, не market proof',
+    primary_metric: `${reportReadabilityAudit.length} readability audit rows`,
+    evidence_files: 'data_processed/global_report_readability_audit.csv;docs/decision/global-report-readability-audit-v1.md',
+    source_boundary_ru: 'Readability audit оценивает форму и ясность текста; он не доказывает рыночные или продуктовые claims.'
   }
 ];
 
@@ -882,6 +892,26 @@ lines.push(mdTable(goalEvidenceCoverage.map(row => ({
 lines.push('');
 lines.push('Главный вывод по этой карте: пакет уже масштабный и трассируемый, но не финально валидированный. Это правильное состояние для evidence-first ресерча: сильные desk/source слои готовы, а product/market claims остаются в hold_validate до ручных walkthrough, интервью, прототипа и WTP.');
 lines.push('');
+if (reportReadabilityAudit.length) {
+  lines.push('## ПРОВЕРКА СКЛАДНОСТИ И ЧИТАЕМОСТИ ОТЧЕТА');
+  lines.push('');
+  lines.push('Отдельно проверено, складно ли текущая версия читается как русский мировой отчет, а не как случайная выгрузка таблиц. Вывод такой: логика гипотез уже держится, счетчики по нишам видны, границы доказательств прописаны, но документ остается плотным рабочим evidence pack. Для внешней версии позже нужен облегченный executive narrative, а тяжелые таблицы лучше вынести в appendix.');
+  lines.push('');
+  lines.push(mdTable(reportReadabilityAudit.map(row => ({
+    area: row.report_area_ru,
+    status: row.readability_status_ru,
+    risk: row.severity_ru,
+    evidence: row.evidence_seen_ru,
+    action: row.recommendation_ru
+  })), [
+    { key: 'area', label: 'Блок' },
+    { key: 'status', label: 'Чтение' },
+    { key: 'risk', label: 'Риск' },
+    { key: 'evidence', label: 'Что видно' },
+    { key: 'action', label: 'Что делать' }
+  ]));
+  lines.push('');
+}
 lines.push('## ИСТОЧНИКИ И ГРАНИЦЫ ДОКАЗАТЕЛЬСТВ');
 lines.push('');
 lines.push('Ниже зафиксирована короткая связка claim -> evidence -> boundary для этой мировой версии отчета. Это не полный manifest всех файлов, а читательский слой: он показывает, какие утверждения можно читать как desk/source support, а какие нельзя усиливать без ручных walkthrough, интервью, прототипных сессий или WTP-проверки.');
@@ -916,6 +946,7 @@ lines.push('- `data_processed/global_hypothesis_source_appendix.csv`');
 lines.push('- `data_processed/global_hypothesis_validation_questionnaire.csv`');
 lines.push('- `data_processed/global_hypothesis_gate_snapshot.csv`');
 lines.push('- `data_processed/global_next_validation_backlog.csv`');
+lines.push('- `data_processed/global_report_readability_audit.csv`');
 lines.push('- `data_processed/global_market_sizing_methodology.csv`');
 lines.push('- `data_processed/global_niche_count_rollup.csv`');
 lines.push('- `data_processed/global_whitespace_audience_synthesis.csv`');

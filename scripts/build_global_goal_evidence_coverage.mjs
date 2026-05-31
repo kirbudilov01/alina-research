@@ -159,8 +159,8 @@ const rows = [
     objective_part_ru: 'Собрать последовательный русский мировой отчет и PDF/DOCX',
     status_ru: 'покрыто как draft, не финальная validated версия',
     evidence_strength_ru: 'средне-сильное',
-    current_evidence_ru: `global report md=${exists('reports/alina-global-hypothesis-report-v1.md')}; pdf=${exists('output/pdf/alina-global-hypothesis-report-v1.pdf')}; docx=${exists('output/docx/alina-global-hypothesis-report-v1.docx')}`,
-    key_files: 'reports/alina-global-hypothesis-report-v1.md;output/pdf/alina-global-hypothesis-report-v1.pdf;output/docx/alina-global-hypothesis-report-v1.docx',
+    current_evidence_ru: `global report md=${exists('reports/alina-global-hypothesis-report-v1.md')}; pdf=${exists('output/pdf/alina-global-hypothesis-report-v1.pdf')}; docx=${exists('output/docx/alina-global-hypothesis-report-v1.docx')}; readability_audit_rows=${countRows('data_processed/global_report_readability_audit.csv')}`,
+    key_files: 'reports/alina-global-hypothesis-report-v1.md;output/pdf/alina-global-hypothesis-report-v1.pdf;output/docx/alina-global-hypothesis-report-v1.docx;data_processed/global_report_readability_audit.csv;docs/decision/global-report-readability-audit-v1.md',
     remaining_gap_ru: 'финальная версия должна обновиться после observed validation rows',
     next_move_ru: 'после capture rows пересобрать отчет и изменить claim language'
   },
