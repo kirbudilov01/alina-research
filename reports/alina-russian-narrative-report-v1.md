@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T11:42:57.219Z
+Собрано: 2026-05-31T11:48:20.404Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 387 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 390 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 387 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 390 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -95,6 +95,37 @@
 Самый важный нюанс: широкие категории заняты, но строгий сигнал behavior-tied avatar/progress progression найден только в 1/100 top-candidate rows. Поэтому белое пятно формулируется узко: не "сделать все сразу", а проверить, действительно ли редка петля meaning -> action -> reset -> visible identity/progress feedback -> next-day return.
 
 Manual inspection packet уже выделяет 12 P0 приложений для walkthrough, а public listing inspection покрывает 12 публичных листингов. Но это еще не закрывает вопрос: публичные описания могут скрывать реальные onboarding/paywall/product-loop детали. Поэтому H1 и H3 остаются в статусе hold/validate.
+
+## 3.1. Русские battlecards P0 конкурентов
+
+Чтобы конкурентный анализ был читаемым, добавлены русские battlecards на 12 P0 приложений. Они показывают угрозу, money proxy, review language, JTBD/pain, открытие для Alina и конкретные slots для walkthrough. Это не human validation: карточки только готовят проверку и не усиливают H1/H3 без скриншотов.
+
+| # | Конкурент | Риск | Priority | Money proxy | Behavior-tied |
+| --- | --- | --- | ---: | --- | --- |
+| 1 | Shepherd: Spiritual Bible BFF | прямой reference-риск | 162.8 | strong_bottom_up_money_proxy | yes |
+| 2 | Zing AI: Home & Gym Workouts | сильный платный close substitute | 112 | strong_bottom_up_money_proxy | no |
+| 3 | Miracle Morning Routine | сильный платный close substitute | 111.4 | strong_bottom_up_money_proxy | no |
+| 4 | EVOLVE: Transform Your Life | сильный платный close substitute | 106 | strong_bottom_up_money_proxy | no |
+| 5 | Daily Yoga: Yoga for Fitness® | сильный платный close substitute | 99.2 | strong_bottom_up_money_proxy | no |
+| 6 | Daily Burn: Workout Coach | сильный платный close substitute | 98 | strong_bottom_up_money_proxy | no |
+| 7 | Myla : Manifest & Vision Board | высокий close-substitute риск | 97.6 | medium_bottom_up_money_proxy | no |
+| 8 | Rosebud: AI Journal & Diary | высокий close-substitute риск | 97 | medium_bottom_up_money_proxy | no |
+| 9 | Habit Tracker : Haby | высокий close-substitute риск | 95.8 | medium_bottom_up_money_proxy | no |
+| 10 | Goddess・Women's Wellness Coach | высокий close-substitute риск | 95.8 | medium_bottom_up_money_proxy | no |
+| 11 | LifeWheel Goal Habit Tracker | высокий close-substitute риск | 95.4 | medium_bottom_up_money_proxy | no |
+| 12 | Habit Tracker | сильный платный close substitute | 94 | strong_bottom_up_money_proxy | no |
+
+**Shepherd: Spiritual Bible BFF.** Публичные данные уже намекают на behavior-tied progression; это нужно проверять первым, потому что такой конкурент может сузить whitespace. Открытие для Alina: Differentiate by broader spiritual/identity scope, softer safety framing, and better reliability around action-tied progression. Проверить: app_store_listing_or_public_positioning|onboarding_first_value_screen|first_daily_action_or_task_screen|progress_avatar_identity_feedback_screen|first_paywall_or_iap_terms_screen.
+
+**Zing AI: Home & Gym Workouts.** Публичные данные показывают близкие primitives, но не подтверждают причинную связку action -> identity/avatar/progress. Открытие для Alina: Make the avatar causally respond to completed daily action, not just exist as profile or decorative identity. Проверить: app_store_listing_or_public_positioning|onboarding_first_value_screen|first_daily_action_or_task_screen|progress_avatar_identity_feedback_screen|first_paywall_or_iap_terms_screen.
+
+**Miracle Morning Routine.** Публичные данные показывают близкие primitives, но не подтверждают причинную связку action -> identity/avatar/progress. Открытие для Alina: Make the avatar causally respond to completed daily action, not just exist as profile or decorative identity. Проверить: app_store_listing_or_public_positioning|onboarding_first_value_screen|first_daily_action_or_task_screen|progress_avatar_identity_feedback_screen|first_paywall_or_iap_terms_screen.
+
+**EVOLVE: Transform Your Life.** Публичные данные показывают близкие primitives, но не подтверждают причинную связку action -> identity/avatar/progress. Открытие для Alina: Make the avatar causally respond to completed daily action, not just exist as profile or decorative identity. Проверить: app_store_listing_or_public_positioning|onboarding_first_value_screen|first_daily_action_or_task_screen|progress_avatar_identity_feedback_screen|first_paywall_or_iap_terms_screen.
+
+**Daily Yoga: Yoga for Fitness®.** Публичные данные показывают близкие primitives, но не подтверждают причинную связку action -> identity/avatar/progress. Открытие для Alina: Make the avatar causally respond to completed daily action, not just exist as profile or decorative identity. Проверить: app_store_listing_or_public_positioning|onboarding_first_value_screen|first_daily_action_or_task_screen|progress_avatar_identity_feedback_screen|first_paywall_or_iap_terms_screen.
+
+**Daily Burn: Workout Coach.** Публичные данные показывают близкие primitives, но не подтверждают причинную связку action -> identity/avatar/progress. Открытие для Alina: Make the avatar causally respond to completed daily action, not just exist as profile or decorative identity. Проверить: app_store_listing_or_public_positioning|onboarding_first_value_screen|first_daily_action_or_task_screen|progress_avatar_identity_feedback_screen|first_paywall_or_iap_terms_screen.
 
 ## 4. Белое пятно: что именно может быть новым
 
@@ -282,6 +313,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_market_deep_dives.csv`
 - `data_processed/russian_claim_evidence_appendix.csv`
 - `data_processed/russian_source_provenance_index.csv`
+- `data_processed/russian_competitor_battlecards.csv`
 - `data_processed/russian_validation_fieldbook.csv`
 - `data_processed/validation_tranche_planner.csv`
 - `data_processed/validation_tranche_briefing_index.csv`

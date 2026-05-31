@@ -127,6 +127,7 @@ const navigationIndex = csv('data_processed/research_navigation_index.csv');
 const marketDeepDives = csv('data_processed/russian_market_deep_dives.csv');
 const claimAppendix = csv('data_processed/russian_claim_evidence_appendix.csv');
 const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv');
+const competitorBattlecards = csv('data_processed/russian_competitor_battlecards.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -243,6 +244,25 @@ lines.push(`Самый важный нюанс: широкие категори�
 lines.push('');
 lines.push(`Manual inspection packet уже выделяет ${manualPacket.length} P0 приложений для walkthrough, а public listing inspection покрывает ${publicListing.length} публичных листингов. Но это еще не закрывает вопрос: публичные описания могут скрывать реальные onboarding/paywall/product-loop детали. Поэтому H1 и H3 остаются в статусе hold/validate.`);
 lines.push('');
+if (competitorBattlecards.length) {
+  lines.push('## 3.1. Русские battlecards P0 конкурентов');
+  lines.push('');
+  lines.push(`Чтобы конкурентный анализ был читаемым, добавлены русские battlecards на ${competitorBattlecards.length} P0 приложений. Они показывают угрозу, money proxy, review language, JTBD/pain, открытие для Alina и конкретные slots для walkthrough. Это не human validation: карточки только готовят проверку и не усиливают H1/H3 без скриншотов.`);
+  lines.push('');
+  lines.push(mdTable(competitorBattlecards, [
+    { key: 'battlecard_rank', label: '#' },
+    { key: 'app_name', label: 'Конкурент' },
+    { key: 'threat_ru', label: 'Риск' },
+    { key: 'validation_priority_score', label: 'Priority', align: 'right' },
+    { key: 'revenue_proxy_band', label: 'Money proxy' },
+    { key: 'behavior_tied_progression_prefill', label: 'Behavior-tied' }
+  ], competitorBattlecards.length));
+  lines.push('');
+  for (const row of competitorBattlecards.slice(0, 6)) {
+    lines.push(`**${row.app_name}.** ${row.inspection_read_ru} Открытие для Alina: ${row.alina_opening_ru} Проверить: ${row.required_screenshot_slots}.`);
+    lines.push('');
+  }
+}
 lines.push('## 4. Белое пятно: что именно может быть новым');
 lines.push('');
 lines.push('Белое пятно не в том, что нет медитаций, нет привычек, нет коучинга или нет аватаров. Все это есть. Потенциальная возможность появляется на стыке: пользователю не просто дают контент или список задач, а помогают каждый день прожить маленький цикл изменения. Сначала он получает персональный смысл или отражение состояния. Потом выбирает одно реальное действие. Потом делает короткий reset. После завершения действия видит, что его прогресс или образ себя изменился не произвольно, а причинно связан с действием.');
@@ -407,6 +427,7 @@ lines.push('- `data_processed/russian_narrative_evidence_map.csv`');
 lines.push('- `data_processed/russian_market_deep_dives.csv`');
 lines.push('- `data_processed/russian_claim_evidence_appendix.csv`');
 lines.push('- `data_processed/russian_source_provenance_index.csv`');
+lines.push('- `data_processed/russian_competitor_battlecards.csv`');
 lines.push('- `data_processed/russian_validation_fieldbook.csv`');
 lines.push('- `data_processed/validation_tranche_planner.csv`');
 lines.push('- `data_processed/validation_tranche_briefing_index.csv`');
