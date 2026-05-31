@@ -131,6 +131,7 @@ const claimAppendix = csv('data_processed/russian_claim_evidence_appendix.csv');
 const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv');
 const competitorBattlecards = csv('data_processed/russian_competitor_battlecards.csv');
 const icpBattlecards = csv('data_processed/russian_icp_battlecards.csv');
+const icpInterviewDossiers = csv('data_processed/russian_icp_interview_dossiers.csv');
 const productLoopCards = csv('data_processed/russian_product_loop_cards.csv');
 const validationGateCards = csv('data_processed/russian_validation_gate_cards.csv');
 const p0ExecutionPacket = csv('data_processed/russian_p0_execution_packet.csv');
@@ -387,6 +388,28 @@ if (icpBattlecards.length) {
   lines.push('Граница этого слоя принципиальна: карточки помогают начать fieldwork, но не выбирают ICP вместо реальных интервью, прототипных сессий и WTP/fatal-objection capture.');
   lines.push('');
 }
+if (icpInterviewDossiers.length) {
+  lines.push('## 5.2. Русские ICP interview dossiers');
+  lines.push('');
+  lines.push(`Чтобы H5 не оставалась аудиторной матрицей, добавлены ICP interview dossiers на ${icpInterviewDossiers.length} сегментов. Они показывают, кого искать, через какие каналы, какие тесты провести, какие evidence fields заполнить и какие ответы апгрейдят или ослабляют сегмент.`);
+  lines.push('');
+  lines.push(mdTable(icpInterviewDossiers, [
+    { key: 'segment_id', label: 'ICP' },
+    { key: 'segment_name', label: 'Segment' },
+    { key: 'priority', label: 'Priority' },
+    { key: 'evidence_score', label: 'Score', align: 'right' },
+    { key: 'capture_rows_count', label: 'Rows', align: 'right' },
+    { key: 'completed_capture_rows', label: 'Done', align: 'right' },
+    { key: 'success_rule_ru', label: 'Upgrade rule' }
+  ], icpInterviewDossiers.length));
+  lines.push('');
+  for (const row of icpInterviewDossiers.filter(r => r.priority === 'P0_top_two')) {
+    lines.push(`**${row.segment_id}. ${row.segment_name}.** Core job: ${row.core_job_ru} Recruiting: ${row.best_recruiting_routes_ru} Downgrade: ${row.downgrade_rule_ru}`);
+    lines.push('');
+  }
+  lines.push('Граница этого слоя: dossier готовит интервью и делает их сравнимыми, но не валидирует аудиторию до заполненных capture rows и точных цитат.');
+  lines.push('');
+}
 lines.push(`Reddit source-native слой сейчас содержит ${redditSignals.length} coded qualitative signal rows. Из них ${redditQueue.length} уникальных тредов поставлены в manual reading queue, ${p0Reddit.length} имеют P0_read_first, ${p1Reddit.length} - P1_read_next. Для P0/P1 создан capture sheet на ${redditCapture.length} строк. Все строки по умолчанию имеют статус unread_do_not_upgrade: это специально защищает отчет от преждевременного апгрейда claims.`);
 lines.push('');
 lines.push('## 6. Что говорит Reddit/forum слой человеческим языком');
@@ -629,6 +652,7 @@ lines.push('- `data_processed/russian_claim_evidence_appendix.csv`');
 lines.push('- `data_processed/russian_source_provenance_index.csv`');
 lines.push('- `data_processed/russian_competitor_battlecards.csv`');
 lines.push('- `data_processed/russian_icp_battlecards.csv`');
+lines.push('- `data_processed/russian_icp_interview_dossiers.csv`');
 lines.push('- `data_processed/russian_product_loop_cards.csv`');
 lines.push('- `data_processed/russian_validation_gate_cards.csv`');
 lines.push('- `data_processed/russian_p0_execution_packet.csv`');

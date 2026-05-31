@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T12:48:16.220Z
+Собрано: 2026-05-31T12:56:25.280Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 417 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 420 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 417 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 420 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -260,6 +260,25 @@ Review/JTBD слой показывает повторяющиеся работ�
 **Cozy/casual progression users.** Это люди, которым близки мягкие игровые циклы, коллекционирование, daily rewards и уютная progression. Для Alina это источник языка возвращения, но есть риск выглядеть как манипулятивная retention-механика. Позиционирование: Borrow cozy progression, but avoid manipulative daily-claim monetization.. Следующий шаг: Использовать после первых P0-сессий как compare-сегмент: проверить, является ли потребность шире одного рынка или распадается на разные продукты.
 
 Граница этого слоя принципиальна: карточки помогают начать fieldwork, но не выбирают ICP вместо реальных интервью, прототипных сессий и WTP/fatal-objection capture.
+
+## 5.2. Русские ICP interview dossiers
+
+Чтобы H5 не оставалась аудиторной матрицей, добавлены ICP interview dossiers на 6 сегментов. Они показывают, кого искать, через какие каналы, какие тесты провести, какие evidence fields заполнить и какие ответы апгрейдят или ослабляют сегмент.
+
+| ICP | Segment | Priority | Score | Rows | Done | Upgrade rule |
+| --- | --- | --- | ---: | ---: | ---: | --- |
+| ICP_A | Spiritual self-improvers | P0_top_two | 10 | 48 | 0 | апгрейдить primary ICP, если recent behavior, trust, meaning lift и WTP не противоречат spiritual/self-improvement framing. |
+| ICP_B | Avatar identity builders | P1_secondary | 8 | 0 | 0 | оставить как secondary ICP, пока P0_top_two не дадут слабый результат или сегмент не покажет более сильный recent-behavior/WTP signal. |
+| ICP_C | Anxious daily reset users | P1_secondary | 9 | 0 | 0 | оставить как secondary ICP, пока P0_top_two не дадут слабый результат или сегмент не покажет более сильный recent-behavior/WTP signal. |
+| ICP_D | Habit and progress users | P0_top_two | 10 | 48 | 0 | апгрейдить primary ICP, если action-tied progress выигрывает у plain checklist/streak и не вызывает streak anxiety. |
+| ICP_E | Cozy/casual progression users | P1_secondary | 9 | 0 | 0 | оставить как secondary ICP, пока P0_top_two не дадут слабый результат или сегмент не покажет более сильный recent-behavior/WTP signal. |
+| ICP_F | Coaching professionals and structured growth users | P1_secondary | 9 | 0 | 0 | оставить как secondary ICP, пока P0_top_two не дадут слабый результат или сегмент не покажет более сильный recent-behavior/WTP signal. |
+
+**ICP_A. Spiritual self-improvers.** Core job: Turn symbolic/personal meaning into one grounded action today. Recruiting: community_or_accountability_need: Relevant community thread, Discord, forum, or group where users already discuss the job | word_of_mouth_or_personal_recommendation: Warm referral or friend-of-user intro | coded_forum_need_or_competitor_context: Forum-language recruiting using exact problem wording from coded snippets | social_platform_discovery: Social platform discovery or creator/community mention Downgrade: ослабить сегмент, если участники не называют recent behavior, проблема оказывается абстрактной, paid depth отвергается, или возникает fatal objection: Alina needs careful framing: soft guidance, no deterministic claims, visible limits, and clear safety posture.
+
+**ICP_D. Habit and progress users.** Core job: Make vague growth concrete and keep momentum without streak anxiety. Recruiting: community_or_accountability_need: Relevant community thread, Discord, forum, or group where users already discuss the job | word_of_mouth_or_personal_recommendation: Warm referral or friend-of-user intro | coded_forum_need_or_competitor_context: Forum-language recruiting using exact problem wording from coded snippets | social_platform_discovery: Social platform discovery or creator/community mention Downgrade: ослабить сегмент, если участники не называют recent behavior, проблема оказывается абстрактной, paid depth отвергается, или возникает fatal objection: The free loop must demonstrate value before asking for deeper paid analysis or personalization.
+
+Граница этого слоя: dossier готовит интервью и делает их сравнимыми, но не валидирует аудиторию до заполненных capture rows и точных цитат.
 
 Reddit source-native слой сейчас содержит 2339 coded qualitative signal rows. Из них 1852 уникальных тредов поставлены в manual reading queue, 336 имеют P0_read_first, 238 - P1_read_next. Для P0/P1 создан capture sheet на 574 строк. Все строки по умолчанию имеют статус unread_do_not_upgrade: это специально защищает отчет от преждевременного апгрейда claims.
 
@@ -569,6 +588,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_source_provenance_index.csv`
 - `data_processed/russian_competitor_battlecards.csv`
 - `data_processed/russian_icp_battlecards.csv`
+- `data_processed/russian_icp_interview_dossiers.csv`
 - `data_processed/russian_product_loop_cards.csv`
 - `data_processed/russian_validation_gate_cards.csv`
 - `data_processed/russian_p0_execution_packet.csv`
