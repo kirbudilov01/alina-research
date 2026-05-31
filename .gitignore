@@ -6,3 +6,6 @@ venv/
 update_linear*.py
 create_issues*.py
 node_modules/
+tmp/
+__pycache__/
+scripts/__pycache__/
