@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="342" viewBox="0 0 1120 342">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="48" y="48" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="#111827">Developer Website Paywall Signal Strength</text>
+<text x="48" y="78" font-family="Inter, Arial, sans-serif" font-size="15" fill="#4b5563">Fetched public developer sites from Google Play metadata; screenshot validation still pending.</text>
+<text x="48" y="136" font-family="Inter, Arial, sans-serif" font-size="17" fill="#111827">low</text>
+<rect x="310" y="112" width="730" height="28" rx="5" fill="#eef2f7"/>
+<rect x="310" y="112" width="730" height="28" rx="5" fill="#2563eb"/>
+<text x="1050" y="132" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#111827">41</text>
+<text x="48" y="194" font-family="Inter, Arial, sans-serif" font-size="17" fill="#111827">medium</text>
+<rect x="310" y="170" width="730" height="28" rx="5" fill="#eef2f7"/>
+<rect x="310" y="170" width="427.3170731707317" height="28" rx="5" fill="#059669"/>
+<text x="747.3170731707316" y="190" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#111827">24</text>
+<text x="48" y="252" font-family="Inter, Arial, sans-serif" font-size="17" fill="#111827">high</text>
+<rect x="310" y="228" width="730" height="28" rx="5" fill="#eef2f7"/>
+<rect x="310" y="228" width="89.02439024390245" height="28" rx="5" fill="#d97706"/>
+<text x="409.0243902439024" y="248" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#111827">5</text>
+</svg>

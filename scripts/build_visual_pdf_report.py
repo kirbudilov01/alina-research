@@ -215,6 +215,7 @@ def main():
     top100 = read_csv("data_processed/top100_competitor_review_scorecard.csv")
     iap = read_csv("data_raw/app_store_iap_pricing_raw.csv")
     gplay = read_csv("data_raw/google_play_pricing_raw.csv")
+    web_paywalls = read_csv("data_processed/web_paywall_signal_matrix.csv")
     reviews = read_csv("data_processed/review_jtbd_cluster_summary.csv")
     forum = read_csv("data_processed/forum_quote_coding_matrix.csv")
 
@@ -222,6 +223,7 @@ def main():
     direct_ref = [r for r in primary if r.get("competitive_verdict") == "direct_reference_competitor"]
     high_threat = [r for r in primary if float(r.get("competitive_threat_score") or 0) >= 24]
     gplay_ok = [r for r in gplay if r.get("collection_status") == "ok"]
+    web_queue = [r for r in web_paywalls if r.get("needs_screenshot_validation") == "yes"]
 
     story = []
     story.append(para("Alina Evidence-First Visual Report V1", STYLES["Title"]))
@@ -242,6 +244,8 @@ def main():
                 ["Direct reference competitors", number(str(len(direct_ref)))],
                 ["App Store IAP rows", number(str(len(iap)))],
                 ["Google Play successful lookups", number(str(len(gplay_ok)))],
+                ["Web paywall domains", number(str(len(web_paywalls)))],
+                ["Web screenshot queue", number(str(len(web_queue)))],
                 ["Forum quote-coding rows", number(str(len(forum)))],
             ],
             [2.8 * inch, 2.0 * inch],
@@ -352,6 +356,28 @@ def main():
     story.append(
         para(
             "Pricing evidence supports free entry with paid depth as the dominant adjacent pattern. App Store exposes richer price ladders; Google Play validates IAP/ad-supported monetization at Android scale.",
+            STYLES["Body"],
+        )
+    )
+
+    story.append(PageBreak())
+    story.append(para("4B. Web Paywall Discovery", STYLES["H1"]))
+    story.append(
+        BarChart(
+            "Developer Website Signal Strength",
+            [(k, float(v)) for k, v in count_by(web_paywalls, "strongest_signal").most_common()],
+        )
+    )
+    story.append(Spacer(1, 0.12 * inch))
+    story.append(
+        BarChart(
+            "Screenshot Queue By Market",
+            [(k, float(v)) for k, v in count_by(web_queue, "niche").most_common()],
+        )
+    )
+    story.append(
+        para(
+            "This page is a discovery layer from public developer websites, not final screenshot validation. High and medium rows should be manually captured and checked for trial terms, monthly or annual prices, and first meaningful paywall location.",
             STYLES["Body"],
         )
     )

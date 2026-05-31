@@ -115,6 +115,9 @@ const iapRows = fs.existsSync('data_raw/app_store_iap_pricing_raw.csv')
 const googlePlayPricing = fs.existsSync('data_raw/google_play_pricing_raw.csv')
   ? csv('data_raw/google_play_pricing_raw.csv')
   : [];
+const webPaywallSignals = fs.existsSync('data_processed/web_paywall_signal_matrix.csv')
+  ? csv('data_processed/web_paywall_signal_matrix.csv')
+  : [];
 
 horizontalBarChart({
   title: 'Whitespace Bands Across Expanded Competitor Universe',
@@ -230,6 +233,29 @@ if (googlePlayPricing.length) {
   });
 }
 
+if (webPaywallSignals.length) {
+  horizontalBarChart({
+    title: 'Developer Website Paywall Signal Strength',
+    subtitle: 'Fetched public developer sites from Google Play metadata; screenshot validation still pending.',
+    rows: Object.entries(countBy(webPaywallSignals, 'strongest_signal'))
+      .sort((a, b) => b[1] - a[1])
+      .map(([label, value]) => ({ label, value })),
+    file: 'web-paywall-signal-strength.svg'
+  });
+
+  horizontalBarChart({
+    title: 'Web Paywall Screenshot Queue by Market',
+    subtitle: 'Domains with medium/high public pricing or paywall language.',
+    rows: Object.entries(
+      webPaywallSignals.filter(row => row.needs_screenshot_validation === 'yes').reduce((acc, row) => {
+        acc[row.niche] = (acc[row.niche] || 0) + 1;
+        return acc;
+      }, {})
+    ).sort((a, b) => b[1] - a[1]).map(([label, value]) => ({ label, value })),
+    file: 'web-paywall-screenshot-queue-by-market.svg'
+  });
+}
+
 const lines = [];
 lines.push('# Chart Index V1');
 lines.push('');
@@ -251,6 +277,10 @@ if (forumQuoteCoding.length) lines.push('- `output/charts/forum-quote-coding-tag
 if (googlePlayPricing.length) {
   lines.push('- `output/charts/google-play-pricing-models.svg`');
   lines.push('- `output/charts/google-play-iap-by-market.svg`');
+}
+if (webPaywallSignals.length) {
+  lines.push('- `output/charts/web-paywall-signal-strength.svg`');
+  lines.push('- `output/charts/web-paywall-screenshot-queue-by-market.svg`');
 }
 lines.push('');
 lines.push('## Notes');

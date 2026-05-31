@@ -1,6 +1,6 @@
 # Chart Index V1
 
-Generated: 2026-05-31T02:54:48.866Z
+Generated: 2026-05-31T03:24:47.118Z
 
 ## Charts
 
@@ -15,6 +15,8 @@ Generated: 2026-05-31T02:54:48.866Z
 - `output/charts/forum-quote-coding-tags.svg`
 - `output/charts/google-play-pricing-models.svg`
 - `output/charts/google-play-iap-by-market.svg`
+- `output/charts/web-paywall-signal-strength.svg`
+- `output/charts/web-paywall-screenshot-queue-by-market.svg`
 
 ## Notes
 

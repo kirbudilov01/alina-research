@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T02:59:35.480Z
+Generated: 2026-05-31T03:24:48.040Z
 
 ## 1. Executive Summary
 
@@ -17,13 +17,14 @@ Key quantified signals:
 - AI-assisted top-100 competitor review: 100 rows, 90 unique primary apps, 45 high-threat apps, 1 direct reference competitor.
 - App Store IAP pricing layer: 498 observed purchase rows across 80 apps; observed price range $0.00-$549.99.
 - Google Play pricing validation: 247/250 successful Android lookups; 191 apps offer IAP.
+- Developer website paywall discovery: 560 fetched URL rows across 70 app/domain rows; 29 domains queued for screenshot validation.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
 - Forum/source evidence map: 18 qualitative rows across 5 market pillars.
 - Forum quote coding layer: 72 snippet rows across 18 sources.
-- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, and forum quote coding.
-- Visual PDF companion: native ReportLab charts embedded in a separate 7-page visual report.
+- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, top-100 competitor verdicts, IAP price bands, Android pricing models, web paywall discovery, and forum quote coding.
+- Visual PDF companion: native ReportLab charts embedded in a separate visual report.
 - Modeled direct intersection SAM base: USD 201960000.
 
 ## 2. Product Hypotheses
@@ -152,6 +153,33 @@ Android pricing summary by market:
 | avatar_identity | 50 | 49 | 1 | 36 | 32 | 48 |
 | coaching | 49 | 49 | 0 | 24 | 1 | 42 |
 | mindfulness | 50 | 50 | 0 | 40 | 6 | 45 |
+
+### Developer Website Paywall Discovery
+
+A first web-paywall discovery pass fetched 560 public URL rows from developer websites in Google Play metadata and aggregated them into 70 app/domain rows. This layer detects visible pricing, subscription, trial, checkout, premium, and upgrade language. It is a prioritization queue, not a substitute for screenshots or in-app paywall testing.
+
+Website paywall signal strength:
+
+- low: 41
+- medium: 24
+- high: 5
+
+Screenshot validation queue: 29 domains with medium/high public pricing or paywall language.
+
+| App | Market | Signal | Best URL | Detected Prices |
+| --- | --- | --- | --- | --- |
+| Lords Mobile: Kingdom Wars | gaming | medium | https://www.igg.com/ |  |
+| Clash of Clans | gaming | medium | https://support.supercell.com/en/index.html |  |
+| Carrom Pool: Disc Game | gaming | medium | https://www.miniclip.com/pricing |  |
+| Pokémon GO | gaming | medium | https://pokemongo.com/ |  |
+| Tennis Clash: Multiplayer Game | gaming | medium | https://wildlifestudios.com/ |  |
+| Mob Control | gaming | medium | https://voodoo.io/ | $670 |
+| The Sims™ FreePlay | gaming | high | https://www.ea.com/ea-play | $5.99/$39.99/$16.99/$119.99 |
+| Modern Strike Online: War FPS | gaming | medium | https://azurgames.com/ |  |
+| Avatar World ® | avatar_identity | medium | https://pazugames.com/ |  |
+| Call of Duty®: Mobile - Garena | gaming | medium | https://codm.garena.tw/ | $5,00 |
+| AstroSage Kundli: AI Astrology | astrology_esoterics | medium | https://www.astrosage.com/ |  |
+| Character AI: Chat, Talk, Text | avatar_identity | high | https://character.ai/subscribe | $9.99/$94.99/$119.88 |
 
 ### Retention Signals
 
@@ -383,6 +411,7 @@ Market claims currently normalized: 14.
 - `docs/competitive/top100-competitor-battlecards-v1.md`
 - `docs/competitive/app-store-iap-pricing-v1.md`
 - `docs/competitive/google-play-pricing-v1.md`
+- `docs/competitive/web-paywall-validation-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
 - `data_processed/competitor_feature_matrix.csv`
@@ -392,6 +421,7 @@ Market claims currently normalized: 14.
 - `data_processed/top100_competitor_review_scorecard.csv`
 - `data_processed/app_store_iap_pricing_summary.csv`
 - `data_processed/google_play_pricing_summary.csv`
+- `data_processed/web_paywall_signal_matrix.csv`
 - `data_processed/pricing_retention_matrix.csv`
 - `data_processed/product_core_evidence_matrix.csv`
 - `data_processed/review_signal_matrix.csv`
@@ -400,6 +430,7 @@ Market claims currently normalized: 14.
 - `data_raw/app_store_top_candidate_reviews.csv`
 - `data_raw/app_store_iap_pricing_raw.csv`
 - `data_raw/google_play_pricing_raw.csv`
+- `data_raw/web_paywall_discovery_raw.csv`
 - `data_raw/forum_evidence_signals.csv`
 - `data_raw/forum_quote_evidence_raw.csv`
 - `data_processed/forum_quote_coding_matrix.csv`
@@ -414,6 +445,8 @@ Market claims currently normalized: 14.
 - `output/charts/iap-price-bands.svg`
 - `output/charts/google-play-pricing-models.svg`
 - `output/charts/google-play-iap-by-market.svg`
+- `output/charts/web-paywall-signal-strength.svg`
+- `output/charts/web-paywall-screenshot-queue-by-market.svg`
 - `output/pdf/alina-evidence-first-report-draft.pdf`
 - `output/pdf/alina-evidence-visual-report-v1.pdf`
 
@@ -421,7 +454,7 @@ Market claims currently normalized: 14.
 
 1. Human-validate the AI-assisted top-100 competitor scorecard and battlecards.
 2. Manually validate the highest-signal review clusters and extract exact user language for positioning.
-3. Validate pricing beyond App Store/Google Play metadata: websites, paywall screenshots, and trial terms.
+3. Screenshot-validate the website paywall queue and verify trial terms / first meaningful paywall location.
 4. Polish final designed PDF and add web/paywall screenshots where useful.
 5. Human-validate retrieval-assisted Reddit/forum/website quote coding.
 6. Update go/no-go decision after manual review and user validation.
