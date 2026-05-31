@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T12:13:10.058Z
+Собрано: 2026-05-31T12:19:43.188Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 402 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 405 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 402 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 405 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -65,6 +65,31 @@
 | Alina direct intersection SAM | insufficient_money_case | 1 |  |
 
 Для intersection-модели базовый SAM в текущей модели: $201,960,000. Эту цифру нельзя читать как прогноз выручки. Ее корректнее читать как рамку: если удастся доказать продуктовую петлю, есть достаточно большой соседний платежный контекст, чтобы продолжать работу.
+
+## 2.0. Русский TAM/SAM/SOM playbook
+
+Чтобы рыночная часть не выглядела как одна магическая цифра, добавлен русский sizing playbook на 6 market rows. Он показывает формулу по каждому рынку: TAM base, serviceable share, SAM base, confidence/directness weighted SAM, money verdict, caveat и следующий proof. Главная логика: цифры нужны для приоритизации и проверки H2, а не для заявления "Alina заработает столько-то".
+
+| Pillar | Directness | SAM base | Weighted SAM | Money verdict | Как читать |
+| --- | --- | --- | --- | --- | --- |
+| gaming | benchmark: деньги и retention-паттерны видны, но это не прямой TAM Alina | $671,100,000 | $469,770,000 | benchmark_money_visible_not_direct_tam | Держать вне прямого TAM. Использовать как benchmark механик прогресса, retention и monetization patterns. |
+| astrology_esoterics | direct adjacent: можно использовать как рыночный якорь с caveats | $374,400,000 | $262,080,000 | strong_directional_money_case | Деньги видны направленно: можно использовать для приоритизации validation, но не как финальную выручку Alina. |
+| avatar_identity | broad adjacent: нужен сильный consumer/self-improvement discount | $420,000,000 | $294,000,000 | strong_directional_money_case | Деньги видны направленно: можно использовать для приоритизации validation, но не как финальную выручку Alina. |
+| coaching | direct adjacent: можно использовать как рыночный якорь с caveats | $300,000,000 | $210,000,000 | medium_directional_money_case | Использовать осторожно как range/context до ручного paywall/product-match evidence. |
+| mindfulness | direct adjacent: можно использовать как рыночный якорь с caveats | $252,000,000 | $176,400,000 | strong_directional_money_case | Деньги видны направленно: можно использовать для приоритизации validation, но не как финальную выручку Alina. |
+| intersection | intersection model: расчетная зона Alina, не внешний market report | $201,960,000 | $80,784,000 | insufficient_money_case | Читать только как modeled SAM для проверки гипотезы. Нельзя использовать как revenue forecast без ICP/WTP и paid-flow validation. |
+
+**gaming.** SAM base = TAM base $134,220,000,000 * serviceable share 0.50% = $671,100,000. Weighted SAM applies confidence/directness weight 0.7 -> $469,770,000. Caveat: Public IAP/review/install/paywall proxies cannot prove revenue; use for triangulation and validation prioritization. Следующий proof: Keep as monetization/retention benchmark; do not count as direct Alina TAM unless direct audience overlap is validated.
+
+**astrology_esoterics.** SAM base = TAM base $6,240,000,000 * serviceable share 6.0% = $374,400,000. Weighted SAM applies confidence/directness weight 0.7 -> $262,080,000. Caveat: Public IAP/review/install/paywall proxies cannot prove revenue; use for triangulation and validation prioritization. Следующий proof: Run paid-flow signoff and WTP prototype probes before using as final product-level money proof.
+
+**avatar_identity.** SAM base = TAM base $8,400,000,000 * serviceable share 5.0% = $420,000,000. Weighted SAM applies confidence/directness weight 0.7 -> $294,000,000. Caveat: Public IAP/review/install/paywall proxies cannot prove revenue; use for triangulation and validation prioritization. Следующий proof: Run paid-flow signoff and WTP prototype probes before using as final product-level money proof.
+
+**coaching.** SAM base = TAM base $5,000,000,000 * serviceable share 6.0% = $300,000,000. Weighted SAM applies confidence/directness weight 0.7 -> $210,000,000. Caveat: Public IAP/review/install/paywall proxies cannot prove revenue; use for triangulation and validation prioritization. Следующий proof: Add manual paywall/product-match evidence and competitor revenue/intelligence before investor-grade claims.
+
+**mindfulness.** SAM base = TAM base $1,680,000,000 * serviceable share 15.0% = $252,000,000. Weighted SAM applies confidence/directness weight 0.7 -> $176,400,000. Caveat: Public IAP/review/install/paywall proxies cannot prove revenue; use for triangulation and validation prioritization. Следующий proof: Run paid-flow signoff and WTP prototype probes before using as final product-level money proof.
+
+**intersection.** SAM base = TAM base $1,346,400,000 * serviceable share 15.0% = $201,960,000. Weighted SAM applies confidence/directness weight 0.4 -> $80,784,000. Caveat: Range-based modeled intersection. Must be validated with competitor revenue, user interviews, and conversion tests. Следующий proof: Validate intersection through ICP/WTP and competitor bottom-up proxies; keep modeled SAM as range-only.
 
 ## 2.1. Пять рынков по отдельности
 
@@ -420,6 +445,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/research_navigation_index.csv`
 - `data_processed/reddit_manual_reading_capture_sheet.csv`
 - `data_processed/russian_narrative_evidence_map.csv`
+- `data_processed/russian_market_sizing_playbook.csv`
 - `data_processed/russian_market_deep_dives.csv`
 - `data_processed/russian_claim_evidence_appendix.csv`
 - `data_processed/russian_source_provenance_index.csv`

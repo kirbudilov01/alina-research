@@ -124,6 +124,7 @@ const russianFieldbook = csv('data_processed/russian_validation_fieldbook.csv');
 const tranchePlanner = csv('data_processed/validation_tranche_planner.csv');
 const trancheBriefings = csv('data_processed/validation_tranche_briefing_index.csv');
 const navigationIndex = csv('data_processed/research_navigation_index.csv');
+const marketSizingPlaybook = csv('data_processed/russian_market_sizing_playbook.csv');
 const marketDeepDives = csv('data_processed/russian_market_deep_dives.csv');
 const claimAppendix = csv('data_processed/russian_claim_evidence_appendix.csv');
 const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv');
@@ -221,6 +222,25 @@ lines.push(mdTable(marketMoney, [
 lines.push('');
 lines.push(`Для intersection-модели базовый SAM в текущей модели: ${money(intersection.samBase)}. Эту цифру нельзя читать как прогноз выручки. Ее корректнее читать как рамку: если удастся доказать продуктовую петлю, есть достаточно большой соседний платежный контекст, чтобы продолжать работу.`);
 lines.push('');
+if (marketSizingPlaybook.length) {
+  lines.push('## 2.0. Русский TAM/SAM/SOM playbook');
+  lines.push('');
+  lines.push(`Чтобы рыночная часть не выглядела как одна магическая цифра, добавлен русский sizing playbook на ${marketSizingPlaybook.length} market rows. Он показывает формулу по каждому рынку: TAM base, serviceable share, SAM base, confidence/directness weighted SAM, money verdict, caveat и следующий proof. Главная логика: цифры нужны для приоритизации и проверки H2, а не для заявления "Alina заработает столько-то".`);
+  lines.push('');
+  lines.push(mdTable(marketSizingPlaybook, [
+    { key: 'pillar', label: 'Pillar' },
+    { key: 'directness_ru', label: 'Directness' },
+    { key: 'sam_base_usd', label: 'SAM base' },
+    { key: 'weighted_sam_base_usd', label: 'Weighted SAM' },
+    { key: 'money_verdict', label: 'Money verdict' },
+    { key: 'decision_rule_ru', label: 'Как читать' }
+  ], marketSizingPlaybook.length));
+  lines.push('');
+  for (const row of marketSizingPlaybook) {
+    lines.push(`**${row.pillar}.** ${row.formula_read_ru} Caveat: ${row.caveat_ru} Следующий proof: ${row.next_proof_ru}`);
+    lines.push('');
+  }
+}
 if (marketDeepDives.length) {
   lines.push('## 2.1. Пять рынков по отдельности');
   lines.push('');
@@ -513,6 +533,7 @@ lines.push('- `data_processed/evidence_claim_register.csv`');
 lines.push('- `data_processed/research_navigation_index.csv`');
 lines.push('- `data_processed/reddit_manual_reading_capture_sheet.csv`');
 lines.push('- `data_processed/russian_narrative_evidence_map.csv`');
+lines.push('- `data_processed/russian_market_sizing_playbook.csv`');
 lines.push('- `data_processed/russian_market_deep_dives.csv`');
 lines.push('- `data_processed/russian_claim_evidence_appendix.csv`');
 lines.push('- `data_processed/russian_source_provenance_index.csv`');
