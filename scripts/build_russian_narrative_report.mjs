@@ -126,6 +126,7 @@ const trancheBriefings = csv('data_processed/validation_tranche_briefing_index.c
 const navigationIndex = csv('data_processed/research_navigation_index.csv');
 const marketSizingPlaybook = csv('data_processed/russian_market_sizing_playbook.csv');
 const marketDeepDives = csv('data_processed/russian_market_deep_dives.csv');
+const whitespaceDecisionMap = csv('data_processed/russian_whitespace_decision_map.csv');
 const claimAppendix = csv('data_processed/russian_claim_evidence_appendix.csv');
 const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv');
 const competitorBattlecards = csv('data_processed/russian_competitor_battlecards.csv');
@@ -305,6 +306,26 @@ lines.push(mdTable(saturation.map(row => ({
   { key: 'next_validation_move', label: 'Следующий шаг' }
 ], 8));
 lines.push('');
+if (whitespaceDecisionMap.length) {
+  lines.push('## 4.1. Русская whitespace decision map');
+  lines.push('');
+  lines.push(`Чтобы H3 не звучала сильнее, чем позволяет evidence, добавлена русская whitespace decision map на ${whitespaceDecisionMap.length} рынков/ниш. Она показывает full-loop rate, scarcity, public-listing hidden clone risks и практический H3 read: где есть узкая directional возможность, где рынок только benchmark, а где claim остается crowded/unclear.`);
+  lines.push('');
+  lines.push(mdTable(whitespaceDecisionMap, [
+    { key: 'niche', label: 'Niche' },
+    { key: 'cross_source_dedup_rows', label: 'Dedup', align: 'right' },
+    { key: 'full_loop_rate_pct', label: 'Full-loop %', align: 'right' },
+    { key: 'opportunity_read_ru', label: 'Opportunity' },
+    { key: 'h3_decision_read_ru', label: 'H3 read' }
+  ], whitespaceDecisionMap.length));
+  lines.push('');
+  for (const row of whitespaceDecisionMap) {
+    lines.push(`**${row.niche}.** ${row.h3_decision_read_ru} Риск: ${row.top_public_risk_apps || 'n/a'}. Следующий шаг: ${row.next_validation_move_ru}`);
+    lines.push('');
+  }
+  lines.push('Самый опасный ранний риск для H3 - Shepherd: Spiritual Bible BFF. Если walkthrough подтвердит полный loop с action -> identity/avatar causality, whitespace wording должен быть немедленно сужен.');
+  lines.push('');
+}
 lines.push('## 5. Аудитория: не "люди из пяти рынков", а digital ritual users');
 lines.push('');
 lines.push(`Аудиторная гипотеза стала точнее. Общая аудитория - это не люди, которые одновременно пользуются всеми пятью категориями. Это люди, которые уже используют цифровые ритуалы, чтобы регулировать состояние, идентичность, прогресс и надежду на изменение. В audience matrix сейчас ${audience.length} rows, в ICP matrix - ${icp.length} segment hypotheses. Самый сильный directional ICP на текущий момент: ${strongestIcp.segment_name || 'нет данных'} с evidence score ${strongestIcp.evidence_score || 'n/a'}.`);
@@ -535,6 +556,7 @@ lines.push('- `data_processed/reddit_manual_reading_capture_sheet.csv`');
 lines.push('- `data_processed/russian_narrative_evidence_map.csv`');
 lines.push('- `data_processed/russian_market_sizing_playbook.csv`');
 lines.push('- `data_processed/russian_market_deep_dives.csv`');
+lines.push('- `data_processed/russian_whitespace_decision_map.csv`');
 lines.push('- `data_processed/russian_claim_evidence_appendix.csv`');
 lines.push('- `data_processed/russian_source_provenance_index.csv`');
 lines.push('- `data_processed/russian_competitor_battlecards.csv`');

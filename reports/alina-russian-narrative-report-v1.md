@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T12:19:43.188Z
+Собрано: 2026-05-31T12:25:19.069Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 405 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 408 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 405 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 408 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -166,6 +166,33 @@ Manual inspection packet уже выделяет 12 P0 приложений дл
 | gaming_progression | mechanic_benchmark_not_primary_market | Strong mechanic/saturation benchmark, but not a primary Alina consumer market without direct ritual/self-improvement overlap. | Use for progression/avatar/retention mechanics only; do not treat as direct market proof. |
 | coaching | crowded_or_unclear_context | Market is visible but either crowded, indirect, or weakly tied to the full Alina loop. | Use only as support/context unless new source-native evidence is added. |
 | astrology_esoterics | crowded_or_unclear_context | Market is visible but either crowded, indirect, or weakly tied to the full Alina loop. | Use only as support/context unless new source-native evidence is added. |
+
+## 4.1. Русская whitespace decision map
+
+Чтобы H3 не звучала сильнее, чем позволяет evidence, добавлена русская whitespace decision map на 6 рынков/ниш. Она показывает full-loop rate, scarcity, public-listing hidden clone risks и практический H3 read: где есть узкая directional возможность, где рынок только benchmark, а где claim остается crowded/unclear.
+
+| Niche | Dedup | Full-loop % | Opportunity | H3 read |
+| --- | ---: | ---: | --- | --- |
+| mindfulness | 9723 | 3.82 | возможность есть, но нужна выборочная ручная проверка | H3 можно держать как narrow directional whitespace: full-loop-like кандидаты редки, но sampling обязателен. |
+| avatar_identity | 7944 | 2.83 | возможность есть, но нужна выборочная ручная проверка | H3 можно держать как narrow directional whitespace: full-loop-like кандидаты редки, но sampling обязателен. |
+| gaming | 14304 | 1.03 | механический benchmark, не основной whitespace | Не использовать как H3 proof. Это источник механик, а не доказательство рынка Alina. |
+| gaming_progression | 950 | 6.63 | механический benchmark, не основной whitespace | Не использовать как H3 proof. Это источник механик, а не доказательство рынка Alina. |
+| coaching | 3857 | 13.02 | рынок видим, но claim о whitespace слабый без нового evidence | H3 не усиливать: плотность/контекст/прямота пока слишком неоднозначны. |
+| astrology_esoterics | 2657 | 13.70 | рынок видим, но claim о whitespace слабый без нового evidence | H3 не усиливать: плотность/контекст/прямота пока слишком неоднозначны. |
+
+**mindfulness.** H3 можно держать как narrow directional whitespace: full-loop-like кандидаты редки, но sampling обязателен. Риск: Shepherd: Spiritual Bible BFF:high_hidden_clone_risk_requires_app_walkthrough|Zing AI: Home & Gym Workouts:medium_adjacency_risk|EVOLVE: Transform Your Life:medium_adjacency_risk|Daily Burn: Workout Coach:medium_adjacency_risk|Myla : Manifest & Vision Board:medium_adjacency_risk. Следующий шаг: Sample top direct consumer-app and desktop rows, then compare against prototype scorecard.
+
+**avatar_identity.** H3 можно держать как narrow directional whitespace: full-loop-like кандидаты редки, но sampling обязателен. Риск: Shepherd: Spiritual Bible BFF:high_hidden_clone_risk_requires_app_walkthrough|Zing AI: Home & Gym Workouts:medium_adjacency_risk|EVOLVE: Transform Your Life:medium_adjacency_risk|Daily Burn: Workout Coach:medium_adjacency_risk|Myla : Manifest & Vision Board:medium_adjacency_risk. Следующий шаг: Sample top direct consumer-app and desktop rows, then compare against prototype scorecard.
+
+**gaming.** Не использовать как H3 proof. Это источник механик, а не доказательство рынка Alina. Риск: Shepherd: Spiritual Bible BFF:high_hidden_clone_risk_requires_app_walkthrough|Zing AI: Home & Gym Workouts:medium_adjacency_risk|EVOLVE: Transform Your Life:medium_adjacency_risk|Daily Burn: Workout Coach:medium_adjacency_risk|Myla : Manifest & Vision Board:medium_adjacency_risk. Следующий шаг: Use for progression/avatar/retention mechanics only; do not treat as direct market proof.
+
+**gaming_progression.** Не использовать как H3 proof. Это источник механик, а не доказательство рынка Alina. Риск: Shepherd: Spiritual Bible BFF:high_hidden_clone_risk_requires_app_walkthrough|Zing AI: Home & Gym Workouts:medium_adjacency_risk|EVOLVE: Transform Your Life:medium_adjacency_risk|Daily Burn: Workout Coach:medium_adjacency_risk|Myla : Manifest & Vision Board:medium_adjacency_risk. Следующий шаг: Use for progression/avatar/retention mechanics only; do not treat as direct market proof.
+
+**coaching.** H3 не усиливать: плотность/контекст/прямота пока слишком неоднозначны. Риск: Shepherd: Spiritual Bible BFF:high_hidden_clone_risk_requires_app_walkthrough|Zing AI: Home & Gym Workouts:medium_adjacency_risk|EVOLVE: Transform Your Life:medium_adjacency_risk|Daily Burn: Workout Coach:medium_adjacency_risk|Myla : Manifest & Vision Board:medium_adjacency_risk. Следующий шаг: Use only as support/context unless new source-native evidence is added.
+
+**astrology_esoterics.** H3 не усиливать: плотность/контекст/прямота пока слишком неоднозначны. Риск: Shepherd: Spiritual Bible BFF:high_hidden_clone_risk_requires_app_walkthrough|Zing AI: Home & Gym Workouts:medium_adjacency_risk|EVOLVE: Transform Your Life:medium_adjacency_risk|Daily Burn: Workout Coach:medium_adjacency_risk|Myla : Manifest & Vision Board:medium_adjacency_risk. Следующий шаг: Use only as support/context unless new source-native evidence is added.
+
+Самый опасный ранний риск для H3 - Shepherd: Spiritual Bible BFF. Если walkthrough подтвердит полный loop с action -> identity/avatar causality, whitespace wording должен быть немедленно сужен.
 
 ## 5. Аудитория: не "люди из пяти рынков", а digital ritual users
 
@@ -447,6 +474,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_narrative_evidence_map.csv`
 - `data_processed/russian_market_sizing_playbook.csv`
 - `data_processed/russian_market_deep_dives.csv`
+- `data_processed/russian_whitespace_decision_map.csv`
 - `data_processed/russian_claim_evidence_appendix.csv`
 - `data_processed/russian_source_provenance_index.csv`
 - `data_processed/russian_competitor_battlecards.csv`
