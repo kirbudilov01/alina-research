@@ -1,0 +1,5 @@
+scenario,reachableUsers,activationRate,paidConversion,arppuYear,paidUsers,annualRevenue,shareOfModeledSamBase
+"conservative_12m","100000","0.35","0.03","60","1050","63000","0.000312"
+"base_24m","1000000","0.4","0.05","80","20000","1600000","0.007922"
+"upside_36m","5000000","0.45","0.08","100","180000","18000000","0.089127"
+"breakout_36m","10000000","0.5","0.1","120","500000","60000000","0.297089"
