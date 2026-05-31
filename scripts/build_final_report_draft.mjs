@@ -133,6 +133,7 @@ const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic
 const crossSourceRaw = csv('data_processed/cross_source_universe_raw.csv');
 const crossSourceDedup = csv('data_processed/cross_source_universe_dedup.csv');
 const crossSourceSummary = csv('data_processed/cross_source_universe_summary.csv');
+const crossSourceCoverage = csv('data_processed/cross_source_coverage_matrix.csv');
 const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
 const validationExecutionDashboard = csv('data_processed/validation_execution_dashboard.csv');
 const manualWalkthroughCapture = csv('data_processed/manual_walkthrough_capture_sheet.csv');
@@ -236,6 +237,7 @@ report.push(`- Source-native itch.io expansion: ${itchRows.length} rows, ${itchO
 report.push(`- Source-native Steam tag expansion: ${steamTagRows.length} rows, ${steamTagOk.length} OK rows, adding PC progression/cozy/avatar mechanic references.`);
 report.push(`- Source-native desktop store expansion: ${desktopStoreRows.length} Mac App Store rows, ${desktopStoreOk.length} OK rows, adding desktop wellness/productivity/avatar/game references without search-engine crawling.`);
 report.push(`- Cross-source universe normalization: ${crossSourceRaw.length} normalized raw rows and ${crossSourceDedup.length} dedup rows across core app stores, Google Play fallback, itch.io, Steam, Mac desktop store, and Chrome.`);
+report.push(`- Cross-source coverage matrix: ${crossSourceCoverage.length} source/market cells, ${crossSourceCoverage.filter(r => r.coverage_band === 'strong_coverage').length} strong and ${crossSourceCoverage.filter(r => r.coverage_band === 'medium_coverage').length} medium coverage cells.`);
 report.push(`- Chrome extension detail enrichment: ${chromeExtensionDetailOk.length}/${chromeExtensionFit.length} detail pages parsed; ${chromeExtensionStrong.length} strong and ${chromeExtensionUseful.length} useful adjacent mechanic references.`);
 report.push(`- Chrome mechanic battlecards: ${chromeExtensionBattlecards.length} browser-extension cards, ${chromeMechanicPriority.length} high/medium references for manual mechanic inspection.`);
 report.push(`- Validation gap roadmap: ${validationGapRoadmap.length} rows; ${validationRoadmapP0.length} P0 and ${validationRoadmapP1.length} P1 next validation tasks across markets, hypotheses, and cross-source checks.`);
@@ -509,6 +511,26 @@ if (crossSourceDedup.length) {
     { key: 'ok_rows', label: 'OK Rows', align: 'right' },
     { key: 'top_niches', label: 'Top Niches' }
   ], 12));
+  report.push('');
+}
+if (crossSourceCoverage.length) {
+  report.push('### Cross-Source Coverage Matrix');
+  report.push('');
+  report.push('The normalized universe now has a source-by-market coverage matrix. This is the interpretation layer that says which cells are strong enough for discovery/triangulation, and which should stay thin/context-only until expanded or manually sampled.');
+  report.push('');
+  report.push('Coverage band mix:');
+  report.push('');
+  report.push(bulletCounts(countBy(crossSourceCoverage, 'coverage_band')));
+  report.push('');
+  report.push('Strongest coverage cells:');
+  report.push('');
+  report.push(mdTable(crossSourceCoverage.filter(r => r.coverage_band === 'strong_coverage').slice(0, 10), [
+    { key: 'source_group', label: 'Source' },
+    { key: 'niche', label: 'Market' },
+    { key: 'dedup_rows', label: 'Dedup', align: 'right' },
+    { key: 'ok_rate_pct', label: 'OK %', align: 'right' },
+    { key: 'market_role', label: 'Role' }
+  ], 10));
   report.push('');
 }
 if (chromeExtensionFit.length) {
@@ -1189,6 +1211,7 @@ report.push('- `docs/competitive/itch-source-expansion-v1.md`');
 report.push('- `docs/competitive/steam-tag-expansion-v1.md`');
 report.push('- `docs/competitive/desktop-store-expansion-v1.md`');
 report.push('- `docs/competitive/cross-source-universe-v1.md`');
+report.push('- `docs/competitive/cross-source-coverage-matrix-v1.md`');
 report.push('- `docs/competitive/chrome-extension-detail-enrichment-v1.md`');
 report.push('- `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`');
 report.push('- `docs/decision/evidence-audit-v1.md`');
@@ -1213,6 +1236,7 @@ report.push('- `data_processed/desktop_store_source_summary.csv`');
 report.push('- `data_processed/cross_source_universe_raw.csv`');
 report.push('- `data_processed/cross_source_universe_dedup.csv`');
 report.push('- `data_processed/cross_source_universe_summary.csv`');
+report.push('- `data_processed/cross_source_coverage_matrix.csv`');
 report.push('- `data_processed/chrome_extension_fit_matrix.csv`');
 report.push('- `data_processed/chrome_extension_mechanic_battlecards.csv`');
 report.push('- `data_processed/validation_gap_roadmap.csv`');
@@ -1291,6 +1315,7 @@ status.push(mdTable([
   { requirement: 'Source-native Steam tag expansion', evidence: 'data_raw/expanded_steam_tags_raw.csv; data_processed/steam_tag_source_summary.csv; docs/competitive/steam-tag-expansion-v1.md', status: 'done v1; adds PC progression/cozy/avatar mechanic benchmarks without broad search-engine crawling' },
   { requirement: 'Source-native desktop store expansion', evidence: 'data_raw/expanded_desktop_store_raw.csv; data_processed/desktop_store_source_summary.csv; docs/competitive/desktop-store-expansion-v1.md', status: 'done v1; adds Mac App Store desktop wellness/productivity/avatar/game references through a source-native API, not broad search crawling' },
   { requirement: 'Cross-source universe normalization', evidence: 'data_processed/cross_source_universe_raw.csv; data_processed/cross_source_universe_dedup.csv; data_processed/cross_source_universe_summary.csv; docs/competitive/cross-source-universe-v1.md', status: 'done v1; normalizes core app-store, Google Play fallback, itch.io, Steam, desktop store, and Chrome rows into one provenance-preserving universe' },
+  { requirement: 'Cross-source coverage matrix', evidence: 'data_processed/cross_source_coverage_matrix.csv; docs/competitive/cross-source-coverage-matrix-v1.md', status: 'done v1; grades source-by-market cells into strong, medium, thin, and context-only coverage for safer interpretation' },
   { requirement: 'Chrome extension detail enrichment', evidence: 'data_raw/chrome_extension_detail_raw.csv; data_processed/chrome_extension_fit_matrix.csv; docs/competitive/chrome-extension-detail-enrichment-v1.md', status: 'done v1; detail pages parsed for known Chrome candidates only, producing fit bands and mechanic tags without broad search expansion' },
   { requirement: 'Chrome extension mechanic battlecards', evidence: 'data_processed/chrome_extension_mechanic_battlecards.csv; docs/competitive/chrome-extension-mechanic-battlecards-v1.md', status: 'done v1; converts enriched Chrome candidates into mechanic lessons, whitespace implications, and validation tasks' },
   { requirement: 'Validation gap roadmap', evidence: 'data_processed/validation_gap_roadmap.csv; docs/decision/validation-gap-roadmap-v1.md', status: 'done v1; maps five markets and H1-H6 gaps into P0/P1 success gates' },
@@ -1362,6 +1387,7 @@ console.log(`desktop_store_rows=${desktopStoreRows.length}`);
 console.log(`desktop_store_ok=${desktopStoreOk.length}`);
 console.log(`cross_source_raw_rows=${crossSourceRaw.length}`);
 console.log(`cross_source_dedup_rows=${crossSourceDedup.length}`);
+console.log(`cross_source_coverage_cells=${crossSourceCoverage.length}`);
 console.log(`chrome_extension_detail_rows=${chromeExtensionFit.length}`);
 console.log(`chrome_extension_strong=${chromeExtensionStrong.length}`);
 console.log(`chrome_extension_battlecards=${chromeExtensionBattlecards.length}`);

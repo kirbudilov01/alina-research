@@ -184,6 +184,7 @@ const requiredArtifacts = [
   'data_processed/cross_source_universe_raw.csv',
   'data_processed/cross_source_universe_dedup.csv',
   'data_processed/cross_source_universe_summary.csv',
+  'data_processed/cross_source_coverage_matrix.csv',
   'data_processed/audience_signal_matrix.csv',
   'data_processed/whitespace_signal_matrix.csv',
   'data_processed/tam_sam_som_model.csv',

@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T07:19:32.773Z
+Generated: 2026-05-31T07:26:27.607Z
 
 ## 1. Executive Summary
 
@@ -25,7 +25,7 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 12 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 200 artifacts tracked, 53 CSV artifacts, 162006 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 203 artifacts tracked, 54 CSV artifacts, 162040 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -33,6 +33,7 @@ Key quantified signals:
 - Source-native Steam tag expansion: 6258 rows, 6000 OK rows, adding PC progression/cozy/avatar mechanic references.
 - Source-native desktop store expansion: 6942 Mac App Store rows, 6938 OK rows, adding desktop wellness/productivity/avatar/game references without search-engine crawling.
 - Cross-source universe normalization: 38240 normalized raw rows and 22769 dedup rows across core app stores, Google Play fallback, itch.io, Steam, Mac desktop store, and Chrome.
+- Cross-source coverage matrix: 34 source/market cells, 10 strong and 12 medium coverage cells.
 - Chrome extension detail enrichment: 251/251 detail pages parsed; 9 strong and 86 useful adjacent mechanic references.
 - Chrome mechanic battlecards: 251 browser-extension cards, 41 high/medium references for manual mechanic inspection.
 - Validation gap roadmap: 16 rows; 4 P0 and 12 P1 next validation tasks across markets, hypotheses, and cross-source checks.
@@ -89,9 +90,9 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 16 validation roadmap rows; 11 execution tasks | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 195 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 203 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
-| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 38240 cross-source raw rows; 22769 cross-source dedup rows; 12552 core dedup rows; 6973 usable itch rows; 6000 usable Steam tag rows; 6938 usable desktop store rows; 251 usable Chrome Web Store rows; 251 Chrome detail pages | Cross-source dedup universe is substantial but still below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
+| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 38240 cross-source raw rows; 22769 cross-source dedup rows; 34 coverage cells; 10 strong and 12 medium source/market cells | Cross-source dedup universe is substantial but still below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | H1_product_shape_exists | public_listing_inspected_walkthrough_open | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Strict full loop is rare and still needs actual app/onboarding screenshots to confirm or downgrade public listing claims. |
 | H2_markets_have_money | supported_with_ranges_stress_test_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, manual in-app paywall validation, and willingness-to-pay prototype evidence for final investor-grade claims. |
 | H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require human sign-off/in-app inspection. |
@@ -105,7 +106,7 @@ Claim-level audit snapshot:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 200 artifacts; 53 CSV artifacts; 162006 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 203 artifacts; 54 CSV artifacts; 162040 tracked CSV rows; 0 missing required artifacts.
 
 Largest tracked CSV artifacts:
 
@@ -145,14 +146,14 @@ Objective readiness matrix:
 | Requirement | Status | Strength | Proof | Remaining Gap |
 | --- | --- | --- | --- | --- |
 | REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=16; execution_dashboard_rows=11 | Keep refreshing as validation results change. |
-| REQ_02_COMPETITOR_UNIVERSE | proved_scale_target_cross_source_normalized | medium_high | dedup=12552; cross_source_raw=38240; cross_source_dedup=22769; cross_source_summary_rows=14; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; desktop_store_rows=6942; chrome_extension_rows=252; known_raw_total=37989; itch_ok=6973; steam_tag_ok=6000; desktop_store_ok=6938; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | Cross-source dedup is substantial but still below the aspirational 30k-50k dedup target; Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
+| REQ_02_COMPETITOR_UNIVERSE | proved_scale_target_cross_source_normalized | medium_high | dedup=12552; cross_source_raw=38240; cross_source_dedup=22769; cross_source_summary_rows=14; coverage_cells=34; coverage_strong=10; coverage_medium=12; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; desktop_store_rows=6942; chrome_extension_rows=252; known_raw_total=37989; itch_ok=6973; steam_tag_ok=6000; desktop_store_ok=6938; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | Cross-source dedup is substantial but still below the aspirational 30k-50k dedup target; Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
 | REQ_04_MARKET_MONEY | supported_with_stress_test_and_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; assumption_audit_rows=6; stress_scenarios=6; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing is stress-tested and range-based, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall validation are still needed for final investor-grade claims. |
 | REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_walkthrough_capture_rows=60; manual_app_walkthrough_done=0 | Public listings for the P0 wave are inspected, but metadata/public copy can miss hidden in-app mechanics; app/onboarding walkthrough screenshots are still required. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36; icp_capture_rows=96 | Segments are directional and need interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=12; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=200; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=203; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; capture_rows=276; manual_capture_rows=60; paid_capture_rows=40; icp_capture_rows=96; prototype_capture_rows=80; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
 ## 2C. Validation Gap Roadmap
@@ -334,6 +335,32 @@ Cross-source summary:
 | desktop_store | 6942 | 1526 | 6938 | mindfulness:1645/coaching:1406/gaming_progression:1377/avatar_identity:1322/astrology_esoterics:1192 |
 | browser_extension | 252 | 252 | 251 | astrology_esoterics:55/avatar_identity:52/coaching:51/mindfulness:50/gaming_progression:44 |
 | unknown_source | 251 | 251 | 251 | astrology_esoterics:55/avatar_identity:52/coaching:51/mindfulness:50/gaming_progression:43 |
+
+### Cross-Source Coverage Matrix
+
+The normalized universe now has a source-by-market coverage matrix. This is the interpretation layer that says which cells are strong enough for discovery/triangulation, and which should stay thin/context-only until expanded or manually sampled.
+
+Coverage band mix:
+
+- medium_coverage: 12
+- strong_coverage: 10
+- thin_but_usable: 10
+- weak_or_context_only: 2
+
+Strongest coverage cells:
+
+| Source | Market | Dedup | OK % | Role |
+| --- | --- | ---: | ---: | --- |
+| itch_web_game | gaming | 3292 | 100.0 | indie_mechanic_and_experiment_discovery |
+| steam_pc | gaming | 3256 | 96.7 | pc_progression_and_mechanic_benchmark |
+| steam_pc | mindfulness | 2911 | 98.7 | pc_progression_and_mechanic_benchmark |
+| mobile_app_store | gaming | 1931 | 100.0 | direct_consumer_app_competitor_base |
+| mobile_app_store | coaching | 1679 | 100.0 | direct_consumer_app_competitor_base |
+| itch_web_game | avatar_identity | 1623 | 98.4 | indie_mechanic_and_experiment_discovery |
+| mobile_app_store | mindfulness | 1584 | 100.0 | direct_consumer_app_competitor_base |
+| itch_web_game | mindfulness | 1480 | 96.9 | indie_mechanic_and_experiment_discovery |
+| mobile_app_store | avatar_identity | 1461 | 100.0 | direct_consumer_app_competitor_base |
+| mobile_app_store | astrology_esoterics | 1448 | 100.0 | direct_consumer_app_competitor_base |
 
 ### Chrome Extension Detail Enrichment
 
@@ -1125,6 +1152,7 @@ Claim audit rows currently normalized: 12.
 - `docs/competitive/steam-tag-expansion-v1.md`
 - `docs/competitive/desktop-store-expansion-v1.md`
 - `docs/competitive/cross-source-universe-v1.md`
+- `docs/competitive/cross-source-coverage-matrix-v1.md`
 - `docs/competitive/chrome-extension-detail-enrichment-v1.md`
 - `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`
 - `docs/decision/evidence-audit-v1.md`
@@ -1149,6 +1177,7 @@ Claim audit rows currently normalized: 12.
 - `data_processed/cross_source_universe_raw.csv`
 - `data_processed/cross_source_universe_dedup.csv`
 - `data_processed/cross_source_universe_summary.csv`
+- `data_processed/cross_source_coverage_matrix.csv`
 - `data_processed/chrome_extension_fit_matrix.csv`
 - `data_processed/chrome_extension_mechanic_battlecards.csv`
 - `data_processed/validation_gap_roadmap.csv`

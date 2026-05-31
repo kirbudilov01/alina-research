@@ -288,6 +288,7 @@ def main() -> None:
     chrome_raw = read_csv("data_raw/expanded_chrome_extensions_raw.csv")
     cross_source_raw = read_csv("data_processed/cross_source_universe_raw.csv")
     cross_source_dedup = read_csv("data_processed/cross_source_universe_dedup.csv")
+    cross_source_coverage = read_csv("data_processed/cross_source_coverage_matrix.csv")
     chrome_fit = read_csv("data_processed/chrome_extension_fit_matrix.csv")
     chrome_battlecards = read_csv("data_processed/chrome_extension_mechanic_battlecards.csv")
     market_assumptions = read_csv("data_processed/market_sizing_assumption_audit.csv")
@@ -352,6 +353,7 @@ def main() -> None:
     metrics = {
         "Known raw source/app rows": number(known_raw_total),
         "Cross-source dedup rows": number(len(cross_source_dedup)),
+        "Coverage cells": number(len(cross_source_coverage)),
         "Deduplicated universe rows": number(len(expanded)),
         "Tracked manifest artifacts": number(len(manifest)),
         "Tracked CSV rows": number(csv_rows),
@@ -368,6 +370,7 @@ def main() -> None:
             [
                 ("known raw rows", number(known_raw_total)),
                 ("cross-source dedup", number(len(cross_source_dedup))),
+                ("coverage cells", number(len(cross_source_coverage))),
                 ("dedup universe", number(len(expanded))),
                 ("manifest artifacts", number(len(manifest))),
                 ("tracked CSV rows", number(csv_rows)),
@@ -435,6 +438,7 @@ def main() -> None:
                 ["Known raw universe", known_raw_total, "Core + itch.io + Steam tag + desktop store + Chrome rows exceed the 30k lower-bound target."],
                 ["Cross-source normalized raw", len(cross_source_raw), "Unified provenance rows across core app stores, Google Play fallback, Steam, itch.io, desktop, and Chrome."],
                 ["Cross-source dedup", len(cross_source_dedup), "Deduped normalization layer that protects against repeated query/country/tag rows."],
+                ["Coverage matrix cells", len(cross_source_coverage), "Source-by-market interpretation layer for strong/medium/thin/context-only evidence cells."],
                 ["Deduped source universe", len(expanded), "Normalized rows for matrices and scoring."],
                 ["Chrome Web Store raw rows", len(chrome_raw), "Source-native browser-extension expansion across five markets."],
                 ["Desktop store raw rows", len(desktop), "Source-native Mac App Store desktop/wellness/productivity/game expansion."],
@@ -643,6 +647,7 @@ def main() -> None:
                 ["Evidence group", "Primary files"],
                 ["Universe", "data_raw/expanded/*; data_raw/expanded_itch_raw.csv; data_raw/expanded_steam_tags_raw.csv; data_raw/expanded_desktop_store_raw.csv"],
                 ["Cross-source universe", "data_processed/cross_source_universe_raw.csv; data_processed/cross_source_universe_dedup.csv; data_processed/cross_source_universe_summary.csv"],
+                ["Coverage matrix", "data_processed/cross_source_coverage_matrix.csv; docs/competitive/cross-source-coverage-matrix-v1.md"],
                 ["Market money", "data_processed/tam_sam_som_model.csv; data_processed/competitor_revenue_proxy_review.csv"],
                 ["Whitespace", "data_processed/whitespace_signal_matrix.csv; data_processed/manual_competitor_inspection_packet.csv"],
                 ["Audience", "data_processed/icp_segment_matrix.csv; data_processed/icp_validation_test_plan.csv"],
