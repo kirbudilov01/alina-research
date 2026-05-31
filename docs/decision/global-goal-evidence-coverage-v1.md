@@ -1,6 +1,6 @@
 # Global Goal Evidence Coverage V1
 
-Generated: 2026-05-31T16:20:46.362Z
+Generated: 2026-05-31T16:25:39.953Z
 
 ## Зачем нужен этот слой
 
@@ -16,7 +16,7 @@ Generated: 2026-05-31T16:20:46.362Z
 | GOAL_04_TAM_SAM_SOM | Подготовить рыночную методологию TAM/SAM/SOM и stress-сценарии | покрыто как range-based methodology, не финальный revenue proof | средне-сильное | 6 methodology rows; 6 TAM/SAM/SOM rows; 6 stress scenarios | H2 не закрыт: paid-flow signoff ниже порога, WTP и paid-depth prototype signals еще нужны | добрать paid-flow capture rows и WTP вопросы из P0 backlog |
 | GOAL_05_WHITESPACE_AUDIENCE | Собрать whitespace и аудиторные матрицы | покрыто как directional synthesis, validation остается открытой | среднее | 5 synthesis rows; 6 whitespace rows; 6 ICP rows; 20492 audience signal rows | H3/H5 нельзя усиливать без manual walkthrough и recent-behavior interviews | исполнить первые 5 walkthrough и P0 ICP interview rows |
 | GOAL_06_REPORT_RU | Собрать последовательный русский мировой отчет и PDF/DOCX | покрыто как draft, не финальная validated версия | средне-сильное | global report md=yes; pdf=yes; docx=yes | финальная версия должна обновиться после observed validation rows | после capture rows пересобрать отчет и изменить claim language |
-| GOAL_07_VERSIONING | Сохранять локально, трассировать источники и версионировать через GitHub | покрыто активно | сильное | manifest=480; missing=0; docs=120; scripts=106 | manifest надо обновлять после каждого нового слоя | пересобирать manifest и делать commit/push после изменений |
+| GOAL_07_VERSIONING | Сохранять локально, трассировать источники и версионировать через GitHub | покрыто активно | сильное | manifest=483; missing=0; docs=121; scripts=107 | manifest надо обновлять после каждого нового слоя | пересобирать manifest и делать commit/push после изменений |
 | GOAL_08_VALIDATION | Критически мыслить и не закрывать гипотезы без observed evidence | открыто, capture-ready | сильное для процесса, слабое для финального proof | gates=6; hold_validate=6; started=6; H1_completed=12 / 60; H1_success=0 / 25; H3_completed=12 / 60; H3_success=0 / 25; H2_completed=28 / 40; H2_success=8 / 12; H5_completed=12 / 96; H5_success=0 / 30; H4_completed=16 / 80; H4_success=0 / 32; H6_completed=16 / 80; H6_success=0 / 32 | цель нельзя считать завершенной, пока observed validation gates не закрыты или не понижены по evidence | исполнить P0 validation backlog и обновить gate statuses |
 
 ## Главный вывод

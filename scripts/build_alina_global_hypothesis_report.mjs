@@ -197,6 +197,7 @@ const nicheCountRollup = csv('data_processed/global_niche_count_rollup.csv');
 const marketDeepDives = csv('data_processed/russian_market_deep_dives.csv');
 const whitespace = csv('data_processed/russian_whitespace_decision_map.csv');
 const competitors = csv('data_processed/russian_competitor_battlecards.csv');
+const competitorArchetypeRollup = csv('data_processed/global_competitor_archetype_rollup.csv');
 const icp = csv('data_processed/russian_icp_battlecards.csv');
 const voc = csv('data_processed/russian_voc_objection_map.csv');
 const productLoop = csv('data_processed/russian_product_loop_cards.csv');
@@ -388,8 +389,8 @@ const sourceAppendix = [
     report_section: 'Определение конкурентов и гипотеза #3',
     claim_ru: 'Конкуренты закрывают отдельные части петли; P0 список нужен для проверки hidden-clone риска.',
     evidence_status_ru: claimById.H1_product_shape_exists?.status_ru || 'готово к проверке, gate открыт',
-    primary_metric: claimById.H1_product_shape_exists?.primary_metric || `${topCompetitors.length} P0 competitors`,
-    evidence_files: 'data_processed/russian_competitor_battlecards.csv;data_processed/top100_competitor_review_scorecard.csv;data_processed/manual_competitor_inspection_packet.csv',
+    primary_metric: claimById.H1_product_shape_exists?.primary_metric || `${topCompetitors.length} P0 competitors; archetype_rows=${competitorArchetypeRollup.length}`,
+    evidence_files: 'data_processed/russian_competitor_battlecards.csv;data_processed/global_competitor_archetype_rollup.csv;data_processed/top100_competitor_review_scorecard.csv;data_processed/manual_competitor_inspection_packet.csv',
     source_boundary_ru: 'Public listings и scorecards не заменяют app/onboarding walkthrough screenshots.'
   },
   {
@@ -650,6 +651,34 @@ lines.push('## ОПРЕДЕЛЕНИЕ КОНКУРЕНТОВ И ГИПОТЕЗА
 lines.push('');
 lines.push('Конкурентная среда подтверждает, что пользователь уже решает части задачи через существующие приложения. В top-100 review сейчас есть meditation apps, habit trackers, AI journals, spiritual guidance apps, avatar/identity apps и progression products. Рынок не пустой, поэтому сильная ставка Alina не может звучать как “конкурентов нет”. Ставка должна быть точнее: конкуренты закрывают отдельные части петли, но полная причинная связка meaning -> action -> reset -> visible identity/progress встречается редко и требует ручной проверки.');
 lines.push('');
+if (competitorArchetypeRollup.length) {
+  lines.push('Чтобы конкурентная карта не выглядела как случайный список приложений, ниже она сведена в archetype rollup. Это промежуточная классификация по App Store metadata/reviews/IAP и AI-assisted scorecards: она показывает, какие типы конкурентов создают риск для Alina, но не заменяет walkthrough. Особенно важно смотреть не только на количество приложений, а на close/direct count, behavior-tied progression и manual targets. Отдельная осторожность: AI companion / tarot-oracle labels требуют taxonomy cleanup перед сильными выводами, потому что source classifier может смешивать symbolic guidance и roleplay/companion продукты.');
+  lines.push('');
+  lines.push(mdTable(competitorArchetypeRollup.map(row => ({
+    archetype: row.archetype,
+    market: row.primary_market_ru,
+    apps: row.top100_primary_apps,
+    close: row.close_or_direct_apps,
+    behavior: row.behavior_tied_progression_apps,
+    paid: row.paid_signal_apps,
+    battle: row.battlecard_rows,
+    manual: row.manual_validation_targets,
+    taxonomy: row.taxonomy_quality_ru,
+    top: row.top_apps
+  })), [
+    { key: 'archetype', label: 'Archetype' },
+    { key: 'market', label: 'Market role' },
+    { key: 'apps', label: 'Top-100 apps', align: 'right' },
+    { key: 'close', label: 'Close/direct', align: 'right' },
+    { key: 'behavior', label: 'Behavior-tied', align: 'right' },
+    { key: 'paid', label: 'Paid signal', align: 'right' },
+    { key: 'battle', label: 'Battlecards', align: 'right' },
+    { key: 'manual', label: 'Manual targets', align: 'right' },
+    { key: 'taxonomy', label: 'Taxonomy' },
+    { key: 'top', label: 'Top examples' }
+  ]));
+  lines.push('');
+}
 lines.push(mdTable(topCompetitors.map(row => ({
   app: row.app_name,
   risk: row.threat_ru,
@@ -866,6 +895,7 @@ lines.push('- `data_processed/global_next_validation_backlog.csv`');
 lines.push('- `data_processed/global_market_sizing_methodology.csv`');
 lines.push('- `data_processed/global_niche_count_rollup.csv`');
 lines.push('- `data_processed/global_whitespace_audience_synthesis.csv`');
+lines.push('- `data_processed/global_competitor_archetype_rollup.csv`');
 lines.push('- `data_processed/global_goal_evidence_coverage.csv`');
 lines.push('- `reports/alina-russian-readable-report-v2.md`');
 lines.push('- `data_processed/russian_readable_niche_summary.csv`');
