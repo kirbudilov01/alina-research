@@ -1,6 +1,6 @@
 # Evidence Package Manifest V1
 
-Generated: 2026-05-31T06:59:07.278Z
+Generated: 2026-05-31T07:11:30.405Z
 
 ## Purpose
 
@@ -8,30 +8,30 @@ This manifest makes the research package auditable. It lists key raw data, proce
 
 ## Package Summary
 
-- Manifest rows: 191
+- Manifest rows: 195
 - Missing required artifacts: 0
-- CSV artifacts: 48
-- Total CSV data rows tracked: 94036
-- CSV rows with source-like identifiers/URLs/domains/packages: 93766
+- CSV artifacts: 50
+- Total CSV data rows tracked: 100983
+- CSV rows with source-like identifiers/URLs/domains/packages: 100713
 
 Artifact types:
 
-- research_doc: 64
-- generator_script: 46
-- processed_data: 36
+- research_doc: 65
+- generator_script: 47
+- processed_data: 37
 - report: 16
 - chart: 14
-- raw_data: 12
+- raw_data: 13
 - pdf: 3
 
 Evidence roles:
 
 - decision_artifact: 46
 - market_money: 45
-- supporting: 32
+- supporting: 34
 - audience_icp: 28
-- competitor_universe: 15
-- source_claim: 13
+- competitor_universe: 16
+- source_claim: 14
 - competitive_whitespace: 12
 
 ## Key Data Artifacts
@@ -43,7 +43,8 @@ Evidence roles:
 | data_processed/competitor_feature_matrix.csv | supporting | 12552 | 12552 | b285aff3873487bc |
 | data_processed/competitor_revenue_proxy_market_summary.csv | market_money | 5 | 0 | bb80578db00af2cd |
 | data_processed/competitor_revenue_proxy_review.csv | audience_icp | 90 | 90 | 168d799198a9e0de |
-| data_processed/evidence_claim_register.csv | decision_artifact | 12 | 0 | 8ffa429ab02442b3 |
+| data_processed/desktop_store_source_summary.csv | source_claim | 5 | 5 | fd23b13384383815 |
+| data_processed/evidence_claim_register.csv | decision_artifact | 12 | 0 | e55b97dbbafcb571 |
 | data_processed/forum_quote_coding_matrix.csv | audience_icp | 72 | 72 | f2fb0ab869195b97 |
 | data_processed/icp_interview_capture_sheet.csv | audience_icp | 96 | 0 | 4494d5bf481075e5 |
 | data_processed/icp_segment_matrix.csv | audience_icp | 6 | 0 | da930b6880a1c41e |
@@ -77,16 +78,15 @@ Evidence roles:
 | data_raw/app_store_iap_pricing_raw.csv | market_money | 498 | 498 | 37f37b15c4554c62 |
 | data_raw/app_store_top_candidate_reviews.csv | audience_icp | 2294 | 2294 | 3fb11211b91b48b3 |
 | data_raw/chrome_extension_detail_raw.csv | competitor_universe | 251 | 251 | 65eb6815dab5c29b |
-| data_raw/expanded/all_expanded_dedup.csv | competitor_universe | 12552 | 12552 | db5e87665dbf3b53 |
 
 ## Decision Artifacts
 
 | File | Type | Lines | Bytes | Hash |
 | --- | --- | ---: | ---: | --- |
 | docs/competitive/human-validation-guide-v1.md | research_doc | 91 | 12102 | b85e6b5dd29fcb2f |
-| docs/decision/evidence-audit-v1.md | research_doc | 58 | 5188 | f7a17292dfc91d5e |
-| docs/decision/evidence-package-manifest-v1.md | research_doc | 116 | 7368 | 58fadf233e8f4722 |
-| docs/decision/polished-evidence-pack-v1.md | research_doc | 22 | 668 | 9ac4babaa34ccc23 |
+| docs/decision/evidence-audit-v1.md | research_doc | 58 | 5220 | 871c43801e3a621f |
+| docs/decision/evidence-package-manifest-v1.md | research_doc | 116 | 7362 | 98db37b79f34b80b |
+| docs/decision/polished-evidence-pack-v1.md | research_doc | 22 | 669 | b43efcd8805778f1 |
 | docs/decision/validation-capture-sheets-v1.md | research_doc | 54 | 2585 | ea9824f1bddab6e5 |
 | docs/decision/validation-execution-dashboard-v1.md | research_doc | 50 | 4779 | b496bcc7698e4711 |
 | docs/decision/validation-gap-roadmap-v1.md | research_doc | 72 | 6850 | 677d44153f8f7a21 |
@@ -95,13 +95,13 @@ Evidence roles:
 | docs/product/prototype-validation-stimulus-v1.md | research_doc | 57 | 6109 | 0faba89f050d2b06 |
 | docs/strategy/validation-falsification-criteria.md | research_doc | 38 | 1152 | 310c8c3044a11540 |
 | docs/visuals/chart-index-v1.md | research_doc | 25 | 886 | 77cba8f26318bcae |
-| output/pdf/alina-evidence-first-report-draft.pdf | pdf | 850 | 116778 | 7caf00a62b0da2dd |
-| output/pdf/alina-evidence-visual-report-v1.pdf | pdf | 226 | 23504 | 6ae2d48d8baf4ebc |
-| output/pdf/alina-polished-evidence-pack-v1.pdf | pdf | 194 | 25192 | b92e3abda14af966 |
-| reports/alina-evidence-first-report-draft.md | report | 1164 | 91699 | 9f4b6925079cea6d |
+| output/pdf/alina-evidence-first-report-draft.pdf | pdf | 869 | 120161 | 61107230b508905b |
+| output/pdf/alina-evidence-visual-report-v1.pdf | pdf | 226 | 23504 | ab0ead6ca34c8ce0 |
+| output/pdf/alina-polished-evidence-pack-v1.pdf | pdf | 194 | 25298 | 9585b45ee2d08acb |
+| reports/alina-evidence-first-report-draft.md | report | 1190 | 94774 | 5ff77907902d0e64 |
 | reports/competitor-universe-expansion-2026-05-21.md | report | 17 | 371 | 6f085c07c40f01e7 |
 | reports/daily-update-template.md | report | 30 | 199 | 3f49329cf740df70 |
-| reports/evidence-status-2026-05-31.md | report | 31 | 7384 | dc127e6d47cbbb5d |
+| reports/evidence-status-2026-05-31.md | report | 32 | 7703 | 113cc2744498e7ba |
 | reports/google-play-enrichment-block-2026-05-21.md | report | 13 | 471 | 8cc4d72b1b4c2a18 |
 | reports/matrix-synthesis-2026-05-31.md | report | 43 | 1009 | 939c826c2c1f40db |
 | reports/pdf-render-check-2026-05-31.md | report | 51 | 1578 | 35abeb7833564f14 |

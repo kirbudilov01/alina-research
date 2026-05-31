@@ -78,10 +78,10 @@ const rows = [
     gap_closed: 'desktop apps and PC wellness/productivity tools outside Steam',
     collection_method: 'site search and public store HTML extraction',
     target_output: 'data_raw/expanded_desktop_store_raw.csv',
-    expected_raw_rows: '1000-2500',
-    expected_evidence_quality: 'medium',
-    command_or_next_step: 'Create collect_desktop_store_candidates.mjs; query Microsoft Store and Mac App Store web pages for meditation, habit, journal, avatar, coach.',
-    risk_or_blocker: 'Mac App Store web overlaps iTunes API; dedupe carefully by bundle/name/source.'
+    expected_raw_rows: '1000-7000',
+    expected_evidence_quality: 'medium_high',
+    command_or_next_step: 'Done v1 through collect:desktop-store using the public Mac App Store/iTunes Search API; Microsoft Store can remain a later add-on.',
+    risk_or_blocker: 'Mac App Store API is source-native but overlaps Apple software search; dedupe carefully by bundle/name/source and treat as discovery evidence.'
   },
   {
     backlog_id: 'SRC-005',

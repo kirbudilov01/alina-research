@@ -126,6 +126,8 @@ const itchRows = csv('data_raw/expanded_itch_raw.csv');
 const itchSummary = csv('data_processed/itch_source_summary.csv');
 const steamTagRows = csv('data_raw/expanded_steam_tags_raw.csv');
 const steamTagSummary = csv('data_processed/steam_tag_source_summary.csv');
+const desktopStoreRows = csv('data_raw/expanded_desktop_store_raw.csv');
+const desktopStoreSummary = csv('data_processed/desktop_store_source_summary.csv');
 const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv');
 const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
 const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
@@ -170,6 +172,7 @@ const partialVisualPaidSurface = webPaywallVisualAdjudication.filter(r => ['conf
 const p0ExternalUsable = p0ExternalSources.filter(r => r.collection_status === 'ok');
 const itchOk = itchRows.filter(r => r.collection_status === 'ok');
 const steamTagOk = steamTagRows.filter(r => r.collection_status === 'ok');
+const desktopStoreOk = desktopStoreRows.filter(r => r.collection_status === 'ok');
 const chromeExtensionDetailOk = chromeExtensionFit.filter(r => r.detail_status === 'ok');
 const chromeExtensionStrong = chromeExtensionFit.filter(r => r.alina_fit_band === 'strong_adjacent');
 const chromeExtensionUseful = chromeExtensionFit.filter(r => r.alina_fit_band === 'useful_adjacent');
@@ -228,6 +231,7 @@ report.push(`- Source expansion backlog: ${sourceExpansionBacklog.length} priori
 report.push(`- Controlled P0 external-source smoke pass: ${p0ExternalSources.length} rows, ${p0ExternalUsable.length} usable candidates, with search-engine-heavy expansion intentionally deferred.`);
 report.push(`- Source-native itch.io expansion: ${itchRows.length} rows, ${itchOk.length} OK rows, adding web-game/mechanic references without broad search-engine crawling.`);
 report.push(`- Source-native Steam tag expansion: ${steamTagRows.length} rows, ${steamTagOk.length} OK rows, adding PC progression/cozy/avatar mechanic references.`);
+report.push(`- Source-native desktop store expansion: ${desktopStoreRows.length} Mac App Store rows, ${desktopStoreOk.length} OK rows, adding desktop wellness/productivity/avatar/game references without search-engine crawling.`);
 report.push(`- Chrome extension detail enrichment: ${chromeExtensionDetailOk.length}/${chromeExtensionFit.length} detail pages parsed; ${chromeExtensionStrong.length} strong and ${chromeExtensionUseful.length} useful adjacent mechanic references.`);
 report.push(`- Chrome mechanic battlecards: ${chromeExtensionBattlecards.length} browser-extension cards, ${chromeMechanicPriority.length} high/medium references for manual mechanic inspection.`);
 report.push(`- Validation gap roadmap: ${validationGapRoadmap.length} rows; ${validationRoadmapP0.length} P0 and ${validationRoadmapP1.length} P1 next validation tasks across markets, hypotheses, and cross-source checks.`);
@@ -466,6 +470,25 @@ if (steamTagRows.length) {
     { key: 'core_features', label: 'Rows / OK' },
     { key: 'evidence_quality', label: 'Quality' }
   ], steamTagSummary.length));
+  report.push('');
+}
+if (desktopStoreRows.length) {
+  report.push('### Source-Native Desktop Store Expansion');
+  report.push('');
+  report.push(`A Mac App Store/iTunes Search API collector adds ${desktopStoreRows.length} rows, including ${desktopStoreOk.length} OK rows. This layer improves PC/desktop coverage for coaching, mindfulness, avatar/identity, astrology/esoterics, and gaming/progression, but it remains discovery/mechanic evidence until manual validation.`);
+  report.push('');
+  report.push('Desktop rows by market:');
+  report.push('');
+  report.push(bulletCounts(countBy(desktopStoreRows, 'niche')));
+  report.push('');
+  report.push('Desktop store summary:');
+  report.push('');
+  report.push(mdTable(desktopStoreSummary, [
+    { key: 'niche', label: 'Market' },
+    { key: 'core_features', label: 'Rows / OK / Unique / Paid' },
+    { key: 'retention_mechanics', label: 'Top Categories' },
+    { key: 'personalization_tags', label: 'Feature Tags' }
+  ], desktopStoreSummary.length));
   report.push('');
 }
 if (chromeExtensionFit.length) {
@@ -1144,6 +1167,7 @@ report.push('- `docs/competitive/source-expansion-backlog-v1.md`');
 report.push('- `docs/competitive/p0-external-source-collection-v1.md`');
 report.push('- `docs/competitive/itch-source-expansion-v1.md`');
 report.push('- `docs/competitive/steam-tag-expansion-v1.md`');
+report.push('- `docs/competitive/desktop-store-expansion-v1.md`');
 report.push('- `docs/competitive/chrome-extension-detail-enrichment-v1.md`');
 report.push('- `docs/competitive/chrome-extension-mechanic-battlecards-v1.md`');
 report.push('- `docs/decision/evidence-audit-v1.md`');
@@ -1164,6 +1188,7 @@ report.push('- `data_processed/source_expansion_backlog.csv`');
 report.push('- `data_processed/p0_external_source_summary.csv`');
 report.push('- `data_processed/itch_source_summary.csv`');
 report.push('- `data_processed/steam_tag_source_summary.csv`');
+report.push('- `data_processed/desktop_store_source_summary.csv`');
 report.push('- `data_processed/chrome_extension_fit_matrix.csv`');
 report.push('- `data_processed/chrome_extension_mechanic_battlecards.csv`');
 report.push('- `data_processed/validation_gap_roadmap.csv`');
@@ -1195,6 +1220,7 @@ report.push('- `data_raw/forum_quote_evidence_raw.csv`');
 report.push('- `data_raw/expanded/p0_external_sources_raw.csv`');
 report.push('- `data_raw/expanded_itch_raw.csv`');
 report.push('- `data_raw/expanded_steam_tags_raw.csv`');
+report.push('- `data_raw/expanded_desktop_store_raw.csv`');
 report.push('- `data_raw/expanded_chrome_extensions_raw.csv`');
 report.push('- `data_raw/chrome_extension_detail_raw.csv`');
 report.push('- `data_processed/forum_quote_coding_matrix.csv`');
@@ -1239,6 +1265,7 @@ status.push(mdTable([
   { requirement: 'Controlled P0 external-source smoke pass', evidence: 'data_raw/expanded/p0_external_sources_raw.csv; data_processed/p0_external_source_summary.csv; docs/competitive/p0-external-source-collection-v1.md', status: 'done v1; small by design; Chrome Web Store yielded usable candidates, Product Hunt/AlternativeTo attempts retained as empty-source evidence' },
   { requirement: 'Source-native itch.io expansion', evidence: 'data_raw/expanded_itch_raw.csv; data_processed/itch_source_summary.csv; docs/competitive/itch-source-expansion-v1.md', status: 'done v1; adds web-game/mechanic discovery rows for gaming, mindfulness, and avatar/identity without broad search-engine crawling' },
   { requirement: 'Source-native Steam tag expansion', evidence: 'data_raw/expanded_steam_tags_raw.csv; data_processed/steam_tag_source_summary.csv; docs/competitive/steam-tag-expansion-v1.md', status: 'done v1; adds PC progression/cozy/avatar mechanic benchmarks without broad search-engine crawling' },
+  { requirement: 'Source-native desktop store expansion', evidence: 'data_raw/expanded_desktop_store_raw.csv; data_processed/desktop_store_source_summary.csv; docs/competitive/desktop-store-expansion-v1.md', status: 'done v1; adds Mac App Store desktop wellness/productivity/avatar/game references through a source-native API, not broad search crawling' },
   { requirement: 'Chrome extension detail enrichment', evidence: 'data_raw/chrome_extension_detail_raw.csv; data_processed/chrome_extension_fit_matrix.csv; docs/competitive/chrome-extension-detail-enrichment-v1.md', status: 'done v1; detail pages parsed for known Chrome candidates only, producing fit bands and mechanic tags without broad search expansion' },
   { requirement: 'Chrome extension mechanic battlecards', evidence: 'data_processed/chrome_extension_mechanic_battlecards.csv; docs/competitive/chrome-extension-mechanic-battlecards-v1.md', status: 'done v1; converts enriched Chrome candidates into mechanic lessons, whitespace implications, and validation tasks' },
   { requirement: 'Validation gap roadmap', evidence: 'data_processed/validation_gap_roadmap.csv; docs/decision/validation-gap-roadmap-v1.md', status: 'done v1; maps five markets and H1-H6 gaps into P0/P1 success gates' },
@@ -1306,6 +1333,8 @@ console.log(`itch_rows=${itchRows.length}`);
 console.log(`itch_ok=${itchOk.length}`);
 console.log(`steam_tag_rows=${steamTagRows.length}`);
 console.log(`steam_tag_ok=${steamTagOk.length}`);
+console.log(`desktop_store_rows=${desktopStoreRows.length}`);
+console.log(`desktop_store_ok=${desktopStoreOk.length}`);
 console.log(`chrome_extension_detail_rows=${chromeExtensionFit.length}`);
 console.log(`chrome_extension_strong=${chromeExtensionStrong.length}`);
 console.log(`chrome_extension_battlecards=${chromeExtensionBattlecards.length}`);

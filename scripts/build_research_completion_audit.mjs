@@ -89,6 +89,7 @@ const expanded = csv('data_raw/expanded/all_expanded_dedup.csv');
 const expandedRaw = csv('data_raw/expanded/all_expanded_raw.csv');
 const itchRows = csv('data_raw/expanded_itch_raw.csv');
 const steamTagRows = csv('data_raw/expanded_steam_tags_raw.csv');
+const desktopStoreRows = csv('data_raw/expanded_desktop_store_raw.csv');
 const chromeExtensionRows = csv('data_raw/expanded_chrome_extensions_raw.csv');
 const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv');
 const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
@@ -145,11 +146,12 @@ const confirmedWebPaywallVisuals = webPaywallVisualAdjudication.filter(row => ro
 const partialWebPaywallVisuals = webPaywallVisualAdjudication.filter(row => ['confirmed_paid_surface_no_clean_price', 'partial_paid_surface_language', 'visible_price_context_uncertain'].includes(row.visual_adjudication)).length;
 const itchOk = itchRows.filter(row => row.collection_status === 'ok');
 const steamTagOk = steamTagRows.filter(row => row.collection_status === 'ok');
+const desktopStoreOk = desktopStoreRows.filter(row => row.collection_status === 'ok');
 const chromeExtensionOk = chromeExtensionRows.filter(row => row.collection_status === 'ok');
 const chromeExtensionDetailOk = chromeExtensionFit.filter(row => row.detail_status === 'ok');
 const chromeExtensionStrong = chromeExtensionFit.filter(row => row.alina_fit_band === 'strong_adjacent');
 const chromeMechanicPriority = chromeExtensionBattlecards.filter(row => ['mechanic_threat_high', 'mechanic_threat_medium', 'mechanic_reference_high'].includes(row.threat_band));
-const expandedRawWithKnownExternal = expandedRaw.length + itchRows.length + steamTagRows.length + chromeExtensionRows.length;
+const expandedRawWithKnownExternal = expandedRaw.length + itchRows.length + steamTagRows.length + desktopStoreRows.length + chromeExtensionRows.length;
 
 const requirements = [
   {
@@ -169,9 +171,9 @@ const requirements = [
     objective_source: 'User requested 30k-50k applications/sources across app stores, forums, web apps, desktop apps, websites.',
     status: expandedRawWithKnownExternal >= 30000 ? 'proved_scale_target' : 'partial_substantial_not_30k_50k',
     evidence_strength: expanded.length >= 10000 ? 'medium_high' : 'medium',
-    proof: `dedup=${expanded.length}; raw_core=${expandedRaw.length}; itch_rows=${itchRows.length}; steam_tag_rows=${steamTagRows.length}; chrome_extension_rows=${chromeExtensionRows.length}; known_raw_total=${expandedRawWithKnownExternal}; itch_ok=${itchOk.length}; steam_tag_ok=${steamTagOk.length}; chrome_extension_ok=${chromeExtensionOk.length}; chrome_detail_ok=${chromeExtensionDetailOk.length}; chrome_strong_adjacent=${chromeExtensionStrong.length}; chrome_priority_mechanics=${chromeMechanicPriority.length}; niches=${Object.keys(countBy(expanded, 'niche')).length}; source_kinds=${Object.keys(countBy(expanded, 'source_kind')).length}`,
-    evidence_files: 'data_raw/expanded/all_expanded_raw.csv;data_raw/expanded/all_expanded_dedup.csv;data_raw/expanded_itch_raw.csv;data_raw/expanded_steam_tags_raw.csv;data_raw/expanded_chrome_extensions_raw.csv;data_raw/chrome_extension_detail_raw.csv;data_processed/chrome_extension_fit_matrix.csv;data_processed/chrome_extension_mechanic_battlecards.csv;data_processed/competitor_feature_matrix.csv;docs/competitive/expanded-source-map.md;docs/competitive/source-expansion-backlog-v1.md;docs/competitive/itch-source-expansion-v1.md;docs/competitive/steam-tag-expansion-v1.md;docs/competitive/chrome-webstore-source-expansion-v1.md;docs/competitive/chrome-extension-detail-enrichment-v1.md;docs/competitive/chrome-extension-mechanic-battlecards-v1.md',
-    remaining_gap: 'Deduped app/source universe is still below the aspirational 30k-50k dedup target; desktop stores, Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog.',
+    proof: `dedup=${expanded.length}; raw_core=${expandedRaw.length}; itch_rows=${itchRows.length}; steam_tag_rows=${steamTagRows.length}; desktop_store_rows=${desktopStoreRows.length}; chrome_extension_rows=${chromeExtensionRows.length}; known_raw_total=${expandedRawWithKnownExternal}; itch_ok=${itchOk.length}; steam_tag_ok=${steamTagOk.length}; desktop_store_ok=${desktopStoreOk.length}; chrome_extension_ok=${chromeExtensionOk.length}; chrome_detail_ok=${chromeExtensionDetailOk.length}; chrome_strong_adjacent=${chromeExtensionStrong.length}; chrome_priority_mechanics=${chromeMechanicPriority.length}; niches=${Object.keys(countBy(expanded, 'niche')).length}; source_kinds=${Object.keys(countBy(expanded, 'source_kind')).length}`,
+    evidence_files: 'data_raw/expanded/all_expanded_raw.csv;data_raw/expanded/all_expanded_dedup.csv;data_raw/expanded_itch_raw.csv;data_raw/expanded_steam_tags_raw.csv;data_raw/expanded_desktop_store_raw.csv;data_raw/expanded_chrome_extensions_raw.csv;data_raw/chrome_extension_detail_raw.csv;data_processed/desktop_store_source_summary.csv;data_processed/chrome_extension_fit_matrix.csv;data_processed/chrome_extension_mechanic_battlecards.csv;data_processed/competitor_feature_matrix.csv;docs/competitive/expanded-source-map.md;docs/competitive/source-expansion-backlog-v1.md;docs/competitive/itch-source-expansion-v1.md;docs/competitive/steam-tag-expansion-v1.md;docs/competitive/desktop-store-expansion-v1.md;docs/competitive/chrome-webstore-source-expansion-v1.md;docs/competitive/chrome-extension-detail-enrichment-v1.md;docs/competitive/chrome-extension-mechanic-battlecards-v1.md',
+    remaining_gap: 'Deduped app/source universe is still below the aspirational 30k-50k dedup target; Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog.',
     next_action: 'Run next non-search-heavy collectors from source expansion backlog, prioritizing sources that return public HTML without Cloudflare/search-engine dependency.'
   },
   {

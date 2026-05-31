@@ -284,6 +284,7 @@ def main() -> None:
     expanded_raw = read_csv("data_raw/expanded/all_expanded_raw.csv")
     itch = read_csv("data_raw/expanded_itch_raw.csv")
     steam = read_csv("data_raw/expanded_steam_tags_raw.csv")
+    desktop = read_csv("data_raw/expanded_desktop_store_raw.csv")
     chrome_raw = read_csv("data_raw/expanded_chrome_extensions_raw.csv")
     chrome_fit = read_csv("data_processed/chrome_extension_fit_matrix.csv")
     chrome_battlecards = read_csv("data_processed/chrome_extension_mechanic_battlecards.csv")
@@ -311,7 +312,7 @@ def main() -> None:
     icp_capture = read_csv("data_processed/icp_interview_capture_sheet.csv")
     prototype_capture = read_csv("data_processed/prototype_session_capture_sheet.csv")
 
-    known_raw_total = len(expanded_raw) + len(itch) + len(steam) + len(chrome_raw)
+    known_raw_total = len(expanded_raw) + len(itch) + len(steam) + len(desktop) + len(chrome_raw)
     csv_rows = sum(int(row.get("row_count") or 0) for row in manifest if row.get("file_path", "").endswith(".csv"))
     source_refs = sum(int(row.get("source_ref_rows") or 0) for row in manifest if row.get("file_path", "").endswith(".csv"))
     strong_revenue = [row for row in revenue if row.get("revenue_proxy_band") == "strong_bottom_up_money_proxy"]
@@ -427,9 +428,10 @@ def main() -> None:
             [
                 ["Evidence layer", "Count", "Interpretation"],
                 ["Five-market coverage", len(count_by(expanded, "niche")), "Core markets represented in the normalized universe."],
-                ["Known raw universe", known_raw_total, "Core + itch.io + Steam tag + Chrome rows exceed the 30k lower-bound target."],
+                ["Known raw universe", known_raw_total, "Core + itch.io + Steam tag + desktop store + Chrome rows exceed the 30k lower-bound target."],
                 ["Deduped source universe", len(expanded), "Normalized rows for matrices and scoring."],
                 ["Chrome Web Store raw rows", len(chrome_raw), "Source-native browser-extension expansion across five markets."],
+                ["Desktop store raw rows", len(desktop), "Source-native Mac App Store desktop/wellness/productivity/game expansion."],
                 ["Chrome detail pages parsed", len([row for row in chrome_fit if row.get("detail_status") == "ok"]), "Fit bands, users, tags, and mechanic evidence."],
                 ["Chrome mechanic battlecards", len(chrome_battlecards), "Browser-extension mechanics translated into whitespace lessons."],
                 ["Market assumption audit", len(market_assumptions), "TAM/SAM/SOM risk rows by market and intersection."],
@@ -633,7 +635,7 @@ def main() -> None:
         table(
             [
                 ["Evidence group", "Primary files"],
-                ["Universe", "data_raw/expanded/*; data_raw/expanded_itch_raw.csv; data_raw/expanded_steam_tags_raw.csv"],
+                ["Universe", "data_raw/expanded/*; data_raw/expanded_itch_raw.csv; data_raw/expanded_steam_tags_raw.csv; data_raw/expanded_desktop_store_raw.csv"],
                 ["Market money", "data_processed/tam_sam_som_model.csv; data_processed/competitor_revenue_proxy_review.csv"],
                 ["Whitespace", "data_processed/whitespace_signal_matrix.csv; data_processed/manual_competitor_inspection_packet.csv"],
                 ["Audience", "data_processed/icp_segment_matrix.csv; data_processed/icp_validation_test_plan.csv"],
