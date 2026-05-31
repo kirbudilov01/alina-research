@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T11:30:00.698Z
+Generated: 2026-05-31T11:36:02.154Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -33,6 +33,7 @@ Generated: 2026-05-31T11:30:00.698Z
 | 5-market TAM/SAM/SOM method | docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; docs/market/competitor-revenue-proxy-review-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv; data_processed/competitor_revenue_proxy_review.csv; data_processed/competitor_revenue_proxy_market_summary.csv | done v1; source confidence, market monetization proxy, and bottom-up competitor revenue proxy layers added; model remains range-based and not final forecast |
 | Market-money triangulation | data_processed/market_money_triangulation.csv; data_processed/market_money_triangulation_summary.csv; docs/market/market-money-triangulation-v1.md | done v1; 6 market rows triangulate TAM/SAM/SOM, monetization proxy, competitor revenue proxy, paywall screenshots, and H2 gate status |
 | Russian five-market deep dives | data_processed/russian_market_deep_dives.csv; docs/market/russian-market-deep-dives-v1.md; reports/alina-russian-narrative-report-v1.md | done v1; 5 Russian market-by-market rows connect TAM/SAM, coverage, saturation, money, audience, and validation boundaries |
+| Russian claim evidence appendix | data_processed/russian_claim_evidence_appendix.csv; docs/decision/russian-claim-evidence-appendix-v1.md; reports/alina-russian-narrative-report-v1.md | done v1; 22 claim rows connect status, confidence, metrics, boundaries, source files, and next actions |
 | Whitespace matrices | data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md | done v1 |
 | Audience matrices | data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md | done v1 |
 | ICP / audience segment matrix | data_processed/icp_segment_matrix.csv; docs/audience/icp-segment-matrix-v1.md | done v1; maps audience/review/forum/monetization evidence into testable ICP hypotheses |
@@ -41,7 +42,7 @@ Generated: 2026-05-31T11:30:00.698Z
 | Prototype validation stimulus | data_processed/prototype_validation_stimulus_flow.csv; data_processed/prototype_validation_scorecard.csv; docs/product/prototype-validation-stimulus-v1.md | done v1; two-minute loop stimulus, top-ICP comparison flow, and success/kill metrics ready; participant results pending |
 | Versioned on GitHub | git log through current commit after push | active |
 | Final PDF | output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf | draft evidence PDF and visual PDF companion done |
-| Russian narrative document | reports/alina-russian-narrative-report-v1.md; output/pdf/alina-russian-narrative-report-v1.pdf; data_processed/russian_narrative_evidence_map.csv; data_processed/russian_market_deep_dives.csv; docs/decision/russian-narrative-evidence-map-v1.md; docs/market/russian-market-deep-dives-v1.md | done v1; sequential Russian-language narrative report, argument map, and five-market deep dives generated from evidence warehouse |
+| Russian narrative document | reports/alina-russian-narrative-report-v1.md; output/pdf/alina-russian-narrative-report-v1.pdf; data_processed/russian_narrative_evidence_map.csv; data_processed/russian_market_deep_dives.csv; data_processed/russian_claim_evidence_appendix.csv; docs/decision/russian-narrative-evidence-map-v1.md; docs/market/russian-market-deep-dives-v1.md; docs/decision/russian-claim-evidence-appendix-v1.md | done v1; sequential Russian-language narrative report, argument map, five-market deep dives, and claim evidence appendix generated from evidence warehouse |
 | Visual charts | docs/visuals/chart-index-v1.md; output/charts/*.svg; output/pdf/alina-evidence-visual-report-v1.pdf | draft chart pack and embedded visual PDF done |
 | Evidence audit / claim register | data_processed/evidence_claim_register.csv; docs/decision/evidence-audit-v1.md | done v1; proof status, confidence, gaps, and next actions explicit |
 | Evidence package manifest | data_processed/evidence_artifact_manifest.csv; docs/decision/evidence-package-manifest-v1.md | done v1; tracks key artifacts with row counts, source-reference coverage, sizes, and short hashes |
