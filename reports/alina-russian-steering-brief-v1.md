@@ -1,0 +1,46 @@
+# Alina Research. Steering Brief на русском
+
+Собрано: 2026-05-31
+
+## Зачем нужен этот brief
+
+Это короткий слой для чтения перед большим PDF. Он отвечает на вопросы: что уже можно утверждать, сколько данных собрано по рынкам, где границы доказательств, какие рекомендации действуют и что надо делать первым. Он не добавляет новых утверждений поверх данных, а сжимает существующий evidence pack в управленческую форму.
+
+## Главное
+
+Сейчас пакет доказывает масштаб desk research: 68,085 raw source rows, 37,176 global dedup rows, 529 локальных артефактов в manifest и 0 missing. Но все validation gates остаются hold_validate, поэтому итоговый вывод должен звучать осторожно: Alina стоит проверять дальше, но продукт, аудитория, WTP и конкурентное преимущество еще не доказаны наблюдаемыми данными.
+
+## Decision Table
+
+| Блок | Вывод | Опора | Решение | Граница |
+| --- | --- | --- | --- | --- |
+| Вердикт на сегодня | Отчет уже можно читать как крупную карту мирового рынка и план проверки, но нельзя читать как доказанный PMF или финальное go. | raw=68,085; global_dedup=37,176; manifest=529; missing=0; gates_hold=6/6 | Использовать как decision pack для validation-first спринта. | Не продавать как доказательство спроса, выручки или выбранного ICP. |
+| Сколько данных собрано | Счетчики теперь разделены: global source scale, direct app-store слой и all-source niche слой отвечают на разные вопросы. | global raw=68,085; global dedup=37,176; direct app-store niche sum=13,117; all-source niche sum=43,144 | В reader/executive тексте показывать все четыре числа рядом с пояснением scope. | Не складывать niche dedup как общее число уникальных приложений. |
+| Приоритет рынков | Первые проверки лучше держать вокруг Mindfulness/reset и Avatar/identity; Astrology и Coaching использовать как язык аудитории и paid-depth контекст; Gaming оставить benchmark-only. | Mindfulness / reset: direct 2,550, all 9,865 / Avatar / identity: direct 2,506, all 10,058 / Astrology / esoterics: direct 2,206, all 2,700 / Coaching / self-improvement: direct 2,651, all 3,864 / Gaming / progression benchmark: direct 3,204, all 17,139 | MVP и интервью формулировать как daily meaning/action/reset/progress loop, а не как игру, астрологию или трекер. | Gaming не использовать как прямой TAM/whitespace proof до доказанного behavioral overlap. |
+| Статус гипотез | Все H1-H6 остаются hold_validate: это нормальный статус для evidence-first ресерча до observed rows. | H1: 12 / 60, success 0 / 25 / H3: 12 / 60, success 0 / 25 / H2: 28 / 48, success 8 / 12 / H5: 12 / 96, success 0 / 30 / H4: 16 / 80, success 0 / 32 / H6: 16 / 80, success 0 / 32 | Усиливать claims только после walkthrough, interviews, prototype sessions и WTP capture. | Desk evidence и public listing signoff не заменяют наблюдаемую проверку. |
+| Продуктовое ядро | Проверяемая ставка: personal meaning -> tiny action -> reset -> visible identity/progress -> next-day hook. | H4/H6 пока без success rows; prototype stimulus и scorecards готовы, но пользовательских сессий нет. | Сузить MVP до одной причинной сессии и измерять понимание причинности. | Не расширять feature set до проверки базовой петли. |
+| Следующий спринт | Следующий прирост качества должен прийти от observed validation, а не от еще одного большого слоя desk research. | P0 execution slice=18 tasks; first blocks=Сначала hidden-clone walkthrough -> Потом paid-flow/WTP evidence -> Затем ICP recent behavior -> После этого prototype loop | Сначала 5 hidden-clone walkthrough, затем 5 paid-flow/WTP, затем ICP recent-behavior interviews, затем prototype sessions. | Не переписывать выводы руками: сначала capture rows, потом генераторы и PDF. |
+| Рекомендации | Управленческий слой уже сформулирован и должен оставаться жестким: продолжать, но не объявлять go. | Решение сейчас: Продолжать как validation-first проект, но не объявлять go/PMF и не продавать отчет как финальное доказательство продукта. / MVP: Сузить MVP до одной причинной сессии: personal meaning -> tiny action -> reset -> visible progress/avatar feedback -> next-day hook. / Приоритет рынков: Первые product/validation гипотезы держать вокруг Mindfulness/reset + Avatar/identity; Astrology и Coaching использовать как язык аудитории и paid-depth контекст; Gaming оставить benchmark-only. / Белое пятно: Формулировать whitespace узко: редкая связка meaning -> action -> reset -> visible identity/progress, а не отсутствие конкурентов. | В pitch/обсуждениях говорить “мы проверяем связку”, а не “мы доказали рынок Alina”. | Не использовать сильные формулировки без gate upgrade. |
+| Что еще не закрыто | Финальная цель не завершена, потому что validation gates не прошли и нет фактических пользовательских/продуктовых наблюдений. | REQ_02_COMPETITOR_UNIVERSE: proved_raw_50k_and_dedup_30k_plus_dedup_50k_open / REQ_05_WHITESPACE: narrow_supported_public_listing_signed_off_walkthrough_open / REQ_06_AUDIENCE_ICP: directionally_supported_secondary_voc_signed_off_interviews_open / REQ_07_COMPETITIVE_ADVANTAGE: prototype_readiness_signed_off_user_sessions_open / REQ_08_REPORT_PDF: global_russian_report_pdf_docx_done_not_validated_final / REQ_10_VALIDATION_GATES: all_gates_started_none_passed_validation_open | Держать цель активной и двигаться по P0 validation rows. | Не закрывать goal как complete до requirement-by-requirement proof. |
+
+## Счетчики по пяти направлениям
+
+| Направление | All-source raw | All-source dedup | Direct app-store dedup | Роль | Как читать |
+| --- | --- | --- | --- | --- | --- |
+| Mindfulness / reset | 15,181 | 9,865 | 2,550 | adjacent рынок для конкурентной карты | Эти счетчики доказывают масштаб карты рынка и плотность source coverage, но не доказывают PMF, willingness-to-pay или отсутствие hidden full-loop clone без manual walkthrough/interviews. |
+| Avatar / identity | 15,000 | 10,058 | 2,506 | adjacent рынок для конкурентной карты | Эти счетчики доказывают масштаб карты рынка и плотность source coverage, но не доказывают PMF, willingness-to-pay или отсутствие hidden full-loop clone без manual walkthrough/interviews. |
+| Astrology / esoterics | 5,475 | 2,700 | 2,206 | adjacent рынок для конкурентной карты | Эти счетчики доказывают масштаб карты рынка и плотность source coverage, но не доказывают PMF, willingness-to-pay или отсутствие hidden full-loop clone без manual walkthrough/interviews. |
+| Coaching / self-improvement | 7,679 | 3,864 | 2,651 | adjacent рынок для конкурентной карты | Эти счетчики доказывают масштаб карты рынка и плотность source coverage, но не доказывают PMF, willingness-to-pay или отсутствие hidden full-loop clone без manual walkthrough/interviews. |
+| Gaming / progression benchmark | 24,750 | 17,139 | 3,204 | benchmark механик, не прямой TAM | Эти счетчики доказывают масштаб карты рынка и плотность source coverage, но не доказывают PMF, willingness-to-pay или отсутствие hidden full-loop clone без manual walkthrough/interviews. |
+
+## Что открыть дальше
+
+- `reports/alina-global-reader-report-v1.md` - читательская версия отчета.
+- `reports/alina-global-executive-narrative-v1.md` - управленческая narrative-версия.
+- `reports/alina-global-hypothesis-report-v1.md` - полный гипотезный отчет.
+- `data_processed/p0_validation_execution_slice.csv` - первая очередь действий.
+- `data_processed/research_completion_audit.csv` - честный audit незакрытых требований.
+
+## Boundary
+
+Этот brief улучшает читаемость и управленческую последовательность. Он не заменяет manual walkthrough, ICP interviews, prototype sessions и willingness-to-pay validation.

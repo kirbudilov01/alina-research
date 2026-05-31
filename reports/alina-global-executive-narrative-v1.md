@@ -6,7 +6,7 @@
 
 Alina стоит дальше проверять как мировую consumer-app гипотезу на пересечении personal meaning, tiny action, short reset и visible progress. Сейчас это не доказанный продукт и не финальный инвестиционный claim. Это большой evidence-first пакет, который показывает: вокруг идеи есть пять платежеспособных adjacent-направлений, заметная конкурентная плотность, рабочая TAM/SAM/SOM методология, предварительное whitespace-окно и понятная P0-очередь валидации.
 
-Масштаб базы сейчас: 68,085 сырьевых source-строк, 37,176 уникализированных строк и 525 локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.
+Масштаб базы сейчас: 68,085 сырьевых source-строк, 37,176 уникализированных строк и 529 локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.
 
 ## Главные числа
 
@@ -57,11 +57,11 @@ Alina стоит дальше проверять как мировую consumer-
 
 | Направление | Direct app dedup | All-source dedup | Top-100 apps | Как читать |
 | --- | ---: | ---: | ---: | --- |
-| Mindfulness / reset | 2,550 | 9,803 | 21 | сильный money proxy |
-| Avatar / identity | 2,506 | 9,952 | 49 | сильный money proxy |
-| Astrology / esoterics | 2,206 | 2,657 | 59 | сильный money proxy |
-| Coaching / self-improvement | 2,651 | 3,857 | 50 | средний money proxy |
-| Gaming / progression benchmark | 3,204 | 16,875 | 8 | benchmark, не прямой TAM |
+| Mindfulness / reset | 2,550 | 9,865 | 21 | сильный money proxy |
+| Avatar / identity | 2,506 | 10,058 | 49 | сильный money proxy |
+| Astrology / esoterics | 2,206 | 2,700 | 59 | сильный money proxy |
+| Coaching / self-improvement | 2,651 | 3,864 | 50 | средний money proxy |
+| Gaming / progression benchmark | 3,204 | 17,139 | 8 | benchmark, не прямой TAM |
 
 Сверка счетчиков: global dedup = 37,176, сумма all-source niche dedup = 43,144, сумма direct app-store dedup по нишам = 13,117. Эти числа отвечают на разные вопросы и не должны складываться в одно “количество приложений”: ниши являются тематическими корзинами, а один продукт может жить в нескольких контекстах.
 

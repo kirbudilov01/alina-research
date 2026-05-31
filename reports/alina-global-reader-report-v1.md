@@ -10,15 +10,15 @@
 
 ## Сначала числа, чтобы не потеряться
 
-Собрано 68,085 сырьевых строк и 37,176 global dedup строк. В manifest сейчас 525 локальных артефактов; missing=0. По пяти нишам direct app-store слой дает 13,117 строк, а all-source niche слой дает 43,144 строк. Эти числа отвечают на разные вопросы и не складываются в одно “количество приложений”.
+Собрано 68,085 сырьевых строк и 37,176 global dedup строк. В manifest сейчас 529 локальных артефактов; missing=0. По пяти нишам direct app-store слой дает 13,117 строк, а all-source niche слой дает 43,144 строк. Эти числа отвечают на разные вопросы и не складываются в одно “количество приложений”.
 
 | Направление | Роль в гипотезе Alina | Сколько данных | Как читать осторожно |
 | --- | --- | --- | --- |
-| Mindfulness / reset | состояние и reset | 2,550 direct app dedup; 9,803 all-source dedup | directional market evidence, не proof спроса |
-| Avatar / identity | видимый образ изменения | 2,506 direct app dedup; 9,952 all-source dedup | directional market evidence, не proof спроса |
-| Astrology / esoterics | личный смысл и персональные интерпретации | 2,206 direct app dedup; 2,657 all-source dedup | directional market evidence, не proof спроса |
-| Coaching / self-improvement | действие и язык роста | 2,651 direct app dedup; 3,857 all-source dedup | directional market evidence, не proof спроса |
-| Gaming / progression benchmark | механики прогресса и возврата | 3,204 direct app dedup; 16,875 all-source dedup | benchmark-only, не прямой TAM |
+| Mindfulness / reset | состояние и reset | 2,550 direct app dedup; 9,865 all-source dedup | directional market evidence, не proof спроса |
+| Avatar / identity | видимый образ изменения | 2,506 direct app dedup; 10,058 all-source dedup | directional market evidence, не proof спроса |
+| Astrology / esoterics | личный смысл и персональные интерпретации | 2,206 direct app dedup; 2,700 all-source dedup | directional market evidence, не proof спроса |
+| Coaching / self-improvement | действие и язык роста | 2,651 direct app dedup; 3,864 all-source dedup | directional market evidence, не proof спроса |
+| Gaming / progression benchmark | механики прогресса и возврата | 3,204 direct app dedup; 17,139 all-source dedup | benchmark-only, не прямой TAM |
 
 ## Какая продуктовая ставка проверяется
 
@@ -129,6 +129,7 @@ MVP должен проверить не весь будущий продукт,
 Эта reader version не заменяет полный evidence pack. Для проверки источников использовать полный отчет, source appendix, manifest, capture sheets и P0 execution slice. Самое важное правило: если в capture sheet нет строки наблюдения, скриншота, цитаты, цены или scorecard-метрики, claim не усиливается.
 
 - `reports/alina-global-reader-report-v1.md`
+- `reports/alina-russian-steering-brief-v1.md`
 - `reports/alina-global-hypothesis-report-v1.md`
 - `reports/alina-global-executive-narrative-v1.md`
 - `data_processed/russian_reader_glossary.csv`

@@ -427,6 +427,7 @@ reportLines.push('');
 reportLines.push('Эта reader version не заменяет полный evidence pack. Для проверки источников использовать полный отчет, source appendix, manifest, capture sheets и P0 execution slice. Самое важное правило: если в capture sheet нет строки наблюдения, скриншота, цитаты, цены или scorecard-метрики, claim не усиливается.');
 reportLines.push('');
 reportLines.push('- `reports/alina-global-reader-report-v1.md`');
+reportLines.push('- `reports/alina-russian-steering-brief-v1.md`');
 reportLines.push('- `reports/alina-global-hypothesis-report-v1.md`');
 reportLines.push('- `reports/alina-global-executive-narrative-v1.md`');
 reportLines.push('- `data_processed/russian_reader_glossary.csv`');

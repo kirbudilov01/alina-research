@@ -1,6 +1,6 @@
 # Alina Research. Мировой рынок и логика гипотез
 
-Собрано: 2026-05-31T18:23:24.449Z
+Собрано: 2026-05-31T18:34:34.410Z
 
 ## ОПИСАНИЕ ПРОЕКТА И ГИПОТЕЗА #1
 
@@ -12,7 +12,7 @@
 
 Гипотеза №1: на мировом consumer-app рынке есть место для приложения, которое объединяет личный смысл, короткое действие, reset и причинно видимый прогресс в одну ежедневную петлю. Эта гипотеза пока не доказана как product-market fit, но уже поддержана масштабной картой соседних рынков и конкурентных сигналов.
 
-На текущем этапе собрано 68,085 сырьевых source-строк, 37,176 уникализированных строк и 525 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
+На текущем этапе собрано 68,085 сырьевых source-строк, 37,176 уникализированных строк и 529 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
 
 ### Первые управленческие числа
 
@@ -107,11 +107,11 @@
 
 | Ниша | All raw | All dedup | Direct app dedup | Direct share | Top-100 | Manual targets | Coverage | Как читать |
 | --- | ---: | ---: | ---: | --- | ---: | ---: | --- | --- |
-| Mindfulness / reset | 15,109 | 9,803 | 2,550 | 26.0% | 21 | 0 | 9 groups; strong 3; medium 2 | возможность есть, нужен ручной sampling |
-| Avatar / identity | 14,872 | 9,952 | 2,506 | 25.2% | 49 | 3 | 9 groups; strong 3; medium 2 | возможность есть, нужен ручной sampling |
-| Astrology / esoterics | 5,427 | 2,657 | 2,206 | 83.0% | 59 | 7 | 8 groups; strong 1; medium 3 | рынок плотный или контекст неясен |
-| Coaching / self-improvement | 7,671 | 3,857 | 2,651 | 68.7% | 50 | 8 | 8 groups; strong 1; medium 3 | рынок плотный или контекст неясен |
-| Gaming / progression benchmark | 24,446 | 16,875 | 3,204 | 19.0% | 8 | 0 | 10 groups; strong 3; medium 2 | benchmark механик, не primary market |
+| Mindfulness / reset | 15,181 | 9,865 | 2,550 | 25.8% | 21 | 0 | 9 groups; strong 3; medium 2 | возможность есть, нужен ручной sampling |
+| Avatar / identity | 15,000 | 10,058 | 2,506 | 24.9% | 49 | 3 | 9 groups; strong 3; medium 2 | возможность есть, нужен ручной sampling |
+| Astrology / esoterics | 5,475 | 2,700 | 2,206 | 81.7% | 59 | 7 | 8 groups; strong 1; medium 3 | рынок плотный или контекст неясен |
+| Coaching / self-improvement | 7,679 | 3,864 | 2,651 | 68.6% | 50 | 8 | 8 groups; strong 1; medium 3 | рынок плотный или контекст неясен |
+| Gaming / progression benchmark | 24,750 | 17,139 | 3,204 | 18.7% | 8 | 0 | 10 groups; strong 3; medium 2 | benchmark механик, не primary market |
 
 ### Сверка счетчиков: почему числа не складываются в одно “количество приложений”
 
@@ -393,7 +393,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | GOAL_04_TAM_SAM_SOM | Подготовить рыночную методологию TAM/SAM/SOM и stress-сценарии | покрыто как range-based methodology, не финальный revenue proof | 6 methodology rows; 6 TAM/SAM/SOM rows; 6 stress scenarios; sensitivity_rows=6 | H2 не закрыт: paid-flow signoff ниже порога, WTP и paid-depth prototype signals еще нужны | добрать paid-flow capture rows и WTP вопросы из P0 backlog |
 | GOAL_05_WHITESPACE_AUDIENCE | Собрать whitespace и аудиторные матрицы | покрыто как directional synthesis, validation остается открытой | 5 synthesis rows; 6 whitespace rows; 6 ICP rows; 20492 audience signal rows | H3/H5 нельзя усиливать без manual walkthrough и recent-behavior interviews | исполнить первые 5 walkthrough и P0 ICP interview rows |
 | GOAL_06_REPORT_RU | Собрать последовательный русский мировой отчет и PDF/DOCX | покрыто как draft, не финальная validated версия | global report md=yes; pdf=yes; docx=yes; executive_md=yes; executive_pdf=yes; reader_md=yes; reader_pdf=yes; glossary_rows=12; readability_audit_rows=10; storyline_rows=10; dashboard_rows=16 | финальная версия должна обновиться после observed validation rows | после capture rows пересобрать отчет и изменить claim language |
-| GOAL_07_VERSIONING | Сохранять локально, трассировать источники и версионировать через GitHub | покрыто активно | manifest=525; missing=0; docs=133; scripts=120 | manifest надо обновлять после каждого нового слоя | пересобирать manifest и делать commit/push после изменений |
+| GOAL_07_VERSIONING | Сохранять локально, трассировать источники и версионировать через GitHub | покрыто активно | manifest=529; missing=0; docs=134; scripts=121 | manifest надо обновлять после каждого нового слоя | пересобирать manifest и делать commit/push после изменений |
 | GOAL_08_VALIDATION | Критически мыслить и не закрывать гипотезы без observed evidence | открыто, capture-ready | gates=6; hold_validate=6; started=6; p0_intake_rows=18; H1_completed=12 / 60; H1_success=0 / 25; H3_completed=12 / 60; H3_success=0 / 25; H2_completed=28 / 48; H2_success=8 / 12; H5_completed=12 / 96; H5_success=0 / 30; H4_completed=16 / 80; H4_success=0 / 32; H6_completed=16 / 80; H6_success=0 / 32 | цель нельзя считать завершенной, пока observed validation gates не закрыты или не понижены по evidence | исполнить P0 validation backlog и обновить gate statuses |
 
 Главный вывод по этой карте: пакет уже масштабный и трассируемый, но не финально валидированный. Это правильное состояние для evidence-first ресерча: сильные desk/source слои готовы, а product/market claims остаются в hold_validate до ручных walkthrough, интервью, прототипа и WTP.
@@ -406,16 +406,16 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 
 | ID | Раздел | Вопрос читателя | Ход повествования | Evidence | Граница |
 | --- | --- | --- | --- | --- | --- |
-| STORY_01_PRODUCT_THESIS | Описание проекта и гипотеза #1 | Что такое Alina и почему это не просто еще один tracker, meditation app или avatar toy? | Сначала дать продуктовую ставку человеческим языком: daily meaning превращается в маленькое действие, reset снижает трение, progress/avatar показывает причинное изменение. | source_base=68,085 raw; dedup=37,176; manifest=525; sample_style=yes | Это не PMF proof и не доказательство спроса; это стартовая рамка H1. |
+| STORY_01_PRODUCT_THESIS | Описание проекта и гипотеза #1 | Что такое Alina и почему это не просто еще один tracker, meditation app или avatar toy? | Сначала дать продуктовую ставку человеческим языком: daily meaning превращается в маленькое действие, reset снижает трение, progress/avatar показывает причинное изменение. | source_base=68,085 raw; dedup=37,176; manifest=529; sample_style=yes | Это не PMF proof и не доказательство спроса; это стартовая рамка H1. |
 | STORY_02_EVIDENCE_STATUS | Текущий статус доказательств | Можно ли уже говорить, что гипотезы доказаны? | Сразу поставить защитную рамку: все гипотезы идут через gates, а desk research не заменяет observed evidence. | gates=6; hold_validate=6; H2=28 / 48 completed | Не усиливать формулировки до go, пока нет walkthrough, интервью, prototype sessions и WTP. |
-| STORY_03_MARKET_MAP | Определение мировых целевых рынков и гипотеза #2 | Какие именно пять мировых направлений проверяются и сколько данных взято в каждой нише? | Показать пять направлений как роли в будущей ценности Alina: reset, action, meaning, visible identity, progression mechanics. | 5 market rows; direct_app_dedup=13,117; all_source_dedup_rows_by_niche=43,144 | Построчные niche dedup нельзя складывать как уникальных конкурентов; gaming остается benchmark, не прямой TAM. |
+| STORY_03_MARKET_MAP | Определение мировых целевых рынков и гипотеза #2 | Какие именно пять мировых направлений проверяются и сколько данных взято в каждой нише? | Показать пять направлений как роли в будущей ценности Alina: reset, action, meaning, visible identity, progression mechanics. | 5 market rows; direct_app_dedup=13,117; all_source_dedup_rows_by_niche=43,626 | Построчные niche dedup нельзя складывать как уникальных конкурентов; gaming остается benchmark, не прямой TAM. |
 | STORY_04_MARKET_MONEY | Методология TAM/SAM/SOM | Есть ли там деньги и насколько хрупка рыночная модель? | Разделить TAM, SAM, confidence-weighted SAM и stress scenarios; отдельно назвать чувствительные assumptions. | tam_rows=6; intersection_sam=201960000; sensitivity_rows=6 | Рыночная модель не является revenue forecast и не закрывает paid-flow/WTP gate. |
 | STORY_05_COMPETITOR_FIELD | Определение конкурентов и гипотеза #3 | Кто уже борется за похожее поведение пользователя? | Показывать конкурентов как карту соседних способов решения задачи, а не как список приложений ради списка. | archetype_rows=7; close_or_direct_total=73 | Плотность конкурентов не доказывает Alina; taxonomy noise и hidden-clone риск остаются. |
 | STORY_06_WHITESPACE | Где дыры и возможность отличиться | Где может быть белое пятно и почему оно не слишком широкое? | Формулировать whitespace как причинную дыру: meaning -> action -> reset -> visible progress, а не как отсутствие wellness apps. | 5 whitespace/audience rows; best_directional_fields=mindfulness, avatar_identity | H3 нельзя усиливать без ручного walkthrough P0-конкурентов. |
 | STORY_07_AUDIENCE | Аудитория, интервью и гипотеза #4 | Кто потенциальный пользователь и почему это не демография? | Описывать audience через поведение: digital ritual users, recent behavior, paid depth, trust boundary и язык боли. | icp_rows=6; p0_segments=Spiritual self-improvers + Habit and progress users | Secondary VOC и review language не заменяют живые интервью. |
 | STORY_08_PRODUCT_LOOP | Итоговая модель продукта и гипотеза #5 | Что именно должен проверить MVP? | Сжать продукт до одной причинной сессии: вход в смысл, контекст, действие, reset, evidence, avatar/progress feedback, next-day hook. | product_loop_screens=8; prototype_scorecard_file=data_processed/prototype_validation_scorecard.csv | H4/H6 не закрыты, пока участники не объясняют петлю своими словами. |
 | STORY_09_VALIDATION_QUEUE | Ближайшая очередь валидации | Что делать следующим шагом, чтобы отчет стал сильнее? | Дать порядок работ: hidden-clone walkthrough, paid-flow/WTP, ICP interviews, prototype sessions. | next_validation_tasks=22; first_workstreams=manual walkthrough + paid-flow | Очередь задач не равна выполненной валидации. |
-| STORY_10_TRACEABILITY | Источники и границы доказательств | Можно ли проверить, откуда взялись утверждения? | Закрыть рассказ source appendix, manifest и границами claims, чтобы отчет был красивым, но не бездоказательным. | manifest=525; readability_rows=10; source_appendix=data_processed/global_hypothesis_source_appendix.csv | Traceability доказывает наличие и связность артефактов, но не доказывает продуктовый outcome. |
+| STORY_10_TRACEABILITY | Источники и границы доказательств | Можно ли проверить, откуда взялись утверждения? | Закрыть рассказ source appendix, manifest и границами claims, чтобы отчет был красивым, но не бездоказательным. | manifest=529; readability_rows=10; source_appendix=data_processed/global_hypothesis_source_appendix.csv | Traceability доказывает наличие и связность артефактов, но не доказывает продуктовый outcome. |
 
 ## ПРОВЕРКА СКЛАДНОСТИ И ЧИТАЕМОСТИ ОТЧЕТА
 
@@ -448,7 +448,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | SRC_04_WHITESPACE | Где дыры и возможность отличиться | поддержано направленно, но не финально доказано | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Whitespace нельзя апгрейдить без manual walkthrough и final verdict_after_inspection. |
 | SRC_05_AUDIENCE | Аудитория, интервью и гипотеза #4 | поддержано направленно, но не финально доказано | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Audience rows и Reddit/forum signals не являются representative survey и не заменяют recent-behavior interviews. |
 | SRC_06_PRODUCT_CORE | Итоговая модель продукта и гипотеза #5 | поддержано направленно, но не финально доказано | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | Product core не считается доказанным без заполненных prototype_session_capture_sheet и scorecard. |
-| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 525 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
+| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 529 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
 | SRC_08_SAMPLE_STYLE_REFERENCE | Логика гипотез и повествовательная форма | используется как style benchmark, не как market evidence | sample_docx_paragraphs=645; benchmark_doc=docs/decision/alina-sample-style-benchmark-v1.md | Образец задает композицию и русский нарратив; он не переносит российский рынок, локальные цифры или старую продуктовую гипотезу в мировой отчет. |
 | SRC_09_NICHE_COUNT_ROLLUP | Определение мировых целевых рынков и гипотеза #2 | доказано как source-count rollup, не как PMF proof | 5 niche rows; file=data_processed/global_niche_count_rollup.csv | Niche count rollup показывает масштаб source discovery по рынкам; он не доказывает спрос, WTP или отсутствие скрытого full-loop конкурента. |
 | SRC_10_REPORT_READABILITY | Проверка складности и читаемости отчета | проверено редакционным аудитом, не market proof | 10 readability audit rows | Readability audit оценивает форму и ясность текста; он не доказывает рыночные или продуктовые claims. |
