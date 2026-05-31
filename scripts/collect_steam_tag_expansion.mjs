@@ -15,13 +15,19 @@ for (const dir of ['data_raw', 'data_processed', 'docs/competitive']) fs.mkdirSy
 const TAG_PLAN = {
   gaming: [
     'Cozy', 'Life Sim', 'Relaxing', 'Casual', 'Idler', 'RPG', 'Simulation', 'Wholesome',
-    'Cute', 'Farming Sim', 'Management', 'Choices Matter'
+    'Cute', 'Farming Sim', 'Management', 'Choices Matter', 'Puzzle', 'Adventure',
+    'Hidden Object', 'Point & Click', 'Story Rich', 'Exploration', 'Sandbox',
+    'Collectathon', 'Creature Collector', 'Rhythm', 'Building', 'Resource Management',
+    'Colony Sim', 'Farming', 'Crafting', 'Roguelike', 'Deckbuilding'
   ],
   mindfulness: [
-    'Relaxing', 'Walking Simulator', 'Atmospheric', 'Psychological', 'Education', 'Nature'
+    'Relaxing', 'Walking Simulator', 'Atmospheric', 'Psychological', 'Education', 'Nature',
+    'Emotional', 'Colorful', 'Exploration', 'Puzzle', 'Hidden Object', 'Music'
   ],
   avatar_identity: [
-    'Character Customization', 'Life Sim', 'Dating Sim', 'Visual Novel', 'Anime', 'Choices Matter'
+    'Character Customization', 'Life Sim', 'Dating Sim', 'Visual Novel', 'Anime',
+    'Choices Matter', 'Interactive Fiction', 'Story Rich', 'Multiple Endings',
+    'Immersive Sim', 'Social Deduction', 'Psychological'
   ]
 };
 
@@ -180,8 +186,15 @@ async function collectTag(niche, tagName, tagId) {
     const url = `https://store.steampowered.com/search/results/?query&start=${start}&count=${PAGE_SIZE}&dynamic_data=&sort_by=_ASC&tags=${encodeURIComponent(tagId)}&infinite=1`;
     try {
       const res = await fetchWithTimeout(url);
-      const data = await res.json();
-      rows.push(...parseResultsHtml(data.results_html, niche, tagName, tagId, page + 1, start, url));
+      const text = await res.text();
+      let html = text;
+      try {
+        const data = JSON.parse(text);
+        html = data.results_html || '';
+      } catch {
+        // Steam sometimes returns the results fragment directly instead of JSON.
+      }
+      rows.push(...parseResultsHtml(html, niche, tagName, tagId, page + 1, start, url));
     } catch (error) {
       rows.push(row({
         app_name: `steam:${tagName}: collection error`,

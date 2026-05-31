@@ -1,6 +1,6 @@
 # Itch Source Expansion V1
 
-Generated: 2026-05-31T04:46:00.719Z
+Generated: 2026-05-31T05:09:24.152Z
 
 ## Purpose
 
@@ -8,21 +8,21 @@ This collector expands the competitor/source universe through source-native itch
 
 ## Summary
 
-- Raw/deduped rows: 1650
-- OK rows: 1643
+- Raw/deduped rows: 7047
+- OK rows: 6973
 - Tags collected: 19
-- Pages per tag: 3
+- Pages per tag: 15
 
 Rows by market:
 
-- gaming: 792
-- mindfulness: 457
-- avatar_identity: 401
+- gaming: 3816
+- avatar_identity: 1721
+- mindfulness: 1510
 
 Rows by status:
 
-- ok: 1643
-- empty_result: 7
+- ok: 6973
+- empty_result: 74
 
 ## Evidence Caveat
 

@@ -1,6 +1,6 @@
 # Steam Tag Expansion V1
 
-Generated: 2026-05-31T04:57:02.714Z
+Generated: 2026-05-31T05:07:03.307Z
 
 ## Purpose
 
@@ -8,22 +8,22 @@ This collector expands the source universe through Steam tag search results. Tre
 
 ## Summary
 
-- Raw/deduped rows: 5934
-- OK rows: 5800
-- Tags collected: 24
-- Pages per tag: 8
+- Raw/deduped rows: 6258
+- OK rows: 6000
+- Tags collected: 53
+- Pages per tag: 6
 - Page size: 100
 
 Rows by market:
 
-- gaming: 3066
-- avatar_identity: 2820
-- mindfulness: 48
+- gaming: 3441
+- mindfulness: 2745
+- avatar_identity: 72
 
 Rows by status:
 
-- ok: 5800
-- error: 134
+- ok: 6000
+- empty_result: 258
 
 ## Evidence Caveat
 

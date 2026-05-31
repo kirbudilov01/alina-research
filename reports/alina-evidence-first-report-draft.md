@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T04:57:23.910Z
+Generated: 2026-05-31T05:11:08.452Z
 
 ## 1. Executive Summary
 
@@ -22,12 +22,12 @@ Key quantified signals:
 - Web paywall screenshot capture: 29/29 queued screenshots captured for manual interpretation.
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Evidence audit register: 12 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 151 artifacts tracked, 29 CSV artifacts, 87337 tracked CSV rows, 0 missing required artifacts.
-- Completion/readiness audit: 10 objective requirements mapped; 6 remain partial, directional, draft, or not final.
+- Evidence package manifest: 151 artifacts tracked, 29 CSV artifacts, 93058 tracked CSV rows, 0 missing required artifacts.
+- Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
-- Source-native itch.io expansion: 1650 rows, 1643 OK rows, adding web-game/mechanic references without broad search-engine crawling.
-- Source-native Steam tag expansion: 5934 rows, 5800 OK rows, adding PC progression/cozy/avatar mechanic references.
+- Source-native itch.io expansion: 7047 rows, 6973 OK rows, adding web-game/mechanic references without broad search-engine crawling.
+- Source-native Steam tag expansion: 6258 rows, 6000 OK rows, adding PC progression/cozy/avatar mechanic references.
 - Chrome extension detail enrichment: 23/23 detail pages parsed; 3 strong and 10 useful adjacent mechanic references.
 - Chrome mechanic battlecards: 23 browser-extension cards, 9 high/medium references for manual mechanic inspection.
 - Validation gap roadmap: 14 rows; 5 P0 and 9 P1 next validation tasks across markets, hypotheses, and cross-source checks.
@@ -79,8 +79,8 @@ Claim-level audit snapshot:
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 14 validation roadmap rows | Needs periodic refresh as validation findings change. |
 | REQ_evidence_package_traceability | proved_v1 | high | 151 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
-| REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 6 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
-| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 1643 usable itch rows; 5800 usable Steam tag rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
+| REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
+| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 6973 usable itch rows; 6000 usable Steam tag rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
 | H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 4/5 strong monetization proxy markets | Market sizing still needs competitor revenue/proxy review and additional triangulation for thin/contextual markets. |
 | H2_paywall_visible_evidence | supported_narrowly | medium_low | 2/29 screenshots confirm visible public pricing | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. |
@@ -94,7 +94,7 @@ Claim-level audit snapshot:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 151 artifacts; 29 CSV artifacts; 87337 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 151 artifacts; 29 CSV artifacts; 93058 tracked CSV rows; 0 missing required artifacts.
 
 Largest tracked CSV artifacts:
 
@@ -105,9 +105,9 @@ Largest tracked CSV artifacts:
 | data_processed/competitor_feature_matrix.csv | supporting | 12552 | 12552 | b285aff3873487bc |
 | data_processed/whitespace_signal_matrix.csv | competitive_whitespace | 12552 | 12552 | d12826260e643b15 |
 | data_raw/expanded/all_expanded_dedup.csv | competitor_universe | 12552 | 12552 | db5e87665dbf3b53 |
-| data_raw/expanded_steam_tags_raw.csv | competitor_universe | 5934 | 5934 | 07075c34529ef6e9 |
+| data_raw/expanded_itch_raw.csv | competitor_universe | 7047 | 7047 | e1a25dd31f49cc5e |
+| data_raw/expanded_steam_tags_raw.csv | competitor_universe | 6258 | 6258 | cd2157e8d1eb5c87 |
 | data_raw/app_store_top_candidate_reviews.csv | audience_icp | 2294 | 2294 | 3fb11211b91b48b3 |
-| data_raw/expanded_itch_raw.csv | competitor_universe | 1650 | 1650 | 38cd47b3df77f674 |
 | data_raw/web_paywall_discovery_raw.csv | market_money | 560 | 560 | 3416403392840293 |
 | data_raw/app_store_iap_pricing_raw.csv | market_money | 498 | 498 | 37f37b15c4554c62 |
 | data_raw/google_play_pricing_raw.csv | market_money | 250 | 250 | 268def050a974daa |
@@ -120,7 +120,7 @@ The completion audit maps the original objective to current proof. It is intenti
 Completion status mix:
 
 - proved_v1: 2
-- partial_substantial_not_30k_50k: 1
+- proved_scale_target: 1
 - supported_with_ranges_not_final: 1
 - narrow_supported_not_final: 1
 - directionally_supported_validation_ready: 1
@@ -134,7 +134,7 @@ Objective readiness matrix:
 | Requirement | Status | Strength | Proof | Remaining Gap |
 | --- | --- | --- | --- | --- |
 | REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=14 | Keep refreshing as validation results change. |
-| REQ_02_COMPETITOR_UNIVERSE | partial_substantial_not_30k_50k | medium_high | dedup=12552; raw_core=17490; itch_rows=1650; steam_tag_rows=5934; known_raw_total=25074; itch_ok=1643; steam_tag_ok=5800; niches=5; source_kinds=4 | Below aspirational 30k-50k raw source/app target; desktop stores, Product Hunt/AlternativeTo, B2B directories, forums, and curated lists remain backlog. |
+| REQ_02_COMPETITOR_UNIVERSE | proved_scale_target | medium_high | dedup=12552; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; known_raw_total=30795; itch_ok=6973; steam_tag_ok=6000; niches=5; source_kinds=4 | Below aspirational 30k-50k raw source/app target; desktop stores, Product Hunt/AlternativeTo, B2B directories, forums, and curated lists remain backlog. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
 | REQ_04_MARKET_MONEY | supported_with_ranges_not_final | medium | tam_rows=6; source_confidence_rows=12; strong_paid_proxy_markets=4/5 | Market sizing remains range-based; competitor revenue/proxy triangulation and additional credible sources are needed for final claims. |
 | REQ_05_WHITESPACE | narrow_supported_not_final | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1 | Metadata can miss hidden in-app mechanics; manual app/onboarding validation is still required. |
@@ -224,39 +224,39 @@ A small P0 pass was run to test external discovery beyond mobile stores without 
 
 ### Source-Native Itch.io Expansion
 
-A controlled itch.io tag-page collector adds 1650 rows, including 1643 OK rows. This layer is useful for gaming/progression, mindfulness, and avatar/identity mechanic discovery, but it is not treated as direct market-share proof.
+A controlled itch.io tag-page collector adds 7047 rows, including 6973 OK rows. This layer is useful for gaming/progression, mindfulness, and avatar/identity mechanic discovery, but it is not treated as direct market-share proof.
 
 Itch rows by market:
 
-- gaming: 792
-- mindfulness: 457
-- avatar_identity: 401
+- gaming: 3816
+- avatar_identity: 1721
+- mindfulness: 1510
 
 Itch summary:
 
 | Market | Rows / OK | Quality |
 | --- | --- | --- |
-| gaming | rows=792; ok=792 | medium_low |
-| mindfulness | rows=457; ok=453 | medium_low |
-| avatar_identity | rows=401; ok=398 | medium_low |
+| gaming | rows=3816; ok=3816 | medium_low |
+| mindfulness | rows=1510; ok=1463 | medium_low |
+| avatar_identity | rows=1721; ok=1694 | medium_low |
 
 ### Source-Native Steam Tag Expansion
 
-A controlled Steam tag collector adds 5934 rows, including 5800 OK rows. This layer expands PC progression, cozy, idle, RPG, avatar/identity, and relaxing-game benchmarks. It is mechanic/saturation evidence, not direct mobile wellness market proof.
+A controlled Steam tag collector adds 6258 rows, including 6000 OK rows. This layer expands PC progression, cozy, idle, RPG, avatar/identity, and relaxing-game benchmarks. It is mechanic/saturation evidence, not direct mobile wellness market proof.
 
 Steam tag rows by market:
 
-- gaming: 3066
-- avatar_identity: 2820
-- mindfulness: 48
+- gaming: 3441
+- mindfulness: 2745
+- avatar_identity: 72
 
 Steam tag summary:
 
 | Market | Rows / OK | Quality |
 | --- | --- | --- |
-| gaming | rows=3066; ok=3000 | medium |
-| mindfulness | rows=48; ok=0 | medium |
-| avatar_identity | rows=2820; ok=2800 | medium |
+| gaming | rows=3441; ok=3300 | medium |
+| mindfulness | rows=2745; ok=2700 | medium |
+| avatar_identity | rows=72; ok=0 | medium |
 
 ### Chrome Extension Detail Enrichment
 
