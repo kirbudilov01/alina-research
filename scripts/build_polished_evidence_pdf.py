@@ -310,6 +310,7 @@ def main() -> None:
     validation_batch01 = read_csv("data_processed/validation_batch_01_index.csv")
     validation_batch02 = read_csv("data_processed/validation_batch_02_index.csv")
     validation_batch03 = read_csv("data_processed/validation_batch_03_index.csv")
+    validation_rollup = read_csv("data_processed/validation_evidence_rollup.csv")
     manifest = read_csv("data_processed/evidence_artifact_manifest.csv")
     revenue = read_csv("data_processed/competitor_revenue_proxy_review.csv")
     revenue_summary = read_csv("data_processed/competitor_revenue_proxy_market_summary.csv")
@@ -393,6 +394,7 @@ def main() -> None:
         "Validation Batch 02 rows": number(len(validation_batch02)),
         "Validation Batch 03 rows": number(len(validation_batch03)),
         "Validation note local evidence links": number(len(validation_batch_local_artifacts)),
+        "Validation rollup rows": number(len(validation_rollup)),
         "Validation capture rows": number(capture_rows),
     }
     build_doc_note(metrics)
@@ -490,6 +492,7 @@ def main() -> None:
                 ["Validation Batch 02 rows", len(validation_batch02), "Prefilled non-blocker P0 notes across the full validation breadth."],
                 ["Validation Batch 03 rows", len(validation_batch03), "Prefilled P1-context paid-flow notes for conservative monetization checks."],
                 ["Validation note local evidence links", len(validation_batch_local_artifacts), "Existing local artifacts linked into batch notes; not human signoff."],
+                ["Validation rollup rows", len(validation_rollup), "Command-level note coverage and local artifact link audit."],
                 ["Manifest source-like refs", source_refs, "Rows with URLs, package IDs, domains, source IDs, or comparable identifiers."],
                 ["Top-100 primary apps", len(primary_top100), "Human-facing competitor review layer."],
                 ["Behavior-tied progression signals", len(behavior_tied), "Strict signal is rare in metadata, hence manual inspection is critical."],
@@ -681,6 +684,17 @@ def main() -> None:
             ],
             [0.75 * inch, 1.8 * inch, 4.55 * inch],
         ),
+        Spacer(1, 0.14 * inch),
+        para("Validation Evidence Rollup", "H2"),
+        para(
+            "The rollup verifies command-level note coverage and local artifact links while keeping linked screenshots below human signoff.",
+            "Body",
+        ),
+        table(
+            [["Evidence state", "Rows"]]
+            + [[state, count] for state, count in count_by(validation_rollup, "evidence_state").most_common()],
+            [4.6 * inch, 1.0 * inch],
+        ),
         PageBreak(),
         para("Market-Money Proxy Read", "H1"),
         para(
@@ -859,6 +873,7 @@ def main() -> None:
                 ["Validation Batch 01", "data_processed/validation_batch_01_index.csv; docs/decision/validation-batch-01-v1.md; output/validation/2026-05-31/*/batch01_*.md"],
                 ["Validation Batch 02", "data_processed/validation_batch_02_index.csv; docs/decision/validation-batch-02-v1.md; output/validation/2026-05-31/*/batch02_*.md"],
                 ["Validation Batch 03", "data_processed/validation_batch_03_index.csv; docs/decision/validation-batch-03-v1.md; output/validation/2026-05-31/*/batch03_*.md"],
+                ["Validation rollup", "data_processed/validation_evidence_rollup.csv; docs/decision/validation-evidence-rollup-v1.md"],
                 ["Audit/provenance", "data_processed/evidence_claim_register.csv; data_processed/research_completion_audit.csv; data_processed/evidence_artifact_manifest.csv"],
             ],
             [1.7 * inch, 5.4 * inch],

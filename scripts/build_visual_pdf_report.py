@@ -219,12 +219,21 @@ def main():
     reviews = read_csv("data_processed/review_jtbd_cluster_summary.csv")
     forum = read_csv("data_processed/forum_quote_coding_matrix.csv")
     icp = read_csv("data_processed/icp_segment_matrix.csv")
+    validation_rollup = read_csv("data_processed/validation_evidence_rollup.csv")
 
     primary = [r for r in top100 if r.get("duplicate_flag") == "primary_app_entry"]
     direct_ref = [r for r in primary if r.get("competitive_verdict") == "direct_reference_competitor"]
     high_threat = [r for r in primary if float(r.get("competitive_threat_score") or 0) >= 24]
     gplay_ok = [r for r in gplay if r.get("collection_status") == "ok"]
     web_queue = [r for r in web_paywalls if r.get("needs_screenshot_validation") == "yes"]
+    rollup_linked = [
+        r for r in validation_rollup
+        if r.get("evidence_state") == "local_artifact_linked_not_signed_off"
+    ]
+    rollup_missing = [
+        r for r in validation_rollup
+        if r.get("evidence_state") == "missing_batch_note"
+    ]
 
     story = []
     story.append(para("Alina Evidence-First Visual Report V1", STYLES["Title"]))
@@ -249,6 +258,8 @@ def main():
                 ["Web screenshot queue", number(str(len(web_queue)))],
                 ["Forum quote-coding rows", number(str(len(forum)))],
                 ["ICP segment hypotheses", number(str(len(icp)))],
+                ["Validation rollup rows", number(str(len(validation_rollup)))],
+                ["Validation rollup local artifacts", number(str(len(rollup_linked)))],
             ],
             [2.8 * inch, 2.0 * inch],
         )
@@ -442,7 +453,35 @@ def main():
     )
 
     story.append(PageBreak())
-    story.append(para("6. Product Core And Next Validation", STYLES["H1"]))
+    story.append(para("6. Validation Evidence Rollup", STYLES["H1"]))
+    story.append(
+        BarChart(
+            "Validation Evidence States",
+            [(k, float(v)) for k, v in count_by(validation_rollup, "evidence_state").most_common()],
+        )
+    )
+    story.append(Spacer(1, 0.12 * inch))
+    story.append(
+        table(
+            [
+                ["Rollup Metric", "Value"],
+                ["Command rows", number(str(len(validation_rollup)))],
+                ["Notes present", number(str(len([r for r in validation_rollup if r.get('note_exists') == 'yes'])))],
+                ["Local artifacts linked, not signed off", number(str(len(rollup_linked)))],
+                ["Missing batch notes", number(str(len(rollup_missing)))],
+            ],
+            [3.0 * inch, 2.0 * inch],
+        )
+    )
+    story.append(
+        para(
+            "The rollup is an intake audit across Batch 01-03: it proves command-level note coverage and local artifact links, while preserving human signoff as an open validation gate.",
+            STYLES["Body"],
+        )
+    )
+
+    story.append(PageBreak())
+    story.append(para("7. Product Core And Next Validation", STYLES["H1"]))
     story.append(
         table(
             [

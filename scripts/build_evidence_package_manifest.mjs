@@ -226,6 +226,7 @@ const requiredArtifacts = [
   'data_processed/validation_batch_01_index.csv',
   'data_processed/validation_batch_02_index.csv',
   'data_processed/validation_batch_03_index.csv',
+  'data_processed/validation_evidence_rollup.csv',
   'data_processed/manual_walkthrough_capture_sheet.csv',
   'data_processed/paid_flow_capture_sheet.csv',
   'data_processed/icp_interview_capture_sheet.csv',
@@ -239,7 +240,8 @@ const requiredArtifacts = [
   'output/validation/templates/generic-validation-note-template.md',
   'docs/decision/validation-batch-01-v1.md',
   'docs/decision/validation-batch-02-v1.md',
-  'docs/decision/validation-batch-03-v1.md'
+  'docs/decision/validation-batch-03-v1.md',
+  'docs/decision/validation-evidence-rollup-v1.md'
 ];
 
 const discoveredArtifacts = [

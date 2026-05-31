@@ -139,6 +139,7 @@ const validationBatch02 = csv('data_processed/validation_batch_02_index.csv');
 const validationBatch03 = csv('data_processed/validation_batch_03_index.csv');
 const validationBatchPrefilledLocalArtifacts = [...validationBatch01, ...validationBatch02, ...validationBatch03]
   .filter(row => row.prefill_status === 'existing_local_artifact_linked').length;
+const validationEvidenceRollup = csv('data_processed/validation_evidence_rollup.csv');
 const evidenceManifest = csv('data_processed/evidence_artifact_manifest.csv');
 const completionAudit = csv('data_processed/research_completion_audit.csv');
 const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv');
@@ -325,6 +326,19 @@ const rows = [
     next_action: 'Use Batch 03 to confirm, weaken, or reject contextual paid-flow signals after P0 evidence is underway.'
   },
   {
+    claim_id: 'REQ_validation_evidence_rollup',
+    claim_type: 'project_requirement',
+    claim: 'Validation intake has command-level rollup coverage across all batch notes and linked local artifacts.',
+    evidence_status: validationEvidenceRollup.length ? 'proved_v1_command_level_rollup_open_gates' : 'missing',
+    confidence: validationEvidenceRollup.length ? 'high' : 'low',
+    primary_metric: `${validationEvidenceRollup.length} command rows; ${validationEvidenceRollup.filter(row => row.note_exists === 'yes').length} notes present; ${validationEvidenceRollup.filter(row => row.evidence_state === 'local_artifact_linked_not_signed_off').length} local artifacts linked`,
+    quantitative_evidence: `rollup_rows=${validationEvidenceRollup.length}; notes_present=${validationEvidenceRollup.filter(row => row.note_exists === 'yes').length}; local_artifact_links=${validationEvidenceRollup.filter(row => row.evidence_state === 'local_artifact_linked_not_signed_off').length}; missing_batch_notes=${validationEvidenceRollup.filter(row => row.evidence_state === 'missing_batch_note').length}`,
+    evidence_files: 'data_processed/validation_evidence_rollup.csv;docs/decision/validation-evidence-rollup-v1.md;data_processed/validation_batch_01_index.csv;data_processed/validation_batch_02_index.csv;data_processed/validation_batch_03_index.csv',
+    strongest_support: 'Rollup verifies command-to-note coverage, note existence, local artifact links, and conservative evidence states for every command row.',
+    key_gap: 'Rollup is an intake audit, not a validation result: most rows still need observed screenshots, quotes, calculations, or human signoff.',
+    next_action: 'Use rollup evidence_state to prioritize rows with no local artifact and paid-flow rows awaiting human signoff.'
+  },
+  {
     claim_id: 'REQ_competitor_universe',
     claim_type: 'project_requirement',
     claim: 'Competitor/source universe has been expanded across the five target markets.',
@@ -487,6 +501,7 @@ lines.push('- Batch layer: validation Batch 01 pre-creates note files for all P0
 lines.push('- Breadth layer: validation Batch 02 pre-creates note files for all non-blocker P0 commands.');
 lines.push('- Context layer: validation Batch 03 pre-creates note files for all P1 context commands.');
 lines.push(`- Existing evidence link layer: ${validationBatchPrefilledLocalArtifacts} batch notes now point at local artifacts, mainly captured paywall screenshots; these links do not equal human signoff.`);
+lines.push('- Rollup layer: validation evidence rollup verifies note coverage and local artifact link status at command level.');
 lines.push('- Strongest product evidence: adjacent markets are monetized; the user language around daily ritual/progress is real; strict behavior-tied avatar progression remains narrow in current metadata.');
 lines.push('- Weakest remaining proof: human validation of competitors, actual in-app paywall/onboarding flows, real user prototype response, and final source-by-source market sizing review.');
 lines.push('- Current decision should remain conditional-go for validation, not full product-build go.');
