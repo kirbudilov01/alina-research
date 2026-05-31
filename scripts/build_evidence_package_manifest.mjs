@@ -356,6 +356,7 @@ const requiredArtifacts = [
   'output/pdf/alina-global-executive-narrative-v1.pdf',
   'output/pdf/alina-global-reader-report-v1.pdf',
   'output/pdf/alina-global-hypothesis-report-v1.pdf',
+  'output/pdf/ALINA_RESEARCH_FULL_RU.pdf',
   'output/pdf/ALINA_RESEARCH_SEND_NOW_RU.pdf',
   'output/pdf/alina-evidence-visual-report-v1.pdf',
   'output/pdf/alina-polished-evidence-pack-v1.pdf',
