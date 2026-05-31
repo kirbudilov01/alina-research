@@ -1,6 +1,6 @@
 # Evidence Package Manifest V1
 
-Generated: 2026-05-31T11:22:50.840Z
+Generated: 2026-05-31T11:30:20.670Z
 
 ## Purpose
 
@@ -8,18 +8,18 @@ This manifest makes the research package auditable. It lists key raw data, proce
 
 ## Package Summary
 
-- Manifest rows: 378
+- Manifest rows: 381
 - Missing required artifacts: 0
-- CSV artifacts: 88
-- Total CSV data rows tracked: 225924
-- CSV rows with source-like identifiers/URLs/domains/packages: 224313
+- CSV artifacts: 89
+- Total CSV data rows tracked: 225929
+- CSV rows with source-like identifiers/URLs/domains/packages: 224318
 
 Artifact types:
 
 - validation_workspace: 93
-- research_doc: 89
-- processed_data: 74
-- generator_script: 73
+- research_doc: 90
+- processed_data: 75
+- generator_script: 74
 - report: 17
 - raw_data: 14
 - chart: 14
@@ -28,9 +28,9 @@ Artifact types:
 Evidence roles:
 
 - decision_artifact: 168
+- market_money: 53
 - audience_icp: 52
 - supporting: 50
-- market_money: 50
 - source_claim: 28
 - competitor_universe: 17
 - competitive_whitespace: 13
@@ -86,12 +86,12 @@ Evidence roles:
 | --- | --- | ---: | ---: | --- |
 | docs/competitive/human-validation-guide-v1.md | research_doc | 91 | 12102 | b85e6b5dd29fcb2f |
 | docs/decision/evidence-audit-v1.md | research_doc | 87 | 9705 | 4867fc7f19255e92 |
-| docs/decision/evidence-package-manifest-v1.md | research_doc | 130 | 8710 | e8cd5c32cc87e72c |
+| docs/decision/evidence-package-manifest-v1.md | research_doc | 130 | 8710 | 110b4f6b02b0a6e3 |
 | docs/decision/hypothesis-decision-matrix-v1.md | research_doc | 51 | 4655 | e4735e2f5779981a |
 | docs/decision/p0-validation-command-center-v1.md | research_doc | 69 | 7260 | 51d22a2990e6aaf3 |
 | docs/decision/p0-validation-field-guide-v1.md | research_doc | 136 | 12679 | 839df92dd885c73b |
 | docs/decision/polished-evidence-pack-v1.md | research_doc | 38 | 1155 | 8e64c35a31b4c6cd |
-| docs/decision/russian-narrative-evidence-map-v1.md | research_doc | 28 | 8231 | c1c3fb5d4e30a87e |
+| docs/decision/russian-narrative-evidence-map-v1.md | research_doc | 28 | 8231 | b86160ee585a838d |
 | docs/decision/russian-validation-fieldbook-v1.md | research_doc | 101 | 15509 | 5d779ba6c6fcac7b |
 | docs/decision/validation-batch-01-v1.md | research_doc | 42 | 2909 | 92f524f2d31bc387 |
 | docs/decision/validation-batch-02-v1.md | research_doc | 143 | 19194 | aeadb19f7ba53a8a |
@@ -112,12 +112,12 @@ Evidence roles:
 | output/pdf/alina-evidence-first-report-draft.pdf | pdf | 1423 | 194961 | 30a3025c4818d99e |
 | output/pdf/alina-evidence-visual-report-v1.pdf | pdf | 322 | 34684 | 3fca188b99b4541c |
 | output/pdf/alina-polished-evidence-pack-v1.pdf | pdf | 328 | 44200 | 12a59927174ba750 |
-| output/pdf/alina-russian-narrative-report-v1.pdf | pdf | 626 | 119284 | 383ae5c148b9b487 |
-| reports/alina-evidence-first-report-draft.md | report | 1843 | 171512 | 6abc59c4ec97c433 |
-| reports/alina-russian-narrative-report-v1.md | report | 217 | 45919 | 05041232627a8554 |
+| output/pdf/alina-russian-narrative-report-v1.pdf | pdf | 641 | 123551 | 0088e1ebf211be9b |
+| reports/alina-evidence-first-report-draft.md | report | 1843 | 171653 | bfa0b6764bedf0ce |
+| reports/alina-russian-narrative-report-v1.md | report | 240 | 51483 | 428ec2e4701bf6ed |
 | reports/competitor-universe-expansion-2026-05-21.md | report | 17 | 371 | 6f085c07c40f01e7 |
 | reports/daily-update-template.md | report | 30 | 199 | 3f49329cf740df70 |
-| reports/evidence-status-2026-05-31.md | report | 51 | 13474 | 09bfe8860bd4d5dd |
+| reports/evidence-status-2026-05-31.md | report | 52 | 13888 | ccdfcab3c3035c55 |
 | reports/google-play-enrichment-block-2026-05-21.md | report | 13 | 471 | 8cc4d72b1b4c2a18 |
 | reports/matrix-synthesis-2026-05-31.md | report | 43 | 1009 | 939c826c2c1f40db |
 | reports/pdf-render-check-2026-05-31.md | report | 51 | 1578 | 35abeb7833564f14 |

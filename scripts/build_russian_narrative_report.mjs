@@ -124,6 +124,7 @@ const russianFieldbook = csv('data_processed/russian_validation_fieldbook.csv');
 const tranchePlanner = csv('data_processed/validation_tranche_planner.csv');
 const trancheBriefings = csv('data_processed/validation_tranche_briefing_index.csv');
 const navigationIndex = csv('data_processed/research_navigation_index.csv');
+const marketDeepDives = csv('data_processed/russian_market_deep_dives.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -213,6 +214,25 @@ lines.push(mdTable(marketMoney, [
 lines.push('');
 lines.push(`Для intersection-модели базовый SAM в текущей модели: ${money(intersection.samBase)}. Эту цифру нельзя читать как прогноз выручки. Ее корректнее читать как рамку: если удастся доказать продуктовую петлю, есть достаточно большой соседний платежный контекст, чтобы продолжать работу.`);
 lines.push('');
+if (marketDeepDives.length) {
+  lines.push('## 2.1. Пять рынков по отдельности');
+  lines.push('');
+  lines.push(`Чтобы не смешивать разные типы доказательств, добавлен market-by-market слой на ${marketDeepDives.length} направлений. Он показывает роль каждого рынка для Alina: где мы ищем деньги, где язык личного смысла, где reset, где identity feedback, а где только механики прогресса. Этот слой особенно важен для русского PDF: он делает пять направлений не списком категорий, а последовательной картой решений.`);
+  lines.push('');
+  lines.push(mdTable(marketDeepDives, [
+    { key: 'ru_name', label: 'Рынок' },
+    { key: 'sam_base_usd', label: 'SAM base', align: 'right' },
+    { key: 'money_verdict', label: 'Money verdict' },
+    { key: 'cross_source_dedup_rows', label: 'Dedup rows', align: 'right' },
+    { key: 'opportunity_band', label: 'Whitespace' },
+    { key: 'verdict_ru', label: 'Русский вывод' }
+  ], marketDeepDives.length));
+  lines.push('');
+  for (const row of marketDeepDives) {
+    lines.push(`**${row.ru_name}.** ${row.role_ru}. Для Alina: ${row.alina_read_ru}. Evidence: ${row.cross_source_dedup_rows || 0} dedup rows, ${row.coverage_cells} coverage cells, ${row.audience_signal_rows} audience rows, ${row.reddit_signal_rows} Reddit/forum signals, ${row.top100_primary_competitors} top-100 primary competitors. Граница: ${row.boundary_ru}`);
+    lines.push('');
+  }
+}
 lines.push('## 3. Конкурентная плотность: рынок большой, но не пустой');
 lines.push('');
 lines.push(`В top-100 review найдено ${primaryTop100.length} unique primary apps. Из них ${highThreat.length} выглядят high-threat, а direct reference competitor сейчас ${directReference.length}. Это означает, что пространство не пустое: пользователи уже решают куски задачи через meditation apps, habit apps, AI companions, astrology apps, avatar tools и game-like progression products.`);
@@ -354,6 +374,7 @@ lines.push('- `data_processed/evidence_claim_register.csv`');
 lines.push('- `data_processed/research_navigation_index.csv`');
 lines.push('- `data_processed/reddit_manual_reading_capture_sheet.csv`');
 lines.push('- `data_processed/russian_narrative_evidence_map.csv`');
+lines.push('- `data_processed/russian_market_deep_dives.csv`');
 lines.push('- `data_processed/russian_validation_fieldbook.csv`');
 lines.push('- `data_processed/validation_tranche_planner.csv`');
 lines.push('- `data_processed/validation_tranche_briefing_index.csv`');
