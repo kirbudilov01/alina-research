@@ -14,8 +14,8 @@ This document registers the publication-style PDF layer.
 - Coverage cells: 34
 - Saturation markets: 6
 - Deduplicated universe rows: 12,552
-- Tracked manifest artifacts: 325
-- Tracked CSV rows: 213,231
+- Tracked manifest artifacts: 329
+- Tracked CSV rows: 213,279
 - Competitor revenue proxy rows: 90
 - Manual P0 inspection targets: 12
 - Hypothesis decision rows: 6
@@ -27,6 +27,7 @@ This document registers the publication-style PDF layer.
 - Validation Batch 03 rows: 17
 - Validation note local evidence links: 29
 - Validation rollup rows: 75
+- Validation gate rows: 6
 - Validation capture rows: 276
 - ICP recruiting bridge rows: 24
 - ICP recruiting message rows: 24

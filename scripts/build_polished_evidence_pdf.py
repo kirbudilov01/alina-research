@@ -328,6 +328,8 @@ def main() -> None:
     validation_batch02 = read_csv("data_processed/validation_batch_02_index.csv")
     validation_batch03 = read_csv("data_processed/validation_batch_03_index.csv")
     validation_rollup = read_csv("data_processed/validation_evidence_rollup.csv")
+    validation_gate_calculator = read_csv("data_processed/validation_gate_calculator.csv")
+    validation_gate_summary = read_csv("data_processed/validation_gate_status_summary.csv")
     manifest = read_csv("data_processed/evidence_artifact_manifest.csv")
     revenue = read_csv("data_processed/competitor_revenue_proxy_review.csv")
     revenue_summary = read_csv("data_processed/competitor_revenue_proxy_market_summary.csv")
@@ -391,6 +393,12 @@ def main() -> None:
     stop_hypotheses = [row for row in hypothesis_decisions if row.get("current_decision") == "stop_or_pivot"]
     blocker_commands = [row for row in p0_commands if row.get("priority") == "P0_blocker"]
     p0_command_rows = [row for row in p0_commands if row.get("priority") == "P0"]
+    validation_gates_passed = [
+        row for row in validation_gate_calculator if row.get("gate_status") == "pass_ready_for_review"
+    ]
+    validation_gates_not_started = [
+        row for row in validation_gate_calculator if row.get("gate_status") == "not_started"
+    ]
     validation_batch_local_artifacts = [
         row
         for row in validation_batch01 + validation_batch02 + validation_batch03
@@ -416,6 +424,7 @@ def main() -> None:
         "Validation Batch 03 rows": number(len(validation_batch03)),
         "Validation note local evidence links": number(len(validation_batch_local_artifacts)),
         "Validation rollup rows": number(len(validation_rollup)),
+        "Validation gate rows": number(len(validation_gate_calculator)),
         "Validation capture rows": number(capture_rows),
         "ICP recruiting bridge rows": number(len(icp_recruiting_bridge)),
         "ICP recruiting message rows": number(len(icp_recruiting_messages)),
@@ -516,6 +525,7 @@ def main() -> None:
                 ["Validation Batch 03 rows", len(validation_batch03), "Prefilled P1-context paid-flow notes for conservative monetization checks."],
                 ["Validation note local evidence links", len(validation_batch_local_artifacts), "Existing local artifacts linked into batch notes; not human signoff."],
                 ["Validation rollup rows", len(validation_rollup), "Command-level note coverage and local artifact link audit."],
+                ["Validation gate calculator rows", len(validation_gate_calculator), "H1-H6 gates computed from capture sheets before any hypothesis upgrade."],
                 ["Manifest source-like refs", source_refs, "Rows with URLs, package IDs, domains, source IDs, or comparable identifiers."],
                 ["Top-100 primary apps", len(primary_top100), "Human-facing competitor review layer."],
                 ["Behavior-tied progression signals", len(behavior_tied), "Strict signal is rare in metadata, hence manual inspection is critical."],
@@ -533,6 +543,45 @@ def main() -> None:
         BarChart(
             "Evidence status mix",
             [(k, v) for k, v in count_by(evidence, "evidence_status").most_common()],
+        ),
+        PageBreak(),
+        para("Validation Gate Calculator", "H1"),
+        para(
+            "The calculator reads capture sheets and keeps H1-H6 in hold/validate until observed screenshots, quotes, scores, or human signoff meet explicit thresholds.",
+            "Body",
+        ),
+        table(
+            [["Gate", "Hypotheses", "Status", "Completed", "Decision effect"]]
+            + [
+                [
+                    row.get("gate_id"),
+                    row.get("linked_hypotheses"),
+                    row.get("gate_status"),
+                    row.get("completed_rows"),
+                    short(row.get("current_decision_effect"), 90),
+                ]
+                for row in validation_gate_calculator
+            ],
+            [2.25 * inch, 0.8 * inch, 1.65 * inch, 0.75 * inch, 1.65 * inch],
+        ),
+        Spacer(1, 0.12 * inch),
+        table(
+            [["Gate status", "Gates", "Required rows", "Completed rows"]]
+            + [
+                [
+                    row.get("gate_status"),
+                    row.get("row_count"),
+                    row.get("total_required_capture_rows"),
+                    row.get("total_completed_rows"),
+                ]
+                for row in validation_gate_summary
+            ],
+            [2.35 * inch, 0.75 * inch, 1.3 * inch, 1.3 * inch],
+            small=False,
+        ),
+        para(
+            f"Current result: {len(validation_gates_passed)} gates pass-ready and {len(validation_gates_not_started)} gates not started. This is expected while capture sheets are still blank.",
+            "Callout",
         ),
         PageBreak(),
         para("Requirement Status Matrix", "H1"),
@@ -902,6 +951,7 @@ def main() -> None:
                 ["Validation Batch 01", "data_processed/validation_batch_01_index.csv; docs/decision/validation-batch-01-v1.md; output/validation/2026-05-31/*/batch01_*.md"],
                 ["Validation Batch 02", "data_processed/validation_batch_02_index.csv; docs/decision/validation-batch-02-v1.md; output/validation/2026-05-31/*/batch02_*.md"],
                 ["Validation Batch 03", "data_processed/validation_batch_03_index.csv; docs/decision/validation-batch-03-v1.md; output/validation/2026-05-31/*/batch03_*.md"],
+                ["Validation gates", "data_processed/validation_gate_calculator.csv; data_processed/validation_gate_status_summary.csv; docs/decision/validation-gate-calculator-v1.md"],
                 ["Validation rollup", "data_processed/validation_evidence_rollup.csv; docs/decision/validation-evidence-rollup-v1.md"],
                 ["Audit/provenance", "data_processed/evidence_claim_register.csv; data_processed/research_completion_audit.csv; data_processed/evidence_artifact_manifest.csv"],
             ],

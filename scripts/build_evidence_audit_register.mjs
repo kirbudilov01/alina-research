@@ -153,6 +153,8 @@ const validationBatch03 = csv('data_processed/validation_batch_03_index.csv');
 const validationBatchPrefilledLocalArtifacts = [...validationBatch01, ...validationBatch02, ...validationBatch03]
   .filter(row => row.prefill_status === 'existing_local_artifact_linked').length;
 const validationEvidenceRollup = csv('data_processed/validation_evidence_rollup.csv');
+const validationGateCalculator = csv('data_processed/validation_gate_calculator.csv');
+const validationGateStatusSummary = csv('data_processed/validation_gate_status_summary.csv');
 const evidenceManifest = csv('data_processed/evidence_artifact_manifest.csv');
 const completionAudit = csv('data_processed/research_completion_audit.csv');
 const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv');
@@ -199,6 +201,10 @@ const validationRoadmapP0 = validationGapRoadmap.filter(row => row.priority === 
 const validationExecutionP0 = validationExecutionDashboard.filter(row => row.priority === 'P0');
 const p0CommandBlockers = p0CommandCenter.filter(row => row.priority === 'P0_blocker');
 const p0CommandRows = p0CommandCenter.filter(row => row.priority === 'P0');
+const validationGatesPassed = validationGateCalculator.filter(row => row.gate_status === 'pass_ready_for_review');
+const validationGatesNotStarted = validationGateCalculator.filter(row => row.gate_status === 'not_started');
+const validationGatesInProgress = validationGateCalculator.filter(row => row.gate_status === 'in_progress_insufficient_evidence');
+const validationGatesDowngrade = validationGateCalculator.filter(row => row.gate_status === 'kill_or_downgrade_triggered');
 const manifestMissing = evidenceManifest.filter(row => row.exists !== 'yes');
 const manifestCsvRows = evidenceManifest.filter(row => row.file_path.endsWith('.csv'));
 const manifestTrackedRows = manifestCsvRows.reduce((sum, row) => sum + Number(row.row_count || 0), 0);
@@ -356,6 +362,19 @@ const rows = [
     strongest_support: 'Rollup verifies command-to-note coverage, note existence, local artifact links, and conservative evidence states for every command row.',
     key_gap: 'Rollup is an intake audit, not a validation result: most rows still need observed screenshots, quotes, calculations, or human signoff.',
     next_action: 'Use rollup evidence_state to prioritize rows with no local artifact and paid-flow rows awaiting human signoff.'
+  },
+  {
+    claim_id: 'REQ_validation_gate_calculator',
+    claim_type: 'project_requirement',
+    claim: 'Observed validation capture rows are converted into explicit H1-H6 gate status before any hypothesis is upgraded.',
+    evidence_status: validationGateCalculator.length ? 'proved_v1_calculator_ready_open_gates' : 'missing',
+    confidence: validationGateCalculator.length ? 'high' : 'low',
+    primary_metric: `${validationGateCalculator.length} gate rows; ${validationGatesPassed.length} pass-ready; ${validationGatesInProgress.length} in-progress; ${validationGatesNotStarted.length} not started; ${validationGatesDowngrade.length} downgrade/kill triggered`,
+    quantitative_evidence: `gate_rows=${validationGateCalculator.length}; status_summary_rows=${validationGateStatusSummary.length}; pass_ready=${validationGatesPassed.length}; in_progress=${validationGatesInProgress.length}; not_started=${validationGatesNotStarted.length}; downgrade_or_kill=${validationGatesDowngrade.length}`,
+    evidence_files: 'data_processed/validation_gate_calculator.csv;data_processed/validation_gate_status_summary.csv;docs/decision/validation-gate-calculator-v1.md;data_processed/manual_walkthrough_capture_sheet.csv;data_processed/paid_flow_capture_sheet.csv;data_processed/icp_interview_capture_sheet.csv;data_processed/prototype_session_capture_sheet.csv',
+    strongest_support: 'Gate calculator reads the four capture sheets and maps evidence into H1 product shape, H2 money, H3 whitespace, H4 competitive advantage, H5 audience, and H6 product-core gates with thresholds and decision effects.',
+    key_gap: 'The calculator is ready, but current capture rows are still unobserved; it deliberately keeps gates in hold/validate until screenshots, quotes, scores, and human signoff are entered.',
+    next_action: 'Fill capture rows for manual walkthrough, paid-flow, ICP interviews, and prototype sessions, then rerun the calculator before updating hypothesis decisions.'
   },
   {
     claim_id: 'REQ_competitor_universe',

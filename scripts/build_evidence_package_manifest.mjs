@@ -231,6 +231,8 @@ const requiredArtifacts = [
   'data_processed/validation_batch_02_index.csv',
   'data_processed/validation_batch_03_index.csv',
   'data_processed/validation_evidence_rollup.csv',
+  'data_processed/validation_gate_calculator.csv',
+  'data_processed/validation_gate_status_summary.csv',
   'data_processed/manual_walkthrough_capture_sheet.csv',
   'data_processed/paid_flow_capture_sheet.csv',
   'data_processed/icp_interview_capture_sheet.csv',

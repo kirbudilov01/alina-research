@@ -1,0 +1,2 @@
+gate_status,row_count,linked_hypotheses,total_required_capture_rows,total_started_rows,total_completed_rows
+"not_started","6","H1|H3|H2|H5|H4|H6","416","0","0"

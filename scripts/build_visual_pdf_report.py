@@ -244,6 +244,7 @@ def main():
     icp_recruiting_bridge = read_csv("data_processed/icp_recruiting_bridge.csv")
     icp_recruiting_messages = read_csv("data_processed/icp_recruiting_message_bank.csv")
     validation_rollup = read_csv("data_processed/validation_evidence_rollup.csv")
+    validation_gate_calculator = read_csv("data_processed/validation_gate_calculator.csv")
 
     primary = [r for r in top100 if r.get("duplicate_flag") == "primary_app_entry"]
     direct_ref = [r for r in primary if r.get("competitive_verdict") == "direct_reference_competitor"]
@@ -287,6 +288,7 @@ def main():
                 ["ICP segment hypotheses", number(str(len(icp)))],
                 ["ICP recruiting bridge rows", number(str(len(icp_recruiting_bridge)))],
                 ["Validation rollup rows", number(str(len(validation_rollup)))],
+                ["Validation gate rows", number(str(len(validation_gate_calculator)))],
                 ["Validation rollup local artifacts", number(str(len(rollup_linked)))],
             ],
             [2.8 * inch, 2.0 * inch],
@@ -533,6 +535,29 @@ def main():
         para(
             "The rollup is an intake audit across Batch 01-03: it proves command-level note coverage and local artifact links, while preserving human signoff as an open validation gate.",
             STYLES["Body"],
+        )
+    )
+    story.append(Spacer(1, 0.12 * inch))
+    story.append(
+        BarChart(
+            "Validation Gate Calculator Status",
+            [(k, float(v)) for k, v in count_by(validation_gate_calculator, "gate_status").most_common()],
+        )
+    )
+    story.append(Spacer(1, 0.12 * inch))
+    story.append(
+        table(
+            [["Gate", "Hypotheses", "Status", "Completed"]]
+            + [
+                [
+                    row.get("gate_id", ""),
+                    row.get("linked_hypotheses", ""),
+                    row.get("gate_status", ""),
+                    row.get("completed_rows", ""),
+                ]
+                for row in validation_gate_calculator
+            ],
+            [2.6 * inch, 0.8 * inch, 2.0 * inch, 0.8 * inch],
         )
     )
 

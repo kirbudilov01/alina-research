@@ -1,6 +1,6 @@
 # Evidence Audit V1
 
-Generated: 2026-05-31T09:36:38.323Z
+Generated: 2026-05-31T09:43:00.486Z
 
 ## Purpose
 
@@ -18,6 +18,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 - proved_v1_p0_breadth_batch_ready_open_gates: 1
 - proved_v1_context_batch_ready_open_gates: 1
 - proved_v1_command_level_rollup_open_gates: 1
+- proved_v1_calculator_ready_open_gates: 1
 - proved_30k_plus_cross_source_dedup_upper_bound_open: 1
 - public_listing_inspected_walkthrough_open: 1
 - supported_with_ranges_stress_test_and_bottom_up_proxy: 1
@@ -30,7 +31,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 
 ## Confidence Mix
 
-- high: 12
+- high: 13
 - medium: 6
 - medium_high: 1
 - medium_low: 1
@@ -40,7 +41,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 | Claim ID | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 16 validation roadmap rows; 11 execution tasks | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 329 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 333 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_hypothesis_decision_matrix | proved_v1_open_validation_decisions | high | 6 hypothesis decision rows; 6 hold/validate; 0 go; 0 stop/pivot | Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open. |
 | REQ_p0_validation_command_center | proved_v1_operator_ready_open_gates | high | 75 command rows; 6 blocker rows; 52 P0 rows | The command center is operational scaffolding; it still requires actual screenshots, participant evidence, paywall signoff, and updated verdicts. |
@@ -50,6 +51,7 @@ This register turns the large research corpus into an auditable claim map. Each 
 | REQ_validation_batch_02 | proved_v1_p0_breadth_batch_ready_open_gates | high | 52 batch rows; 52 not started; 12 local artifacts linked | Batch files are prefilled intake notes; they still need observed screenshots, quotes, measured values, and final verdicts. |
 | REQ_validation_batch_03 | proved_v1_context_batch_ready_open_gates | high | 17 batch rows; 17 not started; 17 local artifacts linked | Batch files are prefilled context notes; they still need observed pricing/paywall checks and conservative signoff decisions. |
 | REQ_validation_evidence_rollup | proved_v1_command_level_rollup_open_gates | high | 75 command rows; 75 notes present; 29 local artifacts linked | Rollup is an intake audit, not a validation result: most rows still need observed screenshots, quotes, calculations, or human signoff. |
+| REQ_validation_gate_calculator | proved_v1_calculator_ready_open_gates | high | 6 gate rows; 0 pass-ready; 0 in-progress; 6 not started; 0 downgrade/kill triggered | The calculator is ready, but current capture rows are still unobserved; it deliberately keeps gates in hold/validate until screenshots, quotes, scores, and human signoff are entered. |
 | REQ_competitor_universe | proved_30k_plus_cross_source_dedup_upper_bound_open | medium_high | 59006 cross-source raw rows; 31866 cross-source dedup rows; 34 coverage cells; 11 strong and 12 medium source/market cells | The 30k lower-bound dedup target is met; upper-bound 50k expansion and Product Hunt/AlternativeTo, Microsoft Store, B2B directories, Reddit mentions, and additional source-native coverage remain backlog. |
 | H1_product_shape_exists | public_listing_inspected_walkthrough_open | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Strict full loop is rare and still needs actual app/onboarding screenshots to confirm or downgrade public listing claims. |
 | H2_markets_have_money | supported_with_ranges_stress_test_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, manual in-app paywall validation, and willingness-to-pay prototype evidence for final investor-grade claims. |

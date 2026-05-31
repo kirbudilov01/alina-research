@@ -160,6 +160,8 @@ const validationBatch03 = csv('data_processed/validation_batch_03_index.csv');
 const validationBatchPrefilledLocalArtifacts = [...validationBatch01, ...validationBatch02, ...validationBatch03]
   .filter(row => row.prefill_status === 'existing_local_artifact_linked').length;
 const validationEvidenceRollup = csv('data_processed/validation_evidence_rollup.csv');
+const validationGateCalculator = csv('data_processed/validation_gate_calculator.csv');
+const validationGateStatusSummary = csv('data_processed/validation_gate_status_summary.csv');
 const manualWalkthroughCapture = csv('data_processed/manual_walkthrough_capture_sheet.csv');
 const paidFlowCapture = csv('data_processed/paid_flow_capture_sheet.csv');
 const icpInterviewCapture = csv('data_processed/icp_interview_capture_sheet.csv');
@@ -211,6 +213,8 @@ const validationExecutionP0 = validationExecutionDashboard.filter(r => r.priorit
 const validationExecutionP1 = validationExecutionDashboard.filter(r => r.priority === 'P1');
 const p0CommandBlockers = p0CommandCenter.filter(r => r.priority === 'P0_blocker');
 const p0CommandRows = p0CommandCenter.filter(r => r.priority === 'P0');
+const validationGatesPassed = validationGateCalculator.filter(r => r.gate_status === 'pass_ready_for_review');
+const validationGatesNotStarted = validationGateCalculator.filter(r => r.gate_status === 'not_started');
 const validationCaptureRows = manualWalkthroughCapture.length + paidFlowCapture.length + icpInterviewCapture.length + prototypeSessionCapture.length;
 const highUseMarketSources = marketSourceConfidence.filter(r => r.confidence_review_band === 'high_use');
 const rangeOnlyMarketSources = marketSourceConfidence.filter(r => ['low_use_range_only', 'context_only'].includes(r.confidence_review_band));
@@ -281,6 +285,7 @@ report.push(`- Validation Batch 02: ${validationBatch02.length} prefilled P0-bre
 report.push(`- Validation Batch 03: ${validationBatch03.length} prefilled P1-context paid-flow note files to keep weaker monetization signals conservative.`);
 report.push(`- Validation note local evidence links: ${validationBatchPrefilledLocalArtifacts} batch notes now point at existing local artifacts, mainly captured paywall screenshots; these are evidence links, not human signoff.`);
 report.push(`- Validation evidence rollup: ${validationEvidenceRollup.length} command rows auditing note coverage, local artifact links, and missing batch notes.`);
+report.push(`- Validation gate calculator: ${validationGateCalculator.length} H1-H6 gate rows; ${validationGatesPassed.length} pass-ready and ${validationGatesNotStarted.length} not started from current capture sheets.`);
 report.push(`- Validation capture sheets: ${validationCaptureRows} fillable capture rows across manual walkthrough, paid-flow, ICP interview, and prototype-session evidence.`);
 report.push(`- Market source confidence review: ${marketSourceConfidence.length} sources graded; ${highUseMarketSources.length} high-use anchors and ${rangeOnlyMarketSources.length} range-only/context sources.`);
 report.push(`- Market sizing stress test: ${marketAssumptionAudit.length} assumption-risk rows and ${marketStressTest.length} bottom-up stress scenarios.`);
@@ -495,8 +500,39 @@ if (validationEvidenceRollup.length) {
   ], 10));
   report.push('');
 }
+if (validationGateCalculator.length) {
+  report.push('## 2K. Validation Gate Calculator');
+  report.push('');
+  report.push('The gate calculator turns capture-sheet rows into H1-H6 readiness status. This is the anti-overclaiming layer: a gate can move only when observed screenshots, quotes, scores, or human signoff have been entered.');
+  report.push('');
+  report.push('Gate status mix:');
+  report.push('');
+  report.push(bulletCounts(countBy(validationGateCalculator, 'gate_status')));
+  report.push('');
+  report.push(mdTable(validationGateCalculator, [
+    { key: 'gate_id', label: 'Gate' },
+    { key: 'linked_hypotheses', label: 'Hypotheses' },
+    { key: 'workstream', label: 'Workstream' },
+    { key: 'gate_status', label: 'Status' },
+    { key: 'required_capture_rows', label: 'Required', align: 'right' },
+    { key: 'completed_rows', label: 'Completed', align: 'right' },
+    { key: 'success_rows', label: 'Success', align: 'right' },
+    { key: 'current_decision_effect', label: 'Decision Effect' }
+  ], validationGateCalculator.length));
+  report.push('');
+  report.push('Status summary:');
+  report.push('');
+  report.push(mdTable(validationGateStatusSummary, [
+    { key: 'gate_status', label: 'Status' },
+    { key: 'row_count', label: 'Gates', align: 'right' },
+    { key: 'linked_hypotheses', label: 'Hypotheses' },
+    { key: 'total_required_capture_rows', label: 'Required Capture Rows', align: 'right' },
+    { key: 'total_completed_rows', label: 'Completed Capture Rows', align: 'right' }
+  ], validationGateStatusSummary.length));
+  report.push('');
+}
 if (evidenceManifest.length) {
-  report.push('## 2K. Evidence Package Manifest');
+  report.push('## 2L. Evidence Package Manifest');
   report.push('');
   report.push('The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.');
   report.push('');
@@ -518,7 +554,7 @@ if (evidenceManifest.length) {
   report.push('');
 }
 if (completionAudit.length) {
-  report.push('## 2L. Research Completion Audit');
+  report.push('## 2M. Research Completion Audit');
   report.push('');
   report.push('The completion audit maps the original objective to current proof. It is intentionally conservative: several requirements are strong enough for continued validation, but not yet final enough to call the whole goal complete.');
   report.push('');
@@ -538,7 +574,7 @@ if (completionAudit.length) {
   report.push('');
 }
 if (validationGapRoadmap.length) {
-  report.push('## 2M. Validation Gap Roadmap');
+  report.push('## 2N. Validation Gap Roadmap');
   report.push('');
   report.push('The research now includes a validation roadmap that turns current evidence gaps into explicit success gates. This keeps the project honest: a claim is not final merely because a table exists.');
   report.push('');
@@ -1552,6 +1588,8 @@ report.push('- `data_processed/community_referral_signal_rows.csv`');
 report.push('- `data_processed/community_referral_summary.csv`');
 report.push('- `data_processed/icp_recruiting_bridge.csv`');
 report.push('- `data_processed/icp_recruiting_message_bank.csv`');
+report.push('- `data_processed/validation_gate_calculator.csv`');
+report.push('- `data_processed/validation_gate_status_summary.csv`');
 report.push('- `data_raw/app_store_top_candidate_reviews.csv`');
 report.push('- `data_raw/app_store_iap_pricing_raw.csv`');
 report.push('- `data_raw/google_play_pricing_raw.csv`');
@@ -1622,6 +1660,7 @@ status.push(mdTable([
   { requirement: 'Validation Batch 02', evidence: 'data_processed/validation_batch_02_index.csv; docs/decision/validation-batch-02-v1.md; output/validation/2026-05-31/*/batch02_*.md', status: `done v1; ${validationBatch02.length} P0-breadth notes prefilled for non-blocker validation commands` },
   { requirement: 'Validation Batch 03', evidence: 'data_processed/validation_batch_03_index.csv; docs/decision/validation-batch-03-v1.md; output/validation/2026-05-31/*/batch03_*.md', status: `done v1; ${validationBatch03.length} P1-context paid-flow notes prefilled for conservative monetization checks` },
   { requirement: 'Validation evidence rollup', evidence: 'data_processed/validation_evidence_rollup.csv; docs/decision/validation-evidence-rollup-v1.md', status: `done v1; ${validationEvidenceRollup.length} command rows audit note existence and local artifact links` },
+  { requirement: 'Validation gate calculator', evidence: 'data_processed/validation_gate_calculator.csv; data_processed/validation_gate_status_summary.csv; docs/decision/validation-gate-calculator-v1.md', status: `done v1; ${validationGateCalculator.length} H1-H6 gate rows convert capture sheets into pass/hold/downgrade readiness` },
   { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; docs/market/competitor-revenue-proxy-review-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv; data_processed/competitor_revenue_proxy_review.csv; data_processed/competitor_revenue_proxy_market_summary.csv', status: 'done v1; source confidence, market monetization proxy, and bottom-up competitor revenue proxy layers added; model remains range-based and not final forecast' },
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },

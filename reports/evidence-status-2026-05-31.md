@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T09:36:16.357Z
+Generated: 2026-05-31T09:42:41.397Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -26,6 +26,7 @@ Generated: 2026-05-31T09:36:16.357Z
 | Validation Batch 02 | data_processed/validation_batch_02_index.csv; docs/decision/validation-batch-02-v1.md; output/validation/2026-05-31/*/batch02_*.md | done v1; 52 P0-breadth notes prefilled for non-blocker validation commands |
 | Validation Batch 03 | data_processed/validation_batch_03_index.csv; docs/decision/validation-batch-03-v1.md; output/validation/2026-05-31/*/batch03_*.md | done v1; 17 P1-context paid-flow notes prefilled for conservative monetization checks |
 | Validation evidence rollup | data_processed/validation_evidence_rollup.csv; docs/decision/validation-evidence-rollup-v1.md | done v1; 75 command rows audit note existence and local artifact links |
+| Validation gate calculator | data_processed/validation_gate_calculator.csv; data_processed/validation_gate_status_summary.csv; docs/decision/validation-gate-calculator-v1.md | done v1; 6 H1-H6 gate rows convert capture sheets into pass/hold/downgrade readiness |
 | 5-market TAM/SAM/SOM method | docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; docs/market/competitor-revenue-proxy-review-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv; data_processed/competitor_revenue_proxy_review.csv; data_processed/competitor_revenue_proxy_market_summary.csv | done v1; source confidence, market monetization proxy, and bottom-up competitor revenue proxy layers added; model remains range-based and not final forecast |
 | Whitespace matrices | data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md | done v1 |
 | Audience matrices | data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md | done v1 |
