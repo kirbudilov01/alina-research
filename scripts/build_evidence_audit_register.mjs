@@ -107,6 +107,7 @@ const icpValidationPlan = csv('data_processed/icp_validation_test_plan.csv');
 const productCore = csv('data_processed/product_core_evidence_matrix.csv');
 const p0External = csv('data_raw/expanded/p0_external_sources_raw.csv');
 const itchRows = csv('data_raw/expanded_itch_raw.csv');
+const steamTagRows = csv('data_raw/expanded_steam_tags_raw.csv');
 const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv');
 const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
 const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
@@ -133,6 +134,7 @@ const strongIcpSegments = icpSegments.filter(row => row.evidence_band === 'stron
 const intersection = tam.find(row => row.pillar === 'intersection') || {};
 const p0ExternalUsable = p0External.filter(row => row.collection_status === 'ok');
 const itchOk = itchRows.filter(row => row.collection_status === 'ok');
+const steamTagOk = steamTagRows.filter(row => row.collection_status === 'ok');
 const chromeExtensionDetailOk = chromeExtensionFit.filter(row => row.detail_status === 'ok');
 const chromeExtensionStrong = chromeExtensionFit.filter(row => row.alina_fit_band === 'strong_adjacent');
 const chromeMechanicPriority = chromeExtensionBattlecards.filter(row => ['mechanic_threat_high', 'mechanic_threat_medium', 'mechanic_reference_high'].includes(row.threat_band));
@@ -188,11 +190,11 @@ const rows = [
     claim: 'Competitor/source universe has been expanded across the five target markets.',
     evidence_status: 'substantial_v1_not_50k_dedup',
     confidence: 'medium_high',
-    primary_metric: `${expanded.length} dedup rows; ${expandedRaw.length} raw expanded rows; ${itchOk.length} usable itch rows; ${p0ExternalUsable.length} usable P0 external smoke rows; ${chromeExtensionDetailOk.length} Chrome detail pages`,
-    quantitative_evidence: `niches=${Object.keys(countBy(expanded, 'niche')).length}; source_kinds=${Object.keys(countBy(expanded, 'source_kind')).length}; p0_external_rows=${p0External.length}; p0_external_usable=${p0ExternalUsable.length}; itch_rows=${itchRows.length}; itch_ok=${itchOk.length}; chrome_detail_ok=${chromeExtensionDetailOk.length}; chrome_strong_adjacent=${chromeExtensionStrong.length}`,
-    evidence_files: 'data_raw/expanded/all_expanded_raw.csv;data_raw/expanded/all_expanded_dedup.csv;data_raw/expanded/p0_external_sources_raw.csv;data_raw/expanded_itch_raw.csv;data_raw/chrome_extension_detail_raw.csv;data_processed/p0_external_source_summary.csv;data_processed/itch_source_summary.csv;data_processed/chrome_extension_fit_matrix.csv;data_processed/competitor_feature_matrix.csv;docs/competitive/expanded-source-map.md;docs/competitive/p0-external-source-collection-v1.md;docs/competitive/itch-source-expansion-v1.md;docs/competitive/chrome-extension-detail-enrichment-v1.md',
-    strongest_support: 'Large normalized universe exists across App Store, Steam, Google Play fallback, and web search rows; controlled P0 external smoke, Chrome detail enrichment, and source-native itch.io tag collection add browser/web-game/mechanic references.',
-    key_gap: 'Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper itch/Steam expansion remain backlog.',
+    primary_metric: `${expanded.length} dedup rows; ${expandedRaw.length} raw expanded rows; ${itchOk.length} usable itch rows; ${steamTagOk.length} usable Steam tag rows; ${p0ExternalUsable.length} usable P0 external smoke rows; ${chromeExtensionDetailOk.length} Chrome detail pages`,
+    quantitative_evidence: `niches=${Object.keys(countBy(expanded, 'niche')).length}; source_kinds=${Object.keys(countBy(expanded, 'source_kind')).length}; p0_external_rows=${p0External.length}; p0_external_usable=${p0ExternalUsable.length}; itch_rows=${itchRows.length}; itch_ok=${itchOk.length}; steam_tag_rows=${steamTagRows.length}; steam_tag_ok=${steamTagOk.length}; chrome_detail_ok=${chromeExtensionDetailOk.length}; chrome_strong_adjacent=${chromeExtensionStrong.length}`,
+    evidence_files: 'data_raw/expanded/all_expanded_raw.csv;data_raw/expanded/all_expanded_dedup.csv;data_raw/expanded/p0_external_sources_raw.csv;data_raw/expanded_itch_raw.csv;data_raw/expanded_steam_tags_raw.csv;data_raw/chrome_extension_detail_raw.csv;data_processed/p0_external_source_summary.csv;data_processed/itch_source_summary.csv;data_processed/steam_tag_source_summary.csv;data_processed/chrome_extension_fit_matrix.csv;data_processed/competitor_feature_matrix.csv;docs/competitive/expanded-source-map.md;docs/competitive/p0-external-source-collection-v1.md;docs/competitive/itch-source-expansion-v1.md;docs/competitive/steam-tag-expansion-v1.md;docs/competitive/chrome-extension-detail-enrichment-v1.md',
+    strongest_support: 'Large normalized universe exists across App Store, Steam, Google Play fallback, and web search rows; controlled P0 external smoke, Chrome detail enrichment, source-native itch.io tag collection, and Steam tag expansion add browser/web-game/PC mechanic references.',
+    key_gap: 'Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog.',
     next_action: 'Continue source-native expansion through Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper itch/Steam tags while keeping evidence quality labels explicit.'
   },
   {

@@ -88,6 +88,7 @@ function bulletCounts(counts) {
 const expanded = csv('data_raw/expanded/all_expanded_dedup.csv');
 const expandedRaw = csv('data_raw/expanded/all_expanded_raw.csv');
 const itchRows = csv('data_raw/expanded_itch_raw.csv');
+const steamTagRows = csv('data_raw/expanded_steam_tags_raw.csv');
 const feature = csv('data_processed/competitor_feature_matrix.csv');
 const audience = csv('data_processed/audience_signal_matrix.csv');
 const whitespace = csv('data_processed/whitespace_signal_matrix.csv');
@@ -109,7 +110,8 @@ const manifestMissing = manifest.filter(row => row.exists !== 'yes').length;
 const primaryApps = top100.filter(row => row.duplicate_flag === 'primary_app_entry').length;
 const strongMoneyMarkets = monetizationProxy.filter(row => row.monetization_proxy_band === 'strong_paid_behavior_proxy').length;
 const itchOk = itchRows.filter(row => row.collection_status === 'ok');
-const expandedRawWithKnownExternal = expandedRaw.length + itchRows.length;
+const steamTagOk = steamTagRows.filter(row => row.collection_status === 'ok');
+const expandedRawWithKnownExternal = expandedRaw.length + itchRows.length + steamTagRows.length;
 
 const requirements = [
   {
@@ -129,8 +131,8 @@ const requirements = [
     objective_source: 'User requested 30k-50k applications/sources across app stores, forums, web apps, desktop apps, websites.',
     status: expandedRawWithKnownExternal >= 30000 ? 'proved_scale_target' : 'partial_substantial_not_30k_50k',
     evidence_strength: expanded.length >= 10000 ? 'medium_high' : 'medium',
-    proof: `dedup=${expanded.length}; raw_core=${expandedRaw.length}; itch_rows=${itchRows.length}; known_raw_total=${expandedRawWithKnownExternal}; itch_ok=${itchOk.length}; niches=${Object.keys(countBy(expanded, 'niche')).length}; source_kinds=${Object.keys(countBy(expanded, 'source_kind')).length}`,
-    evidence_files: 'data_raw/expanded/all_expanded_raw.csv;data_raw/expanded/all_expanded_dedup.csv;data_raw/expanded_itch_raw.csv;data_processed/competitor_feature_matrix.csv;docs/competitive/expanded-source-map.md;docs/competitive/source-expansion-backlog-v1.md;docs/competitive/itch-source-expansion-v1.md',
+    proof: `dedup=${expanded.length}; raw_core=${expandedRaw.length}; itch_rows=${itchRows.length}; steam_tag_rows=${steamTagRows.length}; known_raw_total=${expandedRawWithKnownExternal}; itch_ok=${itchOk.length}; steam_tag_ok=${steamTagOk.length}; niches=${Object.keys(countBy(expanded, 'niche')).length}; source_kinds=${Object.keys(countBy(expanded, 'source_kind')).length}`,
+    evidence_files: 'data_raw/expanded/all_expanded_raw.csv;data_raw/expanded/all_expanded_dedup.csv;data_raw/expanded_itch_raw.csv;data_raw/expanded_steam_tags_raw.csv;data_processed/competitor_feature_matrix.csv;docs/competitive/expanded-source-map.md;docs/competitive/source-expansion-backlog-v1.md;docs/competitive/itch-source-expansion-v1.md;docs/competitive/steam-tag-expansion-v1.md',
     remaining_gap: 'Below aspirational 30k-50k raw source/app target; desktop stores, Product Hunt/AlternativeTo, B2B directories, forums, and curated lists remain backlog.',
     next_action: 'Run next non-search-heavy collectors from source expansion backlog.'
   },
