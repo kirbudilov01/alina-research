@@ -3,6 +3,7 @@ import fs from 'fs';
 const OUT = 'reports/alina-global-hypothesis-report-v1.md';
 const SOURCE_APPENDIX_OUT = 'data_processed/global_hypothesis_source_appendix.csv';
 const VALIDATION_QUESTIONNAIRE_OUT = 'data_processed/global_hypothesis_validation_questionnaire.csv';
+const GATE_SNAPSHOT_OUT = 'data_processed/global_hypothesis_gate_snapshot.csv';
 
 for (const dir of ['reports', 'data_processed']) fs.mkdirSync(dir, { recursive: true });
 
@@ -88,6 +89,84 @@ function money(value) {
 function pct(value) {
   const n = num(value);
   return Number.isFinite(n) ? `${n.toFixed(n % 1 ? 2 : 0)}%` : clean(value);
+}
+
+function ratio(done, total) {
+  const d = num(done);
+  const t = num(total);
+  return `${fmt(d)} / ${fmt(t)}`;
+}
+
+function statusRu(value) {
+  const v = clean(value);
+  return ({
+    not_started: 'не начато',
+    in_progress_insufficient_evidence: 'начато, но доказательств недостаточно',
+    complete: 'закрыто',
+    completed: 'закрыто',
+    blocked: 'заблокировано'
+  })[v] || v || 'нет статуса';
+}
+
+function decisionRu(value) {
+  const v = clean(value);
+  return ({
+    keeps_hold_validate: 'оставить hold_validate',
+    upgrades_go: 'можно усилить до go',
+    downgrades_or_kills: 'понизить или остановить гипотезу'
+  })[v] || v || 'нет решения';
+}
+
+function workstreamRu(value) {
+  const v = clean(value);
+  return ({
+    manual_competitor_walkthrough: 'ручной walkthrough конкурентов',
+    paid_flow_validation: 'проверка paywall и платной глубины',
+    icp_interviews: 'интервью ICP и recent behavior',
+    prototype_user_validation: 'прототипные сессии и scorecard'
+  })[v] || v || 'нет workstream';
+}
+
+function hypothesisName(value) {
+  const v = clean(value);
+  return ({
+    H1: 'форма продукта существует',
+    H2: 'в рынках есть деньги',
+    H3: 'есть узкое белое пятно',
+    H4: 'конкурентное преимущество правдоподобно',
+    H5: 'общая аудитория существует',
+    H6: 'продуктовое ядро можно определить'
+  })[v] || v || 'гипотеза';
+}
+
+function moneyVerdictRu(value) {
+  const v = clean(value);
+  return ({
+    strong_directional_money_case: 'сильный направленный money case',
+    medium_directional_money_case: 'средний направленный money case',
+    benchmark_money_visible_not_direct_tam: 'деньги видны, но это benchmark, не прямой TAM'
+  })[v] || v || 'нет оценки';
+}
+
+function moneyProxyRu(value) {
+  const v = clean(value);
+  return ({
+    strong_bottom_up_money_proxy: 'сильный bottom-up proxy',
+    medium_bottom_up_money_proxy: 'средний bottom-up proxy',
+    weak_bottom_up_money_proxy: 'слабый bottom-up proxy'
+  })[v] || v || 'нет proxy';
+}
+
+function nextActionRu(value) {
+  const v = clean(value);
+  return ({
+    'Capture onboarding, first action, progress/avatar feedback, and paywall screenshots for the highest-risk public-listing rows.': 'Собрать onboarding, первое действие, progress/avatar feedback, границу paywall/free и заметки по самым рискованным P0-конкурентам.',
+    'Use the public-listing risk read to classify action->avatar causality in walkthrough as visible, inferred, absent, or blocked.': 'В walkthrough классифицировать action -> avatar/progress causality как visible, inferred, absent или blocked.',
+    'Use stress-test risk rows to prioritize paid-flow inspection and prototype willingness-to-pay questions.': 'Использовать stress-test risk rows, чтобы выбрать следующие paid-flow проверки и WTP-вопросы для прототипа.',
+    'Execute the ICP validation packet for the top two segments, then update segment status and selected primary ICP.': 'Провести ICP validation packet для двух P0-сегментов, затем обновить статус сегментов и выбор primary ICP.',
+    'Run prototype sessions with the top two ICP segments and fill the scorecard with observed results.': 'Провести прототипные сессии с двумя P0-сегментами и заполнить scorecard наблюдаемыми результатами.',
+    'Run prototype sessions and measure loop completion, comprehension, meaning lift, return intent, and paid-depth interest.': 'Провести прототипные сессии и измерить completion, понимание петли, meaning lift, return intent и интерес к paid depth.'
+  })[v] || v;
 }
 
 function by(rows, key, value) {
@@ -239,6 +318,36 @@ writeCsv(VALIDATION_QUESTIONNAIRE_OUT, validationQuestionnaire, [
   'downgrade_signal_ru'
 ]);
 
+const gateSnapshot = gates.map(row => ({
+  gate_id: row.gate_id,
+  hypothesis_id: row.linked_hypotheses,
+  hypothesis_ru: hypothesisName(row.linked_hypotheses),
+  workstream_ru: workstreamRu(row.workstream),
+  gate_status_ru: statusRu(row.gate_status),
+  completed_vs_required: ratio(row.completed_rows, row.required_capture_rows),
+  success_vs_threshold: ratio(row.success_rows, row.min_success_threshold),
+  decision_ru: decisionRu(row.current_decision_effect),
+  blocker_ru: row.current_blocker === 'No observed capture rows yet.'
+    ? 'нет наблюдаемых capture rows'
+    : row.current_blocker === 'Observed evidence is partial and below threshold.'
+      ? 'наблюдаемые доказательства частичные и ниже порога'
+      : clean(row.current_blocker),
+  next_action_ru: nextActionRu(row.next_action)
+}));
+
+writeCsv(GATE_SNAPSHOT_OUT, gateSnapshot, [
+  'gate_id',
+  'hypothesis_id',
+  'hypothesis_ru',
+  'workstream_ru',
+  'gate_status_ru',
+  'completed_vs_required',
+  'success_vs_threshold',
+  'decision_ru',
+  'blocker_ru',
+  'next_action_ru'
+]);
+
 const sourceAppendix = [
   {
     claim_id: 'SRC_01_PROJECT_AND_SCALE',
@@ -329,7 +438,31 @@ lines.push('Логика продукта строится вокруг связ
 lines.push('');
 lines.push('Гипотеза №1: на мировом consumer-app рынке есть место для приложения, которое объединяет личный смысл, короткое действие, reset и причинно видимый прогресс в одну ежедневную петлю. Эта гипотеза пока не доказана как product-market fit, но уже поддержана масштабной картой соседних рынков и конкурентных сигналов.');
 lines.push('');
-lines.push(`На текущем этапе собрано ${fmt(rawRows.length)} raw source rows, ${fmt(dedupRows.length)} dedup rows и ${fmt(manifest.length)} локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.`);
+lines.push(`На текущем этапе собрано ${fmt(rawRows.length)} сырьевых source-строк, ${fmt(dedupRows.length)} уникализированных строк и ${fmt(manifest.length)} локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.`);
+lines.push('');
+lines.push('## ТЕКУЩИЙ СТАТУС ДОКАЗАТЕЛЬСТВ');
+lines.push('');
+lines.push('На этом этапе исследование уже масштабное как база источников, но еще не завершенное как наблюдаемая валидация. Поэтому главный вывод должен звучать аккуратно: кабинетный ресерч подтверждает, что направление стоит проверять, но большинство гипотез пока нельзя переводить в “доказано”. Ниже показано, какие ворота уже имеют наблюдаемые строки, а где пока есть только подготовленный пакет для ручной проверки.');
+lines.push('');
+lines.push(mdTable(gateSnapshot.map(row => ({
+  h: row.hypothesis_id,
+  name: row.hypothesis_ru,
+  stream: row.workstream_ru,
+  status: row.gate_status_ru,
+  rows: row.completed_vs_required,
+  success: row.success_vs_threshold,
+  decision: row.decision_ru
+})), [
+  { key: 'h', label: 'Гипотеза' },
+  { key: 'name', label: 'Что проверяем' },
+  { key: 'stream', label: 'Поток проверки' },
+  { key: 'status', label: 'Статус' },
+  { key: 'rows', label: 'Заполнено / нужно' },
+  { key: 'success', label: 'Успехи / порог' },
+  { key: 'decision', label: 'Решение сейчас' }
+]));
+lines.push('');
+lines.push('Практически это означает следующее: H2 уже имеет 8 заполненных paid-flow строк из 40, но еще ниже минимального порога; H1, H3, H4, H5 и H6 остаются в hold_validate, потому что по ним нет наблюдаемых capture rows. Это не слабость отчета, а защита от преждевременного вывода: большой массив конкурентов и источников показывает, куда идти, но не заменяет walkthrough, интервью и прототипные сессии.');
 lines.push('');
 lines.push('## ОПРЕДЕЛЕНИЕ МИРОВЫХ ЦЕЛЕВЫХ РЫНКОВ И ГИПОТЕЗА #2');
 lines.push('');
@@ -354,13 +487,13 @@ lines.push('');
 lines.push(mdTable(marketDeepDives.map(row => ({
   market: row.ru_name,
   sam: money(row.sam_base_usd),
-  money: row.money_verdict,
+  money: moneyVerdictRu(row.money_verdict),
   score: row.money_score,
   boundary: row.boundary_ru
 })), [
   { key: 'market', label: 'Рынок' },
   { key: 'sam', label: 'SAM base', align: 'right' },
-  { key: 'money', label: 'Money verdict' },
+  { key: 'money', label: 'Денежный вывод' },
   { key: 'score', label: 'Score', align: 'right' },
   { key: 'boundary', label: 'Граница' }
 ]));
@@ -381,7 +514,7 @@ lines.push(mdTable(topCompetitors.map(row => ({
   app: row.app_name,
   risk: row.threat_ru,
   priority: row.validation_priority_score,
-  money: row.revenue_proxy_band,
+  money: moneyProxyRu(row.revenue_proxy_band),
   check: row.behavior_tied_progression_prefill === 'yes' ? 'проверить full-loop первым' : 'проверить action -> progress causality'
 })), [
   { key: 'app', label: 'Конкурент' },
@@ -524,6 +657,7 @@ lines.push('- `reports/alina-global-hypothesis-report-v1.md`');
 lines.push('- `output/pdf/alina-global-hypothesis-report-v1.pdf`');
 lines.push('- `data_processed/global_hypothesis_source_appendix.csv`');
 lines.push('- `data_processed/global_hypothesis_validation_questionnaire.csv`');
+lines.push('- `data_processed/global_hypothesis_gate_snapshot.csv`');
 lines.push('- `reports/alina-russian-readable-report-v2.md`');
 lines.push('- `data_processed/russian_readable_niche_summary.csv`');
 lines.push('- `data_processed/validation_gate_calculator.csv`');

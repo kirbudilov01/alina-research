@@ -243,6 +243,7 @@ const requiredArtifacts = [
   'data_processed/russian_readable_niche_summary.csv',
   'data_processed/global_hypothesis_source_appendix.csv',
   'data_processed/global_hypothesis_validation_questionnaire.csv',
+  'data_processed/global_hypothesis_gate_snapshot.csv',
   'data_processed/russian_whitespace_decision_map.csv',
   'data_processed/russian_claim_evidence_appendix.csv',
   'data_processed/russian_source_provenance_index.csv',

@@ -1,6 +1,6 @@
 # Alina Research. Мировой рынок и логика гипотез
 
-Собрано: 2026-05-31T15:04:22.840Z
+Собрано: 2026-05-31T15:08:22.216Z
 
 ## ОПИСАНИЕ ПРОЕКТА И ГИПОТЕЗА #1
 
@@ -10,7 +10,22 @@
 
 Гипотеза №1: на мировом consumer-app рынке есть место для приложения, которое объединяет личный смысл, короткое действие, reset и причинно видимый прогресс в одну ежедневную петлю. Эта гипотеза пока не доказана как product-market fit, но уже поддержана масштабной картой соседних рынков и конкурентных сигналов.
 
-На текущем этапе собрано 67,525 raw source rows, 36,694 dedup rows и 455 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
+На текущем этапе собрано 67,525 сырьевых source-строк, 36,694 уникализированных строк и 456 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
+
+## ТЕКУЩИЙ СТАТУС ДОКАЗАТЕЛЬСТВ
+
+На этом этапе исследование уже масштабное как база источников, но еще не завершенное как наблюдаемая валидация. Поэтому главный вывод должен звучать аккуратно: кабинетный ресерч подтверждает, что направление стоит проверять, но большинство гипотез пока нельзя переводить в “доказано”. Ниже показано, какие ворота уже имеют наблюдаемые строки, а где пока есть только подготовленный пакет для ручной проверки.
+
+| Гипотеза | Что проверяем | Поток проверки | Статус | Заполнено / нужно | Успехи / порог | Решение сейчас |
+| --- | --- | --- | --- | --- | --- | --- |
+| H1 | форма продукта существует | ручной walkthrough конкурентов | не начато | 0 / 60 | 0 / 25 | оставить hold_validate |
+| H3 | есть узкое белое пятно | ручной walkthrough конкурентов | не начато | 0 / 60 | 0 / 25 | оставить hold_validate |
+| H2 | в рынках есть деньги | проверка paywall и платной глубины | начато, но доказательств недостаточно | 8 / 40 | 8 / 12 | оставить hold_validate |
+| H5 | общая аудитория существует | интервью ICP и recent behavior | не начато | 0 / 96 | 0 / 30 | оставить hold_validate |
+| H4 | конкурентное преимущество правдоподобно | прототипные сессии и scorecard | не начато | 0 / 80 | 0 / 32 | оставить hold_validate |
+| H6 | продуктовое ядро можно определить | прототипные сессии и scorecard | не начато | 0 / 80 | 0 / 32 | оставить hold_validate |
+
+Практически это означает следующее: H2 уже имеет 8 заполненных paid-flow строк из 40, но еще ниже минимального порога; H1, H3, H4, H5 и H6 остаются в hold_validate, потому что по ним нет наблюдаемых capture rows. Это не слабость отчета, а защита от преждевременного вывода: большой массив конкурентов и источников показывает, куда идти, но не заменяет walkthrough, интервью и прототипные сессии.
 
 ## ОПРЕДЕЛЕНИЕ МИРОВЫХ ЦЕЛЕВЫХ РЫНКОВ И ГИПОТЕЗА #2
 
@@ -26,13 +41,13 @@
 
 Гипотеза №2: мировые adjacent-рынки достаточно велики и монетизируемы, чтобы продолжать проверку Alina, но рыночные цифры должны читаться как sizing для направления, а не как прогноз выручки самого продукта.
 
-| Рынок | SAM base | Money verdict | Score | Граница |
+| Рынок | SAM base | Денежный вывод | Score | Граница |
 | --- | ---: | --- | ---: | --- |
-| Mindfulness / reset | $252M | strong_directional_money_case | 9 | Можно использовать как directional evidence, но нельзя усиливать claim до product-market proof без walkthrough, paywall signoff и пользовательских сессий. |
-| Avatar / identity | $420M | strong_directional_money_case | 10 | Можно использовать как directional evidence, но нельзя усиливать claim до product-market proof без walkthrough, paywall signoff и пользовательских сессий. |
-| Astrology / esoterics | $374M | strong_directional_money_case | 9 | Можно использовать как directional evidence, но нельзя усиливать claim до product-market proof без walkthrough, paywall signoff и пользовательских сессий. |
-| Coaching / self-improvement | $300M | medium_directional_money_case | 8 | Можно использовать как directional evidence, но нельзя усиливать claim до product-market proof без walkthrough, paywall signoff и пользовательских сессий. |
-| Gaming / progression benchmark | $671M | benchmark_money_visible_not_direct_tam | 7 | Нельзя считать прямым рынком Alina без доказанного ritual/self-improvement overlap; использовать как механику прогресса и retention. |
+| Mindfulness / reset | $252M | сильный направленный money case | 9 | Можно использовать как directional evidence, но нельзя усиливать claim до product-market proof без walkthrough, paywall signoff и пользовательских сессий. |
+| Avatar / identity | $420M | сильный направленный money case | 10 | Можно использовать как directional evidence, но нельзя усиливать claim до product-market proof без walkthrough, paywall signoff и пользовательских сессий. |
+| Astrology / esoterics | $374M | сильный направленный money case | 9 | Можно использовать как directional evidence, но нельзя усиливать claim до product-market proof без walkthrough, paywall signoff и пользовательских сессий. |
+| Coaching / self-improvement | $300M | средний направленный money case | 8 | Можно использовать как directional evidence, но нельзя усиливать claim до product-market proof без walkthrough, paywall signoff и пользовательских сессий. |
+| Gaming / progression benchmark | $671M | деньги видны, но это benchmark, не прямой TAM | 7 | Нельзя считать прямым рынком Alina без доказанного ritual/self-improvement overlap; использовать как механику прогресса и retention. |
 
 Intersection SAM в текущей модели равен $202M. Это рабочая мировая рамка для дальнейшей проверки, а не обещание revenue. Локальный paid-flow signoff сейчас заполнен на 8 строках; H2 gate имеет статус in_progress_insufficient_evidence, потому что нужны еще in-app paywall walkthrough и willingness-to-pay evidence.
 
@@ -48,18 +63,18 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 
 | Конкурент | Риск | Priority | Money proxy | Что проверить |
 | --- | --- | ---: | --- | --- |
-| Shepherd: Spiritual Bible BFF | прямой reference-риск | 162.8 | strong_bottom_up_money_proxy | проверить full-loop первым |
-| Zing AI: Home & Gym Workouts | сильный платный close substitute | 112 | strong_bottom_up_money_proxy | проверить action -> progress causality |
-| Miracle Morning Routine | сильный платный close substitute | 111.4 | strong_bottom_up_money_proxy | проверить action -> progress causality |
-| EVOLVE: Transform Your Life | сильный платный close substitute | 106 | strong_bottom_up_money_proxy | проверить action -> progress causality |
-| Daily Yoga: Yoga for Fitness® | сильный платный close substitute | 99.2 | strong_bottom_up_money_proxy | проверить action -> progress causality |
-| Daily Burn: Workout Coach | сильный платный close substitute | 98 | strong_bottom_up_money_proxy | проверить action -> progress causality |
-| Myla : Manifest & Vision Board | высокий close-substitute риск | 97.6 | medium_bottom_up_money_proxy | проверить action -> progress causality |
-| Rosebud: AI Journal & Diary | высокий close-substitute риск | 97 | medium_bottom_up_money_proxy | проверить action -> progress causality |
-| Habit Tracker : Haby | высокий close-substitute риск | 95.8 | medium_bottom_up_money_proxy | проверить action -> progress causality |
-| Goddess・Women's Wellness Coach | высокий close-substitute риск | 95.8 | medium_bottom_up_money_proxy | проверить action -> progress causality |
-| LifeWheel Goal Habit Tracker | высокий close-substitute риск | 95.4 | medium_bottom_up_money_proxy | проверить action -> progress causality |
-| Habit Tracker | сильный платный close substitute | 94 | strong_bottom_up_money_proxy | проверить action -> progress causality |
+| Shepherd: Spiritual Bible BFF | прямой reference-риск | 162.8 | сильный bottom-up proxy | проверить full-loop первым |
+| Zing AI: Home & Gym Workouts | сильный платный close substitute | 112 | сильный bottom-up proxy | проверить action -> progress causality |
+| Miracle Morning Routine | сильный платный close substitute | 111.4 | сильный bottom-up proxy | проверить action -> progress causality |
+| EVOLVE: Transform Your Life | сильный платный close substitute | 106 | сильный bottom-up proxy | проверить action -> progress causality |
+| Daily Yoga: Yoga for Fitness® | сильный платный close substitute | 99.2 | сильный bottom-up proxy | проверить action -> progress causality |
+| Daily Burn: Workout Coach | сильный платный close substitute | 98 | сильный bottom-up proxy | проверить action -> progress causality |
+| Myla : Manifest & Vision Board | высокий close-substitute риск | 97.6 | средний bottom-up proxy | проверить action -> progress causality |
+| Rosebud: AI Journal & Diary | высокий close-substitute риск | 97 | средний bottom-up proxy | проверить action -> progress causality |
+| Habit Tracker : Haby | высокий close-substitute риск | 95.8 | средний bottom-up proxy | проверить action -> progress causality |
+| Goddess・Women's Wellness Coach | высокий close-substitute риск | 95.8 | средний bottom-up proxy | проверить action -> progress causality |
+| LifeWheel Goal Habit Tracker | высокий close-substitute риск | 95.4 | средний bottom-up proxy | проверить action -> progress causality |
+| Habit Tracker | сильный платный close substitute | 94 | сильный bottom-up proxy | проверить action -> progress causality |
 
 Гипотеза №3: востребованным может стать не отдельный mindfulness, habit, astrology или avatar product, а связанная система, где смысл быстро превращается в действие, а действие становится видимым. Главный риск для этой гипотезы - скрытый прямой клон внутри onboarding P0-конкурентов, прежде всего Shepherd: Spiritual Bible BFF.
 
@@ -160,7 +175,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | SRC_04_WHITESPACE | Где дыры и возможность отличиться | поддержано направленно, но не финально доказано | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Whitespace нельзя апгрейдить без manual walkthrough и final verdict_after_inspection. |
 | SRC_05_AUDIENCE | Аудитория, интервью и гипотеза #4 | поддержано направленно, но не финально доказано | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Audience rows и Reddit/forum signals не являются representative survey и не заменяют recent-behavior interviews. |
 | SRC_06_PRODUCT_CORE | Итоговая модель продукта и гипотеза #5 | поддержано направленно, но не финально доказано | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | Product core не считается доказанным без заполненных prototype_session_capture_sheet и scorecard. |
-| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 455 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
+| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 456 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
 
 ## БЫСТРЫЕ ВЫВОДЫ ДЛЯ СТРАТЕГИИ
 
@@ -176,6 +191,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 - `output/pdf/alina-global-hypothesis-report-v1.pdf`
 - `data_processed/global_hypothesis_source_appendix.csv`
 - `data_processed/global_hypothesis_validation_questionnaire.csv`
+- `data_processed/global_hypothesis_gate_snapshot.csv`
 - `reports/alina-russian-readable-report-v2.md`
 - `data_processed/russian_readable_niche_summary.csv`
 - `data_processed/validation_gate_calculator.csv`
