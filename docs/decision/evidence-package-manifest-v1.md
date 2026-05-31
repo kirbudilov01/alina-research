@@ -1,6 +1,6 @@
 # Evidence Package Manifest V1
 
-Generated: 2026-05-31T18:34:50.260Z
+Generated: 2026-05-31T18:41:55.192Z
 
 ## Purpose
 
@@ -8,32 +8,32 @@ This manifest makes the research package auditable. It lists key raw data, proce
 
 ## Package Summary
 
-- Manifest rows: 529
+- Manifest rows: 552
 - Missing required artifacts: 0
-- CSV artifacts: 134
-- Total CSV data rows tracked: 243359
-- CSV rows with source-like identifiers/URLs/domains/packages: 241613
+- CSV artifacts: 135
+- Total CSV data rows tracked: 243377
+- CSV rows with source-like identifiers/URLs/domains/packages: 241631
 
 Artifact types:
 
-- research_doc: 134
-- generator_script: 121
-- processed_data: 118
-- validation_workspace: 95
+- research_doc: 135
+- generator_script: 122
+- processed_data: 119
+- validation_workspace: 114
 - report: 22
 - raw_data: 16
 - chart: 14
-- pdf: 8
+- pdf: 9
 - docx: 1
 
 Evidence roles:
 
-- decision_artifact: 220
-- supporting: 101
+- decision_artifact: 239
+- supporting: 104
 - market_money: 64
 - audience_icp: 57
 - source_claim: 38
-- competitive_whitespace: 31
+- competitive_whitespace: 32
 - competitor_universe: 18
 
 ## Key Data Artifacts
@@ -87,7 +87,7 @@ Evidence roles:
 | --- | --- | ---: | ---: | --- |
 | docs/competitive/human-validation-guide-v1.md | research_doc | 91 | 12102 | b85e6b5dd29fcb2f |
 | docs/decision/evidence-audit-v1.md | research_doc | 87 | 9758 | 28cfc31515e5905e |
-| docs/decision/evidence-package-manifest-v1.md | research_doc | 131 | 8965 | cb8a0ab85d059074 |
+| docs/decision/evidence-package-manifest-v1.md | research_doc | 131 | 8959 | 5b4eba32b7f82db8 |
 | docs/decision/global-goal-evidence-coverage-v1.md | research_doc | 31 | 6149 | d32e797b63ba8926 |
 | docs/decision/global-next-validation-backlog-v1.md | research_doc | 62 | 11960 | 2112606516152be7 |
 | docs/decision/global-report-readability-audit-v1.md | research_doc | 31 | 5768 | fd9fcd8f80a04b98 |
@@ -121,10 +121,10 @@ Evidence roles:
 | docs/product/prototype-validation-stimulus-v1.md | research_doc | 57 | 6109 | 0faba89f050d2b06 |
 | docs/strategy/validation-falsification-criteria.md | research_doc | 38 | 1152 | 310c8c3044a11540 |
 | docs/visuals/chart-index-v1.md | research_doc | 25 | 886 | 77cba8f26318bcae |
+| output/pdf/ALINA_RESEARCH_SEND_NOW_RU.pdf | pdf | 576 | 104422 | db69cd46b4277b7e |
 | output/pdf/alina-evidence-first-report-draft.pdf | pdf | 1423 | 194961 | 30a3025c4818d99e |
 | output/pdf/alina-evidence-visual-report-v1.pdf | pdf | 322 | 34684 | 3fca188b99b4541c |
 | output/pdf/alina-global-executive-narrative-v1.pdf | pdf | 576 | 104422 | db69cd46b4277b7e |
-| output/pdf/alina-global-hypothesis-report-v1.pdf | pdf | 990 | 193290 | 9cd8262c03750c68 |
 
 ## Files
 
