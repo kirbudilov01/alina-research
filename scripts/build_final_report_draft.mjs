@@ -99,6 +99,8 @@ const marketAssumptionAudit = csv('data_processed/market_sizing_assumption_audit
 const marketStressTest = csv('data_processed/market_sizing_stress_test.csv');
 const monetizationProxy = csv('data_processed/market_monetization_proxy_matrix.csv');
 const monetizationExamples = csv('data_processed/monetization_proxy_examples.csv');
+const marketMoneyTriangulation = csv('data_processed/market_money_triangulation.csv');
+const marketMoneyTriangulationSummary = csv('data_processed/market_money_triangulation_summary.csv');
 const prefill = csv('data_processed/top_intersection_review_prefill.csv');
 const pricing = csv('data_processed/pricing_retention_matrix.csv');
 const core = csv('data_processed/product_core_evidence_matrix.csv');
@@ -220,6 +222,8 @@ const highUseMarketSources = marketSourceConfidence.filter(r => r.confidence_rev
 const rangeOnlyMarketSources = marketSourceConfidence.filter(r => ['low_use_range_only', 'context_only'].includes(r.confidence_review_band));
 const strongMonetizationMarkets = monetizationProxy.filter(r => r.monetization_proxy_band === 'strong_paid_behavior_proxy');
 const mediumMonetizationMarkets = monetizationProxy.filter(r => r.monetization_proxy_band === 'medium_paid_behavior_proxy');
+const strongTriangulatedMoneyMarkets = marketMoneyTriangulation.filter(r => r.money_triangulation_verdict === 'strong_directional_money_case');
+const mediumTriangulatedMoneyMarkets = marketMoneyTriangulation.filter(r => r.money_triangulation_verdict === 'medium_directional_money_case');
 const strongRevenueProxyCompetitors = competitorRevenueProxy.filter(r => r.revenue_proxy_band === 'strong_bottom_up_money_proxy');
 const mediumPlusRevenueProxyCompetitors = competitorRevenueProxy.filter(r => ['strong_bottom_up_money_proxy', 'medium_bottom_up_money_proxy'].includes(r.revenue_proxy_band));
 const prototypeSegments = new Set(prototypeStimulusFlow.map(r => r.segment_id).filter(Boolean));
@@ -290,6 +294,7 @@ report.push(`- Validation capture sheets: ${validationCaptureRows} fillable capt
 report.push(`- Market source confidence review: ${marketSourceConfidence.length} sources graded; ${highUseMarketSources.length} high-use anchors and ${rangeOnlyMarketSources.length} range-only/context sources.`);
 report.push(`- Market sizing stress test: ${marketAssumptionAudit.length} assumption-risk rows and ${marketStressTest.length} bottom-up stress scenarios.`);
 report.push(`- Monetization proxy matrix: ${monetizationProxy.length} markets covered; ${strongMonetizationMarkets.length} strong and ${mediumMonetizationMarkets.length} medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.`);
+report.push(`- Market-money triangulation: ${marketMoneyTriangulation.length} market rows; ${strongTriangulatedMoneyMarkets.length} strong and ${mediumTriangulatedMoneyMarkets.length} medium directional money cases, with H2 still gated by paid-flow/WTP validation.`);
 report.push(`- Competitor revenue proxy review: ${competitorRevenueProxy.length} primary competitors reviewed; ${strongRevenueProxyCompetitors.length} strong and ${mediumPlusRevenueProxyCompetitors.length} medium-or-stronger bottom-up money proxies.`);
 report.push(`- ICP segment matrix: ${icpSegments.length} segment hypotheses; strongest current directional ICP is "${strongestIcpSegment.segment_name || 'n/a'}".`);
 report.push(`- ICP validation packet: ${icpValidationPlan.length} interview/prototype test rows for selecting one primary and one secondary ICP.`);
@@ -660,6 +665,36 @@ if (icpRecruitingBridge.length) {
     ], 16));
   report.push('');
   report.push(`Message bank rows: ${icpRecruitingMessages.length}. These are transparent opt-in research invites, not channel proof and not a license for scraped/private outreach.`);
+  report.push('');
+}
+if (marketMoneyTriangulation.length) {
+  report.push('## 2O. Market Money Triangulation');
+  report.push('');
+  report.push('The market-money layer now triangulates TAM/SAM/SOM, source confidence, stress-test posture, monetization proxies, competitor revenue proxies, public paywall screenshots, and the H2 validation gate. It is a prioritization and confidence layer, not a final revenue estimate.');
+  report.push('');
+  report.push('Verdict mix:');
+  report.push('');
+  report.push(bulletCounts(countBy(marketMoneyTriangulation, 'money_triangulation_verdict')));
+  report.push('');
+  report.push(mdTable(marketMoneyTriangulation, [
+    { key: 'pillar', label: 'Pillar' },
+    { key: 'directness', label: 'Directness' },
+    { key: 'sam_base_usd', label: 'SAM Base', align: 'right' },
+    { key: 'total_money_evidence_score', label: 'Score', align: 'right' },
+    { key: 'risk_penalty', label: 'Risk', align: 'right' },
+    { key: 'money_triangulation_verdict', label: 'Verdict' },
+    { key: 'h2_gate_status', label: 'H2 Gate' },
+    { key: 'recommended_next_proof', label: 'Next Proof' }
+  ], marketMoneyTriangulation.length));
+  report.push('');
+  report.push('Summary by verdict:');
+  report.push('');
+  report.push(mdTable(marketMoneyTriangulationSummary, [
+    { key: 'money_triangulation_verdict', label: 'Verdict' },
+    { key: 'row_count', label: 'Markets', align: 'right' },
+    { key: 'markets', label: 'Pillars' },
+    { key: 'avg_money_evidence_score', label: 'Avg Score', align: 'right' }
+  ], marketMoneyTriangulationSummary.length));
   report.push('');
 }
 report.push('## 3. Dataset Overview');
@@ -1590,6 +1625,8 @@ report.push('- `data_processed/icp_recruiting_bridge.csv`');
 report.push('- `data_processed/icp_recruiting_message_bank.csv`');
 report.push('- `data_processed/validation_gate_calculator.csv`');
 report.push('- `data_processed/validation_gate_status_summary.csv`');
+report.push('- `data_processed/market_money_triangulation.csv`');
+report.push('- `data_processed/market_money_triangulation_summary.csv`');
 report.push('- `data_raw/app_store_top_candidate_reviews.csv`');
 report.push('- `data_raw/app_store_iap_pricing_raw.csv`');
 report.push('- `data_raw/google_play_pricing_raw.csv`');
@@ -1662,6 +1699,7 @@ status.push(mdTable([
   { requirement: 'Validation evidence rollup', evidence: 'data_processed/validation_evidence_rollup.csv; docs/decision/validation-evidence-rollup-v1.md', status: `done v1; ${validationEvidenceRollup.length} command rows audit note existence and local artifact links` },
   { requirement: 'Validation gate calculator', evidence: 'data_processed/validation_gate_calculator.csv; data_processed/validation_gate_status_summary.csv; docs/decision/validation-gate-calculator-v1.md', status: `done v1; ${validationGateCalculator.length} H1-H6 gate rows convert capture sheets into pass/hold/downgrade readiness` },
   { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; docs/market/competitor-revenue-proxy-review-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv; data_processed/competitor_revenue_proxy_review.csv; data_processed/competitor_revenue_proxy_market_summary.csv', status: 'done v1; source confidence, market monetization proxy, and bottom-up competitor revenue proxy layers added; model remains range-based and not final forecast' },
+  { requirement: 'Market-money triangulation', evidence: 'data_processed/market_money_triangulation.csv; data_processed/market_money_triangulation_summary.csv; docs/market/market-money-triangulation-v1.md', status: `done v1; ${marketMoneyTriangulation.length} market rows triangulate TAM/SAM/SOM, monetization proxy, competitor revenue proxy, paywall screenshots, and H2 gate status` },
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
   { requirement: 'ICP / audience segment matrix', evidence: 'data_processed/icp_segment_matrix.csv; docs/audience/icp-segment-matrix-v1.md', status: 'done v1; maps audience/review/forum/monetization evidence into testable ICP hypotheses' },

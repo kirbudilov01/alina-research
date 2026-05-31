@@ -101,6 +101,8 @@ const marketConfidenceSummary = csv('data_processed/market_confidence_summary.cs
 const marketAssumptionAudit = csv('data_processed/market_sizing_assumption_audit.csv');
 const marketStressTest = csv('data_processed/market_sizing_stress_test.csv');
 const monetizationProxy = csv('data_processed/market_monetization_proxy_matrix.csv');
+const marketMoneyTriangulation = csv('data_processed/market_money_triangulation.csv');
+const marketMoneyTriangulationSummary = csv('data_processed/market_money_triangulation_summary.csv');
 const competitorRevenueProxy = csv('data_processed/competitor_revenue_proxy_review.csv');
 const competitorRevenueProxySummary = csv('data_processed/competitor_revenue_proxy_market_summary.csv');
 const top100 = csv('data_processed/top100_competitor_review_scorecard.csv');
@@ -161,6 +163,8 @@ const hypothesisDecisions = csv('data_processed/hypothesis_decision_matrix.csv')
 const highUseMarketSources = marketSourceConfidence.filter(row => row.confidence_review_band === 'high_use');
 const rangeOnlyMarketSources = marketSourceConfidence.filter(row => ['low_use_range_only', 'context_only'].includes(row.confidence_review_band));
 const strongMonetizationMarkets = monetizationProxy.filter(row => row.monetization_proxy_band === 'strong_paid_behavior_proxy');
+const strongTriangulatedMoneyMarkets = marketMoneyTriangulation.filter(row => row.money_triangulation_verdict === 'strong_directional_money_case');
+const mediumTriangulatedMoneyMarkets = marketMoneyTriangulation.filter(row => row.money_triangulation_verdict === 'medium_directional_money_case');
 const strongRevenueProxyCompetitors = competitorRevenueProxy.filter(row => row.revenue_proxy_band === 'strong_bottom_up_money_proxy');
 const mediumPlusRevenueProxyCompetitors = competitorRevenueProxy.filter(row => ['strong_bottom_up_money_proxy', 'medium_bottom_up_money_proxy'].includes(row.revenue_proxy_band));
 
@@ -271,6 +275,19 @@ const rows = [
     strongest_support: 'Decision matrix links H1-H6 to current evidence status, confidence, go gates, hold gates, kill/pivot gates, next actions, workstreams, and capture rows.',
     key_gap: 'Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open.',
     next_action: 'Use the hold/validate rows as the next execution order and update decisions only after observed evidence is captured.'
+  },
+  {
+    claim_id: 'REQ_market_money_triangulation',
+    claim_type: 'project_requirement',
+    claim: 'TAM/SAM/SOM, source confidence, stress tests, monetization proxies, competitor revenue proxies, and paywall evidence are triangulated into market-level money verdicts.',
+    evidence_status: marketMoneyTriangulation.length ? 'proved_v1_triangulated_proxy_not_final' : 'missing',
+    confidence: marketMoneyTriangulation.length ? 'medium_high' : 'low',
+    primary_metric: `${marketMoneyTriangulation.length} market rows; ${strongTriangulatedMoneyMarkets.length} strong and ${mediumTriangulatedMoneyMarkets.length} medium directional money cases`,
+    quantitative_evidence: `triangulation_rows=${marketMoneyTriangulation.length}; verdict_rows=${marketMoneyTriangulationSummary.length}; strong_directional=${strongTriangulatedMoneyMarkets.length}; medium_directional=${mediumTriangulatedMoneyMarkets.length}; strong_paid_proxy_markets=${strongMonetizationMarkets.length}; h2_gate=${validationGateCalculator.find(row => row.linked_hypotheses === 'H2')?.gate_status || 'missing'}`,
+    evidence_files: 'data_processed/market_money_triangulation.csv;data_processed/market_money_triangulation_summary.csv;docs/market/market-money-triangulation-v1.md;data_processed/tam_sam_som_model.csv;data_processed/market_sizing_assumption_audit.csv;data_processed/market_monetization_proxy_matrix.csv;data_processed/competitor_revenue_proxy_market_summary.csv;data_processed/web_paywall_visual_adjudication_summary.csv;data_processed/validation_gate_calculator.csv',
+    strongest_support: 'Triangulation matrix normalizes market names, scores source quality, monetization proxy strength, competitor revenue proxy strength, public paywall visibility, and risk penalties, while keeping H2 gated by paid-flow/WTP validation.',
+    key_gap: 'This is public-evidence triangulation, not final revenue proof. H2 still needs paid-flow human signoff, product-match notes, and WTP evidence from prototype/ICP sessions.',
+    next_action: 'Use the strong and medium directional markets to prioritize paid-flow capture rows and WTP probes, then rerun H2 gate calculation.'
   },
   {
     claim_id: 'REQ_p0_validation_command_center',

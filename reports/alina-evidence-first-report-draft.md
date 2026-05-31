@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T09:42:41.364Z
+Generated: 2026-05-31T09:49:42.304Z
 
 ## 1. Executive Summary
 
@@ -24,8 +24,8 @@ Key quantified signals:
 - Web paywall screenshot capture: 29/29 queued screenshots captured for manual interpretation.
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
-- Evidence audit register: 21 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 329 artifacts tracked, 71 CSV artifacts, 213279 tracked CSV rows, 0 missing required artifacts.
+- Evidence audit register: 22 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
+- Evidence package manifest: 333 artifacts tracked, 73 CSV artifacts, 213287 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -53,6 +53,7 @@ Key quantified signals:
 - Market source confidence review: 12 sources graded; 3 high-use anchors and 4 range-only/context sources.
 - Market sizing stress test: 6 assumption-risk rows and 6 bottom-up stress scenarios.
 - Monetization proxy matrix: 5 markets covered; 4 strong and 1 medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.
+- Market-money triangulation: 6 market rows; 3 strong and 1 medium directional money cases, with H2 still gated by paid-flow/WTP validation.
 - Competitor revenue proxy review: 90 primary competitors reviewed; 22 strong and 70 medium-or-stronger bottom-up money proxies.
 - ICP segment matrix: 6 segment hypotheses; strongest current directional ICP is "Spiritual self-improvers".
 - ICP validation packet: 36 interview/prototype test rows for selecting one primary and one secondary ICP.
@@ -89,6 +90,7 @@ Evidence status mix:
 - proved_v1: 2
 - proved_v1_open_requirements: 1
 - proved_v1_open_validation_decisions: 1
+- proved_v1_triangulated_proxy_not_final: 1
 - proved_v1_operator_ready_open_gates: 1
 - proved_v1_execution_scripts_ready_open_gates: 1
 - proved_v1_intake_workspace_ready_open_gates: 1
@@ -112,9 +114,10 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 16 validation roadmap rows; 11 execution tasks | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 329 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 333 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_hypothesis_decision_matrix | proved_v1_open_validation_decisions | high | 6 hypothesis decision rows; 6 hold/validate; 0 go; 0 stop/pivot | Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open. |
+| REQ_market_money_triangulation | proved_v1_triangulated_proxy_not_final | medium_high | 6 market rows; 3 strong and 1 medium directional money cases | This is public-evidence triangulation, not final revenue proof. H2 still needs paid-flow human signoff, product-match notes, and WTP evidence from prototype/ICP sessions. |
 | REQ_p0_validation_command_center | proved_v1_operator_ready_open_gates | high | 75 command rows; 6 blocker rows; 52 P0 rows | The command center is operational scaffolding; it still requires actual screenshots, participant evidence, paywall signoff, and updated verdicts. |
 | REQ_p0_validation_field_guide | proved_v1_execution_scripts_ready_open_gates | high | 8 field guide sections; 75 command rows referenced | Field guide is still an execution artifact, not observed validation evidence. |
 | REQ_validation_evidence_workspace | proved_v1_intake_workspace_ready_open_gates | high | 5 workspace lanes; output/validation README and templates generated | Workspace is empty until real screenshots, notes, quotes, and calculations are captured. |
@@ -374,7 +377,7 @@ Status summary:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 329 artifacts; 71 CSV artifacts; 213279 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 333 artifacts; 73 CSV artifacts; 213287 tracked CSV rows; 0 missing required artifacts.
 Validation note artifact links: 29 existing local artifacts linked inside batch notes.
 
 Largest tracked CSV artifacts:
@@ -402,7 +405,7 @@ Completion status mix:
 
 - proved_v1: 2
 - proved_30k_plus_cross_source_dedup: 1
-- supported_with_stress_test_and_bottom_up_proxy_not_final: 1
+- supported_with_triangulated_proxy_not_final: 1
 - narrow_supported_public_listing_inspected_walkthrough_open: 1
 - directionally_supported_recruiting_ready: 1
 - prototype_stimulus_ready_not_validated: 1
@@ -417,12 +420,12 @@ Objective readiness matrix:
 | REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=16; execution_dashboard_rows=11; hypothesis_decision_rows=6; p0_command_rows=75; p0_field_guide_sections=8; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_batch_local_artifact_links=29; validation_rollup_rows=75 | Keep refreshing as validation results change. |
 | REQ_02_COMPETITOR_UNIVERSE | proved_30k_plus_cross_source_dedup | medium_high | dedup=12552; cross_source_raw=59006; cross_source_dedup=31866; cross_source_summary_rows=14; coverage_cells=34; coverage_strong=11; coverage_medium=12; raw_core=17490; itch_rows=7047; steam_tag_rows=18569; desktop_store_rows=15397; chrome_extension_rows=252; known_raw_total=58755; itch_ok=6973; steam_tag_ok=17954; desktop_store_ok=15394; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | The 30k lower-bound dedup target is now met; the remaining expansion gap is the upper 50k aspiration plus Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and additional source-native coverage. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
-| REQ_04_MARKET_MONEY | supported_with_stress_test_and_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; assumption_audit_rows=6; stress_scenarios=6; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing is stress-tested and range-based, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall validation are still needed for final investor-grade claims. |
+| REQ_04_MARKET_MONEY | supported_with_triangulated_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; assumption_audit_rows=6; stress_scenarios=6; strong_paid_proxy_markets=4/5; market_money_triangulation_rows=6; market_money_triangulation_verdicts=4; strong_triangulated_markets=3; medium_triangulated_markets=1; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing is stress-tested and triangulated, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall/WTP validation are still needed for final investor-grade claims. |
 | REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; cross_source_saturation_markets=6; cross_source_primary_high_opportunity=0; cross_source_benchmark_markets=2; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_walkthrough_capture_rows=60; manual_app_walkthrough_done=0 | Cross-source saturation now keeps gaming/progression as benchmark-only and finds no primary market opportunity strong enough to upgrade without manual walkthrough; app/onboarding screenshots are still required. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_recruiting_ready | medium | audience_rows=20492; community_referral_rows=294; community_referral_signals=6; icp_segments=6; icp_validation_tests=36; icp_recruiting_bridge_rows=24; icp_recruiting_message_rows=24; icp_capture_rows=96 | Segments and recruiting assets are directional and need actual interviews/prototype/WTP validation. |
-| REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=21; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. |
+| REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=22; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=329; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=333; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; p0_command_rows=75; p0_command_blockers=6; p0_command_p0=52; p0_field_guide_sections=8; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_rollup_rows=75; validation_rollup_missing=0; validation_gate_rows=6; validation_gate_status_rows=1; validation_gates_passed=0; validation_gates_not_started=6; validation_batch_local_artifact_links=29; hypothesis_decision_rows=6; hypothesis_hold=6; hypothesis_go=0; hypothesis_stop=0; capture_rows=276; manual_capture_rows=60; paid_capture_rows=40; icp_capture_rows=96; prototype_capture_rows=80; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
 ## 2N. Validation Gap Roadmap
@@ -520,6 +523,35 @@ Bridge rows by source signal kind:
 | ICP_B_CH_FORUM_LANGUAGE | Avatar identity builders | P1_compare | 29 | Forum-language recruiting using exact problem wording from coded snippets | Participant names a recent tool/use moment in avatar_identity/coaching and can describe the trigger without being led. |
 
 Message bank rows: 24. These are transparent opt-in research invites, not channel proof and not a license for scraped/private outreach.
+
+## 2O. Market Money Triangulation
+
+The market-money layer now triangulates TAM/SAM/SOM, source confidence, stress-test posture, monetization proxies, competitor revenue proxies, public paywall screenshots, and the H2 validation gate. It is a prioritization and confidence layer, not a final revenue estimate.
+
+Verdict mix:
+
+- strong_directional_money_case: 3
+- benchmark_money_visible_not_direct_tam: 1
+- medium_directional_money_case: 1
+- insufficient_money_case: 1
+
+| Pillar | Directness | SAM Base | Score | Risk | Verdict | H2 Gate | Next Proof |
+| --- | --- | ---: | ---: | ---: | --- | --- | --- |
+| gaming | mechanic_benchmark | 671100000 | 7 | 3 | benchmark_money_visible_not_direct_tam | not_started | Keep as monetization/retention benchmark; do not count as direct Alina TAM unless direct audience overlap is validated. |
+| astrology_esoterics | direct_adjacent | 374400000 | 9 | 0 | strong_directional_money_case | not_started | Run paid-flow signoff and WTP prototype probes before using as final product-level money proof. |
+| avatar_identity | broad_adjacent | 420000000 | 10 | 1 | strong_directional_money_case | not_started | Run paid-flow signoff and WTP prototype probes before using as final product-level money proof. |
+| coaching | direct_adjacent | 300000000 | 8 | 3 | medium_directional_money_case | not_started | Add manual paywall/product-match evidence and competitor revenue/intelligence before investor-grade claims. |
+| mindfulness | direct_adjacent | 252000000 | 9 | 0 | strong_directional_money_case | not_started | Run paid-flow signoff and WTP prototype probes before using as final product-level money proof. |
+| intersection | intersection_model | 201960000 | 1 | 4 | insufficient_money_case | not_started | Validate intersection through ICP/WTP and competitor bottom-up proxies; keep modeled SAM as range-only. |
+
+Summary by verdict:
+
+| Verdict | Markets | Pillars | Avg Score |
+| --- | ---: | --- | ---: |
+| benchmark_money_visible_not_direct_tam | 1 | gaming | 7 |
+| strong_directional_money_case | 3 | astrology_esoterics/avatar_identity/mindfulness | 9.3 |
+| medium_directional_money_case | 1 | coaching | 8 |
+| insufficient_money_case | 1 | intersection | 1 |
 
 ## 3. Dataset Overview
 
@@ -1452,7 +1484,7 @@ Remaining proof required:
 ## 11. Source and Claim Layer
 
 Market claims currently normalized: 14.
-Claim audit rows currently normalized: 21.
+Claim audit rows currently normalized: 22.
 
 | Claim ID | Market | Value | Period | Confidence | Source |
 | --- | --- | ---: | --- | --- | --- |
@@ -1573,6 +1605,8 @@ Claim audit rows currently normalized: 21.
 - `data_processed/icp_recruiting_message_bank.csv`
 - `data_processed/validation_gate_calculator.csv`
 - `data_processed/validation_gate_status_summary.csv`
+- `data_processed/market_money_triangulation.csv`
+- `data_processed/market_money_triangulation_summary.csv`
 - `data_raw/app_store_top_candidate_reviews.csv`
 - `data_raw/app_store_iap_pricing_raw.csv`
 - `data_raw/google_play_pricing_raw.csv`

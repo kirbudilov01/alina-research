@@ -318,6 +318,8 @@ def main() -> None:
     chrome_battlecards = read_csv("data_processed/chrome_extension_mechanic_battlecards.csv")
     market_assumptions = read_csv("data_processed/market_sizing_assumption_audit.csv")
     market_stress = read_csv("data_processed/market_sizing_stress_test.csv")
+    market_money = read_csv("data_processed/market_money_triangulation.csv")
+    market_money_summary = read_csv("data_processed/market_money_triangulation_summary.csv")
     evidence = read_csv("data_processed/evidence_claim_register.csv")
     completion = read_csv("data_processed/research_completion_audit.csv")
     hypothesis_decisions = read_csv("data_processed/hypothesis_decision_matrix.csv")
@@ -362,6 +364,12 @@ def main() -> None:
         row
         for row in revenue
         if row.get("revenue_proxy_band") in {"strong_bottom_up_money_proxy", "medium_bottom_up_money_proxy"}
+    ]
+    strong_market_money = [
+        row for row in market_money if row.get("money_triangulation_verdict") == "strong_directional_money_case"
+    ]
+    medium_market_money = [
+        row for row in market_money if row.get("money_triangulation_verdict") == "medium_directional_money_case"
     ]
     confirmed_paywall = [row for row in paywall if row.get("visual_adjudication") == "confirmed_visible_public_pricing"]
     partial_paywall = [
@@ -414,6 +422,7 @@ def main() -> None:
         "Tracked manifest artifacts": number(len(manifest)),
         "Tracked CSV rows": number(csv_rows),
         "Competitor revenue proxy rows": number(len(revenue)),
+        "Market-money triangulation rows": number(len(market_money)),
         "Manual P0 inspection targets": number(len(manual)),
         "Hypothesis decision rows": number(len(hypothesis_decisions)),
         "P0 command rows": number(len(p0_commands)),
@@ -516,6 +525,7 @@ def main() -> None:
                 ["Chrome mechanic battlecards", len(chrome_battlecards), "Browser-extension mechanics translated into whitespace lessons."],
                 ["Market assumption audit", len(market_assumptions), "TAM/SAM/SOM risk rows by market and intersection."],
                 ["Market stress scenarios", len(market_stress), "Bottom-up sensitivity cases for reachable users, conversion, and ARPPU."],
+                ["Market-money triangulation rows", len(market_money), "TAM/SAM/SOM, monetization, competitor revenue, paywall, and H2-gate evidence combined market-by-market."],
                 ["Hypothesis decision rows", len(hypothesis_decisions), "H1-H6 operating gates with go/hold/kill criteria and next validation actions."],
                 ["P0 command center rows", len(p0_commands), "Operator-ready validation commands across walkthrough, paid-flow, ICP, and prototype lanes."],
                 ["P0 field guide sections", len(p0_field_guide), "Executable scripts, evidence naming, and post-validation rebuild protocol."],
@@ -540,6 +550,43 @@ def main() -> None:
             [2.05 * inch, 0.78 * inch, 4.25 * inch],
         ),
         Spacer(1, 0.15 * inch),
+        para("Market Money Triangulation", "H1"),
+        para(
+            "This layer is a conservative market-money read, not a final revenue claim. It combines market sizing, source confidence, monetization proxies, competitor revenue proxies, public paywall visibility, risk penalties, and H2 gate status.",
+            "Body",
+        ),
+        table(
+            [["Pillar", "Directness", "Score", "Verdict", "H2 gate"]]
+            + [
+                [
+                    row.get("pillar"),
+                    row.get("directness"),
+                    row.get("total_money_evidence_score"),
+                    row.get("money_triangulation_verdict"),
+                    row.get("h2_gate_status"),
+                ]
+                for row in market_money
+            ],
+            [1.25 * inch, 1.35 * inch, 0.55 * inch, 2.8 * inch, 0.85 * inch],
+        ),
+        Spacer(1, 0.12 * inch),
+        table(
+            [["Verdict", "Markets", "Pillars"]]
+            + [
+                [
+                    row.get("money_triangulation_verdict"),
+                    row.get("row_count"),
+                    short(row.get("markets"), 110),
+                ]
+                for row in market_money_summary
+            ],
+            [2.65 * inch, 0.7 * inch, 3.3 * inch],
+        ),
+        para(
+            f"Current read: {len(strong_market_money)} strong and {len(medium_market_money)} medium directional money cases, while H2 remains gated by paid-flow signoff and WTP evidence.",
+            "Callout",
+        ),
+        PageBreak(),
         BarChart(
             "Evidence status mix",
             [(k, v) for k, v in count_by(evidence, "evidence_status").most_common()],
@@ -940,6 +987,7 @@ def main() -> None:
                 ["Coverage matrix", "data_processed/cross_source_coverage_matrix.csv; docs/competitive/cross-source-coverage-matrix-v1.md"],
                 ["Saturation whitespace", "data_processed/cross_source_market_saturation_matrix.csv; docs/intersections/cross-source-saturation-whitespace-v1.md"],
                 ["Market money", "data_processed/tam_sam_som_model.csv; data_processed/competitor_revenue_proxy_review.csv"],
+                ["Market-money triangulation", "data_processed/market_money_triangulation.csv; data_processed/market_money_triangulation_summary.csv; docs/market/market-money-triangulation-v1.md"],
                 ["Whitespace", "data_processed/whitespace_signal_matrix.csv; data_processed/manual_competitor_inspection_packet.csv"],
                 ["Audience", "data_processed/icp_segment_matrix.csv; data_processed/icp_validation_test_plan.csv; data_processed/icp_recruiting_bridge.csv; data_processed/icp_recruiting_message_bank.csv; data_processed/community_referral_signal_rows.csv"],
                 ["Prototype", "data_processed/prototype_validation_stimulus_flow.csv; data_processed/prototype_validation_scorecard.csv"],

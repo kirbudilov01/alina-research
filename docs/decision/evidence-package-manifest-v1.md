@@ -1,6 +1,6 @@
 # Evidence Package Manifest V1
 
-Generated: 2026-05-31T09:42:51.095Z
+Generated: 2026-05-31T09:49:52.460Z
 
 ## Purpose
 
@@ -8,18 +8,18 @@ This manifest makes the research package auditable. It lists key raw data, proce
 
 ## Package Summary
 
-- Manifest rows: 333
+- Manifest rows: 337
 - Missing required artifacts: 0
-- CSV artifacts: 73
-- Total CSV data rows tracked: 213287
-- CSV rows with source-like identifiers/URLs/domains/packages: 212979
+- CSV artifacts: 75
+- Total CSV data rows tracked: 213298
+- CSV rows with source-like identifiers/URLs/domains/packages: 212985
 
 Artifact types:
 
 - validation_workspace: 87
-- research_doc: 79
-- generator_script: 61
-- processed_data: 60
+- research_doc: 80
+- processed_data: 62
+- generator_script: 62
 - report: 16
 - chart: 14
 - raw_data: 13
@@ -28,8 +28,8 @@ Artifact types:
 Evidence roles:
 
 - decision_artifact: 147
+- market_money: 50
 - audience_icp: 47
-- market_money: 46
 - supporting: 37
 - source_claim: 27
 - competitor_universe: 16
@@ -56,7 +56,7 @@ Evidence roles:
 | data_processed/cross_source_universe_raw_parts/part_004.csv | source_claim | 14006 | 14006 | 4bcf357ad50b3cb1 |
 | data_processed/cross_source_universe_summary.csv | source_claim | 14 | 0 | a862c0e7fcdcd445 |
 | data_processed/desktop_store_source_summary.csv | source_claim | 5 | 5 | c5d367149f6ca29e |
-| data_processed/evidence_claim_register.csv | decision_artifact | 21 | 0 | f02204c29d298a8c |
+| data_processed/evidence_claim_register.csv | decision_artifact | 22 | 0 | 193b1823b540b25a |
 | data_processed/forum_quote_coding_matrix.csv | audience_icp | 72 | 72 | f2fb0ab869195b97 |
 | data_processed/hypothesis_decision_matrix.csv | decision_artifact | 6 | 0 | 4c5dc584cfbdd789 |
 | data_processed/icp_interview_capture_sheet.csv | audience_icp | 96 | 0 | 4494d5bf481075e5 |
@@ -70,6 +70,8 @@ Evidence roles:
 | data_processed/manual_walkthrough_capture_sheet.csv | supporting | 60 | 60 | 5c29a345cad6534e |
 | data_processed/market_claims.csv | market_money | 14 | 14 | ea4d24d882cdef0e |
 | data_processed/market_monetization_proxy_matrix.csv | market_money | 5 | 5 | a252897e3d0641c6 |
+| data_processed/market_money_triangulation.csv | market_money | 6 | 6 | 3449eec6a0215fb4 |
+| data_processed/market_money_triangulation_summary.csv | market_money | 4 | 0 | c69ae58664ce660a |
 | data_processed/market_sizing_assumption_audit.csv | market_money | 6 | 6 | e05c2e764989ea84 |
 | data_processed/market_sizing_stress_test.csv | market_money | 6 | 0 | 57e7579a20a091ee |
 | data_processed/market_source_confidence_review.csv | market_money | 12 | 12 | 0a05c8ffb35c22cf |
@@ -77,20 +79,18 @@ Evidence roles:
 | data_processed/p0_validation_field_guide.csv | decision_artifact | 8 | 8 | 875481ac096f5ef7 |
 | data_processed/paid_flow_capture_sheet.csv | supporting | 40 | 40 | c6b4feccce64ccea |
 | data_processed/prototype_session_capture_sheet.csv | supporting | 80 | 0 | d0f67d5fcb8a6703 |
-| data_processed/prototype_validation_scorecard.csv | decision_artifact | 6 | 0 | 50edbcf4d650b787 |
-| data_processed/prototype_validation_stimulus_flow.csv | decision_artifact | 16 | 0 | 2624eb570e1ae17c |
 
 ## Decision Artifacts
 
 | File | Type | Lines | Bytes | Hash |
 | --- | --- | ---: | ---: | --- |
 | docs/competitive/human-validation-guide-v1.md | research_doc | 91 | 12102 | b85e6b5dd29fcb2f |
-| docs/decision/evidence-audit-v1.md | research_doc | 85 | 9242 | 4c937e52a118f6a3 |
-| docs/decision/evidence-package-manifest-v1.md | research_doc | 125 | 8203 | 2f2290d4df74f247 |
+| docs/decision/evidence-audit-v1.md | research_doc | 87 | 9612 | 54dbb38365bbfaa7 |
+| docs/decision/evidence-package-manifest-v1.md | research_doc | 126 | 8300 | 5b8d222eba00b359 |
 | docs/decision/hypothesis-decision-matrix-v1.md | research_doc | 51 | 4655 | e4735e2f5779981a |
 | docs/decision/p0-validation-command-center-v1.md | research_doc | 69 | 7260 | 51d22a2990e6aaf3 |
 | docs/decision/p0-validation-field-guide-v1.md | research_doc | 136 | 12679 | 839df92dd885c73b |
-| docs/decision/polished-evidence-pack-v1.md | research_doc | 37 | 1118 | ca65d865c51a251f |
+| docs/decision/polished-evidence-pack-v1.md | research_doc | 38 | 1155 | 437e70feeeac78a1 |
 | docs/decision/validation-batch-01-v1.md | research_doc | 42 | 2909 | 92f524f2d31bc387 |
 | docs/decision/validation-batch-02-v1.md | research_doc | 143 | 19194 | aeadb19f7ba53a8a |
 | docs/decision/validation-batch-03-v1.md | research_doc | 69 | 6280 | 7ece8ef9641045d8 |
@@ -105,13 +105,13 @@ Evidence roles:
 | docs/product/prototype-validation-stimulus-v1.md | research_doc | 57 | 6109 | 0faba89f050d2b06 |
 | docs/strategy/validation-falsification-criteria.md | research_doc | 38 | 1152 | 310c8c3044a11540 |
 | docs/visuals/chart-index-v1.md | research_doc | 25 | 886 | 77cba8f26318bcae |
-| output/pdf/alina-evidence-first-report-draft.pdf | pdf | 1251 | 171969 | fc469242c51feaa8 |
-| output/pdf/alina-evidence-visual-report-v1.pdf | pdf | 284 | 29093 | 4acb9e3589ab462c |
-| output/pdf/alina-polished-evidence-pack-v1.pdf | pdf | 309 | 41368 | 31d946d4b0af24d1 |
-| reports/alina-evidence-first-report-draft.md | report | 1614 | 143672 | cdee12043f1d65ae |
+| output/pdf/alina-evidence-first-report-draft.pdf | pdf | 1270 | 174416 | 8b3dc9c247eef76a |
+| output/pdf/alina-evidence-visual-report-v1.pdf | pdf | 303 | 30984 | 7d03061b0c40a802 |
+| output/pdf/alina-polished-evidence-pack-v1.pdf | pdf | 328 | 43642 | 3b0972f9c34623c0 |
+| reports/alina-evidence-first-report-draft.md | report | 1648 | 146609 | b053d56980bfc59f |
 | reports/competitor-universe-expansion-2026-05-21.md | report | 17 | 371 | 6f085c07c40f01e7 |
 | reports/daily-update-template.md | report | 30 | 199 | 3f49329cf740df70 |
-| reports/evidence-status-2026-05-31.md | report | 45 | 11173 | 46ddc7f9255bde9d |
+| reports/evidence-status-2026-05-31.md | report | 46 | 11489 | 76f1f2345757ba7e |
 | reports/google-play-enrichment-block-2026-05-21.md | report | 13 | 471 | 8cc4d72b1b4c2a18 |
 | reports/matrix-synthesis-2026-05-31.md | report | 43 | 1009 | 939c826c2c1f40db |
 | reports/pdf-render-check-2026-05-31.md | report | 51 | 1578 | 35abeb7833564f14 |

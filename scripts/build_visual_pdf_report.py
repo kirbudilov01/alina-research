@@ -232,6 +232,7 @@ def main():
     whitespace = read_csv("data_processed/whitespace_signal_matrix.csv")
     tam = read_csv("data_processed/tam_sam_som_model.csv")
     som = read_csv("data_processed/som_sensitivity_scenarios.csv")
+    market_money = read_csv("data_processed/market_money_triangulation.csv")
     top100 = read_csv("data_processed/top100_competitor_review_scorecard.csv")
     iap = read_csv("data_raw/app_store_iap_pricing_raw.csv")
     gplay = read_csv("data_raw/google_play_pricing_raw.csv")
@@ -283,6 +284,7 @@ def main():
                 ["Google Play successful lookups", number(str(len(gplay_ok)))],
                 ["Web paywall domains", number(str(len(web_paywalls)))],
                 ["Web screenshot queue", number(str(len(web_queue)))],
+                ["Market-money rows", number(str(len(market_money)))],
                 ["Forum quote-coding rows", number(str(len(forum)))],
                 ["Community/referral rows", number(str(len(community_referral)))],
                 ["ICP segment hypotheses", number(str(len(icp)))],
@@ -345,6 +347,29 @@ def main():
         para(
             "The model avoids adding five TAMs together. The direct intersection SAM is treated as a discounted overlap across adjacent markets.",
             STYLES["Body"],
+        )
+    )
+    story.append(Spacer(1, 0.12 * inch))
+    story.append(
+        BarChart(
+            "Market Money Evidence Scores",
+            [(r.get("pillar", ""), float(r.get("total_money_evidence_score") or 0)) for r in market_money],
+            formatter=lambda v: f"{v:.0f}",
+        )
+    )
+    story.append(Spacer(1, 0.12 * inch))
+    story.append(
+        table(
+            [["Pillar", "Verdict", "H2 gate"]]
+            + [
+                [
+                    r.get("pillar", ""),
+                    r.get("money_triangulation_verdict", ""),
+                    r.get("h2_gate_status", ""),
+                ]
+                for r in market_money
+            ],
+            [1.35 * inch, 3.2 * inch, 1.2 * inch],
         )
     )
 

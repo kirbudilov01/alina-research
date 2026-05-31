@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T09:42:41.397Z
+Generated: 2026-05-31T09:49:42.330Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -28,6 +28,7 @@ Generated: 2026-05-31T09:42:41.397Z
 | Validation evidence rollup | data_processed/validation_evidence_rollup.csv; docs/decision/validation-evidence-rollup-v1.md | done v1; 75 command rows audit note existence and local artifact links |
 | Validation gate calculator | data_processed/validation_gate_calculator.csv; data_processed/validation_gate_status_summary.csv; docs/decision/validation-gate-calculator-v1.md | done v1; 6 H1-H6 gate rows convert capture sheets into pass/hold/downgrade readiness |
 | 5-market TAM/SAM/SOM method | docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; docs/market/competitor-revenue-proxy-review-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv; data_processed/competitor_revenue_proxy_review.csv; data_processed/competitor_revenue_proxy_market_summary.csv | done v1; source confidence, market monetization proxy, and bottom-up competitor revenue proxy layers added; model remains range-based and not final forecast |
+| Market-money triangulation | data_processed/market_money_triangulation.csv; data_processed/market_money_triangulation_summary.csv; docs/market/market-money-triangulation-v1.md | done v1; 6 market rows triangulate TAM/SAM/SOM, monetization proxy, competitor revenue proxy, paywall screenshots, and H2 gate status |
 | Whitespace matrices | data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md | done v1 |
 | Audience matrices | data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md | done v1 |
 | ICP / audience segment matrix | data_processed/icp_segment_matrix.csv; docs/audience/icp-segment-matrix-v1.md | done v1; maps audience/review/forum/monetization evidence into testable ICP hypotheses |

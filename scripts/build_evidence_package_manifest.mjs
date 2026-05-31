@@ -196,6 +196,8 @@ const requiredArtifacts = [
   'data_processed/market_sizing_assumption_audit.csv',
   'data_processed/market_sizing_stress_test.csv',
   'data_processed/market_monetization_proxy_matrix.csv',
+  'data_processed/market_money_triangulation.csv',
+  'data_processed/market_money_triangulation_summary.csv',
   'data_processed/competitor_revenue_proxy_review.csv',
   'data_processed/competitor_revenue_proxy_market_summary.csv',
   'data_processed/web_paywall_visual_adjudication.csv',
