@@ -1,6 +1,6 @@
 # Global Goal Evidence Coverage V1
 
-Generated: 2026-05-31T15:39:44.176Z
+Generated: 2026-05-31T15:45:45.817Z
 
 ## Зачем нужен этот слой
 
@@ -17,7 +17,7 @@ Generated: 2026-05-31T15:39:44.176Z
 | GOAL_05_WHITESPACE_AUDIENCE | Собрать whitespace и аудиторные матрицы | покрыто как directional synthesis, validation остается открытой | среднее | 5 synthesis rows; 6 whitespace rows; 6 ICP rows; 20492 audience signal rows | H3/H5 нельзя усиливать без manual walkthrough и recent-behavior interviews | исполнить первые 5 walkthrough и P0 ICP interview rows |
 | GOAL_06_REPORT_RU | Собрать последовательный русский мировой отчет и PDF/DOCX | покрыто как draft, не финальная validated версия | средне-сильное | global report md=yes; pdf=yes; docx=yes | финальная версия должна обновиться после observed validation rows | после capture rows пересобрать отчет и изменить claim language |
 | GOAL_07_VERSIONING | Сохранять локально, трассировать источники и версионировать через GitHub | покрыто активно | сильное | manifest=468; missing=0; docs=114; scripts=101 | manifest надо обновлять после каждого нового слоя | пересобирать manifest и делать commit/push после изменений |
-| GOAL_08_VALIDATION | Критически мыслить и не закрывать гипотезы без observed evidence | открыто, capture-ready | сильное для процесса, слабое для финального proof | gates=6; hold_validate=6; started=1; H2_completed=8/40; H1/H3/H4/H5/H6 observed rows still 0 | цель нельзя считать завершенной, пока observed validation gates не закрыты или не понижены по evidence | исполнить P0 validation backlog и обновить gate statuses |
+| GOAL_08_VALIDATION | Критически мыслить и не закрывать гипотезы без observed evidence | открыто, capture-ready | сильное для процесса, слабое для финального proof | gates=6; hold_validate=6; started=1; H2_completed=28 / 40; H2_success=8 / 12; H1/H3/H4/H5/H6 observed rows still 0 | цель нельзя считать завершенной, пока observed validation gates не закрыты или не понижены по evidence | исполнить P0 validation backlog и обновить gate statuses |
 
 ## Главный вывод
 

@@ -1,6 +1,6 @@
 # Alina Research. Мировой рынок и логика гипотез
 
-Собрано: 2026-05-31T15:39:46.472Z
+Собрано: 2026-05-31T15:45:48.167Z
 
 ## ОПИСАНИЕ ПРОЕКТА И ГИПОТЕЗА #1
 
@@ -20,12 +20,12 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | H1 | форма продукта существует | ручной walkthrough конкурентов | не начато | 0 / 60 | 0 / 25 | оставить hold_validate |
 | H3 | есть узкое белое пятно | ручной walkthrough конкурентов | не начато | 0 / 60 | 0 / 25 | оставить hold_validate |
-| H2 | в рынках есть деньги | проверка paywall и платной глубины | начато, но доказательств недостаточно | 8 / 40 | 8 / 12 | оставить hold_validate |
+| H2 | в рынках есть деньги | проверка paywall и платной глубины | начато, но доказательств недостаточно | 28 / 40 | 8 / 12 | оставить hold_validate |
 | H5 | общая аудитория существует | интервью ICP и recent behavior | не начато | 0 / 96 | 0 / 30 | оставить hold_validate |
 | H4 | конкурентное преимущество правдоподобно | прототипные сессии и scorecard | не начато | 0 / 80 | 0 / 32 | оставить hold_validate |
 | H6 | продуктовое ядро можно определить | прототипные сессии и scorecard | не начато | 0 / 80 | 0 / 32 | оставить hold_validate |
 
-Практически это означает следующее: H2 уже имеет 8 заполненных paid-flow строк из 40, но еще ниже минимального порога; H1, H3, H4, H5 и H6 остаются в hold_validate, потому что по ним нет наблюдаемых capture rows. Это не слабость отчета, а защита от преждевременного вывода: большой массив конкурентов и источников показывает, куда идти, но не заменяет walkthrough, интервью и прототипные сессии.
+Практически это означает следующее: H2 уже имеет 28 / 40 заполненных paid-flow строк и 8 / 12 успешных строк, но еще ниже минимального порога; H1, H3, H4, H5 и H6 остаются в hold_validate, потому что по ним нет наблюдаемых capture rows. Это не слабость отчета, а защита от преждевременного вывода: большой массив конкурентов и источников показывает, куда идти, но не заменяет walkthrough, интервью и прототипные сессии.
 
 ## ОПРЕДЕЛЕНИЕ МИРОВЫХ ЦЕЛЕВЫХ РЫНКОВ И ГИПОТЕЗА #2
 
@@ -49,7 +49,7 @@
 | Coaching / self-improvement | $300M | средний направленный money case | 8 | Можно использовать как directional evidence, но нельзя усиливать claim до product-market proof без walkthrough, paywall signoff и пользовательских сессий. |
 | Gaming / progression benchmark | $671M | деньги видны, но это benchmark, не прямой TAM | 7 | Нельзя считать прямым рынком Alina без доказанного ritual/self-improvement overlap; использовать как механику прогресса и retention. |
 
-Intersection SAM в текущей модели равен $202M. Это рабочая мировая рамка для дальнейшей проверки, а не обещание revenue. Локальный paid-flow signoff сейчас заполнен на 8 строках; H2 gate имеет статус in_progress_insufficient_evidence, потому что нужны еще in-app paywall walkthrough и willingness-to-pay evidence.
+Intersection SAM в текущей модели равен $202M. Это рабочая мировая рамка для дальнейшей проверки, а не обещание revenue. Локальный paid-flow signoff сейчас заполнен на 28 строках; H2 gate имеет статус in_progress_insufficient_evidence, потому что нужны еще in-app paywall walkthrough и willingness-to-pay evidence.
 
 ## МЕТОДОЛОГИЯ TAM/SAM/SOM
 
@@ -239,7 +239,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | GOAL_05_WHITESPACE_AUDIENCE | Собрать whitespace и аудиторные матрицы | покрыто как directional synthesis, validation остается открытой | 5 synthesis rows; 6 whitespace rows; 6 ICP rows; 20492 audience signal rows | H3/H5 нельзя усиливать без manual walkthrough и recent-behavior interviews | исполнить первые 5 walkthrough и P0 ICP interview rows |
 | GOAL_06_REPORT_RU | Собрать последовательный русский мировой отчет и PDF/DOCX | покрыто как draft, не финальная validated версия | global report md=yes; pdf=yes; docx=yes | финальная версия должна обновиться после observed validation rows | после capture rows пересобрать отчет и изменить claim language |
 | GOAL_07_VERSIONING | Сохранять локально, трассировать источники и версионировать через GitHub | покрыто активно | manifest=468; missing=0; docs=114; scripts=101 | manifest надо обновлять после каждого нового слоя | пересобирать manifest и делать commit/push после изменений |
-| GOAL_08_VALIDATION | Критически мыслить и не закрывать гипотезы без observed evidence | открыто, capture-ready | gates=6; hold_validate=6; started=1; H2_completed=8/40; H1/H3/H4/H5/H6 observed rows still 0 | цель нельзя считать завершенной, пока observed validation gates не закрыты или не понижены по evidence | исполнить P0 validation backlog и обновить gate statuses |
+| GOAL_08_VALIDATION | Критически мыслить и не закрывать гипотезы без observed evidence | открыто, capture-ready | gates=6; hold_validate=6; started=1; H2_completed=28 / 40; H2_success=8 / 12; H1/H3/H4/H5/H6 observed rows still 0 | цель нельзя считать завершенной, пока observed validation gates не закрыты или не понижены по evidence | исполнить P0 validation backlog и обновить gate statuses |
 
 Главный вывод по этой карте: пакет уже масштабный и трассируемый, но не финально валидированный. Это правильное состояние для evidence-first ресерча: сильные desk/source слои готовы, а product/market claims остаются в hold_validate до ручных walkthrough, интервью, прототипа и WTP.
 

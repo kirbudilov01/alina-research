@@ -110,7 +110,13 @@ function completedPaid(row) {
 }
 
 function successPaid(row) {
-  return completedPaid(row) && !['reject', 'unrelated_product', 'wrong_product'].includes(clean(row.product_match_label).toLowerCase());
+  const paidFlow = clean(row.paid_flow_label).toLowerCase();
+  const productMatch = clean(row.product_match_label).toLowerCase();
+  const strength = clean(row.signoff_strength).toLowerCase();
+  if (!completedPaid(row)) return false;
+  if (['reject', 'unrelated_product', 'wrong_product'].includes(productMatch)) return false;
+  if (paidFlow.includes('no_clean') || productMatch.includes('no_clean') || strength.includes('no_clean')) return false;
+  return true;
 }
 
 function failPaid(row) {

@@ -95,6 +95,9 @@ const dedupMilestone = sourceScale.find(row => row.milestone_id === 'DEDUP_30_40
 const dedup50 = sourceScale.find(row => row.milestone_id === 'DEDUP_50K_UPPER_ASPIRATION') || {};
 const gateOpen = gates.filter(row => row.decision_ru === 'оставить hold_validate').length;
 const gateStarted = gates.filter(row => clean(row.gate_status_ru).startsWith('начато')).length;
+const h2Gate = gates.find(row => row.hypothesis_id === 'H2') || {};
+const h2Completed = h2Gate.completed_vs_required || '0 / 0';
+const h2Success = h2Gate.success_vs_threshold || '0 / 0';
 
 const rows = [
   {
@@ -172,7 +175,7 @@ const rows = [
     objective_part_ru: 'Критически мыслить и не закрывать гипотезы без observed evidence',
     status_ru: 'открыто, capture-ready',
     evidence_strength_ru: 'сильное для процесса, слабое для финального proof',
-    current_evidence_ru: `gates=${gates.length}; hold_validate=${gateOpen}; started=${gateStarted}; H2_completed=8/40; H1/H3/H4/H5/H6 observed rows still 0`,
+    current_evidence_ru: `gates=${gates.length}; hold_validate=${gateOpen}; started=${gateStarted}; H2_completed=${h2Completed}; H2_success=${h2Success}; H1/H3/H4/H5/H6 observed rows still 0`,
     key_files: 'data_processed/global_hypothesis_gate_snapshot.csv;data_processed/global_next_validation_backlog.csv;data_processed/validation_gate_calculator.csv;data_processed/manual_walkthrough_capture_sheet.csv;data_processed/icp_interview_capture_sheet.csv;data_processed/prototype_session_capture_sheet.csv',
     remaining_gap_ru: 'цель нельзя считать завершенной, пока observed validation gates не закрыты или не понижены по evidence',
     next_move_ru: 'исполнить P0 validation backlog и обновить gate statuses'
