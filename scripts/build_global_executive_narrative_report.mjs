@@ -102,6 +102,7 @@ const rawRows = csv('data_processed/cross_source_universe_raw.csv');
 const dedupRows = csv('data_processed/cross_source_universe_dedup.csv');
 const manifest = csv('data_processed/evidence_artifact_manifest.csv');
 const nicheRollup = csv('data_processed/global_niche_count_rollup.csv');
+const nicheCountReconciliation = csv('data_processed/niche_count_reconciliation.csv');
 const marketMoney = csv('data_processed/market_money_triangulation.csv');
 const tam = csv('data_processed/tam_sam_som_model.csv');
 const gates = csv('data_processed/global_hypothesis_gate_snapshot.csv');
@@ -219,6 +220,13 @@ lines.push(mdTable(marketRows, [
   { key: 'read', label: 'Как читать' }
 ]));
 lines.push('');
+if (nicheCountReconciliation.length) {
+  const globalDedupRow = nicheCountReconciliation.find(row => row.row_id === 'COUNT_02_GLOBAL_DEDUP') || {};
+  const nicheDedupRow = nicheCountReconciliation.find(row => row.row_id === 'COUNT_03_NICHE_DEDUP_SUM') || {};
+  const directAppRow = nicheCountReconciliation.find(row => row.row_id === 'COUNT_04_DIRECT_APP_SUM') || {};
+  lines.push(`Сверка счетчиков: global dedup = ${fmt(globalDedupRow.count_value)}, сумма all-source niche dedup = ${fmt(nicheDedupRow.count_value)}, сумма direct app-store dedup по нишам = ${fmt(directAppRow.count_value)}. Эти числа отвечают на разные вопросы и не должны складываться в одно “количество приложений”: ниши являются тематическими корзинами, а один продукт может жить в нескольких контекстах.`);
+  lines.push('');
+}
 lines.push(`Текущая intersection SAM-модель дает ${money(intersection.samBase)} base SAM и ${money(by(marketMoney, 'pillar', 'intersection').weighted_sam_base_usd)} confidence-weighted SAM. Это рамка для проверки, а не forecast выручки Alina. Gaming показывает большой money context, но остается benchmark mechanics, пока нет доказанного ritual/self-improvement overlap.`);
 lines.push('');
 lines.push('## Что видно по конкурентам');
@@ -288,6 +296,7 @@ lines.push('- `data_processed/evidence_artifact_manifest.csv`');
 lines.push('- `data_processed/global_report_readability_audit.csv`');
 lines.push('- `data_processed/russian_sequential_storyline.csv`');
 lines.push('- `data_processed/russian_frontmatter_dashboard.csv`');
+lines.push('- `data_processed/niche_count_reconciliation.csv`');
 
 fs.writeFileSync(OUT, `${lines.join('\n')}\n`);
 

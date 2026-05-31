@@ -194,6 +194,7 @@ const rawRows = csv('data_processed/cross_source_universe_raw.csv');
 const dedupRows = csv('data_processed/cross_source_universe_dedup.csv');
 const nicheSummary = csv('data_processed/russian_readable_niche_summary.csv');
 const nicheCountRollup = csv('data_processed/global_niche_count_rollup.csv');
+const nicheCountReconciliation = csv('data_processed/niche_count_reconciliation.csv');
 const marketDeepDives = csv('data_processed/russian_market_deep_dives.csv');
 const whitespace = csv('data_processed/russian_whitespace_decision_map.csv');
 const competitors = csv('data_processed/russian_competitor_battlecards.csv');
@@ -498,6 +499,15 @@ const sourceAppendix = [
     primary_metric: `${frontmatterDashboard.length} dashboard rows`,
     evidence_files: 'data_processed/russian_frontmatter_dashboard.csv;docs/decision/russian-frontmatter-dashboard-v1.md;data_processed/global_niche_count_rollup.csv;data_processed/global_hypothesis_gate_snapshot.csv',
     source_boundary_ru: 'Dashboard улучшает читаемость и видимость счетчиков; он не превращает coverage, source volume или TAM/SAM/SOM в доказанный спрос.'
+  },
+  {
+    claim_id: 'SRC_15_NICHE_COUNT_RECONCILIATION',
+    report_section: 'Определение мировых целевых рынков и гипотеза #2',
+    claim_ru: 'Счетчики по пяти нишам сверены между raw, all-source niche dedup, global dedup, direct app-store dedup, top100 review и manual targets.',
+    evidence_status_ru: 'доказано как count reconciliation, не demand proof',
+    primary_metric: `${nicheCountReconciliation.length} reconciliation rows`,
+    evidence_files: 'data_processed/niche_count_reconciliation.csv;docs/competitive/niche-count-reconciliation-v1.md;data_processed/global_niche_count_rollup.csv;data_processed/cross_source_universe_dedup.csv',
+    source_boundary_ru: 'Reconciliation объясняет арифметику и scope счетчиков; он не доказывает спрос, WTP или отсутствие hidden clone.'
   }
 ];
 
@@ -697,6 +707,42 @@ if (nicheCountRollup.length) {
     { key: 'manual', label: 'Manual targets', align: 'right' },
     { key: 'coverage', label: 'Coverage' },
     { key: 'read', label: 'Как читать' }
+  ]));
+  lines.push('');
+}
+if (nicheCountReconciliation.length) {
+  const reconciliationSummary = nicheCountReconciliation.filter(row => row.layer_ru !== 'Ниша');
+  const reconciliationNiches = nicheCountReconciliation.filter(row => row.layer_ru === 'Ниша');
+  lines.push('### Сверка счетчиков: почему числа не складываются в одно “количество приложений”');
+  lines.push('');
+  lines.push('Чтобы не было ощущения, что в отчете смешаны несопоставимые данные, ниже отдельно сверены уровни счетчиков. Главное правило: global dedup, niche dedup и direct app-store dedup отвечают на разные вопросы. Global dedup показывает размер уникализированного пакета. Niche dedup показывает тематическую ширину каждой корзины. Direct app-store dedup ближе всего к вопросу “сколько consumer-app конкурентов видно в нише”, но и он не доказывает, что все эти продукты являются прямыми клонами Alina.');
+  lines.push('');
+  lines.push(mdTable(reconciliationSummary.map(row => ({
+    id: row.row_id,
+    layer: row.layer_ru,
+    type: row.count_type_ru,
+    value: row.count_value,
+    meaning: row.plain_meaning_ru,
+    note: row.reconciliation_note_ru
+  })), [
+    { key: 'id', label: 'ID' },
+    { key: 'layer', label: 'Слой' },
+    { key: 'type', label: 'Тип числа' },
+    { key: 'value', label: 'Значение', align: 'right' },
+    { key: 'meaning', label: 'Что значит' },
+    { key: 'note', label: 'Как сверять' }
+  ]));
+  lines.push('');
+  lines.push(mdTable(reconciliationNiches.map(row => ({
+    market: row.market_ru,
+    value: row.count_value,
+    meaning: row.plain_meaning_ru,
+    cannot: row.what_it_cannot_prove_ru
+  })), [
+    { key: 'market', label: 'Ниша' },
+    { key: 'value', label: 'All-source dedup', align: 'right' },
+    { key: 'meaning', label: 'Стек счетчиков' },
+    { key: 'cannot', label: 'Что не доказывает' }
   ]));
   lines.push('');
 }
@@ -1110,6 +1156,7 @@ lines.push('- `data_processed/russian_frontmatter_dashboard.csv`');
 lines.push('- `data_processed/global_market_sizing_methodology.csv`');
 lines.push('- `data_processed/market_model_sensitivity_audit.csv`');
 lines.push('- `data_processed/global_niche_count_rollup.csv`');
+lines.push('- `data_processed/niche_count_reconciliation.csv`');
 lines.push('- `data_processed/global_whitespace_audience_synthesis.csv`');
 lines.push('- `data_processed/global_competitor_archetype_rollup.csv`');
 lines.push('- `data_processed/competitor_taxonomy_cleanup_queue.csv`');

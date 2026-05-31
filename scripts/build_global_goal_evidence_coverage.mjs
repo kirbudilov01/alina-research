@@ -129,8 +129,8 @@ const rows = [
     objective_part_ru: 'Покрыть 5 направлений: mindfulness, coaching, astrology/esoterics, avatar/identity, gaming/progression',
     status_ru: 'покрыто',
     evidence_strength_ru: 'сильное',
-    current_evidence_ru: `${countRows('data_processed/russian_readable_niche_summary.csv')} market rows; ${countRows('data_processed/global_whitespace_audience_synthesis.csv')} whitespace/audience rows; ${countRows('data_processed/global_market_sizing_methodology.csv')} market methodology rows`,
-    key_files: 'data_processed/russian_readable_niche_summary.csv;data_processed/global_whitespace_audience_synthesis.csv;data_processed/global_market_sizing_methodology.csv',
+    current_evidence_ru: `${countRows('data_processed/russian_readable_niche_summary.csv')} market rows; ${countRows('data_processed/global_whitespace_audience_synthesis.csv')} whitespace/audience rows; ${countRows('data_processed/global_market_sizing_methodology.csv')} market methodology rows; count_reconciliation_rows=${countRows('data_processed/niche_count_reconciliation.csv')}`,
+    key_files: 'data_processed/russian_readable_niche_summary.csv;data_processed/global_whitespace_audience_synthesis.csv;data_processed/global_market_sizing_methodology.csv;data_processed/niche_count_reconciliation.csv;docs/competitive/niche-count-reconciliation-v1.md',
     remaining_gap_ru: 'gaming остается benchmark-only до direct audience overlap proof',
     next_move_ru: 'сохранять gaming вне прямого TAM и H3 proof'
   },
