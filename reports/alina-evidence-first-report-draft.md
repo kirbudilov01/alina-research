@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T03:33:58.037Z
+Generated: 2026-05-31T03:37:47.396Z
 
 ## 1. Executive Summary
 
@@ -20,6 +20,7 @@ Key quantified signals:
 - Google Play pricing validation: 247/250 successful Android lookups; 191 apps offer IAP.
 - Developer website paywall discovery: 560 fetched URL rows across 70 app/domain rows; 29 domains queued for screenshot validation.
 - Web paywall screenshot capture: 29/29 queued screenshots captured for manual interpretation.
+- Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
@@ -215,6 +216,30 @@ Highest-priority screenshot evidence:
 | 10 | Tennis Clash: Multiplayer Game | gaming | medium | captured | output/paywall_screenshots/10-tennis-clash-multiplayer-game-medium.png |
 | 11 | Mob Control | gaming | medium | captured | output/paywall_screenshots/11-mob-control-medium.png |
 | 12 | Modern Strike Online: War FPS | gaming | medium | captured | output/paywall_screenshots/12-modern-strike-online-war-fps-medium.png |
+
+### Web Paywall Screenshot OCR Interpretation
+
+OCR interpretation was run for 29 captured screenshots. This conservative layer separates visible public pricing from ambiguous pages, login gates, and not-found pages; it still requires human review before final claims.
+
+Screenshot interpretation verdicts:
+
+- weak_or_unconfirmed: 17
+- partially_confirms_paywall_language: 5
+- weakens_signal_not_found: 3
+- confirms_public_pricing_signal: 2
+- needs_manual_review_high_signal_no_visible_price: 2
+
+Strongest confirmed/weakening examples:
+
+| Rank | App | Original Signal | OCR Verdict | OCR Prices | Screenshot |
+| ---: | --- | --- | --- | --- | --- |
+| 1 | The Sims™ FreePlay | high | weakens_signal_not_found |  | output/paywall_screenshots/01-the-sims-freeplay-high.png |
+| 2 | Character AI: Chat, Talk, Text | high | confirms_public_pricing_signal | $9.99/$94.99 | output/paywall_screenshots/02-character-ai-chat-talk-text-high.png |
+| 3 | Headspace: Sleep & Meditate | high | needs_manual_review_high_signal_no_visible_price |  | output/paywall_screenshots/03-headspace-sleep-meditate-high.png |
+| 4 | Meditopia: Sleep & Meditation | high | confirms_public_pricing_signal | $3.50 | output/paywall_screenshots/04-meditopia-sleep-meditation-high.png |
+| 5 | Nebula: Spiritual Guidance | high | needs_manual_review_high_signal_no_visible_price |  | output/paywall_screenshots/05-nebula-spiritual-guidance-high.png |
+| 23 | BetterMe: Health Coaching | medium | weakens_signal_not_found |  | output/paywall_screenshots/23-betterme-health-coaching-medium.png |
+| 27 | Co–Star Personalized Astrology | medium | weakens_signal_not_found |  | output/paywall_screenshots/27-co-star-personalized-astrology-medium.png |
 
 ### Retention Signals
 
@@ -478,6 +503,7 @@ Market claims currently normalized: 14.
 - `docs/competitive/google-play-pricing-v1.md`
 - `docs/competitive/web-paywall-validation-v1.md`
 - `docs/competitive/web-paywall-screenshot-validation-v1.md`
+- `docs/competitive/web-paywall-screenshot-interpretation-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
 - `data_processed/competitor_feature_matrix.csv`
@@ -490,6 +516,7 @@ Market claims currently normalized: 14.
 - `data_processed/google_play_pricing_summary.csv`
 - `data_processed/web_paywall_signal_matrix.csv`
 - `data_processed/web_paywall_screenshot_validation.csv`
+- `data_processed/web_paywall_screenshot_interpretation.csv`
 - `data_processed/pricing_retention_matrix.csv`
 - `data_processed/product_core_evidence_matrix.csv`
 - `data_processed/review_signal_matrix.csv`
