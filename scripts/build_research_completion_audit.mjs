@@ -117,11 +117,16 @@ const icpSegments = csv('data_processed/icp_segment_matrix.csv');
 const icpValidation = csv('data_processed/icp_validation_test_plan.csv');
 const prototypeStimulusFlow = csv('data_processed/prototype_validation_stimulus_flow.csv');
 const prototypeScorecard = csv('data_processed/prototype_validation_scorecard.csv');
+const manualWalkthroughCapture = csv('data_processed/manual_walkthrough_capture_sheet.csv');
+const paidFlowCapture = csv('data_processed/paid_flow_capture_sheet.csv');
+const icpInterviewCapture = csv('data_processed/icp_interview_capture_sheet.csv');
+const prototypeSessionCapture = csv('data_processed/prototype_session_capture_sheet.csv');
 
 const p0Roadmap = roadmap.filter(row => row.priority === 'P0');
 const p1Roadmap = roadmap.filter(row => row.priority === 'P1');
 const p0ExecutionTasks = validationExecutionDashboard.filter(row => row.priority === 'P0');
 const p1ExecutionTasks = validationExecutionDashboard.filter(row => row.priority === 'P1');
+const validationCaptureRows = manualWalkthroughCapture.length + paidFlowCapture.length + icpInterviewCapture.length + prototypeSessionCapture.length;
 const humanConfirmed = validationQueue.filter(row => !['', 'not_started'].includes(row.validation_status)).length;
 const manualInspectionDone = manualInspectionPacket.filter(row => !['', 'not_started'].includes(row.inspection_status)).length;
 const publicListingInspected = publicListingInspection.filter(row => row.public_listing_inspection_status === 'public_listing_inspected').length;
@@ -197,8 +202,8 @@ const requirements = [
     objective_source: 'User asked to prove a white spot among markets/apps and absence or weakness of existing solutions.',
     status: whitespace.length && manualInspectionPacket.length && publicListingInspection.length ? 'narrow_supported_public_listing_inspected_walkthrough_open' : (whitespace.length && manualInspectionPacket.length ? 'narrow_supported_inspection_ready_not_final' : 'missing'),
     evidence_strength: 'medium',
-    proof: `whitespace_rows=${whitespace.length}; high_ws=${whitespace.filter(row => row.whitespace_band === 'high').length}; top100=${top100.length}; behavior_tied=${top100.filter(row => row.behavior_tied_progression === 'yes').length}; manual_inspection_targets=${manualInspectionPacket.length}; manual_inspection_rubric=${manualInspectionRubric.length}; public_listing_inspected=${publicListingInspected}; public_listing_visible_causality=${publicListingVisibleCausality}; public_listing_high_clone_risk=${publicListingHighCloneRisk}; manual_app_walkthrough_done=${manualInspectionDone}`,
-    evidence_files: 'data_processed/whitespace_signal_matrix.csv;data_processed/top100_competitor_review_scorecard.csv;data_processed/manual_competitor_inspection_packet.csv;data_processed/manual_competitor_inspection_rubric.csv;data_processed/public_listing_inspection_results.csv;data_processed/public_listing_inspection_summary.csv;docs/intersections/whitespace-map-v2.md;docs/competitive/top100-competitor-review-v1.md;docs/competitive/manual-competitor-inspection-packet-v1.md;docs/competitive/public-listing-inspection-v1.md',
+    proof: `whitespace_rows=${whitespace.length}; high_ws=${whitespace.filter(row => row.whitespace_band === 'high').length}; top100=${top100.length}; behavior_tied=${top100.filter(row => row.behavior_tied_progression === 'yes').length}; manual_inspection_targets=${manualInspectionPacket.length}; manual_inspection_rubric=${manualInspectionRubric.length}; public_listing_inspected=${publicListingInspected}; public_listing_visible_causality=${publicListingVisibleCausality}; public_listing_high_clone_risk=${publicListingHighCloneRisk}; manual_walkthrough_capture_rows=${manualWalkthroughCapture.length}; manual_app_walkthrough_done=${manualInspectionDone}`,
+    evidence_files: 'data_processed/whitespace_signal_matrix.csv;data_processed/top100_competitor_review_scorecard.csv;data_processed/manual_competitor_inspection_packet.csv;data_processed/manual_competitor_inspection_rubric.csv;data_processed/manual_walkthrough_capture_sheet.csv;data_processed/public_listing_inspection_results.csv;data_processed/public_listing_inspection_summary.csv;docs/intersections/whitespace-map-v2.md;docs/competitive/top100-competitor-review-v1.md;docs/competitive/manual-competitor-inspection-packet-v1.md;docs/competitive/public-listing-inspection-v1.md;docs/decision/validation-capture-sheets-v1.md',
     remaining_gap: 'Public listings for the P0 wave are inspected, but metadata/public copy can miss hidden in-app mechanics; app/onboarding walkthrough screenshots are still required.',
     next_action: 'Use the public-listing risk reads to prioritize walkthrough screenshots for onboarding, first action, progress/avatar feedback, and paywall boundary.'
   },
@@ -208,8 +213,8 @@ const requirements = [
     objective_source: 'User asked for common audience, segments, customer profile, detailed matrices.',
     status: audience.length && icpSegments.length && icpValidation.length ? 'directionally_supported_validation_ready' : 'missing',
     evidence_strength: 'medium',
-    proof: `audience_rows=${audience.length}; icp_segments=${icpSegments.length}; icp_validation_tests=${icpValidation.length}`,
-    evidence_files: 'data_processed/audience_signal_matrix.csv;data_processed/icp_segment_matrix.csv;data_processed/icp_validation_test_plan.csv;docs/audience/icp-segment-matrix-v1.md;docs/audience/icp-validation-packet-v1.md',
+    proof: `audience_rows=${audience.length}; icp_segments=${icpSegments.length}; icp_validation_tests=${icpValidation.length}; icp_capture_rows=${icpInterviewCapture.length}`,
+    evidence_files: 'data_processed/audience_signal_matrix.csv;data_processed/icp_segment_matrix.csv;data_processed/icp_validation_test_plan.csv;data_processed/icp_interview_capture_sheet.csv;docs/audience/icp-segment-matrix-v1.md;docs/audience/icp-validation-packet-v1.md;docs/decision/validation-capture-sheets-v1.md',
     remaining_gap: 'Segments are directional and need interviews/prototype/WTP validation.',
     next_action: 'Run ICP validation packet for top two segments.'
   },
@@ -219,8 +224,8 @@ const requirements = [
     objective_source: 'User asked to prove competitive advantage and move toward product ядро.',
     status: feature.length && prototypeStimulusFlow.length && prototypeScorecard.length ? 'prototype_stimulus_ready_not_validated' : 'missing',
     evidence_strength: 'medium',
-    proof: `feature_rows=${feature.length}; primary_top100_apps=${primaryApps}; evidence_claims=${evidence.length}; prototype_segments=${prototypeSegments}; prototype_screens=${prototypeScreens}; prototype_flow_rows=${prototypeStimulusFlow.length}; prototype_scorecard_metrics=${prototypeScorecard.length}`,
-    evidence_files: 'data_processed/product_core_evidence_matrix.csv;data_processed/prototype_validation_stimulus_flow.csv;data_processed/prototype_validation_scorecard.csv;docs/product/product-core-evidence-v1.md;docs/product/prototype-validation-stimulus-v1.md;docs/strategy/value-proposition-v1.md;data_processed/evidence_claim_register.csv',
+    proof: `feature_rows=${feature.length}; primary_top100_apps=${primaryApps}; evidence_claims=${evidence.length}; prototype_segments=${prototypeSegments}; prototype_screens=${prototypeScreens}; prototype_flow_rows=${prototypeStimulusFlow.length}; prototype_scorecard_metrics=${prototypeScorecard.length}; prototype_capture_rows=${prototypeSessionCapture.length}`,
+    evidence_files: 'data_processed/product_core_evidence_matrix.csv;data_processed/prototype_validation_stimulus_flow.csv;data_processed/prototype_validation_scorecard.csv;data_processed/prototype_session_capture_sheet.csv;docs/product/product-core-evidence-v1.md;docs/product/prototype-validation-stimulus-v1.md;docs/strategy/value-proposition-v1.md;data_processed/evidence_claim_register.csv;docs/decision/validation-capture-sheets-v1.md',
     remaining_gap: 'No completed user/prototype sessions prove the loop is understood/preferred.',
     next_action: 'Run prototype sessions with the top two ICP segments and record comprehension, meaning lift, differentiation, return intent, and paid-depth signals.'
   },
@@ -250,10 +255,10 @@ const requirements = [
     requirement_id: 'REQ_10_VALIDATION_GATES',
     requirement: 'Remaining validation gates are explicit and prioritized.',
     objective_source: 'User wanted critical thinking and continued work when information is missing.',
-    status: roadmap.length && validationExecutionDashboard.length ? 'proved_v1_open_gates_execution_dashboard_ready' : (roadmap.length ? 'proved_v1_open_gates' : 'missing'),
+    status: roadmap.length && validationExecutionDashboard.length && validationCaptureRows ? 'proved_v1_open_gates_capture_ready' : (roadmap.length && validationExecutionDashboard.length ? 'proved_v1_open_gates_execution_dashboard_ready' : (roadmap.length ? 'proved_v1_open_gates' : 'missing')),
     evidence_strength: 'strong',
-    proof: `roadmap_rows=${roadmap.length}; p0=${p0Roadmap.length}; p1=${p1Roadmap.length}; execution_tasks=${validationExecutionDashboard.length}; execution_p0=${p0ExecutionTasks.length}; execution_p1=${p1ExecutionTasks.length}; human_confirmed=${humanConfirmed}; manual_inspection_targets=${manualInspectionPacket.length}; public_listing_inspected=${publicListingInspected}; manual_app_walkthrough_done=${manualInspectionDone}`,
-    evidence_files: 'data_processed/validation_gap_roadmap.csv;data_processed/validation_execution_dashboard.csv;docs/decision/validation-gap-roadmap-v1.md;docs/decision/validation-execution-dashboard-v1.md;data_processed/top100_human_validation_queue.csv;data_processed/manual_competitor_inspection_packet.csv;data_processed/public_listing_inspection_results.csv;docs/competitive/manual-competitor-inspection-packet-v1.md;docs/competitive/public-listing-inspection-v1.md',
+    proof: `roadmap_rows=${roadmap.length}; p0=${p0Roadmap.length}; p1=${p1Roadmap.length}; execution_tasks=${validationExecutionDashboard.length}; execution_p0=${p0ExecutionTasks.length}; execution_p1=${p1ExecutionTasks.length}; capture_rows=${validationCaptureRows}; manual_capture_rows=${manualWalkthroughCapture.length}; paid_capture_rows=${paidFlowCapture.length}; icp_capture_rows=${icpInterviewCapture.length}; prototype_capture_rows=${prototypeSessionCapture.length}; human_confirmed=${humanConfirmed}; manual_inspection_targets=${manualInspectionPacket.length}; public_listing_inspected=${publicListingInspected}; manual_app_walkthrough_done=${manualInspectionDone}`,
+    evidence_files: 'data_processed/validation_gap_roadmap.csv;data_processed/validation_execution_dashboard.csv;data_processed/manual_walkthrough_capture_sheet.csv;data_processed/paid_flow_capture_sheet.csv;data_processed/icp_interview_capture_sheet.csv;data_processed/prototype_session_capture_sheet.csv;docs/decision/validation-gap-roadmap-v1.md;docs/decision/validation-execution-dashboard-v1.md;docs/decision/validation-capture-sheets-v1.md;data_processed/top100_human_validation_queue.csv;data_processed/manual_competitor_inspection_packet.csv;data_processed/public_listing_inspection_results.csv;docs/competitive/manual-competitor-inspection-packet-v1.md;docs/competitive/public-listing-inspection-v1.md',
     remaining_gap: 'Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation.',
     next_action: 'Execute P0 rows in the validation execution dashboard, then update source CSVs and final verdicts.'
   }

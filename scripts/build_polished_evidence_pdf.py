@@ -306,6 +306,10 @@ def main() -> None:
     top100 = read_csv("data_processed/top100_competitor_review_scorecard.csv")
     roadmap = read_csv("data_processed/validation_gap_roadmap.csv")
     execution_dashboard = read_csv("data_processed/validation_execution_dashboard.csv")
+    manual_capture = read_csv("data_processed/manual_walkthrough_capture_sheet.csv")
+    paid_capture = read_csv("data_processed/paid_flow_capture_sheet.csv")
+    icp_capture = read_csv("data_processed/icp_interview_capture_sheet.csv")
+    prototype_capture = read_csv("data_processed/prototype_session_capture_sheet.csv")
 
     known_raw_total = len(expanded_raw) + len(itch) + len(steam) + len(chrome_raw)
     csv_rows = sum(int(row.get("row_count") or 0) for row in manifest if row.get("file_path", "").endswith(".csv"))
@@ -340,6 +344,7 @@ def main() -> None:
     p1_roadmap = [row for row in roadmap if row.get("priority") == "P1"]
     p0_execution = [row for row in execution_dashboard if row.get("priority") == "P0"]
     p1_execution = [row for row in execution_dashboard if row.get("priority") == "P1"]
+    capture_rows = len(manual_capture) + len(paid_capture) + len(icp_capture) + len(prototype_capture)
 
     metrics = {
         "Known raw source/app rows": number(known_raw_total),
@@ -348,6 +353,7 @@ def main() -> None:
         "Tracked CSV rows": number(csv_rows),
         "Competitor revenue proxy rows": number(len(revenue)),
         "Manual P0 inspection targets": number(len(manual)),
+        "Validation capture rows": number(capture_rows),
     }
     build_doc_note(metrics)
 
@@ -360,7 +366,7 @@ def main() -> None:
                 ("dedup universe", number(len(expanded))),
                 ("manifest artifacts", number(len(manifest))),
                 ("tracked CSV rows", number(csv_rows)),
-                ("P0 app inspections", number(len(manual))),
+                ("capture rows", number(capture_rows)),
             ]
         ),
         Spacer(1, 0.14 * inch),
@@ -582,6 +588,10 @@ def main() -> None:
                 ["P1 validation roadmap rows", len(p1_roadmap)],
                 ["P0 execution dashboard tasks", len(p0_execution)],
                 ["P1 execution dashboard tasks", len(p1_execution)],
+                ["Manual walkthrough capture rows", len(manual_capture)],
+                ["Paid-flow capture rows", len(paid_capture)],
+                ["ICP interview capture rows", len(icp_capture)],
+                ["Prototype session capture rows", len(prototype_capture)],
             ],
             [3.4 * inch, 1.1 * inch],
             small=False,
@@ -628,6 +638,7 @@ def main() -> None:
                 ["Whitespace", "data_processed/whitespace_signal_matrix.csv; data_processed/manual_competitor_inspection_packet.csv"],
                 ["Audience", "data_processed/icp_segment_matrix.csv; data_processed/icp_validation_test_plan.csv"],
                 ["Prototype", "data_processed/prototype_validation_stimulus_flow.csv; data_processed/prototype_validation_scorecard.csv"],
+                ["Validation capture", "data_processed/manual_walkthrough_capture_sheet.csv; data_processed/paid_flow_capture_sheet.csv; data_processed/icp_interview_capture_sheet.csv; data_processed/prototype_session_capture_sheet.csv"],
                 ["Audit/provenance", "data_processed/evidence_claim_register.csv; data_processed/research_completion_audit.csv; data_processed/evidence_artifact_manifest.csv"],
             ],
             [1.7 * inch, 5.4 * inch],

@@ -11,10 +11,11 @@ This document registers the publication-style PDF layer.
 
 - Known raw source/app rows: 31,047
 - Deduplicated universe rows: 12,552
-- Tracked manifest artifacts: 185
-- Tracked CSV rows: 93,760
+- Tracked manifest artifacts: 191
+- Tracked CSV rows: 94,036
 - Competitor revenue proxy rows: 90
 - Manual P0 inspection targets: 12
+- Validation capture rows: 276
 
 ## Caveat
 

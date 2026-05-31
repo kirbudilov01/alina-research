@@ -130,6 +130,10 @@ const chromeExtensionFit = csv('data_processed/chrome_extension_fit_matrix.csv')
 const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic_battlecards.csv');
 const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
 const validationExecutionDashboard = csv('data_processed/validation_execution_dashboard.csv');
+const manualWalkthroughCapture = csv('data_processed/manual_walkthrough_capture_sheet.csv');
+const paidFlowCapture = csv('data_processed/paid_flow_capture_sheet.csv');
+const icpInterviewCapture = csv('data_processed/icp_interview_capture_sheet.csv');
+const prototypeSessionCapture = csv('data_processed/prototype_session_capture_sheet.csv');
 const evidenceManifest = csv('data_processed/evidence_artifact_manifest.csv');
 const completionAudit = csv('data_processed/research_completion_audit.csv');
 const competitorRevenueProxy = csv('data_processed/competitor_revenue_proxy_review.csv');
@@ -174,6 +178,7 @@ const validationRoadmapP0 = validationGapRoadmap.filter(r => r.priority === 'P0'
 const validationRoadmapP1 = validationGapRoadmap.filter(r => r.priority === 'P1');
 const validationExecutionP0 = validationExecutionDashboard.filter(r => r.priority === 'P0');
 const validationExecutionP1 = validationExecutionDashboard.filter(r => r.priority === 'P1');
+const validationCaptureRows = manualWalkthroughCapture.length + paidFlowCapture.length + icpInterviewCapture.length + prototypeSessionCapture.length;
 const highUseMarketSources = marketSourceConfidence.filter(r => r.confidence_review_band === 'high_use');
 const rangeOnlyMarketSources = marketSourceConfidence.filter(r => ['low_use_range_only', 'context_only'].includes(r.confidence_review_band));
 const strongMonetizationMarkets = monetizationProxy.filter(r => r.monetization_proxy_band === 'strong_paid_behavior_proxy');
@@ -227,6 +232,7 @@ report.push(`- Chrome extension detail enrichment: ${chromeExtensionDetailOk.len
 report.push(`- Chrome mechanic battlecards: ${chromeExtensionBattlecards.length} browser-extension cards, ${chromeMechanicPriority.length} high/medium references for manual mechanic inspection.`);
 report.push(`- Validation gap roadmap: ${validationGapRoadmap.length} rows; ${validationRoadmapP0.length} P0 and ${validationRoadmapP1.length} P1 next validation tasks across markets, hypotheses, and cross-source checks.`);
 report.push(`- Validation execution dashboard: ${validationExecutionDashboard.length} concrete execution tasks; ${validationExecutionP0.length} P0 and ${validationExecutionP1.length} P1.`);
+report.push(`- Validation capture sheets: ${validationCaptureRows} fillable capture rows across manual walkthrough, paid-flow, ICP interview, and prototype-session evidence.`);
 report.push(`- Market source confidence review: ${marketSourceConfidence.length} sources graded; ${highUseMarketSources.length} high-use anchors and ${rangeOnlyMarketSources.length} range-only/context sources.`);
 report.push(`- Market sizing stress test: ${marketAssumptionAudit.length} assumption-risk rows and ${marketStressTest.length} bottom-up stress scenarios.`);
 report.push(`- Monetization proxy matrix: ${monetizationProxy.length} markets covered; ${strongMonetizationMarkets.length} strong and ${mediumMonetizationMarkets.length} medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.`);
@@ -364,6 +370,23 @@ if (validationExecutionDashboard.length) {
     { key: 'success_gate', label: 'Success Gate' },
     { key: 'output_file_to_update', label: 'Update' }
   ], validationExecutionDashboard.length));
+  report.push('');
+}
+if (validationCaptureRows) {
+  report.push('### Validation Capture Sheets');
+  report.push('');
+  report.push('The execution dashboard is now backed by fillable capture sheets. This is the handoff layer for manual evidence: each row names the slot, status, expected screenshot/quote/observation, and the claim file that must be updated after evidence is collected.');
+  report.push('');
+  report.push(mdTable([
+    { sheet: 'manual_walkthrough_capture_sheet.csv', rows: manualWalkthroughCapture.length, purpose: 'P0 app walkthrough screenshots by app and slot' },
+    { sheet: 'paid_flow_capture_sheet.csv', rows: paidFlowCapture.length, purpose: 'Human paid-flow signoff by app and evidence slot' },
+    { sheet: 'icp_interview_capture_sheet.csv', rows: icpInterviewCapture.length, purpose: 'Top-two ICP interview capture by participant and test' },
+    { sheet: 'prototype_session_capture_sheet.csv', rows: prototypeSessionCapture.length, purpose: 'Two-minute prototype observations by segment, participant, and screen' }
+  ], [
+    { key: 'sheet', label: 'Sheet' },
+    { key: 'rows', label: 'Rows', align: 'right' },
+    { key: 'purpose', label: 'Purpose' }
+  ]));
   report.push('');
 }
 report.push('## 3. Dataset Overview');

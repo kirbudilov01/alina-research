@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T06:51:18.634Z
+Generated: 2026-05-31T06:59:00.266Z
 
 ## 1. Executive Summary
 
@@ -25,7 +25,7 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 12 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 185 artifacts tracked, 44 CSV artifacts, 93760 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 191 artifacts tracked, 48 CSV artifacts, 94036 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -35,6 +35,7 @@ Key quantified signals:
 - Chrome mechanic battlecards: 251 browser-extension cards, 41 high/medium references for manual mechanic inspection.
 - Validation gap roadmap: 16 rows; 4 P0 and 12 P1 next validation tasks across markets, hypotheses, and cross-source checks.
 - Validation execution dashboard: 11 concrete execution tasks; 8 P0 and 3 P1.
+- Validation capture sheets: 276 fillable capture rows across manual walkthrough, paid-flow, ICP interview, and prototype-session evidence.
 - Market source confidence review: 12 sources graded; 3 high-use anchors and 4 range-only/context sources.
 - Market sizing stress test: 6 assumption-risk rows and 6 bottom-up stress scenarios.
 - Monetization proxy matrix: 5 markets covered; 4 strong and 1 medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.
@@ -102,7 +103,7 @@ Claim-level audit snapshot:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 185 artifacts; 44 CSV artifacts; 93760 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 191 artifacts; 48 CSV artifacts; 94036 tracked CSV rows; 0 missing required artifacts.
 
 Largest tracked CSV artifacts:
 
@@ -135,7 +136,7 @@ Completion status mix:
 - prototype_stimulus_ready_not_validated: 1
 - polished_evidence_draft_done_not_validated_final: 1
 - proved_active: 1
-- proved_v1_open_gates_execution_dashboard_ready: 1
+- proved_v1_open_gates_capture_ready: 1
 
 Objective readiness matrix:
 
@@ -145,12 +146,12 @@ Objective readiness matrix:
 | REQ_02_COMPETITOR_UNIVERSE | proved_scale_target | medium_high | dedup=12552; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; chrome_extension_rows=252; known_raw_total=31047; itch_ok=6973; steam_tag_ok=6000; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | Deduped app/source universe is still below the aspirational 30k-50k dedup target; desktop stores, Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
 | REQ_04_MARKET_MONEY | supported_with_stress_test_and_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; assumption_audit_rows=6; stress_scenarios=6; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing is stress-tested and range-based, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall validation are still needed for final investor-grade claims. |
-| REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_app_walkthrough_done=0 | Public listings for the P0 wave are inspected, but metadata/public copy can miss hidden in-app mechanics; app/onboarding walkthrough screenshots are still required. |
-| REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36 | Segments are directional and need interviews/prototype/WTP validation. |
-| REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=12; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6 | No completed user/prototype sessions prove the loop is understood/preferred. |
+| REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_walkthrough_capture_rows=60; manual_app_walkthrough_done=0 | Public listings for the P0 wave are inspected, but metadata/public copy can miss hidden in-app mechanics; app/onboarding walkthrough screenshots are still required. |
+| REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36; icp_capture_rows=96 | Segments are directional and need interviews/prototype/WTP validation. |
+| REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=12; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
 | REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=185; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
-| REQ_10_VALIDATION_GATES | proved_v1_open_gates_execution_dashboard_ready | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
+| REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; capture_rows=276; manual_capture_rows=60; paid_capture_rows=40; icp_capture_rows=96; prototype_capture_rows=80; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
 ## 2C. Validation Gap Roadmap
 
@@ -195,6 +196,17 @@ The roadmap is now backed by an execution dashboard: concrete tasks, exact evide
 | 9 | P0 | roadmap_p0_trace | Use the public-listing risk read to classify action->avatar causality in walkthrough as visible, inferred, absent, or blocked. | Manual app/onboarding inspection confirms action -> identity/avatar causality remains rare. | data_processed/validation_gap_roadmap.csv |
 | 10 | P0 | roadmap_p0_trace | Capture onboarding, first action, progress/avatar feedback, and paywall-boundary screenshots for the high-risk P0 apps. | P0 apps have final directness, action-to-avatar causality, hidden clone risk, and paywall-boundary verdicts. | data_processed/validation_gap_roadmap.csv |
 | 11 | P0 | roadmap_p0_trace | Run the ICP validation packet for the top two segments, compare language resonance, loop completion, return intent, and willingness to pay. | One primary ICP and one secondary ICP are selected with validated language, top pains, activation trigger, and willingness-to-pay evidence. | data_processed/validation_gap_roadmap.csv |
+
+### Validation Capture Sheets
+
+The execution dashboard is now backed by fillable capture sheets. This is the handoff layer for manual evidence: each row names the slot, status, expected screenshot/quote/observation, and the claim file that must be updated after evidence is collected.
+
+| Sheet | Rows | Purpose |
+| --- | ---: | --- |
+| manual_walkthrough_capture_sheet.csv | 60 | P0 app walkthrough screenshots by app and slot |
+| paid_flow_capture_sheet.csv | 40 | Human paid-flow signoff by app and evidence slot |
+| icp_interview_capture_sheet.csv | 96 | Top-two ICP interview capture by participant and test |
+| prototype_session_capture_sheet.csv | 80 | Two-minute prototype observations by segment, participant, and screen |
 
 ## 3. Dataset Overview
 
