@@ -100,6 +100,7 @@ const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
 const forumSources = csv('data_raw/forum_evidence_signals.csv');
 const forumQuotes = csv('data_processed/forum_quote_coding_matrix.csv');
 const productCore = csv('data_processed/product_core_evidence_matrix.csv');
+const p0External = csv('data_raw/expanded/p0_external_sources_raw.csv');
 
 const primary = top100.filter(row => row.duplicate_flag === 'primary_app_entry');
 const highThreat = primary.filter(row => Number(row.competitive_threat_score || 0) >= 24);
@@ -115,6 +116,7 @@ const p1 = validationQueue.filter(row => row.priority_band === 'P1_high');
 const reviewApps = new Set(reviews.map(row => row.app_store_id).filter(Boolean)).size;
 const forumSourceCount = new Set(forumQuotes.map(row => row.source_id).filter(Boolean)).size;
 const intersection = tam.find(row => row.pillar === 'intersection') || {};
+const p0ExternalUsable = p0External.filter(row => row.collection_status === 'ok');
 
 const rows = [
   {
@@ -136,12 +138,12 @@ const rows = [
     claim: 'Competitor/source universe has been expanded across the five target markets.',
     evidence_status: 'substantial_v1_not_50k_dedup',
     confidence: 'medium_high',
-    primary_metric: `${expanded.length} dedup rows; ${expandedRaw.length} raw expanded rows`,
-    quantitative_evidence: `niches=${Object.keys(countBy(expanded, 'niche')).length}; source_kinds=${Object.keys(countBy(expanded, 'source_kind')).length}`,
-    evidence_files: 'data_raw/expanded/all_expanded_raw.csv;data_raw/expanded/all_expanded_dedup.csv;data_processed/competitor_feature_matrix.csv;docs/competitive/expanded-source-map.md',
-    strongest_support: 'Large normalized universe exists across App Store, Steam, Google Play fallback, and web search rows.',
-    key_gap: 'Deduped universe is below the aspirational 30k-50k app target; raw collection across older and expanded layers is larger but not final dedup.',
-    next_action: 'Continue source expansion with additional directories, web apps, desktop apps, forums, Product Hunt, Chrome extensions, and subreddit/wiki lists.'
+    primary_metric: `${expanded.length} dedup rows; ${expandedRaw.length} raw expanded rows; ${p0ExternalUsable.length} usable P0 external smoke rows`,
+    quantitative_evidence: `niches=${Object.keys(countBy(expanded, 'niche')).length}; source_kinds=${Object.keys(countBy(expanded, 'source_kind')).length}; p0_external_rows=${p0External.length}; p0_external_usable=${p0ExternalUsable.length}`,
+    evidence_files: 'data_raw/expanded/all_expanded_raw.csv;data_raw/expanded/all_expanded_dedup.csv;data_raw/expanded/p0_external_sources_raw.csv;data_processed/p0_external_source_summary.csv;data_processed/competitor_feature_matrix.csv;docs/competitive/expanded-source-map.md;docs/competitive/p0-external-source-collection-v1.md',
+    strongest_support: 'Large normalized universe exists across App Store, Steam, Google Play fallback, and web search rows; a controlled P0 external smoke pass added browser-extension candidates.',
+    key_gap: 'Deduped universe is below the aspirational 30k-50k app target; P0 external pass is intentionally small, with Product Hunt/AlternativeTo still needing source-native or curated collection.',
+    next_action: 'Detail-fetch usable Chrome Web Store candidates, then continue source expansion through curated/non-search-heavy directories, desktop apps, forums, Product Hunt exports/lists, and subreddit/wiki lists.'
   },
   {
     claim_id: 'H1_product_shape_exists',

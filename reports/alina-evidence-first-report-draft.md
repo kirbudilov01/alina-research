@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T03:45:34.086Z
+Generated: 2026-05-31T03:56:39.896Z
 
 ## 1. Executive Summary
 
@@ -23,6 +23,7 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Evidence audit register: 10 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
+- Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
@@ -65,7 +66,7 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists | Needs periodic refresh as validation findings change. |
-| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows | Deduped universe is below the aspirational 30k-50k app target; raw collection across older and expanded layers is larger but not final dedup. |
+| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 23 usable P0 external smoke rows | Deduped universe is below the aspirational 30k-50k app target; P0 external pass is intentionally small, with Product Hunt/AlternativeTo still needing source-native or curated collection. |
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
 | H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000 | Market sizing is modeled from public claims and needs source-by-source confidence review. |
 | H2_paywall_visible_evidence | supported_narrowly | medium_low | 2/29 screenshots confirm visible public pricing | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. |
@@ -114,6 +115,16 @@ Backlog priority mix:
 | SRC-008 | P2 | Public website/pricing pages for top candidates | 500-1200 pages | data_raw/company_positioning_raw.csv;data_processed/company_positioning_matrix.csv |
 | SRC-009 | P2 | Steam deep tag expansion | 3000-8000 | data_raw/expanded_steam_tags_raw.csv |
 | SRC-010 | P2 | Market reports and PDF source expansion | 50-150 claims | data_processed/market_source_registry_v2.csv;data_processed/market_claims_v2.csv |
+
+### Controlled P0 External Source Smoke Pass
+
+A small P0 pass was run to test external discovery beyond mobile stores without turning the research into a broad search-engine crawl. Chrome Web Store produced usable browser-extension candidates; Product Hunt and AlternativeTo attempts are retained as empty-attempt evidence and should be revisited through source-native or curated methods.
+
+| Source | Raw Rows | Usable | Empty/Error | Markets | Examples |
+| --- | ---: | ---: | ---: | --- | --- |
+| Product Hunt | 3 | 0 | 3 | coaching |  |
+| AlternativeTo | 3 | 0 | 3 | coaching |  |
+| Chrome Web Store | 23 | 23 | 0 | coaching | COACH by Dropzone AI/Lichess AI Coach/Made That AI Coach/Spekit — AI Sidekick: Your AI Sales Coach and Assistant/Hinty - AI Meeting Coach/Mindstone AI Coach/Reply Coach AI/AI Prompt Coach by LeadWithAI.co |
 
 ## 4. Market Sizing
 
@@ -563,11 +574,13 @@ Claim audit rows currently normalized: 10.
 - `docs/competitive/web-paywall-screenshot-validation-v1.md`
 - `docs/competitive/web-paywall-screenshot-interpretation-v1.md`
 - `docs/competitive/source-expansion-backlog-v1.md`
+- `docs/competitive/p0-external-source-collection-v1.md`
 - `docs/decision/evidence-audit-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
 - `data_processed/evidence_claim_register.csv`
 - `data_processed/source_expansion_backlog.csv`
+- `data_processed/p0_external_source_summary.csv`
 - `data_processed/competitor_feature_matrix.csv`
 - `data_processed/audience_signal_matrix.csv`
 - `data_processed/whitespace_signal_matrix.csv`
@@ -590,6 +603,8 @@ Claim audit rows currently normalized: 10.
 - `data_raw/web_paywall_discovery_raw.csv`
 - `data_raw/forum_evidence_signals.csv`
 - `data_raw/forum_quote_evidence_raw.csv`
+- `data_raw/expanded/p0_external_sources_raw.csv`
+- `data_raw/expanded_chrome_extensions_raw.csv`
 - `data_processed/forum_quote_coding_matrix.csv`
 - `output/charts/whitespace-bands.svg`
 - `output/charts/review-jtbd-clusters.svg`

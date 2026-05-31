@@ -104,6 +104,8 @@ const webPaywallScreenshots = csv('data_processed/web_paywall_screenshot_validat
 const webPaywallScreenshotInterpretation = csv('data_processed/web_paywall_screenshot_interpretation.csv');
 const evidenceAudit = csv('data_processed/evidence_claim_register.csv');
 const sourceExpansionBacklog = csv('data_processed/source_expansion_backlog.csv');
+const p0ExternalSources = csv('data_raw/expanded/p0_external_sources_raw.csv');
+const p0ExternalSummary = csv('data_processed/p0_external_source_summary.csv');
 
 const highWhitespace = whitespace.filter(r => r.whitespace_band === 'high').length;
 const mediumWhitespace = whitespace.filter(r => r.whitespace_band === 'medium').length;
@@ -126,6 +128,7 @@ const googlePlayOk = googlePlayPricing.filter(r => r.collection_status === 'ok')
 const webPaywallScreenshotQueue = webPaywallSignals.filter(r => r.needs_screenshot_validation === 'yes');
 const webPaywallCapturedScreenshots = webPaywallScreenshots.filter(r => r.screenshot_status === 'captured');
 const confirmedPublicPricingScreenshots = webPaywallScreenshotInterpretation.filter(r => r.screenshot_interpretation_verdict === 'confirms_public_pricing_signal');
+const p0ExternalUsable = p0ExternalSources.filter(r => r.collection_status === 'ok');
 
 const report = [];
 
@@ -154,6 +157,7 @@ report.push(`- Web paywall screenshot capture: ${webPaywallCapturedScreenshots.l
 report.push(`- Web paywall OCR interpretation: ${webPaywallScreenshotInterpretation.length} screenshots interpreted; ${confirmedPublicPricingScreenshots.length} currently confirm visible public pricing, while the rest need human review or weaken the signal.`);
 report.push(`- Evidence audit register: ${evidenceAudit.length} claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.`);
 report.push(`- Source expansion backlog: ${sourceExpansionBacklog.length} prioritized collector/source tasks for the next move toward a 30k-50k raw universe.`);
+report.push(`- Controlled P0 external-source smoke pass: ${p0ExternalSources.length} rows, ${p0ExternalUsable.length} usable candidates, with search-engine-heavy expansion intentionally deferred.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
@@ -225,6 +229,21 @@ if (sourceExpansionBacklog.length) {
     { key: 'expected_raw_rows', label: 'Expected Rows' },
     { key: 'target_output', label: 'Output' }
   ], sourceExpansionBacklog.length));
+  report.push('');
+}
+if (p0ExternalSources.length) {
+  report.push('### Controlled P0 External Source Smoke Pass');
+  report.push('');
+  report.push('A small P0 pass was run to test external discovery beyond mobile stores without turning the research into a broad search-engine crawl. Chrome Web Store produced usable browser-extension candidates; Product Hunt and AlternativeTo attempts are retained as empty-attempt evidence and should be revisited through source-native or curated methods.');
+  report.push('');
+  report.push(mdTable(p0ExternalSummary, [
+    { key: 'source_bucket', label: 'Source' },
+    { key: 'raw_rows', label: 'Raw Rows', align: 'right' },
+    { key: 'usable_rows', label: 'Usable', align: 'right' },
+    { key: 'empty_or_error_rows', label: 'Empty/Error', align: 'right' },
+    { key: 'markets', label: 'Markets' },
+    { key: 'top_examples', label: 'Examples' }
+  ], p0ExternalSummary.length));
   report.push('');
 }
 report.push('## 4. Market Sizing');
@@ -597,11 +616,13 @@ report.push('- `docs/competitive/web-paywall-validation-v1.md`');
 report.push('- `docs/competitive/web-paywall-screenshot-validation-v1.md`');
 report.push('- `docs/competitive/web-paywall-screenshot-interpretation-v1.md`');
 report.push('- `docs/competitive/source-expansion-backlog-v1.md`');
+report.push('- `docs/competitive/p0-external-source-collection-v1.md`');
 report.push('- `docs/decision/evidence-audit-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
 report.push('- `data_processed/evidence_claim_register.csv`');
 report.push('- `data_processed/source_expansion_backlog.csv`');
+report.push('- `data_processed/p0_external_source_summary.csv`');
 report.push('- `data_processed/competitor_feature_matrix.csv`');
 report.push('- `data_processed/audience_signal_matrix.csv`');
 report.push('- `data_processed/whitespace_signal_matrix.csv`');
@@ -624,6 +645,8 @@ report.push('- `data_raw/google_play_pricing_raw.csv`');
 report.push('- `data_raw/web_paywall_discovery_raw.csv`');
 report.push('- `data_raw/forum_evidence_signals.csv`');
 report.push('- `data_raw/forum_quote_evidence_raw.csv`');
+report.push('- `data_raw/expanded/p0_external_sources_raw.csv`');
+report.push('- `data_raw/expanded_chrome_extensions_raw.csv`');
 report.push('- `data_processed/forum_quote_coding_matrix.csv`');
 report.push('- `output/charts/whitespace-bands.svg`');
 report.push('- `output/charts/review-jtbd-clusters.svg`');
@@ -662,6 +685,7 @@ status.push(mdTable([
   { requirement: 'Large plan/backlog', evidence: 'docs/research-expansion-master-plan.md', status: 'done' },
   { requirement: 'Competitor/source expansion', evidence: 'data_raw/expanded/all_expanded_raw.csv; data_raw/research_source_discovery.csv', status: 'partial but substantial' },
   { requirement: 'Next source expansion backlog', evidence: 'data_processed/source_expansion_backlog.csv; docs/competitive/source-expansion-backlog-v1.md', status: 'done v1; prioritized sources, target outputs, expected row ranges, and risks captured' },
+  { requirement: 'Controlled P0 external-source smoke pass', evidence: 'data_raw/expanded/p0_external_sources_raw.csv; data_processed/p0_external_source_summary.csv; docs/competitive/p0-external-source-collection-v1.md', status: 'done v1; small by design; Chrome Web Store yielded usable candidates, Product Hunt/AlternativeTo attempts retained as empty-source evidence' },
   { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; data_processed/tam_sam_som_model.csv', status: 'done v1' },
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
@@ -698,3 +722,5 @@ console.log(`web_paywall_screenshot_interpretations=${webPaywallScreenshotInterp
 console.log(`human_validation_queue_rows=${humanValidationQueue.length}`);
 console.log(`evidence_audit_rows=${evidenceAudit.length}`);
 console.log(`source_expansion_backlog_rows=${sourceExpansionBacklog.length}`);
+console.log(`p0_external_rows=${p0ExternalSources.length}`);
+console.log(`p0_external_usable=${p0ExternalUsable.length}`);

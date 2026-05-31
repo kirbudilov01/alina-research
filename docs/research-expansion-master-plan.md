@@ -172,7 +172,7 @@ Tasks:
 
 ### Block B. Source Expansion
 
-Status: partial/substantial v1 complete; next collector backlog defined
+Status: partial/substantial v1 complete; next collector backlog defined; controlled P0 external smoke pass completed
 
 Target sources:
 
@@ -183,7 +183,7 @@ Target sources:
 - AlternativeTo categories.
 - G2/Capterra/Trustpilot style SaaS/review directories where accessible.
 - Reddit search pages and subreddit discovery.
-- Web search via DuckDuckGo HTML.
+- Controlled indexed-search smoke tests only where source-native options are missing.
 - Company websites and pricing pages.
 - Public market research pages and PDFs.
 
@@ -198,12 +198,14 @@ Current evidence:
 - Expanded deduplicated universe: `data_raw/expanded/all_expanded_dedup.csv`.
 - Current source map: `docs/competitive/expanded-source-map.md`.
 - Next source expansion backlog: `docs/competitive/source-expansion-backlog-v1.md`.
+- Controlled P0 external source smoke pass: `docs/competitive/p0-external-source-collection-v1.md`.
 
 Next collector priority:
 
-1. Product Hunt, AlternativeTo, and Chrome Web Store/browser-extension discovery.
+1. Detail-fetch usable Chrome Web Store/browser-extension candidates from the P0 smoke pass.
 2. Desktop stores, itch.io, B2B review directories, and Reddit competitor mentions.
-3. Company positioning pages, Steam deep tag expansion, and market-report source expansion.
+3. Product Hunt and AlternativeTo through source-native, curated-list, or export-style discovery rather than broad search-engine crawling.
+4. Company positioning pages, Steam deep tag expansion, and market-report source expansion.
 
 ### Block C. Market Sizing
 

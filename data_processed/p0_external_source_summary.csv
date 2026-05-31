@@ -1,0 +1,4 @@
+source_bucket,source_kind,raw_rows,usable_rows,empty_or_error_rows,markets,target_output,top_examples
+"Product Hunt","product_hunt_site_search","3","0","3","coaching","data_raw/expanded_product_hunt_raw.csv",""
+"AlternativeTo","alternativeto_site_search","3","0","3","coaching","data_raw/expanded_alternativeto_raw.csv",""
+"Chrome Web Store","chrome_web_store_site_search","23","23","0","coaching","data_raw/expanded_chrome_extensions_raw.csv","COACH by Dropzone AI|Lichess AI Coach|Made That AI Coach|Spekit — AI Sidekick: Your AI Sales Coach and Assistant|Hinty - AI Meeting Coach|Mindstone AI Coach|Reply Coach AI|AI Prompt Coach by LeadWithAI.co"
