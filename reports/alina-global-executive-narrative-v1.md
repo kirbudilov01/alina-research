@@ -6,7 +6,24 @@
 
 Alina стоит дальше проверять как мировую consumer-app гипотезу на пересечении personal meaning, tiny action, short reset и visible progress. Сейчас это не доказанный продукт и не финальный инвестиционный claim. Это большой evidence-first пакет, который показывает: вокруг идеи есть пять платежеспособных adjacent-направлений, заметная конкурентная плотность, рабочая TAM/SAM/SOM методология, предварительное whitespace-окно и понятная P0-очередь валидации.
 
-Масштаб базы сейчас: 67,525 сырьевых source-строк, 36,694 уникализированных строк и 498 локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.
+Масштаб базы сейчас: 67,525 сырьевых source-строк, 36,694 уникализированных строк и 501 локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.
+
+## Как устроен рассказ
+
+Эта версия специально идет не от таблиц, а от цепочки вопросов. Сначала фиксируется продуктовая ставка, затем статус доказательств, потом пять рынков и деньги, затем конкуренты, whitespace, аудитория, MVP и очередь валидации. Такой порядок взят из образца Alina как форма, но применен к мировому рынку.
+
+| Шаг | Вопрос | Что можно выводить | Что нельзя усиливать |
+| --- | --- | --- | --- |
+| STORY_01_PRODUCT_THESIS | Что такое Alina и почему это не просто еще один tracker, meditation app или avatar toy? | Есть достаточно широкий контекст для проверки продуктовой формы. | Это не PMF proof и не доказательство спроса; это стартовая рамка H1. |
+| STORY_02_EVIDENCE_STATUS | Можно ли уже говорить, что гипотезы доказаны? | Исследование достаточно большое, чтобы выбирать следующие проверки, но не достаточно наблюдаемое, чтобы закрывать gates. | Не усиливать формулировки до go, пока нет walkthrough, интервью, prototype sessions и WTP. |
+| STORY_03_MARKET_MAP | Какие именно пять мировых направлений проверяются и сколько данных взято в каждой нише? | Пять направлений покрыты как global competitor/source map. | Построчные niche dedup нельзя складывать как уникальных конкурентов; gaming остается benchmark, не прямой TAM. |
+| STORY_04_MARKET_MONEY | Есть ли там деньги и насколько хрупка рыночная модель? | H2 получает directional money case для продолжения проверки. | Рыночная модель не является revenue forecast и не закрывает paid-flow/WTP gate. |
+| STORY_05_COMPETITOR_FIELD | Кто уже борется за похожее поведение пользователя? | Конкурентное поле плотное, и это подтверждает market activity. | Плотность конкурентов не доказывает Alina; taxonomy noise и hidden-clone риск остаются. |
+| STORY_06_WHITESPACE | Где может быть белое пятно и почему оно не слишком широкое? | Узкое directional whitespace выглядит проверяемым, особенно в mindfulness/avatar слоях. | H3 нельзя усиливать без ручного walkthrough P0-конкурентов. |
+| STORY_07_AUDIENCE | Кто потенциальный пользователь и почему это не демография? | Есть два P0-сегмента для первых интервью и прототипа. | Secondary VOC и review language не заменяют живые интервью. |
+| STORY_08_PRODUCT_LOOP | Что именно должен проверить MVP? | MVP можно проектировать вокруг loop comprehension, differentiation, trust и return intent. | H4/H6 не закрыты, пока участники не объясняют петлю своими словами. |
+| STORY_09_VALIDATION_QUEUE | Что делать следующим шагом, чтобы отчет стал сильнее? | Следующий прирост качества должен прийти от observed rows, а не от бесконечного расширения desk research. | Очередь задач не равна выполненной валидации. |
+| STORY_10_TRACEABILITY | Можно ли проверить, откуда взялись утверждения? | Пакет трассируем локально и готов к следующему validation pass. | Traceability доказывает наличие и связность артефактов, но не доказывает продуктовый outcome. |
 
 ## Логика продукта
 
@@ -75,7 +92,7 @@ Observed validation пока не закрывает claims: listing-only, secon
 
 ## Как читать этот документ
 
-Это executive narrative поверх полного evidence pack. Он специально короче основного отчета, потому что readability audit показал: полный документ логичен, но перегружен таблицами (markdown_table_rows=186). Для решений использовать эту версию как входную историю, а полный отчет, manifest, source appendix и capture sheets - как доказательную базу.
+Это executive narrative поверх полного evidence pack. Он специально короче основного отчета, потому что readability audit показал: полный документ логичен, но перегружен таблицами (markdown_table_rows=217). Для решений использовать эту версию как входную историю, а полный отчет, manifest, source appendix и capture sheets - как доказательную базу.
 
 ## Файлы
 
@@ -84,3 +101,4 @@ Observed validation пока не закрывает claims: listing-only, secon
 - `output/pdf/alina-global-executive-narrative-v1.pdf`
 - `data_processed/evidence_artifact_manifest.csv`
 - `data_processed/global_report_readability_audit.csv`
+- `data_processed/russian_sequential_storyline.csv`

@@ -112,6 +112,7 @@ const archetypes = csv('data_processed/global_competitor_archetype_rollup.csv');
 const whitespaceAudience = csv('data_processed/global_whitespace_audience_synthesis.csv');
 const nextBacklog = csv('data_processed/global_next_validation_backlog.csv');
 const validationRollup = csv('data_processed/global_validation_executive_rollup.csv');
+const russianStoryline = csv('data_processed/russian_sequential_storyline.csv');
 
 const intersection = by(tam, 'pillar', 'intersection');
 const holdGates = gates.filter(row => clean(row.decision_ru) === 'оставить hold_validate');
@@ -151,6 +152,24 @@ lines.push('Alina стоит дальше проверять как мирову
 lines.push('');
 lines.push(`Масштаб базы сейчас: ${fmt(rawRows.length)} сырьевых source-строк, ${fmt(dedupRows.length)} уникализированных строк и ${fmt(manifest.length)} локальных артефактов в manifest. Главная граница: все шесть гипотез остаются в hold_validate, потому что observed evidence еще не закрыло walkthrough, интервью, prototype sessions и WTP.`);
 lines.push('');
+if (russianStoryline.length) {
+  lines.push('## Как устроен рассказ');
+  lines.push('');
+  lines.push('Эта версия специально идет не от таблиц, а от цепочки вопросов. Сначала фиксируется продуктовая ставка, затем статус доказательств, потом пять рынков и деньги, затем конкуренты, whitespace, аудитория, MVP и очередь валидации. Такой порядок взят из образца Alina как форма, но применен к мировому рынку.');
+  lines.push('');
+  lines.push(mdTable(russianStoryline.slice(0, 10).map(row => ({
+    step: row.storyline_id,
+    question: row.reader_question_ru,
+    conclusion: row.allowed_conclusion_ru,
+    boundary: row.boundary_ru
+  })), [
+    { key: 'step', label: 'Шаг' },
+    { key: 'question', label: 'Вопрос' },
+    { key: 'conclusion', label: 'Что можно выводить' },
+    { key: 'boundary', label: 'Что нельзя усиливать' }
+  ]));
+  lines.push('');
+}
 lines.push('## Логика продукта');
 lines.push('');
 lines.push('Базовая ставка Alina не в том, чтобы сделать еще один habit tracker, meditation library, astrology app или avatar toy. Ставка уже иная: короткая ежедневная петля, где личный смысл превращается в маленькое действие, действие поддерживается reset, а потом пользователь видит причинный progress или identity feedback. Если причинность не видна, продукт разваливается на красивую декорацию. Если действия нет, он превращается в чтение. Если reset живет отдельно, это просто meditation content.');
@@ -236,6 +255,7 @@ lines.push('- `reports/alina-global-hypothesis-report-v1.md`');
 lines.push('- `output/pdf/alina-global-executive-narrative-v1.pdf`');
 lines.push('- `data_processed/evidence_artifact_manifest.csv`');
 lines.push('- `data_processed/global_report_readability_audit.csv`');
+lines.push('- `data_processed/russian_sequential_storyline.csv`');
 
 fs.writeFileSync(OUT, `${lines.join('\n')}\n`);
 

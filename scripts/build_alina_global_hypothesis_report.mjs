@@ -217,6 +217,7 @@ const reportReadabilityAudit = csv('data_processed/global_report_readability_aud
 const sourceQualityAudit = csv('data_processed/global_source_quality_gap_audit.csv');
 const marketSizingMethodology = csv('data_processed/global_market_sizing_methodology.csv');
 const marketSensitivityAudit = csv('data_processed/market_model_sensitivity_audit.csv');
+const russianStoryline = csv('data_processed/russian_sequential_storyline.csv');
 const marketStressScenarios = csv('data_processed/market_sizing_stress_test.csv');
 const whitespaceAudienceSynthesis = csv('data_processed/global_whitespace_audience_synthesis.csv');
 const goalEvidenceCoverage = csv('data_processed/global_goal_evidence_coverage.csv');
@@ -478,6 +479,15 @@ const sourceAppendix = [
     primary_metric: `${marketSensitivityAudit.length} sensitivity rows`,
     evidence_files: 'data_processed/market_model_sensitivity_audit.csv;docs/market/market-model-sensitivity-audit-v1.md;data_processed/tam_sam_som_model.csv;data_processed/market_sizing_stress_test.csv',
     source_boundary_ru: 'Sensitivity audit показывает хрупкость assumptions; он не доказывает выручку Alina.'
+  },
+  {
+    claim_id: 'SRC_13_RUSSIAN_STORYLINE',
+    report_section: 'Повествовательная логика отчета',
+    claim_ru: 'Отчет должен читаться как русская последовательная цепочка гипотез: идея -> evidence status -> рынки -> деньги -> конкуренты -> whitespace -> аудитория -> MVP -> validation -> источники.',
+    evidence_status_ru: 'проверено narrative-spine картой, не market proof',
+    primary_metric: `${russianStoryline.length} storyline rows`,
+    evidence_files: 'data_processed/russian_sequential_storyline.csv;docs/decision/russian-sequential-storyline-v1.md;docs/decision/alina-sample-style-benchmark-v1.md',
+    source_boundary_ru: 'Storyline карта управляет формой и переходами отчета; она не усиливает рыночные, конкурентные или продуктовые claims без observed evidence.'
   }
 ];
 
@@ -954,6 +964,30 @@ lines.push(mdTable(goalEvidenceCoverage.map(row => ({
 lines.push('');
 lines.push('Главный вывод по этой карте: пакет уже масштабный и трассируемый, но не финально валидированный. Это правильное состояние для evidence-first ресерча: сильные desk/source слои готовы, а product/market claims остаются в hold_validate до ручных walkthrough, интервью, прототипа и WTP.');
 lines.push('');
+if (russianStoryline.length) {
+  lines.push('## ПОВЕСТВОВАТЕЛЬНАЯ ЛОГИКА ОТЧЕТА');
+  lines.push('');
+  lines.push('Чтобы отчет не выглядел как набор разрозненных таблиц, отдельно зафиксирована русская storyline-карта. Она переводит образец Alina в текущий мировой research: каждый большой раздел отвечает на один вопрос читателя, сначала дает смысловой вывод, затем показывает evidence, называет границу доказательства и объясняет переход к следующей гипотезе.');
+  lines.push('');
+  lines.push('Практически это означает: не начинать с методологии ради методологии, не прятать счетчики по нишам, не выдавать market size за proof, не писать “конкурентов нет”, а вести читателя по цепочке “идея -> рынки -> деньги -> конкуренты -> whitespace -> аудитория -> MVP -> validation”.');
+  lines.push('');
+  lines.push(mdTable(russianStoryline.map(row => ({
+    id: row.storyline_id,
+    section: row.report_section_ru,
+    question: row.reader_question_ru,
+    move: row.narrative_move_ru,
+    evidence: row.evidence_anchor_ru,
+    boundary: row.boundary_ru
+  })), [
+    { key: 'id', label: 'ID' },
+    { key: 'section', label: 'Раздел' },
+    { key: 'question', label: 'Вопрос читателя' },
+    { key: 'move', label: 'Ход повествования' },
+    { key: 'evidence', label: 'Evidence' },
+    { key: 'boundary', label: 'Граница' }
+  ]));
+  lines.push('');
+}
 if (reportReadabilityAudit.length) {
   lines.push('## ПРОВЕРКА СКЛАДНОСТИ И ЧИТАЕМОСТИ ОТЧЕТА');
   lines.push('');
@@ -1014,6 +1048,7 @@ lines.push('- `data_processed/global_hypothesis_gate_snapshot.csv`');
 lines.push('- `data_processed/global_next_validation_backlog.csv`');
 lines.push('- `data_processed/global_report_readability_audit.csv`');
 lines.push('- `data_processed/global_source_quality_gap_audit.csv`');
+lines.push('- `data_processed/russian_sequential_storyline.csv`');
 lines.push('- `data_processed/global_market_sizing_methodology.csv`');
 lines.push('- `data_processed/market_model_sensitivity_audit.csv`');
 lines.push('- `data_processed/global_niche_count_rollup.csv`');
