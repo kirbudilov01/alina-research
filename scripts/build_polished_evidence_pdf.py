@@ -287,6 +287,8 @@ def main() -> None:
     chrome_raw = read_csv("data_raw/expanded_chrome_extensions_raw.csv")
     chrome_fit = read_csv("data_processed/chrome_extension_fit_matrix.csv")
     chrome_battlecards = read_csv("data_processed/chrome_extension_mechanic_battlecards.csv")
+    market_assumptions = read_csv("data_processed/market_sizing_assumption_audit.csv")
+    market_stress = read_csv("data_processed/market_sizing_stress_test.csv")
     evidence = read_csv("data_processed/evidence_claim_register.csv")
     completion = read_csv("data_processed/research_completion_audit.csv")
     manifest = read_csv("data_processed/evidence_artifact_manifest.csv")
@@ -407,8 +409,8 @@ def main() -> None:
                 ("competitors reviewed", number(len(revenue))),
                 ("strong money proxies", number(len(strong_revenue))),
                 ("medium+ money proxies", number(len(medium_plus_revenue))),
+                ("market stress cases", number(len(market_stress))),
                 ("paywall screenshots", number(len(paywall))),
-                ("prototype screens", number(len(prototype_screens))),
             ]
         ),
         Spacer(1, 0.12 * inch),
@@ -421,6 +423,8 @@ def main() -> None:
                 ["Chrome Web Store raw rows", len(chrome_raw), "Source-native browser-extension expansion across five markets."],
                 ["Chrome detail pages parsed", len([row for row in chrome_fit if row.get("detail_status") == "ok"]), "Fit bands, users, tags, and mechanic evidence."],
                 ["Chrome mechanic battlecards", len(chrome_battlecards), "Browser-extension mechanics translated into whitespace lessons."],
+                ["Market assumption audit", len(market_assumptions), "TAM/SAM/SOM risk rows by market and intersection."],
+                ["Market stress scenarios", len(market_stress), "Bottom-up sensitivity cases for reachable users, conversion, and ARPPU."],
                 ["Manifest source-like refs", source_refs, "Rows with URLs, package IDs, domains, source IDs, or comparable identifiers."],
                 ["Top-100 primary apps", len(primary_top100), "Human-facing competitor review layer."],
                 ["Behavior-tied progression signals", len(behavior_tied), "Strict signal is rare in metadata, hence manual inspection is critical."],

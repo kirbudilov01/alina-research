@@ -86,6 +86,8 @@ const som = csv('data_processed/som_sensitivity_scenarios.csv');
 const claims = csv('data_processed/market_claims.csv');
 const marketSourceConfidence = csv('data_processed/market_source_confidence_review.csv');
 const marketConfidenceSummary = csv('data_processed/market_confidence_summary.csv');
+const marketAssumptionAudit = csv('data_processed/market_sizing_assumption_audit.csv');
+const marketStressTest = csv('data_processed/market_sizing_stress_test.csv');
 const monetizationProxy = csv('data_processed/market_monetization_proxy_matrix.csv');
 const monetizationExamples = csv('data_processed/monetization_proxy_examples.csv');
 const prefill = csv('data_processed/top_intersection_review_prefill.csv');
@@ -222,6 +224,7 @@ report.push(`- Chrome extension detail enrichment: ${chromeExtensionDetailOk.len
 report.push(`- Chrome mechanic battlecards: ${chromeExtensionBattlecards.length} browser-extension cards, ${chromeMechanicPriority.length} high/medium references for manual mechanic inspection.`);
 report.push(`- Validation gap roadmap: ${validationGapRoadmap.length} rows; ${validationRoadmapP0.length} P0 and ${validationRoadmapP1.length} P1 next validation tasks across markets, hypotheses, and cross-source checks.`);
 report.push(`- Market source confidence review: ${marketSourceConfidence.length} sources graded; ${highUseMarketSources.length} high-use anchors and ${rangeOnlyMarketSources.length} range-only/context sources.`);
+report.push(`- Market sizing stress test: ${marketAssumptionAudit.length} assumption-risk rows and ${marketStressTest.length} bottom-up stress scenarios.`);
 report.push(`- Monetization proxy matrix: ${monetizationProxy.length} markets covered; ${strongMonetizationMarkets.length} strong and ${mediumMonetizationMarkets.length} medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.`);
 report.push(`- Competitor revenue proxy review: ${competitorRevenueProxy.length} primary competitors reviewed; ${strongRevenueProxyCompetitors.length} strong and ${mediumPlusRevenueProxyCompetitors.length} medium-or-stronger bottom-up money proxies.`);
 report.push(`- ICP segment matrix: ${icpSegments.length} segment hypotheses; strongest current directional ICP is "${strongestIcpSegment.segment_name || 'n/a'}".`);
@@ -509,6 +512,36 @@ if (marketConfidenceSummary.length) {
       { key: 'confidence_review_score', label: 'Score', align: 'right' },
       { key: 'model_role', label: 'Model Role' }
     ], 8));
+  report.push('');
+}
+if (marketAssumptionAudit.length && marketStressTest.length) {
+  report.push('### Market Sizing Stress Test');
+  report.push('');
+  report.push('The model now includes an assumption audit and stress-test layer. It does not add new TAM claims; it checks how much the current model depends on source confidence, intersection discounts, reachable users, activation, paid conversion, and ARPPU.');
+  report.push('');
+  report.push('Model-risk audit:');
+  report.push('');
+  report.push(mdTable(marketAssumptionAudit, [
+    { key: 'pillar', label: 'Pillar' },
+    { key: 'sam_base', label: 'SAM Base', align: 'right' },
+    { key: 'sam_spread_ratio', label: 'Spread', align: 'right' },
+    { key: 'model_confidence', label: 'Confidence' },
+    { key: 'monetization_proxy_band', label: 'Money Proxy' },
+    { key: 'strong_competitor_money_proxy', label: 'Strong Competitors', align: 'right' },
+    { key: 'model_risk', label: 'Risk' }
+  ], marketAssumptionAudit.length));
+  report.push('');
+  report.push('Bottom-up stress scenarios:');
+  report.push('');
+  report.push(mdTable(marketStressTest, [
+    { key: 'scenario_family', label: 'Scenario' },
+    { key: 'intersection_discount', label: 'Intersection Discount', align: 'right' },
+    { key: 'reachable_users', label: 'Reachable Users', align: 'right' },
+    { key: 'paid_conversion', label: 'Paid Conversion', align: 'right' },
+    { key: 'arppu_year', label: 'ARPPU', align: 'right' },
+    { key: 'annual_revenue', label: 'Annual Revenue', align: 'right' },
+    { key: 'stress_read', label: 'Read' }
+  ], marketStressTest.length));
   report.push('');
 }
 if (monetizationProxy.length) {

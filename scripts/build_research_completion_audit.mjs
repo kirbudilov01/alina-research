@@ -97,6 +97,8 @@ const audience = csv('data_processed/audience_signal_matrix.csv');
 const whitespace = csv('data_processed/whitespace_signal_matrix.csv');
 const tam = csv('data_processed/tam_sam_som_model.csv');
 const marketConfidence = csv('data_processed/market_source_confidence_review.csv');
+const marketAssumptionAudit = csv('data_processed/market_sizing_assumption_audit.csv');
+const marketStressTest = csv('data_processed/market_sizing_stress_test.csv');
 const monetizationProxy = csv('data_processed/market_monetization_proxy_matrix.csv');
 const competitorRevenueProxy = csv('data_processed/competitor_revenue_proxy_review.csv');
 const competitorRevenueProxySummary = csv('data_processed/competitor_revenue_proxy_market_summary.csv');
@@ -179,12 +181,12 @@ const requirements = [
     requirement_id: 'REQ_04_MARKET_MONEY',
     requirement: 'TAM/SAM/SOM methodology and market-money evidence are prepared.',
     objective_source: 'User asked for complex market evaluation formulas and open research source gathering.',
-    status: tam.length && marketConfidence.length && monetizationProxy.length && competitorRevenueProxy.length ? 'supported_with_bottom_up_proxy_not_final' : 'missing',
+    status: tam.length && marketConfidence.length && marketAssumptionAudit.length && marketStressTest.length && monetizationProxy.length && competitorRevenueProxy.length ? 'supported_with_stress_test_and_bottom_up_proxy_not_final' : (tam.length && marketConfidence.length && monetizationProxy.length && competitorRevenueProxy.length ? 'supported_with_bottom_up_proxy_not_final' : 'missing'),
     evidence_strength: competitorRevenueProxy.length ? 'medium_high' : 'medium',
-    proof: `tam_rows=${tam.length}; source_confidence_rows=${marketConfidence.length}; strong_paid_proxy_markets=${strongMoneyMarkets}/5; competitor_revenue_proxy_rows=${competitorRevenueProxy.length}; competitor_revenue_proxy_markets=${competitorRevenueProxySummary.length}; strong_competitor_money_proxy=${strongRevenueProxyCompetitors}; medium_plus_competitor_money_proxy=${mediumPlusRevenueProxyCompetitors}; web_paywall_visual_rows=${webPaywallVisualAdjudication.length}; web_paywall_visual_confirmed=${confirmedWebPaywallVisuals}; web_paywall_visual_partial=${partialWebPaywallVisuals}`,
-    evidence_files: 'docs/market/market-sizing-methodology.md;data_processed/tam_sam_som_model.csv;data_processed/market_source_confidence_review.csv;data_processed/market_monetization_proxy_matrix.csv;data_processed/competitor_revenue_proxy_review.csv;data_processed/competitor_revenue_proxy_market_summary.csv;data_processed/web_paywall_visual_adjudication.csv;docs/market/tam-sam-som-model-v1.md;docs/market/competitor-revenue-proxy-review-v1.md;docs/competitive/web-paywall-visual-adjudication-v1.md',
-    remaining_gap: 'Market sizing remains range-based; actual revenue estimates and manual in-app paywall validation are needed for final investor-grade claims.',
-    next_action: 'Manually validate the highest competitor money proxies and add paid/credible revenue intelligence where available.'
+    proof: `tam_rows=${tam.length}; source_confidence_rows=${marketConfidence.length}; assumption_audit_rows=${marketAssumptionAudit.length}; stress_scenarios=${marketStressTest.length}; strong_paid_proxy_markets=${strongMoneyMarkets}/5; competitor_revenue_proxy_rows=${competitorRevenueProxy.length}; competitor_revenue_proxy_markets=${competitorRevenueProxySummary.length}; strong_competitor_money_proxy=${strongRevenueProxyCompetitors}; medium_plus_competitor_money_proxy=${mediumPlusRevenueProxyCompetitors}; web_paywall_visual_rows=${webPaywallVisualAdjudication.length}; web_paywall_visual_confirmed=${confirmedWebPaywallVisuals}; web_paywall_visual_partial=${partialWebPaywallVisuals}`,
+    evidence_files: 'docs/market/market-sizing-methodology.md;data_processed/tam_sam_som_model.csv;data_processed/som_sensitivity_scenarios.csv;data_processed/market_source_confidence_review.csv;data_processed/market_sizing_assumption_audit.csv;data_processed/market_sizing_stress_test.csv;data_processed/market_monetization_proxy_matrix.csv;data_processed/competitor_revenue_proxy_review.csv;data_processed/competitor_revenue_proxy_market_summary.csv;data_processed/web_paywall_visual_adjudication.csv;docs/market/tam-sam-som-model-v1.md;docs/market/market-sizing-stress-test-v1.md;docs/market/competitor-revenue-proxy-review-v1.md;docs/competitive/web-paywall-visual-adjudication-v1.md',
+    remaining_gap: 'Market sizing is stress-tested and range-based, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall validation are still needed for final investor-grade claims.',
+    next_action: 'Use stress-test risk rows to prioritize manual paid-flow inspection and willingness-to-pay prototype questions.'
   },
   {
     requirement_id: 'REQ_05_WHITESPACE',

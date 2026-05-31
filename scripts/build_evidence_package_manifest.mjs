@@ -186,6 +186,8 @@ const requiredArtifacts = [
   'data_processed/som_sensitivity_scenarios.csv',
   'data_processed/market_claims.csv',
   'data_processed/market_source_confidence_review.csv',
+  'data_processed/market_sizing_assumption_audit.csv',
+  'data_processed/market_sizing_stress_test.csv',
   'data_processed/market_monetization_proxy_matrix.csv',
   'data_processed/competitor_revenue_proxy_review.csv',
   'data_processed/competitor_revenue_proxy_market_summary.csv',

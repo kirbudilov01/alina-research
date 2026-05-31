@@ -1,0 +1,7 @@
+scenario_family,intersection_discount,reachable_users,activation_rate,paid_conversion,arppu_year,modeled_intersection_sam,paid_users,annual_revenue,share_of_modeled_sam,stress_read
+"defensive","0.05","100000","0.25","0.02","50","67320000","500","25000","0.000371","tiny_validation_business"
+"conservative","0.08","250000","0.32","0.03","60","107712000","2400","144000","0.001337","niche_early_business"
+"base","0.15","1000000","0.4","0.05","80","201960000","20000","1600000","0.007922","niche_early_business"
+"strong_niche","0.2","2500000","0.45","0.07","95","269280000","78750","7481250","0.027782","venture_relevant_if_retention_works"
+"upside","0.25","5000000","0.5","0.09","110","336600000","225000","24750000","0.073529","large_outcome_requires_distribution_and_retention_proof"
+"breakout","0.3","10000000","0.55","0.11","125","403920000","605000","75625000","0.187228","large_outcome_requires_distribution_and_retention_proof"

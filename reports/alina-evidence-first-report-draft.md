@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T06:36:31.539Z
+Generated: 2026-05-31T06:43:36.665Z
 
 ## 1. Executive Summary
 
@@ -25,7 +25,7 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 12 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 178 artifacts tracked, 41 CSV artifacts, 93735 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 182 artifacts tracked, 43 CSV artifacts, 93747 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -35,6 +35,7 @@ Key quantified signals:
 - Chrome mechanic battlecards: 251 browser-extension cards, 41 high/medium references for manual mechanic inspection.
 - Validation gap roadmap: 14 rows; 5 P0 and 9 P1 next validation tasks across markets, hypotheses, and cross-source checks.
 - Market source confidence review: 12 sources graded; 3 high-use anchors and 4 range-only/context sources.
+- Market sizing stress test: 6 assumption-risk rows and 6 bottom-up stress scenarios.
 - Monetization proxy matrix: 5 markets covered; 4 strong and 1 medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.
 - Competitor revenue proxy review: 90 primary competitors reviewed; 22 strong and 70 medium-or-stronger bottom-up money proxies.
 - ICP segment matrix: 6 segment hypotheses; strongest current directional ICP is "Spiritual self-improvers".
@@ -71,7 +72,7 @@ Evidence status mix:
 - proved_v1_open_requirements: 1
 - substantial_v1_not_50k_dedup: 1
 - public_listing_inspected_walkthrough_open: 1
-- supported_with_ranges_and_bottom_up_proxy: 1
+- supported_with_ranges_stress_test_and_bottom_up_proxy: 1
 - supported_narrowly_with_visual_adjudication: 1
 - narrow_supported_public_listing_inspected_walkthrough_open: 1
 - prototype_stimulus_ready_unvalidated: 1
@@ -84,11 +85,11 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 14 validation roadmap rows | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 178 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 182 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 6973 usable itch rows; 6000 usable Steam tag rows; 251 usable Chrome Web Store rows; 251 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | H1_product_shape_exists | public_listing_inspected_walkthrough_open | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Strict full loop is rare and still needs actual app/onboarding screenshots to confirm or downgrade public listing claims. |
-| H2_markets_have_money | supported_with_ranges_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 4/5 strong market-level monetization proxies; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, or manual in-app paywall validation for final investor-grade claims. |
+| H2_markets_have_money | supported_with_ranges_stress_test_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 6 assumption rows; 6 stress scenarios; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, manual in-app paywall validation, and willingness-to-pay prototype evidence for final investor-grade claims. |
 | H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require human sign-off/in-app inspection. |
 | H3_whitespace_exists | narrow_supported_public_listing_inspected_walkthrough_open | medium | 1/100 strict behavior-tied progression signals; 12 P0 apps queued; 1 public listing visible causality case | Actual app/onboarding inspection results are still missing; public listings can overstate or hide in-app loops. |
 | H4_competitive_advantage_plausible | prototype_stimulus_ready_unvalidated | medium | 1 direct reference competitor; 45 high-threat competitors; 8 prototype screens; 6 success/kill metrics | No human prototype session yet proves users understand, prefer, or value the integrated loop. |
@@ -100,7 +101,7 @@ Claim-level audit snapshot:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 178 artifacts; 41 CSV artifacts; 93735 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 182 artifacts; 43 CSV artifacts; 93747 tracked CSV rows; 0 missing required artifacts.
 
 Largest tracked CSV artifacts:
 
@@ -127,7 +128,7 @@ Completion status mix:
 
 - proved_v1: 2
 - proved_scale_target: 1
-- supported_with_bottom_up_proxy_not_final: 1
+- supported_with_stress_test_and_bottom_up_proxy_not_final: 1
 - narrow_supported_public_listing_inspected_walkthrough_open: 1
 - directionally_supported_validation_ready: 1
 - prototype_stimulus_ready_not_validated: 1
@@ -142,12 +143,12 @@ Objective readiness matrix:
 | REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=14 | Keep refreshing as validation results change. |
 | REQ_02_COMPETITOR_UNIVERSE | proved_scale_target | medium_high | dedup=12552; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; chrome_extension_rows=252; known_raw_total=31047; itch_ok=6973; steam_tag_ok=6000; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | Deduped app/source universe is still below the aspirational 30k-50k dedup target; desktop stores, Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
-| REQ_04_MARKET_MONEY | supported_with_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing remains range-based; actual revenue estimates and manual in-app paywall validation are needed for final investor-grade claims. |
+| REQ_04_MARKET_MONEY | supported_with_stress_test_and_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; assumption_audit_rows=6; stress_scenarios=6; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing is stress-tested and range-based, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall validation are still needed for final investor-grade claims. |
 | REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_app_walkthrough_done=0 | Public listings for the P0 wave are inspected, but metadata/public copy can miss hidden in-app mechanics; app/onboarding walkthrough screenshots are still required. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36 | Segments are directional and need interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=12; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6 | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=178; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=182; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates | strong | roadmap_rows=14; p0=5; p1=9; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
 ## 2C. Validation Gap Roadmap
@@ -363,6 +364,32 @@ Highest-use market sources:
 | SRC-MKT-0006 | astrology_esoterics | Research and Markets | medium_use | 6 | direct_adjacent_tam_anchor_requires_variance_review |
 | SRC-MKT-0007 | astrology_esoterics | Econ Market Research | medium_use | 6 | direct_adjacent_tam_anchor_requires_variance_review |
 | SRC-MKT-0008 | astrology_esoterics | Global Growth Insights | medium_use | 6 | direct_adjacent_tam_anchor_requires_variance_review |
+
+### Market Sizing Stress Test
+
+The model now includes an assumption audit and stress-test layer. It does not add new TAM claims; it checks how much the current model depends on source confidence, intersection discounts, reachable users, activation, paid conversion, and ARPPU.
+
+Model-risk audit:
+
+| Pillar | SAM Base | Spread | Confidence | Money Proxy | Strong Competitors | Risk |
+| --- | ---: | ---: | --- | --- | ---: | --- |
+| gaming | 671100000 | 7.35 | medium | medium_paid_behavior_proxy |  | benchmark_only_not_direct_tam |
+| astrology_esoterics | 374400000 | 9.41 | low_medium | strong_paid_behavior_proxy | 8 | medium_proxy_supported_risk |
+| avatar_identity | 420000000 | 29.44 | medium | strong_paid_behavior_proxy | 7 | medium_proxy_supported_risk |
+| coaching | 300000000 | 5.28 | medium | strong_paid_behavior_proxy |  | high_range_variance_risk |
+| mindfulness | 252000000 | 8.59 | medium | strong_paid_behavior_proxy | 2 | medium_proxy_supported_risk |
+| intersection | 201960000 | 30.32 | low |  |  | high_source_and_monetization_risk |
+
+Bottom-up stress scenarios:
+
+| Scenario | Intersection Discount | Reachable Users | Paid Conversion | ARPPU | Annual Revenue | Read |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| defensive | 0.05 | 100000 | 0.02 | 50 | 25000 | tiny_validation_business |
+| conservative | 0.08 | 250000 | 0.03 | 60 | 144000 | niche_early_business |
+| base | 0.15 | 1000000 | 0.05 | 80 | 1600000 | niche_early_business |
+| strong_niche | 0.2 | 2500000 | 0.07 | 95 | 7481250 | venture_relevant_if_retention_works |
+| upside | 0.25 | 5000000 | 0.09 | 110 | 24750000 | large_outcome_requires_distribution_and_retention_proof |
+| breakout | 0.3 | 10000000 | 0.11 | 125 | 75625000 | large_outcome_requires_distribution_and_retention_proof |
 
 ### Monetization Proxy Matrix
 
