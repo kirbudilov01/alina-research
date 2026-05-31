@@ -477,7 +477,9 @@ lines.push(mdTable(gateSnapshot.map(row => ({
 ]));
 lines.push('');
 const h2Gate = gateSnapshot.find(row => row.hypothesis_id === 'H2') || {};
-lines.push(`Практически это означает следующее: H2 уже имеет ${h2Gate.completed_vs_required || '0 / 0'} заполненных paid-flow строк и ${h2Gate.success_vs_threshold || '0 / 0'} успешных строк, но еще ниже минимального порога; H1, H3, H4, H5 и H6 остаются в hold_validate, потому что по ним нет наблюдаемых capture rows. Это не слабость отчета, а защита от преждевременного вывода: большой массив конкурентов и источников показывает, куда идти, но не заменяет walkthrough, интервью и прототипные сессии.`);
+const h1Gate = gateSnapshot.find(row => row.hypothesis_id === 'H1') || {};
+const h3Gate = gateSnapshot.find(row => row.hypothesis_id === 'H3') || {};
+lines.push(`Практически это означает следующее: H1 и H3 уже имеют по ${h1Gate.completed_vs_required || h3Gate.completed_vs_required || '0 / 0'} listing-only строк, но ${h1Gate.success_vs_threshold || h3Gate.success_vs_threshold || '0 / 0'} успешных app-walkthrough строк, поэтому hidden-clone риск остается открытым. H2 имеет ${h2Gate.completed_vs_required || '0 / 0'} заполненных paid-flow строк и ${h2Gate.success_vs_threshold || '0 / 0'} успешных строк, но тоже ниже минимального порога. H4, H5 и H6 пока без наблюдаемых capture rows. Это не слабость отчета, а защита от преждевременного вывода: большой массив конкурентов и источников показывает, куда идти, но не заменяет walkthrough, интервью и прототипные сессии.`);
 lines.push('');
 lines.push('## ОПРЕДЕЛЕНИЕ МИРОВЫХ ЦЕЛЕВЫХ РЫНКОВ И ГИПОТЕЗА #2');
 lines.push('');

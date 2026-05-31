@@ -98,6 +98,10 @@ const gateStarted = gates.filter(row => clean(row.gate_status_ru).startsWith('н
 const h2Gate = gates.find(row => row.hypothesis_id === 'H2') || {};
 const h2Completed = h2Gate.completed_vs_required || '0 / 0';
 const h2Success = h2Gate.success_vs_threshold || '0 / 0';
+function gateRatio(id, field) {
+  const gate = gates.find(row => row.hypothesis_id === id) || {};
+  return gate[field] || '0 / 0';
+}
 
 const rows = [
   {
@@ -175,7 +179,7 @@ const rows = [
     objective_part_ru: 'Критически мыслить и не закрывать гипотезы без observed evidence',
     status_ru: 'открыто, capture-ready',
     evidence_strength_ru: 'сильное для процесса, слабое для финального proof',
-    current_evidence_ru: `gates=${gates.length}; hold_validate=${gateOpen}; started=${gateStarted}; H2_completed=${h2Completed}; H2_success=${h2Success}; H1/H3/H4/H5/H6 observed rows still 0`,
+    current_evidence_ru: `gates=${gates.length}; hold_validate=${gateOpen}; started=${gateStarted}; H1_completed=${gateRatio('H1', 'completed_vs_required')}; H1_success=${gateRatio('H1', 'success_vs_threshold')}; H3_completed=${gateRatio('H3', 'completed_vs_required')}; H3_success=${gateRatio('H3', 'success_vs_threshold')}; H2_completed=${h2Completed}; H2_success=${h2Success}; H4/H5/H6 observed rows still 0`,
     key_files: 'data_processed/global_hypothesis_gate_snapshot.csv;data_processed/global_next_validation_backlog.csv;data_processed/validation_gate_calculator.csv;data_processed/manual_walkthrough_capture_sheet.csv;data_processed/icp_interview_capture_sheet.csv;data_processed/prototype_session_capture_sheet.csv',
     remaining_gap_ru: 'цель нельзя считать завершенной, пока observed validation gates не закрыты или не понижены по evidence',
     next_move_ru: 'исполнить P0 validation backlog и обновить gate statuses'
@@ -216,7 +220,7 @@ lines.push(mdTable(rows, [
 lines.push('');
 lines.push('## Главный вывод');
 lines.push('');
-lines.push('Исследовательский пакет уже большой и трассируемый: есть source scale, пять рынков, TAM/SAM/SOM methodology, whitespace/audience synthesis, report PDF/DOCX и GitHub history. Но цель нельзя закрывать как финально достигнутую, потому что observed validation gates все еще открыты: H1/H3/H4/H5/H6 без capture rows, H2 начат, но ниже порога.');
+lines.push('Исследовательский пакет уже большой и трассируемый: есть source scale, пять рынков, TAM/SAM/SOM methodology, whitespace/audience synthesis, report PDF/DOCX и GitHub history. Но цель нельзя закрывать как финально достигнутую, потому что observed validation gates все еще открыты: H1/H3 имеют только listing-only строки без app walkthrough success, H2 начат, но ниже порога, H4/H5/H6 без capture rows.');
 lines.push('');
 lines.push('## Files');
 lines.push('');

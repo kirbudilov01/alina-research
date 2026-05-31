@@ -93,6 +93,7 @@ function completedManual(row) {
 }
 
 function successManual(row) {
+  if (clean(row.capture_status).toLowerCase().includes('public_listing_signoff')) return false;
   return completedManual(row)
     && ['full_loop', 'adjacent_loop', 'weak_adjacency', 'not_alina_like'].includes(clean(row.directness_label).toLowerCase())
     && clean(row.action_to_avatar_causality_label)
@@ -100,6 +101,7 @@ function successManual(row) {
 }
 
 function failManual(row) {
+  if (clean(row.capture_status).toLowerCase().includes('public_listing_signoff')) return false;
   const directness = clean(row.directness_label).toLowerCase();
   const causality = clean(row.action_to_avatar_causality_label).toLowerCase();
   return directness === 'full_loop' || causality === 'confirmed_full_action_to_avatar_causality';

@@ -88,6 +88,7 @@
     "build:validation-roadmap": "node scripts/build_validation_gap_roadmap.mjs",
     "build:validation-dashboard": "node scripts/build_validation_execution_dashboard.mjs",
     "build:validation-capture-sheets": "node scripts/build_validation_capture_sheets.mjs",
+    "build:manual-public-listing-signoff": "node scripts/build_manual_public_listing_signoff.mjs",
     "build:paid-flow-local-signoff": "node scripts/build_paid_flow_local_signoff.mjs",
     "build:hypothesis-decision": "node scripts/build_hypothesis_decision_matrix.mjs",
     "build:p0-command-center": "node scripts/build_p0_validation_command_center.mjs",

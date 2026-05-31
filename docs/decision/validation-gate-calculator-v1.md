@@ -1,6 +1,6 @@
 # Validation Gate Calculator V1
 
-Generated: 2026-05-31T15:44:48.267Z
+Generated: 2026-05-31T15:48:42.382Z
 
 ## Purpose
 
@@ -10,8 +10,8 @@ This calculator reads the manual walkthrough, paid-flow, ICP interview, and prot
 
 | Gate | Hypotheses | Workstream | Status | Required Rows | Completed Rows | Success Rows | Decision Effect |
 | --- | --- | --- | --- | ---: | ---: | ---: | --- |
-| GATE_H1_MANUAL_PRODUCT_SHAPE | H1 | manual_competitor_walkthrough | not_started | 60 | 0 | 0 | keeps_hold_validate |
-| GATE_H3_MANUAL_WHITESPACE | H3 | manual_competitor_walkthrough | not_started | 60 | 0 | 0 | keeps_hold_validate |
+| GATE_H1_MANUAL_PRODUCT_SHAPE | H1 | manual_competitor_walkthrough | in_progress_insufficient_evidence | 60 | 12 | 0 | keeps_hold_validate |
+| GATE_H3_MANUAL_WHITESPACE | H3 | manual_competitor_walkthrough | in_progress_insufficient_evidence | 60 | 12 | 0 | keeps_hold_validate |
 | GATE_H2_PAID_FLOW | H2 | paid_flow_validation | in_progress_insufficient_evidence | 40 | 28 | 8 | keeps_hold_validate |
 | GATE_H5_ICP_RECENT_BEHAVIOR | H5 | icp_interviews | not_started | 96 | 0 | 0 | keeps_hold_validate |
 | GATE_H4_PROTOTYPE_ADVANTAGE | H4 | prototype_user_validation | not_started | 80 | 0 | 0 | keeps_hold_validate |
@@ -21,8 +21,8 @@ This calculator reads the manual walkthrough, paid-flow, ICP interview, and prot
 
 | Status | Gates | Hypotheses | Required Capture Rows | Completed Capture Rows |
 | --- | ---: | --- | ---: | ---: |
-| not_started | 5 | H1/H3/H5/H4/H6 | 376 | 0 |
-| in_progress_insufficient_evidence | 1 | H2 | 40 | 28 |
+| in_progress_insufficient_evidence | 3 | H1/H3/H2 | 160 | 52 |
+| not_started | 3 | H5/H4/H6 | 256 | 0 |
 
 ## Interpretation
 

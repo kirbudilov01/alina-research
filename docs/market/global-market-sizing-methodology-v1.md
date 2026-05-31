@@ -1,6 +1,6 @@
 # Global Market Sizing Methodology V1
 
-Generated: 2026-05-31T15:44:57.763Z
+Generated: 2026-05-31T15:48:53.149Z
 
 ## Что доказывает этот слой
 
