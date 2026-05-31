@@ -214,6 +214,7 @@ const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv
 const marketSources = csv('data_processed/market_source_registry.csv');
 const nextValidationBacklog = csv('data_processed/global_next_validation_backlog.csv');
 const reportReadabilityAudit = csv('data_processed/global_report_readability_audit.csv');
+const sourceQualityAudit = csv('data_processed/global_source_quality_gap_audit.csv');
 const marketSizingMethodology = csv('data_processed/global_market_sizing_methodology.csv');
 const marketStressScenarios = csv('data_processed/market_sizing_stress_test.csv');
 const whitespaceAudienceSynthesis = csv('data_processed/global_whitespace_audience_synthesis.csv');
@@ -458,6 +459,15 @@ const sourceAppendix = [
     primary_metric: `${reportReadabilityAudit.length} readability audit rows`,
     evidence_files: 'data_processed/global_report_readability_audit.csv;docs/decision/global-report-readability-audit-v1.md;reports/alina-global-executive-narrative-v1.md;output/pdf/alina-global-executive-narrative-v1.pdf',
     source_boundary_ru: 'Readability audit оценивает форму и ясность текста; он не доказывает рыночные или продуктовые claims.'
+  },
+  {
+    claim_id: 'SRC_11_SOURCE_QUALITY_GAP',
+    report_section: 'Описание проекта и гипотеза #1',
+    claim_ru: 'Source base по пяти рынкам имеет разную силу: direct app coverage, benchmark mechanics и VOC/context нужно читать отдельно.',
+    evidence_status_ru: 'доказано как source-quality audit, не validation proof',
+    primary_metric: `${sourceQualityAudit.length} market source-quality rows`,
+    evidence_files: 'data_processed/global_source_quality_gap_audit.csv;docs/competitive/global-source-quality-gap-audit-v1.md;data_processed/cross_source_coverage_matrix.csv;data_processed/source_expansion_backlog.csv',
+    source_boundary_ru: 'Source quality audit показывает качество coverage и next lanes; он не доказывает PMF, WTP или отсутствие hidden clone.'
   }
 ];
 
@@ -489,6 +499,26 @@ lines.push('Гипотеза №1: на мировом consumer-app рынке �
 lines.push('');
 lines.push(`На текущем этапе собрано ${fmt(rawRows.length)} сырьевых source-строк, ${fmt(dedupRows.length)} уникализированных строк и ${fmt(manifest.length)} локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.`);
 lines.push('');
+if (sourceQualityAudit.length) {
+  lines.push('Чтобы масштаб базы не читался как одинаковое качество источников, отдельно добавлен source-quality audit по пяти рынкам. Он показывает, где coverage ближе к прямым consumer-app конкурентам, где это скорее Steam/itch mechanics benchmark, а где нужны source-native lanes из backlog. Это защищает отчет от ложного вывода “много строк = все доказано”.');
+  lines.push('');
+  lines.push(mdTable(sourceQualityAudit.map(row => ({
+    market: row.market_ru,
+    direct: row.direct_consumer_app_dedup,
+    directShare: row.direct_share_of_coverage,
+    benchmark: row.benchmark_mechanics_dedup,
+    quality: row.quality_read_ru,
+    next: row.next_source_lanes_ru
+  })), [
+    { key: 'market', label: 'Рынок' },
+    { key: 'direct', label: 'Direct dedup', align: 'right' },
+    { key: 'directShare', label: 'Direct share', align: 'right' },
+    { key: 'benchmark', label: 'Benchmark dedup', align: 'right' },
+    { key: 'quality', label: 'Как читать source quality' },
+    { key: 'next', label: 'Следующие lanes' }
+  ]));
+  lines.push('');
+}
 lines.push('### Логика гипотез');
 lines.push('');
 lines.push('Исследование специально построено как цепочка, а не как набор независимых таблиц. Сначала фиксируется продуктовая идея: если Alina должна соединить смысл, действие, reset и видимый прогресс, то первая проверка - существует ли вообще такая форма продукта и не занята ли она уже конкурентами. После этого нужно понять, есть ли вокруг нее мировые рынки и деньги: без этого даже красивая продуктовая петля остается маленьким экспериментом.');
@@ -951,6 +981,7 @@ lines.push('- `data_processed/global_hypothesis_validation_questionnaire.csv`');
 lines.push('- `data_processed/global_hypothesis_gate_snapshot.csv`');
 lines.push('- `data_processed/global_next_validation_backlog.csv`');
 lines.push('- `data_processed/global_report_readability_audit.csv`');
+lines.push('- `data_processed/global_source_quality_gap_audit.csv`');
 lines.push('- `data_processed/global_market_sizing_methodology.csv`');
 lines.push('- `data_processed/global_niche_count_rollup.csv`');
 lines.push('- `data_processed/global_whitespace_audience_synthesis.csv`');

@@ -119,8 +119,8 @@ const rows = [
     objective_part_ru: 'Расширить конкурентов и источники по 5 рынкам до большого масштаба',
     status_ru: 'покрыто по raw 50k и dedup 30k+, dedup 50k остается aspiration',
     evidence_strength_ru: 'средне-сильное',
-    current_evidence_ru: `raw=${rawMilestone.metric_value || 'n/a'}; dedup=${dedupMilestone.metric_value || 'n/a'}; dedup50_status=${dedup50.status || 'open'}; source_refs=${manifest.reduce((sum, row) => sum + num(row.source_ref_rows), 0)}`,
-    key_files: 'data_processed/cross_source_universe_raw_index.csv;data_processed/cross_source_universe_dedup.csv;data_processed/source_scale_milestone.csv;data_processed/cross_source_coverage_matrix.csv',
+    current_evidence_ru: `raw=${rawMilestone.metric_value || 'n/a'}; dedup=${dedupMilestone.metric_value || 'n/a'}; dedup50_status=${dedup50.status || 'open'}; source_refs=${manifest.reduce((sum, row) => sum + num(row.source_ref_rows), 0)}; source_quality_rows=${countRows('data_processed/global_source_quality_gap_audit.csv')}`,
+    key_files: 'data_processed/cross_source_universe_raw_index.csv;data_processed/cross_source_universe_dedup.csv;data_processed/source_scale_milestone.csv;data_processed/cross_source_coverage_matrix.csv;data_processed/global_source_quality_gap_audit.csv;docs/competitive/global-source-quality-gap-audit-v1.md',
     remaining_gap_ru: 'нельзя писать, что 50k dedup уникальных конкурентов доказаны; доказаны raw 50k и dedup 30k-40k band',
     next_move_ru: 'расширять source-native lanes без тяжелого поискового crawl'
   },

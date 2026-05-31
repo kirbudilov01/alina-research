@@ -1,6 +1,6 @@
 # Alina Research. Мировой рынок и логика гипотез
 
-Собрано: 2026-05-31T16:46:55.496Z
+Собрано: 2026-05-31T16:52:28.036Z
 
 ## ОПИСАНИЕ ПРОЕКТА И ГИПОТЕЗА #1
 
@@ -12,7 +12,17 @@
 
 Гипотеза №1: на мировом consumer-app рынке есть место для приложения, которое объединяет личный смысл, короткое действие, reset и причинно видимый прогресс в одну ежедневную петлю. Эта гипотеза пока не доказана как product-market fit, но уже поддержана масштабной картой соседних рынков и конкурентных сигналов.
 
-На текущем этапе собрано 67,525 сырьевых source-строк, 36,694 уникализированных строк и 492 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
+На текущем этапе собрано 67,525 сырьевых source-строк, 36,694 уникализированных строк и 495 локальных артефактов. Эти данные нужны не для того, чтобы объявить продукт доказанным, а для последовательной проверки: существует ли рынок, есть ли деньги, насколько плотна конкуренция, где может быть белое пятно, кто аудитория и какую MVP-петлю надо тестировать.
+
+Чтобы масштаб базы не читался как одинаковое качество источников, отдельно добавлен source-quality audit по пяти рынкам. Он показывает, где coverage ближе к прямым consumer-app конкурентам, где это скорее Steam/itch mechanics benchmark, а где нужны source-native lanes из backlog. Это защищает отчет от ложного вывода “много строк = все доказано”.
+
+| Рынок | Direct dedup | Direct share | Benchmark dedup | Как читать source quality | Следующие lanes |
+| --- | ---: | ---: | ---: | --- | --- |
+| Mindfulness / reset | 2,550 | 26.0% | 6,608 | coverage пригоден для directionality, но требует ручного sampling перед claim upgrade | P0 Product Hunt / P0 AlternativeTo / P0 Chrome Web Store / browser extensions |
+| Avatar / identity | 2,506 | 25.2% | 6,867 | coverage пригоден для directionality, но требует ручного sampling перед claim upgrade | P0 Product Hunt / P0 AlternativeTo / P0 Chrome Web Store / browser extensions |
+| Astrology / esoterics | 2,206 | 83.0% | 366 | direct consumer-app coverage достаточно заметный для desk map | P0 Product Hunt / P1 Reddit/subreddit discovery as competitor source / P2 Public website/pricing pages for top candidates |
+| Coaching / self-improvement | 2,651 | 68.7% | 485 | direct consumer-app coverage достаточно заметный для desk map | P0 Product Hunt / P0 AlternativeTo / P0 Chrome Web Store / browser extensions |
+| Gaming / progression benchmark | 3,204 | 19.0% | 13,542 | coverage сильный по масштабу, но сильно benchmark/mechanics-heavy | P1 Microsoft Store / Mac App Store web / P1 itch.io / indie game directories / P1 Reddit/subreddit discovery as competitor source |
 
 ### Логика гипотез
 
@@ -291,12 +301,12 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | ID | Часть цели | Статус | Текущее evidence | Осталось | Следующий ход |
 | --- | --- | --- | --- | --- | --- |
 | GOAL_01_PLAN | Зафиксировать большой план задач и execution path | покрыто как рабочая система | 22 next-validation задач; 75 command-center задач; 5 runway шагов | план есть, но требует обновления после observed evidence | после каждой ручной проверки пересобирать backlog и gates |
-| GOAL_02_SOURCE_SCALE | Расширить конкурентов и источники по 5 рынкам до большого масштаба | покрыто по raw 50k и dedup 30k+, dedup 50k остается aspiration | raw=67525; dedup=36694; dedup50_status=open; source_refs=239857 | нельзя писать, что 50k dedup уникальных конкурентов доказаны; доказаны raw 50k и dedup 30k-40k band | расширять source-native lanes без тяжелого поискового crawl |
+| GOAL_02_SOURCE_SCALE | Расширить конкурентов и источники по 5 рынкам до большого масштаба | покрыто по raw 50k и dedup 30k+, dedup 50k остается aspiration | raw=67525; dedup=36694; dedup50_status=open; source_refs=239863; source_quality_rows=5 | нельзя писать, что 50k dedup уникальных конкурентов доказаны; доказаны raw 50k и dedup 30k-40k band | расширять source-native lanes без тяжелого поискового crawl |
 | GOAL_03_FIVE_MARKETS | Покрыть 5 направлений: mindfulness, coaching, astrology/esoterics, avatar/identity, gaming/progression | покрыто | 5 market rows; 5 whitespace/audience rows; 6 market methodology rows | gaming остается benchmark-only до direct audience overlap proof | сохранять gaming вне прямого TAM и H3 proof |
 | GOAL_04_TAM_SAM_SOM | Подготовить рыночную методологию TAM/SAM/SOM и stress-сценарии | покрыто как range-based methodology, не финальный revenue proof | 6 methodology rows; 6 TAM/SAM/SOM rows; 6 stress scenarios | H2 не закрыт: paid-flow signoff ниже порога, WTP и paid-depth prototype signals еще нужны | добрать paid-flow capture rows и WTP вопросы из P0 backlog |
 | GOAL_05_WHITESPACE_AUDIENCE | Собрать whitespace и аудиторные матрицы | покрыто как directional synthesis, validation остается открытой | 5 synthesis rows; 6 whitespace rows; 6 ICP rows; 20492 audience signal rows | H3/H5 нельзя усиливать без manual walkthrough и recent-behavior interviews | исполнить первые 5 walkthrough и P0 ICP interview rows |
 | GOAL_06_REPORT_RU | Собрать последовательный русский мировой отчет и PDF/DOCX | покрыто как draft, не финальная validated версия | global report md=yes; pdf=yes; docx=yes; executive_md=yes; executive_pdf=yes; readability_audit_rows=7 | финальная версия должна обновиться после observed validation rows | после capture rows пересобрать отчет и изменить claim language |
-| GOAL_07_VERSIONING | Сохранять локально, трассировать источники и версионировать через GitHub | покрыто активно | manifest=492; missing=0; docs=123; scripts=110 | manifest надо обновлять после каждого нового слоя | пересобирать manifest и делать commit/push после изменений |
+| GOAL_07_VERSIONING | Сохранять локально, трассировать источники и версионировать через GitHub | покрыто активно | manifest=495; missing=0; docs=124; scripts=111 | manifest надо обновлять после каждого нового слоя | пересобирать manifest и делать commit/push после изменений |
 | GOAL_08_VALIDATION | Критически мыслить и не закрывать гипотезы без observed evidence | открыто, capture-ready | gates=6; hold_validate=6; started=6; H1_completed=12 / 60; H1_success=0 / 25; H3_completed=12 / 60; H3_success=0 / 25; H2_completed=28 / 40; H2_success=8 / 12; H5_completed=12 / 96; H5_success=0 / 30; H4_completed=16 / 80; H4_success=0 / 32; H6_completed=16 / 80; H6_success=0 / 32 | цель нельзя считать завершенной, пока observed validation gates не закрыты или не понижены по evidence | исполнить P0 validation backlog и обновить gate statuses |
 
 Главный вывод по этой карте: пакет уже масштабный и трассируемый, но не финально валидированный. Это правильное состояние для evidence-first ресерча: сильные desk/source слои готовы, а product/market claims остаются в hold_validate до ручных walkthrough, интервью, прототипа и WTP.
@@ -329,10 +339,11 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 | SRC_04_WHITESPACE | Где дыры и возможность отличиться | поддержано направленно, но не финально доказано | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Whitespace нельзя апгрейдить без manual walkthrough и final verdict_after_inspection. |
 | SRC_05_AUDIENCE | Аудитория, интервью и гипотеза #4 | поддержано направленно, но не финально доказано | 20492 audience signal rows; 294 community/referral rows; 2339 coded Reddit mention rows; 1852 Reddit manual-read queue rows; 574 Reddit capture rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Audience rows и Reddit/forum signals не являются representative survey и не заменяют recent-behavior interviews. |
 | SRC_06_PRODUCT_CORE | Итоговая модель продукта и гипотеза #5 | поддержано направленно, но не финально доказано | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | Product core не считается доказанным без заполненных prototype_session_capture_sheet и scorecard. |
-| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 492 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
+| SRC_07_PROVENANCE | Источники и границы доказательств | доказано как исследовательский слой | 495 manifest artifacts; missing=0 | Manifest доказывает наличие файлов и хэши, но не заменяет содержательную валидацию claims. |
 | SRC_08_SAMPLE_STYLE_REFERENCE | Логика гипотез и повествовательная форма | используется как style benchmark, не как market evidence | sample_docx_paragraphs=645; benchmark_doc=docs/decision/alina-sample-style-benchmark-v1.md | Образец задает композицию и русский нарратив; он не переносит российский рынок, локальные цифры или старую продуктовую гипотезу в мировой отчет. |
 | SRC_09_NICHE_COUNT_ROLLUP | Определение мировых целевых рынков и гипотеза #2 | доказано как source-count rollup, не как PMF proof | 5 niche rows; file=data_processed/global_niche_count_rollup.csv | Niche count rollup показывает масштаб source discovery по рынкам; он не доказывает спрос, WTP или отсутствие скрытого full-loop конкурента. |
 | SRC_10_REPORT_READABILITY | Проверка складности и читаемости отчета | проверено редакционным аудитом, не market proof | 7 readability audit rows | Readability audit оценивает форму и ясность текста; он не доказывает рыночные или продуктовые claims. |
+| SRC_11_SOURCE_QUALITY_GAP | Описание проекта и гипотеза #1 | доказано как source-quality audit, не validation proof | 5 market source-quality rows | Source quality audit показывает качество coverage и next lanes; он не доказывает PMF, WTP или отсутствие hidden clone. |
 
 ## БЫСТРЫЕ ВЫВОДЫ ДЛЯ СТРАТЕГИИ
 
@@ -353,6 +364,7 @@ Intersection SAM в текущей модели равен $202M. Это раб�
 - `data_processed/global_hypothesis_gate_snapshot.csv`
 - `data_processed/global_next_validation_backlog.csv`
 - `data_processed/global_report_readability_audit.csv`
+- `data_processed/global_source_quality_gap_audit.csv`
 - `data_processed/global_market_sizing_methodology.csv`
 - `data_processed/global_niche_count_rollup.csv`
 - `data_processed/global_whitespace_audience_synthesis.csv`
