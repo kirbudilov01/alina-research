@@ -1,6 +1,6 @@
 # Research Completion Audit V1
 
-Generated: 2026-05-31T05:10:34.612Z
+Generated: 2026-05-31T05:17:38.015Z
 
 ## Purpose
 
@@ -10,7 +10,7 @@ This audit maps the original user objective to current evidence. It prevents the
 
 - proved_v1: 2
 - proved_scale_target: 1
-- supported_with_ranges_not_final: 1
+- supported_with_bottom_up_proxy_not_final: 1
 - narrow_supported_not_final: 1
 - directionally_supported_validation_ready: 1
 - supported_for_mvp_framing_not_validated: 1
@@ -20,9 +20,9 @@ This audit maps the original user objective to current evidence. It prevents the
 
 ## Evidence Strength Mix
 
-- medium: 4
 - strong: 3
-- medium_high: 2
+- medium_high: 3
+- medium: 3
 - high: 1
 
 ## Completion Matrix
@@ -32,7 +32,7 @@ This audit maps the original user objective to current evidence. It prevents the
 | REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=14 | Keep refreshing as validation results change. | Update after any manual validation/prototype result. |
 | REQ_02_COMPETITOR_UNIVERSE | proved_scale_target | medium_high | dedup=12552; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; known_raw_total=30795; itch_ok=6973; steam_tag_ok=6000; niches=5; source_kinds=4 | Below aspirational 30k-50k raw source/app target; desktop stores, Product Hunt/AlternativeTo, B2B directories, forums, and curated lists remain backlog. | Run next non-search-heavy collectors from source expansion backlog. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. | Keep market-specific validation gates explicit. |
-| REQ_04_MARKET_MONEY | supported_with_ranges_not_final | medium | tam_rows=6; source_confidence_rows=12; strong_paid_proxy_markets=4/5 | Market sizing remains range-based; competitor revenue/proxy triangulation and additional credible sources are needed for final claims. | Add competitor revenue/proxy review and refresh source confidence. |
+| REQ_04_MARKET_MONEY | supported_with_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70 | Market sizing remains range-based; actual revenue estimates and manual in-app paywall validation are needed for final investor-grade claims. | Manually validate the highest competitor money proxies and add paid/credible revenue intelligence where available. |
 | REQ_05_WHITESPACE | narrow_supported_not_final | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1 | Metadata can miss hidden in-app mechanics; manual app/onboarding validation is still required. | Execute P0/P1 human validation queue and Chrome mechanic validation. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36 | Segments are directional and need interviews/prototype/WTP validation. | Run ICP validation packet for top two segments. |
 | REQ_07_COMPETITIVE_ADVANTAGE | supported_for_mvp_framing_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=12 | No prototype or user test proves the loop is understood/preferred. | Prototype two-minute loop and measure comprehension, emotional value, return intent. |

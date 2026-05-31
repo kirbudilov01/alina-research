@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T05:11:08.452Z
+Generated: 2026-05-31T05:17:58.748Z
 
 ## 1. Executive Summary
 
@@ -22,7 +22,7 @@ Key quantified signals:
 - Web paywall screenshot capture: 29/29 queued screenshots captured for manual interpretation.
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Evidence audit register: 12 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 151 artifacts tracked, 29 CSV artifacts, 93058 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 155 artifacts tracked, 31 CSV artifacts, 93153 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -33,6 +33,7 @@ Key quantified signals:
 - Validation gap roadmap: 14 rows; 5 P0 and 9 P1 next validation tasks across markets, hypotheses, and cross-source checks.
 - Market source confidence review: 12 sources graded; 3 high-use anchors and 4 range-only/context sources.
 - Monetization proxy matrix: 5 markets covered; 4 strong and 1 medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.
+- Competitor revenue proxy review: 90 primary competitors reviewed; 22 strong and 70 medium-or-stronger bottom-up money proxies.
 - ICP segment matrix: 6 segment hypotheses; strongest current directional ICP is "Spiritual self-improvers".
 - ICP validation packet: 36 interview/prototype test rows for selecting one primary and one secondary ICP.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
@@ -65,7 +66,7 @@ Evidence status mix:
 - proved_v1_open_requirements: 1
 - substantial_v1_not_50k_dedup: 1
 - partially_supported: 1
-- supported_with_ranges: 1
+- supported_with_ranges_and_bottom_up_proxy: 1
 - supported_narrowly: 1
 - narrow_supported_not_final: 1
 - plausible_unproven: 1
@@ -82,7 +83,7 @@ Claim-level audit snapshot:
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 6973 usable itch rows; 6000 usable Steam tag rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
-| H2_markets_have_money | supported_with_ranges | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 4/5 strong monetization proxy markets | Market sizing still needs competitor revenue/proxy review and additional triangulation for thin/contextual markets. |
+| H2_markets_have_money | supported_with_ranges_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 4/5 strong market-level monetization proxies; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, or manual in-app paywall validation for final investor-grade claims. |
 | H2_paywall_visible_evidence | supported_narrowly | medium_low | 2/29 screenshots confirm visible public pricing | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. |
 | H3_whitespace_exists | narrow_supported_not_final | medium | 1/100 strict behavior-tied progression signals; 9 Chrome mechanic references to inspect | Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors. |
 | H4_competitive_advantage_plausible | plausible_unproven | medium_low | 1 direct reference competitor; 45 high-threat competitors; 23 Chrome mechanic battlecards | No human validation or prototype test yet proves users value the loop. |
@@ -94,7 +95,7 @@ Claim-level audit snapshot:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 151 artifacts; 29 CSV artifacts; 93058 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 155 artifacts; 31 CSV artifacts; 93153 tracked CSV rows; 0 missing required artifacts.
 
 Largest tracked CSV artifacts:
 
@@ -121,7 +122,7 @@ Completion status mix:
 
 - proved_v1: 2
 - proved_scale_target: 1
-- supported_with_ranges_not_final: 1
+- supported_with_bottom_up_proxy_not_final: 1
 - narrow_supported_not_final: 1
 - directionally_supported_validation_ready: 1
 - supported_for_mvp_framing_not_validated: 1
@@ -136,7 +137,7 @@ Objective readiness matrix:
 | REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=14 | Keep refreshing as validation results change. |
 | REQ_02_COMPETITOR_UNIVERSE | proved_scale_target | medium_high | dedup=12552; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; known_raw_total=30795; itch_ok=6973; steam_tag_ok=6000; niches=5; source_kinds=4 | Below aspirational 30k-50k raw source/app target; desktop stores, Product Hunt/AlternativeTo, B2B directories, forums, and curated lists remain backlog. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
-| REQ_04_MARKET_MONEY | supported_with_ranges_not_final | medium | tam_rows=6; source_confidence_rows=12; strong_paid_proxy_markets=4/5 | Market sizing remains range-based; competitor revenue/proxy triangulation and additional credible sources are needed for final claims. |
+| REQ_04_MARKET_MONEY | supported_with_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70 | Market sizing remains range-based; actual revenue estimates and manual in-app paywall validation are needed for final investor-grade claims. |
 | REQ_05_WHITESPACE | narrow_supported_not_final | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1 | Metadata can miss hidden in-app mechanics; manual app/onboarding validation is still required. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36 | Segments are directional and need interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | supported_for_mvp_framing_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=12 | No prototype or user test proves the loop is understood/preferred. |
@@ -385,6 +386,47 @@ Highest-signal monetization examples:
 | app_store_iap | mindfulness | 369 Manifestation & Meditation | 0.99-6.99 | medium_high | Observed IAP metadata supports paid behavior proxy, but product type may be consumable/unclassified. |
 | app_store_iap | astrology_esoterics | Zodya Tarot Coffee Reading AI | 7.99-49.99 | medium_high | Observed subscription-like IAP metadata supports paid behavior proxy. |
 | app_store_iap | avatar_identity | LunaMate: AI Fanstasy Roleplay | 14.99-79.99 | medium_high | Observed subscription-like IAP metadata supports paid behavior proxy. |
+
+### Competitor Revenue Proxy Review
+
+A bottom-up competitor revenue proxy layer reviews 90 primary competitors using public App Store IAP, review depth, Google Play pricing/install context, top-100 scorecard fields, and web-paywall signals. It does not estimate actual revenue; it identifies visible paid behavior and demand-depth proxies for TAM/SAM/SOM sanity checks.
+
+Revenue proxy bands:
+
+- medium_bottom_up_money_proxy: 48
+- strong_bottom_up_money_proxy: 22
+- weak_to_medium_money_proxy: 12
+- weak_public_money_proxy: 8
+
+Market-level bottom-up read:
+
+| Market | Reviewed | Strong | Medium+ | IAP Apps | Max Price | Read |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| astrology_esoterics | 44 | 8 | 35 | 39 | 549.99 | bottom_up_paid_behavior_visible |
+| avatar_identity | 22 | 7 | 16 | 18 | 509 | bottom_up_paid_behavior_visible |
+| coaching_self_improvement | 14 | 5 | 11 | 13 | 119.99 | bottom_up_paid_behavior_visible |
+| mindfulness | 5 | 2 | 4 | 5 | 174.99 | bottom_up_paid_behavior_directional |
+| gaming_progression | 5 | 0 | 4 | 5 | 129.99 | bottom_up_paid_behavior_directional |
+
+Highest bottom-up money proxies:
+
+| App | Market | Verdict | Reviews | IAP | Max Price | Score | Band |
+| --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| Shepherd: Spiritual Bible BFF | astrology_esoterics | direct_reference_competitor | 8248 | 6 | 59.99 | 90 | strong_bottom_up_money_proxy |
+| Mindvalley: Self Improvement | astrology_esoterics | high_priority_close_substitute | 6863 | 8 | 399.00 | 86 | strong_bottom_up_money_proxy |
+| Yoga International | avatar_identity | high_priority_close_substitute | 5989 | 2 | 169.00 | 86 | strong_bottom_up_money_proxy |
+| Daily Burn: Workout Coach | avatar_identity | high_priority_close_substitute | 14226 | 8 | 149.99 | 84 | strong_bottom_up_money_proxy |
+| stoic. journal & mental health | astrology_esoterics | high_priority_close_substitute | 34617 | 8 | 99.99 | 84 | strong_bottom_up_money_proxy |
+| Day One: Daily Journal & Diary | coaching_self_improvement | high_priority_close_substitute | 116607 | 6 | 74.99 | 80 | strong_bottom_up_money_proxy |
+| Law of Attraction Toolbox | astrology_esoterics | high_priority_close_substitute | 2935 | 6 | 99.99 | 78 | strong_bottom_up_money_proxy |
+| 5 Minute Journal・Daily Diary | astrology_esoterics | monetization_risk_benchmark | 17397 | 8 | 39.99 | 78 | strong_bottom_up_money_proxy |
+| ZOE Health: AI Meal Tracker | avatar_identity | high_priority_close_substitute | 6577 | 2 | 99.99 | 78 | strong_bottom_up_money_proxy |
+| Motivate: Daily Motivation | avatar_identity | high_priority_close_substitute | 8307 | 4 | 399.99 | 78 | strong_bottom_up_money_proxy |
+| Daily Yoga: Yoga for Fitness® | avatar_identity | high_priority_close_substitute | 4320 | 10 | 69.99 | 78 | strong_bottom_up_money_proxy |
+| Pregnancy Tracker 3D by Sprout | coaching_self_improvement | monetization_risk_benchmark | 23429 | 10 | 59.99 | 76 | strong_bottom_up_money_proxy |
+| Kindara: Fertility Tracker | coaching_self_improvement | adjacent_benchmark | 10147 | 3 | 49.99 | 76 | strong_bottom_up_money_proxy |
+| Daily Habit List: Goal Tracker | coaching_self_improvement | high_priority_close_substitute | 344 | 10 | 49.99 | 76 | strong_bottom_up_money_proxy |
+| Flow Lab: Growth Mindset Coach | astrology_esoterics | high_priority_close_substitute | 894 | 9 | 69.99 | 76 | strong_bottom_up_money_proxy |
 
 ### SOM Sensitivity
 

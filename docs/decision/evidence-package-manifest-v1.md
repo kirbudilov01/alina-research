@@ -1,6 +1,6 @@
 # Evidence Package Manifest V1
 
-Generated: 2026-05-31T05:11:22.183Z
+Generated: 2026-05-31T05:18:01.117Z
 
 ## Purpose
 
@@ -8,17 +8,17 @@ This manifest makes the research package auditable. It lists key raw data, proce
 
 ## Package Summary
 
-- Manifest rows: 151
+- Manifest rows: 155
 - Missing required artifacts: 0
-- CSV artifacts: 29
-- Total CSV data rows tracked: 93058
-- CSV rows with source-like identifiers/URLs/domains/packages: 93024
+- CSV artifacts: 31
+- Total CSV data rows tracked: 93153
+- CSV rows with source-like identifiers/URLs/domains/packages: 93114
 
 Artifact types:
 
-- research_doc: 54
-- generator_script: 36
-- processed_data: 18
+- research_doc: 55
+- generator_script: 37
+- processed_data: 20
 - report: 16
 - chart: 14
 - raw_data: 11
@@ -26,9 +26,9 @@ Artifact types:
 
 Evidence roles:
 
-- market_money: 35
+- market_money: 37
 - decision_artifact: 34
-- audience_icp: 25
+- audience_icp: 27
 - supporting: 21
 - competitor_universe: 14
 - competitive_whitespace: 12
@@ -40,7 +40,9 @@ Evidence roles:
 | --- | --- | ---: | ---: | --- |
 | data_processed/audience_signal_matrix.csv | audience_icp | 20492 | 20492 | 865f8a0de8b075d7 |
 | data_processed/competitor_feature_matrix.csv | supporting | 12552 | 12552 | b285aff3873487bc |
-| data_processed/evidence_claim_register.csv | decision_artifact | 12 | 0 | 30147e96c24ba6e1 |
+| data_processed/competitor_revenue_proxy_market_summary.csv | market_money | 5 | 0 | bb80578db00af2cd |
+| data_processed/competitor_revenue_proxy_review.csv | audience_icp | 90 | 90 | 168d799198a9e0de |
+| data_processed/evidence_claim_register.csv | decision_artifact | 12 | 0 | d4c686601f637f28 |
 | data_processed/forum_quote_coding_matrix.csv | audience_icp | 72 | 72 | f2fb0ab869195b97 |
 | data_processed/icp_segment_matrix.csv | audience_icp | 6 | 0 | da930b6880a1c41e |
 | data_processed/icp_validation_test_plan.csv | audience_icp | 36 | 36 | 403bffc6be3783b4 |
@@ -73,19 +75,19 @@ Evidence roles:
 | File | Type | Lines | Bytes | Hash |
 | --- | --- | ---: | ---: | --- |
 | docs/competitive/human-validation-guide-v1.md | research_doc | 91 | 12102 | b85e6b5dd29fcb2f |
-| docs/decision/evidence-audit-v1.md | research_doc | 58 | 4605 | 16b6d06a4afe4d6e |
-| docs/decision/evidence-package-manifest-v1.md | research_doc | 100 | 5751 | faca6fb3e573cdcc |
+| docs/decision/evidence-audit-v1.md | research_doc | 58 | 4712 | db5cae811c4ef6ba |
+| docs/decision/evidence-package-manifest-v1.md | research_doc | 102 | 5955 | ab8994dbd9cef1f4 |
 | docs/decision/validation-gap-roadmap-v1.md | research_doc | 56 | 5654 | db39dd05e7ed6d6a |
 | docs/final-report-outline.md | research_doc | 120 | 2462 | c1f32c179799ccf1 |
 | docs/product/product-core-evidence-v1.md | research_doc | 26 | 1444 | 38d7eb6669cbc2a0 |
 | docs/strategy/validation-falsification-criteria.md | research_doc | 38 | 1152 | 310c8c3044a11540 |
 | docs/visuals/chart-index-v1.md | research_doc | 25 | 886 | 77cba8f26318bcae |
-| output/pdf/alina-evidence-first-report-draft.pdf | pdf | 659 | 86184 | 5d071756dbc8723f |
-| output/pdf/alina-evidence-visual-report-v1.pdf | pdf | 226 | 23504 | e3f357bd966af6bd |
-| reports/alina-evidence-first-report-draft.md | report | 936 | 64994 | 67d1a562dff7e0d7 |
+| output/pdf/alina-evidence-first-report-draft.pdf | pdf | 697 | 89393 | ac041070431d752b |
+| output/pdf/alina-evidence-visual-report-v1.pdf | pdf | 226 | 23504 | 2e1c17aad40c8957 |
+| reports/alina-evidence-first-report-draft.md | report | 978 | 68794 | ee1352e54e6754ce |
 | reports/competitor-universe-expansion-2026-05-21.md | report | 17 | 371 | 6f085c07c40f01e7 |
 | reports/daily-update-template.md | report | 30 | 199 | 3f49329cf740df70 |
-| reports/evidence-status-2026-05-31.md | report | 29 | 6196 | 9bea316cdbf221b6 |
+| reports/evidence-status-2026-05-31.md | report | 29 | 6403 | 0bdf1623206e805e |
 | reports/google-play-enrichment-block-2026-05-21.md | report | 13 | 471 | 8cc4d72b1b4c2a18 |
 | reports/matrix-synthesis-2026-05-31.md | report | 43 | 1009 | 939c826c2c1f40db |
 | reports/pdf-render-check-2026-05-31.md | report | 51 | 1578 | 35abeb7833564f14 |

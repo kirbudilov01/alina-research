@@ -121,6 +121,8 @@ const chromeExtensionBattlecards = csv('data_processed/chrome_extension_mechanic
 const validationGapRoadmap = csv('data_processed/validation_gap_roadmap.csv');
 const evidenceManifest = csv('data_processed/evidence_artifact_manifest.csv');
 const completionAudit = csv('data_processed/research_completion_audit.csv');
+const competitorRevenueProxy = csv('data_processed/competitor_revenue_proxy_review.csv');
+const competitorRevenueProxySummary = csv('data_processed/competitor_revenue_proxy_market_summary.csv');
 
 const highWhitespace = whitespace.filter(r => r.whitespace_band === 'high').length;
 const mediumWhitespace = whitespace.filter(r => r.whitespace_band === 'medium').length;
@@ -156,6 +158,8 @@ const highUseMarketSources = marketSourceConfidence.filter(r => r.confidence_rev
 const rangeOnlyMarketSources = marketSourceConfidence.filter(r => ['low_use_range_only', 'context_only'].includes(r.confidence_review_band));
 const strongMonetizationMarkets = monetizationProxy.filter(r => r.monetization_proxy_band === 'strong_paid_behavior_proxy');
 const mediumMonetizationMarkets = monetizationProxy.filter(r => r.monetization_proxy_band === 'medium_paid_behavior_proxy');
+const strongRevenueProxyCompetitors = competitorRevenueProxy.filter(r => r.revenue_proxy_band === 'strong_bottom_up_money_proxy');
+const mediumPlusRevenueProxyCompetitors = competitorRevenueProxy.filter(r => ['strong_bottom_up_money_proxy', 'medium_bottom_up_money_proxy'].includes(r.revenue_proxy_band));
 const strongestIcpSegment = [...icpSegments].sort((a, b) => Number(b.evidence_score || 0) - Number(a.evidence_score || 0))[0] || {};
 const manifestMissing = evidenceManifest.filter(r => r.exists !== 'yes');
 const manifestCsvRows = evidenceManifest.filter(r => r.file_path.endsWith('.csv'));
@@ -199,6 +203,7 @@ report.push(`- Chrome mechanic battlecards: ${chromeExtensionBattlecards.length}
 report.push(`- Validation gap roadmap: ${validationGapRoadmap.length} rows; ${validationRoadmapP0.length} P0 and ${validationRoadmapP1.length} P1 next validation tasks across markets, hypotheses, and cross-source checks.`);
 report.push(`- Market source confidence review: ${marketSourceConfidence.length} sources graded; ${highUseMarketSources.length} high-use anchors and ${rangeOnlyMarketSources.length} range-only/context sources.`);
 report.push(`- Monetization proxy matrix: ${monetizationProxy.length} markets covered; ${strongMonetizationMarkets.length} strong and ${mediumMonetizationMarkets.length} medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.`);
+report.push(`- Competitor revenue proxy review: ${competitorRevenueProxy.length} primary competitors reviewed; ${strongRevenueProxyCompetitors.length} strong and ${mediumPlusRevenueProxyCompetitors.length} medium-or-stronger bottom-up money proxies.`);
 report.push(`- ICP segment matrix: ${icpSegments.length} segment hypotheses; strongest current directional ICP is "${strongestIcpSegment.segment_name || 'n/a'}".`);
 report.push(`- ICP validation packet: ${icpValidationPlan.length} interview/prototype test rows for selecting one primary and one secondary ICP.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
@@ -510,6 +515,41 @@ if (monetizationProxy.length) {
     { key: 'evidence_quality', label: 'Evidence' },
     { key: 'interpretation', label: 'Interpretation' }
   ], 12));
+  report.push('');
+}
+if (competitorRevenueProxy.length) {
+  report.push('### Competitor Revenue Proxy Review');
+  report.push('');
+  report.push(`A bottom-up competitor revenue proxy layer reviews ${competitorRevenueProxy.length} primary competitors using public App Store IAP, review depth, Google Play pricing/install context, top-100 scorecard fields, and web-paywall signals. It does not estimate actual revenue; it identifies visible paid behavior and demand-depth proxies for TAM/SAM/SOM sanity checks.`);
+  report.push('');
+  report.push('Revenue proxy bands:');
+  report.push('');
+  report.push(bulletCounts(countBy(competitorRevenueProxy, 'revenue_proxy_band')));
+  report.push('');
+  report.push('Market-level bottom-up read:');
+  report.push('');
+  report.push(mdTable(competitorRevenueProxySummary, [
+    { key: 'market', label: 'Market' },
+    { key: 'reviewed_competitors', label: 'Reviewed', align: 'right' },
+    { key: 'strong_proxy_competitors', label: 'Strong', align: 'right' },
+    { key: 'medium_or_stronger_proxy_competitors', label: 'Medium+', align: 'right' },
+    { key: 'observed_iap_competitors', label: 'IAP Apps', align: 'right' },
+    { key: 'max_observed_price_usd', label: 'Max Price', align: 'right' },
+    { key: 'market_money_read', label: 'Read' }
+  ], competitorRevenueProxySummary.length));
+  report.push('');
+  report.push('Highest bottom-up money proxies:');
+  report.push('');
+  report.push(mdTable(competitorRevenueProxy.slice(0, 15), [
+    { key: 'app_name', label: 'App' },
+    { key: 'market', label: 'Market' },
+    { key: 'competitive_verdict', label: 'Verdict' },
+    { key: 'review_count', label: 'Reviews', align: 'right' },
+    { key: 'observed_iap_count', label: 'IAP', align: 'right' },
+    { key: 'observed_max_price_usd', label: 'Max Price', align: 'right' },
+    { key: 'revenue_proxy_score', label: 'Score', align: 'right' },
+    { key: 'revenue_proxy_band', label: 'Band' }
+  ], 15));
   report.push('');
 }
 report.push('### SOM Sensitivity');
@@ -999,7 +1039,7 @@ status.push(mdTable([
   { requirement: 'Chrome extension detail enrichment', evidence: 'data_raw/chrome_extension_detail_raw.csv; data_processed/chrome_extension_fit_matrix.csv; docs/competitive/chrome-extension-detail-enrichment-v1.md', status: 'done v1; detail pages parsed for known Chrome candidates only, producing fit bands and mechanic tags without broad search expansion' },
   { requirement: 'Chrome extension mechanic battlecards', evidence: 'data_processed/chrome_extension_mechanic_battlecards.csv; docs/competitive/chrome-extension-mechanic-battlecards-v1.md', status: 'done v1; converts enriched Chrome candidates into mechanic lessons, whitespace implications, and validation tasks' },
   { requirement: 'Validation gap roadmap', evidence: 'data_processed/validation_gap_roadmap.csv; docs/decision/validation-gap-roadmap-v1.md', status: 'done v1; maps five markets and H1-H6 gaps into P0/P1 success gates' },
-  { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv', status: 'done v1; source confidence and monetization proxy layers added, model remains range-based and not final forecast' },
+  { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; docs/market/competitor-revenue-proxy-review-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv; data_processed/competitor_revenue_proxy_review.csv; data_processed/competitor_revenue_proxy_market_summary.csv', status: 'done v1; source confidence, market monetization proxy, and bottom-up competitor revenue proxy layers added; model remains range-based and not final forecast' },
   { requirement: 'Whitespace matrices', evidence: 'data_processed/whitespace_signal_matrix.csv; docs/intersections/whitespace-map-v2.md', status: 'done v1' },
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
   { requirement: 'ICP / audience segment matrix', evidence: 'data_processed/icp_segment_matrix.csv; docs/audience/icp-segment-matrix-v1.md', status: 'done v1; maps audience/review/forum/monetization evidence into testable ICP hypotheses' },
@@ -1027,6 +1067,9 @@ console.log(`audience_rows=${audience.length}`);
 console.log(`icp_segments=${icpSegments.length}`);
 console.log(`icp_validation_tests=${icpValidationPlan.length}`);
 console.log(`market_claims=${claims.length}`);
+console.log(`competitor_revenue_proxy_rows=${competitorRevenueProxy.length}`);
+console.log(`competitor_revenue_proxy_strong=${strongRevenueProxyCompetitors.length}`);
+console.log(`competitor_revenue_proxy_medium_plus=${mediumPlusRevenueProxyCompetitors.length}`);
 console.log(`review_rows=${rawReviews.length}`);
 console.log(`review_signal_rows=${reviewSignals.length}`);
 console.log(`review_clusters=${reviewClusters.length}`);
