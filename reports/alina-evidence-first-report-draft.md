@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T06:24:01.598Z
+Generated: 2026-05-31T06:36:31.539Z
 
 ## 1. Executive Summary
 
@@ -25,14 +25,14 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 12 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 174 artifacts tracked, 39 CSV artifacts, 93248 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 178 artifacts tracked, 41 CSV artifacts, 93735 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
 - Source-native itch.io expansion: 7047 rows, 6973 OK rows, adding web-game/mechanic references without broad search-engine crawling.
 - Source-native Steam tag expansion: 6258 rows, 6000 OK rows, adding PC progression/cozy/avatar mechanic references.
-- Chrome extension detail enrichment: 23/23 detail pages parsed; 3 strong and 10 useful adjacent mechanic references.
-- Chrome mechanic battlecards: 23 browser-extension cards, 9 high/medium references for manual mechanic inspection.
+- Chrome extension detail enrichment: 251/251 detail pages parsed; 9 strong and 86 useful adjacent mechanic references.
+- Chrome mechanic battlecards: 251 browser-extension cards, 41 high/medium references for manual mechanic inspection.
 - Validation gap roadmap: 14 rows; 5 P0 and 9 P1 next validation tasks across markets, hypotheses, and cross-source checks.
 - Market source confidence review: 12 sources graded; 3 high-use anchors and 4 range-only/context sources.
 - Monetization proxy matrix: 5 markets covered; 4 strong and 1 medium paid-behavior proxy markets from IAP/Google Play/web paywall evidence.
@@ -84,9 +84,9 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 14 validation roadmap rows | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 174 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 178 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
-| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 6973 usable itch rows; 6000 usable Steam tag rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
+| REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 6973 usable itch rows; 6000 usable Steam tag rows; 251 usable Chrome Web Store rows; 251 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | H1_product_shape_exists | public_listing_inspected_walkthrough_open | medium | 100 top-candidate rows; 90 primary apps; 12 P0 inspection targets; 12 public listings inspected | Strict full loop is rare and still needs actual app/onboarding screenshots to confirm or downgrade public listing claims. |
 | H2_markets_have_money | supported_with_ranges_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 4/5 strong market-level monetization proxies; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, or manual in-app paywall validation for final investor-grade claims. |
 | H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require human sign-off/in-app inspection. |
@@ -100,7 +100,7 @@ Claim-level audit snapshot:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 174 artifacts; 39 CSV artifacts; 93248 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 178 artifacts; 41 CSV artifacts; 93735 tracked CSV rows; 0 missing required artifacts.
 
 Largest tracked CSV artifacts:
 
@@ -116,8 +116,8 @@ Largest tracked CSV artifacts:
 | data_raw/app_store_top_candidate_reviews.csv | audience_icp | 2294 | 2294 | 3fb11211b91b48b3 |
 | data_raw/web_paywall_discovery_raw.csv | market_money | 560 | 560 | 3416403392840293 |
 | data_raw/app_store_iap_pricing_raw.csv | market_money | 498 | 498 | 37f37b15c4554c62 |
-| data_raw/google_play_pricing_raw.csv | market_money | 250 | 250 | 268def050a974daa |
-| data_processed/top100_competitor_review_scorecard.csv | competitive_whitespace | 100 | 100 | 925db07b8f5323d7 |
+| data_raw/expanded_chrome_extensions_raw.csv | competitor_universe | 252 | 252 | eb4e8b85b1d1f0fe |
+| data_raw/chrome_extension_detail_raw.csv | competitor_universe | 251 | 251 | 65eb6815dab5c29b |
 
 ## 2E. Research Completion Audit
 
@@ -140,14 +140,14 @@ Objective readiness matrix:
 | Requirement | Status | Strength | Proof | Remaining Gap |
 | --- | --- | --- | --- | --- |
 | REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=14 | Keep refreshing as validation results change. |
-| REQ_02_COMPETITOR_UNIVERSE | proved_scale_target | medium_high | dedup=12552; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; known_raw_total=30795; itch_ok=6973; steam_tag_ok=6000; niches=5; source_kinds=4 | Below aspirational 30k-50k raw source/app target; desktop stores, Product Hunt/AlternativeTo, B2B directories, forums, and curated lists remain backlog. |
+| REQ_02_COMPETITOR_UNIVERSE | proved_scale_target | medium_high | dedup=12552; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; chrome_extension_rows=252; known_raw_total=31047; itch_ok=6973; steam_tag_ok=6000; chrome_extension_ok=251; chrome_detail_ok=251; chrome_strong_adjacent=9; chrome_priority_mechanics=41; niches=5; source_kinds=4 | Deduped app/source universe is still below the aspirational 30k-50k dedup target; desktop stores, Product Hunt/AlternativeTo, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
 | REQ_04_MARKET_MONEY | supported_with_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing remains range-based; actual revenue estimates and manual in-app paywall validation are needed for final investor-grade claims. |
 | REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_app_walkthrough_done=0 | Public listings for the P0 wave are inspected, but metadata/public copy can miss hidden in-app mechanics; app/onboarding walkthrough screenshots are still required. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36 | Segments are directional and need interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=12; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6 | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=174; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=178; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates | strong | roadmap_rows=14; p0=5; p1=9; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
 ## 2C. Validation Gap Roadmap
@@ -270,25 +270,25 @@ The Chrome Web Store smoke-pass candidates were enriched from their own detail p
 
 Fit band mix:
 
-- useful_adjacent: 10
-- weak_adjacent: 6
-- out_of_scope_or_b2b: 4
-- strong_adjacent: 3
+- useful_adjacent: 86
+- weak_adjacent: 79
+- out_of_scope_or_b2b: 77
+- strong_adjacent: 9
 
 | Candidate | Fit | Score | Users | Rating | Feature Tags |
 | --- | --- | ---: | ---: | ---: | --- |
+| ChartLense: AI Chart Analysis & Journaling | strong_adjacent | 9 | 873 | 5 | ai_coaching/habit_tracking/progress_feedback/mood_or_reflection |
 | Ritual — Habit Tracker | strong_adjacent | 8 | 2 | 0 | habit_tracking/progress_feedback/mood_or_reflection |
+| MyndGuard – Family Wellness Monitor | strong_adjacent | 8 | 25 | 5 | ai_coaching/accountability/progress_feedback |
 | Accountability Shield - Free Website Blocker | strong_adjacent | 7 | 26 | 4.8 | ai_coaching/accountability/progress_feedback |
+| Aura - Daily Mindfulness | strong_adjacent | 7 |  | 5 | habit_tracking/mood_or_reflection |
+| KundliShastra – Daily Kundli, Panchang & Personal Astrology Insights | strong_adjacent | 7 | 24 | 5 | habit_tracking/progress_feedback |
+| LifeHack Daily Affirmation | strong_adjacent | 7 | 238 | 4.8 | ai_coaching/habit_tracking |
+| AI Habit Tracker | strong_adjacent | 7 | 57 | 4.8 | ai_coaching/habit_tracking/progress_feedback |
 | Habit Tracker - Track My Habit | strong_adjacent | 6 | 1000 | 4.9 | habit_tracking/progress_feedback |
 | Habit Tracker | useful_adjacent | 5 | 1000 | 4.9 | habit_tracking |
 | Habit Tracker | useful_adjacent | 5 | 4000 | 4.9 | habit_tracking/progress_feedback |
 | Time Tracker - Web Habit Builder | useful_adjacent | 5 | 20000 | 4.8 | habit_tracking/accountability |
-| Habit Squares: Bullet Journal Habit Tracker | useful_adjacent | 5 | 36 | 5 | habit_tracking/mood_or_reflection |
-| Ora - New Tab: Habit Tracker & Time Progress | useful_adjacent | 5 | 31 | 4.9 | habit_tracking/progress_feedback |
-| Habit Tracker – Progress & Stats on New Tab | useful_adjacent | 5 | 14 | 4.7 | habit_tracking/progress_feedback |
-| AI Prompt Coach by LeadWithAI.co | useful_adjacent | 4 | 76 | 4.3 | ai_coaching/progress_feedback |
-| LeetCode AI Coach | useful_adjacent | 4 | 2 | 4.6 | ai_coaching/progress_feedback/developer_or_learning_coach |
-| Daily Habit Tracker | useful_adjacent | 3 | 5 | 4.4 | habit_tracking |
 
 ### Chrome Extension Mechanic Battlecards
 
@@ -296,34 +296,35 @@ The enriched Chrome candidates are converted into mechanic battlecards. This lay
 
 Threat/reference band mix:
 
-- boundary_or_low: 10
-- mechanic_reference_high: 6
-- mechanic_reference_medium: 4
-- mechanic_threat_medium: 2
+- boundary_or_low: 156
+- mechanic_reference_medium: 54
+- mechanic_reference_high: 32
+- mechanic_threat_medium: 8
 - mechanic_threat_high: 1
 
 Core mechanic mix:
 
-- narrow_ai_coaching: 7
-- habit_progress_loop: 4
-- simple_habit_capture: 4
-- accountability_monitoring_loop: 3
-- ai_feedback_loop: 3
-- habit_progress_reflection_loop: 1
-- ai_accountability_loop: 1
+- boundary_reference: 111
+- simple_habit_capture: 56
+- narrow_ai_coaching: 38
+- accountability_monitoring_loop: 22
+- habit_progress_loop: 12
+- ai_accountability_loop: 6
+- ai_feedback_loop: 4
+- habit_progress_reflection_loop: 2
 
 | Candidate | Threat/Reference | Mechanic | Alina Lesson | Whitespace Implication |
 | --- | --- | --- | --- | --- |
+| ChartLense: AI Chart Analysis & Journaling | mechanic_threat_medium | habit_progress_reflection_loop | Use visible progress plus mood/reflection as proof that tiny rituals can feel emotionally richer than checkbox habits. | Narrows whitespace: lightweight habit/progress/reflection exists, but no avatar/identity transformation object is visible in extracted evidence. |
 | Ritual — Habit Tracker | mechanic_threat_medium | habit_progress_reflection_loop | Use visible progress plus mood/reflection as proof that tiny rituals can feel emotionally richer than checkbox habits. | Narrows whitespace: lightweight habit/progress/reflection exists, but no avatar/identity transformation object is visible in extracted evidence. |
+| MyndGuard – Family Wellness Monitor | mechanic_threat_medium | ai_accountability_loop | AI nudging and accountability can support behavior change, but Alina should avoid surveillance framing and keep consent/softness central. | Supports positioning risk: AI accountability language exists, so Alina should differentiate through emotional safety and personal meaning. |
 | Accountability Shield - Free Website Blocker | mechanic_threat_medium | ai_accountability_loop | AI nudging and accountability can support behavior change, but Alina should avoid surveillance framing and keep consent/softness central. | Supports positioning risk: AI accountability language exists, so Alina should differentiate through emotional safety and personal meaning. |
+| Aura - Daily Mindfulness | mechanic_threat_medium | simple_habit_capture | Habit capture is table stakes; the differentiator has to be what completion changes in the user-facing identity object. | Low direct impact on whitespace; keep for market-boundary mapping. |
+| KundliShastra – Daily Kundli, Panchang & Personal Astrology Insights | mechanic_threat_medium | habit_progress_loop | Borrow the lightweight capture/progress affordance, but connect it to identity/avatar feedback rather than a plain stat surface. | Supports whitespace: progress loops exist, but they appear utilitarian rather than identity/avatar-centered. |
+| LifeHack Daily Affirmation | mechanic_threat_medium | narrow_ai_coaching | Keep as boundary evidence showing what is outside the consumer ritual/identity core. | Boundary evidence: AI coaching is crowded in narrow tasks, so generic AI coach positioning is weak. |
+| AI Habit Tracker | mechanic_threat_medium | habit_progress_loop | Borrow the lightweight capture/progress affordance, but connect it to identity/avatar feedback rather than a plain stat surface. | Supports whitespace: progress loops exist, but they appear utilitarian rather than identity/avatar-centered. |
 | Habit Tracker - Track My Habit | mechanic_threat_high | habit_progress_loop | Borrow the lightweight capture/progress affordance, but connect it to identity/avatar feedback rather than a plain stat surface. | Supports whitespace: progress loops exist, but they appear utilitarian rather than identity/avatar-centered. |
 | Habit Tracker | mechanic_reference_high | simple_habit_capture | Habit capture is table stakes; the differentiator has to be what completion changes in the user-facing identity object. | Low direct impact on whitespace; keep for market-boundary mapping. |
-| Habit Tracker | mechanic_reference_high | habit_progress_loop | Borrow the lightweight capture/progress affordance, but connect it to identity/avatar feedback rather than a plain stat surface. | Supports whitespace: progress loops exist, but they appear utilitarian rather than identity/avatar-centered. |
-| Time Tracker - Web Habit Builder | mechanic_reference_high | accountability_monitoring_loop | Accountability creates commitment, but the consumer version should be self-compassionate and not feel punitive. | Boundary evidence: accountability mechanics are viable but can conflict with calm/wellness framing. |
-| Habit Squares: Bullet Journal Habit Tracker | mechanic_reference_high | simple_habit_capture | Habit capture is table stakes; the differentiator has to be what completion changes in the user-facing identity object. | Low direct impact on whitespace; keep for market-boundary mapping. |
-| Ora - New Tab: Habit Tracker & Time Progress | mechanic_reference_high | habit_progress_loop | Borrow the lightweight capture/progress affordance, but connect it to identity/avatar feedback rather than a plain stat surface. | Supports whitespace: progress loops exist, but they appear utilitarian rather than identity/avatar-centered. |
-| Habit Tracker – Progress & Stats on New Tab | mechanic_reference_high | habit_progress_loop | Borrow the lightweight capture/progress affordance, but connect it to identity/avatar feedback rather than a plain stat surface. | Supports whitespace: progress loops exist, but they appear utilitarian rather than identity/avatar-centered. |
-| AI Prompt Coach by LeadWithAI.co | mechanic_reference_medium | ai_feedback_loop | AI feedback is common in narrow contexts; Alina needs personal meaning and ritual continuity to avoid becoming a generic coach. | Boundary evidence: AI coaching is crowded in narrow tasks, so generic AI coach positioning is weak. |
 
 ## 4. Market Sizing
 

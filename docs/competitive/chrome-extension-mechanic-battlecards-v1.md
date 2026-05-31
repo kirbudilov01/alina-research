@@ -1,6 +1,6 @@
 # Chrome Extension Mechanic Battlecards V1
 
-Generated: 2026-05-31T04:05:16.629Z
+Generated: 2026-05-31T06:34:21.437Z
 
 ## Scope
 
@@ -8,28 +8,39 @@ This layer converts enriched Chrome Web Store candidates into mechanic battlecar
 
 ## Summary
 
-- Battlecards: 23
-- High/medium mechanic references to inspect: 9
+- Battlecards: 251
+- High/medium mechanic references to inspect: 41
 
 Threat/reference bands:
 
-- boundary_or_low: 10
-- mechanic_reference_high: 6
-- mechanic_reference_medium: 4
-- mechanic_threat_medium: 2
+- boundary_or_low: 156
+- mechanic_reference_medium: 54
+- mechanic_reference_high: 32
+- mechanic_threat_medium: 8
 - mechanic_threat_high: 1
 
 Core mechanics:
 
-- narrow_ai_coaching: 7
-- habit_progress_loop: 4
-- simple_habit_capture: 4
-- accountability_monitoring_loop: 3
-- ai_feedback_loop: 3
-- habit_progress_reflection_loop: 1
-- ai_accountability_loop: 1
+- boundary_reference: 111
+- simple_habit_capture: 56
+- narrow_ai_coaching: 38
+- accountability_monitoring_loop: 22
+- habit_progress_loop: 12
+- ai_accountability_loop: 6
+- ai_feedback_loop: 4
+- habit_progress_reflection_loop: 2
 
 ## Priority Battlecards
+
+### ChartLense: AI Chart Analysis & Journaling
+
+- Fit: strong_adjacent; threat/reference band: mechanic_threat_medium; score: 9.
+- Evidence basis: AI chart analysis & daily journal for TradingView. Instant pattern recognition and trend insights — without leaving your chart.
+- Mechanic: habit_progress_reflection_loop; tags: ai_coaching, habit_tracking, progress_feedback, mood_or_reflection.
+- Alina lesson: Use visible progress plus mood/reflection as proof that tiny rituals can feel emotionally richer than checkbox habits.
+- Whitespace implication: Narrows whitespace: lightweight habit/progress/reflection exists, but no avatar/identity transformation object is visible in extracted evidence.
+- Validation task: Manually inspect screenshots/onboarding for action -> progress causality and any identity/avatar metaphor.
+- Source: https://chromewebstore.google.com/detail/chartlense-ai-chart-analy/mlefllemblmlibeibbjbjbhfoocpipll
 
 ### Ritual — Habit Tracker
 
@@ -41,6 +52,16 @@ Core mechanics:
 - Validation task: Manually inspect screenshots/onboarding for action -> progress causality and any identity/avatar metaphor.
 - Source: https://chromewebstore.google.com/detail/ritual-%E2%80%94-habit-tracker/gmnjcnfgnplcgcjkhmkiipocadniojmb
 
+### MyndGuard – Family Wellness Monitor
+
+- Fit: strong_adjacent; threat/reference band: mechanic_threat_medium; score: 8.
+- Evidence basis: AI-powered browsing pattern analysis for personal mental wellness insights. All data stays on your device.
+- Mechanic: ai_accountability_loop; tags: ai_coaching, accountability, progress_feedback.
+- Alina lesson: AI nudging and accountability can support behavior change, but Alina should avoid surveillance framing and keep consent/softness central.
+- Whitespace implication: Supports positioning risk: AI accountability language exists, so Alina should differentiate through emotional safety and personal meaning.
+- Validation task: Manually inspect screenshots/onboarding for action -> progress causality and any identity/avatar metaphor.
+- Source: https://chromewebstore.google.com/detail/myndguard-%E2%80%93-family-wellne/gdndmbmcebeilmbgmnbljfnnbhffopbl
+
 ### Accountability Shield - Free Website Blocker
 
 - Fit: strong_adjacent; threat/reference band: mechanic_threat_medium; score: 7.
@@ -50,6 +71,46 @@ Core mechanics:
 - Whitespace implication: Supports positioning risk: AI accountability language exists, so Alina should differentiate through emotional safety and personal meaning.
 - Validation task: Manually inspect screenshots/onboarding for action -> progress causality and any identity/avatar metaphor.
 - Source: https://chromewebstore.google.com/detail/accountability-shield-fre/npeckjnckdjkfdilppedpibokdbmfkfm
+
+### Aura - Daily Mindfulness
+
+- Fit: strong_adjacent; threat/reference band: mechanic_threat_medium; score: 7.
+- Evidence basis: Your personal space for daily intentions, affirmations, and mindful reflection
+- Mechanic: simple_habit_capture; tags: habit_tracking, mood_or_reflection.
+- Alina lesson: Habit capture is table stakes; the differentiator has to be what completion changes in the user-facing identity object.
+- Whitespace implication: Low direct impact on whitespace; keep for market-boundary mapping.
+- Validation task: Manually inspect screenshots/onboarding for action -> progress causality and any identity/avatar metaphor.
+- Source: https://chromewebstore.google.com/detail/aura-daily-mindfulness/phmhndegkljmebmlnpigajnlmffjnbfd
+
+### KundliShastra – Daily Kundli, Panchang & Personal Astrology Insights
+
+- Fit: strong_adjacent; threat/reference band: mechanic_threat_medium; score: 7.
+- Evidence basis: Get daily astrology insights & generate your kundli instantly. Panchang, Moon sign—continue your full reading in the browser.
+- Mechanic: habit_progress_loop; tags: habit_tracking, progress_feedback.
+- Alina lesson: Borrow the lightweight capture/progress affordance, but connect it to identity/avatar feedback rather than a plain stat surface.
+- Whitespace implication: Supports whitespace: progress loops exist, but they appear utilitarian rather than identity/avatar-centered.
+- Validation task: Manually inspect screenshots/onboarding for action -> progress causality and any identity/avatar metaphor.
+- Source: https://chromewebstore.google.com/detail/kundlishastra-%E2%80%93-daily-kun/bhgpceiaommphjgpnlfigaimodpkaici
+
+### LifeHack Daily Affirmation
+
+- Fit: strong_adjacent; threat/reference band: mechanic_threat_medium; score: 7.
+- Evidence basis: Transform your mindset with AI-powered daily affirmations. Set your goals & receive personalized messages to keep you inspired.
+- Mechanic: narrow_ai_coaching; tags: ai_coaching, habit_tracking.
+- Alina lesson: Keep as boundary evidence showing what is outside the consumer ritual/identity core.
+- Whitespace implication: Boundary evidence: AI coaching is crowded in narrow tasks, so generic AI coach positioning is weak.
+- Validation task: Manually inspect screenshots/onboarding for action -> progress causality and any identity/avatar metaphor.
+- Source: https://chromewebstore.google.com/detail/lifehack-daily-affirmatio/gemgfombpplipodaglfpbhbhmcdmchhh
+
+### AI Habit Tracker
+
+- Fit: strong_adjacent; threat/reference band: mechanic_threat_medium; score: 7.
+- Evidence basis: Build better AI habits with usage stats, daily streaks, and insights for ChatGPT and more
+- Mechanic: habit_progress_loop; tags: ai_coaching, habit_tracking, progress_feedback.
+- Alina lesson: Borrow the lightweight capture/progress affordance, but connect it to identity/avatar feedback rather than a plain stat surface.
+- Whitespace implication: Supports whitespace: progress loops exist, but they appear utilitarian rather than identity/avatar-centered.
+- Validation task: Manually inspect screenshots/onboarding for action -> progress causality and any identity/avatar metaphor.
+- Source: https://chromewebstore.google.com/detail/ai-habit-tracker/jecnigedbdjbbnjjiaokkhcaeeondglh
 
 ### Habit Tracker - Track My Habit
 
@@ -90,66 +151,6 @@ Core mechanics:
 - Whitespace implication: Boundary evidence: accountability mechanics are viable but can conflict with calm/wellness framing.
 - Validation task: Capture screenshots of the core loop and note whether progress is emotional, behavioral, or purely numeric.
 - Source: https://chromewebstore.google.com/detail/time-tracker-web-habit-bu/dkdhhcbjijekmneelocdllcldcpmekmm
-
-### Habit Squares: Bullet Journal Habit Tracker
-
-- Fit: useful_adjacent; threat/reference band: mechanic_reference_high; score: 5.
-- Evidence basis: Stay on top of your daily routines with a bullet-journal-style habit tracker that keeps you motivated.
-- Mechanic: simple_habit_capture; tags: habit_tracking, mood_or_reflection.
-- Alina lesson: Habit capture is table stakes; the differentiator has to be what completion changes in the user-facing identity object.
-- Whitespace implication: Low direct impact on whitespace; keep for market-boundary mapping.
-- Validation task: Capture screenshots of the core loop and note whether progress is emotional, behavioral, or purely numeric.
-- Source: https://chromewebstore.google.com/detail/habit-squares-bullet-jour/pbbbmoikigmnomamfpofaifplcjjpijn
-
-### Ora - New Tab: Habit Tracker & Time Progress
-
-- Fit: useful_adjacent; threat/reference band: mechanic_reference_high; score: 5.
-- Evidence basis: A new tab page that tracks your habits and shows time progress
-- Mechanic: habit_progress_loop; tags: habit_tracking, progress_feedback.
-- Alina lesson: Borrow the lightweight capture/progress affordance, but connect it to identity/avatar feedback rather than a plain stat surface.
-- Whitespace implication: Supports whitespace: progress loops exist, but they appear utilitarian rather than identity/avatar-centered.
-- Validation task: Capture screenshots of the core loop and note whether progress is emotional, behavioral, or purely numeric.
-- Source: https://chromewebstore.google.com/detail/ora-new-tab-habit-tracker/gclgiemlfgkmonglimgaalhaijejikme
-
-### Habit Tracker – Progress & Stats on New Tab
-
-- Fit: useful_adjacent; threat/reference band: mechanic_reference_high; score: 5.
-- Evidence basis: A simple habit tracker that replaces your new tab page.
-- Mechanic: habit_progress_loop; tags: habit_tracking, progress_feedback.
-- Alina lesson: Borrow the lightweight capture/progress affordance, but connect it to identity/avatar feedback rather than a plain stat surface.
-- Whitespace implication: Supports whitespace: progress loops exist, but they appear utilitarian rather than identity/avatar-centered.
-- Validation task: Capture screenshots of the core loop and note whether progress is emotional, behavioral, or purely numeric.
-- Source: https://chromewebstore.google.com/detail/habit-tracker-%E2%80%93-progress/fokblddhicmobehamooafpinddmapdpk
-
-### AI Prompt Coach by LeadWithAI.co
-
-- Fit: useful_adjacent; threat/reference band: mechanic_reference_medium; score: 4.
-- Evidence basis: AI Prompt Coach by LeadWithAI.co scores and improves your prompts on ChatGPT, Claude, and Gemini for better AI responses
-- Mechanic: ai_feedback_loop; tags: ai_coaching, progress_feedback.
-- Alina lesson: AI feedback is common in narrow contexts; Alina needs personal meaning and ritual continuity to avoid becoming a generic coach.
-- Whitespace implication: Boundary evidence: AI coaching is crowded in narrow tasks, so generic AI coach positioning is weak.
-- Validation task: Capture screenshots of the core loop and note whether progress is emotional, behavioral, or purely numeric.
-- Source: https://chromewebstore.google.com/detail/ai-prompt-coach-by-leadwi/chhfmdhihjalnghacmfflhijhmmhgkjl
-
-### LeetCode AI Coach
-
-- Fit: useful_adjacent; threat/reference band: mechanic_reference_medium; score: 4.
-- Evidence basis: AI-powered LeetCode assistant: code assessment, progressive hints, optimal solutions, and personalized study recommendations.
-- Mechanic: ai_feedback_loop; tags: ai_coaching, progress_feedback, developer_or_learning_coach.
-- Alina lesson: AI feedback is common in narrow contexts; Alina needs personal meaning and ritual continuity to avoid becoming a generic coach.
-- Whitespace implication: Boundary evidence: AI coaching is crowded in narrow tasks, so generic AI coach positioning is weak.
-- Validation task: Capture screenshots of the core loop and note whether progress is emotional, behavioral, or purely numeric.
-- Source: https://chromewebstore.google.com/detail/leetcode-ai-coach/enbfnoneblppoheaechfcncklldegiin
-
-### Daily Habit Tracker
-
-- Fit: useful_adjacent; threat/reference band: mechanic_reference_medium; score: 3.
-- Evidence basis: A minimalist daily habit tracker.
-- Mechanic: simple_habit_capture; tags: habit_tracking.
-- Alina lesson: Habit capture is table stakes; the differentiator has to be what completion changes in the user-facing identity object.
-- Whitespace implication: Low direct impact on whitespace; keep for market-boundary mapping.
-- Validation task: Capture screenshots of the core loop and note whether progress is emotional, behavioral, or purely numeric.
-- Source: https://chromewebstore.google.com/detail/daily-habit-tracker/icagcpddhbekcfaofkihcjdcnoajaogo
 
 ## Product Implications
 

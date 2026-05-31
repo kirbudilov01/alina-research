@@ -284,6 +284,9 @@ def main() -> None:
     expanded_raw = read_csv("data_raw/expanded/all_expanded_raw.csv")
     itch = read_csv("data_raw/expanded_itch_raw.csv")
     steam = read_csv("data_raw/expanded_steam_tags_raw.csv")
+    chrome_raw = read_csv("data_raw/expanded_chrome_extensions_raw.csv")
+    chrome_fit = read_csv("data_processed/chrome_extension_fit_matrix.csv")
+    chrome_battlecards = read_csv("data_processed/chrome_extension_mechanic_battlecards.csv")
     evidence = read_csv("data_processed/evidence_claim_register.csv")
     completion = read_csv("data_processed/research_completion_audit.csv")
     manifest = read_csv("data_processed/evidence_artifact_manifest.csv")
@@ -301,7 +304,7 @@ def main() -> None:
     top100 = read_csv("data_processed/top100_competitor_review_scorecard.csv")
     roadmap = read_csv("data_processed/validation_gap_roadmap.csv")
 
-    known_raw_total = len(expanded_raw) + len(itch) + len(steam)
+    known_raw_total = len(expanded_raw) + len(itch) + len(steam) + len(chrome_raw)
     csv_rows = sum(int(row.get("row_count") or 0) for row in manifest if row.get("file_path", "").endswith(".csv"))
     source_refs = sum(int(row.get("source_ref_rows") or 0) for row in manifest if row.get("file_path", "").endswith(".csv"))
     strong_revenue = [row for row in revenue if row.get("revenue_proxy_band") == "strong_bottom_up_money_proxy"]
@@ -413,8 +416,11 @@ def main() -> None:
             [
                 ["Evidence layer", "Count", "Interpretation"],
                 ["Five-market coverage", len(count_by(expanded, "niche")), "Core markets represented in the normalized universe."],
-                ["Known raw universe", known_raw_total, "Core + itch.io + Steam tag rows exceed the 30k lower-bound target."],
+                ["Known raw universe", known_raw_total, "Core + itch.io + Steam tag + Chrome rows exceed the 30k lower-bound target."],
                 ["Deduped source universe", len(expanded), "Normalized rows for matrices and scoring."],
+                ["Chrome Web Store raw rows", len(chrome_raw), "Source-native browser-extension expansion across five markets."],
+                ["Chrome detail pages parsed", len([row for row in chrome_fit if row.get("detail_status") == "ok"]), "Fit bands, users, tags, and mechanic evidence."],
+                ["Chrome mechanic battlecards", len(chrome_battlecards), "Browser-extension mechanics translated into whitespace lessons."],
                 ["Manifest source-like refs", source_refs, "Rows with URLs, package IDs, domains, source IDs, or comparable identifiers."],
                 ["Top-100 primary apps", len(primary_top100), "Human-facing competitor review layer."],
                 ["Behavior-tied progression signals", len(behavior_tied), "Strict signal is rare in metadata, hence manual inspection is critical."],
