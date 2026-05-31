@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T13:14:08.303Z
+Собрано: 2026-05-31T13:22:11.976Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 426 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 429 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 426 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 429 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -279,6 +279,33 @@ Review/JTBD слой показывает повторяющиеся работ�
 **ICP_D. Habit and progress users.** Core job: Make vague growth concrete and keep momentum without streak anxiety. Recruiting: community_or_accountability_need: Relevant community thread, Discord, forum, or group where users already discuss the job | word_of_mouth_or_personal_recommendation: Warm referral or friend-of-user intro | coded_forum_need_or_competitor_context: Forum-language recruiting using exact problem wording from coded snippets | social_platform_discovery: Social platform discovery or creator/community mention Downgrade: ослабить сегмент, если участники не называют recent behavior, проблема оказывается абстрактной, paid depth отвергается, или возникает fatal objection: The free loop must demonstrate value before asking for deeper paid analysis or personalization.
 
 Граница этого слоя: dossier готовит интервью и делает их сравнимыми, но не валидирует аудиторию до заполненных capture rows и точных цитат.
+
+## 5.3. Русская voice-of-customer / objection map
+
+Чтобы аудитория не была только сегментной матрицей, добавлена voice-of-customer / objection map на 8 тем. Она сшивает review/JTBD clusters, community/referral rows, Reddit signal rows, manual-read queue, ICP segments и prototype scorecard в язык пользовательских работ, возражений, interview probes и prototype probes. Суммарно по темам учтено 22759 локальных supporting signals/rows; это intentionally proxy layer, а не representative demand proof.
+
+| # | Theme | Тема | H | Signals | Read queue | Interview probe |
+| --- | --- | --- | --- | ---: | ---: | --- |
+| 1 | VOC_DAILY_ANCHOR | Ежедневный якорь и повторяемый ритуал | H5/H6/H4 | 3234 | 962 | Расскажи про последний цифровой ритуал, к которому ты возвращался несколько дней подряд. Что именно заставляло открыть его снова? |
+| 2 | VOC_VISIBLE_PROGRESS | Видимый прогресс и доказательство, что действие помогает | H3/H4/H6 | 5931 | 1664 | Когда ты в последний раз бросил практику, потому что не видел, что она реально работает? |
+| 3 | VOC_OVERBUILT_STREAK_ANXIETY | Перегруз, streak anxiety и тяжелые productivity-системы | H3/H5/H6 | 2301 | 908 | Что в последнем self-improvement/productivity app стало слишком тяжелым или давящим? |
+| 4 | VOC_PERSONALIZATION_FEEL_SEEN | Персонализация и ощущение “меня увидели” | H2/H5/H6 | 4743 | 1092 | Какая персональная подсказка за последний месяц попала в точку, а какая показалась пустой или манипулятивной? |
+| 5 | VOC_TRUST_SAFETY | Доверие, безопасность и граница мягкого guidance | H4/H5/H6 | 1263 | 515 | Что сделало бы такой продукт небезопасным, cringe, манипулятивным или не для тебя? |
+| 6 | VOC_DEPTH_CUSTOMIZATION | Глубина, свежесть и кастомизация после первого value moment | H2/H5/H6 | 1544 | 541 | За какую глубину в похожем продукте тебе было бы не жалко платить после первой бесплатной пользы? |
+| 7 | VOC_SUBSCRIPTION_VALUE | Цена, подписка и доказательство ценности | H2/H6 | 1312 | 512 | За что ты уже платишь в этой зоне и что должно случиться бесплатно, чтобы подписка стала честной? |
+| 8 | VOC_SOCIAL_PROOF_REFERRAL | Рекомендации, принадлежность и легкость рассказа другу | H5/H6 | 2431 | 1120 | Как бы ты одним предложением объяснил другу, зачем это открыть завтра? |
+
+**VOC_DAILY_ANCHOR.** Возможность: Alina должна быть не библиотекой функций, а одним коротким ежедневным циклом, к которому понятно зачем возвращаться. Риск: Если первый экран выглядит как меню практик, пользователь сравнит продукт с meditation/journal/habit apps и потеряет ощущение нового ядра. Downgrade: Ослабить H5/H6, если участники не называют recent recurring behavior или не видят причины вернуться завтра.
+
+**VOC_VISIBLE_PROGRESS.** Возможность: Сильная ставка Alina: связать meaning -> action -> visible progress так, чтобы изменение выглядело причинным, а не декоративным. Риск: Если avatar/progress меняется произвольно, продукт станет декоративной игрушкой или обычным habit tracker с красивой оболочкой. Downgrade: Ослабить H3/H4, если пользователи не могут объяснить причинность без подсказки или называют feedback косметическим.
+
+**VOC_OVERBUILT_STREAK_ANXIETY.** Возможность: Alina может выиграть как легкая, forgiving петля без наказания за пропуск и без ощущения обслуживания системы. Риск: Если добавить streak pressure, сложные настройки или много обязательных шагов, продукт попадет в прямо отвергаемый паттерн. Downgrade: Ослабить H5/H6, если P0 сегменты воспринимают петлю как pressure, chores или guilt machine.
+
+**VOC_PERSONALIZATION_FEEL_SEEN.** Возможность: Пользователь платит вниманием и деньгами не за generic совет, а за точное отражение состояния, которое превращается в действие. Риск: Слишком generic guidance разрушит доверие; слишком deterministic guidance создаст safety/trust risk. Downgrade: Ослабить H5/H2, если пользователи не чувствуют персональной точности или не готовы платить за глубину после free loop.
+
+**VOC_TRUST_SAFETY.** Возможность: Если Alina честно ограничивает обещания и дает контролируемое мягкое guidance, она может избежать части риска spiritual/AI/self-help продуктов. Риск: Любое ощущение диагноза, предсказания судьбы, манипуляции или небезопасного совета должно останавливать claim upgrade. Downgrade: Ослабить H4/H6 немедленно, если возникает повторяющийся fatal trust/safety objection.
+
+Граница этого слоя: VOC карта задает язык интервью, prototype sessions и paid-depth checks, но не апгрейдит H5/H6/H4 без заполненных capture rows.
 
 Reddit source-native слой сейчас содержит 2339 coded qualitative signal rows. Из них 1852 уникальных тредов поставлены в manual reading queue, 336 имеют P0_read_first, 238 - P1_read_next. Для P0/P1 создан capture sheet на 574 строк. Все строки по умолчанию имеют статус unread_do_not_upgrade: это специально защищает отчет от преждевременного апгрейда claims.
 
@@ -628,6 +655,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_competitor_battlecards.csv`
 - `data_processed/russian_icp_battlecards.csv`
 - `data_processed/russian_icp_interview_dossiers.csv`
+- `data_processed/russian_voc_objection_map.csv`
 - `data_processed/russian_product_loop_cards.csv`
 - `data_processed/russian_prototype_session_dossiers.csv`
 - `data_processed/russian_validation_gate_cards.csv`

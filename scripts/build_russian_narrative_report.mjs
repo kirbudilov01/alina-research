@@ -132,6 +132,7 @@ const sourceProvenance = csv('data_processed/russian_source_provenance_index.csv
 const competitorBattlecards = csv('data_processed/russian_competitor_battlecards.csv');
 const icpBattlecards = csv('data_processed/russian_icp_battlecards.csv');
 const icpInterviewDossiers = csv('data_processed/russian_icp_interview_dossiers.csv');
+const vocObjectionMap = csv('data_processed/russian_voc_objection_map.csv');
 const productLoopCards = csv('data_processed/russian_product_loop_cards.csv');
 const prototypeSessionDossiers = csv('data_processed/russian_prototype_session_dossiers.csv');
 const validationGateCards = csv('data_processed/russian_validation_gate_cards.csv');
@@ -410,6 +411,29 @@ if (icpInterviewDossiers.length) {
     lines.push('');
   }
   lines.push('Граница этого слоя: dossier готовит интервью и делает их сравнимыми, но не валидирует аудиторию до заполненных capture rows и точных цитат.');
+  lines.push('');
+}
+if (vocObjectionMap.length) {
+  lines.push('## 5.3. Русская voice-of-customer / objection map');
+  lines.push('');
+  const vocSignals = vocObjectionMap.reduce((sum, row) => sum + Number(row.evidence_rows || 0), 0);
+  lines.push(`Чтобы аудитория не была только сегментной матрицей, добавлена voice-of-customer / objection map на ${vocObjectionMap.length} тем. Она сшивает review/JTBD clusters, community/referral rows, Reddit signal rows, manual-read queue, ICP segments и prototype scorecard в язык пользовательских работ, возражений, interview probes и prototype probes. Суммарно по темам учтено ${vocSignals} локальных supporting signals/rows; это intentionally proxy layer, а не representative demand proof.`);
+  lines.push('');
+  lines.push(mdTable(vocObjectionMap, [
+    { key: 'theme_rank', label: '#' },
+    { key: 'theme_id', label: 'Theme' },
+    { key: 'theme_ru', label: 'Тема' },
+    { key: 'linked_hypotheses', label: 'H' },
+    { key: 'evidence_rows', label: 'Signals', align: 'right' },
+    { key: 'reddit_queue_rows', label: 'Read queue', align: 'right' },
+    { key: 'interview_probe_ru', label: 'Interview probe' }
+  ], vocObjectionMap.length));
+  lines.push('');
+  for (const row of vocObjectionMap.slice(0, 5)) {
+    lines.push(`**${row.theme_id}.** Возможность: ${row.opportunity_ru} Риск: ${row.product_risk_ru} Downgrade: ${row.downgrade_rule_ru}`);
+    lines.push('');
+  }
+  lines.push('Граница этого слоя: VOC карта задает язык интервью, prototype sessions и paid-depth checks, но не апгрейдит H5/H6/H4 без заполненных capture rows.');
   lines.push('');
 }
 lines.push(`Reddit source-native слой сейчас содержит ${redditSignals.length} coded qualitative signal rows. Из них ${redditQueue.length} уникальных тредов поставлены в manual reading queue, ${p0Reddit.length} имеют P0_read_first, ${p1Reddit.length} - P1_read_next. Для P0/P1 создан capture sheet на ${redditCapture.length} строк. Все строки по умолчанию имеют статус unread_do_not_upgrade: это специально защищает отчет от преждевременного апгрейда claims.`);
@@ -699,6 +723,7 @@ lines.push('- `data_processed/russian_source_provenance_index.csv`');
 lines.push('- `data_processed/russian_competitor_battlecards.csv`');
 lines.push('- `data_processed/russian_icp_battlecards.csv`');
 lines.push('- `data_processed/russian_icp_interview_dossiers.csv`');
+lines.push('- `data_processed/russian_voc_objection_map.csv`');
 lines.push('- `data_processed/russian_product_loop_cards.csv`');
 lines.push('- `data_processed/russian_prototype_session_dossiers.csv`');
 lines.push('- `data_processed/russian_validation_gate_cards.csv`');
