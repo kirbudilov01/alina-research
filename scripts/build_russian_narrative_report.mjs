@@ -133,6 +133,7 @@ const competitorBattlecards = csv('data_processed/russian_competitor_battlecards
 const icpBattlecards = csv('data_processed/russian_icp_battlecards.csv');
 const icpInterviewDossiers = csv('data_processed/russian_icp_interview_dossiers.csv');
 const productLoopCards = csv('data_processed/russian_product_loop_cards.csv');
+const prototypeSessionDossiers = csv('data_processed/russian_prototype_session_dossiers.csv');
 const validationGateCards = csv('data_processed/russian_validation_gate_cards.csv');
 const p0ExecutionPacket = csv('data_processed/russian_p0_execution_packet.csv');
 const observedEvidenceLadder = csv('data_processed/russian_observed_evidence_ladder.csv');
@@ -444,6 +445,27 @@ if (productLoopCards.length) {
   lines.push('Граница этого слоя: это stimulus design, а не результат пользовательской валидации. Он делает H4/H6 проверяемыми, но не закрывает их.');
   lines.push('');
 }
+if (prototypeSessionDossiers.length) {
+  lines.push('## 7.2. Русские prototype session dossiers');
+  lines.push('');
+  lines.push(`Чтобы H4/H6 не оставались на уровне stimulus design, добавлены prototype session dossiers на ${prototypeSessionDossiers.length} P0 сегмента. Они показывают flow сессии, critical screens, scorecard metrics, evidence fields и правила upgrade/downgrade для конкурентного преимущества и продуктового ядра.`);
+  lines.push('');
+  lines.push(mdTable(prototypeSessionDossiers, [
+    { key: 'segment_id', label: 'ICP' },
+    { key: 'segment_name', label: 'Segment' },
+    { key: 'screen_count', label: 'Screens', align: 'right' },
+    { key: 'capture_rows_count', label: 'Rows', align: 'right' },
+    { key: 'completed_capture_rows', label: 'Done', align: 'right' },
+    { key: 'critical_screens_ru', label: 'Critical screens' }
+  ], prototypeSessionDossiers.length));
+  lines.push('');
+  for (const row of prototypeSessionDossiers) {
+    lines.push(`**${row.segment_id}. ${row.segment_name}.** Upgrade: ${row.upgrade_rule_ru} Downgrade: ${row.downgrade_rule_ru}`);
+    lines.push('');
+  }
+  lines.push('Граница этого слоя: prototype dossier делает H4/H6 проверяемыми, но claim усиливается только после заполненных prototype_session_capture_sheet и scorecard metrics.');
+  lines.push('');
+}
 lines.push('## 8. Что уже доказано, а что еще нельзя утверждать');
 lines.push('');
 lines.push('На текущем этапе доказано не "Alina точно сработает", а другое: есть достаточно большой и платежеспособный adjacent landscape; есть повторяющиеся боли и jobs-to-be-done; есть narrow whitespace hypothesis; есть операционная система источников, матриц, claim boundaries, capture sheets и PDF/report artifacts. Не доказано: что пользователи действительно предпочитают эту петлю существующим решениям, что они понимают avatar/progress causality, что они готовы платить за paid depth, и что конкуренты не закрывают этот loop внутри onboarding.');
@@ -654,6 +676,7 @@ lines.push('- `data_processed/russian_competitor_battlecards.csv`');
 lines.push('- `data_processed/russian_icp_battlecards.csv`');
 lines.push('- `data_processed/russian_icp_interview_dossiers.csv`');
 lines.push('- `data_processed/russian_product_loop_cards.csv`');
+lines.push('- `data_processed/russian_prototype_session_dossiers.csv`');
 lines.push('- `data_processed/russian_validation_gate_cards.csv`');
 lines.push('- `data_processed/russian_p0_execution_packet.csv`');
 lines.push('- `data_processed/russian_observed_evidence_ladder.csv`');

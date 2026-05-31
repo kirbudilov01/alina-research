@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T12:56:25.280Z
+Собрано: 2026-05-31T13:04:21.592Z
 
 ## Как читать этот документ
 
@@ -28,7 +28,7 @@
 
 ## 0. Исполнительный рассказ
 
-Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 420 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
+Если читать весь ресерч как одну историю, она выглядит так. Мы начали с осторожной продуктовой гипотезы: возможно, существует место для приложения, которое соединяет личный смысл, маленькое действие, короткий reset и видимый прогресс в одну ежедневную петлю. Чтобы не строить это на вкусе или интуиции, мы развернули карту соседних рынков и получили 33718 dedup rows в cross-source universe, 100 строк top-candidate review, 20492 audience signal rows и 423 локальных артефактов в manifest. Это уже достаточно большой evidence warehouse, чтобы видеть рельеф рынка, но недостаточно, чтобы объявить продукт доказанным.
 
 Главное, что стало понятнее: Alina не должна соревноваться с каждым meditation app, habit tracker, astrology app, avatar generator или coaching product по отдельности. Сильнее выглядит узкая ставка на причинную петлю: пользователь получает персональное отражение дня, выбирает одно действие, проходит reset, завершает шаг и видит, что прогресс или образ себя изменился именно из-за действия. В публичных данных эта комбинация пока выглядит редкой: в top-100 найдено 1/100 строгих behavior-tied progression signals, но 12 P0 конкурентов все еще требуют настоящего walkthrough, потому что скрытая петля может жить внутри onboarding, paywall или first-session experience.
 
@@ -40,7 +40,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 420 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 423 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -327,6 +327,21 @@ Product-core evidence и prototype stimulus переводят исследов�
 
 Граница этого слоя: это stimulus design, а не результат пользовательской валидации. Он делает H4/H6 проверяемыми, но не закрывает их.
 
+## 7.2. Русские prototype session dossiers
+
+Чтобы H4/H6 не оставались на уровне stimulus design, добавлены prototype session dossiers на 2 P0 сегмента. Они показывают flow сессии, critical screens, scorecard metrics, evidence fields и правила upgrade/downgrade для конкурентного преимущества и продуктового ядра.
+
+| ICP | Segment | Screens | Rows | Done | Critical screens |
+| --- | --- | ---: | ---: | ---: | --- |
+| ICP_A | Spiritual self-improvers | 8 | 40 | 0 | S03_ACTION_CARD: Participant sees the action as doable and causally linked to the chosen theme. / S06_AVATAR_CHANGE: Participant understands action -> identity/avatar causality. / S08_VALUE_CHECK: Participant names the integrated loop in their own words. |
+| ICP_D | Habit and progress users | 8 | 40 | 0 | S03_ACTION_CARD: Participant sees the action as doable and causally linked to the chosen theme. / S06_AVATAR_CHANGE: Participant understands action -> identity/avatar causality. / S08_VALUE_CHECK: Participant names the integrated loop in their own words. |
+
+**ICP_A. Spiritual self-improvers.** Upgrade: усилить H4/H6 только если участники понимают причинность meaning -> action -> avatar/progress, проходят петлю примерно за две минуты, видят отличие от habit/coach/meditation альтернатив и не дают fatal trust/safety objection. Downgrade: ослабить H4/H6, если пользователи читают петлю как generic habit tracker, vague reading, manipulative gamification, childish avatar toy или unsafe guidance. Segment risk: Alina needs careful framing: soft guidance, no deterministic claims, visible limits, and clear safety posture.
+
+**ICP_D. Habit and progress users.** Upgrade: усилить H4/H6 только если участники понимают причинность meaning -> action -> avatar/progress, проходят петлю примерно за две минуты, видят отличие от habit/coach/meditation альтернатив и не дают fatal trust/safety objection. Downgrade: ослабить H4/H6, если пользователи читают петлю как generic habit tracker, vague reading, manipulative gamification, childish avatar toy или unsafe guidance. Segment risk: The free loop must demonstrate value before asking for deeper paid analysis or personalization.
+
+Граница этого слоя: prototype dossier делает H4/H6 проверяемыми, но claim усиливается только после заполненных prototype_session_capture_sheet и scorecard metrics.
+
 ## 8. Что уже доказано, а что еще нельзя утверждать
 
 На текущем этапе доказано не "Alina точно сработает", а другое: есть достаточно большой и платежеспособный adjacent landscape; есть повторяющиеся боли и jobs-to-be-done; есть narrow whitespace hypothesis; есть операционная система источников, матриц, claim boundaries, capture sheets и PDF/report artifacts. Не доказано: что пользователи действительно предпочитают эту петлю существующим решениям, что они понимают avatar/progress causality, что они готовы платить за paid depth, и что конкуренты не закрывают этот loop внутри onboarding.
@@ -590,6 +605,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_icp_battlecards.csv`
 - `data_processed/russian_icp_interview_dossiers.csv`
 - `data_processed/russian_product_loop_cards.csv`
+- `data_processed/russian_prototype_session_dossiers.csv`
 - `data_processed/russian_validation_gate_cards.csv`
 - `data_processed/russian_p0_execution_packet.csv`
 - `data_processed/russian_observed_evidence_ladder.csv`
