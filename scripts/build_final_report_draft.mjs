@@ -91,6 +91,7 @@ const reviewSignals = csv('data_processed/review_signal_matrix.csv');
 const rawReviews = csv('data_raw/app_store_top_candidate_reviews.csv');
 const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
 const forumSignals = csv('data_raw/forum_evidence_signals.csv');
+const top100Review = csv('data_processed/top100_competitor_review_scorecard.csv');
 
 const highWhitespace = whitespace.filter(r => r.whitespace_band === 'high').length;
 const mediumWhitespace = whitespace.filter(r => r.whitespace_band === 'medium').length;
@@ -102,6 +103,9 @@ const baseIntersection = tam.find(r => r.pillar === 'intersection') || {};
 const reviewApps = new Set(rawReviews.map(r => r.app_store_id).filter(Boolean)).size;
 const ratingMix = countBy(rawReviews, 'rating');
 const reviewSignalCounts = countBy(reviewSignals, 'signal');
+const primaryCompetitors = top100Review.filter(r => r.duplicate_flag === 'primary_app_entry');
+const highThreatCompetitors = primaryCompetitors.filter(r => Number(r.competitive_threat_score) >= 24);
+const directReferenceCompetitors = primaryCompetitors.filter(r => r.competitive_verdict === 'direct_reference_competitor');
 
 const report = [];
 
@@ -121,11 +125,12 @@ report.push(`- Expanded competitor universe: ${expanded.length} deduplicated row
 report.push(`- Audience signal rows: ${audience.length}.`);
 report.push(`- High whitespace candidates: ${highWhitespace}; medium: ${mediumWhitespace}; low: ${lowWhitespace}.`);
 report.push(`- Top-100 intersection candidates enriched from App Store metadata: ${prefill.length}/100.`);
+report.push(`- AI-assisted top-100 competitor review: ${top100Review.length} rows, ${primaryCompetitors.length} unique primary apps, ${highThreatCompetitors.length} high-threat apps, ${directReferenceCompetitors.length} direct reference competitor.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
 report.push(`- Review JTBD/pain clusters: ${reviewClusters.length} themes; top cluster is "${reviewClusters[0]?.cluster_label || 'n/a'}" with ${reviewClusters[0]?.review_rows || 'n/a'} rows.`);
 report.push(`- Forum/source evidence map: ${forumSignals.length} qualitative rows across ${Object.keys(countBy(forumSignals, 'market')).length} market pillars.`);
-report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, and forum source coverage.');
+report.push('- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, and top-100 competitor verdicts.');
 report.push(`- Modeled direct intersection SAM base: USD ${baseIntersection.samBase || 'n/a'}.`);
 report.push('');
 report.push('## 2. Product Hypotheses');
@@ -198,6 +203,33 @@ const retentionTags = {};
 for (const row of pricing) for (const tag of String(row.retention_tags || '').split('|').filter(Boolean)) retentionTags[tag] = (retentionTags[tag] || 0) + 1;
 report.push(bulletCounts(retentionTags));
 report.push('');
+if (top100Review.length) {
+  report.push('### AI-Assisted Top-100 Competitor Review');
+  report.push('');
+  report.push(`The top-100 candidate set now has an AI-assisted scorecard that combines App Store metadata, product-core scoring, pricing/retention tags, review-language signals, and JTBD/pain clusters. This is a strong triage layer but still needs human product validation before final claims.`);
+  report.push('');
+  report.push(`Coverage: ${top100Review.length} rows, ${primaryCompetitors.length} unique primary apps, ${top100Review.length - primaryCompetitors.length} duplicate app entries, ${primaryCompetitors.filter(r => Number(r.review_signal_rows) > 0).length} unique apps with public review signals.`);
+  report.push('');
+  report.push('Competitor verdict counts:');
+  report.push('');
+  report.push(bulletCounts(countBy(top100Review, 'competitive_verdict')));
+  report.push('');
+  report.push('Highest-threat primary competitors:');
+  report.push('');
+  report.push(mdTable([...primaryCompetitors]
+    .sort((a, b) => Number(b.competitive_threat_score) - Number(a.competitive_threat_score))
+    .slice(0, 10), [
+      { key: 'review_rank', label: 'Rank', align: 'right' },
+      { key: 'app_name', label: 'App' },
+      { key: 'competitive_threat_score', label: 'Threat', align: 'right' },
+      { key: 'competitive_verdict', label: 'Verdict' },
+      { key: 'alina_core_score', label: 'Core', align: 'right' },
+      { key: 'behavior_tied_progression', label: 'Behavior Progression' }
+    ], 10));
+  report.push('');
+  report.push('Competitive interpretation: the field is full of close substitutes, but only one direct reference competitor currently shows strict behavior-tied avatar/identity progression. That keeps the whitespace narrow but real.');
+  report.push('');
+}
 report.push('## 6. Whitespace Analysis');
 report.push('');
 report.push('Broad whitespace is weak: the market already has many products that combine meaning, habits, AI, mindfulness, and identity language. Narrow whitespace is stronger: top-100 metadata shows only one strict signal of behavior-tied avatar progression.');
@@ -297,11 +329,13 @@ report.push('');
 report.push('- Adjacent markets have meaningful revenue pools.');
 report.push('- Users are already trained on daily loops, streaks, reflection, and spiritual/personalized guidance.');
 report.push('- Top-100 evidence suggests avatar/identity is common but behavior-tied avatar progression is rare.');
+report.push('- AI-assisted competitor review found many close substitutes but only one direct reference competitor under the strict behavior-tied progression criterion.');
 report.push('- Review language confirms user pull toward daily support, emotional regulation, progress cues, and personal meaning.');
 report.push('');
 report.push('Remaining proof required:');
 report.push('');
 report.push('- Manual validation of the top-100 candidates.');
+report.push('- Human validation of AI-assisted battlecards and scorecard verdicts.');
 report.push('- Forum evidence and deeper manual clustering of reviews for user pain language and subscription objections.');
 report.push('- Manual quote-level coding of forum/source rows.');
 report.push('- Pricing/IAP extraction beyond App Store metadata.');
@@ -331,12 +365,15 @@ report.push('- `docs/audience/review-jtbd-clusters-v1.md`');
 report.push('- `docs/audience/forum-evidence-synthesis-v1.md`');
 report.push('- `docs/visuals/chart-index-v1.md`');
 report.push('- `docs/competitive/top-intersection-review-synthesis-v1.md`');
+report.push('- `docs/competitive/top100-competitor-review-v1.md`');
+report.push('- `docs/competitive/top100-competitor-battlecards-v1.md`');
 report.push('- `docs/product/product-core-evidence-v1.md`');
 report.push('- `data_processed/tam_sam_som_model.csv`');
 report.push('- `data_processed/competitor_feature_matrix.csv`');
 report.push('- `data_processed/audience_signal_matrix.csv`');
 report.push('- `data_processed/whitespace_signal_matrix.csv`');
 report.push('- `data_processed/top_intersection_review_prefill.csv`');
+report.push('- `data_processed/top100_competitor_review_scorecard.csv`');
 report.push('- `data_processed/pricing_retention_matrix.csv`');
 report.push('- `data_processed/product_core_evidence_matrix.csv`');
 report.push('- `data_processed/review_signal_matrix.csv`');
@@ -349,10 +386,12 @@ report.push('- `output/charts/review-jtbd-clusters.svg`');
 report.push('- `output/charts/sam-base-by-pillar.svg`');
 report.push('- `output/charts/som-scenarios.svg`');
 report.push('- `output/charts/forum-signals-by-market.svg`');
+report.push('- `output/charts/top100-competitor-verdicts.svg`');
+report.push('- `output/charts/top100-threat-scores.svg`');
 report.push('');
 report.push('## 13. Next Work');
 report.push('');
-report.push('1. Complete manual review of top 100 intersection candidates.');
+report.push('1. Human-validate the AI-assisted top-100 competitor scorecard and battlecards.');
 report.push('2. Manually validate the highest-signal review clusters and extract exact user language for positioning.');
 report.push('3. Extract detailed IAP/subscription pricing where accessible.');
 report.push('4. Build visual charts and render the PDF version.');
@@ -375,7 +414,7 @@ status.push(mdTable([
   { requirement: 'Versioned on GitHub', evidence: 'git log through current commit after push', status: 'active' },
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf', status: 'draft PDF done' },
   { requirement: 'Visual charts', evidence: 'docs/visuals/chart-index-v1.md; output/charts/*.svg', status: 'draft chart pack done' },
-  { requirement: 'Manual review of top 100', evidence: 'data_processed/top_intersection_review_prefill.csv', status: 'prefilled, not manually completed' },
+  { requirement: 'Manual review of top 100', evidence: 'data_processed/top100_competitor_review_scorecard.csv; docs/competitive/top100-competitor-review-v1.md; docs/competitive/top100-competitor-battlecards-v1.md', status: 'AI-assisted review done v1; human validation pending' },
   { requirement: 'Review/forum evidence', evidence: 'data_raw/app_store_top_candidate_reviews.csv; data_raw/forum_evidence_signals.csv; data_processed/review_signal_matrix.csv; data_processed/review_jtbd_cluster_summary.csv; docs/audience/review-language-synthesis-v1.md; docs/audience/forum-evidence-synthesis-v1.md', status: 'App Store review extraction, JTBD clustering, and forum source map done v1; quote-level forum coding pending' }
 ], [
   { key: 'requirement', label: 'Requirement' },

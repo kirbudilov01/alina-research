@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T02:32:20.006Z
+Generated: 2026-05-31T02:37:10.148Z
 
 ## 1. Executive Summary
 
@@ -14,11 +14,12 @@ Key quantified signals:
 - Audience signal rows: 20492.
 - High whitespace candidates: 593; medium: 4040; low: 7919.
 - Top-100 intersection candidates enriched from App Store metadata: 100/100.
+- AI-assisted top-100 competitor review: 100 rows, 90 unique primary apps, 45 high-threat apps, 1 direct reference competitor.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
 - Review JTBD/pain clusters: 12 themes; top cluster is "Users want more depth, options, or customization" with 612 rows.
 - Forum/source evidence map: 18 qualitative rows across 5 market pillars.
-- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, and forum source coverage.
+- Draft visual chart pack: whitespace bands, review clusters, SAM by pillar, SOM scenarios, forum source coverage, and top-100 competitor verdicts.
 - Modeled direct intersection SAM base: USD 201960000.
 
 ## 2. Product Hypotheses
@@ -102,6 +103,37 @@ The model intentionally avoids adding five TAMs together. Gaming is treated prim
 - daily_loop: 57
 - avatar_feedback: 54
 - quests_challenges: 30
+
+### AI-Assisted Top-100 Competitor Review
+
+The top-100 candidate set now has an AI-assisted scorecard that combines App Store metadata, product-core scoring, pricing/retention tags, review-language signals, and JTBD/pain clusters. This is a strong triage layer but still needs human product validation before final claims.
+
+Coverage: 100 rows, 90 unique primary apps, 10 duplicate app entries, 75 unique apps with public review signals.
+
+Competitor verdict counts:
+
+- high_priority_close_substitute: 48
+- close_substitute: 30
+- monetization_risk_benchmark: 12
+- adjacent_benchmark: 9
+- direct_reference_competitor: 1
+
+Highest-threat primary competitors:
+
+| Rank | App | Threat | Verdict | Core | Behavior Progression |
+| ---: | --- | ---: | --- | ---: | --- |
+| 1 | Shepherd: Spiritual Bible BFF | 40.9 | direct_reference_competitor | 6 | yes |
+| 80 | Zing AI: Home & Gym Workouts | 34 | high_priority_close_substitute | 5 | no |
+| 73 | Miracle Morning Routine | 33.7 | high_priority_close_substitute | 5 | no |
+| 100 | Daily Yoga: Yoga for Fitness® | 31.6 | high_priority_close_substitute | 5 | no |
+| 31 | Vida Health | 31 | high_priority_close_substitute | 5 | no |
+| 49 | Daily Burn: Workout Coach | 31 | high_priority_close_substitute | 5 | no |
+| 63 | EVOLVE: Transform Your Life | 31 | high_priority_close_substitute | 5 | no |
+| 84 | Motivate: Daily Motivation | 30.9 | high_priority_close_substitute | 5 | no |
+| 53 | Yoga International | 30.8 | high_priority_close_substitute | 5 | no |
+| 55 | Unplug: Meditation | 30.8 | high_priority_close_substitute | 5 | no |
+
+Competitive interpretation: the field is full of close substitutes, but only one direct reference competitor currently shows strict behavior-tied avatar/identity progression. That keeps the whitespace narrow but real.
 
 ## 6. Whitespace Analysis
 
@@ -231,11 +263,13 @@ Go signals present:
 - Adjacent markets have meaningful revenue pools.
 - Users are already trained on daily loops, streaks, reflection, and spiritual/personalized guidance.
 - Top-100 evidence suggests avatar/identity is common but behavior-tied avatar progression is rare.
+- AI-assisted competitor review found many close substitutes but only one direct reference competitor under the strict behavior-tied progression criterion.
 - Review language confirms user pull toward daily support, emotional regulation, progress cues, and personal meaning.
 
 Remaining proof required:
 
 - Manual validation of the top-100 candidates.
+- Human validation of AI-assisted battlecards and scorecard verdicts.
 - Forum evidence and deeper manual clustering of reviews for user pain language and subscription objections.
 - Manual quote-level coding of forum/source rows.
 - Pricing/IAP extraction beyond App Store metadata.
@@ -271,12 +305,15 @@ Market claims currently normalized: 14.
 - `docs/audience/forum-evidence-synthesis-v1.md`
 - `docs/visuals/chart-index-v1.md`
 - `docs/competitive/top-intersection-review-synthesis-v1.md`
+- `docs/competitive/top100-competitor-review-v1.md`
+- `docs/competitive/top100-competitor-battlecards-v1.md`
 - `docs/product/product-core-evidence-v1.md`
 - `data_processed/tam_sam_som_model.csv`
 - `data_processed/competitor_feature_matrix.csv`
 - `data_processed/audience_signal_matrix.csv`
 - `data_processed/whitespace_signal_matrix.csv`
 - `data_processed/top_intersection_review_prefill.csv`
+- `data_processed/top100_competitor_review_scorecard.csv`
 - `data_processed/pricing_retention_matrix.csv`
 - `data_processed/product_core_evidence_matrix.csv`
 - `data_processed/review_signal_matrix.csv`
@@ -289,10 +326,12 @@ Market claims currently normalized: 14.
 - `output/charts/sam-base-by-pillar.svg`
 - `output/charts/som-scenarios.svg`
 - `output/charts/forum-signals-by-market.svg`
+- `output/charts/top100-competitor-verdicts.svg`
+- `output/charts/top100-threat-scores.svg`
 
 ## 13. Next Work
 
-1. Complete manual review of top 100 intersection candidates.
+1. Human-validate the AI-assisted top-100 competitor scorecard and battlecards.
 2. Manually validate the highest-signal review clusters and extract exact user language for positioning.
 3. Extract detailed IAP/subscription pricing where accessible.
 4. Build visual charts and render the PDF version.

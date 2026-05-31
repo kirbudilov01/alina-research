@@ -103,6 +103,9 @@ const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
 const tam = csv('data_processed/tam_sam_som_model.csv');
 const som = csv('data_processed/som_sensitivity_scenarios.csv');
 const forum = csv('data_raw/forum_evidence_signals.csv');
+const top100Review = fs.existsSync('data_processed/top100_competitor_review_scorecard.csv')
+  ? csv('data_processed/top100_competitor_review_scorecard.csv')
+  : [];
 
 horizontalBarChart({
   title: 'Whitespace Bands Across Expanded Competitor Universe',
@@ -143,6 +146,29 @@ horizontalBarChart({
   file: 'forum-signals-by-market.svg'
 });
 
+if (top100Review.length) {
+  horizontalBarChart({
+    title: 'Top-100 Competitor Verdicts',
+    subtitle: 'AI-assisted scorecard verdicts; still requires human validation.',
+    rows: Object.entries(countBy(top100Review, 'competitive_verdict'))
+      .sort((a, b) => b[1] - a[1])
+      .map(([label, value]) => ({ label, value })),
+    file: 'top100-competitor-verdicts.svg'
+  });
+
+  horizontalBarChart({
+    title: 'Highest Competitive Threat Scores',
+    subtitle: 'Unique primary app entries scored from core fit, retention, review evidence, and threat level.',
+    rows: top100Review
+      .filter(row => row.duplicate_flag === 'primary_app_entry')
+      .sort((a, b) => Number(b.competitive_threat_score) - Number(a.competitive_threat_score))
+      .slice(0, 12)
+      .map(row => ({ label: row.app_name, value: row.competitive_threat_score })),
+    file: 'top100-threat-scores.svg',
+    valueLabel: value => String(value)
+  });
+}
+
 const lines = [];
 lines.push('# Chart Index V1');
 lines.push('');
@@ -155,6 +181,10 @@ lines.push('- `output/charts/review-jtbd-clusters.svg`');
 lines.push('- `output/charts/sam-base-by-pillar.svg`');
 lines.push('- `output/charts/som-scenarios.svg`');
 lines.push('- `output/charts/forum-signals-by-market.svg`');
+if (top100Review.length) {
+  lines.push('- `output/charts/top100-competitor-verdicts.svg`');
+  lines.push('- `output/charts/top100-threat-scores.svg`');
+}
 lines.push('');
 lines.push('## Notes');
 lines.push('');

@@ -1,6 +1,6 @@
 # Chart Index V1
 
-Generated: 2026-05-31T02:31:42.999Z
+Generated: 2026-05-31T02:37:09.296Z
 
 ## Charts
 
@@ -9,6 +9,8 @@ Generated: 2026-05-31T02:31:42.999Z
 - `output/charts/sam-base-by-pillar.svg`
 - `output/charts/som-scenarios.svg`
 - `output/charts/forum-signals-by-market.svg`
+- `output/charts/top100-competitor-verdicts.svg`
+- `output/charts/top100-threat-scores.svg`
 
 ## Notes
 
