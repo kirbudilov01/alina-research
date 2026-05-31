@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T09:27:31.350Z
+Generated: 2026-05-31T09:36:16.215Z
 
 ## 1. Executive Summary
 
@@ -25,7 +25,7 @@ Key quantified signals:
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
 - Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 20 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 321 artifacts tracked, 67 CSV artifacts, 212931 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 329 artifacts tracked, 71 CSV artifacts, 213279 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -55,6 +55,7 @@ Key quantified signals:
 - Competitor revenue proxy review: 90 primary competitors reviewed; 22 strong and 70 medium-or-stronger bottom-up money proxies.
 - ICP segment matrix: 6 segment hypotheses; strongest current directional ICP is "Spiritual self-improvers".
 - ICP validation packet: 36 interview/prototype test rows for selecting one primary and one secondary ICP.
+- ICP recruiting bridge: 24 segment-channel rows and 24 opt-in outreach/message rows linking community/referral signals to screeners, prototype prompts, WTP probes, and evidence capture.
 - Prototype validation stimulus: 8 screens across 2 top ICP segments, with 6 success/kill metrics.
 - Strict behavior-tied avatar progression signal in top-100: 1/100.
 - App Store review-language layer: 2294 reviews from 78 top-candidate apps, mapped into 2288 signal rows.
@@ -109,7 +110,7 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 16 validation roadmap rows; 11 execution tasks | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 321 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 329 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_hypothesis_decision_matrix | proved_v1_open_validation_decisions | high | 6 hypothesis decision rows; 6 hold/validate; 0 go; 0 stop/pivot | Decision rows remain validation gates, not final proof: competitor walkthroughs, paywall sign-off, ICP interviews, and prototype sessions are still open. |
 | REQ_p0_validation_command_center | proved_v1_operator_ready_open_gates | high | 75 command rows; 6 blocker rows; 52 P0 rows | The command center is operational scaffolding; it still requires actual screenshots, participant evidence, paywall signoff, and updated verdicts. |
@@ -125,7 +126,7 @@ Claim-level audit snapshot:
 | H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require human sign-off/in-app inspection. |
 | H3_whitespace_exists | narrow_supported_public_listing_inspected_walkthrough_open | medium | 1/100 strict behavior-tied progression signals; 6 cross-source saturation markets; 2 benchmark-only markets; 12 P0 apps queued | Actual app/onboarding inspection results are still missing; public listings and cross-source text rules can overstate or hide in-app loops. |
 | H4_competitive_advantage_plausible | prototype_stimulus_ready_unvalidated | medium | 1 direct reference competitor; 45 high-threat competitors; 8 prototype screens; 6 success/kill metrics | No human prototype session yet proves users understand, prefer, or value the integrated loop. |
-| H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 294 community/referral rows; 6 ICP segment hypotheses; 36 ICP validation tests | Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. |
+| H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 294 community/referral rows; 6 ICP segment hypotheses; 36 ICP validation tests; 24 ICP recruiting bridge rows | Keyword/OCR/forum coding and directional ICP recruiting assets need human validation, interviews, and prototype tests. |
 | H6_product_core_defined | supported_for_mvp_framing | medium | 12552 feature matrix rows; 100 product-core rows; 8 prototype screens | No user prototype evidence yet confirms comprehension, emotional value, or retention impact. |
 | REQ_final_artifacts_versioned | proved_active | high | current branch pushed through latest commit | Final polished investor/user-facing PDF is still draft-level, not final designed publication. |
 
@@ -347,7 +348,7 @@ Evidence state mix:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 321 artifacts; 67 CSV artifacts; 212931 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 329 artifacts; 71 CSV artifacts; 213279 tracked CSV rows; 0 missing required artifacts.
 Validation note artifact links: 29 existing local artifacts linked inside batch notes.
 
 Largest tracked CSV artifacts:
@@ -377,7 +378,7 @@ Completion status mix:
 - proved_30k_plus_cross_source_dedup: 1
 - supported_with_stress_test_and_bottom_up_proxy_not_final: 1
 - narrow_supported_public_listing_inspected_walkthrough_open: 1
-- directionally_supported_validation_ready: 1
+- directionally_supported_recruiting_ready: 1
 - prototype_stimulus_ready_not_validated: 1
 - polished_evidence_draft_done_not_validated_final: 1
 - proved_active: 1
@@ -392,10 +393,10 @@ Objective readiness matrix:
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
 | REQ_04_MARKET_MONEY | supported_with_stress_test_and_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; assumption_audit_rows=6; stress_scenarios=6; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing is stress-tested and range-based, but actual competitor revenue estimates, paid intelligence, and manual in-app paywall validation are still needed for final investor-grade claims. |
 | REQ_05_WHITESPACE | narrow_supported_public_listing_inspected_walkthrough_open | medium | whitespace_rows=12552; high_ws=593; cross_source_saturation_markets=6; cross_source_primary_high_opportunity=0; cross_source_benchmark_markets=2; top100=100; behavior_tied=1; manual_inspection_targets=12; manual_inspection_rubric=6; public_listing_inspected=12; public_listing_visible_causality=1; public_listing_high_clone_risk=1; manual_walkthrough_capture_rows=60; manual_app_walkthrough_done=0 | Cross-source saturation now keeps gaming/progression as benchmark-only and finds no primary market opportunity strong enough to upgrade without manual walkthrough; app/onboarding screenshots are still required. |
-| REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; community_referral_rows=294; community_referral_signals=6; icp_segments=6; icp_validation_tests=36; icp_capture_rows=96 | Segments are directional and need interviews/prototype/WTP validation. |
+| REQ_06_AUDIENCE_ICP | directionally_supported_recruiting_ready | medium | audience_rows=20492; community_referral_rows=294; community_referral_signals=6; icp_segments=6; icp_validation_tests=36; icp_recruiting_bridge_rows=24; icp_recruiting_message_rows=24; icp_capture_rows=96 | Segments and recruiting assets are directional and need actual interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | prototype_stimulus_ready_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=20; prototype_segments=2; prototype_screens=8; prototype_flow_rows=16; prototype_scorecard_metrics=6; prototype_capture_rows=80 | No completed user/prototype sessions prove the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | polished_evidence_draft_done_not_validated_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true; polished_evidence_pack_pdf=true; polished_evidence_pack_doc=true | Polished evidence PDF exists as a publication-ready draft, but it is not final validated investor/user-facing proof because manual competitor inspection and prototype/user validation remain open. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=321; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=329; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates_capture_ready | strong | roadmap_rows=16; p0=4; p1=12; execution_tasks=11; execution_p0=8; execution_p1=3; p0_command_rows=75; p0_command_blockers=6; p0_command_p0=52; p0_field_guide_sections=8; validation_workspace_lanes=5; validation_batch01_rows=6; validation_batch02_rows=52; validation_batch03_rows=17; validation_rollup_rows=75; validation_rollup_missing=0; validation_batch_local_artifact_links=29; hypothesis_decision_rows=6; hypothesis_hold=6; hypothesis_go=0; hypothesis_stop=0; capture_rows=276; manual_capture_rows=60; paid_capture_rows=40; icp_capture_rows=96; prototype_capture_rows=80; human_confirmed=0; manual_inspection_targets=12; public_listing_inspected=12; manual_app_walkthrough_done=0 | Open P0 gates remain: app/onboarding walkthrough screenshots, paywall human sign-off, whitespace validation, competitive advantage prototype sessions, ICP validation. |
 
 ## 2M. Validation Gap Roadmap
@@ -452,6 +453,47 @@ The execution dashboard is now backed by fillable capture sheets. This is the ha
 | paid_flow_capture_sheet.csv | 40 | Human paid-flow signoff by app and evidence slot |
 | icp_interview_capture_sheet.csv | 96 | Top-two ICP interview capture by participant and test |
 | prototype_session_capture_sheet.csv | 80 | Two-minute prototype observations by segment, participant, and screen |
+
+### ICP Recruiting Bridge
+
+The ICP layer now has a practical bridge from evidence to fieldwork. Each row links a segment to a recruiting-channel hypothesis, matching community/referral signal counts, screener language, qualifying/disqualifying signals, prototype prompt, WTP probe, linked validation tests, and ethical constraints.
+
+Bridge rows by segment:
+
+- Spiritual self-improvers: 4
+- Habit and progress users: 4
+- Anxious daily reset users: 4
+- Cozy/casual progression users: 4
+- Coaching professionals and structured growth users: 4
+- Avatar identity builders: 4
+
+Bridge rows by source signal kind:
+
+- word_of_mouth_or_personal_recommendation: 6
+- community_or_accountability_need: 6
+- social_platform_discovery: 6
+- coded_forum_need_or_competitor_context: 6
+
+| Bridge | Segment | Priority | Matched Rows | Channel Hypothesis | Qualifying Signal |
+| --- | --- | --- | ---: | --- | --- |
+| ICP_A_CH_COMMUNITY | Spiritual self-improvers | P0_top_two | 107 | Relevant community thread, Discord, forum, or group where users already discuss the job | Participant names a recent tool/use moment in astrology_esoterics/coaching and can describe the trigger without being led. |
+| ICP_A_CH_REFERRAL | Spiritual self-improvers | P0_top_two | 83 | Warm referral or friend-of-user intro | Participant names a recent tool/use moment in astrology_esoterics/coaching and can describe the trigger without being led. |
+| ICP_D_CH_COMMUNITY | Habit and progress users | P0_top_two | 69 | Relevant community thread, Discord, forum, or group where users already discuss the job | Participant names a recent tool/use moment in coaching/mindfulness and can describe the trigger without being led. |
+| ICP_D_CH_REFERRAL | Habit and progress users | P0_top_two | 58 | Warm referral or friend-of-user intro | Participant names a recent tool/use moment in coaching/mindfulness and can describe the trigger without being led. |
+| ICP_C_CH_COMMUNITY | Anxious daily reset users | P1_compare | 47 | Relevant community thread, Discord, forum, or group where users already discuss the job | Participant names a recent tool/use moment in mindfulness/coaching and can describe the trigger without being led. |
+| ICP_C_CH_FORUM_LANGUAGE | Anxious daily reset users | P1_compare | 46 | Forum-language recruiting using exact problem wording from coded snippets | Participant names a recent tool/use moment in mindfulness/coaching and can describe the trigger without being led. |
+| ICP_D_CH_FORUM_LANGUAGE | Habit and progress users | P0_top_two | 45 | Forum-language recruiting using exact problem wording from coded snippets | Participant names a recent tool/use moment in coaching/mindfulness and can describe the trigger without being led. |
+| ICP_C_CH_REFERRAL | Anxious daily reset users | P1_compare | 42 | Warm referral or friend-of-user intro | Participant names a recent tool/use moment in mindfulness/coaching and can describe the trigger without being led. |
+| ICP_F_CH_COMMUNITY | Coaching professionals and structured growth users | P1_compare | 38 | Relevant community thread, Discord, forum, or group where users already discuss the job | Participant names a recent tool/use moment in coaching and can describe the trigger without being led. |
+| ICP_A_CH_FORUM_LANGUAGE | Spiritual self-improvers | P0_top_two | 36 | Forum-language recruiting using exact problem wording from coded snippets | Participant names a recent tool/use moment in astrology_esoterics/coaching and can describe the trigger without being led. |
+| ICP_F_CH_REFERRAL | Coaching professionals and structured growth users | P1_compare | 35 | Warm referral or friend-of-user intro | Participant names a recent tool/use moment in coaching and can describe the trigger without being led. |
+| ICP_B_CH_REFERRAL | Avatar identity builders | P1_compare | 35 | Warm referral or friend-of-user intro | Participant names a recent tool/use moment in avatar_identity/coaching and can describe the trigger without being led. |
+| ICP_B_CH_COMMUNITY | Avatar identity builders | P1_compare | 35 | Relevant community thread, Discord, forum, or group where users already discuss the job | Participant names a recent tool/use moment in avatar_identity/coaching and can describe the trigger without being led. |
+| ICP_E_CH_REFERRAL | Cozy/casual progression users | P1_compare | 32 | Warm referral or friend-of-user intro | Participant names a recent tool/use moment in gaming/avatar_identity and can describe the trigger without being led. |
+| ICP_E_CH_COMMUNITY | Cozy/casual progression users | P1_compare | 32 | Relevant community thread, Discord, forum, or group where users already discuss the job | Participant names a recent tool/use moment in gaming/avatar_identity and can describe the trigger without being led. |
+| ICP_B_CH_FORUM_LANGUAGE | Avatar identity builders | P1_compare | 29 | Forum-language recruiting using exact problem wording from coded snippets | Participant names a recent tool/use moment in avatar_identity/coaching and can describe the trigger without being led. |
+
+Message bank rows: 24. These are transparent opt-in research invites, not channel proof and not a license for scraped/private outreach.
 
 ## 3. Dataset Overview
 
@@ -1501,6 +1543,8 @@ Claim audit rows currently normalized: 20.
 - `data_processed/review_jtbd_cluster_rows.csv`
 - `data_processed/community_referral_signal_rows.csv`
 - `data_processed/community_referral_summary.csv`
+- `data_processed/icp_recruiting_bridge.csv`
+- `data_processed/icp_recruiting_message_bank.csv`
 - `data_raw/app_store_top_candidate_reviews.csv`
 - `data_raw/app_store_iap_pricing_raw.csv`
 - `data_raw/google_play_pricing_raw.csv`

@@ -216,6 +216,8 @@ const requiredArtifacts = [
   'data_processed/forum_quote_coding_matrix.csv',
   'data_processed/icp_segment_matrix.csv',
   'data_processed/icp_validation_test_plan.csv',
+  'data_processed/icp_recruiting_bridge.csv',
+  'data_processed/icp_recruiting_message_bank.csv',
   'data_processed/prototype_validation_stimulus_flow.csv',
   'data_processed/prototype_validation_scorecard.csv',
   'data_processed/hypothesis_decision_matrix.csv',

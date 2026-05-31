@@ -111,6 +111,8 @@ const forumSignals = csv('data_raw/forum_evidence_signals.csv');
 const forumQuoteCoding = csv('data_processed/forum_quote_coding_matrix.csv');
 const icpSegments = csv('data_processed/icp_segment_matrix.csv');
 const icpValidationPlan = csv('data_processed/icp_validation_test_plan.csv');
+const icpRecruitingBridge = csv('data_processed/icp_recruiting_bridge.csv');
+const icpRecruitingMessages = csv('data_processed/icp_recruiting_message_bank.csv');
 const prototypeStimulusFlow = csv('data_processed/prototype_validation_stimulus_flow.csv');
 const prototypeScorecard = csv('data_processed/prototype_validation_scorecard.csv');
 const top100Review = csv('data_processed/top100_competitor_review_scorecard.csv');
@@ -286,6 +288,7 @@ report.push(`- Monetization proxy matrix: ${monetizationProxy.length} markets co
 report.push(`- Competitor revenue proxy review: ${competitorRevenueProxy.length} primary competitors reviewed; ${strongRevenueProxyCompetitors.length} strong and ${mediumPlusRevenueProxyCompetitors.length} medium-or-stronger bottom-up money proxies.`);
 report.push(`- ICP segment matrix: ${icpSegments.length} segment hypotheses; strongest current directional ICP is "${strongestIcpSegment.segment_name || 'n/a'}".`);
 report.push(`- ICP validation packet: ${icpValidationPlan.length} interview/prototype test rows for selecting one primary and one secondary ICP.`);
+report.push(`- ICP recruiting bridge: ${icpRecruitingBridge.length} segment-channel rows and ${icpRecruitingMessages.length} opt-in outreach/message rows linking community/referral signals to screeners, prototype prompts, WTP probes, and evidence capture.`);
 report.push(`- Prototype validation stimulus: ${prototypeScreens.size} screens across ${prototypeSegments.size} top ICP segments, with ${prototypeScorecard.length} success/kill metrics.`);
 report.push(`- Strict behavior-tied avatar progression signal in top-100: ${behaviorTied}/100.`);
 report.push(`- App Store review-language layer: ${rawReviews.length} reviews from ${reviewApps} top-candidate apps, mapped into ${reviewSignals.length} signal rows.`);
@@ -594,6 +597,33 @@ if (validationCaptureRows) {
     { key: 'rows', label: 'Rows', align: 'right' },
     { key: 'purpose', label: 'Purpose' }
   ]));
+  report.push('');
+}
+if (icpRecruitingBridge.length) {
+  report.push('### ICP Recruiting Bridge');
+  report.push('');
+  report.push('The ICP layer now has a practical bridge from evidence to fieldwork. Each row links a segment to a recruiting-channel hypothesis, matching community/referral signal counts, screener language, qualifying/disqualifying signals, prototype prompt, WTP probe, linked validation tests, and ethical constraints.');
+  report.push('');
+  report.push('Bridge rows by segment:');
+  report.push('');
+  report.push(bulletCounts(countBy(icpRecruitingBridge, 'segment_name')));
+  report.push('');
+  report.push('Bridge rows by source signal kind:');
+  report.push('');
+  report.push(bulletCounts(countBy(icpRecruitingBridge, 'source_signal_kind')));
+  report.push('');
+  report.push(mdTable(icpRecruitingBridge
+    .slice()
+    .sort((a, b) => Number(b.matched_community_signal_rows || 0) - Number(a.matched_community_signal_rows || 0)), [
+      { key: 'bridge_id', label: 'Bridge' },
+      { key: 'segment_name', label: 'Segment' },
+      { key: 'priority', label: 'Priority' },
+      { key: 'matched_community_signal_rows', label: 'Matched Rows', align: 'right' },
+      { key: 'recruiting_channel_hypothesis', label: 'Channel Hypothesis' },
+      { key: 'qualifying_signal', label: 'Qualifying Signal' }
+    ], 16));
+  report.push('');
+  report.push(`Message bank rows: ${icpRecruitingMessages.length}. These are transparent opt-in research invites, not channel proof and not a license for scraped/private outreach.`);
   report.push('');
 }
 report.push('## 3. Dataset Overview');
@@ -1520,6 +1550,8 @@ report.push('- `data_processed/review_jtbd_cluster_summary.csv`');
 report.push('- `data_processed/review_jtbd_cluster_rows.csv`');
 report.push('- `data_processed/community_referral_signal_rows.csv`');
 report.push('- `data_processed/community_referral_summary.csv`');
+report.push('- `data_processed/icp_recruiting_bridge.csv`');
+report.push('- `data_processed/icp_recruiting_message_bank.csv`');
 report.push('- `data_raw/app_store_top_candidate_reviews.csv`');
 report.push('- `data_raw/app_store_iap_pricing_raw.csv`');
 report.push('- `data_raw/google_play_pricing_raw.csv`');
@@ -1595,6 +1627,7 @@ status.push(mdTable([
   { requirement: 'Audience matrices', evidence: 'data_processed/audience_signal_matrix.csv; docs/audience/audience-segmentation-v1.md', status: 'done v1' },
   { requirement: 'ICP / audience segment matrix', evidence: 'data_processed/icp_segment_matrix.csv; docs/audience/icp-segment-matrix-v1.md', status: 'done v1; maps audience/review/forum/monetization evidence into testable ICP hypotheses' },
   { requirement: 'ICP validation packet', evidence: 'data_processed/icp_validation_test_plan.csv; docs/audience/icp-validation-packet-v1.md', status: 'done v1; interview/prototype/WTP/disconfirmation protocol created for top ICP selection' },
+  { requirement: 'ICP recruiting bridge', evidence: 'data_processed/icp_recruiting_bridge.csv; data_processed/icp_recruiting_message_bank.csv; docs/audience/icp-recruiting-bridge-v1.md', status: `done v1; ${icpRecruitingBridge.length} segment-channel rows and ${icpRecruitingMessages.length} opt-in message rows connect evidence to recruiting and validation capture` },
   { requirement: 'Prototype validation stimulus', evidence: 'data_processed/prototype_validation_stimulus_flow.csv; data_processed/prototype_validation_scorecard.csv; docs/product/prototype-validation-stimulus-v1.md', status: 'done v1; two-minute loop stimulus, top-ICP comparison flow, and success/kill metrics ready; participant results pending' },
   { requirement: 'Versioned on GitHub', evidence: 'git log through current commit after push', status: 'active' },
   { requirement: 'Final PDF', evidence: 'output/pdf/alina-evidence-first-report-draft.pdf; output/pdf/alina-evidence-visual-report-v1.pdf', status: 'draft evidence PDF and visual PDF companion done' },

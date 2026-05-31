@@ -338,6 +338,8 @@ def main() -> None:
     prototype = read_csv("data_processed/prototype_validation_stimulus_flow.csv")
     prototype_scorecard = read_csv("data_processed/prototype_validation_scorecard.csv")
     icp = read_csv("data_processed/icp_segment_matrix.csv")
+    icp_recruiting_bridge = read_csv("data_processed/icp_recruiting_bridge.csv")
+    icp_recruiting_messages = read_csv("data_processed/icp_recruiting_message_bank.csv")
     community_referral = read_csv("data_processed/community_referral_signal_rows.csv")
     community_referral_summary = read_csv("data_processed/community_referral_summary.csv")
     tam = read_csv("data_processed/tam_sam_som_model.csv")
@@ -415,6 +417,8 @@ def main() -> None:
         "Validation note local evidence links": number(len(validation_batch_local_artifacts)),
         "Validation rollup rows": number(len(validation_rollup)),
         "Validation capture rows": number(capture_rows),
+        "ICP recruiting bridge rows": number(len(icp_recruiting_bridge)),
+        "ICP recruiting message rows": number(len(icp_recruiting_messages)),
     }
     build_doc_note(metrics)
 
@@ -519,6 +523,7 @@ def main() -> None:
                 ["Visible public causality cases", len(public_listing_visible_causality), "Highest-priority walkthrough target; not final clone proof."],
                 ["Manual rubric dimensions", len(manual_rubric), "Dimensions for causality, hidden clone risk, paywall, and final verdict."],
                 ["ICP segments", len(icp), "Segment hypotheses to test before product commitment."],
+                ["ICP recruiting bridge rows", len(icp_recruiting_bridge), "Segment-channel links from community/referral evidence to screeners, prototype prompts, WTP probes, and capture fields."],
                 ["Community/referral rows", len(community_referral), "Local review/forum signals for audience language and channel hypotheses."],
                 ["Prototype scorecard metrics", len(prototype_scorecard), "Success/kill metrics for the two-minute loop."],
             ],
@@ -804,7 +809,7 @@ def main() -> None:
         PageBreak(),
         para("Audience And Prototype Validation", "H1"),
         para(
-            "The pack now has enough structure to run user validation without improvising the product story: two ICP segments, an 8-screen stimulus, and six success/kill metrics.",
+            "The pack now has enough structure to run user validation without improvising the product story: ICP segments, an evidence-linked recruiting bridge, opt-in outreach copy, an 8-screen stimulus, and six success/kill metrics.",
             "Body",
         ),
         table(
@@ -825,6 +830,8 @@ def main() -> None:
             [
                 ["Prototype validation asset", "Count"],
                 ["ICP segments in prototype flow", len(prototype_segments)],
+                ["ICP recruiting bridge rows", len(icp_recruiting_bridge)],
+                ["ICP opt-in message rows", len(icp_recruiting_messages)],
                 ["Community/referral signal kinds", len(community_referral_summary)],
                 ["Community/referral signal rows", len(community_referral)],
                 ["Prototype screens", len(prototype_screens)],
@@ -885,7 +892,7 @@ def main() -> None:
                 ["Saturation whitespace", "data_processed/cross_source_market_saturation_matrix.csv; docs/intersections/cross-source-saturation-whitespace-v1.md"],
                 ["Market money", "data_processed/tam_sam_som_model.csv; data_processed/competitor_revenue_proxy_review.csv"],
                 ["Whitespace", "data_processed/whitespace_signal_matrix.csv; data_processed/manual_competitor_inspection_packet.csv"],
-                ["Audience", "data_processed/icp_segment_matrix.csv; data_processed/icp_validation_test_plan.csv; data_processed/community_referral_signal_rows.csv"],
+                ["Audience", "data_processed/icp_segment_matrix.csv; data_processed/icp_validation_test_plan.csv; data_processed/icp_recruiting_bridge.csv; data_processed/icp_recruiting_message_bank.csv; data_processed/community_referral_signal_rows.csv"],
                 ["Prototype", "data_processed/prototype_validation_stimulus_flow.csv; data_processed/prototype_validation_scorecard.csv"],
                 ["Validation capture", "data_processed/manual_walkthrough_capture_sheet.csv; data_processed/paid_flow_capture_sheet.csv; data_processed/icp_interview_capture_sheet.csv; data_processed/prototype_session_capture_sheet.csv"],
                 ["Decision gates", "data_processed/hypothesis_decision_matrix.csv; docs/decision/hypothesis-decision-matrix-v1.md"],

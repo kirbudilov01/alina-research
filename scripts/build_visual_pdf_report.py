@@ -241,6 +241,8 @@ def main():
     community_referral_summary = read_csv("data_processed/community_referral_summary.csv")
     forum = read_csv("data_processed/forum_quote_coding_matrix.csv")
     icp = read_csv("data_processed/icp_segment_matrix.csv")
+    icp_recruiting_bridge = read_csv("data_processed/icp_recruiting_bridge.csv")
+    icp_recruiting_messages = read_csv("data_processed/icp_recruiting_message_bank.csv")
     validation_rollup = read_csv("data_processed/validation_evidence_rollup.csv")
 
     primary = [r for r in top100 if r.get("duplicate_flag") == "primary_app_entry"]
@@ -283,6 +285,7 @@ def main():
                 ["Forum quote-coding rows", number(str(len(forum)))],
                 ["Community/referral rows", number(str(len(community_referral)))],
                 ["ICP segment hypotheses", number(str(len(icp)))],
+                ["ICP recruiting bridge rows", number(str(len(icp_recruiting_bridge)))],
                 ["Validation rollup rows", number(str(len(validation_rollup)))],
                 ["Validation rollup local artifacts", number(str(len(rollup_linked)))],
             ],
@@ -460,6 +463,27 @@ def main():
                 for r in sorted(icp, key=lambda r: float(r.get("evidence_score") or 0), reverse=True)
             ],
             formatter=lambda v: f"{v:.0f}",
+        )
+    )
+    story.append(Spacer(1, 0.12 * inch))
+    story.append(
+        BarChart(
+            "ICP Recruiting Bridge Rows By Segment",
+            [(k, float(v)) for k, v in count_by(icp_recruiting_bridge, "segment_name").most_common()],
+            formatter=lambda v: f"{v:.0f}",
+        )
+    )
+    story.append(Spacer(1, 0.12 * inch))
+    story.append(
+        table(
+            [
+                ["Recruiting asset", "Value"],
+                ["Bridge rows", number(str(len(icp_recruiting_bridge)))],
+                ["Opt-in message rows", number(str(len(icp_recruiting_messages)))],
+                ["Source-signal kinds", number(str(len(count_by(icp_recruiting_bridge, "source_signal_kind"))))],
+                ["P0 bridge rows", number(str(len([r for r in icp_recruiting_bridge if r.get("priority") == "P0_top_two"])))],
+            ],
+            [2.8 * inch, 2.0 * inch],
         )
     )
     story.append(Spacer(1, 0.12 * inch))

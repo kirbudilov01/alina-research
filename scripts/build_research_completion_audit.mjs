@@ -139,6 +139,8 @@ const publicListingInspection = csv('data_processed/public_listing_inspection_re
 const publicListingSummary = csv('data_processed/public_listing_inspection_summary.csv');
 const icpSegments = csv('data_processed/icp_segment_matrix.csv');
 const icpValidation = csv('data_processed/icp_validation_test_plan.csv');
+const icpRecruitingBridge = csv('data_processed/icp_recruiting_bridge.csv');
+const icpRecruitingMessages = csv('data_processed/icp_recruiting_message_bank.csv');
 const communityReferralRows = csv('data_processed/community_referral_signal_rows.csv');
 const communityReferralSummary = csv('data_processed/community_referral_summary.csv');
 const prototypeStimulusFlow = csv('data_processed/prototype_validation_stimulus_flow.csv');
@@ -250,12 +252,12 @@ const requirements = [
     requirement_id: 'REQ_06_AUDIENCE_ICP',
     requirement: 'Audience, ICP, JTBD, pain, and shared segment hypotheses are prepared.',
     objective_source: 'User asked for common audience, segments, customer profile, detailed matrices.',
-    status: audience.length && icpSegments.length && icpValidation.length ? 'directionally_supported_validation_ready' : 'missing',
+    status: audience.length && icpSegments.length && icpValidation.length && icpRecruitingBridge.length ? 'directionally_supported_recruiting_ready' : (audience.length && icpSegments.length && icpValidation.length ? 'directionally_supported_validation_ready' : 'missing'),
     evidence_strength: 'medium',
-    proof: `audience_rows=${audience.length}; community_referral_rows=${communityReferralRows.length}; community_referral_signals=${communityReferralSummary.length}; icp_segments=${icpSegments.length}; icp_validation_tests=${icpValidation.length}; icp_capture_rows=${icpInterviewCapture.length}`,
-    evidence_files: 'data_processed/audience_signal_matrix.csv;data_processed/community_referral_signal_rows.csv;data_processed/community_referral_summary.csv;data_processed/icp_segment_matrix.csv;data_processed/icp_validation_test_plan.csv;data_processed/icp_interview_capture_sheet.csv;docs/audience/community-referral-evidence-v1.md;docs/audience/icp-segment-matrix-v1.md;docs/audience/icp-validation-packet-v1.md;docs/decision/validation-capture-sheets-v1.md',
-    remaining_gap: 'Segments are directional and need interviews/prototype/WTP validation.',
-    next_action: 'Run ICP validation packet for top two segments.'
+    proof: `audience_rows=${audience.length}; community_referral_rows=${communityReferralRows.length}; community_referral_signals=${communityReferralSummary.length}; icp_segments=${icpSegments.length}; icp_validation_tests=${icpValidation.length}; icp_recruiting_bridge_rows=${icpRecruitingBridge.length}; icp_recruiting_message_rows=${icpRecruitingMessages.length}; icp_capture_rows=${icpInterviewCapture.length}`,
+    evidence_files: 'data_processed/audience_signal_matrix.csv;data_processed/community_referral_signal_rows.csv;data_processed/community_referral_summary.csv;data_processed/icp_segment_matrix.csv;data_processed/icp_validation_test_plan.csv;data_processed/icp_recruiting_bridge.csv;data_processed/icp_recruiting_message_bank.csv;data_processed/icp_interview_capture_sheet.csv;docs/audience/community-referral-evidence-v1.md;docs/audience/icp-segment-matrix-v1.md;docs/audience/icp-validation-packet-v1.md;docs/audience/icp-recruiting-bridge-v1.md;docs/decision/validation-capture-sheets-v1.md',
+    remaining_gap: 'Segments and recruiting assets are directional and need actual interviews/prototype/WTP validation.',
+    next_action: 'Use the ICP recruiting bridge to recruit the top two segments, then run the validation packet and update capture sheets.'
   },
   {
     requirement_id: 'REQ_07_COMPETITIVE_ADVANTAGE',
