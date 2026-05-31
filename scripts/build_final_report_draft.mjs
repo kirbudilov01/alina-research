@@ -170,6 +170,7 @@ const validationBatch03 = csv('data_processed/validation_batch_03_index.csv');
 const validationBatchPrefilledLocalArtifacts = [...validationBatch01, ...validationBatch02, ...validationBatch03]
   .filter(row => row.prefill_status === 'existing_local_artifact_linked').length;
 const validationEvidenceRollup = csv('data_processed/validation_evidence_rollup.csv');
+const validationTranchePlanner = csv('data_processed/validation_tranche_planner.csv');
 const validationGateCalculator = csv('data_processed/validation_gate_calculator.csv');
 const validationGateStatusSummary = csv('data_processed/validation_gate_status_summary.csv');
 const manualWalkthroughCapture = csv('data_processed/manual_walkthrough_capture_sheet.csv');
@@ -309,6 +310,7 @@ report.push(`- Validation Batch 02: ${validationBatch02.length} prefilled P0-bre
 report.push(`- Validation Batch 03: ${validationBatch03.length} prefilled P1-context paid-flow note files to keep weaker monetization signals conservative.`);
 report.push(`- Validation note local evidence links: ${validationBatchPrefilledLocalArtifacts} batch notes now point at existing local artifacts, mainly captured paywall screenshots; these are evidence links, not human signoff.`);
 report.push(`- Validation evidence rollup: ${validationEvidenceRollup.length} command rows auditing note coverage, local artifact links, and missing batch notes.`);
+report.push(`- Validation tranche planner: ${validationTranchePlanner.length} ordered execution tranches turn capture rows into blocker spikes, pilot batches, and rebuild gates.`);
 report.push(`- Validation gate calculator: ${validationGateCalculator.length} H1-H6 gate rows; ${validationGatesPassed.length} pass-ready and ${validationGatesNotStarted.length} not started from current capture sheets.`);
 report.push(`- Validation capture sheets: ${validationCaptureRows} fillable capture rows across manual walkthrough, paid-flow, ICP interview, prototype-session, and Reddit manual-read evidence.`);
 report.push(`- Market source confidence review: ${marketSourceConfidence.length} sources graded; ${highUseMarketSources.length} high-use anchors and ${rangeOnlyMarketSources.length} range-only/context sources.`);
@@ -528,8 +530,24 @@ if (validationEvidenceRollup.length) {
   ], 10));
   report.push('');
 }
+if (validationTranchePlanner.length) {
+  report.push('## 2K. Validation Tranche Planner');
+  report.push('');
+  report.push('The tranche planner sequences manual validation so the project does not burn time on broad capture before the highest-risk blockers are resolved. It starts with stop rules and hidden-clone inspection, then moves into top-five competitor walkthrough, paid-flow signoff, ICP/prototype pilots, Reddit language reads, and only then broader execution.');
+  report.push('');
+  report.push(mdTable(validationTranchePlanner, [
+    { key: 'sequence', label: 'Seq', align: 'right' },
+    { key: 'tranche_id', label: 'Tranche' },
+    { key: 'priority', label: 'Priority' },
+    { key: 'workstream_mix', label: 'Workstream' },
+    { key: 'row_count', label: 'Rows', align: 'right' },
+    { key: 'operator_goal_ru', label: 'Operator Goal' },
+    { key: 'stop_or_downgrade_rule_ru', label: 'Stop/Downgrade' }
+  ], validationTranchePlanner.length));
+  report.push('');
+}
 if (validationGateCalculator.length) {
-  report.push('## 2K. Validation Gate Calculator');
+  report.push('## 2L. Validation Gate Calculator');
   report.push('');
   report.push('The gate calculator turns capture-sheet rows into H1-H6 readiness status. This is the anti-overclaiming layer: a gate can move only when observed screenshots, quotes, scores, or human signoff have been entered.');
   report.push('');
@@ -1809,6 +1827,7 @@ status.push(mdTable([
   { requirement: 'Validation Batch 02', evidence: 'data_processed/validation_batch_02_index.csv; docs/decision/validation-batch-02-v1.md; output/validation/2026-05-31/*/batch02_*.md', status: `done v1; ${validationBatch02.length} P0-breadth notes prefilled for non-blocker validation commands` },
   { requirement: 'Validation Batch 03', evidence: 'data_processed/validation_batch_03_index.csv; docs/decision/validation-batch-03-v1.md; output/validation/2026-05-31/*/batch03_*.md', status: `done v1; ${validationBatch03.length} P1-context paid-flow notes prefilled for conservative monetization checks` },
   { requirement: 'Validation evidence rollup', evidence: 'data_processed/validation_evidence_rollup.csv; docs/decision/validation-evidence-rollup-v1.md', status: `done v1; ${validationEvidenceRollup.length} command rows audit note existence and local artifact links` },
+  { requirement: 'Validation tranche planner', evidence: 'data_processed/validation_tranche_planner.csv; docs/decision/validation-tranche-planner-v1.md', status: `done v1; ${validationTranchePlanner.length} execution tranches prioritize blocker spikes, pilot reads, and rebuild gates` },
   { requirement: 'Validation gate calculator', evidence: 'data_processed/validation_gate_calculator.csv; data_processed/validation_gate_status_summary.csv; docs/decision/validation-gate-calculator-v1.md', status: `done v1; ${validationGateCalculator.length} H1-H6 gate rows convert capture sheets into pass/hold/downgrade readiness` },
   { requirement: '5-market TAM/SAM/SOM method', evidence: 'docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; docs/market/competitor-revenue-proxy-review-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv; data_processed/competitor_revenue_proxy_review.csv; data_processed/competitor_revenue_proxy_market_summary.csv', status: 'done v1; source confidence, market monetization proxy, and bottom-up competitor revenue proxy layers added; model remains range-based and not final forecast' },
   { requirement: 'Market-money triangulation', evidence: 'data_processed/market_money_triangulation.csv; data_processed/market_money_triangulation_summary.csv; docs/market/market-money-triangulation-v1.md', status: `done v1; ${marketMoneyTriangulation.length} market rows triangulate TAM/SAM/SOM, monetization proxy, competitor revenue proxy, paywall screenshots, and H2 gate status` },
@@ -1880,6 +1899,7 @@ console.log(`validation_batch02_rows=${validationBatch02.length}`);
 console.log(`validation_batch03_rows=${validationBatch03.length}`);
 console.log(`validation_batch_local_artifact_links=${validationBatchPrefilledLocalArtifacts}`);
 console.log(`validation_evidence_rollup_rows=${validationEvidenceRollup.length}`);
+console.log(`validation_tranche_planner_rows=${validationTranchePlanner.length}`);
 console.log(`source_expansion_backlog_rows=${sourceExpansionBacklog.length}`);
 console.log(`p0_external_rows=${p0ExternalSources.length}`);
 console.log(`p0_external_usable=${p0ExternalUsable.length}`);

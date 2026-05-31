@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T10:56:39.607Z
+Собрано: 2026-05-31T11:04:43.143Z
 
 ## Как читать этот документ
 
@@ -30,7 +30,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 363 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 366 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -145,6 +145,22 @@ Product-core evidence и prototype stimulus переводят исследов�
 | RU_FIELD_06 | Reddit/manual reading: читать как язык боли, а не как количественный спрос | source thread / user job / alternative used / rejected pattern / paid signal / safety boundary / Alina implication / quote approved for external use | Forum/Reddit evidence усиливает только language and pain claims, если нет репрезентативной выборки или подтверждения в интервью. |
 | RU_FIELD_07 | Обновить gates и отчет: evidence меняет документ, а не живет рядом | updated gate status / updated hypothesis decision / changed claim boundary / regenerated PDF / git commit hash | Любой validation result должен завершаться rebuild -> audit -> commit -> push, иначе research package считается рассинхронизированным. |
 
+## 9.2. Очередность validation tranches
+
+Чтобы не тратить силы на широкий capture до проверки самых опасных рисков, добавлен tranche planner на 9 партий. Он начинает со stop rules и hidden-clone spike, затем ведет через top-5 competitor walkthrough, paid-flow signoff, ICP/prototype pilots, Reddit language read и только потом предлагает расширять объем.
+
+| Seq | Tranche | Priority | Rows | Задача | Stop / downgrade |
+| --- | --- | --- | --- | --- | --- |
+| 0 | TRANCHE_00_STOP_RULES | P0_guardrail | 0 | Зафиксировать, что validation tranche может не только усиливать идею, но и сузить, downgrade или kill claims. | Если результат показывает скрытого full-loop clone, отсутствие WTP, непонимание causality или fatal trust objection, отчет должен стать слабее. |
+| 1 | TRANCHE_01_HIDDEN_CLONE_SPIKE | P0_blocker | 5 | Сначала проверить самый опасный public-listing сигнал: Shepherd выглядит как потенциальный hidden direct clone, поэтому его нужно разобрать до других приложений. | Если Shepherd полностью владеет Alina loop с action->identity/avatar causality, H1/H3 немедленно downgrade до narrow/pivot wording. |
+| 2 | TRANCHE_02_MANUAL_TOP5 | P0 | 25 | Закрыть первые 5 P0 конкурентов, потому что gate требует минимум 5 приложений с полным walkthrough. | Любой full-loop competitor переводит whitespace claim в narrower/pivot language. |
+| 3 | TRANCHE_03_PAID_CONFIRMED_SPIKE | P0 | 8 | Сначала проверить подтвержденные visible pricing rows, чтобы быстро отделить real paid surfaces от proxy noise. | Если confirmed rows оказываются unrelated/parent-only/OCR noise, H2 остается proxy-only и market-money wording сужается. |
+| 4 | TRANCHE_04_ICP_PILOT | P0 | 24 | Провести маленький pilot по двум сегментам до массового интервью, чтобы проверить язык, recent behavior и fatal objections. | Если оба сегмента говорят только абстрактно или отвергают action-tied identity/progress, ICP claim не усиливается. |
+| 5 | TRANCHE_05_PROTOTYPE_PILOT | P0_blocker | 32 | Проверить самое хрупкое место: понимают ли люди causality между действием и avatar/progress feedback. | Если avatar/progress читается как декоративная игра или манипуляция, H4/H6 остаются hold или pivot. |
+| 6 | TRANCHE_06_REDDIT_TOP25_LANGUAGE | P0 | 25 | Быстро получить живой язык rejected patterns и alternatives, не превращая Reddit в ложный количественный спрос. | Если top threads показывают, что users reject gamified identity/progress, prototype positioning must change before more sessions. |
+| 7 | TRANCHE_07_EXPAND_AFTER_SPIKES | P1_after_spikes | 236 | Расширять объем только после первых spikes. Если первые партии противоречат гипотезам, сначала обновить позиционирование и вопросы. | Do not continue broad capture if early evidence shows the core loop is misunderstood or already owned. |
+| 8 | TRANCHE_08_PUBLICATION_REBUILD | P0_after_observed_evidence | 0 | Закрыть цикл evidence-first: результаты должны попасть в claims, русский отчет, PDF, manifest и GitHub. | If reports do not reflect changed evidence, publication is stale and cannot be used externally. |
+
 ## 10. Финальный текущий verdict
 
 Текущий verdict: продолжать, но не переобещать. Alina выглядит как исследовательски перспективная ставка на стыке digital ritual, self-improvement, reset и identity/progress feedback. Самая сильная формулировка возможности: не универсальный комбайн, а короткая ежедневная трансформационная петля, где действие меняет видимый образ прогресса. Самая большая опасность: сделать слишком широкий продукт, который будет одновременно слабым meditation app, слабым habit tracker, слабым astrology app и слабым avatar toy. Поэтому следующий этап должен быть не расширением ради расширения, а жесткой проверкой центральной петли на реальных конкурентных экранах и реальных людях.
@@ -157,6 +173,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/reddit_manual_reading_capture_sheet.csv`
 - `data_processed/russian_narrative_evidence_map.csv`
 - `data_processed/russian_validation_fieldbook.csv`
+- `data_processed/validation_tranche_planner.csv`
 - `data_processed/validation_gate_calculator.csv`
 - `reports/alina-russian-narrative-report-v1.md`
 - `output/pdf/alina-russian-narrative-report-v1.pdf`

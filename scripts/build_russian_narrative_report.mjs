@@ -113,6 +113,7 @@ const manifest = csv('data_processed/evidence_artifact_manifest.csv');
 const paywallVisual = csv('data_processed/web_paywall_visual_adjudication.csv');
 const narrativeMap = csv('data_processed/russian_narrative_evidence_map.csv');
 const russianFieldbook = csv('data_processed/russian_validation_fieldbook.csv');
+const tranchePlanner = csv('data_processed/validation_tranche_planner.csv');
 const validationCaptureRows =
   csv('data_processed/manual_walkthrough_capture_sheet.csv').length +
   csv('data_processed/paid_flow_capture_sheet.csv').length +
@@ -270,6 +271,21 @@ if (russianFieldbook.length) {
   ], russianFieldbook.length));
   lines.push('');
 }
+if (tranchePlanner.length) {
+  lines.push('## 9.2. Очередность validation tranches');
+  lines.push('');
+  lines.push(`Чтобы не тратить силы на широкий capture до проверки самых опасных рисков, добавлен tranche planner на ${tranchePlanner.length} партий. Он начинает со stop rules и hidden-clone spike, затем ведет через top-5 competitor walkthrough, paid-flow signoff, ICP/prototype pilots, Reddit language read и только потом предлагает расширять объем.`);
+  lines.push('');
+  lines.push(mdTable(tranchePlanner, [
+    { key: 'sequence', label: 'Seq' },
+    { key: 'tranche_id', label: 'Tranche' },
+    { key: 'priority', label: 'Priority' },
+    { key: 'row_count', label: 'Rows' },
+    { key: 'operator_goal_ru', label: 'Задача' },
+    { key: 'stop_or_downgrade_rule_ru', label: 'Stop / downgrade' }
+  ], tranchePlanner.length));
+  lines.push('');
+}
 lines.push('## 10. Финальный текущий verdict');
 lines.push('');
 lines.push('Текущий verdict: продолжать, но не переобещать. Alina выглядит как исследовательски перспективная ставка на стыке digital ritual, self-improvement, reset и identity/progress feedback. Самая сильная формулировка возможности: не универсальный комбайн, а короткая ежедневная трансформационная петля, где действие меняет видимый образ прогресса. Самая большая опасность: сделать слишком широкий продукт, который будет одновременно слабым meditation app, слабым habit tracker, слабым astrology app и слабым avatar toy. Поэтому следующий этап должен быть не расширением ради расширения, а жесткой проверкой центральной петли на реальных конкурентных экранах и реальных людях.');
@@ -282,6 +298,7 @@ lines.push('- `data_processed/evidence_claim_register.csv`');
 lines.push('- `data_processed/reddit_manual_reading_capture_sheet.csv`');
 lines.push('- `data_processed/russian_narrative_evidence_map.csv`');
 lines.push('- `data_processed/russian_validation_fieldbook.csv`');
+lines.push('- `data_processed/validation_tranche_planner.csv`');
 lines.push('- `data_processed/validation_gate_calculator.csv`');
 lines.push('- `reports/alina-russian-narrative-report-v1.md`');
 lines.push('- `output/pdf/alina-russian-narrative-report-v1.pdf`');
