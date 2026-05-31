@@ -1,6 +1,6 @@
 # Evidence Status
 
-Generated: 2026-05-31T11:04:35.305Z
+Generated: 2026-05-31T11:10:49.602Z
 
 | Requirement | Evidence | Status |
 | --- | --- | --- |
@@ -28,6 +28,7 @@ Generated: 2026-05-31T11:04:35.305Z
 | Validation Batch 03 | data_processed/validation_batch_03_index.csv; docs/decision/validation-batch-03-v1.md; output/validation/2026-05-31/*/batch03_*.md | done v1; 17 P1-context paid-flow notes prefilled for conservative monetization checks |
 | Validation evidence rollup | data_processed/validation_evidence_rollup.csv; docs/decision/validation-evidence-rollup-v1.md | done v1; 75 command rows audit note existence and local artifact links |
 | Validation tranche planner | data_processed/validation_tranche_planner.csv; docs/decision/validation-tranche-planner-v1.md | done v1; 9 execution tranches prioritize blocker spikes, pilot reads, and rebuild gates |
+| Validation tranche briefings | data_processed/validation_tranche_briefing_index.csv; docs/decision/validation-tranche-briefings-v1.md; output/validation/2026-05-31/tranche_briefings/*.md | done v1; 6 briefing packets route first validation tranches to exact capture rows |
 | Validation gate calculator | data_processed/validation_gate_calculator.csv; data_processed/validation_gate_status_summary.csv; docs/decision/validation-gate-calculator-v1.md | done v1; 6 H1-H6 gate rows convert capture sheets into pass/hold/downgrade readiness |
 | 5-market TAM/SAM/SOM method | docs/market/market-sizing-methodology.md; docs/market/market-source-confidence-review-v1.md; docs/market/monetization-proxy-matrix-v1.md; docs/market/competitor-revenue-proxy-review-v1.md; data_processed/tam_sam_som_model.csv; data_processed/market_source_confidence_review.csv; data_processed/market_confidence_summary.csv; data_processed/market_monetization_proxy_matrix.csv; data_processed/competitor_revenue_proxy_review.csv; data_processed/competitor_revenue_proxy_market_summary.csv | done v1; source confidence, market monetization proxy, and bottom-up competitor revenue proxy layers added; model remains range-based and not final forecast |
 | Market-money triangulation | data_processed/market_money_triangulation.csv; data_processed/market_money_triangulation_summary.csv; docs/market/market-money-triangulation-v1.md | done v1; 6 market rows triangulate TAM/SAM/SOM, monetization proxy, competitor revenue proxy, paywall screenshots, and H2 gate status |

@@ -1,6 +1,6 @@
 # Alina Research. Русский повествовательный отчет V1
 
-Собрано: 2026-05-31T11:04:43.143Z
+Собрано: 2026-05-31T11:10:57.891Z
 
 ## Как читать этот документ
 
@@ -30,7 +30,7 @@
 
 Исходная продуктовая идея была не в том, чтобы сделать еще один трекер привычек, еще один mindfulness-продукт или еще одно эзотерическое приложение. Интуиция была шире: есть люди, которым нужен ежедневный ритуал личного смысла, короткий reset, понятный следующий шаг и ощущение, что они меняются. Поэтому исследование разложено на пять направлений: coaching/self-improvement, mindfulness/reset, avatar/identity, astrology/esoterics и gaming/progression как источник механик, но не обязательно как основной рынок.
 
-На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 366 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
+На уровне данных это уже не маленькая записка. Сейчас в локальном пакете 375 артефакта, missing в manifest: 0. Cross-source universe содержит 61345 нормализованных raw rows и 33718 dedup rows. Это дает масштабную карту соседних продуктов, но сама по себе карта не доказывает спрос на Alina. Она нужна, чтобы не спорить вслепую.
 
 | Слой | Объем | Что это значит |
 | --- | ---: | --- |
@@ -161,6 +161,19 @@ Product-core evidence и prototype stimulus переводят исследов�
 | 7 | TRANCHE_07_EXPAND_AFTER_SPIKES | P1_after_spikes | 236 | Расширять объем только после первых spikes. Если первые партии противоречат гипотезам, сначала обновить позиционирование и вопросы. | Do not continue broad capture if early evidence shows the core loop is misunderstood or already owned. |
 | 8 | TRANCHE_08_PUBLICATION_REBUILD | P0_after_observed_evidence | 0 | Закрыть цикл evidence-first: результаты должны попасть в claims, русский отчет, PDF, manifest и GitHub. | If reports do not reflect changed evidence, publication is stale and cannot be used externally. |
 
+## 9.3. Briefing-пакеты для первых tranches
+
+Чтобы оператор не прыгал между десятками CSV, создано 6 briefing-пакетов. Каждый пакет связывает одну tranche с конкретными capture rows, linked gates, success criteria, stop/downgrade rule и файлами, куда нужно записать результат. Это все еще не validation evidence, а рабочий маршрут для получения evidence.
+
+| # | Tranche | Priority | Rows | Briefing | Boundary |
+| --- | --- | --- | --- | --- | --- |
+| 1 | TRANCHE_01_HIDDEN_CLONE_SPIKE | P0_blocker | 5 | output/validation/2026-05-31/tranche_briefings/01__tranche-01-hidden-clone-spike__briefing.md | briefing_routes_execution_only_no_claim_upgrade_without_filled_capture_rows |
+| 2 | TRANCHE_02_MANUAL_TOP5 | P0 | 25 | output/validation/2026-05-31/tranche_briefings/02__tranche-02-manual-top5__briefing.md | briefing_routes_execution_only_no_claim_upgrade_without_filled_capture_rows |
+| 3 | TRANCHE_03_PAID_CONFIRMED_SPIKE | P0 | 8 | output/validation/2026-05-31/tranche_briefings/03__tranche-03-paid-confirmed-spike__briefing.md | briefing_routes_execution_only_no_claim_upgrade_without_filled_capture_rows |
+| 4 | TRANCHE_04_ICP_PILOT | P0 | 24 | output/validation/2026-05-31/tranche_briefings/04__tranche-04-icp-pilot__briefing.md | briefing_routes_execution_only_no_claim_upgrade_without_filled_capture_rows |
+| 5 | TRANCHE_05_PROTOTYPE_PILOT | P0_blocker | 32 | output/validation/2026-05-31/tranche_briefings/05__tranche-05-prototype-pilot__briefing.md | briefing_routes_execution_only_no_claim_upgrade_without_filled_capture_rows |
+| 6 | TRANCHE_06_REDDIT_TOP25_LANGUAGE | P0 | 25 | output/validation/2026-05-31/tranche_briefings/06__tranche-06-reddit-top25-language__briefing.md | briefing_routes_execution_only_no_claim_upgrade_without_filled_capture_rows |
+
 ## 10. Финальный текущий verdict
 
 Текущий verdict: продолжать, но не переобещать. Alina выглядит как исследовательски перспективная ставка на стыке digital ritual, self-improvement, reset и identity/progress feedback. Самая сильная формулировка возможности: не универсальный комбайн, а короткая ежедневная трансформационная петля, где действие меняет видимый образ прогресса. Самая большая опасность: сделать слишком широкий продукт, который будет одновременно слабым meditation app, слабым habit tracker, слабым astrology app и слабым avatar toy. Поэтому следующий этап должен быть не расширением ради расширения, а жесткой проверкой центральной петли на реальных конкурентных экранах и реальных людях.
@@ -174,6 +187,7 @@ Product-core evidence и prototype stimulus переводят исследов�
 - `data_processed/russian_narrative_evidence_map.csv`
 - `data_processed/russian_validation_fieldbook.csv`
 - `data_processed/validation_tranche_planner.csv`
+- `data_processed/validation_tranche_briefing_index.csv`
 - `data_processed/validation_gate_calculator.csv`
 - `reports/alina-russian-narrative-report-v1.md`
 - `output/pdf/alina-russian-narrative-report-v1.pdf`

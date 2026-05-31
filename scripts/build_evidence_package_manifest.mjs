@@ -243,6 +243,7 @@ const requiredArtifacts = [
   'data_processed/validation_batch_03_index.csv',
   'data_processed/validation_evidence_rollup.csv',
   'data_processed/validation_tranche_planner.csv',
+  'data_processed/validation_tranche_briefing_index.csv',
   'data_processed/validation_gate_calculator.csv',
   'data_processed/validation_gate_status_summary.csv',
   'data_processed/manual_walkthrough_capture_sheet.csv',
@@ -264,7 +265,8 @@ const requiredArtifacts = [
   'docs/decision/validation-batch-02-v1.md',
   'docs/decision/validation-batch-03-v1.md',
   'docs/decision/validation-evidence-rollup-v1.md',
-  'docs/decision/validation-tranche-planner-v1.md'
+  'docs/decision/validation-tranche-planner-v1.md',
+  'docs/decision/validation-tranche-briefings-v1.md'
 ];
 
 const discoveredArtifacts = [

@@ -1,6 +1,6 @@
 # Evidence Package Manifest V1
 
-Generated: 2026-05-31T11:04:48.781Z
+Generated: 2026-05-31T11:11:04.981Z
 
 ## Purpose
 
@@ -8,18 +8,18 @@ This manifest makes the research package auditable. It lists key raw data, proce
 
 ## Package Summary
 
-- Manifest rows: 366
+- Manifest rows: 375
 - Missing required artifacts: 0
-- CSV artifacts: 86
-- Total CSV data rows tracked: 225880
-- CSV rows with source-like identifiers/URLs/domains/packages: 224294
+- CSV artifacts: 87
+- Total CSV data rows tracked: 225886
+- CSV rows with source-like identifiers/URLs/domains/packages: 224300
 
 Artifact types:
 
-- research_doc: 87
-- validation_workspace: 87
-- processed_data: 72
-- generator_script: 71
+- validation_workspace: 93
+- research_doc: 88
+- processed_data: 73
+- generator_script: 72
 - report: 17
 - raw_data: 14
 - chart: 14
@@ -27,8 +27,8 @@ Artifact types:
 
 Evidence roles:
 
-- decision_artifact: 160
-- audience_icp: 51
+- decision_artifact: 168
+- audience_icp: 52
 - market_money: 50
 - supporting: 47
 - source_claim: 28
@@ -86,7 +86,7 @@ Evidence roles:
 | --- | --- | ---: | ---: | --- |
 | docs/competitive/human-validation-guide-v1.md | research_doc | 91 | 12102 | b85e6b5dd29fcb2f |
 | docs/decision/evidence-audit-v1.md | research_doc | 87 | 9705 | 4867fc7f19255e92 |
-| docs/decision/evidence-package-manifest-v1.md | research_doc | 130 | 8697 | adcb232f374ab1aa |
+| docs/decision/evidence-package-manifest-v1.md | research_doc | 130 | 8710 | c5c837bbf2f6e4c1 |
 | docs/decision/hypothesis-decision-matrix-v1.md | research_doc | 51 | 4655 | e4735e2f5779981a |
 | docs/decision/p0-validation-command-center-v1.md | research_doc | 69 | 7260 | 51d22a2990e6aaf3 |
 | docs/decision/p0-validation-field-guide-v1.md | research_doc | 136 | 12679 | 839df92dd885c73b |
@@ -102,6 +102,7 @@ Evidence roles:
 | docs/decision/validation-execution-dashboard-v1.md | research_doc | 50 | 4779 | b496bcc7698e4711 |
 | docs/decision/validation-gap-roadmap-v1.md | research_doc | 72 | 6850 | 677d44153f8f7a21 |
 | docs/decision/validation-gate-calculator-v1.md | research_doc | 40 | 2210 | d86171a6c86b1bf8 |
+| docs/decision/validation-tranche-briefings-v1.md | research_doc | 34 | 2557 | 8612369dbb3ace0a |
 | docs/decision/validation-tranche-planner-v1.md | research_doc | 183 | 16693 | 9aec9c4fd321f0b8 |
 | docs/final-report-outline.md | research_doc | 120 | 2462 | c1f32c179799ccf1 |
 | docs/product/product-core-evidence-v1.md | research_doc | 26 | 1444 | 38d7eb6669cbc2a0 |
@@ -111,19 +112,18 @@ Evidence roles:
 | output/pdf/alina-evidence-first-report-draft.pdf | pdf | 1423 | 194961 | 30a3025c4818d99e |
 | output/pdf/alina-evidence-visual-report-v1.pdf | pdf | 322 | 34684 | 3fca188b99b4541c |
 | output/pdf/alina-polished-evidence-pack-v1.pdf | pdf | 328 | 44200 | 12a59927174ba750 |
-| output/pdf/alina-russian-narrative-report-v1.pdf | pdf | 559 | 110788 | 47773d702c4144ed |
-| reports/alina-evidence-first-report-draft.md | report | 1815 | 167764 | 212365930ca7c63f |
-| reports/alina-russian-narrative-report-v1.md | report | 179 | 37722 | 9b203273a3236e82 |
+| output/pdf/alina-russian-narrative-report-v1.pdf | pdf | 572 | 113456 | dfba9d817666dcb9 |
+| reports/alina-evidence-first-report-draft.md | report | 1829 | 169798 | 68b3cad1a7896cac |
+| reports/alina-russian-narrative-report-v1.md | report | 193 | 39720 | 4a6c7a41590906d3 |
 | reports/competitor-universe-expansion-2026-05-21.md | report | 17 | 371 | 6f085c07c40f01e7 |
 | reports/daily-update-template.md | report | 30 | 199 | 3f49329cf740df70 |
-| reports/evidence-status-2026-05-31.md | report | 49 | 12959 | 14a3bb7f51114af8 |
+| reports/evidence-status-2026-05-31.md | report | 50 | 13234 | 69b5edf24b2596f9 |
 | reports/google-play-enrichment-block-2026-05-21.md | report | 13 | 471 | 8cc4d72b1b4c2a18 |
 | reports/matrix-synthesis-2026-05-31.md | report | 43 | 1009 | 939c826c2c1f40db |
 | reports/pdf-render-check-2026-05-31.md | report | 51 | 1578 | 35abeb7833564f14 |
 | reports/phase1-execution-report-2026-05-21.md | report | 32 | 785 | 67137b3722162884 |
 | reports/phase2-progress-20x5-2026-05-21.md | report | 19 | 507 | 97c1bd587d819a0f |
 | reports/phase2-progress-50x5-2026-05-21.md | report | 16 | 784 | d167dcd3b0d42620 |
-| reports/phase2-seed-progress-2026-05-21.md | report | 30 | 735 | 86b621862a5dd561 |
 
 ## Files
 
