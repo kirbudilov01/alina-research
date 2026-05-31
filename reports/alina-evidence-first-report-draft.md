@@ -1,6 +1,6 @@
 # Alina Evidence-First Research Report Draft
 
-Generated: 2026-05-31T05:17:58.748Z
+Generated: 2026-05-31T05:23:03.349Z
 
 ## 1. Executive Summary
 
@@ -21,8 +21,9 @@ Key quantified signals:
 - Developer website paywall discovery: 560 fetched URL rows across 70 app/domain rows; 29 domains queued for screenshot validation.
 - Web paywall screenshot capture: 29/29 queued screenshots captured for manual interpretation.
 - Web paywall OCR interpretation: 29 screenshots interpreted; 2 currently confirm visible public pricing, while the rest need human review or weaken the signal.
+- Web paywall visual adjudication: 29 screenshots adjudicated; 2 confirmed public pricing and 8 partial paid-surface examples.
 - Evidence audit register: 12 claim rows mapping hypotheses/requirements to proof status, confidence, gaps, and next actions.
-- Evidence package manifest: 155 artifacts tracked, 31 CSV artifacts, 93153 tracked CSV rows, 0 missing required artifacts.
+- Evidence package manifest: 159 artifacts tracked, 33 CSV artifacts, 93187 tracked CSV rows, 0 missing required artifacts.
 - Completion/readiness audit: 10 objective requirements mapped; 5 remain partial, directional, draft, or not final.
 - Source expansion backlog: 10 prioritized collector/source tasks for the next move toward a 30k-50k raw universe.
 - Controlled P0 external-source smoke pass: 29 rows, 23 usable candidates, with search-engine-heavy expansion intentionally deferred.
@@ -67,7 +68,7 @@ Evidence status mix:
 - substantial_v1_not_50k_dedup: 1
 - partially_supported: 1
 - supported_with_ranges_and_bottom_up_proxy: 1
-- supported_narrowly: 1
+- supported_narrowly_with_visual_adjudication: 1
 - narrow_supported_not_final: 1
 - plausible_unproven: 1
 - directionally_supported: 1
@@ -79,12 +80,12 @@ Claim-level audit snapshot:
 | Claim | Status | Confidence | Primary Metric | Key Gap |
 | --- | --- | --- | --- | --- |
 | REQ_plan | proved_v1 | high | master plan exists; 14 validation roadmap rows | Needs periodic refresh as validation findings change. |
-| REQ_evidence_package_traceability | proved_v1 | high | 151 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
+| REQ_evidence_package_traceability | proved_v1 | high | 155 manifest rows; 0 missing artifacts | Manifest is a reproducibility layer, not a substitute for human validation of claims. |
 | REQ_completion_readiness_audit | proved_v1_open_requirements | high | 10 completion requirements; 5 not fully proved/final | Several objective requirements remain partial, directional, draft, or validation-ready rather than fully complete. |
 | REQ_competitor_universe | substantial_v1_not_50k_dedup | medium_high | 12552 dedup rows; 17490 raw expanded rows; 6973 usable itch rows; 6000 usable Steam tag rows; 23 usable P0 external smoke rows; 23 Chrome detail pages | Deduped universe is below the aspirational 30k-50k app target; Product Hunt/AlternativeTo, desktop stores, B2B directories, Reddit mentions, and deeper source-native expansion remain backlog. |
 | H1_product_shape_exists | partially_supported | medium | 100 top-candidate rows; 90 primary apps | Strict full loop is rare and needs manual product/onboarding validation. |
 | H2_markets_have_money | supported_with_ranges_and_bottom_up_proxy | medium | intersection SAM base USD 201960000; 12 market sources confidence-reviewed; 4/5 strong market-level monetization proxies; 22 strong competitor money proxies | Market sizing still needs actual revenue estimates, paid intelligence, or manual in-app paywall validation for final investor-grade claims. |
-| H2_paywall_visible_evidence | supported_narrowly | medium_low | 2/29 screenshots confirm visible public pricing | Most web signals are ambiguous, not found, parent-company pages, or require human interpretation. |
+| H2_paywall_visible_evidence | supported_narrowly_with_visual_adjudication | medium_low | 2/29 screenshots confirm visible public pricing; 8 partial paid-surface examples | Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require human sign-off/in-app inspection. |
 | H3_whitespace_exists | narrow_supported_not_final | medium | 1/100 strict behavior-tied progression signals; 9 Chrome mechanic references to inspect | Metadata can under-detect in-app mechanics; Chrome battlecards explicitly require screenshot/onboarding inspection for hidden identity metaphors. |
 | H4_competitive_advantage_plausible | plausible_unproven | medium_low | 1 direct reference competitor; 45 high-threat competitors; 23 Chrome mechanic battlecards | No human validation or prototype test yet proves users value the loop. |
 | H5_shared_audience_exists | directionally_supported | medium | 20492 audience signal rows; 6 ICP segment hypotheses; 36 ICP validation tests | Keyword/OCR/forum coding and directional ICP segments need human validation, interviews, and prototype tests. |
@@ -95,7 +96,7 @@ Claim-level audit snapshot:
 
 The repository now includes a package manifest for traceability. It is a reproducibility layer: it records key raw data, processed data, docs, reports, charts, PDFs, and generator scripts with row counts, source-reference coverage, sizes, and short hashes.
 
-Manifest snapshot: 155 artifacts; 31 CSV artifacts; 93153 tracked CSV rows; 0 missing required artifacts.
+Manifest snapshot: 159 artifacts; 33 CSV artifacts; 93187 tracked CSV rows; 0 missing required artifacts.
 
 Largest tracked CSV artifacts:
 
@@ -137,12 +138,12 @@ Objective readiness matrix:
 | REQ_01_MASTER_PLAN | proved_v1 | strong | master_plan=true; roadmap_rows=14 | Keep refreshing as validation results change. |
 | REQ_02_COMPETITOR_UNIVERSE | proved_scale_target | medium_high | dedup=12552; raw_core=17490; itch_rows=7047; steam_tag_rows=6258; known_raw_total=30795; itch_ok=6973; steam_tag_ok=6000; niches=5; source_kinds=4 | Below aspirational 30k-50k raw source/app target; desktop stores, Product Hunt/AlternativeTo, B2B directories, forums, and curated lists remain backlog. |
 | REQ_03_FIVE_MARKET_COVERAGE | proved_v1 | strong | expanded_markets=5; tam_rows=6; audience_rows=20492 | Gaming should remain benchmark-only unless direct consumer overlap is validated. |
-| REQ_04_MARKET_MONEY | supported_with_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70 | Market sizing remains range-based; actual revenue estimates and manual in-app paywall validation are needed for final investor-grade claims. |
+| REQ_04_MARKET_MONEY | supported_with_bottom_up_proxy_not_final | medium_high | tam_rows=6; source_confidence_rows=12; strong_paid_proxy_markets=4/5; competitor_revenue_proxy_rows=90; competitor_revenue_proxy_markets=5; strong_competitor_money_proxy=22; medium_plus_competitor_money_proxy=70; web_paywall_visual_rows=29; web_paywall_visual_confirmed=2; web_paywall_visual_partial=8 | Market sizing remains range-based; actual revenue estimates and manual in-app paywall validation are needed for final investor-grade claims. |
 | REQ_05_WHITESPACE | narrow_supported_not_final | medium | whitespace_rows=12552; high_ws=593; top100=100; behavior_tied=1 | Metadata can miss hidden in-app mechanics; manual app/onboarding validation is still required. |
 | REQ_06_AUDIENCE_ICP | directionally_supported_validation_ready | medium | audience_rows=20492; icp_segments=6; icp_validation_tests=36 | Segments are directional and need interviews/prototype/WTP validation. |
 | REQ_07_COMPETITIVE_ADVANTAGE | supported_for_mvp_framing_not_validated | medium | feature_rows=12552; primary_top100_apps=90; evidence_claims=12 | No prototype or user test proves the loop is understood/preferred. |
 | REQ_08_REPORT_PDF | draft_done_not_polished_final | medium_high | report_md=true; evidence_pdf=true; visual_pdf=true | PDF is draft evidence/reporting artifact, not final polished investor/user-facing publication. |
-| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=151; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
+| REQ_09_VERSIONING_PROVENANCE | proved_active | high | manifest_rows=155; missing_manifest=0; git_versioned=active | Manifest must be regenerated after future evidence changes. |
 | REQ_10_VALIDATION_GATES | proved_v1_open_gates | strong | roadmap_rows=14; p0=5; p1=9; human_confirmed=0 | Open P0 gates remain: manual competitor validation, paywall review, whitespace validation, competitive advantage prototype, ICP validation. |
 
 ## 2C. Validation Gap Roadmap
@@ -597,6 +598,45 @@ Strongest confirmed/weakening examples:
 | 5 | Nebula: Spiritual Guidance | high | needs_manual_review_high_signal_no_visible_price |  | output/paywall_screenshots/05-nebula-spiritual-guidance-high.png |
 | 23 | BetterMe: Health Coaching | medium | weakens_signal_not_found |  | output/paywall_screenshots/23-betterme-health-coaching-medium.png |
 | 27 | Co–Star Personalized Astrology | medium | weakens_signal_not_found |  | output/paywall_screenshots/27-co-star-personalized-astrology-medium.png |
+
+### Web Paywall Visual Adjudication
+
+The visual adjudication layer classifies 29 captured public website screenshots into conservative evidence buckets. It is not human sign-off and it does not inspect in-app paywalls; it decides what the public screenshot/OCR evidence can support today.
+
+Visual adjudication mix:
+
+- weak_or_unconfirmed_public_signal: 11
+- partial_paid_surface_language: 5
+- reject_or_weaken_public_page_signal: 3
+- login_gate_or_app_store_redirect: 3
+- visible_price_context_uncertain: 3
+- confirmed_visible_public_pricing: 2
+- manual_review_required_high_prior: 2
+
+Market-level adjudication read:
+
+| Market | Screenshots | Confirmed | Partial | Weakened | Manual/Login | Read |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| astrology_esoterics | 3 | 0 | 1 | 1 | 1 | mostly_unconfirmed_public_web_pricing |
+| avatar_identity | 7 | 1 | 4 | 0 | 0 | visible_public_pricing_confirmed_for_some_examples |
+| coaching | 1 | 0 | 0 | 1 | 0 | mostly_unconfirmed_public_web_pricing |
+| gaming | 12 | 0 | 2 | 1 | 1 | paid_surface_language_directional |
+| mindfulness | 6 | 1 | 1 | 0 | 3 | visible_public_pricing_confirmed_for_some_examples |
+
+Confirmed and partial public paid-surface examples:
+
+| Rank | App | Market | Adjudication | Price Evidence | Screenshot |
+| ---: | --- | --- | --- | --- | --- |
+| 2 | Character AI: Chat, Talk, Text | avatar_identity | confirmed_visible_public_pricing | $9.99/$94.99 | output/paywall_screenshots/02-character-ai-chat-talk-text-high.png |
+| 4 | Meditopia: Sleep & Meditation | mindfulness | confirmed_visible_public_pricing | $3.50 | output/paywall_screenshots/04-meditopia-sleep-meditation-high.png |
+| 8 | Carrom Pool: Disc Game | gaming | partial_paid_surface_language |  | output/paywall_screenshots/08-carrom-pool-disc-game-medium.png |
+| 13 | Avatar World ® | avatar_identity | partial_paid_surface_language |  | output/paywall_screenshots/13-avatar-world-medium.png |
+| 15 | AstroSage Kundli: AI Astrology | astrology_esoterics | partial_paid_surface_language |  | output/paywall_screenshots/15-astrosage-kundli-ai-astrology-medium.png |
+| 17 | NBA 2K Mobile Basketball Game | gaming | visible_price_context_uncertain | $20 | output/paywall_screenshots/17-nba-2k-mobile-basketball-game-medium.png |
+| 21 | Everskies: Virtual Dress up | avatar_identity | partial_paid_surface_language |  | output/paywall_screenshots/21-everskies-virtual-dress-up-medium.png |
+| 25 | Mindfulness with Petit BamBou | mindfulness | partial_paid_surface_language |  | output/paywall_screenshots/25-mindfulness-with-petit-bambou-medium.png |
+| 28 | Monster Girl Maker 2 | avatar_identity | visible_price_context_uncertain | $9 | output/paywall_screenshots/28-monster-girl-maker-2-medium.png |
+| 29 | Monster Girl Maker | avatar_identity | visible_price_context_uncertain | $9 | output/paywall_screenshots/29-monster-girl-maker-medium.png |
 
 ### Retention Signals
 

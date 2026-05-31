@@ -97,6 +97,7 @@ const marketConfidence = csv('data_processed/market_source_confidence_review.csv
 const monetizationProxy = csv('data_processed/market_monetization_proxy_matrix.csv');
 const competitorRevenueProxy = csv('data_processed/competitor_revenue_proxy_review.csv');
 const competitorRevenueProxySummary = csv('data_processed/competitor_revenue_proxy_market_summary.csv');
+const webPaywallVisualAdjudication = csv('data_processed/web_paywall_visual_adjudication.csv');
 const evidence = csv('data_processed/evidence_claim_register.csv');
 const roadmap = csv('data_processed/validation_gap_roadmap.csv');
 const manifest = csv('data_processed/evidence_artifact_manifest.csv');
@@ -113,6 +114,8 @@ const primaryApps = top100.filter(row => row.duplicate_flag === 'primary_app_ent
 const strongMoneyMarkets = monetizationProxy.filter(row => row.monetization_proxy_band === 'strong_paid_behavior_proxy').length;
 const strongRevenueProxyCompetitors = competitorRevenueProxy.filter(row => row.revenue_proxy_band === 'strong_bottom_up_money_proxy').length;
 const mediumPlusRevenueProxyCompetitors = competitorRevenueProxy.filter(row => ['strong_bottom_up_money_proxy', 'medium_bottom_up_money_proxy'].includes(row.revenue_proxy_band)).length;
+const confirmedWebPaywallVisuals = webPaywallVisualAdjudication.filter(row => row.visual_adjudication === 'confirmed_visible_public_pricing').length;
+const partialWebPaywallVisuals = webPaywallVisualAdjudication.filter(row => ['confirmed_paid_surface_no_clean_price', 'partial_paid_surface_language', 'visible_price_context_uncertain'].includes(row.visual_adjudication)).length;
 const itchOk = itchRows.filter(row => row.collection_status === 'ok');
 const steamTagOk = steamTagRows.filter(row => row.collection_status === 'ok');
 const expandedRawWithKnownExternal = expandedRaw.length + itchRows.length + steamTagRows.length;
@@ -157,8 +160,8 @@ const requirements = [
     objective_source: 'User asked for complex market evaluation formulas and open research source gathering.',
     status: tam.length && marketConfidence.length && monetizationProxy.length && competitorRevenueProxy.length ? 'supported_with_bottom_up_proxy_not_final' : 'missing',
     evidence_strength: competitorRevenueProxy.length ? 'medium_high' : 'medium',
-    proof: `tam_rows=${tam.length}; source_confidence_rows=${marketConfidence.length}; strong_paid_proxy_markets=${strongMoneyMarkets}/5; competitor_revenue_proxy_rows=${competitorRevenueProxy.length}; competitor_revenue_proxy_markets=${competitorRevenueProxySummary.length}; strong_competitor_money_proxy=${strongRevenueProxyCompetitors}; medium_plus_competitor_money_proxy=${mediumPlusRevenueProxyCompetitors}`,
-    evidence_files: 'docs/market/market-sizing-methodology.md;data_processed/tam_sam_som_model.csv;data_processed/market_source_confidence_review.csv;data_processed/market_monetization_proxy_matrix.csv;data_processed/competitor_revenue_proxy_review.csv;data_processed/competitor_revenue_proxy_market_summary.csv;docs/market/tam-sam-som-model-v1.md;docs/market/competitor-revenue-proxy-review-v1.md',
+    proof: `tam_rows=${tam.length}; source_confidence_rows=${marketConfidence.length}; strong_paid_proxy_markets=${strongMoneyMarkets}/5; competitor_revenue_proxy_rows=${competitorRevenueProxy.length}; competitor_revenue_proxy_markets=${competitorRevenueProxySummary.length}; strong_competitor_money_proxy=${strongRevenueProxyCompetitors}; medium_plus_competitor_money_proxy=${mediumPlusRevenueProxyCompetitors}; web_paywall_visual_rows=${webPaywallVisualAdjudication.length}; web_paywall_visual_confirmed=${confirmedWebPaywallVisuals}; web_paywall_visual_partial=${partialWebPaywallVisuals}`,
+    evidence_files: 'docs/market/market-sizing-methodology.md;data_processed/tam_sam_som_model.csv;data_processed/market_source_confidence_review.csv;data_processed/market_monetization_proxy_matrix.csv;data_processed/competitor_revenue_proxy_review.csv;data_processed/competitor_revenue_proxy_market_summary.csv;data_processed/web_paywall_visual_adjudication.csv;docs/market/tam-sam-som-model-v1.md;docs/market/competitor-revenue-proxy-review-v1.md;docs/competitive/web-paywall-visual-adjudication-v1.md',
     remaining_gap: 'Market sizing remains range-based; actual revenue estimates and manual in-app paywall validation are needed for final investor-grade claims.',
     next_action: 'Manually validate the highest competitor money proxies and add paid/credible revenue intelligence where available.'
   },

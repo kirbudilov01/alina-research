@@ -99,6 +99,8 @@ const googlePlay = csv('data_raw/google_play_pricing_raw.csv');
 const webPaywalls = csv('data_processed/web_paywall_signal_matrix.csv');
 const screenshots = csv('data_processed/web_paywall_screenshot_validation.csv');
 const screenshotInterpretation = csv('data_processed/web_paywall_screenshot_interpretation.csv');
+const webPaywallVisualAdjudication = csv('data_processed/web_paywall_visual_adjudication.csv');
+const webPaywallVisualAdjudicationSummary = csv('data_processed/web_paywall_visual_adjudication_summary.csv');
 const reviews = csv('data_raw/app_store_top_candidate_reviews.csv');
 const reviewSignals = csv('data_processed/review_signal_matrix.csv');
 const reviewClusters = csv('data_processed/review_jtbd_cluster_summary.csv');
@@ -130,6 +132,9 @@ const googleOk = googlePlay.filter(row => row.collection_status === 'ok');
 const appsWithIap = new Set(iap.map(row => row.app_store_id).filter(Boolean)).size;
 const webConfirmedPricing = screenshotInterpretation.filter(row => row.screenshot_interpretation_verdict === 'confirms_public_pricing_signal');
 const webWeakens = screenshotInterpretation.filter(row => row.screenshot_interpretation_verdict === 'weakens_signal_not_found');
+const webVisualConfirmed = webPaywallVisualAdjudication.filter(row => row.visual_adjudication === 'confirmed_visible_public_pricing');
+const webVisualPartial = webPaywallVisualAdjudication.filter(row => ['confirmed_paid_surface_no_clean_price', 'partial_paid_surface_language', 'visible_price_context_uncertain'].includes(row.visual_adjudication));
+const webVisualWeakened = webPaywallVisualAdjudication.filter(row => row.visual_adjudication === 'reject_or_weaken_public_page_signal');
 const p0 = validationQueue.filter(row => row.priority_band === 'P0_validate_first');
 const p1 = validationQueue.filter(row => row.priority_band === 'P1_high');
 const reviewApps = new Set(reviews.map(row => row.app_store_id).filter(Boolean)).size;
@@ -231,14 +236,14 @@ const rows = [
     claim_id: 'H2_paywall_visible_evidence',
     claim_type: 'pricing_subclaim',
     claim: 'Some adjacent products expose public web paywall/pricing signals outside app stores.',
-    evidence_status: 'supported_narrowly',
+    evidence_status: 'supported_narrowly_with_visual_adjudication',
     confidence: 'medium_low',
-    primary_metric: `${webConfirmedPricing.length}/${screenshotInterpretation.length} screenshots confirm visible public pricing`,
-    quantitative_evidence: `web_domains=${webPaywalls.length}; screenshot_captured=${screenshots.filter(row => row.screenshot_status === 'captured').length}; weakens_signal=${webWeakens.length}`,
-    evidence_files: 'data_processed/web_paywall_signal_matrix.csv;data_processed/web_paywall_screenshot_validation.csv;data_processed/web_paywall_screenshot_interpretation.csv;docs/competitive/web-paywall-screenshot-interpretation-v1.md;output/paywall_screenshots/*.png',
-    strongest_support: 'Character.ai and Meditopia screenshots/OCR confirm visible price signals.',
-    key_gap: 'Most web signals are ambiguous, not found, parent-company pages, or require human interpretation.',
-    next_action: 'Human-review screenshot queue and classify confirm/partial/reject with notes.'
+    primary_metric: `${webVisualConfirmed.length}/${webPaywallVisualAdjudication.length} screenshots confirm visible public pricing; ${webVisualPartial.length} partial paid-surface examples`,
+    quantitative_evidence: `web_domains=${webPaywalls.length}; screenshot_captured=${screenshots.filter(row => row.screenshot_status === 'captured').length}; ocr_confirmed=${webConfirmedPricing.length}; visual_adjudication_rows=${webPaywallVisualAdjudication.length}; visual_summary_markets=${webPaywallVisualAdjudicationSummary.length}; visual_confirmed=${webVisualConfirmed.length}; visual_partial=${webVisualPartial.length}; visual_weakened=${webVisualWeakened.length}; weakens_signal=${webWeakens.length}`,
+    evidence_files: 'data_processed/web_paywall_signal_matrix.csv;data_processed/web_paywall_screenshot_validation.csv;data_processed/web_paywall_screenshot_interpretation.csv;data_processed/web_paywall_visual_adjudication.csv;data_processed/web_paywall_visual_adjudication_summary.csv;docs/competitive/web-paywall-screenshot-interpretation-v1.md;docs/competitive/web-paywall-visual-adjudication-v1.md;output/paywall_screenshots/*.png',
+    strongest_support: 'Character.ai and Meditopia screenshots/OCR confirm visible price signals; additional public pages partially confirm paid-surface language or uncertain visible price context.',
+    key_gap: 'Most web signals remain ambiguous, not found, parent-company pages, login-gated, or require human sign-off/in-app inspection.',
+    next_action: 'Human-signoff the adjudication queue and inspect in-app paywall flows for the highest competitor revenue proxies.'
   },
   {
     claim_id: 'H3_whitespace_exists',
