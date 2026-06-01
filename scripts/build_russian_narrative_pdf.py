@@ -70,6 +70,11 @@ DOCUMENTS = [
         OUTPUT_DIR / "AURA_PRD_SPRINT_BACKLOG_V1.pdf",
         "AURA PRD / Sprint Backlog v1",
     ),
+    (
+        ROOT / "reports" / "aura-master-book-v1.md",
+        OUTPUT_DIR / "AURA_MASTER_BOOK_V1.pdf",
+        "AURA Master Book v1",
+    ),
 ]
 
 
@@ -233,6 +238,12 @@ def build_story(markdown: str):
         line = lines[i].rstrip()
         if not line:
             flush_bullets()
+            i += 1
+            continue
+
+        if line.strip() == "<!-- PAGEBREAK -->":
+            flush_bullets()
+            story.append(PageBreak())
             i += 1
             continue
 
