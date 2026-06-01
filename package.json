@@ -72,6 +72,7 @@
     "build:aura-gtm-plan": "node scripts/build_aura_gtm_plan.mjs",
     "build:aura-prd-sprint-backlog": "node scripts/build_aura_prd_sprint_backlog.mjs",
     "build:aura-master-book": "node scripts/build_aura_master_book.mjs",
+    "build:aura-25-slide-deck": "node scripts/build_aura_25_slide_deck.mjs",
     "build:global-hypothesis-docx": "python3 scripts/build_alina_global_hypothesis_docx.py",
     "build:ru-pdf": "python3 scripts/build_russian_narrative_pdf.py",
     "build:visual-pdf": "python3 scripts/build_visual_pdf_report.py",
