@@ -2007,6 +2007,130 @@ lines.push(mdTable([
   { key: 'risk', label: 'Главный риск' }
 ]));
 lines.push('');
+lines.push('### Что технически нужно подключать для avatar и Life Series');
+lines.push('');
+lines.push('Если сопоставить техническую часть с продуктовой идеей, АУРА не должна начинаться с самого дорогого “живого видеоаватара”. Техническая логика должна идти ступенями: сначала собрать работающую ежедневную петлю, затем добавить визуальный future-self образ, потом микропрогресс avatar, и только после этого проверять premium video-avatar как дорогой вау-слой. Иначе продукт рискует потратить бюджет на генерацию роликов до того, как доказал, что пользователь вообще хочет возвращаться в “сериал о себе”.');
+lines.push('');
+lines.push(mdTable([
+  {
+    block: '1. Профиль и смысловой вход',
+    job: 'Дата рождения, имя, запрос дня, состояние, выбранная тема сезона.',
+    services: 'Backend и база: Supabase/Firebase; LLM-слой для интерпретаций и safety-фильтров.',
+    mvp: 'Обязательно в MVP.',
+    risk: 'Нельзя хранить чувствительные данные без явного согласия и понятной privacy-логики.'
+  },
+  {
+    block: '2. Сценарий эпизода',
+    job: 'Сформировать серию дня: тема, конфликт, мягкий смысл, одно действие, короткий reset.',
+    services: 'LLM orchestration + prompt/version storage + moderation/safety rules.',
+    mvp: 'Обязательно в MVP.',
+    risk: 'Если генерация звучит как гадание или диагноз, доверие падает.'
+  },
+  {
+    block: '3. Static / layered avatar',
+    job: 'Показать героя/future-self без дорогого видео: образ, свет, состояние, предметы, черты.',
+    services: 'Image generation API или шаблонный avatar-builder; хранение ассетов в storage/CDN.',
+    mvp: 'Лучший первый визуальный слой.',
+    risk: 'Если avatar не связан с действием, он становится косметикой.'
+  },
+  {
+    block: '4. Микроизменения avatar',
+    job: 'После действия менять не весь avatar, а черту: свет, позу, аксессуар, фон, карточку эпизода.',
+    services: 'Template engine + image generation по лимиту + rules engine “действие -> изменение”.',
+    mvp: 'Желательно в MVP или сразу после него.',
+    risk: 'Нужна объяснимая причинность, иначе пользователь не поймет, почему образ изменился.'
+  },
+  {
+    block: '5. Voice / narration',
+    job: 'Озвучить эпизод, reset или обращение future-self.',
+    services: 'TTS API, например ElevenLabs или аналог; аудио-кэширование.',
+    mvp: 'Не обязательно, но может усилить эмоциональность.',
+    risk: 'Голос повышает стоимость и требования к качеству; плохой voice ломает ощущение премиальности.'
+  },
+  {
+    block: '6. Video-avatar / living avatar',
+    job: 'Сделать ролики “лучшая версия себя”, трейлер сезона, special episode или talking avatar.',
+    services: 'HeyGen / D-ID / Tavus для avatar-video; Runway или похожие video generation API для cinematic-сцен.',
+    mvp: 'Не ставить в ежедневную бесплатную норму; тестировать как premium.',
+    risk: 'Самый дорогой слой: себестоимость, latency, retries, права на лицо/образ и consent.'
+  },
+  {
+    block: '7. Память сериала и аналитика',
+    job: 'Хранить эпизоды, действия, состояния avatar, возврат, paywall, понимание причинности.',
+    services: 'Postgres/Supabase, object storage, event analytics, A/B flags.',
+    mvp: 'Обязательно с первой версии.',
+    risk: 'Без аналитики невозможно понять, где ломается петля: смысл, действие, reset или avatar.'
+  }
+], [
+  { key: 'block', label: 'Технический блок' },
+  { key: 'job', label: 'Что делает' },
+  { key: 'services', label: 'Что подключать' },
+  { key: 'mvp', label: 'Роль в MVP' },
+  { key: 'risk', label: 'Главный риск' }
+]));
+lines.push('');
+lines.push('Практическая рекомендация: первая техническая версия должна быть дешевой, но эмоционально понятной. То есть текстовый эпизод, одно действие, reset, статичный или слоистый avatar, память эпизодов и базовая аналитика. Видео-avatar лучше вынести в отдельный paid/premium эксперимент: например, пользователь получает один бесплатный “трейлер сезона” после нескольких завершенных эпизодов, а дальше платит токенами или подпиской за редкие special episodes. Это лучше соответствует экономике и не убивает маржу ежедневной петли.');
+lines.push('');
+lines.push('Ниже не финальный выбор подрядчиков, а карта подключаемых сервисов для MVP и следующих итераций. Цены, лимиты, latency и правила consent у таких API меняются, поэтому перед финмоделью и ТЗ их нужно перепроверять по официальным страницам и считать на конкретных сценариях: сколько текстовых эпизодов, сколько image/avatar генераций, сколько секунд видео и сколько retries на одного пользователя.');
+lines.push('');
+lines.push(mdTable([
+  {
+    source: 'OpenAI Image Generation API',
+    use: 'Генерация и редактирование image/avatar cards, визуальных карточек эпизода, future-self образов.',
+    note: 'Подходит для image-first MVP; цену считать по качеству, размеру и количеству генераций.',
+    url: 'https://openai.com/index/image-generation-api/'
+  },
+  {
+    source: 'Replicate',
+    use: 'Доступ к разным image/video/open-source моделям через API и pay-as-you-go эксперименты.',
+    note: 'Удобно для прототипирования и сравнения моделей без жесткой привязки к одному поставщику.',
+    url: 'https://replicate.com/pricing'
+  },
+  {
+    source: 'HeyGen API',
+    use: 'Avatar video, talking avatar, digital twin / instant avatar сценарии.',
+    note: 'Смотреть как premium-видеослой, не как ежедневную бесплатную механику.',
+    url: 'https://developers.heygen.com/docs/pricing'
+  },
+  {
+    source: 'D-ID API',
+    use: 'Talking avatars / agents / video presenter сценарии.',
+    note: 'Нужна отдельная проверка pricing, consent, качества и ограничений по образу.',
+    url: 'https://help.d-id.com/hc/en-us/articles/31262544439697-Is-there-an-API-that-I-can-use-to-create-Agents'
+  },
+  {
+    source: 'Tavus API',
+    use: 'Conversational video interface и AI-replica сценарии.',
+    note: 'Больше подходит для дорогого human-like слоя или future-self conversation, чем для простого MVP.',
+    url: 'https://docs.tavus.io/api-reference'
+  },
+  {
+    source: 'Runway API',
+    use: 'Кинематографичная video generation, трейлеры сезонов, visual episodes.',
+    note: 'Считать по секундам/credits; использовать для редких вау-моментов.',
+    url: 'https://docs.dev.runwayml.com/guides/pricing'
+  },
+  {
+    source: 'ElevenLabs API',
+    use: 'Text-to-speech, voice narration, эмоциональный voice reset.',
+    note: 'Добавлять после проверки текстовой петли; голос повышает стоимость и ожидание качества.',
+    url: 'https://elevenlabs.io/docs/overview/intro'
+  },
+  {
+    source: 'Supabase',
+    use: 'Auth, Postgres, storage, edge functions, база эпизодов и состояния avatar.',
+    note: 'Подходит как быстрый backend для MVP, но нужно считать MAU/storage/egress.',
+    url: 'https://supabase.com/pricing'
+  }
+], [
+  { key: 'source', label: 'Сервис / источник' },
+  { key: 'use', label: 'Как может использоваться в АУРЕ' },
+  { key: 'note', label: 'Как читать для решения' },
+  { key: 'url', label: 'Источник' }
+]));
+lines.push('');
+lines.push('Технический вывод: реализуемость высокая, если не начинать с полностью видеоцентричного продукта. Самый здоровый порядок такой: сначала mobile/web MVP с текстом, действиями, reset и слоистым avatar; затем image/avatar generation по лимитам; затем voice; затем редкий premium video-avatar. Так продукт остается проверяемым, экономика - управляемой, а центральная идея “сериал о себе” не зависит от самого дорогого провайдера.');
+lines.push('');
 lines.push('### Монетизация: что проверять у конкурентов');
 lines.push('');
 lines.push('Монетизацию АУРЫ нельзя выбирать только из вкуса команды. Ее нужно вывести из конкурентов и себестоимости. В соседних рынках уже видны подписки, встроенные покупки, пробные периоды, годовые планы, кредиты/токены и premium-пакеты. Рабочее решение на сейчас: базовая ежедневная петля должна быстро давать ценность бесплатно или через пробный период, а платная часть должна продавать глубину: историю сезона, расширенный avatar, больше визуальных моментов, персональные ритуалы, архив эпизодов, premium-интерпретации и редкие видео- или avatar-генерации.');
