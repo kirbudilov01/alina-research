@@ -2071,65 +2071,289 @@ lines.push(mdTable([
 lines.push('');
 lines.push('Практическая рекомендация: первая техническая версия должна быть дешевой, но эмоционально понятной. То есть текстовый эпизод, одно действие, reset, статичный или слоистый avatar, память эпизодов и базовая аналитика. Видео-avatar лучше вынести в отдельный paid/premium эксперимент: например, пользователь получает один бесплатный “трейлер сезона” после нескольких завершенных эпизодов, а дальше платит токенами или подпиской за редкие special episodes. Это лучше соответствует экономике и не убивает маржу ежедневной петли.');
 lines.push('');
-lines.push('Ниже не финальный выбор подрядчиков, а карта подключаемых сервисов для MVP и следующих итераций. Цены, лимиты, latency и правила consent у таких API меняются, поэтому перед финмоделью и ТЗ их нужно перепроверять по официальным страницам и считать на конкретных сценариях: сколько текстовых эпизодов, сколько image/avatar генераций, сколько секунд видео и сколько retries на одного пользователя.');
+lines.push('Ниже не финальный выбор подрядчиков, а расширенная карта подключаемых сервисов для MVP и следующих итераций. Здесь важно мыслить не “какой один сервис выбрать”, а “какой стек даст нам управляемую себестоимость и нужный эмоциональный эффект”. Цены, лимиты, latency и правила consent у таких API меняются, поэтому перед финмоделью и ТЗ их нужно перепроверять по официальным страницам и считать на конкретных сценариях: сколько текстовых эпизодов, сколько image/avatar генераций, сколько секунд видео, сколько voice-over и сколько retries на одного пользователя.');
 lines.push('');
 lines.push(mdTable([
   {
+    type: 'Image/API',
     source: 'OpenAI Image Generation API',
     use: 'Генерация и редактирование image/avatar cards, визуальных карточек эпизода, future-self образов.',
-    note: 'Подходит для image-first MVP; цену считать по качеству, размеру и количеству генераций.',
+    price: 'Считать по модели, качеству, размеру и числу изображений.',
+    note: 'Подходит для image-first MVP: быстро проверить, цепляет ли пользователя “образ себя”.',
     url: 'https://openai.com/index/image-generation-api/'
   },
   {
+    type: 'Model marketplace',
     source: 'Replicate',
     use: 'Доступ к разным image/video/open-source моделям через API и pay-as-you-go эксперименты.',
+    price: 'Pay-as-you-go по времени работы модели/GPU.',
     note: 'Удобно для прототипирования и сравнения моделей без жесткой привязки к одному поставщику.',
     url: 'https://replicate.com/pricing'
   },
   {
+    type: 'Image/video API',
+    source: 'Stability AI API',
+    use: 'Быстрая генерация visual cards, стилизация, image-to-image, отдельные video-эксперименты.',
+    price: 'Кредитная модель; Stable Image Core указан как 3 credits за генерацию.',
+    note: 'Хороший кандидат для недорогих визуальных карточек и проверки альтернатив к OpenAI/Replicate.',
+    url: 'https://platform.stability.ai/pricing'
+  },
+  {
+    type: 'Video API',
+    source: 'Runway API',
+    use: 'Кинематографичная video generation, трейлеры сезонов, visual episodes.',
+    price: 'Кредитная модель; пример API billing: 5s video около $0.25 по указанной таблице.',
+    note: 'Использовать для редких вау-моментов, а не для ежедневной бесплатной нормы.',
+    url: 'https://docs.dev.runwayml.com/usage/billing/'
+  },
+  {
+    type: 'Video/API',
+    source: 'Luma Dream Machine / Ray',
+    use: 'Text-to-video и image-to-video для коротких “сцен жизни”, mood-трейлеров и visual episodes.',
+    price: 'Кредитная модель по секундам видео; тарифы Plus/Pro/Ultra начинаются с $30/$90/$300 в месяц.',
+    note: 'Смотреть как cinematic-слой рядом с Runway/Kling, особенно для image-to-video экспериментов.',
+    url: 'https://lumalabs.ai/pricing'
+  },
+  {
+    type: 'Avatar video API',
     source: 'HeyGen API',
     use: 'Avatar video, talking avatar, digital twin / instant avatar сценарии.',
-    note: 'Смотреть как premium-видеослой, не как ежедневную бесплатную механику.',
-    url: 'https://developers.heygen.com/docs/pricing'
+    price: 'Pay-as-you-go: стандартный Avatar III около $1/min, Avatar IV до $3-5/min, Video Agent около $2/min.',
+    note: 'Сильный кандидат для premium-видеослоя; custom digital twin и режимы вычитки требуют enterprise-проверки.',
+    url: 'https://help.heygen.com/en/articles/10060327-heygen-api-pricing-explained'
   },
   {
+    type: 'Avatar video API',
     source: 'D-ID API',
     use: 'Talking avatars / agents / video presenter сценарии.',
-    note: 'Нужна отдельная проверка pricing, consent, качества и ограничений по образу.',
-    url: 'https://help.d-id.com/hc/en-us/articles/31262544439697-Is-there-an-API-that-I-can-use-to-create-Agents'
+    price: 'Планы от trial до paid; trial дает ограниченные минуты video/streaming, далее кредиты/планы.',
+    note: 'Проверять для talking portrait и agent-слоя; важно смотреть watermark, лицензию и права на персональный avatar.',
+    url: 'https://www.d-id.com/pricing/api/'
   },
   {
+    type: 'Conversational avatar API',
     source: 'Tavus API',
     use: 'Conversational video interface и AI-replica сценарии.',
-    note: 'Больше подходит для дорогого human-like слоя или future-self conversation, чем для простого MVP.',
+    price: 'API/pricing требует отдельной коммерческой проверки по выбранному сценарию.',
+    note: 'Больше подходит для дорогого future-self conversation, чем для простого MVP.',
     url: 'https://docs.tavus.io/api-reference'
   },
   {
-    source: 'Runway API',
-    use: 'Кинематографичная video generation, трейлеры сезонов, visual episodes.',
-    note: 'Считать по секундам/credits; использовать для редких вау-моментов.',
-    url: 'https://docs.dev.runwayml.com/guides/pricing'
+    type: 'Avatar video platform',
+    source: 'Synthesia',
+    use: 'AI-presenter videos, avatars, dubbing, personal avatars, API access на старших планах.',
+    price: 'Планы от ~$29/month; API access указан на Creator/выше, enterprise - custom.',
+    note: 'Скорее B2B/training-style benchmark, полезен для понимания качества avatar-presenter рынка.',
+    url: 'https://www.synthesia.io/pricing'
   },
   {
+    type: 'Avatar video platform/API',
+    source: 'Colossyan',
+    use: 'AI avatars, custom avatars, AI voices, auto-translation, API для автоматизации видео.',
+    price: 'Starter около $27/month с 15 min/month; Business около $88/month, API included/add-on по плану.',
+    note: 'Полезен как benchmark “аватар + обучение + сценарии”, но для АУРЫ может быть слишком корпоративным.',
+    url: 'https://www.colossyan.com/pricing'
+  },
+  {
+    type: 'Avatar video platform/API',
+    source: 'Elai',
+    use: 'Avatar-presenter, talking photo, video slides, API integration.',
+    price: 'Free/basic/advanced; Basic около $23/month annually, Advanced около $59/user/month annually.',
+    note: 'Смотреть как быстрый benchmark talking-avatar без сложной cinematic-части.',
+    url: 'https://elai.io/pricing/'
+  },
+  {
+    type: 'Enterprise avatar API',
+    source: 'Hour One',
+    use: 'Automated avatar video production at scale через enterprise API.',
+    price: 'API доступен enterprise-пользователям; цена обычно custom.',
+    note: 'Не MVP-провайдер, но важен как ориентир верхнего B2B-слоя рынка.',
+    url: 'https://helpcenter.hourone.ai/knowledge/api'
+  },
+  {
+    type: 'Interactive avatar',
+    source: 'DeepBrain AI / AI Studios',
+    use: 'Interactive avatar, AI video generator, dubbing, talking avatar, enterprise deployment.',
+    price: 'Interactive avatar: add-on slots около $49/slot/month; conversation usage примерно $0.2-0.5/min по модели.',
+    note: 'Интересен для future-self conversation, но требует жесткого контроля стоимости минут разговора.',
+    url: 'https://help.aistudios.com/en/articles/14683575-how-does-interactive-avatar-pricing-work'
+  },
+  {
+    type: 'Avatar/API',
+    source: 'AKOOL API',
+    use: 'Streaming avatar, talking avatar, talking photo, lipsync, face swap, voice generator.',
+    price: 'Кредитная сетка: talking avatar 1080p 5 credits/10s, 4K 10 credits/10s; streaming avatar 1-1.2 credits/10s.',
+    note: 'Хороший кандидат для тестов talking/streaming avatar, но нужно понять цену одного credit и качество.',
+    url: 'https://akool.com/ja-jp/api-pricing'
+  },
+  {
+    type: 'Avatar/ad video API',
+    source: 'Creatify API',
+    use: 'AI Avatar, URL-to-video, product videos, AI shorts, ad clone.',
+    price: 'API Starter $99/month за 500 credits; AI Avatar 5 credits/30s; Aurora 0.5-1 credit/sec.',
+    note: 'Больше ad/UGC-инструмент; полезен для маркетинговых avatar-роликов и performance-креативов.',
+    url: 'https://docs.creatify.ai/billing'
+  },
+  {
+    type: 'Voice API',
     source: 'ElevenLabs API',
     use: 'Text-to-speech, voice narration, эмоциональный voice reset.',
+    price: 'Считать по плану, символам/минутам и требованиям к voice clone.',
     note: 'Добавлять после проверки текстовой петли; голос повышает стоимость и ожидание качества.',
     url: 'https://elevenlabs.io/docs/overview/intro'
   },
   {
+    type: 'Voice/STT API',
+    source: 'Cartesia',
+    use: 'TTS/STT и голосовые agent-сценарии, если АУРА пойдет в аудио/разговорный режим.',
+    price: 'Кредитная модель; STT указан как credits per second, voice-agent минуты считаются отдельно.',
+    note: 'Резервный вариант для voice-first механик и быстрых low-latency сценариев.',
+    url: 'https://cartesia.ai/pricing'
+  },
+  {
+    type: 'Backend',
     source: 'Supabase',
     use: 'Auth, Postgres, storage, edge functions, база эпизодов и состояния avatar.',
+    price: 'Планы и usage по MAU/storage/egress/functions.',
     note: 'Подходит как быстрый backend для MVP, но нужно считать MAU/storage/egress.',
     url: 'https://supabase.com/pricing'
+  },
+  {
+    type: 'Backend',
+    source: 'Firebase',
+    use: 'Auth, analytics, remote config, push notifications, mobile backend.',
+    price: 'Spark/Blaze; usage-based pricing для Firebase/Google Cloud ресурсов.',
+    note: 'Альтернатива Supabase, особенно если делать mobile-first и быстро включать аналитику/remote config.',
+    url: 'https://firebase.google.com/pricing'
+  },
+  {
+    type: 'Payments',
+    source: 'RevenueCat',
+    use: 'Подписки, paywalls, entitlement logic, App Store/Google Play billing, A/B paywall tests.',
+    price: 'Считать по revenue/MAU и выбранному плану.',
+    note: 'Практически обязательный кандидат для мобильной подписочной модели, чтобы не писать billing-логику с нуля.',
+    url: 'https://www.revenuecat.com/pricing/'
+  },
+  {
+    type: 'Analytics',
+    source: 'PostHog',
+    use: 'Product analytics, funnels, feature flags, session replay, experiments.',
+    price: 'Usage-based по events/session replay/features.',
+    note: 'Нужен для проверки, где ломается петля: onboarding, первый avatar, действие, reset, paywall.',
+    url: 'https://posthog.com/pricing'
   }
 ], [
+  { key: 'type', label: 'Тип' },
   { key: 'source', label: 'Сервис / источник' },
   { key: 'use', label: 'Как может использоваться в АУРЕ' },
+  { key: 'price', label: 'Цена / единица для проверки' },
   { key: 'note', label: 'Как читать для решения' },
   { key: 'url', label: 'Источник' }
 ]));
 lines.push('');
-lines.push('Технический вывод: реализуемость высокая, если не начинать с полностью видеоцентричного продукта. Самый здоровый порядок такой: сначала mobile/web MVP с текстом, действиями, reset и слоистым avatar; затем image/avatar generation по лимитам; затем voice; затем редкий premium video-avatar. Так продукт остается проверяемым, экономика - управляемой, а центральная идея “сериал о себе” не зависит от самого дорогого провайдера.');
+lines.push('Отдельно нужно рассмотреть локальный/open-source слой. Он не заменяет hosted API в первом прототипе, потому что требует GPU, MLOps, очередей, мониторинга качества, прав на модели и инженеров, которые будут чинить пайплайн. Но он важен стратегически: если у АУРЫ выстрелит регулярная визуальная петля, локальные модели могут снизить переменную себестоимость, дать больше контроля над стилем и убрать зависимость от одного avatar-провайдера.');
+lines.push('');
+lines.push(mdTable([
+  {
+    model: 'ComfyUI',
+    job: 'Оркестрация локальных visual workflows: image, image-to-image, animation nodes, batch generation.',
+    role: 'Лаборатория для сборки пайплайна “future-self card -> micro-animation -> video variation”.',
+    cost: 'Нет оплаты за API-вызов, но нужны GPU/серверы, настройка, обновления, хранение и QA.',
+    risk: 'Высокая сложность поддержки; custom nodes могут ломаться после обновлений.',
+    url: 'https://github.com/comfy-org/ComfyUI'
+  },
+  {
+    model: 'FLUX.1 / Stable Diffusion family',
+    job: 'Статичные avatar cards, стили, mood-образы, “я в другой жизни”, сезонные visual states.',
+    role: 'Кандидат для дешевого image-first слоя после доказательства спроса.',
+    cost: 'Переменная стоимость уходит в GPU-время; лицензии и коммерческие условия проверять по конкретной модели.',
+    risk: 'Нужны LoRA/style control, prompt QA и safety-фильтры, иначе образ будет нестабильным.',
+    url: 'https://huggingface.co/black-forest-labs/FLUX.1-schnell'
+  },
+  {
+    model: 'LivePortrait',
+    job: 'Оживление портрета по driving video / motion template, мимика и движение головы.',
+    role: 'Хороший локальный кандидат для “живого” future-self без полного text-to-video.',
+    cost: 'GPU-инференс + подготовка исходных портретов; на Apple Silicon может быть существенно медленнее, чем на RTX.',
+    risk: 'Нужны consent, стабильная фронтальная фотография, контроль похожести и защита от deepfake-рисков.',
+    url: 'https://github.com/KlingAIResearch/LivePortrait'
+  },
+  {
+    model: 'SadTalker',
+    job: 'Talking head video из одного портрета и аудио.',
+    role: 'Прототип для “avatar говорит со мной” без покупки дорогого API на каждой итерации.',
+    cost: 'Локальный GPU-инференс; Apache 2.0 у репозитория, но все равно проверять веса/зависимости/коммерческое использование.',
+    risk: 'Качество может выглядеть менее premium, чем у hosted avatar-сервисов; нужен human QA.',
+    url: 'https://github.com/OpenTalker/SadTalker'
+  },
+  {
+    model: 'Wav2Lip',
+    job: 'Lip-sync для уже готового видео/лица по аудиодорожке.',
+    role: 'Инструментальный модуль, если нужно синхронизировать рот, а не генерировать весь avatar.',
+    cost: 'Локальный инференс; стоимость - GPU и поддержка окружения.',
+    risk: 'Не решает мимику/эмоцию целиком; может давать механический lip-sync.',
+    url: 'https://github.com/Rudrabha/Wav2Lip'
+  },
+  {
+    model: 'MuseTalk',
+    job: 'Real-time/high-quality lip synchronization через latent-space inpainting.',
+    role: 'Кандидат для более качественного talking-face слоя после базовой проверки работоспособности.',
+    cost: 'GPU-инференс и интеграция; нужно тестировать latency и стабильность на пользовательских лицах.',
+    risk: 'Research/open-source слой: до production нужен отдельный техаудит качества, лицензий и воспроизводимости.',
+    url: 'https://github.com/TMElyralab/MuseTalk'
+  },
+  {
+    model: 'AnimateDiff / video diffusion workflows',
+    job: 'Короткие стилизованные движения, atmospheric scenes, animated episode cards.',
+    role: 'Может дать не “говорящую голову”, а более красивый сериализованный visual mood.',
+    cost: 'GPU-время и настройка ComfyUI-workflows.',
+    risk: 'Сложнее держать постоянство лица/персонажа; подходит для mood-сцен, но не для identity-heavy avatar.',
+    url: 'https://github.com/guoyww/AnimateDiff'
+  }
+], [
+  { key: 'model', label: 'Локальная модель / слой' },
+  { key: 'job', label: 'Что делает' },
+  { key: 'role', label: 'Роль для АУРЫ' },
+  { key: 'cost', label: 'Экономика' },
+  { key: 'risk', label: 'Риск' },
+  { key: 'url', label: 'Источник' }
+]));
+lines.push('');
+lines.push('Из этого получается не один стек, а три реалистичных технических маршрута. Маршрут A - быстрый hosted MVP: OpenAI/Stability/Replicate для картинок, Supabase/Firebase для backend, RevenueCat для подписок, PostHog для аналитики. Маршрут B - гибрид: ежедневная петля остается дешевой, а HeyGen/D-ID/AKOOL/Creatify/Runway/Luma включаются только для premium-эпизодов. Маршрут C - локальная визуальная лаборатория: ComfyUI + FLUX/Stable Diffusion + LivePortrait/SadTalker/Wav2Lip/MuseTalk, когда уже понятно, какие визуальные моменты реально удерживают пользователя и какие нужно удешевлять.');
+lines.push('');
+lines.push(mdTable([
+  {
+    stage: 'MVP 0: доказать петлю',
+    stack: 'Backend, LLM-сценарии, static/layered avatar, analytics, paywall foundation.',
+    services: 'Supabase/Firebase, OpenAI Image/Stability/Replicate, RevenueCat, PostHog.',
+    decision: 'Проверяем: человек понимает “сериал о себе”, возвращается и завершает действия.'
+  },
+  {
+    stage: 'MVP 1: усилить образ',
+    stack: 'Периодические future-self cards, сезонные изменения, avatar progress, voice reset.',
+    services: 'Image API + ElevenLabs/Cartesia + storage/CDN.',
+    decision: 'Проверяем: визуальный образ повышает retention и willingness to pay.'
+  },
+  {
+    stage: 'MVP 2: premium video',
+    stack: 'Редкие трейлеры сезона, talking avatar, “лучшая версия себя” в видео.',
+    services: 'HeyGen, D-ID, AKOOL, Creatify, Runway, Luma, Tavus.',
+    decision: 'Проверяем: пользователь готов платить отдельно за дорогой вау-слой.'
+  },
+  {
+    stage: 'Scale: снижать себестоимость',
+    stack: 'Локальные workflows, batch generation, style control, QA и moderation.',
+    services: 'ComfyUI, FLUX/Stable Diffusion, LivePortrait, SadTalker, Wav2Lip, MuseTalk.',
+    decision: 'Переходим сюда только после того, как доказаны сценарии, частота и платность.'
+  }
+], [
+  { key: 'stage', label: 'Этап' },
+  { key: 'stack', label: 'Что собираем' },
+  { key: 'services', label: 'Кандидаты' },
+  { key: 'decision', label: 'Что должно стать понятно' }
+]));
+lines.push('');
+lines.push('Технический вывод: реализуемость высокая, но АУРА не должна становиться “дорогим генератором видео” раньше времени. Самый здоровый порядок такой: сначала mobile/web MVP с текстом, действиями, reset, слоистым avatar, платежной и аналитической инфраструктурой; затем image/avatar generation по лимитам; затем voice; затем редкий premium video-avatar; и только после подтверждения спроса - локальный визуальный стек для снижения себестоимости и контроля стиля. Так продукт остается проверяемым, экономика - управляемой, а центральная идея “сериал о себе” не зависит от самого дорогого провайдера.');
 lines.push('');
 lines.push('### Монетизация: что проверять у конкурентов');
 lines.push('');
