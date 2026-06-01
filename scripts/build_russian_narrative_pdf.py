@@ -317,6 +317,228 @@ def visual_diagram(name: str):
             if idx < len(steps) - 1:
                 drawing.add(Line(x + w, y + 0.67 * cm, x + w + gap, y + 0.67 * cm, strokeColor=colors.HexColor("#0f172a"), strokeWidth=1))
 
+    elif name == "hypothesis_map":
+        title("Карта проверки гипотез", "Каждый шаг снижает один тип неопределенности")
+        items = [
+            ("1", "форма продукта"),
+            ("2", "рынок и деньги"),
+            ("3", "белое пятно"),
+            ("4", "преимущество"),
+            ("5", "аудитория"),
+            ("6", "ядро продукта"),
+        ]
+        x0, y = 1.2 * cm, height / 2 - 18
+        w, gap = 2.35 * cm, 0.35 * cm
+        for idx, (num, label) in enumerate(items):
+            x = x0 + idx * (w + gap)
+            drawing.add(Circle(x + w / 2, y + 1.0 * cm, 18, fillColor=colors.HexColor("#111827"), strokeColor=colors.HexColor("#111827")))
+            add_label(drawing, x + w / 2, y + 1.0 * cm - 4, num, size=10, bold=True, color="#ffffff")
+            box(drawing, x, y, w, 0.8 * cm, label, fill="#f8fafc", stroke="#cbd5e1")
+            if idx < len(items) - 1:
+                drawing.add(Line(x + w, y + 1.0 * cm, x + w + gap, y + 1.0 * cm, strokeColor=colors.HexColor("#64748b")))
+
+    elif name == "category_layers":
+        title("Категория -> слой продукта", "Каждый рынок дает AURA не цифру, а продуктовую функцию")
+        rows = [
+            ("Mindfulness", "reset", "#dbeafe"),
+            ("Astrology", "meaning", "#ede9fe"),
+            ("Coaching", "action", "#fef3c7"),
+            ("Avatar", "visual self", "#dcfce7"),
+            ("Progression", "return", "#ffe4e6"),
+        ]
+        x0, y0 = 1.5 * cm, height - 82
+        for idx, (cat, layer, fill) in enumerate(rows):
+            y = y0 - idx * 31
+            box(drawing, x0, y, 5.3 * cm, 0.62 * cm, cat, fill=fill)
+            box(drawing, x0 + 6.8 * cm, y, 5.3 * cm, 0.62 * cm, layer, fill="#f8fafc")
+            drawing.add(Line(x0 + 5.3 * cm, y + 0.31 * cm, x0 + 6.8 * cm, y + 0.31 * cm, strokeColor=colors.HexColor("#2563eb")))
+
+    elif name == "segment_map":
+        title("Карта первых сегментов", "Не все аудитории проверяются одновременно")
+        segments = [
+            ("Spiritual\nself-improvers", 2.1 * cm, 5.1 * cm, "#ede9fe"),
+            ("Habit / progress\nusers", 8.2 * cm, 5.1 * cm, "#dbeafe"),
+            ("Reset\nusers", 2.1 * cm, 2.4 * cm, "#dcfce7"),
+            ("Avatar / future-self\nusers", 8.2 * cm, 2.4 * cm, "#fef3c7"),
+        ]
+        for label, x, y, fill in segments:
+            drawing.add(Rect(x, y, 5.2 * cm, 1.45 * cm, rx=10, ry=10, fillColor=colors.HexColor(fill), strokeColor=colors.HexColor("#94a3b8")))
+            for j, part in enumerate(label.split("\n")):
+                add_label(drawing, x + 2.6 * cm, y + 0.9 * cm - j * 12, part, size=9, bold=j == 0)
+        add_label(drawing, width / 2, 40, "Первые два сегмента дают лучший баланс смысла и действия.", size=9, bold=True)
+
+    elif name == "timeline_30":
+        title("Накопление ценности во времени", "AURA должна становиться понятнее на День 2, 7 и 30")
+        items = [("Day 1", "первый loop"), ("Day 2", "память"), ("Day 7", "season recap"), ("Day 30", "траектория")]
+        x0, y = 2.0 * cm, height / 2 - 12
+        span = 13.0 * cm
+        drawing.add(Line(x0, y, x0 + span, y, strokeColor=colors.HexColor("#2563eb"), strokeWidth=2))
+        for idx, (day, label) in enumerate(items):
+            x = x0 + idx * (span / (len(items) - 1))
+            drawing.add(Circle(x, y, 16, fillColor=colors.HexColor("#eff6ff"), strokeColor=colors.HexColor("#2563eb"), strokeWidth=1.5))
+            add_label(drawing, x, y + 26, day, size=9, bold=True)
+            add_label(drawing, x, y - 30, label, size=7)
+
+    elif name == "life_canvas_cause":
+        title("Life Canvas: причина -> визуальный след", "Образ должен объяснять действие, а не заменять его")
+        items = [("Action", "пользователь сделал шаг"), ("Evidence", "система сохранила факт"), ("Visual trait", "цвет / свет / предмет"), ("Life Canvas", "видимый след")]
+        x0, y = 1.5 * cm, height / 2 - 16
+        w, gap = 3.35 * cm, 0.55 * cm
+        for idx, (label, sub) in enumerate(items):
+            x = x0 + idx * (w + gap)
+            box(drawing, x, y, w, 1.15 * cm, label, fill="#eef6ff", stroke="#93c5fd")
+            add_label(drawing, x + w / 2, y - 13, sub, size=6.5, color="#475467")
+            if idx < len(items) - 1:
+                drawing.add(Line(x + w, y + 0.57 * cm, x + w + gap, y + 0.57 * cm, strokeColor=colors.HexColor("#2563eb")))
+        add_label(drawing, width / 2, 34, "Если связь не читается, Life Canvas превращается в random image.", size=9, bold=True)
+
+    elif name == "service_blueprint":
+        title("Service blueprint первого loop", "Что видит человек и что делает система")
+        cols = ["User", "Screen", "Backend", "AI/Image", "Analytics"]
+        rows = ["Episode", "Action", "Canvas"]
+        x0, y0 = 1.0 * cm, 1.6 * cm
+        cell_w, cell_h = 3.1 * cm, 0.85 * cm
+        for c, label in enumerate(cols):
+            box(drawing, x0 + c * cell_w, y0 + len(rows) * cell_h, cell_w, cell_h, label, fill="#e7eef8", stroke="#cbd5e1")
+        for r, row in enumerate(rows):
+            y = y0 + (len(rows) - 1 - r) * cell_h
+            for c in range(len(cols)):
+                text = row if c == 0 else ["read", "save", "generate", "track"][min(c - 1, 3)]
+                box(drawing, x0 + c * cell_w, y, cell_w, cell_h, text, fill="#ffffff", stroke="#e2e8f0")
+
+    elif name == "data_flow":
+        title("Поток данных", "Контекст становится эпизодом, действие становится визуальным следом")
+        items = ["Profile", "Season", "Episode", "Action", "Reflection", "AvatarState", "Memory"]
+        x0, y = 1.1 * cm, height / 2 - 18
+        w, gap = 2.0 * cm, 0.28 * cm
+        for idx, label in enumerate(items):
+            x = x0 + idx * (w + gap)
+            box(drawing, x, y, w, 1.0 * cm, label, fill="#f8fafc", stroke="#94a3b8")
+            if idx < len(items) - 1:
+                drawing.add(Line(x + w, y + 0.5 * cm, x + w + gap, y + 0.5 * cm, strokeColor=colors.HexColor("#64748b")))
+
+    elif name == "cost_stack":
+        title("Cost stack", "Что реально двигает себестоимость")
+        items = [("AI text", 18, "#dbeafe"), ("Images", 45, "#93c5fd"), ("Infra", 22, "#bfdbfe"), ("Support", 10, "#e0f2fe"), ("Other", 5, "#f8fafc")]
+        x, y = 3.0 * cm, height / 2 - 16
+        total_w = 11.0 * cm
+        current = x
+        for label, pct, fill in items:
+            w = total_w * pct / 100
+            drawing.add(Rect(current, y, w, 1.2 * cm, fillColor=colors.HexColor(fill), strokeColor=colors.HexColor("#ffffff")))
+            add_label(drawing, current + w / 2, y + 0.7 * cm, f"{pct}%", size=8, bold=True)
+            add_label(drawing, current + w / 2, y - 12, label, size=6.5)
+            current += w
+        add_label(drawing, width / 2, 34, "Видео не входит в free loop, потому что ломает stack.", size=9, bold=True)
+
+    elif name == "monetization_ladder":
+        title("Лестница монетизации", "Платность появляется после первого value moment")
+        items = [("Free", "первый loop"), ("Plus", "season + memory"), ("Premium", "styles + recaps"), ("Tokens", "video moments")]
+        x0, y0 = 3.1 * cm, 1.6 * cm
+        for idx, (label, sub) in enumerate(items):
+            w = 3.0 * cm + idx * 0.6 * cm
+            y = y0 + idx * 0.95 * cm
+            drawing.add(Rect(x0, y, w, 0.75 * cm, rx=8, ry=8, fillColor=colors.HexColor(["#f8fafc", "#dbeafe", "#93c5fd", "#1d4ed8"][idx]), strokeColor=colors.HexColor("#94a3b8")))
+            add_label(drawing, x0 + w / 2, y + 0.43 * cm, label, size=9, bold=True, color="#ffffff" if idx == 3 else "#111827")
+            add_label(drawing, x0 + w + 1.8 * cm, y + 0.32 * cm, sub, size=8, anchor="start")
+
+    elif name == "channel_map":
+        title("Карта каналов запуска", "Каждый канал выполняет свою работу")
+        channels = [("TikTok", "discovery"), ("Reels", "trust"), ("Shorts", "search"), ("Reddit", "critique"), ("Creators", "proof"), ("Referral", "share")]
+        center_x, center_y = width / 2, height / 2 - 6
+        drawing.add(Circle(center_x, center_y, 38, fillColor=colors.HexColor("#111827"), strokeColor=colors.HexColor("#111827")))
+        add_label(drawing, center_x, center_y, "AURA", size=12, bold=True, color="#ffffff")
+        positions = [(-150, 65), (0, 92), (150, 65), (-150, -70), (0, -98), (150, -70)]
+        for (label, sub), (dx, dy) in zip(channels, positions):
+            x, y = center_x + dx, center_y + dy
+            box(drawing, x - 1.3 * cm, y - 0.35 * cm, 2.6 * cm, 0.7 * cm, label, fill="#eef6ff", stroke="#93c5fd")
+            add_label(drawing, x, y - 26, sub, size=7, color="#475467")
+            drawing.add(Line(center_x, center_y, x, y, strokeColor=colors.HexColor("#cbd5e1")))
+
+    elif name == "content_wheel":
+        title("Контент-пиллары", "AURA объясняется через несколько повторяемых углов")
+        labels = ["Life series", "Future self", "Avatar causality", "Reset", "7-day season", "Build in public", "Objections"]
+        center_x, center_y = width / 2, height / 2 - 4
+        drawing.add(Circle(center_x, center_y, 34, fillColor=colors.HexColor("#111827"), strokeColor=colors.HexColor("#111827")))
+        add_label(drawing, center_x, center_y, "AURA", size=11, bold=True, color="#ffffff")
+        import math
+        for idx, label in enumerate(labels):
+            angle = 2 * math.pi * idx / len(labels)
+            x = center_x + 145 * math.cos(angle)
+            y = center_y + 90 * math.sin(angle)
+            drawing.add(Circle(x, y, 28, fillColor=colors.HexColor("#f8fafc"), strokeColor=colors.HexColor("#94a3b8")))
+            add_label(drawing, x, y, label, size=6.5, bold=True)
+
+    elif name == "launch_timeline":
+        title("30 дней проверки", "От прототипа к первым платным сигналам")
+        weeks = [("Week 1", "interviews"), ("Week 2", "concierge"), ("Week 3", "content"), ("Week 4", "paid signal")]
+        x0, y = 2.0 * cm, height / 2 - 12
+        for idx, (week, sub) in enumerate(weeks):
+            x = x0 + idx * 3.6 * cm
+            box(drawing, x, y, 2.7 * cm, 1.1 * cm, week, fill="#dbeafe", stroke="#93c5fd")
+            add_label(drawing, x + 1.35 * cm, y - 13, sub, size=7, color="#475467")
+            if idx < len(weeks) - 1:
+                drawing.add(Line(x + 2.7 * cm, y + 0.55 * cm, x + 3.6 * cm, y + 0.55 * cm, strokeColor=colors.HexColor("#2563eb")))
+
+    elif name == "experiment_board":
+        title("Доска экспериментов", "Каждый запуск должен отвечать на конкретную гипотезу")
+        cols = ["Гипотеза", "Тест", "Метрика"]
+        rows = ["Positioning", "Causality", "Paywall", "Sharing"]
+        x0, y0 = 1.5 * cm, 1.6 * cm
+        cell_w, cell_h = 4.6 * cm, 0.72 * cm
+        for c, label in enumerate(cols):
+            box(drawing, x0 + c * cell_w, y0 + len(rows) * cell_h, cell_w, cell_h, label, fill="#e7eef8")
+        for r, row in enumerate(rows):
+            y = y0 + (len(rows) - 1 - r) * cell_h
+            for c in range(len(cols)):
+                text = row if c == 0 else ("prototype" if c == 1 else "decision")
+                box(drawing, x0 + c * cell_w, y, cell_w, cell_h, text, fill="#ffffff", stroke="#e2e8f0")
+
+    elif name == "dependency_map":
+        title("Критический путь разработки", "Что блокирует следующий шаг")
+        items = [("Wireframes", "Sprint 1"), ("Prompt", "Episode"), ("Image provider", "Canvas"), ("RevenueCat", "Paywall"), ("Analytics", "Go/No-Go")]
+        x0, y = 1.4 * cm, height / 2 - 18
+        w, gap = 2.6 * cm, 0.45 * cm
+        for idx, (label, sub) in enumerate(items):
+            x = x0 + idx * (w + gap)
+            box(drawing, x, y, w, 1.05 * cm, label, fill="#fef3c7", stroke="#f59e0b")
+            add_label(drawing, x + w / 2, y - 12, sub, size=7)
+            if idx < len(items) - 1:
+                drawing.add(Line(x + w, y + 0.52 * cm, x + w + gap, y + 0.52 * cm, strokeColor=colors.HexColor("#92400e")))
+
+    elif name == "budget_chart":
+        title("Бюджет по спринтам", "Затраты должны следовать доказательству петли")
+        vals = [180, 220, 240, 230, 260]
+        labels = ["S1", "S2", "S3", "S4", "S5"]
+        x0, y0 = 3.0 * cm, 1.7 * cm
+        max_v = max(vals)
+        for idx, val in enumerate(vals):
+            x = x0 + idx * 2.2 * cm
+            h = 4.4 * cm * val / max_v
+            drawing.add(Rect(x, y0, 1.2 * cm, h, fillColor=colors.HexColor("#bfdbfe"), strokeColor=colors.HexColor("#2563eb")))
+            add_label(drawing, x + 0.6 * cm, y0 + h + 12, str(val), size=8, bold=True)
+            add_label(drawing, x + 0.6 * cm, y0 - 14, labels[idx], size=8)
+
+    elif name == "go_no_go":
+        title("Go / No-Go dashboard", "Решение принимает не вкус, а метрики")
+        metrics = [("Activation", "45%+"), ("Loop", "25-35%"), ("Causality", "70%+"), ("D1", "20-30%"), ("Paid", "5-10%")]
+        x0, y = 1.3 * cm, height / 2 - 18
+        for idx, (label, target) in enumerate(metrics):
+            x = x0 + idx * 3.0 * cm
+            drawing.add(Circle(x + 1.2 * cm, y + 0.85 * cm, 25, fillColor=colors.HexColor("#dcfce7"), strokeColor=colors.HexColor("#16a34a")))
+            add_label(drawing, x + 1.2 * cm, y + 0.85 * cm - 4, target, size=8, bold=True)
+            add_label(drawing, x + 1.2 * cm, y - 8, label, size=8, bold=True)
+
+    elif name == "decision_tree":
+        title("Дерево решения", "Что делать после первых пользователей")
+        box(drawing, 6.2 * cm, 6.2 * cm, 4.6 * cm, 0.9 * cm, "Петля понята?", fill="#dbeafe", stroke="#2563eb")
+        box(drawing, 1.6 * cm, 3.6 * cm, 4.2 * cm, 0.9 * cm, "Нет: менять flow", fill="#fee2e2", stroke="#ef4444")
+        box(drawing, 6.5 * cm, 3.6 * cm, 4.2 * cm, 0.9 * cm, "Да: смотреть D1", fill="#dcfce7", stroke="#16a34a")
+        box(drawing, 11.4 * cm, 3.6 * cm, 4.2 * cm, 0.9 * cm, "Да + paid: строить", fill="#dbeafe", stroke="#2563eb")
+        drawing.add(Line(8.5 * cm, 6.2 * cm, 3.7 * cm, 4.5 * cm, strokeColor=colors.HexColor("#64748b")))
+        drawing.add(Line(8.5 * cm, 6.2 * cm, 8.6 * cm, 4.5 * cm, strokeColor=colors.HexColor("#64748b")))
+        drawing.add(Line(8.6 * cm, 4.5 * cm, 13.5 * cm, 4.5 * cm, strokeColor=colors.HexColor("#64748b")))
+
     else:
         title("AURA visual framework")
         add_label(drawing, width / 2, height / 2, name, size=12, bold=True)
