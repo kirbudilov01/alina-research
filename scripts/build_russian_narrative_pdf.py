@@ -50,6 +50,11 @@ DOCUMENTS = [
         OUTPUT_DIR / "alina-global-reader-report-v1.pdf",
         "Alina Research - reader version",
     ),
+    (
+        ROOT / "reports" / "aura-mvp-spec-v1.md",
+        OUTPUT_DIR / "AURA_MVP_SPEC_V1.pdf",
+        "AURA MVP Specification v1",
+    ),
 ]
 
 
