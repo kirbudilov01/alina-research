@@ -1414,6 +1414,59 @@ flowchart LR
 | Месяц 12 | Несколько ICP/рынков, paid acquisition tests, локальный image pipeline, creator seasons. | Социальная сеть только если share/creator loops доказаны. | Повторяемый канал, валовая маржа 70%+, срок окупаемости виден. | CAC выше маржи, churn высокий. |
 | Месяц 24 | Платформа сезонов, deeper personalization, advanced avatar/video premium, international scale. | Любая функция без вклада в возврат/revenue. | D90 cohort, sustainable subscription revenue, scalable content/AI ops. | Сложность продукта размывает ядро. |
 
+#### Tech stack decision: выбранные решения по слоям
+
+| Слой | Выбранное решение | Причина выбора | Альтернативы | Стоимость | Риски |
+| --- | --- | --- | --- | --- | --- |
+| Frontend | React Native / Expo | Самый быстрый путь к iOS/Android при JS/TS-команде и готовых SDK. | Flutter, Native iOS/Android. | 1 senior/strong middle mobile engineer на MVP. | Native edge cases, performance, качество анимаций. |
+| Backend | Supabase + Edge Functions сначала; NestJS позже | Быстро закрывает auth, Postgres, storage и простые API. | Firebase, FastAPI, чистый NestJS. | $25-500+/мес. infra на раннем этапе + backend time. | Сложная бизнес-логика может перерасти serverless. |
+| Database | Postgres | Сезоны, эпизоды, действия, пользователи и платежи требуют связной модели. | Firestore, MongoDB. | Включено в Supabase/managed Postgres. | Нужно правильно проектировать privacy и deletion. |
+| Authentication | Supabase Auth / Apple Sign-In / Google Sign-In | Mobile стандарт, быстро, меньше кастомного риска. | Firebase Auth, Auth0. | Низкая/включено. | Trust friction при сборе даты рождения. |
+| Storage | Supabase Storage или S3-compatible | Хранить avatar cards, recaps, audio/video assets. | Cloudflare R2, Firebase Storage. | Низкая для image; высокая при video. | Нельзя хранить тяжелые видео без возврат policy. |
+| Analytics | PostHog + Firebase events | Нужны воронки, флаги функций, возврат, платный экран events. | Amplitude, Mixpanel. | Free/по фактическому использованию до роста. | Без строгой taxonomy данные станут шумом. |
+| Push | Firebase Cloud Messaging / OneSignal | Возврат к следующему эпизоду. | Expo Push, native APNS/FCM. | Низкая. | Спам ухудшает trust. |
+| AI Layer | OpenRouter + direct fallback to chosen provider | Быстро сравнивать GPT/Claude/Gemini/DeepSeek. | Только OpenAI, только Claude. | Переменная по tokens. | Generic tone, hallucination, safety. |
+| Avatar Layer | Image-first Life Canvas | Дешевле и быстрее, чем видео; проверяет центральную гипотезу. | Video-first, 3D avatar. | Переменная image cost. | Качество лица/стиля и causality. |
+| Image Generation | OpenAI Images / Stability / Replicate; FLUX позже | Hosted MVP сейчас, локальное удешевление после спроса. | Midjourney, Ideogram. | Лимитировать по ключевым моментам. | Ежедневные изображения ломают себестоимость. |
+| Animation Layer | Not MVP; HeyGen/Tavus premium test later | Видео слишком дорого для базовой подписки. | LivePortrait, SadTalker, Runway/Luma. | $/minute или GPU cost. | Deepfake/consent, возвраты, задержку. |
+| Payments | RevenueCat | Subscriptions, пробный периодs, entitlement, restore purchases. | StoreKit/Billing raw. | Revenue share/plan by scale. | Ошибки entitlement и refund негатив. |
+| Admin Panel | Retool/Supabase Studio/custom lightweight admin | Нужны prompts, seasons, moderation, support. | Полностью кастомный admin. | Низкая на MVP. | Без admin нельзя быстро чинить контент. |
+
+#### System architecture decision: нагрузка, стоимость, масштабирование
+
+| Блок | Нагрузка | Стоимость | Ограничения | Риски масштабирования / решение |
+| --- | --- | --- | --- | --- |
+| Mobile App | Все пользовательские сессии, локальный cache, push handling. | Разработка; runtime cost почти ноль. | App Store анализ, offline states, device performance. | Масштабируется через API/CDN; UX debt опаснее infra. |
+| Backend API | Profiles, seasons, episodes, действиеs, платный экран, entitlements. | $50-2k/month до среднего масштаба. | Serverless limits, повторные попытки, background jobs. | Выносить heavy jobs в queues/workers. |
+| AI Orchestration | Prompt routing, safety, generation logs, повторные попытки. | Tokens + orchestration infra. | Latency, output quality, provider downtime. | Caching, templates, model routing, batch jobs. |
+| Avatar/Image Layer | Life Canvas cards, style states, recap images. | Главный variable cost после LLM. | Generation задержку, face consistency, moderation. | Лимиты, async generation, local FLUX/SD later. |
+| Storage/CDN | Images, recaps, possible video. | Низкая для images; высокая для video. | Storage growth, privacy, deletion. | Retention policy, CDN, compressed assets. |
+| Analytics | Events: activation, действие, reset, avatar и платный экран. | по фактическому использованию. | Event noise, privacy. | Taxonomy, выборочная проверка, warehouse later. |
+| Billing | Trials, subscriptions, tokens, restore. | Store fee + tooling. | Regional цен, возвраты, entitlement bugs. | RevenueCat + clean event sync. |
+| Admin | Prompt edits, season control, support, moderation. | Tooling + operator time. | Manual ops bottleneck. | Automate only after repeated manual tasks. |
+
+#### Monetization funnel: Free -> Activation -> Subscription -> Premium -> Upsell
+
+| Этап | Что покупает/получает | Ориентир конверсии | Риск | Причина отказа |
+| --- | --- | --- | --- | --- |
+| Free | Пользователь ничего не покупает: пробует первый эпизод. | Visit/install -> first episode 30-60% на теплом трафике. | Не понял категорию или испугался даты рождения. | “Это гороскоп/AI toy, не для меня”. |
+| Activation | Пользователь платит вниманием: делает действие и видит avatar shift. | First episode -> completed loop 40-70% в хорошем прототипе. | Действие слишком абстрактное. | “Красиво, но не полезно”. |
+| Subscription | Продолжение сезона, память, weekly recap, avatar evolution. | Activated -> пробный период/намерение подписаться 5-15% на ранних тестах. | Paywall до результата. | “Не вижу, за что платить каждый месяц”. |
+| Premium Layer | Deep reads, premium styles, больше визуальных моментов. | Paid -> premium interest 10-25% среди вовлеченных. | Premium не отличается от Plus. | “Это та же генерация, только дороже”. |
+| Upsell | Visual tokens, seasonal trailers, future-self video, creator seasons. | Paid active -> token purchase 3-10% как гипотеза. | Продукт уходит в expensive AI toy. | “Видео прикольное, но не нужно постоянно”. |
+
+#### Go-to-market CAC assumptions
+
+| Канал | Контент/формат | CTA | Ожидаемый CAC | Риск |
+| --- | --- | --- | --- | --- |
+| TikTok / Reels organic | Future-self, сериал о себе, before/after canvas. | Получить первый эпизод. | $0-3 условно, если founder/UGC работает; время команды вместо media spend. | Много любопытных, мало платящих. |
+| Paid TikTok / Meta | UGC hooks и visual transformation. | Начать 7-дневный сезон. | $5-30+ install/lead как ранний тест, сильно зависит от креатива. | Нельзя масштабировать до доказательство of LTV. |
+| Pinterest | Life Canvas posters, ritual boards, future self. | Собери свою неделю. | $0-10 lead при organic/boost tests. | Сохраняют картинки, но не устанавливают. |
+| Reddit/communities | Validation posts и honest prototype ask. | Помочь протестировать. | $0-5 lead, но требует ручного времени. | Плохая реакция на рекламу. |
+| Influencers | Персональный сезон автора. | Пройти сезон автора. | $5-50+ lead/payer в зависимости от creator fit. | Нужна сильная creator-product связка. |
+| Referral | Season recap / Life Canvas share. | Открой свой эпизод. | Близко к $0 после D7, если share artifact сильный. | Не работает до первого результата. |
+| App Store Search | Keywords: astrology, self care, future self, journal. | Install. | Органика + Apple Search Ads test $1-8 install как ориентир. | Конкуренция и слабый keyword intent. |
+
 #### Investment memo: расширенный skeleton на 10-15 страниц
 
 Инвесторская версия должна быть отдельным приложением к отчету, но ее skeleton уже можно собрать из текущего исследования. Структура: 1) проблема: разрыв между смысл и действие; 2) рынок: wellness/self-improvement/astrology/AI/avatar/progression; 3) решение: life-series with causal avatar progress; 4) почему сейчас: AI personalization + subscription habit + avatar culture; 5) конкуренты: Calm, Finch, Nebula, Replika, Character AI, Headspace; 6) преимущество: причинная петля и season memory; 7) монетизация: Plus, Premium, visual tokens; 8) финмодель: image-first margin и video as premium; 9) GTM: UGC/creator/search/referral; 10) команда: product, mobile, AI, design, growth, смысл expert; 11) риски: generic content, trust, video cost, возврат; 12) сценарии роста: niche wedge -> broader self-growth platform.

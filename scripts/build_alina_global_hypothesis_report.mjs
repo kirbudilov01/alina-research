@@ -4476,6 +4476,84 @@ lines.push(mdTable([
   { key: 'risks', label: 'Риски' }
 ]));
 lines.push('');
+lines.push('#### Tech stack decision: выбранные решения по слоям');
+lines.push('');
+lines.push(mdTable([
+  { layer: 'Frontend', choice: 'React Native / Expo', reason: 'Самый быстрый путь к iOS/Android при JS/TS-команде и готовых SDK.', alternatives: 'Flutter, Native iOS/Android.', cost: '1 senior/strong middle mobile engineer на MVP.', risks: 'Native edge cases, performance, качество анимаций.' },
+  { layer: 'Backend', choice: 'Supabase + Edge Functions сначала; NestJS позже', reason: 'Быстро закрывает auth, Postgres, storage и простые API.', alternatives: 'Firebase, FastAPI, чистый NestJS.', cost: '$25-500+/мес. infra на раннем этапе + backend time.', risks: 'Сложная бизнес-логика может перерасти serverless.' },
+  { layer: 'Database', choice: 'Postgres', reason: 'Сезоны, эпизоды, действия, пользователи и платежи требуют связной модели.', alternatives: 'Firestore, MongoDB.', cost: 'Включено в Supabase/managed Postgres.', risks: 'Нужно правильно проектировать privacy и deletion.' },
+  { layer: 'Authentication', choice: 'Supabase Auth / Apple Sign-In / Google Sign-In', reason: 'Mobile стандарт, быстро, меньше кастомного риска.', alternatives: 'Firebase Auth, Auth0.', cost: 'Низкая/включено.', risks: 'Trust friction при сборе даты рождения.' },
+  { layer: 'Storage', choice: 'Supabase Storage или S3-compatible', reason: 'Хранить avatar cards, recaps, audio/video assets.', alternatives: 'Cloudflare R2, Firebase Storage.', cost: 'Низкая для image; высокая при video.', risks: 'Нельзя хранить тяжелые видео без retention policy.' },
+  { layer: 'Analytics', choice: 'PostHog + Firebase events', reason: 'Нужны funnels, feature flags, retention, paywall events.', alternatives: 'Amplitude, Mixpanel.', cost: 'Free/usage-based до роста.', risks: 'Без строгой taxonomy данные станут шумом.' },
+  { layer: 'Push', choice: 'Firebase Cloud Messaging / OneSignal', reason: 'Возврат к следующему эпизоду.', alternatives: 'Expo Push, native APNS/FCM.', cost: 'Низкая.', risks: 'Спам ухудшает trust.' },
+  { layer: 'AI Layer', choice: 'OpenRouter + direct fallback to chosen provider', reason: 'Быстро сравнивать GPT/Claude/Gemini/DeepSeek.', alternatives: 'Только OpenAI, только Claude.', cost: 'Переменная по tokens.', risks: 'Generic tone, hallucination, safety.' },
+  { layer: 'Avatar Layer', choice: 'Image-first Life Canvas', reason: 'Дешевле и быстрее, чем видео; проверяет центральную гипотезу.', alternatives: 'Video-first, 3D avatar.', cost: 'Переменная image cost.', risks: 'Качество лица/стиля и causality.' },
+  { layer: 'Image Generation', choice: 'OpenAI Images / Stability / Replicate; FLUX позже', reason: 'Hosted MVP сейчас, локальное удешевление после спроса.', alternatives: 'Midjourney, Ideogram.', cost: 'Лимитировать по ключевым моментам.', risks: 'Ежедневные изображения ломают себестоимость.' },
+  { layer: 'Animation Layer', choice: 'Not MVP; HeyGen/Tavus premium test later', reason: 'Видео слишком дорого для базовой подписки.', alternatives: 'LivePortrait, SadTalker, Runway/Luma.', cost: '$/minute или GPU cost.', risks: 'Deepfake/consent, refunds, latency.' },
+  { layer: 'Payments', choice: 'RevenueCat', reason: 'Subscriptions, trials, entitlement, restore purchases.', alternatives: 'StoreKit/Billing raw.', cost: 'Revenue share/plan by scale.', risks: 'Ошибки entitlement и refund негатив.' },
+  { layer: 'Admin Panel', choice: 'Retool/Supabase Studio/custom lightweight admin', reason: 'Нужны prompts, seasons, moderation, support.', alternatives: 'Полностью кастомный admin.', cost: 'Низкая на MVP.', risks: 'Без admin нельзя быстро чинить контент.' }
+], [
+  { key: 'layer', label: 'Слой' },
+  { key: 'choice', label: 'Выбранное решение' },
+  { key: 'reason', label: 'Причина выбора' },
+  { key: 'alternatives', label: 'Альтернативы' },
+  { key: 'cost', label: 'Стоимость' },
+  { key: 'risks', label: 'Риски' }
+]));
+lines.push('');
+lines.push('#### System architecture decision: нагрузка, стоимость, масштабирование');
+lines.push('');
+lines.push(mdTable([
+  { block: 'Mobile App', load: 'Все пользовательские сессии, локальный cache, push handling.', cost: 'Разработка; runtime cost почти ноль.', limits: 'App Store review, offline states, device performance.', scaling: 'Масштабируется через API/CDN; UX debt опаснее infra.' },
+  { block: 'Backend API', load: 'Profiles, seasons, episodes, actions, paywall, entitlements.', cost: '$50-2k/month до среднего масштаба.', limits: 'Serverless limits, retries, background jobs.', scaling: 'Выносить heavy jobs в queues/workers.' },
+  { block: 'AI Orchestration', load: 'Prompt routing, safety, generation logs, retries.', cost: 'Tokens + orchestration infra.', limits: 'Latency, output quality, provider downtime.', scaling: 'Caching, templates, model routing, batch jobs.' },
+  { block: 'Avatar/Image Layer', load: 'Life Canvas cards, style states, recap images.', cost: 'Главный variable cost после LLM.', limits: 'Generation latency, face consistency, moderation.', scaling: 'Лимиты, async generation, local FLUX/SD later.' },
+  { block: 'Storage/CDN', load: 'Images, recaps, possible video.', cost: 'Низкая для images; высокая для video.', limits: 'Storage growth, privacy, deletion.', scaling: 'Retention policy, CDN, compressed assets.' },
+  { block: 'Analytics', load: 'Events: activation, action, reset, avatar, paywall.', cost: 'Usage-based.', limits: 'Event noise, privacy.', scaling: 'Taxonomy, sampling, warehouse later.' },
+  { block: 'Billing', load: 'Trials, subscriptions, tokens, restore.', cost: 'Store fee + tooling.', limits: 'Regional pricing, refunds, entitlement bugs.', scaling: 'RevenueCat + clean event sync.' },
+  { block: 'Admin', load: 'Prompt edits, season control, support, moderation.', cost: 'Tooling + operator time.', limits: 'Manual ops bottleneck.', scaling: 'Automate only after repeated manual tasks.' }
+], [
+  { key: 'block', label: 'Блок' },
+  { key: 'load', label: 'Нагрузка' },
+  { key: 'cost', label: 'Стоимость' },
+  { key: 'limits', label: 'Ограничения' },
+  { key: 'scaling', label: 'Риски масштабирования / решение' }
+]));
+lines.push('');
+lines.push('#### Monetization funnel: Free -> Activation -> Subscription -> Premium -> Upsell');
+lines.push('');
+lines.push(mdTable([
+  { step: 'Free', buys: 'Пользователь ничего не покупает: пробует первый эпизод.', conversion: 'Visit/install -> first episode 30-60% на теплом трафике.', risk: 'Не понял категорию или испугался даты рождения.', refusal: '“Это гороскоп/AI toy, не для меня”.' },
+  { step: 'Activation', buys: 'Пользователь платит вниманием: делает действие и видит avatar shift.', conversion: 'First episode -> completed loop 40-70% в хорошем прототипе.', risk: 'Действие слишком абстрактное.', refusal: '“Красиво, но не полезно”.' },
+  { step: 'Subscription', buys: 'Продолжение сезона, память, weekly recap, avatar evolution.', conversion: 'Activated -> trial/subscription intent 5-15% на ранних тестах.', risk: 'Paywall до результата.', refusal: '“Не вижу, за что платить каждый месяц”.' },
+  { step: 'Premium Layer', buys: 'Deep reads, premium styles, больше visual moments.', conversion: 'Paid -> premium interest 10-25% среди вовлеченных.', risk: 'Premium не отличается от Plus.', refusal: '“Это та же генерация, только дороже”.' },
+  { step: 'Upsell', buys: 'Visual tokens, seasonal trailers, future-self video, creator seasons.', conversion: 'Paid active -> token purchase 3-10% как гипотеза.', risk: 'Продукт уходит в expensive AI toy.', refusal: '“Видео прикольное, но не нужно постоянно”.' }
+], [
+  { key: 'step', label: 'Этап' },
+  { key: 'buys', label: 'Что покупает/получает' },
+  { key: 'conversion', label: 'Ориентир конверсии' },
+  { key: 'risk', label: 'Риск' },
+  { key: 'refusal', label: 'Причина отказа' }
+]));
+lines.push('');
+lines.push('#### Go-to-market CAC assumptions');
+lines.push('');
+lines.push(mdTable([
+  { channel: 'TikTok / Reels organic', content: 'Future-self, сериал о себе, before/after canvas.', cta: 'Получить первый эпизод.', cac: '$0-3 условно, если founder/UGC работает; время команды вместо media spend.', risk: 'Много любопытных, мало платящих.' },
+  { channel: 'Paid TikTok / Meta', content: 'UGC hooks и visual transformation.', cta: 'Начать 7-дневный сезон.', cac: '$5-30+ install/lead как ранний тест, сильно зависит от креатива.', risk: 'Нельзя масштабировать до proof of LTV.' },
+  { channel: 'Pinterest', content: 'Life Canvas posters, ritual boards, future self.', cta: 'Собери свою неделю.', cac: '$0-10 lead при organic/boost tests.', risk: 'Сохраняют картинки, но не устанавливают.' },
+  { channel: 'Reddit/communities', content: 'Validation posts и honest prototype ask.', cta: 'Помочь протестировать.', cac: '$0-5 lead, но требует ручного времени.', risk: 'Плохая реакция на рекламу.' },
+  { channel: 'Influencers', content: 'Персональный сезон автора.', cta: 'Пройти сезон автора.', cac: '$5-50+ lead/payer в зависимости от creator fit.', risk: 'Нужна сильная creator-product связка.' },
+  { channel: 'Referral', content: 'Season recap / Life Canvas share.', cta: 'Открой свой эпизод.', cac: 'Близко к $0 после D7, если share artifact сильный.', risk: 'Не работает до первого результата.' },
+  { channel: 'App Store Search', content: 'Keywords: astrology, self care, future self, journal.', cta: 'Install.', cac: 'Органика + Apple Search Ads test $1-8 install как ориентир.', risk: 'Конкуренция и слабый keyword intent.' }
+], [
+  { key: 'channel', label: 'Канал' },
+  { key: 'content', label: 'Контент/формат' },
+  { key: 'cta', label: 'CTA' },
+  { key: 'cac', label: 'Ожидаемый CAC' },
+  { key: 'risk', label: 'Риск' }
+]));
+lines.push('');
 lines.push('#### Investment memo: расширенный skeleton на 10-15 страниц');
 lines.push('');
 lines.push('Инвесторская версия должна быть отдельным приложением к отчету, но ее skeleton уже можно собрать из текущего исследования. Структура: 1) проблема: разрыв между meaning и action; 2) рынок: wellness/self-improvement/astrology/AI/avatar/progression; 3) решение: life-series with causal avatar progress; 4) почему сейчас: AI personalization + subscription habit + avatar culture; 5) конкуренты: Calm, Finch, Nebula, Replika, Character AI, Headspace; 6) преимущество: причинная петля и season memory; 7) монетизация: Plus, Premium, visual tokens; 8) финмодель: image-first margin и video as premium; 9) GTM: UGC/creator/search/referral; 10) команда: product, mobile, AI, design, growth, meaning expert; 11) риски: generic content, trust, video cost, retention; 12) сценарии роста: niche wedge -> broader self-growth platform.');
