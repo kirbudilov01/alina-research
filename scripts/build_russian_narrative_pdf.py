@@ -65,6 +65,11 @@ DOCUMENTS = [
         OUTPUT_DIR / "AURA_GTM_PLAN_V1.pdf",
         "AURA GTM Plan v1",
     ),
+    (
+        ROOT / "reports" / "aura-prd-sprint-backlog-v1.md",
+        OUTPUT_DIR / "AURA_PRD_SPRINT_BACKLOG_V1.pdf",
+        "AURA PRD / Sprint Backlog v1",
+    ),
 ]
 
 
