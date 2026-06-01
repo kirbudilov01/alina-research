@@ -1355,6 +1355,73 @@ flowchart LR
 | Метрики остановки? | D1 <10-15%, D7 почти нулевой, пользователи не видят отличие от horoscope/journal/avatar generator, нет готовность платить, video cost ломает маржу. |
 | Решение сейчас? | Не строить большой продукт. Строить image-first MVP/concierge validation на 6 недель, где проверяется одна петля и один платный оффер. |
 
+### 13. Финальная детализация: День 90, экранная карта, MVP scope и roadmap
+
+Эта секция закрывает последний слой, который нужен для перехода от стратегии к дизайну, ТЗ и roadmap. Здесь фиксируется не визуальный дизайн, а логическая карта продукта: какие экраны нужны, какие данные входят, что пользователь делает, какой результат получает и почему следующий экран вообще существует.
+
+#### День 90: как выглядит идеальный пользователь
+
+Через 90 дней идеальный пользователь АУРЫ не говорит “я пользуюсь приложением с аватарами”. Он говорит иначе: “у меня есть личная система, которая помогает мне замечать периоды жизни, выбирать маленькие действия и видеть, как меняется моя версия себя”. У него уже есть 3-8 завершенных сезонов, архив Life Canvas, повторяющиеся темы, несколько сохраненных weekly recaps и понятное ощущение, что приложение не просто развлекает, а собирает личную траекторию. Если к Дню 90 пользователь не может объяснить ценность другу без слов “прикольная AI-картинка”, продуктовая ставка не сработала.
+
+| Экран | Задача | Входящие данные | Действие | Результат | Следующий экран | Удержание | Монетизация |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Первый экран / promise | Объяснить “сериал о себе” и безопасную рамку. | Нет. | Начать первый опыт. | Пользователь понимает категорию. | Privacy / consent | Снижает ранний отвал. | Готовит доверие до платного экрана. |
+| Privacy / consent | Объяснить дату рождения, данные и границы обещания. | Политика данных. | Дать согласие. | Снижается trust-risk. | Birth + state | Не пугает чувствительными данными. | Без доверия подписка невозможна. |
+| Birth + current state | Собрать дату рождения, имя, состояние, запрос. | Дата рождения, имя, mood, тема. | Заполнить короткий профиль. | AI получает контекст. | Season choice | Персонализация повышает first wow. | Персональный контекст продает deep reads. |
+| Season choice | Выбрать 7-дневную тему. | Запрос, suggested seasons. | Выбрать сезон. | Появляется структура недели. | Daily episode | Сезон дает reason to return. | Сезоны становятся платную глубину. |
+| Daily episode | Дать личный смысл дня. | Профиль, тема, вчерашняя память. | Прочитать эпизод. | Первый инсайт. | Daily действие | Daily content hook. | Продолжение эпизодов продается. |
+| Daily действие | Перевести смысл в действие. | Эпизод, состояние, уровень сложности. | Выбрать одно действие. | Появляется поведенческий шаг. | Reset | Action completion усиливает возвращение. | Платная ценность выглядит честнее. |
+| Reset | Снять сопротивление перед действием. | Действие, состояние. | Пройти 30-60 сек. | Готовность к действию. | Done / reflection | Короткий ритуал формирует привычку. | Premium reset packs позже. |
+| Done / reflection | Зафиксировать выполнение. | Действие, эмоция, короткая заметка. | Отметить done. | Появляется evidence. | Изменение avatar | Memory loop. | Архив/recap premium. |
+| Avatar / Life Canvas | Показать причинное изменение. | Действие, эпизод, style state. | Сохранить/поделиться. | Видимый прогресс. | Причина вернуться завтра | Главная emotional anchor. | Visual tokens/premium styles. |
+| Причина вернуться завтра / платный экран | Показать продолжение и платную глубину. | Завершенный loop. | Вернуться завтра / начать пробный период. | D2 или paid intent. | Next episode / subscription | Возврат через историю. | Главный момент оплаты. |
+| Weekly recap | Собрать 7 дней в результат. | 7 episodes, действиеs, avatar states. | Сохранить, поделиться, продолжить. | Первый успех. | Next season | D7 completion. | Лучший платный экран/upsell момент. |
+| Archive / memory | Показать историю сезонов. | Сезоны, темы, заметки, canvas. | Открыть прошлое/выбрать следующий сезон. | Долгая ценность. | Season choice / premium | D30/D90. | Premium archive/deep reads. |
+
+#### MVP scope: жесткие границы первой версии
+
+| Группа | Что входит | Почему |
+| --- | --- | --- |
+| Must Have | Daily Episode; Daily Action; Reset; Avatar Progress / Life Canvas; Daily Reflection; Memory System; Season System; Analytics; мягкий платный экран после ценности. | Без этого нет причинной петли и нельзя проверить продукт. |
+| Should Have | Progress System; Weekly Recap; Notifications; Future Self tone; базовые style presets; privacy screen. | Сильно повышает возврат и доверие, но часть можно упростить в concierge MVP. |
+| Could Have | Achievements; голос reset; premium episode mock; share cards; 2-3 creator season concepts. | Можно добавить после первых пользователей, если не ломает сроки. |
+| Explicitly Not MVP | Видео-генерация каждый день; социальная сеть; marketplace; сообщества; глубокая кастомизация; мультиплеер; AI-друзья; коуч-маркетплейс; AR/метавселенная. | Все это увеличивает бюджет, privacy/safety risk и себестоимость до доказательства петли. |
+
+#### Product mechanics: что нельзя потерять
+
+| Механика | Приоритет | Роль | Риск реализации | Если убрать |
+| --- | --- | --- | --- | --- |
+| Daily Episode | Must Have | Смысл дня. | Generic текст убивает доверие. | Нет daily hook. |
+| Future Self | Must Have | Образ направления. | Может звучать токсично как “лучшая версия”. | Нет героя сериала. |
+| Avatar | Must Have | Видимое изменение. | Декоративность или плохое лицо. | Продукт становится текстовым. |
+| Reset | Must Have | Мост к действию. | Слишком медитативно/клинически. | Действие не выполняется. |
+| Daily Action | Must Have | Поведенческое доказательство. | Слишком сложно. | Нет причинности. |
+| Memory | Must Have | Архив изменений. | Слишком тяжелый дневник. | Нет D7/D30 value. |
+| Seasons | Must Have | Структура недели. | Сезоны станут контентной фабрикой. | Нет финала/продолжения. |
+| Progress | Should Have | Показывает движение. | Слишком gamey. | Слабее ощущение роста. |
+| Achievements | Could Have | Мягкое подкрепление. | Детскость. | MVP живет. |
+| AI Layer | Must Have | Персонализация и генерация. | Hallucination/safety. | Нет масштабируемого experience. |
+| Reflection | Must Have | Фиксация действия. | Слишком много письма. | Нет памяти. |
+| Notifications | Must Have | Возврат завтра. | Спам. | Падает D1/D7. |
+
+#### Roadmap: 1 / 3 / 6 / 12 / 24 месяца
+
+| Период | Что появляется | Что исключается | Метрики | Риски |
+| --- | --- | --- | --- | --- |
+| Месяц 1 | Интервью, prototype, landing, concierge MVP, first paid tests. | Нет полноценной разработки, видео, комьюнити. | 20-30 интервью, >70% comprehension, первые готовность платить. | Идея нравится, но не конвертируется в поведение. |
+| Месяц 3 | Mobile MVP: episode, действие, reset, Life Canvas, memory, платный экран, analytics. | Нет social/marketplace/daily video. | Activation >40%, D1 >25%, D7 >10-15%, первые платежи. | Себестоимость visual layer и слабый возврат. |
+| Месяц 6 | Premium seasons, weekly recap, visual tokens, better AI routing, creator tests. | Нет масштабного marketplace. | Trial start >5%, переход из пробного периода в оплату >20%, D30 signal. | Пользователи платят за visual, но не удерживаются. |
+| Месяц 12 | Несколько ICP/рынков, paid acquisition tests, локальный image pipeline, creator seasons. | Социальная сеть только если share/creator loops доказаны. | Повторяемый канал, валовая маржа 70%+, срок окупаемости виден. | CAC выше маржи, churn высокий. |
+| Месяц 24 | Платформа сезонов, deeper personalization, advanced avatar/video premium, international scale. | Любая функция без вклада в возврат/revenue. | D90 cohort, sustainable subscription revenue, scalable content/AI ops. | Сложность продукта размывает ядро. |
+
+#### Investment memo: расширенный skeleton на 10-15 страниц
+
+Инвесторская версия должна быть отдельным приложением к отчету, но ее skeleton уже можно собрать из текущего исследования. Структура: 1) проблема: разрыв между смысл и действие; 2) рынок: wellness/self-improvement/astrology/AI/avatar/progression; 3) решение: life-series with causal avatar progress; 4) почему сейчас: AI personalization + subscription habit + avatar culture; 5) конкуренты: Calm, Finch, Nebula, Replika, Character AI, Headspace; 6) преимущество: причинная петля и season memory; 7) монетизация: Plus, Premium, visual tokens; 8) финмодель: image-first margin и video as premium; 9) GTM: UGC/creator/search/referral; 10) команда: product, mobile, AI, design, growth, смысл expert; 11) риски: generic content, trust, video cost, возврат; 12) сценарии роста: niche wedge -> broader self-growth platform.
+
+#### Final decision: следующие шаги после исследования
+
+После этой версии исследования следующий шаг не “писать еще один отчет”, а запускать validation sprint. Рекомендуемый порядок: 1) за 3-5 дней собрать clickable prototype по экранной карте; 2) провести 20 интервью по четырем сегментам; 3) вручную провести 30-50 человек через 3 дня concierge experience; 4) поставить платный экран/preorder после первого completed loop; 5) пересчитать финмодель по фактическим usage и готовность платить; 6) только после этого принимать решение о mobile MVP бюджете.
+
 Источники для перепроверки технической экономики перед разработкой: OpenAI API pricing https://openai.com/api/pricing/, Anthropic Claude pricing https://docs.anthropic.com/en/docs/about-claude/pricing, Google Gemini API pricing https://ai.google.dev/gemini-api/docs/pricing, DeepSeek API pricing https://api-docs.deepseek.com/quick_start/pricing, HeyGen API цен https://help.heygen.com/en/articles/10060327-heygen-api-pricing-explained, Synthesia pricing https://www.synthesia.io/pricing. Перед бюджетированием нужно заново открыть эти страницы и пересчитать выбранный сценарий по фактическим лимитам.
 
 ## БЛИЖАЙШАЯ ЛОГИКА ПРОВЕРКИ

@@ -4392,6 +4392,98 @@ lines.push(mdTable([
   { key: 'answer', label: 'Финальное решение' }
 ]));
 lines.push('');
+lines.push('### 13. Финальная детализация: День 90, экранная карта, MVP scope и roadmap');
+lines.push('');
+lines.push('Эта секция закрывает последний слой, который нужен для перехода от стратегии к дизайну, ТЗ и roadmap. Здесь фиксируется не визуальный дизайн, а логическая карта продукта: какие экраны нужны, какие данные входят, что пользователь делает, какой результат получает и почему следующий экран вообще существует.');
+lines.push('');
+lines.push('#### День 90: как выглядит идеальный пользователь');
+lines.push('');
+lines.push('Через 90 дней идеальный пользователь АУРЫ не говорит “я пользуюсь приложением с аватарами”. Он говорит иначе: “у меня есть личная система, которая помогает мне замечать периоды жизни, выбирать маленькие действия и видеть, как меняется моя версия себя”. У него уже есть 3-8 завершенных сезонов, архив Life Canvas, повторяющиеся темы, несколько сохраненных weekly recaps и понятное ощущение, что приложение не просто развлекает, а собирает личную траекторию. Если к Дню 90 пользователь не может объяснить ценность другу без слов “прикольная AI-картинка”, продуктовая ставка не сработала.');
+lines.push('');
+lines.push(mdTable([
+  { screen: 'Welcome / promise', task: 'Объяснить “сериал о себе” и безопасную рамку.', input: 'Нет.', action: 'Начать первый опыт.', result: 'Пользователь понимает категорию.', next: 'Privacy / consent', retention: 'Снижает ранний отвал.', monetization: 'Готовит доверие до paywall.' },
+  { screen: 'Privacy / consent', task: 'Объяснить дату рождения, данные и границы обещания.', input: 'Политика данных.', action: 'Дать согласие.', result: 'Снижается trust-risk.', next: 'Birth + state', retention: 'Не пугает чувствительными данными.', monetization: 'Без доверия подписка невозможна.' },
+  { screen: 'Birth + current state', task: 'Собрать дату рождения, имя, состояние, запрос.', input: 'Дата рождения, имя, mood, тема.', action: 'Заполнить короткий профиль.', result: 'AI получает контекст.', next: 'Season choice', retention: 'Персонализация повышает first wow.', monetization: 'Персональный контекст продает deep reads.' },
+  { screen: 'Season choice', task: 'Выбрать 7-дневную тему.', input: 'Запрос, suggested seasons.', action: 'Выбрать сезон.', result: 'Появляется структура недели.', next: 'Daily episode', retention: 'Сезон дает reason to return.', monetization: 'Сезоны становятся paid depth.' },
+  { screen: 'Daily episode', task: 'Дать личный смысл дня.', input: 'Профиль, тема, вчерашняя память.', action: 'Прочитать эпизод.', result: 'Первый инсайт.', next: 'Daily action', retention: 'Daily content hook.', monetization: 'Продолжение эпизодов продается.' },
+  { screen: 'Daily action', task: 'Перевести смысл в действие.', input: 'Эпизод, состояние, уровень сложности.', action: 'Выбрать одно действие.', result: 'Появляется поведенческий шаг.', next: 'Reset', retention: 'Action completion усиливает возвращение.', monetization: 'Платная ценность выглядит честнее.' },
+  { screen: 'Reset', task: 'Снять сопротивление перед действием.', input: 'Действие, состояние.', action: 'Пройти 30-60 сек.', result: 'Готовность к действию.', next: 'Done / reflection', retention: 'Короткий ритуал формирует привычку.', monetization: 'Premium reset packs позже.' },
+  { screen: 'Done / reflection', task: 'Зафиксировать выполнение.', input: 'Действие, эмоция, короткая заметка.', action: 'Отметить done.', result: 'Появляется evidence.', next: 'Avatar change', retention: 'Memory loop.', monetization: 'Архив/recap premium.' },
+  { screen: 'Avatar / Life Canvas', task: 'Показать причинное изменение.', input: 'Действие, эпизод, style state.', action: 'Сохранить/поделиться.', result: 'Видимый прогресс.', next: 'Tomorrow hook', retention: 'Главная emotional anchor.', monetization: 'Visual tokens/premium styles.' },
+  { screen: 'Tomorrow hook / paywall', task: 'Показать продолжение и платную глубину.', input: 'Завершенный loop.', action: 'Вернуться завтра / начать trial.', result: 'D2 или paid intent.', next: 'Next episode / subscription', retention: 'Возврат через историю.', monetization: 'Главный момент оплаты.' },
+  { screen: 'Weekly recap', task: 'Собрать 7 дней в результат.', input: '7 episodes, actions, avatar states.', action: 'Сохранить, поделиться, продолжить.', result: 'Первый успех.', next: 'Next season', retention: 'D7 completion.', monetization: 'Лучший paywall/upsell момент.' },
+  { screen: 'Archive / memory', task: 'Показать историю сезонов.', input: 'Сезоны, темы, заметки, canvas.', action: 'Открыть прошлое/выбрать следующий сезон.', result: 'Долгая ценность.', next: 'Season choice / premium', retention: 'D30/D90.', monetization: 'Premium archive/deep reads.' }
+], [
+  { key: 'screen', label: 'Экран' },
+  { key: 'task', label: 'Задача' },
+  { key: 'input', label: 'Входящие данные' },
+  { key: 'action', label: 'Действие' },
+  { key: 'result', label: 'Результат' },
+  { key: 'next', label: 'Следующий экран' },
+  { key: 'retention', label: 'Удержание' },
+  { key: 'monetization', label: 'Монетизация' }
+]));
+lines.push('');
+lines.push('#### MVP scope: жесткие границы первой версии');
+lines.push('');
+lines.push(mdTable([
+  { group: 'Must Have', items: 'Daily Episode; Daily Action; Reset; Avatar Progress / Life Canvas; Daily Reflection; Memory System; Season System; Analytics; мягкий paywall после ценности.', why: 'Без этого нет причинной петли и нельзя проверить продукт.' },
+  { group: 'Should Have', items: 'Progress System; Weekly Recap; Notifications; Future Self tone; базовые style presets; privacy screen.', why: 'Сильно повышает retention и доверие, но часть можно упростить в concierge MVP.' },
+  { group: 'Could Have', items: 'Achievements; voice reset; premium episode mock; share cards; 2-3 creator season concepts.', why: 'Можно добавить после первых пользователей, если не ломает сроки.' },
+  { group: 'Explicitly Not MVP', items: 'Видео-генерация каждый день; социальная сеть; marketplace; сообщества; глубокая кастомизация; мультиплеер; AI-друзья; коуч-маркетплейс; AR/метавселенная.', why: 'Все это увеличивает бюджет, privacy/safety risk и себестоимость до доказательства петли.' }
+], [
+  { key: 'group', label: 'Группа' },
+  { key: 'items', label: 'Что входит' },
+  { key: 'why', label: 'Почему' }
+]));
+lines.push('');
+lines.push('#### Product mechanics: что нельзя потерять');
+lines.push('');
+lines.push(mdTable([
+  { mechanic: 'Daily Episode', priority: 'Must Have', role: 'Смысл дня.', risk: 'Generic текст убивает доверие.', without: 'Нет daily hook.' },
+  { mechanic: 'Future Self', priority: 'Must Have', role: 'Образ направления.', risk: 'Может звучать токсично как “лучшая версия”.', without: 'Нет героя сериала.' },
+  { mechanic: 'Avatar', priority: 'Must Have', role: 'Видимое изменение.', risk: 'Декоративность или плохое лицо.', without: 'Продукт становится текстовым.' },
+  { mechanic: 'Reset', priority: 'Must Have', role: 'Мост к действию.', risk: 'Слишком медитативно/клинически.', without: 'Действие не выполняется.' },
+  { mechanic: 'Daily Action', priority: 'Must Have', role: 'Поведенческое доказательство.', risk: 'Слишком сложно.', without: 'Нет причинности.' },
+  { mechanic: 'Memory', priority: 'Must Have', role: 'Архив изменений.', risk: 'Слишком тяжелый дневник.', without: 'Нет D7/D30 value.' },
+  { mechanic: 'Seasons', priority: 'Must Have', role: 'Структура недели.', risk: 'Сезоны станут контентной фабрикой.', without: 'Нет финала/продолжения.' },
+  { mechanic: 'Progress', priority: 'Should Have', role: 'Показывает движение.', risk: 'Слишком gamey.', without: 'Слабее ощущение роста.' },
+  { mechanic: 'Achievements', priority: 'Could Have', role: 'Мягкое подкрепление.', risk: 'Детскость.', without: 'MVP живет.' },
+  { mechanic: 'AI Layer', priority: 'Must Have', role: 'Персонализация и генерация.', risk: 'Hallucination/safety.', without: 'Нет масштабируемого experience.' },
+  { mechanic: 'Reflection', priority: 'Must Have', role: 'Фиксация действия.', risk: 'Слишком много письма.', without: 'Нет памяти.' },
+  { mechanic: 'Notifications', priority: 'Must Have', role: 'Возврат завтра.', risk: 'Спам.', without: 'Падает D1/D7.' }
+], [
+  { key: 'mechanic', label: 'Механика' },
+  { key: 'priority', label: 'Приоритет' },
+  { key: 'role', label: 'Роль' },
+  { key: 'risk', label: 'Риск реализации' },
+  { key: 'without', label: 'Если убрать' }
+]));
+lines.push('');
+lines.push('#### Roadmap: 1 / 3 / 6 / 12 / 24 месяца');
+lines.push('');
+lines.push(mdTable([
+  { period: 'Месяц 1', appears: 'Интервью, prototype, landing, concierge MVP, first paid tests.', excluded: 'Нет полноценной разработки, видео, комьюнити.', metrics: '20-30 интервью, >70% comprehension, первые WTP.', risks: 'Идея нравится, но не конвертируется в поведение.' },
+  { period: 'Месяц 3', appears: 'Mobile MVP: episode, action, reset, Life Canvas, memory, paywall, analytics.', excluded: 'Нет social/marketplace/daily video.', metrics: 'Activation >40%, D1 >25%, D7 >10-15%, первые платежи.', risks: 'Себестоимость visual layer и слабый retention.' },
+  { period: 'Месяц 6', appears: 'Premium seasons, weekly recap, visual tokens, better AI routing, creator tests.', excluded: 'Нет масштабного marketplace.', metrics: 'Trial start >5%, trial-to-paid >20%, D30 signal.', risks: 'Пользователи платят за visual, но не удерживаются.' },
+  { period: 'Месяц 12', appears: 'Несколько ICP/рынков, paid acquisition tests, локальный image pipeline, creator seasons.', excluded: 'Социальная сеть только если share/creator loops доказаны.', metrics: 'Повторяемый канал, gross margin 70%+, payback виден.', risks: 'CAC выше маржи, churn высокий.' },
+  { period: 'Месяц 24', appears: 'Платформа сезонов, deeper personalization, advanced avatar/video premium, international scale.', excluded: 'Любая функция без вклада в retention/revenue.', metrics: 'D90 cohort, sustainable subscription revenue, scalable content/AI ops.', risks: 'Сложность продукта размывает ядро.' }
+], [
+  { key: 'period', label: 'Период' },
+  { key: 'appears', label: 'Что появляется' },
+  { key: 'excluded', label: 'Что исключается' },
+  { key: 'metrics', label: 'Метрики' },
+  { key: 'risks', label: 'Риски' }
+]));
+lines.push('');
+lines.push('#### Investment memo: расширенный skeleton на 10-15 страниц');
+lines.push('');
+lines.push('Инвесторская версия должна быть отдельным приложением к отчету, но ее skeleton уже можно собрать из текущего исследования. Структура: 1) проблема: разрыв между meaning и action; 2) рынок: wellness/self-improvement/astrology/AI/avatar/progression; 3) решение: life-series with causal avatar progress; 4) почему сейчас: AI personalization + subscription habit + avatar culture; 5) конкуренты: Calm, Finch, Nebula, Replika, Character AI, Headspace; 6) преимущество: причинная петля и season memory; 7) монетизация: Plus, Premium, visual tokens; 8) финмодель: image-first margin и video as premium; 9) GTM: UGC/creator/search/referral; 10) команда: product, mobile, AI, design, growth, meaning expert; 11) риски: generic content, trust, video cost, retention; 12) сценарии роста: niche wedge -> broader self-growth platform.');
+lines.push('');
+lines.push('#### Final decision: следующие шаги после исследования');
+lines.push('');
+lines.push('После этой версии исследования следующий шаг не “писать еще один отчет”, а запускать validation sprint. Рекомендуемый порядок: 1) за 3-5 дней собрать clickable prototype по экранной карте; 2) провести 20 интервью по четырем сегментам; 3) вручную провести 30-50 человек через 3 дня concierge experience; 4) поставить paywall/preorder после первого completed loop; 5) пересчитать финмодель по фактическим usage и WTP; 6) только после этого принимать решение о mobile MVP бюджете.');
+lines.push('');
 lines.push('Источники для перепроверки технической экономики перед разработкой: OpenAI API pricing https://openai.com/api/pricing/, Anthropic Claude pricing https://docs.anthropic.com/en/docs/about-claude/pricing, Google Gemini API pricing https://ai.google.dev/gemini-api/docs/pricing, DeepSeek API pricing https://api-docs.deepseek.com/quick_start/pricing, HeyGen API pricing https://help.heygen.com/en/articles/10060327-heygen-api-pricing-explained, Synthesia pricing https://www.synthesia.io/pricing. Перед бюджетированием нужно заново открыть эти страницы и пересчитать выбранный сценарий по фактическим лимитам.');
 lines.push('');
 lines.push('## БЛИЖАЙШАЯ ЛОГИКА ПРОВЕРКИ');
