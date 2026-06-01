@@ -4168,6 +4168,29 @@ lines.push(mdTable([
   { key: 'stop', label: 'Когда останавливать/менять' }
 ]));
 lines.push('');
+lines.push('#### Цены провайдеров: что закладывать в расчет');
+lines.push('');
+lines.push('Перед разработкой финмодель нужно пересчитать по live pricing. Для текущего решения достаточно зафиксировать порядок расходов: LLM-текст можно держать дешево, image layer требует лимитов, а video/avatar layer должен быть платным отдельно. Ниже - рабочая таблица по публичным тарифам и рискам.');
+lines.push('');
+lines.push(mdTable([
+  { provider: 'OpenAI', layer: 'Text + images', publicPrice: 'GPT-Image-2: image input $8/MTok, cached $2/MTok, output $30/MTok; text input $5/MTok, cached $1.25/MTok. Realtime voice существенно дороже: audio input $32/MTok, output $64/MTok.', use: 'MVP images и premium-quality текст.', risk: 'Без лимитов изображений и retries cost станет непредсказуемым.', source: 'openai.com/api/pricing' },
+  { provider: 'Claude', layer: 'Premium text / deep reads', publicPrice: 'Claude Haiku/Sonnet/Opus отличаются на порядки; Batch API дает 50% discount; web search отдельно $10/1,000 searches.', use: 'Deep reads, редакторский тон, сложные интерпретации.', risk: 'Sonnet/Opus нельзя использовать безлимитно в daily loop.', source: 'docs.anthropic.com pricing' },
+  { provider: 'Gemini', layer: 'Text / multimodal fallback', publicPrice: 'Gemini Pro до 200k prompt: $1.25 input и $10 output/MTok; Flash/Lite дешевле: в публичной таблице есть $0.15 input и $1.25 output/MTok для легкого слоя.', use: 'Fallback, multimodal, budget variants.', risk: 'Нужно контролировать thinking/output tokens и search grounding.', source: 'ai.google.dev pricing' },
+  { provider: 'DeepSeek', layer: 'Budget text', publicPrice: 'DeepSeek V4 Flash: $0.14 input cache miss и $0.28 output/MTok; cache hit $0.0028/MTok. V4 Pro после discount: $0.435 input и $0.87 output/MTok.', use: 'Черновые генерации, массовый budget слой, A/B prompts.', risk: 'Нужно тестировать русский tone, trust и safety.', source: 'api-docs.deepseek.com' },
+  { provider: 'HeyGen API', layer: 'Hosted avatar video', publicPrice: 'Avatar III около $1/min; Avatar IV Photo $3/min, Digital Twin/Studio $4/min; Video Agent $2/min; Photo/Digital Twin creation $1/call.', use: 'Только premium/token video-avatar и сезонные трейлеры.', risk: 'Ежедневное видео быстро дороже подписки.', source: 'HeyGen API Pricing Explained' },
+  { provider: 'Synthesia', layer: 'Avatar presenter benchmark', publicPrice: 'Планы начинаются около $29/month; API/enterprise зависят от плана.', use: 'Benchmark качества, не основной consumer MVP.', risk: 'Может выглядеть как B2B-training, а не личная магия.', source: 'synthesia.io/pricing' },
+  { provider: 'Tavus', layer: 'Conversational avatar', publicPrice: 'Требует коммерческой проверки под сценарий API.', use: 'Future-self conversation позже.', risk: 'Дорого, сложно, не нужно до proof of retention.', source: 'docs.tavus.io' }
+], [
+  { key: 'provider', label: 'Провайдер' },
+  { key: 'layer', label: 'Слой' },
+  { key: 'publicPrice', label: 'Публичный тариф / ориентир' },
+  { key: 'use', label: 'Как использовать' },
+  { key: 'risk', label: 'Риск для экономики' },
+  { key: 'source', label: 'Источник' }
+]));
+lines.push('');
+lines.push('Расчетный вывод: ежедневный AI-текст даже на 10,000 MAU может оставаться управляемым, если ограничить output и retries. Ежедневные изображения уже требуют лимитов и batching. Ежедневный video-avatar на HeyGen/Tavus-подобных тарифах почти точно не сходится при подписке $7.99-9.99, если не продавать его отдельно как token/premium moment.');
+lines.push('');
 lines.push('### 6. Monetization: конкуренты и итоговая модель АУРЫ');
 lines.push('');
 lines.push(mdTable([
@@ -4202,6 +4225,39 @@ lines.push(mdTable([
 ]));
 lines.push('');
 lines.push('Итоговая модель АУРЫ: free first episode -> Aura Plus subscription for seasons/memory/avatar evolution -> premium visual tokens for expensive scenes -> later season packs/deep reports. Marketplace, community и human coaching не входят в MVP.');
+lines.push('');
+lines.push('#### Конкурентная монетизация: что реально проверять на paywall');
+lines.push('');
+lines.push('Для финального pricing decision недостаточно знать, что у конкурентов “есть подписка”. Нужно вручную открыть paywall и зафиксировать timing, trial, monthly/annual price, что остается бесплатным и какая именно глубина продается. Ниже - практическая карта проверки по ключевым конкурентам.');
+lines.push('');
+lines.push(mdTable([
+  { competitor: 'Calm', free: 'Ограниченный free content; Calm Premium открывает библиотеку.', paid: 'Daily Calm, Sleep Stories, музыка, masterclasses, весь premium library.', price: 'Официальная help-страница отправляет смотреть current regional plans; публичные трекеры часто показывают около $14.99/month или $69.99/year в США.', negative: 'Цена/renewal, ощущение неиспользуемой библиотеки.', aura: 'Не продавать библиотеку; продавать сезон, память и weekly result.' },
+  { competitor: 'Headspace', free: 'Trial/free content зависит от региона и кампании.', paid: 'Meditation, sleep, focus, courses, mental-health companion.', price: 'Проверять current store/web paywall.', negative: 'Цена, “контента много, пользуюсь мало”.', aura: 'Сделать paid value не библиотекой, а продолжением личной истории.' },
+  { competitor: 'Finch', free: 'Базовая self-care петля и pet/progress доступны бесплатно.', paid: 'Косметика, расширенная персонализация, больше items/seasonal content.', price: 'Проверять App Store/Google Play IAP.', negative: 'Цена, ограничения, детскость.', aura: 'Avatar должен быть взрослым Life Canvas, а не игрушкой.' },
+  { competitor: 'Replika', free: 'Базовый companion chat.', paid: 'Advanced relationship modes, voice/video, customization, higher tiers.', price: 'Цены сильно зависят от in-app tier/tests; обязательно снимать paywall.', negative: 'Непрозрачность tiers, изменения функций, цена, trust.', aura: 'Не делать зависимый companion; продавать управляемую глубину и память.' },
+  { competitor: 'Nebula', free: 'Часть horoscope/astrology контента.', paid: 'Персональные разборы, совместимость, прогнозы, premium astrology.', price: 'Проверять store/web paywall.', negative: 'Generic readings, ранний paywall, trust.', aura: 'Не обещать судьбу; продавать мягкую интерпретацию + действие.' },
+  { competitor: 'Character AI', free: 'Core chat остается доступным.', paid: 'c.ai+ обычно около $9.99/month: priority/faster access and extras.', price: 'Проверять official/in-app c.ai+ page.', negative: 'Safety, limits, качество, молодежная аудитория.', aura: 'Не конкурировать как infinite chat; строить структурированный season.' }
+], [
+  { key: 'competitor', label: 'Конкурент' },
+  { key: 'free', label: 'Что бесплатно' },
+  { key: 'paid', label: 'За что платят' },
+  { key: 'price', label: 'Цена / что проверить' },
+  { key: 'negative', label: 'Негатив' },
+  { key: 'aura', label: 'Вывод для АУРЫ' }
+]));
+lines.push('');
+lines.push(mdTable([
+  { tier: 'Free first episode', price: '$0', includes: 'Первый эпизод, одно действие, reset, один Life Canvas след.', why: 'Показать ценность до денег.', risk: 'Если free не дает wow, paywall бессмысленен.' },
+  { tier: 'Aura Plus', price: '$7.99-9.99/month или $39.99-59.99/year', includes: '7-дневные сезоны, память, daily episodes, avatar evolution, weekly recap.', why: 'Основная подписка для retention.', risk: 'Нужен D7 и ощущение результата.' },
+  { tier: 'Aura Premium', price: '$14.99-19.99/month', includes: 'Deep reads, больше visual styles, premium seasons, больше image moments.', why: 'Повысить ARPPU без обязательного видео.', risk: 'Премиум должен реально отличаться от Plus.' },
+  { tier: 'Visual tokens', price: '$2.99-9.99 packs', includes: 'Video-avatar, cinematic trailer, future-self poster, rare scenes.', why: 'Отдельно монетизировать дорогой visual layer.', risk: 'Не превращать АУРУ в AI image/video toy.' }
+], [
+  { key: 'tier', label: 'Тариф АУРЫ' },
+  { key: 'price', label: 'Цена для теста' },
+  { key: 'includes', label: 'Что входит' },
+  { key: 'why', label: 'Зачем' },
+  { key: 'risk', label: 'Риск' }
+]));
 lines.push('');
 lines.push('### 7. Retention research: удержание и отток');
 lines.push('');
@@ -5083,6 +5139,18 @@ const reportText = lines.join('\n')
   .replace(/shared/g, 'отправлен')
   .replace(/paid visual intent/g, 'интерес к платной визуальной глубине')
   .replace(/ежедневную петлю и progression/g, 'ежедневной петли и progression')
+  .replace(/openai\.com\/api\/цен/g, 'openai.com/api/pricing')
+  .replace(/docs\.anthropic\.com\/en\/docs\/about-claude\/цен/g, 'docs.anthropic.com/en/docs/about-claude/pricing')
+  .replace(/ai\.google\.dev\/gemini-api\/docs\/цен/g, 'ai.google.dev/gemini-api/docs/pricing')
+  .replace(/api-docs\.deepseek\.com\/quick_start\/цен/g, 'api-docs.deepseek.com/quick_start/pricing')
+  .replace(/ai\.google\.dev цен/g, 'ai.google.dev pricing')
+  .replace(/Google Gemini API цен/g, 'Google Gemini API pricing')
+  .replace(/DeepSeek API цен/g, 'DeepSeek API pricing')
+  .replace(/OpenAI API цен/g, 'OpenAI API pricing')
+  .replace(/Anthropic Claude цен/g, 'Anthropic Claude pricing')
+  .replace(/Synthesia цен/g, 'Synthesia pricing')
+  .replace(/Основная подписка для возврат\./g, 'Основная подписка для удержания.')
+  .replace(/повторные попытки cost/g, 'себестоимость повторных попыток')
   .replace(/Usage-based по/g, 'По фактическому использованию по')
   .replace(/billing-логику/g, 'логику биллинга')
   .replace(/revenue\/MAU/g, 'выручке/MAU')

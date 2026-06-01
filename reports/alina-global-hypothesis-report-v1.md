@@ -1201,6 +1201,22 @@ flowchart LR
 | Trial-to-paid | 20-30%+ для теплого validation traffic | Нужен первый сигнал willingness to pay. | <10% и нет качественных причин платить. |
 | Runway до первой выручки | 6-12 недель validation + 8-12 недель MVP | Не строить 6 месяцев без денег и сигналов. | Нет preorders/готовность платить после 6 недель. |
 
+#### Цены провайдеров: что закладывать в расчет
+
+Перед разработкой финмодель нужно пересчитать по live цен. Для текущего решения достаточно зафиксировать порядок расходов: LLM-текст можно держать дешево, image layer требует лимитов, а video/avatar layer должен быть платным отдельно. Ниже - рабочая таблица по публичным тарифам и рискам.
+
+| Провайдер | Слой | Публичный тариф / ориентир | Как использовать | Риск для экономики | Источник |
+| --- | --- | --- | --- | --- | --- |
+| OpenAI | Text + images | GPT-Image-2: image input $8/MTok, cached $2/MTok, output $30/MTok; text input $5/MTok, cached $1.25/MTok. Realtime голос существенно дороже: audio input $32/MTok, output $64/MTok. | MVP images и premium-quality текст. | Без лимитов изображений и себестоимость повторных попыток станет непредсказуемым. | openai.com/api/pricing |
+| Claude | Premium text / deep reads | Claude Haiku/Sonnet/Opus отличаются на порядки; Batch API дает 50% discount; web search отдельно $10/1,000 searches. | Deep reads, редакторский тон, сложные интерпретации. | Sonnet/Opus нельзя использовать безлимитно в ежедневную петлю. | docs.anthropic.com цен |
+| Gemini | Text / multimodal fallback | Gemini Pro до 200k prompt: $1.25 input и $10 output/MTok; Flash/Lite дешевле: в публичной таблице есть $0.15 input и $1.25 output/MTok для легкого слоя. | Fallback, multimodal, budget variants. | Нужно контролировать thinking/output tokens и search grounding. | ai.google.dev pricing |
+| DeepSeek | Budget text | DeepSeek V4 Flash: $0.14 input cache miss и $0.28 output/MTok; cache hit $0.0028/MTok. V4 Pro после discount: $0.435 input и $0.87 output/MTok. | Черновые генерации, массовый budget слой, A/B prompts. | Нужно тестировать русский tone, trust и safety. | api-docs.deepseek.com |
+| HeyGen API | Hosted avatar video | Avatar III около $1/min; Avatar IV Photo $3/min, Digital Twin/Studio $4/min; Video Agent $2/min; Photo/Digital Twin creation $1/call. | Только premium/token видео-avatar и сезонные трейлеры. | Ежедневное видео быстро дороже подписки. | HeyGen API Pricing Explained |
+| Synthesia | Avatar presenter бенчмарк | Планы начинаются около $29/month; API/enterprise зависят от плана. | Benchmark качества, не основной consumer MVP. | Может выглядеть как B2B-training, а не личная магия. | synthesia.io/цен |
+| Tavus | Conversational avatar | Требует коммерческой проверки под сценарий API. | Future-self conversation позже. | Дорого, сложно, не нужно до доказательство of возврат. | docs.tavus.io |
+
+Расчетный вывод: ежедневный AI-текст даже на 10,000 MAU может оставаться управляемым, если ограничить output и повторные попытки. Ежедневные изображения уже требуют лимитов и batching. Ежедневный видео-avatar на HeyGen/Tavus-подобных тарифах почти точно не сходится при подписке $7.99-9.99, если не продавать его отдельно как token/premium moment.
+
 ### 6. Монетизация: конкуренты и итоговая модель АУРЫ
 
 | Конкурент | Что бесплатно | За что платят | Стоимость | Что вызывает негатив | Что продлевает подписку |
@@ -1222,6 +1238,26 @@ flowchart LR
 | Human coaching | Высокий чек | Очень высокая | Меняет бизнес-модель. | Won’t Have MVP |
 
 Итоговая модель АУРЫ: free first episode -> Aura Plus subscription for seasons/memory/avatar evolution -> premium visual tokens for expensive scenes -> later season packs/deep reports. Marketplace, community и human coaching не входят в MVP.
+
+#### Конкурентная монетизация: что реально проверять на платный экран
+
+Для финального цен decision недостаточно знать, что у конкурентов “есть подписка”. Нужно вручную открыть платный экран и зафиксировать момент показа, пробный период, monthly/annual price, что остается бесплатным и какая именно глубина продается. Ниже - практическая карта проверки по ключевым конкурентам.
+
+| Конкурент | Что бесплатно | За что платят | Цена / что проверить | Негатив | Вывод для АУРЫ |
+| --- | --- | --- | --- | --- | --- |
+| Calm | Ограниченный free content; Calm Premium открывает библиотеку. | Daily Calm, Sleep Stories, музыка, masterclasses, весь premium library. | Официальная help-страница отправляет смотреть current regional plans; публичные трекеры часто показывают около $14.99/month или $69.99/year в США. | Цена/renewal, ощущение неиспользуемой библиотеки. | Не продавать библиотеку; продавать сезон, память и weekly result. |
+| Headspace | Trial/free content зависит от региона и кампании. | Meditation, sleep, focus, courses, mental-health companion. | Проверять current store/web платный экран. | Цена, “контента много, пользуюсь мало”. | Сделать paid value не библиотекой, а продолжением личной истории. |
+| Finch | Базовая self-care петля и pet/progress доступны бесплатно. | Косметика, расширенная персонализация, больше items/seasonal content. | Проверять App Store/Google Play встроенные покупки. | Цена, ограничения, детскость. | Avatar должен быть взрослым Life Canvas, а не игрушкой. |
+| Replika | Базовый companion chat. | Advanced relationship modes, голос/video, customization, higher tiers. | Цены сильно зависят от in-app tier/tests; обязательно снимать платный экран. | Непрозрачность tiers, изменения функций, цена, trust. | Не делать зависимый companion; продавать управляемую глубину и память. |
+| Nebula | Часть horoscope/astrology контента. | Персональные разборы, совместимость, прогнозы, premium astrology. | Проверять store/web платный экран. | Generic readings, ранний платный экран, trust. | Не обещать судьбу; продавать мягкую интерпретацию + действие. |
+| Character AI | Core chat остается доступным. | c.ai+ обычно около $9.99/month: priority/faster access and extras. | Проверять official/in-app c.ai+ page. | Safety, limits, качество, молодежная аудитория. | Не конкурировать как infinite chat; строить структурированный season. |
+
+| Тариф АУРЫ | Цена для теста | Что входит | Зачем | Риск |
+| --- | --- | --- | --- | --- |
+| Free first episode | $0 | Первый эпизод, одно действие, reset, один Life Canvas след. | Показать ценность до денег. | Если free не дает wow, платный экран бессмысленен. |
+| Aura Plus | $7.99-9.99 в месяц или $39.99-59.99 в год | 7-дневные сезоны, память, daily episodes, avatar evolution, weekly recap. | Основная подписка для удержания. | Нужен D7 и ощущение результата. |
+| Aura Premium | $14.99-19.99/month | Deep reads, больше visual styles, premium seasons, больше image moments. | Повысить средняя выручка на платящего пользователя без обязательного видео. | Премиум должен реально отличаться от Plus. |
+| Visual tokens | $2.99-9.99 packs | Видео-avatar, cinematic trailer, future-self poster, rare scenes. | Отдельно монетизировать дорогой visual layer. | Не превращать АУРУ в AI image/video toy. |
 
 ### 7. Исследование удержания: возврат и отток
 
@@ -1319,7 +1355,7 @@ flowchart LR
 | Метрики остановки? | D1 <10-15%, D7 почти нулевой, пользователи не видят отличие от horoscope/journal/avatar generator, нет готовность платить, video cost ломает маржу. |
 | Решение сейчас? | Не строить большой продукт. Строить image-first MVP/concierge validation на 6 недель, где проверяется одна петля и один платный оффер. |
 
-Источники для перепроверки технической экономики перед разработкой: OpenAI API цен https://openai.com/api/цен/, Anthropic Claude цен https://docs.anthropic.com/en/docs/about-claude/цен, Google Gemini API цен https://ai.google.dev/gemini-api/docs/цен, DeepSeek API цен https://api-docs.deepseek.com/quick_start/цен, HeyGen API цен https://help.heygen.com/en/articles/10060327-heygen-api-pricing-explained, Synthesia цен https://www.synthesia.io/pricing. Перед бюджетированием нужно заново открыть эти страницы и пересчитать выбранный сценарий по фактическим лимитам.
+Источники для перепроверки технической экономики перед разработкой: OpenAI API pricing https://openai.com/api/pricing/, Anthropic Claude pricing https://docs.anthropic.com/en/docs/about-claude/pricing, Google Gemini API pricing https://ai.google.dev/gemini-api/docs/pricing, DeepSeek API pricing https://api-docs.deepseek.com/quick_start/pricing, HeyGen API цен https://help.heygen.com/en/articles/10060327-heygen-api-pricing-explained, Synthesia pricing https://www.synthesia.io/pricing. Перед бюджетированием нужно заново открыть эти страницы и пересчитать выбранный сценарий по фактическим лимитам.
 
 ## БЛИЖАЙШАЯ ЛОГИКА ПРОВЕРКИ
 
