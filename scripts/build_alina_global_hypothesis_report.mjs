@@ -272,6 +272,59 @@ function sumPairs(rows, field) {
     .sort((a, b) => b.count - a.count);
 }
 
+function topList(rows, field, limit = 5) {
+  const totals = new Map();
+  for (const row of rows) {
+    for (const key of clean(row[field]).split('|').map(clean).filter(Boolean)) {
+      totals.set(key, (totals.get(key) || 0) + 1);
+    }
+  }
+  return [...totals.entries()]
+    .map(([key, count]) => ({ key, count }))
+    .sort((a, b) => b.count - a.count || a.key.localeCompare(b.key))
+    .slice(0, limit);
+}
+
+function featureLabelRu(key) {
+  return ({
+    ai: 'AI-персонализация / AI-чат',
+    astrology: 'астрология, horoscope, birth chart',
+    tarot_or_oracle: 'tarot/oracle интерпретации',
+    manifestation_spirituality: 'manifestation / духовные практики',
+    avatar_identity: 'avatar / identity / future-self образ',
+    photo_video_generation: 'фото- и video-генерация',
+    coaching: 'coaching / советы / план роста',
+    habits_streaks: 'habit loop, streak, ежедневные отметки',
+    mindfulness: 'meditation, breathing, reset',
+    journaling_mood: 'дневник, mood tracking, reflection',
+    gaming_progression: 'уровни, XP, квесты, прогресс',
+    social_community: 'социальность / community / sharing'
+  })[key] || key.replace(/_/g, ' ');
+}
+
+function sourceGroupReadableRu(key) {
+  return ({
+    mobile_app_store: 'App Store: карточки приложений, категории, рейтинги, отзывы и ссылки',
+    google_play_or_android: 'Google Play / Android: кросс-проверка карточек и pricing-сигналов',
+    desktop_store: 'Desktop/Mac/PC stores: соседние desktop-продукты и productivity/wellness контекст',
+    steam_pc: 'Steam: PC/gaming продукты как бенчмарк progression и retention механик',
+    itch_web_game: 'itch.io: indie/game эксперименты, avatar/identity и cozy/progression паттерны',
+    browser_extension: 'Chrome Web Store: browser-extension слой и lightweight utility patterns',
+    community_forum: 'Reddit/forum/community: VOC, боли, обходные решения и язык пользователей',
+    company_positioning: 'Сайты компаний/pricing pages: позиционирование, paywall и paid-depth сигналы',
+    unknown_source: 'прочие нормализованные source rows'
+  })[key] || key.replace(/_/g, ' ');
+}
+
+function compactTopApps(rows, limit = 4) {
+  return rows
+    .filter(row => clean(row.app_name))
+    .sort((a, b) => num(b.review_count) - num(a.review_count))
+    .slice(0, limit)
+    .map(row => row.app_name)
+    .join(', ');
+}
+
 function signalLabelRu(key) {
   return ({
     loves_daily_loop: 'пользователям нравится ежедневный ритуал',
@@ -387,6 +440,8 @@ const marketDeepDives = csv('data_processed/russian_market_deep_dives.csv');
 const whitespace = csv('data_processed/russian_whitespace_decision_map.csv');
 const competitors = csv('data_processed/russian_competitor_battlecards.csv');
 const competitorArchetypeRollup = csv('data_processed/global_competitor_archetype_rollup.csv');
+const competitorFeatureRows = csv('data_processed/competitor_feature_matrix.csv');
+const topIntersectionCandidates = csv('data_processed/top_intersection_review_candidates.csv');
 const taxonomyCleanupQueue = csv('data_processed/competitor_taxonomy_cleanup_queue.csv');
 const icp = csv('data_processed/russian_icp_battlecards.csv');
 const voc = csv('data_processed/russian_voc_objection_map.csv');
@@ -407,6 +462,8 @@ const p0ObservedEvidenceIntake = csv('data_processed/p0_observed_evidence_intake
 const readerGlossary = csv('data_processed/russian_reader_glossary.csv');
 const reportReadabilityAudit = csv('data_processed/global_report_readability_audit.csv');
 const sourceQualityAudit = csv('data_processed/global_source_quality_gap_audit.csv');
+const crossSourceSummary = csv('data_processed/cross_source_universe_summary.csv');
+const crossSourceCoverage = csv('data_processed/cross_source_coverage_matrix.csv');
 const marketSizingMethodology = csv('data_processed/global_market_sizing_methodology.csv');
 const marketSensitivityAudit = csv('data_processed/market_model_sensitivity_audit.csv');
 const russianStoryline = csv('data_processed/russian_sequential_storyline.csv');
@@ -1086,6 +1143,38 @@ if (nicheCountRollup.length) {
   ]));
   lines.push('');
 }
+if (crossSourceSummary.length) {
+  const sourceRows = crossSourceSummary
+    .filter(row => clean(row.summary_type) === 'source_group')
+    .sort((a, b) => num(b.raw_rows) - num(a.raw_rows))
+    .slice(0, 9);
+  lines.push('### Откуда взяты данные');
+  lines.push('');
+  lines.push('Данные в отчете не взяты из одного “магического” источника и не являются одной таблицей конкурентов. Это локально сохраненный source-пакет: карточки приложений из магазинов, Android/Google Play кросс-проверка, desktop/browser stores, Steam и itch как бенчмарк механик, Reddit/forum/community сигналы, публичные страницы компаний, pricing/paywall страницы и отдельный registry рыночных источников для TAM/SAM/SOM. Поэтому в отчете постоянно разделяются три уровня: discovery rows, уникализированные объекты и приложения из магазинов.');
+  lines.push('');
+  lines.push(mdTable(sourceRows.map(row => ({
+    source: sourceGroupReadableRu(row.segment),
+    raw: row.raw_rows,
+    dedup: row.dedup_rows,
+    niches: row.unique_niches,
+    read: clean(row.segment) === 'steam_pc' || clean(row.segment) === 'itch_web_game'
+      ? 'используем как бенчмарк механик и saturation, не как прямой TAM АУРЫ'
+      : clean(row.segment) === 'mobile_app_store' || clean(row.segment) === 'google_play_or_android'
+        ? 'ближе всего к конкурентной карте consumer-приложений'
+        : clean(row.segment) === 'community_forum'
+          ? 'используем как язык боли/VOC, не как репрезентативный опрос'
+          : 'поддерживающий слой для проверки позиционирования, pricing или соседних продуктов'
+  })), [
+    { key: 'source', label: 'Семейство источников' },
+    { key: 'raw', label: 'Исходных строк', align: 'right' },
+    { key: 'dedup', label: 'После уникализации', align: 'right' },
+    { key: 'niches', label: 'Ниш' },
+    { key: 'read', label: 'Как использовать' }
+  ]));
+  lines.push('');
+  lines.push('Трассировка источников хранится в локальных файлах: `data_processed/cross_source_universe_dedup.csv`, `data_processed/competitor_feature_matrix.csv`, `data_processed/top100_competitor_review_scorecard.csv`, `data_processed/review_signal_matrix.csv`, `data_processed/russian_source_provenance_index.csv` и `data_processed/market_source_registry.csv`. Важно читать это аккуратно: source rows показывают масштаб и происхождение данных, но финальные продуктовые выводы нельзя усиливать без ручного walkthrough, интервью и прототипных сессий.');
+  lines.push('');
+}
 lines.push('### Что реально нашли по каждой нише: top-приложения');
 lines.push('');
 lines.push('Ниже не внутренняя методология, а конкретная картина рынка: по каждой нише показаны заметные consumer-приложения из уже собранной базы. Это не финальный список прямых конкурентов АУРЫ, но он отвечает на практический вопрос: какие приложения мы нашли, насколько они крупные по отзывам и почему эта ниша важна для гипотезы.');
@@ -1120,6 +1209,60 @@ for (const row of nicheSummary) {
     { key: 'pricing', label: 'Монетизация' },
     { key: 'relevance', label: 'Почему важно для АУРЫ' }
   ], 8));
+  lines.push('');
+}
+if (competitorFeatureRows.length || topIntersectionCandidates.length) {
+  lines.push('### Главные повторяющиеся паттерны в функциях и возможностях');
+  lines.push('');
+  lines.push('Отдельно важно показать не только названия топ-приложений, а то, что у них повторяется внутри продукта. Ниже это прочитано по feature tags, карточкам приложений, review scorecards и top-intersection кандидатам. Это не утверждение, что каждая функция реализована одинаково глубоко: часть сигналов видна из публичных карточек и отзывов, поэтому они дают карту паттернов, а не финальный вывод после ручного прохождения onboarding.');
+  lines.push('');
+
+  const patternRows = nicheSummary.map(row => {
+    const marketId = row.market_id;
+    const featureRows = competitorFeatureRows.filter(item => {
+      const niche = clean(item.niche);
+      return niche === marketId || (marketId === 'gaming_progression' && niche === 'gaming');
+    });
+    const intersectionRows = topIntersectionCandidates.filter(item => {
+      const niche = clean(item.niche);
+      return niche === marketId || (marketId === 'gaming_progression' && niche === 'gaming');
+    });
+    const topFeatures = topList([...featureRows, ...intersectionRows], 'feature_tags', 7)
+      .map(item => `${featureLabelRu(item.key)} (${fmt(item.count)})`)
+      .join('; ');
+    const topAudience = topList(intersectionRows, 'audience_tags', 4)
+      .map(item => `${featureLabelRu(item.key)} (${fmt(item.count)})`)
+      .join('; ');
+    const topExamples = compactTopApps(topAppsByNiche[marketId] || intersectionRows, 4);
+    const opportunity = ({
+      mindfulness: 'Брать короткий reset и эмоциональный вход, но связывать его с действием и изменением avatar/progress.',
+      avatar_identity: 'Не делать “редактор аватаров”: avatar должен быть следом действия и героем личного сериала.',
+      astrology_esoterics: 'Использовать дату рождения/символы как персональный вход, но выводить пользователя в действие, а не оставлять в чтении.',
+      coaching: 'Забирать структуру роста и привычки, но делать ее мягче, короче и менее похожей на task manager.',
+      gaming_progression: 'Брать сезоны, XP, квесты, награды и возврат как механику, но не превращать АУРУ в игру ради игры.'
+    })[marketId] || 'Использовать как соседний паттерн, затем проверять вручную.';
+    return {
+      market: row.ru_name,
+      rows: featureRows.length,
+      candidates: intersectionRows.length,
+      patterns: topFeatures || 'нет достаточных tags',
+      examples: topExamples || 'нет данных',
+      opportunity
+    };
+  });
+
+  lines.push(mdTable(patternRows, [
+    { key: 'market', label: 'Категория' },
+    { key: 'rows', label: 'Строк функций', align: 'right' },
+    { key: 'candidates', label: 'Топ-кандидатов', align: 'right' },
+    { key: 'patterns', label: 'Что повторяется в функциях' },
+    { key: 'examples', label: 'Примеры из топа' },
+    { key: 'opportunity', label: 'Что забираем в АУРУ' }
+  ]));
+  lines.push('');
+  lines.push('Главный вывод из паттернов: рынок уже научил пользователей нескольким вещам. Пользователь ожидает персонализацию, ежедневный якорь, visible progress, reminder/return loop, платную глубину и иногда avatar или AI companion. Но почти везде эти элементы живут раздельно: meditation дает состояние, habit apps дают действие, astrology дает смысл, avatar apps дают образ, gaming дает возвращаемость. Возможность АУРЫ как раз в сборке этих повторяющихся паттернов в одну причинную петлю: смысл -> действие -> reset -> видимое изменение -> следующая серия.');
+  lines.push('');
+  lines.push('Что это значит для MVP: первая версия должна не демонстрировать “много функций”, а доказать, что самые частые паттерны действительно соединяются. Минимальный набор: персональный вход, один daily-ритуал, маленькое действие, короткий reset, avatar/progress feedback, память эпизодов и причина вернуться завтра. Все остальное - social, marketplace, длинные библиотеки контента, глубокая кастомизация и дорогое видео - должно идти после проверки базовой петли.');
   lines.push('');
 }
 if (false && nicheCountReconciliation.length) {
@@ -2340,6 +2483,15 @@ const reportText = lines.join('\n')
   .replace(/действие-tied прогресс/g, 'прогресс, связанный с действием')
   .replace(/может ли прогресс, связанный с действием заменить/g, 'может ли прогресс, связанный с действием, заменить')
   .replace(/расчетное пересечение АУРА/g, 'расчетное пересечение АУРЫ')
+  .replace(/анализ оценочной картыs/g, 'оценочным картам')
+  .replace(/top100_competitor_анализ_оценочной карты\.csv/g, 'top100_competitor_review_scorecard.csv')
+  .replace(/анализ_signal_matrix\.csv/g, 'review_signal_matrix.csv')
+  .replace(/competitor_revenue_косвенный сигнал_анализ\.csv/g, 'competitor_revenue_proxy_review.csv')
+  .replace(/market_source_confidence_анализ\.csv/g, 'market_source_confidence_review.csv')
+  .replace(/market-source-confidence-анализ-v1\.md/g, 'market-source-confidence-review-v1.md')
+  .replace(/avatar-приложениеs/g, 'avatar-приложения')
+  .replace(/ручного ручную проверку/g, 'ручного walkthrough')
+  .replace(/ручного анализ/g, 'ручного review')
   .replace(/прогресс, связанный с действиемion/g, 'видимым прогрессом, связанным с действием')
   .replace(/Differentiate by broader spiritual\/identity scope, softer safety framing, and better reliability around видимым прогрессом, связанным с действием\./g, 'Отличаться более широким identity/spiritual контуром, мягкими границами безопасности и надежной связкой действия с видимым прогрессом.')
   .replace(/full-loop-like кандидаты/g, 'кандидаты с похожей полной петлей')
