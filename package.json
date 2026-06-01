@@ -68,6 +68,8 @@
     "build:alina-sample-style": "python3 scripts/build_alina_sample_style_profile.py",
     "build:global-next-validation-backlog": "node scripts/build_global_next_validation_backlog.mjs",
     "build:aura-mvp-spec": "node scripts/build_aura_mvp_spec.mjs",
+    "build:aura-technical-blueprint": "node scripts/build_aura_technical_blueprint.mjs",
+    "build:aura-gtm-plan": "node scripts/build_aura_gtm_plan.mjs",
     "build:global-hypothesis-docx": "python3 scripts/build_alina_global_hypothesis_docx.py",
     "build:ru-pdf": "python3 scripts/build_russian_narrative_pdf.py",
     "build:visual-pdf": "python3 scripts/build_visual_pdf_report.py",

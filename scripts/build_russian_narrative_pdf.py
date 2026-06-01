@@ -55,6 +55,16 @@ DOCUMENTS = [
         OUTPUT_DIR / "AURA_MVP_SPEC_V1.pdf",
         "AURA MVP Specification v1",
     ),
+    (
+        ROOT / "reports" / "aura-technical-blueprint-v1.md",
+        OUTPUT_DIR / "AURA_TECHNICAL_BLUEPRINT_V1.pdf",
+        "AURA Technical Blueprint v1",
+    ),
+    (
+        ROOT / "reports" / "aura-gtm-plan-v1.md",
+        OUTPUT_DIR / "AURA_GTM_PLAN_V1.pdf",
+        "AURA GTM Plan v1",
+    ),
 ]
 
 
