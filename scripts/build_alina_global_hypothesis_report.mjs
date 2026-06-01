@@ -191,6 +191,34 @@ function coreJobRu(value) {
   })[v] || v;
 }
 
+function prototypeScreenRu(value) {
+  const v = clean(value);
+  return ({
+    'Daily meaning entry': 'Вход в смысл дня',
+    'Tiny context prompt': 'Короткий контекст',
+    'One grounded action': 'Одно конкретное действие',
+    'Short reset': 'Короткий reset',
+    'Action evidence': 'Подтверждение действия',
+    'Identity/avatar feedback': 'Обратная связь через identity/avatar',
+    'Next-day hook': 'Причина вернуться завтра',
+    'Immediate value check': 'Проверка ценности сразу после петли'
+  })[v] || v;
+}
+
+function prototypeSignalRu(value) {
+  const v = clean(value);
+  return ({
+    'Participant can explain why this is personal rather than generic content.': 'Участник может объяснить, почему это ощущается личным, а не общей мотивационной фразой.',
+    'Participant supplies a concrete lived moment or emotional target.': 'Участник дает конкретный эпизод дня или эмоциональную цель.',
+    'Participant sees the action as doable and causally linked to the chosen theme.': 'Участник видит действие как посильное и связанное с выбранной темой.',
+    'Participant feels the reset makes action easier without feeling clinical.': 'Участник чувствует, что reset облегчает действие и не выглядит клиническим.',
+    'Participant accepts lightweight self-report as enough evidence.': 'Участник принимает легкий самоотчет как достаточное подтверждение действия.',
+    'Participant understands action -> identity/avatar causality.': 'Участник понимает причинность: действие меняет identity/avatar.',
+    'Participant wants to return and understands continuity.': 'Участник хочет вернуться и понимает продолжение петли.',
+    'Participant names the integrated loop in their own words.': 'Участник своими словами называет связанную петлю продукта.'
+  })[v] || v;
+}
+
 function screenerRu(value) {
   const v = clean(value);
   return v
@@ -201,6 +229,75 @@ function screenerRu(value) {
     .replace(/Return because progress feels gentle, visible, and emotionally rewarding\./g, 'возвращаться потому, что прогресс ощущается мягким, видимым и эмоционально приятным.')
     .replace(/Get structured guidance that turns intention into accountable practice\./g, 'получать структурную поддержку, которая превращает намерение в регулярную практику.')
     .replace(/See a version of myself change as I make progress\./g, 'видеть, как версия себя меняется вместе с реальным прогрессом.');
+}
+
+function kvPairs(value) {
+  return clean(value).split('|')
+    .map(part => {
+      const [key, rawCount] = part.split(':');
+      return { key: clean(key), count: num(rawCount) };
+    })
+    .filter(item => item.key);
+}
+
+function sumPairs(rows, field) {
+  const totals = new Map();
+  for (const row of rows) {
+    for (const item of kvPairs(row[field])) {
+      totals.set(item.key, (totals.get(item.key) || 0) + item.count);
+    }
+  }
+  return [...totals.entries()]
+    .map(([key, count]) => ({ key, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+function signalLabelRu(key) {
+  return ({
+    loves_daily_loop: 'пользователям нравится ежедневный ритуал',
+    loves_avatar_progress: 'пользователям нравится avatar/progress feedback',
+    loves_emotional_support: 'ценится эмоциональная поддержка',
+    content_depth_request: 'люди просят больше глубины, настроек и персонализации',
+    pricing_complaint: 'есть жалобы на цену или подписку',
+    churn_signal: 'видны причины оттока',
+    quality_bug_complaint: 'сбои ломают доверие и ритуал',
+    trust_accuracy_complaint: 'есть жалобы на точность и доверие'
+  })[key] || key.replace(/_/g, ' ');
+}
+
+function jtbdLabelRu(key) {
+  return ({
+    jtbd_daily_anchor: 'получить ежедневный якорь',
+    jtbd_make_growth_visible: 'сделать рост видимым',
+    jtbd_structure_self_improvement: 'структурировать саморазвитие',
+    jtbd_belonging_accountability: 'чувствовать поддержку и ответственность',
+    jtbd_fast_emotional_reset: 'быстро эмоционально перезагрузиться',
+    jtbd_feel_seen_personalized: 'почувствовать, что продукт видит именно меня'
+  })[key] || key.replace(/_/g, ' ');
+}
+
+function painLabelRu(key) {
+  return ({
+    pain_content_depth_customization: 'не хватает глубины и кастомизации',
+    pain_subscription_value: 'подписка не кажется достаточно ценной',
+    pain_signup_access_friction: 'вход и доступ создают трение',
+    pain_reliability_breaks_ritual: 'сбои ломают ежедневный ритуал',
+    pain_trust_accuracy_safety: 'есть риск доверия, точности и безопасности',
+    pain_unclear_game_loop: 'игровая петля считывается неясно'
+  })[key] || key.replace(/_/g, ' ');
+}
+
+function retentionTagRu(key) {
+  return ({
+    daily_loop: 'ежедневная петля',
+    streaks: 'streak',
+    xp_levels: 'уровни/XP',
+    avatar_feedback: 'avatar feedback',
+    quests_challenges: 'квесты и челленджи',
+    journaling_reflection: 'дневник и рефлексия',
+    social: 'социальная поддержка',
+    reminders_habits: 'напоминания и привычки'
+  })[key] || key.replace(/_/g, ' ');
 }
 
 function nextActionRu(value) {
@@ -400,6 +497,16 @@ const gateByHypothesis = Object.fromEntries(gateCards.map(row => [row.hypothesis
 const fieldByStep = Object.fromEntries(fieldSessionKit.map(row => [row.step_id, row]));
 const prototypeMetricById = Object.fromEntries(prototypeScorecard.map(row => [row.metric_id, row]));
 const vocByTheme = Object.fromEntries(voc.map(row => [row.theme_id, row]));
+const competitorSignalRows = competitors.length ? competitors : [];
+const reviewSignalSummary = sumPairs(competitorSignalRows, 'top_review_signals').slice(0, 8);
+const reviewJtbdSummary = sumPairs(competitorSignalRows, 'top_review_jtbd').slice(0, 8);
+const reviewPainSummary = sumPairs(competitorSignalRows, 'top_review_pains').slice(0, 8);
+const avatarCompetitorRows = competitorSignalRows
+  .filter(row => clean(row.retention_tags).includes('avatar_feedback') || clean(row.top_review_signals).includes('loves_avatar_progress') || clean(row.archetype).includes('avatar'))
+  .slice(0, 10);
+const avatarSpec = fs.existsSync('docs/strategy/avatar-loop-spec.md')
+  ? fs.readFileSync('docs/strategy/avatar-loop-spec.md', 'utf8')
+  : '';
 
 const validationQuestionnaire = [
   {
@@ -1035,7 +1142,7 @@ lines.push(mdTable(marketDeepDives.map(row => ({
   { key: 'market', label: 'Рынок' },
   { key: 'sam', label: 'SAM base', align: 'right' },
   { key: 'money', label: 'Денежный вывод' },
-  { key: 'score', label: 'Score', align: 'right' },
+  { key: 'score', label: 'Оценка', align: 'right' },
   { key: 'boundary', label: 'Граница' }
 ]));
 lines.push('');
@@ -1209,10 +1316,85 @@ lines.push(mdTable(topCompetitors.map(row => ({
   { key: 'check', label: 'Что проверить' }
 ]));
 lines.push('');
-lines.push('Гипотеза №3: востребованным может стать не отдельный mindfulness, habit, astrology или avatar product, а связанная система, где смысл быстро превращается в действие, а действие становится видимым. Главный риск для этой гипотезы - скрытый прямой клон внутри onboarding P0-конкурентов, прежде всего Shepherd: Spiritual Bible BFF.');
+lines.push('### Что видно внутри приложений и отзывов');
+lines.push('');
+lines.push('Если смотреть не только на категории приложений, а на то, за что пользователи хвалят и ругают близкие продукты, картина становится конкретнее. Люди возвращаются не просто “в wellness” или “в коучинг”. Они ищут ежедневный якорь, ощущение движения, эмоциональную поддержку, персонализацию и доказательство, что маленькое действие действительно что-то меняет. Поэтому АУРА должна конкурировать не количеством функций, а качеством одной понятной петли.');
+lines.push('');
+lines.push(mdTable(reviewSignalSummary.map(row => ({
+  signal: signalLabelRu(row.key),
+  count: fmt(row.count),
+  read: row.key === 'loves_avatar_progress'
+    ? 'avatar/progress уже считывается пользователями как ценность, но только если он не декоративный.'
+    : row.key === 'content_depth_request'
+      ? 'после первого value moment пользователи хотят больше глубины, настроек и персонализации.'
+      : row.key === 'pricing_complaint'
+        ? 'платная модель должна появляться после понятной ценности, иначе вызывает сопротивление.'
+        : 'это повторяющийся сигнал из отзывов и конкурентных карточек.'
+})), [
+  { key: 'signal', label: 'Что повторяется в отзывах' },
+  { key: 'count', label: 'Сигналов', align: 'right' },
+  { key: 'read', label: 'Что это значит для АУРЫ' }
+]));
+lines.push('');
+lines.push(mdTable(reviewJtbdSummary.slice(0, 6).map(row => ({
+  job: jtbdLabelRu(row.key),
+  count: fmt(row.count),
+  implication: row.key === 'jtbd_make_growth_visible'
+    ? 'главный мост к avatar-механике: человек хочет видеть, что движение произошло.'
+    : row.key === 'jtbd_daily_anchor'
+      ? 'продукт должен быть коротким ежедневным ритуалом, а не тяжелой системой.'
+      : row.key === 'jtbd_feel_seen_personalized'
+        ? 'персонализация должна ощущаться точной, но не предсказательной и не небезопасной.'
+        : 'это поведенческая задача, которую уже закрывают соседние продукты.'
+})), [
+  { key: 'job', label: 'Что человек пытается сделать' },
+  { key: 'count', label: 'Сигналов', align: 'right' },
+  { key: 'implication', label: 'Как это влияет на продукт' }
+]));
+lines.push('');
+lines.push(mdTable(reviewPainSummary.slice(0, 6).map(row => ({
+  pain: painLabelRu(row.key),
+  count: fmt(row.count),
+  implication: row.key === 'pain_reliability_breaks_ritual'
+    ? 'если ежедневный ритуал ломается технически, доверие к эмоциональному продукту падает сильнее.'
+    : row.key === 'pain_subscription_value'
+      ? 'подписка должна продавать глубину после понятной бесплатной петли.'
+      : row.key === 'pain_trust_accuracy_safety'
+        ? 'AI/spiritual/identity слой обязан иметь мягкие границы и не обещать лишнего.'
+        : 'это риск, который должен быть учтен в MVP и первых интервью.'
+})), [
+  { key: 'pain', label: 'Что раздражает или ломает опыт' },
+  { key: 'count', label: 'Сигналов', align: 'right' },
+  { key: 'implication', label: 'Что нельзя повторить в АУРЕ' }
+]));
+lines.push('');
+lines.push('Практический вывод из этого слоя: пользователю мало получить “красивый инсайт”. Он должен увидеть, что инсайт превратился в действие, действие было достаточно маленьким, а результат стал видимым. Именно здесь avatar становится не украшением, а способом доказать пользователю изменение.');
+lines.push('');
+lines.push('### Avatar / identity как центральная ставка');
+lines.push('');
+lines.push('Avatar в АУРЕ должен быть не картинкой профиля и не косметической наградой. Его роль - визуализировать будущую версию пользователя и связывать ежедневные действия с видимым изменением. В конкурентных карточках регулярно встречаются обратная связь через avatar/progress, уровни, XP, streak, квесты, дневник и напоминания. Но главный вопрос остается открытым: меняется ли образ пользователя именно потому, что он сделал действие, или просто потому, что приложение хочет удержать его еще на день.');
+lines.push('');
+lines.push(mdTable(avatarCompetitorRows.map(row => ({
+  app: row.app_name,
+  signals: kvPairs(row.top_review_signals).slice(0, 3).map(item => `${signalLabelRu(item.key)} (${fmt(item.count)})`).join('; '),
+  mechanics: clean(row.retention_tags).split('|').map(retentionTagRu).slice(0, 5).join(', '),
+  opening: row.alina_opening_ru
+    .replace('Differentiate by broader spiritual/identity scope, softer safety framing, and better reliability around action-tied progress.', 'Отличаться более широким identity/spiritual контуром, мягкими границами безопасности и надежной связкой действия с видимым прогрессом.')
+    .replace('Make the avatar causally respond to completed daily action, not just exist as profile or decorative identity.', 'Сделать так, чтобы avatar причинно реагировал на завершенное действие, а не существовал как декоративный профиль.')
+    .replace('Demonstrate daily-loop value before paywall; monetize depth and advanced personalization.', 'Сначала показать ценность ежедневной петли, а платную глубину строить на расширенной персонализации.')
+})), [
+  { key: 'app', label: 'Пример' },
+  { key: 'signals', label: 'Что видно в отзывах' },
+  { key: 'mechanics', label: 'Механики возврата' },
+  { key: 'opening', label: 'Вывод для АУРЫ' }
+]));
+lines.push('');
+lines.push('Из avatar-spec следует рабочая модель: пользователь дает входной сигнал дня, выбирает маленькое действие, проходит короткий reset, а avatar отвечает как “лучшая версия себя” и меняется микроскопически, но причинно. Важно не обещать магического преображения и не уходить в диагнозы. Avatar должен показывать: “ты сделал шаг, и это стало частью твоей версии себя”.');
+lines.push('');
+lines.push('Гипотеза №3: востребованной может стать не отдельная медитация, привычка, astrology-механика или avatar-продукт, а связанная система, где смысл быстро превращается в действие, а действие становится видимым. Главный риск для этой гипотезы - скрытый прямой клон внутри первого пользовательского опыта P0-конкурентов, прежде всего Shepherd: Spiritual Bible BFF.');
 lines.push('');
 interimConclusion('Итог по конкурентам', [
-  'Конкурентная карта не доказывает, что поле свободно. Наоборот, она показывает плотную среду, где почти каждая часть петли уже кем-то закрывается. Сила гипотезы Alina появляется только в более узкой формулировке: возможно, рынок занят отдельными функциями, но не занят причинной daily-loop системой.',
+  'Конкурентная карта не доказывает, что поле свободно. Наоборот, она показывает плотную среду, где почти каждая часть петли уже кем-то закрывается. Сила гипотезы Alina появляется только в более узкой формулировке: возможно, рынок занят отдельными функциями, но не занят причинной системой ежедневного ритуала.',
   'Значит, следующий вопрос звучит не “есть ли конкуренты”, а “где именно петля разрывается”. Поэтому отчет переходит от списка конкурентов к whitespace: какие элементы у рынка есть, каких не хватает, и где у Alina может быть отличие.'
 ]);
 lines.push('## ГДЕ ДЫРЫ И ВОЗМОЖНОСТЬ ОТЛИЧИТЬСЯ');
@@ -1232,11 +1414,11 @@ lines.push(mdTable(marketDeepDives.map(row => {
   { key: 'read', label: 'Как читать' }
 ]));
 lines.push('');
-lines.push('Наиболее перспективная формулировка белого пятна: не “новый wellness app”, а короткая трансформационная петля с причинным visual feedback. Если прогресс меняется произвольно, продукт станет декоративным avatar toy. Если действие никак не связано со смыслом, продукт станет обычным habit tracker. Если reset живет отдельно, продукт станет библиотекой практик. Поэтому отличие должно проверяться именно на связке, а не на отдельных функциях.');
+lines.push('Наиболее перспективная формулировка белого пятна: не “новое wellness-приложение”, а короткая трансформационная петля с причинной визуальной обратной связью. Если прогресс меняется произвольно, продукт станет декоративной avatar-игрушкой. Если действие никак не связано со смыслом, продукт станет обычным трекером привычек. Если reset живет отдельно, продукт станет библиотекой практик. Поэтому отличие должно проверяться именно на связке, а не на отдельных функциях.');
 lines.push('');
 lines.push('## СВЯЗКА WHITESPACE И АУДИТОРИИ');
 lines.push('');
-lines.push('Белое пятно нельзя оценивать отдельно от аудитории. Даже если full-loop candidates редки, это становится продуктовой возможностью только там, где есть люди с recent behavior, current workaround и языком боли. Поэтому следующий слой соединяет H3 и H5: по каждому мировому направлению видно, какой разрыв найден в конкурентной среде, какой ICP туда ложится и какой первый validation move нужен.');
+lines.push('Белое пятно нельзя оценивать отдельно от аудитории. Даже если кандидаты с похожей полной петлей редки, это становится продуктовой возможностью только там, где есть люди с недавним поведением, текущими обходными решениями и языком боли. Поэтому следующий слой соединяет H3 и H5: по каждому мировому направлению видно, какой разрыв найден в конкурентной среде, какой сегмент туда ложится и какой первый шаг проверки нужен.');
 lines.push('');
 lines.push(mdTable(whitespaceAudienceSynthesis.map(row => ({
   market: row.market_ru,
@@ -1252,11 +1434,11 @@ lines.push(mdTable(whitespaceAudienceSynthesis.map(row => ({
   { key: 'move', label: 'Первый validation move' }
 ]));
 lines.push('');
-lines.push('Практический вывод: mindfulness и avatar/identity выглядят как самые чистые whitespace-поля по редкости full-loop candidates, но они все равно требуют walkthrough. Astrology/esoterics и coaching дают сильную аудиторию и деньги, но full-loop rate выше, поэтому claim о белом пятне там слабее. Gaming остается benchmark механик, а не прямой рынок.');
+lines.push('Практический вывод: mindfulness/reset и avatar/identity выглядят как самые чистые поля белого пятна по редкости кандидатов с похожей полной петлей, но они все равно требуют ручной проверки. Astrology/esoterics и coaching дают сильную аудиторию и деньги, но доля полной петли выше, поэтому вывод о белом пятне там слабее. Gaming остается источником механик, а не прямым рынком.');
 lines.push('');
 interimConclusion('Итог по whitespace и аудитории', [
-  'Белое пятно выглядит не как пустой рынок, а как узкая недособранная петля. Это более сильная и более честная формулировка: Alina не должна победить все wellness, coaching, astrology, avatar и gaming-продукты; ей нужно доказать, что связка meaning -> tiny action -> reset -> visible progress дает пользователю другой опыт.',
-  'Но даже хороший whitespace ничего не стоит без аудитории с recent behavior. Поэтому следующий блок отвечает на вопрос: кто уже живет рядом с этой задачей, какие текущие решения использует и с кого начинать интервью.'
+  'Белое пятно выглядит не как пустой рынок, а как узкая недособранная петля. Это более сильная и более честная формулировка: Alina не должна победить все wellness, coaching, astrology, avatar и gaming-продукты; ей нужно доказать, что связка смысл -> маленькое действие -> reset -> видимый прогресс дает пользователю другой опыт.',
+  'Но даже хорошее белое пятно ничего не стоит без аудитории с недавним поведением. Поэтому следующий блок отвечает на вопрос: кто уже живет рядом с этой задачей, какие текущие решения использует и с кого начинать интервью.'
 ]);
 lines.push('## АУДИТОРИЯ, ИНТЕРВЬЮ И ГИПОТЕЗА #4');
 lines.push('');
@@ -1270,13 +1452,13 @@ lines.push(mdTable(icp.map(row => ({
 })), [
   { key: 'segment', label: 'Сегмент' },
   { key: 'priority', label: 'Приоритет' },
-  { key: 'score', label: 'Score', align: 'right' },
+  { key: 'score', label: 'Оценка', align: 'right' },
   { key: 'job', label: 'Ключевая задача' }
 ]));
 lines.push('');
-lines.push(`Первые интервью и прототипные сессии нужно начинать с двух P0-сегментов: ${p0Icp.map(row => row.segment_name).join(' и ') || 'нет данных'}. Первый проверяет, доверяет ли пользователь personal meaning enough to act. Второй проверяет, может ли action-tied progress заменить обычный checklist или streak pressure.`);
+lines.push(`Первые интервью и прототипные сессии нужно начинать с двух P0-сегментов: ${p0Icp.map(row => row.segment_name).join(' и ') || 'нет данных'}. Первый проверяет, доверяет ли пользователь личному смыслу настолько, чтобы перейти к действию. Второй проверяет, может ли прогресс, связанный с действием, заменить обычный чеклист или давление streak.`);
 lines.push('');
-lines.push('Гипотеза №4: primary-аудитория Alina находится среди людей, которые уже имеют recent behavior вокруг daily ritual, progress, reset или personal meaning, и которым нужна не новая функция, а более короткий и связанный цикл изменения.');
+lines.push('Гипотеза №4: первичная аудитория Alina находится среди людей, у которых уже есть недавнее поведение вокруг ежедневного ритуала, прогресса, reset или личного смысла, и которым нужна не новая функция, а более короткий и связанный цикл изменения.');
 lines.push('');
 lines.push('## КЛЮЧЕВЫЕ НАБЛЮДЕНИЯ И ВОПРОСЫ ДЛЯ ПРОВЕРКИ');
 lines.push('');
@@ -1286,25 +1468,73 @@ lines.push(mdTable(voc.slice(0, 8).map(row => ({
   probe: row.interview_probe_ru
 })), [
   { key: 'theme', label: 'Тема' },
-  { key: 'signals', label: 'Signals', align: 'right' },
+  { key: 'signals', label: 'Сигналов', align: 'right' },
   { key: 'probe', label: 'Вопрос для интервью' }
 ]));
 lines.push('');
 lines.push('Вопросы для следующей проверки должны быть прикладными, как в образце: какой последний цифровой ритуал человек реально использовал; что стало слишком тяжелым или давящим; за какую глубину он уже платит; какая персональная подсказка показалась точной; как он объяснил бы продукт другу; что сделало бы продукт небезопасным, cringe или манипулятивным.');
 lines.push('');
 interimConclusion('Итог по аудитории и интервью', [
-  'Пока самая рабочая аудитория описывается как digital ritual users, но это не финальный ICP. Это набор людей, у которых уже есть поведение рядом с проблемой: они возвращаются к приложениям, ищут смысл или reset, используют трекеры, paid guidance или персонализацию и могут рассказать конкретный последний эпизод.',
+  'Пока самая рабочая аудитория описывается как digital ritual users, но это не финальный ICP. Это набор людей, у которых уже есть поведение рядом с проблемой: они возвращаются к приложениям, ищут смысл или reset, используют трекеры, платные подсказки или персонализацию и могут рассказать конкретный последний эпизод.',
   'Именно поэтому продуктовую модель нельзя собирать из желаний команды. Она должна быть следующей гипотезой, выведенной из рынков, конкурентов, whitespace и первых вопросов к пользователям.'
 ]);
 lines.push('## ИТОГОВАЯ МОДЕЛЬ ПРОДУКТА И ГИПОТЕЗА #5');
 lines.push('');
-lines.push('По текущим данным продуктовая модель должна опираться на несколько столпов. Первый столп - персональное отражение дня, которое не выглядит generic motivation. Второй - одно маленькое действие, связанное со смыслом. Третий - короткий reset, который снижает трение перед действием. Четвертый - visible progress или avatar/identity feedback, который меняется причинно. Пятый - мягкий next-day hook без наказания и streak anxiety.');
+lines.push('По текущим данным продуктовая модель должна опираться на несколько столпов. Первый столп - персональное отражение дня, которое не выглядит общей мотивационной фразой. Второй - одно маленькое действие, связанное со смыслом. Третий - короткий reset, который снижает трение перед действием. Четвертый - видимый прогресс или avatar/identity feedback, который меняется причинно. Пятый - мягкая причина вернуться завтра без наказания и тревоги из-за streak.');
+lines.push('');
+lines.push('Если расширять ядро, его стоит описывать не как набор экранов, а как последовательность внутренних состояний пользователя. Сначала человек должен почувствовать: “это про меня сегодня”. Затем он должен увидеть одно действие, которое реально можно сделать. После этого ему нужен короткий reset, чтобы снизить сопротивление. И только затем появляется avatar/progress: не как приз, а как доказательство, что действие стало частью новой версии себя.');
+lines.push('');
+lines.push(mdTable([
+  {
+    layer: '1. Личное отражение',
+    user: 'Пользователь ищет не общий совет, а точное попадание в состояние дня.',
+    product: 'АУРА дает мягкий смысловой вход: тема дня, короткий вопрос, один эмоциональный фокус.',
+    risk: 'Если звучит слишком общо или слишком эзотерически, доверие падает сразу.'
+  },
+  {
+    layer: '2. Маленькое действие',
+    user: 'Пользователь не хочет обслуживать большую систему, ему нужен один посильный шаг.',
+    product: 'Продукт переводит смысл в действие, которое можно выполнить сейчас или сегодня.',
+    risk: 'Если действие выглядит случайной задачей, АУРА превращается в habit tracker.'
+  },
+  {
+    layer: '3. Короткий reset',
+    user: 'Перед действием часто есть тревога, усталость или внутреннее сопротивление.',
+    product: 'Reset снижает трение и помогает перейти от мысли к движению.',
+    risk: 'Если reset живет отдельно, продукт становится очередной библиотекой практик.'
+  },
+  {
+    layer: '4. Avatar/progress',
+    user: 'Пользователь хочет видеть, что шаг что-то изменил.',
+    product: 'Avatar меняется причинно: маленький визуальный сдвиг связан с выполненным действием.',
+    risk: 'Если avatar меняется произвольно, он становится декорацией и теряет силу.'
+  },
+  {
+    layer: '5. Возврат завтра',
+    user: 'Пользователь должен понимать, зачем возвращаться, но без наказания за пропуск.',
+    product: 'АУРА показывает мягкую историю движения: что изменилось сегодня и какой следующий шаг может быть завтра.',
+    risk: 'Если добавить давление streak, продукт попадет в отвергаемый productivity-паттерн.'
+  },
+  {
+    layer: '6. Платная глубина',
+    user: 'Платить готовы не за обещание, а за глубину после понятного первого момента ценности.',
+    product: 'Платная часть может давать историю изменений, более богатый выбор avatar-настроек, персональные ритуалы и расширенную рефлексию.',
+    risk: 'Если paywall появляется до ценности, денежный аргумент ослабевает.'
+  }
+], [
+  { key: 'layer', label: 'Слой ядра' },
+  { key: 'user', label: 'Что происходит у пользователя' },
+  { key: 'product', label: 'Что должна делать АУРА' },
+  { key: 'risk', label: 'Что сломает гипотезу' }
+]));
+lines.push('');
+lines.push('В таком виде центральная продуктовая ставка звучит жестче: АУРА должна доказать не “у нас есть avatar”, а “avatar показывает изменение личности через действие”. Это разные продукты. Первый конкурирует с редактором аватарок и игровыми наградами. Второй конкурирует за глубинную пользовательскую задачу: увидеть, что маленький шаг сегодня меняет мою траекторию.');
 lines.push('');
 lines.push(mdTable(productLoop.map(row => ({
   step: row.step,
-  screen: row.screen_name,
+  screen: prototypeScreenRu(row.screen_name),
   role: row.role_ru,
-  success: row.expected_signal_ru
+  success: prototypeSignalRu(row.expected_signal_ru)
 })), [
   { key: 'step', label: 'Шаг' },
   { key: 'screen', label: 'Экран' },
@@ -1618,9 +1848,11 @@ const reportText = lines.join('\n')
   .replace(/directional рыночно-денежный anchor/g, 'направленный рыночный ориентир')
   .replace(/готовность платить evidence/g, 'доказательства готовности платить')
   .replace(/venture вывод/g, 'venture-вывод')
+  .replace(/маленький validation business/g, 'маленький проверочный бизнес')
   .replace(/venture-relevant/g, 'venture-релевантно')
   .replace(/distribution, возврат/g, 'дистрибуции и возврата')
   .replace(/недавнее поведение интервью/g, 'интервью о недавнем поведении')
+  .replace(/по недавнее поведение/g, 'по недавнему поведению')
   .replace(/где есть люди с недавнее поведение/g, 'где есть люди с недавним поведением')
   .replace(/current workaround/g, 'текущими обходными решениями')
   .replace(/validation tests/g, 'проверочные вопросы')
@@ -1639,11 +1871,24 @@ const reportText = lines.join('\n')
   .replace(/personal смысл enough to act/g, 'личному смыслу достаточно, чтобы перейти к действию')
   .replace(/personal смысл/g, 'личный смысл')
   .replace(/действие-tied progress/g, 'прогресс, связанный с действием')
+  .replace(/прогресс, связанный с действиемion/g, 'видимым прогрессом, связанным с действием')
+  .replace(/Differentiate by broader spiritual\/identity scope, softer safety framing, and better reliability around видимым прогрессом, связанным с действием\./g, 'Отличаться более широким identity/spiritual контуром, мягкими границами безопасности и надежной связкой действия с видимым прогрессом.')
   .replace(/full-loop-like кандидаты/g, 'кандидаты с похожей полной петлей')
+  .replace(/full-loop candidates/g, 'кандидаты с похожей полной петлей')
+  .replace(/нужен P0 ручную проверку/g, 'нужна P0-ручная проверка')
+  .replace(/high-risk конкурентов/g, 'конкурентов высокого риска')
+  .replace(/high-risk competitor ручную проверку/g, 'ручную проверку конкурентов высокого риска')
+  .replace(/high-risk substitutes/g, 'близких конкурентов высокого риска')
+  .replace(/compare-сегмент/g, 'сегмент для сравнения')
   .replace(/narrow directional whitespace/g, 'узкое направленное белое пятно')
   .replace(/без нового evidence/g, 'без новых доказательств')
   .replace(/ручного evidence/g, 'ручного доказательства')
   .replace(/validation move/g, 'шаг проверки')
+  .replace(/После ручную проверку конкурента/g, 'После ручной проверки конкурента')
+  .replace(/Ручной ручную проверку/g, 'Ручная проверка')
+  .replace(/behavior-tied identity\/avatar progression/g, 'identity/avatar progress, связанный с действием')
+  .replace(/Walkthrough показывает/g, 'Ручная проверка показывает')
+  .replace(/full-loop substitutes/g, 'конкурентов с полной петлей')
   .replace(/Action evidence/g, 'Доказательство действия')
   .replace(/self-report/g, 'самоотчет')
   .replace(/Participant accepts lightweight самоотчет as enough доказательство\./g, 'Участник принимает легкий самоотчет как достаточное подтверждение действия.')
@@ -1655,6 +1900,16 @@ const reportText = lines.join('\n')
   .replace(/parent pages/g, 'родительским страницам')
   .replace(/login-gated/g, 'закрытым за логином')
   .replace(/daily ritual/g, 'ежедневного ритуала')
+  .replace(/generic motivation/g, 'общая мотивационная фраза')
+  .replace(/ручную проверку-слоты/g, 'слоты ручной проверки')
+  .replace(/Для крупном платном конкурентов/g, 'Для крупных платных конкурентов')
+  .replace(/free момента ценности/g, 'бесплатного момента ценности')
+  .replace(/платную глубину не связана/g, 'платная глубина не связана')
+  .replace(/распространенные конкурентов с полной петлей/g, 'распространенных конкурентов с полной петлей')
+  .replace(/связанный с действием остается/g, 'связанный с действием, остается')
+  .replace(/Аудитория и текущими обходными решениями/g, 'Аудитория и текущие обходные решения')
+  .replace(/текущими обходными решениями и язык боли/g, 'текущее обходное решение и язык боли')
+  .replace(/конкурентных ручную проверку/g, 'ручной проверки конкурентов')
   .replace(/progress, reset/g, 'прогресса, reset')
   .replace(/broad market/g, 'широкая рыночная')
   .replace(/sampling/g, 'выборочная проверка')
