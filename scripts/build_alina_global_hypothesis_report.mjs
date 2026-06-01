@@ -373,6 +373,35 @@ function retentionTagRu(key) {
   })[key] || key.replace(/_/g, ' ');
 }
 
+function tagListRu(value) {
+  return clean(value)
+    .split('|')
+    .filter(Boolean)
+    .slice(0, 6)
+    .map(tag => retentionTagRu(tag)
+      .replace(/free_entry/g, 'бесплатный вход')
+      .replace(/premium/g, 'premium')
+      .replace(/credits_or_consumables/g, 'кредиты/расходники')
+      .replace(/enterprise_or_human_service/g, 'человеческий или enterprise-слой'))
+    .join(', ');
+}
+
+function compactSignalRu(value) {
+  return clean(value)
+    .split('|')
+    .filter(Boolean)
+    .slice(0, 5)
+    .map(item => {
+      const [key, count] = item.split(':');
+      const base = key.startsWith('pain_') ? painLabelRu(key) : key.startsWith('jtbd_') ? jtbdLabelRu(key) : signalLabelRu(key);
+      const label = base
+        .replace('пользователям нравится avatar/progress feedback', 'нравится avatar/progress')
+        .replace('люди просят больше глубины, настроек и персонализации', 'просят глубину/настройку');
+      return count ? `${label}: ${count}` : label;
+    })
+    .join('; ');
+}
+
 function nextActionRu(value) {
   const v = clean(value);
   return ({
@@ -472,10 +501,26 @@ const marketStressScenarios = csv('data_processed/market_sizing_stress_test.csv'
 const whitespaceAudienceSynthesis = csv('data_processed/global_whitespace_audience_synthesis.csv');
 const goalEvidenceCoverage = csv('data_processed/global_goal_evidence_coverage.csv');
 const validationExecutiveRollup = csv('data_processed/global_validation_executive_rollup.csv');
+const reviewJtbdClusterSummary = csv('data_processed/review_jtbd_cluster_summary.csv');
+const reviewSignalMatrix = csv('data_processed/review_signal_matrix.csv');
+const pricingRetentionMatrix = csv('data_processed/pricing_retention_matrix.csv');
+const top100ReviewScorecard = csv('data_processed/top100_competitor_review_scorecard.csv');
 
 const intersection = by(tam, 'pillar', 'intersection');
 const p0Icp = icp.filter(row => clean(row.priority_ru).startsWith('P0'));
 const topCompetitors = competitors.slice(0, 12);
+const topReviewJtbdClusters = reviewJtbdClusterSummary
+  .filter(row => row.cluster_type === 'jtbd')
+  .sort((a, b) => num(b.review_rows) - num(a.review_rows))
+  .slice(0, 8);
+const topReviewPainClusters = reviewJtbdClusterSummary
+  .filter(row => row.cluster_type === 'pain')
+  .sort((a, b) => num(b.review_rows) - num(a.review_rows))
+  .slice(0, 12);
+const closeReviewCompetitors = top100ReviewScorecard
+  .filter(row => row.duplicate_flag !== 'duplicate_app_entry')
+  .sort((a, b) => num(b.competitive_threat_score) - num(a.competitive_threat_score))
+  .slice(0, 10);
 const nicheNameById = Object.fromEntries(nicheSummary.map(row => [row.market_id, row.ru_name]));
 const nicheTerms = {
   mindfulness: ['calm', 'headspace', 'meditation', 'mindful', 'sleep', 'breath', 'relax', 'mood', 'motivation', 'affirmation', 'journal'],
@@ -3593,8 +3638,81 @@ lines.push(mdTable([
   { key: 'product', label: 'Что строить' }
 ]));
 lines.push('');
+if (topReviewJtbdClusters.length) {
+  lines.push('Ниже - не просто продуктовая интуиция, а чтение уже собранных отзывов. В review-кластерах видно, что люди возвращаются к соседним продуктам за ежедневным якорем, конкретизацией саморазвития и видимым прогрессом. Это ровно те три слоя, которые АУРА должна собрать в одну петлю.');
+  lines.push('');
+  lines.push(mdTable(topReviewJtbdClusters.map(row => ({
+    cluster: jtbdLabelRu(row.cluster_id),
+    rows: fmt(row.review_rows),
+    apps: fmt(row.app_count),
+    rating: Number(num(row.avg_rating)).toFixed(2),
+    examples: clean(row.top_apps).split(';').slice(0, 3).join('; '),
+    implication: clean(row.product_implication)
+      .replace('Alina needs one obvious recurring ritual, not a menu of disconnected features.', 'АУРЕ нужен один очевидный повторяющийся ритуал, а не меню разрозненных функций.')
+      .replace('The product should translate identity/guidance into one small completed action per day.', 'Продукт должен переводить identity/guidance в одно маленькое завершенное действие в день.')
+      .replace('The avatar/progress object should act as proof of effort, not decoration.', 'Avatar/progress должен быть доказательством усилия, а не декорацией.')
+  })), [
+    { key: 'cluster', label: 'Что люди пытаются получить' },
+    { key: 'rows', label: 'Сигналов' },
+    { key: 'apps', label: 'Приложений' },
+    { key: 'rating', label: 'Средняя оценка' },
+    { key: 'examples', label: 'Где видно' },
+    { key: 'implication', label: 'Вывод для АУРЫ' }
+  ]));
+  lines.push('');
+}
+if (topReviewPainClusters.length) {
+  lines.push('Точно так же отзывы показывают, почему продукты удаляют или перестают воспринимать как ценные. Для АУРЫ это почти готовый список требований к MVP: не делать ранний платный экран, не обещать больше, чем продукт доказывает, не ломать ритуал багами и не прятать ценность за длинным входом.');
+  lines.push('');
+  lines.push(mdTable(topReviewPainClusters.map(row => ({
+    pain: painLabelRu(row.cluster_id),
+    rows: fmt(row.review_rows),
+    apps: fmt(row.app_count),
+    rating: Number(num(row.avg_rating)).toFixed(2),
+    examples: clean(row.top_apps).split(';').slice(0, 3).join('; '),
+    response: clean(row.product_implication)
+      .replace('Depth should be earned after the core loop, especially custom rituals, richer avatar choices, and accessibility options.', 'Глубину нужно открывать после базовой петли: кастомные ритуалы, больше avatar-выбора, accessibility.')
+      .replace('The free loop must demonstrate value before asking for deeper paid analysis or personalization.', 'Бесплатная петля должна доказать ценность до продажи глубокой персонализации.')
+      .replace('Reliability must be treated as part of the ritual, not just engineering hygiene.', 'Надежность - часть ритуала, а не просто инженерная гигиена.')
+  })), [
+    { key: 'pain', label: 'Причина ухода / раздражения' },
+    { key: 'rows', label: 'Сигналов' },
+    { key: 'apps', label: 'Приложений' },
+    { key: 'rating', label: 'Средняя оценка' },
+    { key: 'examples', label: 'Где видно' },
+    { key: 'response', label: 'Как закрывать в АУРЕ' }
+  ]));
+  lines.push('');
+}
 lines.push('Главные причины удаления, которые нужно заранее закрыть продуктом: слишком общий текст, непонятная связь avatar с действием, ранний paywall, дорогие визуальные лимиты без объяснения, плохое качество лица/avatar, слишком много вопросов на входе, ощущение манипулятивной astrology, тревожные формулировки, скучные повторы, отсутствие результата через неделю, навязчивые пуши, медленная генерация, ошибки платежей, страх за персональные данные, отсутствие контроля над историей, слишком детский стиль, слишком эзотерический стиль, слишком productivity-стиль, неочевидная цена и отсутствие понятного “зачем завтра”.');
 lines.push('');
+if (closeReviewCompetitors.length) {
+  lines.push('Отдельно важно посмотреть на ближайших конкурентов через призму функций, цен и отзывов. Эти приложения не обязательно являются прямыми клонами АУРЫ, но они показывают, какие механики уже привычны пользователю и где у АУРЫ остается шанс отличиться причинной связкой “действие -> avatar/progress”.');
+  lines.push('');
+  lines.push(mdTable(closeReviewCompetitors.map(row => ({
+    app: row.app_name,
+    threat: row.competitive_verdict
+      .replace('direct_reference_competitor', 'прямой ориентир')
+      .replace('high_priority_close_substitute', 'близкий заменитель')
+      .replace('adjacent_benchmark', 'соседний benchmark'),
+    score: row.alina_core_score,
+    iap: row.observed_iap_count ? `${row.observed_iap_count} IAP, $${row.observed_min_iap_price_usd}-${row.observed_max_iap_price_usd}` : 'нет наблюдаемых IAP',
+    retention: tagListRu(row.retention_tags),
+    review: compactSignalRu(row.top_review_signals),
+    opening: clean(row.alina_opening)
+      .replace('Make the avatar causally respond to completed daily action, not just exist as profile or decorative identity.', 'Сделать avatar причинным ответом на завершенное действие, а не декоративным профилем.')
+      .replace('Differentiate by broader spiritual/identity scope, softer safety framing, and better reliability around action-tied progression.', 'Отличаться более широким identity/spiritual контекстом, мягкими safety-рамками и надежной связкой действия с прогрессом.')
+  })), [
+    { key: 'app', label: 'Близкий продукт' },
+    { key: 'threat', label: 'Роль' },
+    { key: 'score', label: 'Core score' },
+    { key: 'iap', label: 'Платные сигналы' },
+    { key: 'retention', label: 'Механики возврата' },
+    { key: 'review', label: 'Что видно в отзывах' },
+    { key: 'opening', label: 'Окно для АУРЫ' }
+  ]));
+  lines.push('');
+}
 lines.push('### Virality: что пользователь может захотеть показать другим');
 lines.push('');
 lines.push('Виральность АУРЫ не должна начинаться с “пригласи друга”. Для такого интимного продукта сильнее работают shareable artifacts: красивые, личные, но не слишком раскрывающие внутреннюю жизнь. Это могут быть не сырые прогнозы, а визуальные следы сезона, постеры future-self, короткие трейлеры, карточки “мой эпизод дня” и before/after без чувствительных подробностей.');
@@ -3635,6 +3753,46 @@ lines.push(mdTable([
   { key: 'why', label: 'Почему может работать' },
   { key: 'channel', label: 'Канал' },
   { key: 'risk', label: 'Риск' }
+]));
+lines.push('');
+lines.push('Если смотреть на соседние продукты как на источники роста, АУРЕ не нужно копировать их механику буквально. Нужно понять, какой социальный повод они создают: забота о себе, привязанность к персонажу, разговор с AI, игровая серия или спокойный lifestyle-образ. Отсюда можно собрать свои share-loops.');
+lines.push('');
+lines.push(mdTable([
+  {
+    benchmark: 'Finch',
+    growth: 'Мягкая привязанность к персонажу, self-care задачи, чувство заботы и progress companion.',
+    aura: 'Life Canvas и future-self avatar должны быть эмоционально близкими, но взрослее и более связанными с реальным действием.',
+    share: 'Недельный recap, мягкая карточка прогресса, “мой герой изменился после недели действий”.'
+  },
+  {
+    benchmark: 'Replika',
+    growth: 'Персональная память, ощущение диалога, эмоциональная близость и curiosity вокруг AI companion.',
+    aura: 'Использовать память и личный тон, но не делать романтическую зависимость или бесконечный чат ядром.',
+    share: 'Фрагмент обращения future-self, но с контролем приватности и без чувствительных деталей.'
+  },
+  {
+    benchmark: 'Character AI',
+    growth: 'Ролевые сценарии, персонажи, бесконечное исследование identity и social buzz вокруг необычных диалогов.',
+    aura: 'Взять сценарность и “серии”, но держать фокус на жизни пользователя, а не на чужих персонажах.',
+    share: 'Короткий teaser эпизода и выбор следующей развилки.'
+  },
+  {
+    benchmark: 'Duolingo',
+    growth: 'Сильная ежедневная петля, streak, понятный прогресс, меметичный бренд и регулярные напоминания.',
+    aura: 'Взять ясность daily loop и progression, но заменить давление streak на мягкое продолжение сезона.',
+    share: 'День 7: “я закончил первый сезон”, visual progress card.'
+  },
+  {
+    benchmark: 'Calm',
+    growth: 'Доверие, спокойный бренд, ritual time, сон/дыхание/голос и привычка возвращаться к состоянию.',
+    aura: 'Взять спокойствие и reset, но добавить действие, avatar/progress и личную историю.',
+    share: 'Эстетичная ritual card без интимного содержания.'
+  }
+], [
+  { key: 'benchmark', label: 'Ориентир' },
+  { key: 'growth', label: 'Почему распространяется / возвращает' },
+  { key: 'aura', label: 'Что берет АУРА' },
+  { key: 'share', label: 'Какой share-loop тестировать' }
 ]));
 lines.push('');
 lines.push('### Go-to-market: где проверять спрос');
@@ -4435,6 +4593,32 @@ const reportText = lines.join('\n')
   .replace(/image-first/g, 'image-first')
   .replace(/Платный экран и деньги/g, 'Платный экран и деньги')
   .replace(/Product analytics/g, 'Продуктовая аналитика')
+  .replace(/Core score/g, 'Оценка ядра')
+  .replace(/action completed/g, 'действие завершено')
+  .replace(/действие completed/g, 'действие завершено')
+  .replace(/Action chosen/g, 'Действие выбрано')
+  .replace(/reflection saved/g, 'рефлексия сохранена')
+  .replace(/ritual\/голос\/breathing/g, 'ритуал/голос/дыхание')
+  .replace(/Reset start\/completion, действие completion after reset/g, 'старт/завершение reset, выполнение действия после reset')
+  .replace(/Season completion/g, 'завершение сезона')
+  .replace(/recap save\/share/g, 'сохранение/шеринг recap')
+  .replace(/subscription intent/g, 'намерение подписаться')
+  .replace(/Reactivation after missed day/g, 'возврат после пропущенного дня')
+  .replace(/notification opt-in/g, 'согласие на уведомления')
+  .replace(/Companion energy can be useful, but social\/community features should not precede the solo ежедневную петлю\./g, 'Энергия companion может быть полезна, но социальные функции не должны появляться раньше сольной ежедневной петли.')
+  .replace(/A two-minute reset is a plausible core unit if it produces relief without feeling clinical or generic\./g, 'Двухминутный reset выглядит сильной базовой единицей, если дает облегчение и не звучит клинически или шаблонно.')
+  .replace(/Personalization must be concrete and explainable, especially around birth data, goals, mood, and recent действиеs\./g, 'Персонализация должна быть конкретной и объяснимой, особенно вокруг даты рождения, целей, состояния и недавних действий.')
+  .replace(/Avoid unnecessary phone-number gates and preserve low-friction first-use flow\./g, 'Не просить лишний телефон/доступы и сохранить простой первый вход.')
+  .replace(/Reliability is part of the emotional promise; broken streaks, loading failures, or lost rewards are high-risk\./g, 'Надежность является частью эмоционального обещания: сломанные серии, ошибки загрузки и потерянные награды опасны.')
+  .replace(/АУРА needs careful framing: soft guidance, no deterministic выводs, visible limits, and clear safety posture\./g, 'АУРЕ нужна аккуратная рамка: мягкое сопровождение, никаких детерминированных выводов, видимые ограничения и ясная позиция по безопасности.')
+  .replace(/Progression must be causally tied to the действие users just completed; story\/rewards cannot feel arbitrary\./g, 'Прогресс должен быть причинно связан с только что выполненным действием; история и награды не должны казаться случайными.')
+  .replace(/причинной связкой “действие -> avatar\/progress”/g, 'причинной связкой “действие -> avatar/progress”')
+  .replace(/IAP/g, 'встроенные покупки')
+  .replace(/Avatar viewed/g, 'avatar просмотрен')
+  .replace(/saved/g, 'сохранен')
+  .replace(/shared/g, 'отправлен')
+  .replace(/paid visual intent/g, 'интерес к платной визуальной глубине')
+  .replace(/ежедневную петлю и progression/g, 'ежедневной петли и progression')
   .replace(/Usage-based по/g, 'По фактическому использованию по')
   .replace(/billing-логику/g, 'логику биллинга')
   .replace(/revenue\/MAU/g, 'выручке/MAU')
