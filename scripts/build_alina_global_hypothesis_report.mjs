@@ -2582,6 +2582,76 @@ lines.push(mdTable([
 lines.push('');
 lines.push('Практический вывод по финмодели: сейчас нельзя утверждать “бизнес точно сходится”, но можно утверждать, что есть проверяемый путь к модели. Самый сильный вариант - не продавать одно видео и не делать безлимитный генератор, а строить подписку вокруг ежедневного ритуала и платной глубины, где дорогие avatar/video-сцены ограничены токенами, milestone rewards или premium tier. Следующий артефакт после этого отчета - отдельная таблица финмодели с тремя сценариями: консервативный, базовый и оптимистичный; в каждом сценарии должны быть цена, store fee, conversion to trial, trial-to-paid, monthly churn, среднее число image/video генераций, себестоимость, gross margin, CAC и payback.');
 lines.push('');
+lines.push('Для этой версии исследования собрана отдельная Excel-модель: `output/finance/AURA_financial_model_v1.xlsx`. Это не финальный forecast, а первая управленческая экономика, которая показывает, какие допущения делают продукт жизнеспособным. Главный результат модели: консервативный сценарий не сходится, если платящих пользователей мало; базовый и оптимистичный сценарии начинают выглядеть рабочими только при строгом ограничении AI-себестоимости, хорошем trial-to-paid и вынесении video-avatar в premium/token слой.');
+lines.push('');
+lines.push(mdTable([
+  {
+    scenario: 'Conservative',
+    users: '10,000 MAU / 84 paid subscribers',
+    net: '$413 net revenue / month',
+    margin: '29.2% product gross margin',
+    payback: '23.2 months',
+    decision: 'Не проходит: мало платящих пользователей, CAC и AI-cost слишком тяжелые для ранней базы.'
+  },
+  {
+    scenario: 'Base',
+    users: '50,000 MAU / 1,650 paid subscribers',
+    net: '$13.1k net revenue / month',
+    margin: '68.8% product gross margin',
+    payback: '5.5 months',
+    decision: 'Проходит как MVP-экономика, если video ограничен, images лимитированы, а ежедневная петля остается дешевой.'
+  },
+  {
+    scenario: 'Upside',
+    users: '150,000 MAU / 8,370 paid subscribers',
+    net: '$97.0k net revenue / month',
+    margin: '70.6% product gross margin',
+    payback: '4.8 months',
+    decision: 'Выглядит как сильный scale-сценарий, но требует повторного возврата, annual mix и работающей premium-token логики.'
+  }
+], [
+  { key: 'scenario', label: 'Сценарий' },
+  { key: 'users', label: 'Масштаб' },
+  { key: 'net', label: 'Net revenue' },
+  { key: 'margin', label: 'Маржа' },
+  { key: 'payback', label: 'Payback' },
+  { key: 'decision', label: 'Вывод' }
+]));
+lines.push('');
+lines.push('Что это меняет в продуктовой рекомендации: АУРА должна выглядеть дорогой для пользователя, но быть дешевой внутри базовой петли. Дороговизна должна ощущаться через точность интерпретации, память сезона, красивый future-self образ и редкие special episodes, а не через ежедневную генерацию видео. Если команда хочет “супер вау” с аватарами, это нужно упаковывать как milestone, premium pack, сезонный трейлер или token-расход. Тогда продукт может быть красивым, интересным и дорогим, не превращаясь в убыточную AI-фабрику.');
+lines.push('');
+lines.push(mdTable([
+  {
+    lever: 'Сделать daily loop дешевым',
+    action: 'Текст, reset, память и static/layered avatar должны быть основной ежедневной нормой.',
+    why: 'Именно это сохраняет product gross margin.'
+  },
+  {
+    lever: 'Лимитировать image/avatar generation',
+    action: 'Давать визуальные моменты по плану, milestone или paid depth, а не безлимитно.',
+    why: 'Image-cost быстро растет на активной базе, даже если unit cost кажется маленьким.'
+  },
+  {
+    lever: 'Video-avatar только premium',
+    action: 'HeyGen/D-ID/AKOOL/Runway/Luma использовать для special episodes, token packs или сезонных трейлеров.',
+    why: 'Видео дает вау, но разрушает маржу при ежедневном бесплатном использовании.'
+  },
+  {
+    lever: 'Поднимать annual mix',
+    action: 'Продавать годовой план после первого сильного value moment и нескольких завершенных эпизодов.',
+    why: 'Annual улучшает cashflow и позволяет выдержать CAC.'
+  },
+  {
+    lever: 'Считать CAC через payback',
+    action: 'Paid social запускать только после видимой trial-to-paid и D7/D30 retention.',
+    why: 'Даже при хорошей product gross margin маркетинг может сделать первый месяц отрицательным.'
+  }
+], [
+  { key: 'lever', label: 'Рычаг' },
+  { key: 'action', label: 'Что делать' },
+  { key: 'why', label: 'Почему важно' }
+]));
+lines.push('');
 lines.push('### Точки верификации с автором приложения');
 lines.push('');
 lines.push('В отчете нужно отдельно фиксировать места, где решение нельзя принимать без автора/заказчика, потому что это уже не только исследовательский вопрос, а вопрос видения продукта. Эти точки лучше пройти как отдельный созвон или комментарии к документу.');
