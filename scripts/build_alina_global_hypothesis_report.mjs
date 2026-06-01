@@ -4056,6 +4056,26 @@ lines.push(mdTable([
 lines.push('');
 lines.push('Итоговый технологический выбор для MVP: React Native или Flutter для клиента, Supabase/Postgres как backend foundation, OpenRouter + один основной LLM + fallback, OpenAI Images/Stability/Replicate для image-first Life Canvas, RevenueCat для подписок, PostHog/Firebase для аналитики и пушей. Видео-avatar не включать в базовый MVP.');
 lines.push('');
+lines.push('#### Победители по технологическим слоям и точка пересчета бюджета');
+lines.push('');
+lines.push('Чтобы команда не спорила абстрактно “какая модель лучше”, решение нужно зафиксировать слоями. В MVP побеждает не самый красивый или мощный сервис, а тот, который быстрее проверяет пользовательскую петлю и не ломает маржу. Перед началом разработки цены нужно перепроверить по официальным страницам, потому что тарифы AI/API меняются быстрее, чем цикл продукта.');
+lines.push('');
+lines.push(mdTable([
+  { layer: 'AI Brain: ежедневный эпизод', winner: 'OpenRouter + основной GPT/Claude/Gemini/DeepSeek fallback', why: 'Нужна возможность быстро сравнить тон, цену и качество без переписывания продукта.', budget: 'Считать 1-3 генерации на активного пользователя в день; лимитировать retries.', risk: 'Один провайдер может стать дорогим или давать generic tone.' },
+  { layer: 'AI Brain: deep/premium read', winner: 'Claude или GPT как premium-quality слой', why: 'Для платных глубоких разборов важнее тон, связность и доверие.', budget: 'Считать отдельно от daily loop; не включать безлимитно в Plus.', risk: 'Премиум-текст должен реально отличаться от free.' },
+  { layer: 'Image / Life Canvas MVP', winner: 'OpenAI Images / Stability / Replicate', why: 'Hosted API быстрее для первого продукта и не требует MLOps.', budget: 'Лимитировать до ключевых моментов: День 1, День 7, milestones.', risk: 'При ежедневных изображениях cost быстро растет.' },
+  { layer: 'Image scale', winner: 'FLUX / Stable Diffusion через локальный или managed pipeline', why: 'После доказанного спроса можно снижать себестоимость и контролировать стиль.', budget: 'Появляется GPU/MLOps cost, но ниже marginal cost на масштабе.', risk: 'Нужны QA, safety, стабильность лица и лицензии.' },
+  { layer: 'Animated avatar', winner: 'Не MVP; HeyGen/Tavus только для premium test, LivePortrait/SadTalker для R&D', why: 'Видео создает wow, но почти наверняка опасно для подписочной маржи.', budget: 'Считать как token/premium purchase, не как ежедневный entitlement.', risk: 'Deepfake/consent, задержки, refunds, высокая себестоимость.' },
+  { layer: 'Mobile', winner: 'React Native, если команда JS/TS; Flutter, если команда Flutter', why: 'Оба варианта годятся; важнее скорость прототипирования и SDK платежей/аналитики.', budget: '1 mobile engineer + design system достаточно для MVP.', risk: 'Native-only удвоит бюджет до доказанного спроса.' },
+  { layer: 'Backend', winner: 'Supabase/Postgres сначала, NestJS позже', why: 'Быстрее запустить auth, storage, data model, admin и edge functions.', budget: 'Низкий стартовый infra cost.', risk: 'Если не дисциплинировать схему, MVP превратится в хаос.' }
+], [
+  { key: 'layer', label: 'Слой' },
+  { key: 'winner', label: 'Победитель' },
+  { key: 'why', label: 'Почему' },
+  { key: 'budget', label: 'Как считать бюджет' },
+  { key: 'risk', label: 'Риск' }
+]));
+lines.push('');
 lines.push('### 4. Technical architecture: схема системы');
 lines.push('');
 lines.push('```mermaid');
@@ -4115,6 +4135,38 @@ lines.push(mdTable([
 ]));
 lines.push('');
 lines.push('Для первой платной версии целевая продуктовая маржа должна быть не ниже 70-80% до маркетинга. Это означает: текст и легкие image-сцены могут жить в подписке, а видео-avatar должен быть premium/token, milestone или редкая paid-сцена. Если CAC окажется выше 1-2 месячных маржинальных вкладов, paid acquisition нужно откладывать и запускаться через organic/creator/UGC.');
+lines.push('');
+lines.push('#### Финмодель: маржа, CAC и runway до первой выручки');
+lines.push('');
+lines.push('Рабочая финансовая логика для АУРЫ должна быть консервативной. На старте мы не доказываем миллиардный рынок, а проверяем, сходится ли маленькая подписочная машина: пользователь активируется, возвращается, видит платную глубину, платит, а себестоимость AI/visual слоя не съедает чек. Ниже - не финальный P&L, а decision-модель для первого бюджета.');
+lines.push('');
+lines.push(mdTable([
+  { scenario: 'Concierge validation', users: '30-50', team: 'Founder/product + designer + AI operator', build: '$0-5k', ops: '$500-2k', revenue: '$0-1k', decision: 'Проверить смысл, WTP и D2/D7 без разработки.' },
+  { scenario: 'Clickable + landing', users: '100-500 leads', team: 'Product + designer + no-code/web', build: '$2k-10k', ops: '$500-3k', revenue: '$0-3k preorders', decision: 'Понять лучший оффер и цену до mobile MVP.' },
+  { scenario: 'MVP soft launch', users: '1k-5k MAU', team: '1 mobile, 1 backend/fullstack, designer, product/AI', build: '$40k-120k', ops: '$1k-8k/month', revenue: '$1k-20k MRR при первых платящих', decision: 'Доказать activation, D7 и trial-to-paid.' },
+  { scenario: 'Seed-ready pilot', users: '10k-50k MAU', team: 'Mobile, backend, AI, designer, growth, support', build: '$150k-400k', ops: '$10k-60k/month', revenue: '$20k-200k MRR при working funnel', decision: 'Искать инвестиции только если retention и маржа видны.' }
+], [
+  { key: 'scenario', label: 'Сценарий' },
+  { key: 'users', label: 'Масштаб' },
+  { key: 'team', label: 'Команда' },
+  { key: 'build', label: 'Разработка/подготовка' },
+  { key: 'ops', label: 'Операционные расходы' },
+  { key: 'revenue', label: 'Первая выручка' },
+  { key: 'decision', label: 'Для какого решения' }
+]));
+lines.push('');
+lines.push(mdTable([
+  { metric: 'Gross margin до маркетинга', target: '70-80%+', why: 'Иначе paid acquisition и support быстро съедят подписку.', stop: '<50% при image-first сценарии.' },
+  { metric: 'CAC payback', target: '1-2 месяца для ранних paid tests, 3-6 месяцев допустимо позже', why: 'Mobile subscriptions часто требуют терпения, но на старте нельзя покупать трафик вслепую.', stop: 'CAC не окупается при D30 retention.' },
+  { metric: 'Trial start', target: '5-10%+ от активированных пользователей', why: 'Показывает, что платная глубина понятна.', stop: '<2-3% после нескольких paywall/offers.' },
+  { metric: 'Trial-to-paid', target: '20-30%+ для теплого validation traffic', why: 'Нужен первый сигнал willingness to pay.', stop: '<10% и нет качественных причин платить.' },
+  { metric: 'Runway до первой выручки', target: '6-12 недель validation + 8-12 недель MVP', why: 'Не строить 6 месяцев без денег и сигналов.', stop: 'Нет preorders/WTP после 6 недель.' }
+], [
+  { key: 'metric', label: 'Метрика' },
+  { key: 'target', label: 'Цель' },
+  { key: 'why', label: 'Почему важна' },
+  { key: 'stop', label: 'Когда останавливать/менять' }
+]));
 lines.push('');
 lines.push('### 6. Monetization: конкуренты и итоговая модель АУРЫ');
 lines.push('');
@@ -4176,6 +4228,24 @@ lines.push(mdTable([
 ]));
 lines.push('');
 lines.push('Удерживающие механики АУРЫ: season map, tomorrow hook, avatar causality, weekly recap, comeback episode, мягкий push, короткий reset, memory archive, visual before/after, paid depth after value.');
+lines.push('');
+lines.push('#### Retention decision matrix: что усиливать, если метрики слабые');
+lines.push('');
+lines.push(mdTable([
+  { symptom: 'Пользователь не возвращается на День 2', likely: 'Нет tomorrow hook, пуш слишком общий, вчерашнее действие не влияет на сегодня.', fix: 'Добавить teaser следующей серии, показать “вчера -> сегодня”, персонализировать пуш.', metric: 'D1 return, episode open.' },
+  { symptom: 'Пользователь проходит День 1, но не делает действие', likely: 'Действие слишком сложное или не связано с инсайтом.', fix: 'Три уровня сложности, действие на 2 минуты, больше конкретики.', metric: 'Action chosen/completed.' },
+  { symptom: 'Avatar нравится, но не удерживает', likely: 'Образ красивый, но не причинный.', fix: 'Показывать, какая черта avatar изменилась из-за выполненного действия.', metric: 'Avatar causality comprehension.' },
+  { symptom: 'Paywall вызывает негатив', likely: 'Платный экран до ценности или продает абстрактную подписку.', fix: 'Ставить paywall после первого completed loop и продавать продолжение сезона.', metric: 'Paywall conversion, dislike/refund.' },
+  { symptom: 'D7 низкий', likely: 'Сезон не имеет финала и visible result.', fix: 'Сделать weekly recap центральным событием.', metric: 'Season completion, recap save/share.' },
+  { symptom: 'Платят за visual, но не остаются', likely: 'Продукт стал генератором картинок.', fix: 'Ограничить visual tokens и вернуть фокус на action/memory.', metric: 'D30 retention после visual purchase.' }
+], [
+  { key: 'symptom', label: 'Симптом' },
+  { key: 'likely', label: 'Вероятная причина' },
+  { key: 'fix', label: 'Что менять' },
+  { key: 'metric', label: 'Метрика' }
+]));
+lines.push('');
+lines.push('Итоговая ставка по удержанию: АУРА должна оптимизировать не streak и не количество сгенерированных картинок, а completion личного сезона. Главная retention-метрика первой версии - не “сколько раз открыли приложение”, а “сколько людей поняли причинность, вернулись к следующей серии и захотели увидеть итог недели”.');
 lines.push('');
 lines.push('### 8. Go to market: каналы и план запуска');
 lines.push('');
