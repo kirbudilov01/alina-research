@@ -71,9 +71,9 @@ DOCUMENTS = [
         "AURA PRD / Sprint Backlog v1",
     ),
     (
-        ROOT / "reports" / "aura-master-book-v1.md",
-        OUTPUT_DIR / "AURA_MASTER_BOOK_V1.pdf",
-        "AURA Master Book v1",
+        ROOT / "reports" / "aura-master-book.md",
+        OUTPUT_DIR / "AURA_MASTER_BOOK.pdf",
+        "AURA",
     ),
 ]
 
