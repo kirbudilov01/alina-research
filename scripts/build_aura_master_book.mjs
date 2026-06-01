@@ -217,6 +217,8 @@ lines.push('Вся логика AURA держится на одной прове
 lines.push('');
 lines.push('## Главная схема книги');
 lines.push('');
+lines.push('[[DIAGRAM:core_loop]]');
+lines.push('');
 lines.push(visualLoop());
 lines.push('');
 lines.push('## Как читать AURA');
@@ -237,6 +239,20 @@ lines.push(chapter('1', 'Почему AURA должна существовать
   takeaway: 'AURA не должна копировать одну категорию. Она должна соединить смысл, действие, память и визуальный прогресс.',
   impact: 'Глава задает стратегическую рамку: рынок важен только потому, что помогает выбрать форму продукта.'
 }));
+lines.push(pageBreak());
+lines.push('## Карта категорий');
+lines.push('');
+lines.push('AURA находится не внутри одной привычной категории, а на пересечении пяти существующих типов спроса. Эта страница должна читаться быстрее, чем несколько таблиц: сначала видно поле, потом ниже остаются доказательные данные.');
+lines.push('');
+lines.push('[[DIAGRAM:category_intersection]]');
+lines.push('');
+lines.push(pageBreak());
+lines.push('## Карта конкурентного поля');
+lines.push('');
+lines.push('Конкуренты важны не как список логотипов, а как координаты: кто дает смысл, кто дает действие, кто дает образ, кто дает память. AURA должна занять место, где эти элементы соединяются.');
+lines.push('');
+lines.push('[[DIAGRAM:competitor_matrix]]');
+lines.push('');
 lines.push(sources.market);
 lines.push(chapterClose('Перейти от рыночной логики к конкретному пути пользователя внутри AURA.'));
 
@@ -246,6 +262,13 @@ lines.push(chapter('2', 'Как работает продукт', 'Идея ст
   takeaway: 'Центр продукта - не экран avatar, а причинная петля от episode к Life Canvas.',
   impact: 'Глава превращает AURA из концепции в систему решений для дизайна и разработки.'
 }));
+lines.push(pageBreak());
+lines.push('## Journey Map первого дня');
+lines.push('');
+lines.push('Главный пользовательский путь должен быть виден до чтения деталей. Если эта схема не работает, таблицы с экранами не спасут продукт.');
+lines.push('');
+lines.push('[[DIAGRAM:journey_map]]');
+lines.push('');
 lines.push(sources.product);
 lines.push(chapterClose('Нарисовать low-fi wireframes для ключевых экранов и проверить, считывается ли причинность.'));
 
@@ -255,6 +278,20 @@ lines.push(chapter('3', 'Как это собрать и не сломать э�
   takeaway: 'AURA должна быть mobile-first, image-first и analytics-first; бесплатное ежедневное видео запрещено.',
   impact: 'Глава защищает запуск от решений, которые выглядят красиво, но делают продукт экономически нежизнеспособным.'
 }));
+lines.push(pageBreak());
+lines.push('## Архитектура как продуктовая система');
+lines.push('');
+lines.push('Технические блоки должны быть прочитаны как слои одной причинной машины: профиль дает контекст, AI собирает эпизод, действие создает evidence, image layer показывает след, analytics доказывает результат.');
+lines.push('');
+lines.push('[[DIAGRAM:architecture_stack]]');
+lines.push('');
+lines.push(pageBreak());
+lines.push('## Экономика петли');
+lines.push('');
+lines.push('Себестоимость нужна не как финансовая таблица ради таблицы. Она показывает, почему AURA нельзя начинать с бесплатного ежедневного видео и почему image-first подход защищает продукт.');
+lines.push('');
+lines.push('[[DIAGRAM:unit_economics]]');
+lines.push('');
 lines.push(sources.technology);
 lines.push(chapterClose('Закрепить стек, провайдеров, cost logging и границы дорогих AI/video функций до начала разработки.'));
 
@@ -264,6 +301,13 @@ lines.push(chapter('4', 'Как найти первых людей', 'Запус
   takeaway: 'Первые пользователи добываются вручную; масштабирование начинается только после сигналов по петле.',
   impact: 'Глава переводит маркетинг из “купить трафик” в “найти людей для проверки главной гипотезы”.'
 }));
+lines.push(pageBreak());
+lines.push('## Воронка первых пользователей');
+lines.push('');
+lines.push('Первые пользователи не являются масштабом. Они являются инструментом проверки: каждый уровень воронки должен приближать команду к пониманию, работает ли центральная петля.');
+lines.push('');
+lines.push('[[DIAGRAM:gtm_funnel]]');
+lines.push('');
 lines.push(sources.launch);
 lines.push(chapterClose('Собрать первый cohort plan: 20 интервью, 30 concierge users, 100 warm users, затем первые публичные каналы.'));
 
@@ -273,6 +317,13 @@ lines.push(chapter('5', 'Как превратить AURA в работу ком
   takeaway: 'Пять спринтов должны строить не “все приложение”, а доказательство центральной петли.',
   impact: 'Глава превращает стратегию в операционный backlog без потери фокуса.'
 }));
+lines.push(pageBreak());
+lines.push('## Roadmap сборки');
+lines.push('');
+lines.push('Спринты идут не от “сделать побольше функций”, а от доказательства: сначала foundation, затем episode/action, затем Life Canvas, затем return/paywall, затем admin и launch.');
+lines.push('');
+lines.push('[[DIAGRAM:sprint_roadmap]]');
+lines.push('');
 lines.push(sources.build);
 lines.push(chapterClose('После wireframes начинать первый спринт и держать scope вокруг центральной петли.'));
 
