@@ -78,6 +78,26 @@ function fmt(value) {
   return Math.round(num(value)).toLocaleString('en-US');
 }
 
+function ruPluralOneFewMany(number, forms) {
+  const n = Math.abs(Number(number)) % 100;
+  const n1 = n % 10;
+  if (n > 10 && n < 20) return forms[2];
+  if (n1 > 1 && n1 < 5) return forms[1];
+  if (n1 === 1) return forms[0];
+  return forms[2];
+}
+
+function pricingRu(value) {
+  const raw = clean(value);
+  if (!raw) return '';
+  if (/free_or_freemium_unknown/i.test(raw)) return 'бесплатно или freemium; модель требует проверки';
+  return raw
+    .replace(/\bfree\b/gi, 'бесплатно')
+    .replace(/\bpaid\b/gi, 'платно')
+    .replace(/\bin_app_purchase\b/gi, 'встроенные покупки')
+    .replace(/\bsubscription\b/gi, 'подписка');
+}
+
 function money(value) {
   const n = num(value);
   if (!n) return 'нет данных';
@@ -344,16 +364,18 @@ function interimConclusion(title, paragraphs) {
 
 function relevanceRu(app, marketId) {
   const tags = clean(app.feature_tags).split('|').filter(Boolean);
-  const tagText = tags.length ? `видимые теги: ${tags.join(', ')}` : 'релевантность видна по названию, категории и описанию';
+  const tagText = tags.length
+    ? `Отмеченные теги: ${tags.join(', ')}.`
+    : 'Релевантность предварительная: по названию, категории и описанию.';
   const reads = {
     mindfulness: 'Показывает рынок короткого reset, mental health, meditation, journaling или эмоциональной саморегуляции. Для АУРЫ это источник языка спокойного входа и ежедневного ритуала.',
     avatar_identity: 'Показывает спрос на avatar/identity/AI companion механику. Для АУРЫ важно проверить, может ли образ себя меняться не декоративно, а причинно от действия.',
-    astrology_esoterics: 'Показывает рынок personal meaning: horoscope, tarot, moon/spiritual guidance, manifestation или symbolic reflection. Для АУРЫ это источник входа через смысл, но не proof действия.',
+    astrology_esoterics: 'Показывает рынок личного смысла: horoscope, tarot, moon/spiritual guidance, manifestation или symbolic reflection. Для АУРЫ это источник входа через смысл, но не доказательство действия.',
     coaching: 'Показывает рынок self-improvement, habit, AI coach, routine или goal guidance. Для АУРЫ это источник слоя действия и платной глубины, но не доказательство мягкого ритуального опыта.',
-    gaming: 'Показывает progression/quest/avatar benchmark. Для АУРЫ это не прямой TAM, а источник механик возврата, видимого прогресса и награды.',
-    gaming_progression: 'Показывает progression/quest/avatar benchmark. Для АУРЫ это не прямой TAM, а источник механик возврата, видимого прогресса и награды.'
+    gaming: 'Показывает бенчмарк progression/quest/avatar механик. Для АУРЫ это не прямой TAM, а источник механик возврата, видимого прогресса и награды.',
+    gaming_progression: 'Показывает бенчмарк progression/quest/avatar механик. Для АУРЫ это не прямой TAM, а источник механик возврата, видимого прогресса и награды.'
   };
-  return `${reads[marketId] || 'Релевантный adjacent product для проверки.'} ${tagText}.`;
+  return `${reads[marketId] || 'Релевантный соседний продукт для проверки.'} ${tagText}`;
 }
 
 const rawRows = csv('data_processed/cross_source_universe_raw.csv');
@@ -819,7 +841,7 @@ writeCsv(SOURCE_APPENDIX_OUT, sourceAppendix, [
 
 const lines = [];
 
-lines.push('# АУРА Research. Мировой рынок и логика гипотез');
+lines.push('# Исследование АУРА. Мировой рынок и логика гипотез');
 lines.push('');
 lines.push(`Версия отчета: ${new Date().toLocaleDateString('ru-RU')}`);
 lines.push('');
@@ -1039,7 +1061,7 @@ lines.push(mdTable(nicheSummary.map(row => ({
 ]));
 lines.push('');
 if (nicheCountRollup.length) {
-  lines.push(`Чтобы было понятно, сколько материала собрано по каждой нише, ниже отдельно показана сводка. Здесь есть три уровня: общий объем показывает ширину карты рынка, приложения из магазинов ближе всего к конкурентному полю, а кандидаты в review показывают, какие продукты уже вынесены в более внимательное сравнение. Глобально в пакете сейчас ${fmt(dedupRows.length)} уникализированных объектов; ниши нельзя просто складывать между собой, потому что один продукт может попадать в несколько тематических контекстов.`);
+  lines.push(`Чтобы было понятно, сколько материала собрано по каждой нише, ниже отдельно показана сводка. Здесь есть три уровня: общий объем показывает ширину карты рынка, приложения из магазинов ближе всего к конкурентному полю, а кандидаты в анализ показывают, какие продукты уже вынесены в более внимательное сравнение. Глобально в пакете сейчас ${fmt(dedupRows.length)} уникализированных объектов; ниши нельзя просто складывать между собой, потому что один продукт может попадать в несколько тематических контекстов.`);
   lines.push('');
   lines.push(mdTable(nicheCountRollup.map(row => ({
     market: row.market_ru,
@@ -1049,7 +1071,7 @@ if (nicheCountRollup.length) {
     direct_share: row.direct_app_store_dedup_share,
     top100: row.top100_primary_competitors,
     manual: row.manual_validation_targets,
-    coverage: `${row.coverage_groups} groups; strong ${row.strong_coverage_groups}; medium ${row.medium_coverage_groups}`,
+    coverage: `источников: ${row.coverage_groups}; сильных: ${row.strong_coverage_groups}; средних: ${row.medium_coverage_groups}`,
     read: row.opportunity_ru
   })), [
     { key: 'market', label: 'Ниша' },
@@ -1057,7 +1079,7 @@ if (nicheCountRollup.length) {
     { key: 'all_dedup', label: 'Уникальных объектов', align: 'right' },
     { key: 'direct', label: 'Приложений из магазинов', align: 'right' },
     { key: 'direct_share', label: 'Доля приложений' },
-    { key: 'top100', label: 'В review', align: 'right' },
+    { key: 'top100', label: 'В анализ', align: 'right' },
     { key: 'manual', label: 'На ручную проверку', align: 'right' },
     { key: 'coverage', label: 'Покрытие' },
     { key: 'read', label: 'Как читать' }
@@ -1071,9 +1093,15 @@ lines.push('');
 for (const row of nicheSummary) {
   const rollup = by(nicheCountRollup, 'market_id', row.market_id);
   const topApps = topAppsByNiche[row.market_id] || [];
+  const reviewCount = Number(rollup.top100_primary_competitors || row.top100_primary_competitors || 0);
+  const manualCount = Number(rollup.manual_validation_targets || row.manual_validation_targets || 0);
+  const reviewWord = ruPluralOneFewMany(reviewCount, ['приложение', 'приложения', 'приложений']);
+  const manualPhrase = manualCount > 0
+    ? `на ручную проверку уже выделено ${fmt(manualCount)}`
+    : 'ручная проверка пока не выделена';
   lines.push(`#### ${row.ru_name}`);
   lines.push('');
-  lines.push(`${row.ru_name}: в этой нише собрано ${fmt(rollup.all_source_raw_rows || row.all_source_raw_rows)} исходных записей, ${fmt(rollup.all_source_dedup_rows || row.all_source_dedup_rows)} уникализированных объектов и ${fmt(rollup.direct_app_store_dedup_rows || row.direct_app_store_dedup_rows)} приложений из магазинов. В более внимательный review вынесено ${fmt(rollup.top100_primary_competitors || row.top100_primary_competitors)} приложений; на ручную проверку уже выделено ${fmt(rollup.manual_validation_targets || row.manual_validation_targets)}. Для АУРЫ эта ниша важна так: ${row.role_ru}. Денежный сигнал сейчас читается как: ${moneyVerdictRu(row.money_verdict)}.`);
+  lines.push(`${row.ru_name}: в этой нише собрано ${fmt(rollup.all_source_raw_rows || row.all_source_raw_rows)} исходных записей, ${fmt(rollup.all_source_dedup_rows || row.all_source_dedup_rows)} уникализированных объектов и ${fmt(rollup.direct_app_store_dedup_rows || row.direct_app_store_dedup_rows)} приложений из магазинов. В более внимательный анализ вынесено ${fmt(reviewCount)} ${reviewWord}; ${manualPhrase}. Для АУРЫ эта ниша важна так: ${row.role_ru}. Денежный сигнал сейчас читается как: ${moneyVerdictRu(row.money_verdict)}.`);
   lines.push('');
   lines.push(mdTable(topApps.map(app => ({
     app: app.app_name,
@@ -1081,7 +1109,7 @@ for (const row of nicheSummary) {
     source: sourceGroupRu(app.source_group),
     reviews: fmt(app.review_count),
     rating: app.rating,
-    pricing: [app.pricing_type, app.monetization_tags].map(clean).filter(Boolean).join('; ') || 'нет данных',
+    pricing: [app.pricing_type, app.monetization_tags].map(pricingRu).filter(Boolean).join('; ') || 'нет данных',
     relevance: relevanceRu(app, row.market_id)
   })), [
     { key: 'app', label: 'Приложение' },
@@ -1140,7 +1168,7 @@ lines.push(mdTable(marketDeepDives.map(row => ({
   boundary: row.boundary_ru
 })), [
   { key: 'market', label: 'Рынок' },
-  { key: 'sam', label: 'SAM base', align: 'right' },
+  { key: 'sam', label: 'Рабочая SAM-оценка', align: 'right' },
   { key: 'money', label: 'Денежный вывод' },
   { key: 'score', label: 'Оценка', align: 'right' },
   { key: 'boundary', label: 'Граница' }
@@ -1229,7 +1257,7 @@ if (false && marketSensitivityAudit.length) {
     next: row.next_evidence_to_reduce_risk_ru
   })), [
     { key: 'pillar', label: 'Pillar' },
-    { key: 'sam', label: 'SAM base', align: 'right' },
+  { key: 'sam', label: 'Рабочая SAM-оценка', align: 'right' },
     { key: 'weighted', label: 'Weighted SAM', align: 'right' },
     { key: 'spread', label: 'SAM spread', align: 'right' },
     { key: 'risk', label: 'Risk' },
@@ -1762,7 +1790,7 @@ lines.push('Практический вывод по функциям: MVP до�
 lines.push('');
 lines.push('### Техническая реализуемость и себестоимость');
 lines.push('');
-lines.push('Следующий обязательный вопрос: можно ли это сделать технически и при какой себестоимости. На уровне современной реализации базовый MVP выглядит реализуемым: текстовый смысловой вход, короткие сценарии, статичный или полугенерируемый avatar, память эпизодов, действия и аналитика не требуют невозможных технологий. Самый дорогой и рискованный слой - частая генерация видео-avatar или сложной personalized visual output на каждого пользователя.');
+lines.push('Следующий обязательный вопрос: можно ли это сделать технически и при какой себестоимости. На уровне современной реализации базовый MVP выглядит реализуемым: текстовый смысловой вход, короткие сценарии, статичный или полугенерируемый avatar, память эпизодов, действия и аналитика не требуют невозможных технологий. Самый дорогой и рискованный слой - частая генерация видео-avatar или сложного персонализированного визуального результата на каждого пользователя.');
 lines.push('');
 lines.push(mdTable([
   {
@@ -1787,7 +1815,7 @@ lines.push(mdTable([
     layer: 'Видео-avatar',
     feasible: 'Средняя',
     cost: 'Потенциально высокая; зависит от длительности, качества, частоты и провайдера.',
-    decision: 'Проверять отдельно: может быть premium/one-off, а не ежедневной бесплатной механикой.'
+    decision: 'Проверять отдельно: может быть premium или разовой покупкой, а не ежедневной бесплатной механикой.'
   },
   {
     layer: 'Память сериала',
@@ -1808,7 +1836,7 @@ lines.push(mdTable([
   { key: 'decision', label: 'Решение для продукта' }
 ]));
 lines.push('');
-lines.push('Экономическая проверка должна идти от частоты генераций. Если пользователь каждый день получает дорогое видео, модель может не сойтись при обычной подписке. Если же daily loop строится на тексте, легком reset, статичном avatar и редких premium visual moments, экономика становится гораздо реалистичнее. Поэтому до финального ТЗ нужно посчитать три сценария: дешевый static-avatar MVP, средний image/avatar MVP и дорогой video-avatar MVP.');
+lines.push('Экономическая проверка должна идти от частоты генераций. Если пользователь каждый день получает дорогое видео, модель может не сойтись при обычной подписке. Если же ежедневная петля строится на тексте, легком reset, статичном avatar и редких визуальных premium-моментах, экономика становится гораздо реалистичнее. Поэтому до финального ТЗ нужно посчитать три сценария: дешевый static-avatar MVP, средний image/avatar MVP и дорогой video-avatar MVP.');
 lines.push('');
 lines.push(mdTable([
   {
@@ -1819,14 +1847,14 @@ lines.push(mdTable([
   },
   {
     scenario: 'Image/avatar MVP',
-    contents: 'Периодическая генерация образов, сезонные изменения, персональные visual cards.',
-    monetization: 'Подписка + лимиты генераций + paid packs.',
+    contents: 'Периодическая генерация образов, сезонные изменения, персональные визуальные карточки.',
+    monetization: 'Подписка + лимиты генераций + платные пакеты.',
     risk: 'Нужно считать себестоимость генераций и лимиты.'
   },
   {
-    scenario: 'Video-avatar premium',
-    contents: 'Видео “лучшая версия себя”, сериальные трейлеры, special episodes.',
-    monetization: 'Premium add-on, токены или разовые покупки.',
+    scenario: 'Premium video-avatar',
+    contents: 'Видео “лучшая версия себя”, сериальные трейлеры, специальные эпизоды.',
+    monetization: 'Premium-дополнение, токены или разовые покупки.',
     risk: 'Высокая себестоимость; нельзя делать бесплатной ежедневной нормой без финмодели.'
   }
 ], [
@@ -1838,35 +1866,35 @@ lines.push(mdTable([
 lines.push('');
 lines.push('### Монетизация: что проверять у конкурентов');
 lines.push('');
-lines.push('Монетизацию АУРЫ нельзя выбирать только из вкуса команды. Ее нужно вывести из конкурентов и себестоимости. В соседних рынках уже видны подписки, IAP, trial, годовые планы, credits/tokens и premium packs. Рабочее решение на сейчас: базовая daily-петля должна быстро давать ценность бесплатно или через trial, а платная часть должна продавать глубину: историю сезона, расширенный avatar, больше visual moments, персональные ритуалы, архив эпизодов, premium-интерпретации и редкие video/avatar outputs.');
+lines.push('Монетизацию АУРЫ нельзя выбирать только из вкуса команды. Ее нужно вывести из конкурентов и себестоимости. В соседних рынках уже видны подписки, встроенные покупки, пробные периоды, годовые планы, кредиты/токены и premium-пакеты. Рабочее решение на сейчас: базовая ежедневная петля должна быстро давать ценность бесплатно или через пробный период, а платная часть должна продавать глубину: историю сезона, расширенный avatar, больше визуальных моментов, персональные ритуалы, архив эпизодов, premium-интерпретации и редкие видео- или avatar-генерации.');
 lines.push('');
 lines.push(mdTable([
   {
     model: 'Подписка',
     fit: 'Лучше всего для ежедневного ритуала и памяти сезона.',
-    use: 'Основная модель, если retention подтверждается.',
+    use: 'Основная модель, если возврат подтверждается.',
     risk: 'Paywall до первого момента ценности вызовет сопротивление.'
   },
   {
-    model: 'Freemium + paid depth',
+    model: 'Freemium + платная глубина',
     fit: 'Хорошо совпадает с логикой “сначала почувствуй серию, потом углубляй”.',
     use: 'Оставить короткую daily-петлю доступной, платно продавать глубину и историю.',
     risk: 'Если free слишком полный, сложно объяснить подписку.'
   },
   {
-    model: 'Tokens / credits',
-    fit: 'Подходит для дорогих visual/video генераций.',
-    use: 'Использовать для premium avatar moments, не для базового ежедневного действия.',
+    model: 'Токены / кредиты',
+    fit: 'Подходит для дорогих визуальных или video-генераций.',
+    use: 'Использовать для premium avatar-моментов, не для базового ежедневного действия.',
     risk: 'Может сделать продукт похожим на генератор картинок, а не на ежедневный ритуал.'
   },
   {
-    model: 'One-off packs',
-    fit: 'Подходит для сезонов, тем, visual styles, special episodes.',
-    use: 'Можно тестировать после подтверждения core loop.',
+    model: 'Разовые пакеты',
+    fit: 'Подходит для сезонов, тем, визуальных стилей, специальных эпизодов.',
+    use: 'Можно тестировать после подтверждения базовой петли.',
     risk: 'Слабее для регулярной выручки, если нет подписки.'
   },
   {
-    model: 'Premium coaching / human layer',
+    model: 'Premium coaching / человеческий слой',
     fit: 'Может быть дорого и ценно для глубокой аудитории.',
     use: 'Не MVP; рассмотреть как высокий чек позже.',
     risk: 'Сложнее операционно и меняет природу продукта.'
@@ -1878,7 +1906,7 @@ lines.push(mdTable([
   { key: 'risk', label: 'Риск' }
 ]));
 lines.push('');
-lines.push('Следующий расчет финмодели должен быть простым: цена подписки или ARPPU минус себестоимость генераций, хранение, платежные комиссии, поддержка и маркетинг. Отдельно нужно считать продуктовую маржу без маркетинга и затем проверять, выдерживает ли она платный acquisition. Если CAC окажется выше допустимой маржи, придется менять прайсинг, free limits, частоту генераций или маркетинговый канал.');
+lines.push('Следующий расчет финмодели должен быть простым: цена подписки или средний годовой чек платящего пользователя минус себестоимость генераций, хранение, платежные комиссии, поддержка и маркетинг. Отдельно нужно считать продуктовую маржу без маркетинга и затем проверять, выдерживает ли она платное привлечение. Если стоимость привлечения окажется выше допустимой маржи, придется менять прайсинг, бесплатные лимиты, частоту генераций или маркетинговый канал.');
 lines.push('');
 lines.push('### Точки верификации с автором приложения');
 lines.push('');
@@ -1913,7 +1941,7 @@ lines.push(mdTable([
   {
     point: 'Следующий артефакт',
     question: 'Что нужно первым: бизнес-модель, кликабельный прототип, ТЗ продукта или маркетинговая стратегия?',
-    output: 'Определить следующий deliverable после ресерча.'
+    output: 'Определить следующий рабочий артефакт после ресерча.'
   }
 ], [
   { key: 'point', label: 'Точка решения' },
@@ -2299,6 +2327,7 @@ const reportText = lines.join('\n')
   .replace(/Первый validation move/g, 'Первый шаг проверки')
   .replace(/скрытого клона ручную проверку, платной модели signoff, P0 ICP interviews/g, 'ручная проверка скрытого клона, проверка платной модели, первые ICP-интервью')
   .replace(/evidence-first/g, 'доказательными')
+  .replace(/доказательными гипотезами/g, 'проверяемыми гипотезами')
   .replace(/финальным go/g, 'финальным решением')
   .replace(/доказательство product-market fit/g, 'доказательства product-market fit')
   .replace(/paywall signoff/g, 'проверки paywall')
@@ -2308,6 +2337,9 @@ const reportText = lines.join('\n')
   .replace(/personal смысл enough to act/g, 'личному смыслу достаточно, чтобы перейти к действию')
   .replace(/personal смысл/g, 'личный смысл')
   .replace(/действие-tied progress/g, 'прогресс, связанный с действием')
+  .replace(/действие-tied прогресс/g, 'прогресс, связанный с действием')
+  .replace(/может ли прогресс, связанный с действием заменить/g, 'может ли прогресс, связанный с действием, заменить')
+  .replace(/расчетное пересечение АУРА/g, 'расчетное пересечение АУРЫ')
   .replace(/прогресс, связанный с действиемion/g, 'видимым прогрессом, связанным с действием')
   .replace(/Differentiate by broader spiritual\/identity scope, softer safety framing, and better reliability around видимым прогрессом, связанным с действием\./g, 'Отличаться более широким identity/spiritual контуром, мягкими границами безопасности и надежной связкой действия с видимым прогрессом.')
   .replace(/full-loop-like кандидаты/g, 'кандидаты с похожей полной петлей')
@@ -2354,10 +2386,15 @@ const reportText = lines.join('\n')
   .replace(/primary-аудитория/g, 'первичная аудитория')
   .replace(/а ежедневного ритуала с/g, 'а ежедневный ритуал с')
   .replace(/нужен ручной выборочная проверка/g, 'нужна ручная выборочная проверка')
+  .replace(/выборочная проверка обязателен/g, 'выборочная проверка обязательна')
+  .replace(/Opportunity/g, 'Возможность')
   .replace(/соседний-рынки/g, 'соседние рынки')
   .replace(/соседний-рынок/g, 'соседний рынок')
   .replace(/соседний рынки/g, 'соседние рынки')
   .replace(/consumer-discount/g, 'consumer-поправкой')
+  .replace(/modeled SAM/g, 'модельную SAM-оценку')
+  .replace(/investor-grade market вывод/g, 'инвесторский рыночный вывод')
+  .replace(/читать как рабочий модельную SAM-оценку/g, 'читать как рабочую модельную SAM-оценку')
   .replace(/money context/g, 'денежный контекст')
   .replace(/conservative range/g, 'консервативный диапазон')
   .replace(/дистрибуции и возврата и готовность платить/g, 'дистрибуции, возврата и готовности платить')
@@ -2366,16 +2403,19 @@ const reportText = lines.join('\n')
   .replace(/с сильным consumer\/self-improvement discount/g, 'с сильной поправкой на широту consumer/self-improvement рынка')
   .replace(/возврат и платную глубину реально работают/g, 'возврат и платная глубина реально работают')
   .replace(/daily loop/g, 'daily-петля')
+  .replace(/daily-петля строится/g, 'ежедневная петля строится')
   .replace(/premium visual moments/g, 'редких визуальных premium-моментах')
+  .replace(/редких редких визуальных premium-моментах/g, 'редких визуальных premium-моментах')
   .replace(/static-avatar MVP/g, 'static-avatar MVP')
   .replace(/image\/avatar MVP/g, 'image/avatar MVP')
   .replace(/video-avatar MVP/g, 'video-avatar MVP')
-  .replace(/Premium add-on/g, 'Premium add-on')
+  .replace(/Premium add-on/g, 'Premium-дополнение')
   .replace(/visual moments/g, 'визуальных моментов')
-  .replace(/video\/avatar outputs/g, 'video/avatar outputs')
+  .replace(/video\/avatar outputs/g, 'видео- или avatar-генерации')
   .replace(/Freemium \+ платную глубину/g, 'Freemium + платная глубина')
   .replace(/One-off packs/g, 'Разовые пакеты')
-  .replace(/core loop/g, 'core loop')
+  .replace(/core loop/g, 'базовая петля')
+  .replace(/core-петля/g, 'базовая петля')
   .replace(/human layer/g, 'человеческий слой')
   .replace(/premium episodes/g, 'premium-эпизоды')
   .replace(/платный acquisition/g, 'платное привлечение')
