@@ -3889,6 +3889,385 @@ lines.push(mdTable([
 lines.push('');
 lines.push('Метрики провала тоже нужно определить заранее: пользователь не понимает отличие от horoscope/journal/avatar generator; не видит связи действия и avatar; не возвращается на второй день; считает текст generic; боится вводить дату рождения; хочет только бесплатную картинку; не готов платить за сезон; видео кажется красивым, но не усиливает желание возвращаться. Если эти сигналы появятся, продукт нужно не “дописывать функциями”, а пересобирать вокруг другого ядра.');
 lines.push('');
+lines.push('## DECISION-ВЕРСИЯ: ЧТО НУЖНО ДЛЯ ЗАПУСКА, ТЗ, БЮДЖЕТА И MVP');
+lines.push('');
+lines.push('Следующие блоки переводят исследование из режима “рынок и конкуренты” в режим решения: что именно строить, какой стек брать, какую экономику считать, как проверять спрос и при каких условиях проект нужно останавливать. Это не заменяет дизайн и финальное ТЗ, но дает каркас, после которого можно ставить задачи дизайнеру, разработчику, маркетологу и исследователю.');
+lines.push('');
+lines.push('### 1. Product blueprint: полный путь пользователя');
+lines.push('');
+lines.push(mdTable([
+  {
+    moment: 'День 0: до установки',
+    situation: 'Пользователь чувствует размытое состояние: хочет понять себя, собрать фокус, сделать шаг, но обычные советы, гороскопы, дневники и habit apps не дают ощущения личной траектории.',
+    alternatives: 'Calm/Headspace для состояния, Nebula/astrology для смысла, Finch/habit apps для мягкого прогресса, Replika/AI chat для персонального внимания, заметки/дневник для рефлексии.',
+    trigger: 'Увидел ролик или карточку “сериал о себе / future-self avatar / моя неделя как Life Canvas” и захотел попробовать первый эпизод.',
+    product: 'Лендинг или стор показывает: это не гадание и не трекер, а личный сезон, где смысл превращается в действие и видимый avatar-прогресс.'
+  },
+  {
+    moment: 'День 1: первый вход',
+    situation: 'Регистрация, дата рождения, текущий запрос, выбор темы сезона, первый эпизод, одно действие, reset, первый avatar/Life Canvas след.',
+    alternatives: 'Пользователь сравнивает опыт с гороскопом, AI-chat, дневником и motivation app.',
+    trigger: 'Вау должен возникнуть на связке: “это про меня сегодня” + “я понимаю маленький шаг” + “образ изменился из-за моего действия”.',
+    product: '5-10 экранов: welcome, privacy, birth+state, season, episode, action, reset, done, avatar change, tomorrow hook/paywall.'
+  },
+  {
+    moment: 'День 2: возврат',
+    situation: 'Пользователь получает продолжение вчерашней истории, видит, что вчерашний шаг сохранен, и открывает новую серию.',
+    alternatives: 'Если ничего не изменилось, продукт ощущается как генератор случайных советов.',
+    trigger: 'Новизна: “вчерашнее действие изменило сегодняшний контекст”.',
+    product: 'Память, recap одной строки, новый эпизод, мягкий push, отсутствие наказания за пропуск.'
+  },
+  {
+    moment: 'День 7: первый сезон',
+    situation: 'Пользователь видит завершенную неделю: карта действий, повторяющиеся темы, before/after Life Canvas, первый measurable result.',
+    alternatives: 'Habit apps дают streak, mindfulness apps дают состояние, astrology apps дают чтение; АУРА должна дать историю изменения.',
+    trigger: '“Я вижу, что неделя была не случайной”.',
+    product: 'Season recap становится первым сильным premium/paywall моментом.'
+  },
+  {
+    moment: 'День 30: первый большой результат',
+    situation: 'Пользователь видит несколько сезонов, карту траектории, avatar evolution, темы, которые повторяются, и предлагает следующий сезон.',
+    alternatives: 'Без архива и траектории пользователь уйдет в обычный дневник или coaching app.',
+    trigger: '“Я вижу свою траекторию и хочу продолжить следующий сезон”.',
+    product: 'Архив, карта паттернов, рекомендации, premium visual moment, годовая подписка или сезонные пакеты.'
+  }
+], [
+  { key: 'moment', label: 'Момент' },
+  { key: 'situation', label: 'Что происходит' },
+  { key: 'alternatives', label: 'С чем сравнивает' },
+  { key: 'trigger', label: 'Что должно сработать' },
+  { key: 'product', label: 'Что строим' }
+]));
+lines.push('');
+lines.push('Логическая карта экранов для первого прототипа:');
+lines.push('');
+lines.push(mdTable([
+  { screen: '1. Welcome', action: 'Понять обещание “сериал о себе” и безопасную рамку', outcome: 'Пользователь не путает АУРУ с жестким гаданием или медицинским продуктом.' },
+  { screen: '2. Privacy + consent', action: 'Согласиться на дату рождения и персональные данные', outcome: 'Снижается страх: пользователь понимает, что хранится и зачем.' },
+  { screen: '3. Birth + current state', action: 'Ввести дату рождения, имя, состояние, запрос дня', outcome: 'Символический слой соединяется с текущей жизнью.' },
+  { screen: '4. Season choice', action: 'Выбрать тему 7-дневного сезона', outcome: 'Появляется контекст продолжения, а не одноразовая выдача.' },
+  { screen: '5. Daily episode', action: 'Прочитать короткий эпизод дня', outcome: 'Первый инсайт: “это похоже на меня”.' },
+  { screen: '6. Daily action', action: 'Выбрать одно действие: мягкое / обычное / смелое', outcome: 'Смысл превращается в поведение.' },
+  { screen: '7. Reset', action: 'Пройти 30-60 секунд подготовки', outcome: 'Снижается сопротивление перед действием.' },
+  { screen: '8. Done + reflection', action: 'Отметить действие и оставить одну строку', outcome: 'Появляется доказательство действия.' },
+  { screen: '9. Avatar / Life Canvas change', action: 'Увидеть изменение образа', outcome: 'Пользователь считывает причинность действия.' },
+  { screen: '10. Tomorrow / paywall', action: 'Увидеть продолжение сезона или платную глубину', outcome: 'Возникает причина вернуться и/или заплатить.' }
+], [
+  { key: 'screen', label: 'Screen' },
+  { key: 'action', label: 'Action' },
+  { key: 'outcome', label: 'Outcome' }
+]));
+lines.push('');
+lines.push('### 2. Product specification: функции и приоритеты');
+lines.push('');
+lines.push(mdTable([
+  { feature: 'Daily Episode', priority: 'Must Have', does: 'Создает короткий личный смысл дня.', problem: 'Пользователь не понимает, с чего начать.', retention: 'Дает ежедневный повод открыть приложение.', monetization: 'Продает продолжение сезона.', viral: 'Может стать teaser-карточкой.', remove: 'Продукт теряет главный narrative layer.' },
+  { feature: 'Avatar / Life Canvas', priority: 'Must Have', does: 'Показывает визуальное изменение после действия.', problem: 'Рост не ощущается видимым.', retention: 'Создает эмоциональную привязанность.', monetization: 'Дает premium visual depth.', viral: 'Главный share artifact.', remove: 'АУРА превращается в текстовый journal/astrology app.' },
+  { feature: 'Future Self', priority: 'Must Have', does: 'Дает образ “куда я двигаюсь”.', problem: 'Пользователю сложно представить траекторию.', retention: 'Хочется увидеть развитие образа.', monetization: 'Можно продавать deep future-self reads.', viral: 'Постеры и обращения future-self.', remove: 'Сериал теряет героя.' },
+  { feature: 'Daily Action', priority: 'Must Have', does: 'Превращает смысл в маленький шаг.', problem: 'Инсайт остается пассивным чтением.', retention: 'Возврат связан с реальным прогрессом.', monetization: 'Платная ценность выглядит честнее.', viral: 'Можно делиться итогом недели.', remove: 'Нет причинной петли.' },
+  { feature: 'Reset', priority: 'Must Have', does: 'Переводит пользователя в состояние готовности.', problem: 'Пользователь понимает смысл, но не действует.', retention: 'Создает быстрый ритуал.', monetization: 'Premium reset packs позже.', viral: 'Слабо, только как ritual card.', remove: 'Переход от смысла к действию становится резким.' },
+  { feature: 'Life Series', priority: 'Must Have', does: 'Собирает дни в историю.', problem: 'Единичные советы быстро забываются.', retention: 'Tomorrow hook и сезонность.', monetization: 'Подписка продает продолжение.', viral: 'Season recap.', remove: 'Продукт становится одноразовым.' },
+  { feature: 'Memory', priority: 'Must Have', does: 'Хранит эпизоды, действия, заметки, avatar states.', problem: 'Нет ощущения накопления.', retention: 'Пользователь возвращается к своей истории.', monetization: 'Архив и recap можно сделать платной глубиной.', viral: 'Before/after cards.', remove: 'День 7 и День 30 невозможны.' },
+  { feature: 'Season System', priority: 'Must Have', does: 'Дает 7-дневную структуру.', problem: 'Нет границ и финала.', retention: 'Пользователь хочет завершить сезон.', monetization: 'Сезоны можно продавать/расширять.', viral: '“Я закончил сезон”.', remove: 'Неясно, зачем возвращаться неделю.' },
+  { feature: 'Progress System', priority: 'Should Have', does: 'Показывает движение без жесткого streak.', problem: 'Рост кажется невидимым.', retention: 'Усиливает D7/D30.', monetization: 'Premium analytics/recap.', viral: 'Progress card.', remove: 'Можно жить в MVP, но слабее ощущение достижения.' },
+  { feature: 'AI Companion', priority: 'Should Have', does: 'Дает личный тон и память в диалоге.', problem: 'Пользователь хочет быть услышанным.', retention: 'Может усилить привязанность.', monetization: 'Premium companion mode.', viral: 'Слабая: приватный сценарий.', remove: 'MVP сохранится, если episode/action сильные.' },
+  { feature: 'Premium Episodes', priority: 'Should Have', does: 'Глубокие сезоны, visual/video moments.', problem: 'Нужна платная глубина.', retention: 'Дает цель после базового сезона.', monetization: 'Один из главных платных слоев.', viral: 'Cinematic trailer.', remove: 'Потеряем часть выручки, но не ядро.' },
+  { feature: 'Community', priority: 'Won’t Have MVP', does: 'Социальные челленджи и группы.', problem: 'Может дать принадлежность.', retention: 'Потенциально сильна позже.', monetization: 'Marketplace/creator seasons позже.', viral: 'Может усилить referral.', remove: 'В MVP лучше убрать, чтобы сохранить интимность.' },
+  { feature: 'Achievements', priority: 'Could Have', does: 'Мягкие награды за сезон/действия.', problem: 'Нужно подкрепление прогресса.', retention: 'Может усилить completion.', monetization: 'Слабо напрямую.', viral: 'Achievement cards.', remove: 'Не критично, если Life Canvas работает.' },
+  { feature: 'Notifications', priority: 'Must Have', does: 'Возвращает к следующему эпизоду.', problem: 'Пользователь забывает.', retention: 'Критично для D1/D7.', monetization: 'Косвенно через completion.', viral: 'Нет.', remove: 'Сильно падает возврат, но пуши должны быть мягкими.' }
+], [
+  { key: 'feature', label: 'Функция' },
+  { key: 'priority', label: 'Приоритет' },
+  { key: 'does', label: 'Что делает' },
+  { key: 'problem', label: 'Проблема' },
+  { key: 'retention', label: 'Удержание' },
+  { key: 'monetization', label: 'Монетизация' },
+  { key: 'viral', label: 'Виральность' },
+  { key: 'remove', label: 'Если убрать' }
+]));
+lines.push('');
+lines.push('### 3. Technology research: сравнение и выбор');
+lines.push('');
+lines.push('Цены ниже являются рабочими ориентирами на момент подготовки версии и должны быть перепроверены перед разработкой: AI/API-провайдеры регулярно меняют тарифы, лимиты и модели. Для MVP важнее не выбрать “самую мощную модель”, а выбрать стек, где качество достаточно высокое, себестоимость управляемая, а замена провайдера не ломает продукт.');
+lines.push('');
+lines.push(mdTable([
+  { area: 'AI Brain', option: 'GPT / OpenAI', cost: 'Средний/высокий по сравнению с budget-моделями; pricing считать по live calculator.', quality: 'Сильный общий quality, safety и structured output.', speed: 'Высокая.', complexity: 'Низкая/средняя.', recommendation: 'Хороший основной или premium brain для MVP, особенно для качества текста.' },
+  { area: 'AI Brain', option: 'Claude', cost: 'Haiku дешевле, Sonnet средний, Opus дорогой; Sonnet в официальной таблице $3 input / $15 output за MTok.', quality: 'Сильный длинный текст, тон, reasoning.', speed: 'Средняя/высокая.', complexity: 'Низкая.', recommendation: 'Кандидат для premium/deep reads и редакторского качества.' },
+  { area: 'AI Brain', option: 'Gemini', cost: 'Gemini 2.5 Pro в официальной таблице от $1.25 input и $10 output за MTok для <=200K prompt; batch дешевле.', quality: 'Сильный multimodal и длинный контекст.', speed: 'Высокая у Flash, ниже у Pro.', complexity: 'Средняя из-за Google Cloud/AI Studio различий.', recommendation: 'Хороший fallback и multimodal layer.' },
+  { area: 'AI Brain', option: 'DeepSeek', cost: 'Очень низкий: DeepSeek V4 Flash $0.14 input cache miss / $0.28 output за MTok; Pro дороже, но все еще низкий.', quality: 'Сильная экономика, качество нужно тестировать на русском тоне и safety.', speed: 'Высокая, но зависит от лимитов.', complexity: 'Низкая, OpenAI/Anthropic-compatible API.', recommendation: 'Budget layer для массовых черновиков и cost control.' },
+  { area: 'AI Brain', option: 'OpenRouter', cost: 'Наценка/цены зависят от выбранной модели.', quality: 'Позволяет сравнивать GPT/Claude/Gemini/DeepSeek.', speed: 'Зависит от маршрута.', complexity: 'Низкая для multi-model MVP.', recommendation: 'Лучший роутер на старте, если хотим быстро менять модели.' }
+], [
+  { key: 'area', label: 'Раздел' },
+  { key: 'option', label: 'Вариант' },
+  { key: 'cost', label: 'Стоимость' },
+  { key: 'quality', label: 'Качество' },
+  { key: 'speed', label: 'Скорость' },
+  { key: 'complexity', label: 'Интеграция' },
+  { key: 'recommendation', label: 'Рекомендация' }
+]));
+lines.push('');
+lines.push(mdTable([
+  { area: 'Avatar Generation', option: 'FLUX', cost: 'Дешевле при локальном/Replicate pipeline, но требует GPU/QA.', quality: 'Высокое качество, хороший creative control.', control: 'Высокий при LoRA/style workflows.', scale: 'Хорошо после настройки.', recommendation: 'Не первый день MVP, но лучший кандидат для снижения себестоимости после проверки спроса.' },
+  { area: 'Avatar Generation', option: 'Stable Diffusion', cost: 'Низкая при локальном inference.', quality: 'Зависит от модели и workflow.', control: 'Высокий при ControlNet/LoRA.', scale: 'Хорошо, если есть MLOps.', recommendation: 'Scale layer, не самый быстрый hosted MVP.' },
+  { area: 'Avatar Generation', option: 'Midjourney', cost: 'Подписка, не API-first для production.', quality: 'Очень сильная эстетика.', control: 'Ограничен для стабильного avatar/persona pipeline.', scale: 'Слабее для автоматизированного приложения.', recommendation: 'Использовать для moodboard/style exploration, не как production backend.' },
+  { area: 'Avatar Generation', option: 'OpenAI Images', cost: 'Считать по image/token pricing; удобно для hosted MVP.', quality: 'Хорошее качество и интеграция.', control: 'Средний/высокий.', scale: 'Хорошо через API.', recommendation: 'Сильный кандидат для MVP image-first.' },
+  { area: 'Avatar Generation', option: 'Ideogram', cost: 'Проверять по API/плану.', quality: 'Силен в text-in-image/poster style.', control: 'Средний.', scale: 'Зависит от API.', recommendation: 'Кандидат для share cards/posters, не единственный avatar engine.' }
+], [
+  { key: 'area', label: 'Раздел' },
+  { key: 'option', label: 'Вариант' },
+  { key: 'cost', label: 'Стоимость' },
+  { key: 'quality', label: 'Качество' },
+  { key: 'control', label: 'Контроль стиля' },
+  { key: 'scale', label: 'Масштабирование' },
+  { key: 'recommendation', label: 'Рекомендация' }
+]));
+lines.push('');
+lines.push(mdTable([
+  { area: 'Animated Avatar', option: 'LivePortrait', cost: 'GPU/инфраструктура, дешевле hosted при масштабе.', quality: 'Хорошо для оживления портрета, но нужен QA.', risks: 'Deepfake/consent, стабильность лица.', mvp: 'Could Have: прототип или premium после базового MVP.' },
+  { area: 'Animated Avatar', option: 'SadTalker', cost: 'Локальный GPU, низкая переменная стоимость.', quality: 'Может выглядеть менее premium.', risks: 'Uncanny valley, voice/lip sync.', mvp: 'Только эксперимент.' },
+  { area: 'Animated Avatar', option: 'Tavus', cost: 'Коммерческая проверка по API и сценарию.', quality: 'Силен для conversational avatar.', risks: 'Дорого и не нужно ежедневно.', mvp: 'Не MVP; premium/future-self conversation.' },
+  { area: 'Animated Avatar', option: 'HeyGen', cost: 'Публичные API-ориентиры около $1/min и выше по avatar/video типам.', quality: 'Сильный hosted avatar layer.', risks: 'Маржа, права на образ, enterprise terms.', mvp: 'Premium/token, не базовая петля.' },
+  { area: 'Animated Avatar', option: 'Synthesia', cost: 'Планы от примерно $29/month, API на старших планах/enterprise.', quality: 'B2B presenter quality.', risks: 'Может выглядеть training-style, не personal magic.', mvp: 'Benchmark, не основной MVP.' }
+], [
+  { key: 'area', label: 'Раздел' },
+  { key: 'option', label: 'Вариант' },
+  { key: 'cost', label: 'Стоимость' },
+  { key: 'quality', label: 'Качество' },
+  { key: 'risks', label: 'Риски' },
+  { key: 'mvp', label: 'MVP пригодность' }
+]));
+lines.push('');
+lines.push(mdTable([
+  { layer: 'Mobile Stack', option: 'React Native', pros: 'Быстро, JS/TS, много SDK, RevenueCat/PostHog/Firebase удобно.', cons: 'Нужен контроль performance и native edge cases.', decision: 'Рекомендация для MVP, если команда близка к JS/TS.' },
+  { layer: 'Mobile Stack', option: 'Flutter', pros: 'Стабильный UI, хороший cross-platform control.', cons: 'Другой стек/найм, интеграции иногда требуют мостов.', decision: 'Равноценная альтернатива, если команда Flutter.' },
+  { layer: 'Mobile Stack', option: 'Native iOS', pros: 'Лучшее качество iOS.', cons: 'Дороже и медленнее для двух платформ.', decision: 'Не MVP, если нет iOS-only стратегии.' },
+  { layer: 'Mobile Stack', option: 'Native Android', pros: 'Контроль Android.', cons: 'Не закрывает iOS, где подписочный wellness часто сильнее.', decision: 'Не MVP отдельно.' },
+  { layer: 'Backend', option: 'Supabase', pros: 'Postgres, auth, storage, edge functions, быстрый старт.', cons: 'Логику нужно дисциплинировать.', decision: 'Рекомендация для MVP.' },
+  { layer: 'Backend', option: 'Firebase', pros: 'Push/analytics/realtime, быстрый mobile start.', cons: 'NoSQL и vendor lock-in.', decision: 'Хорошо для push/analytics, но Postgres удобнее для сезонов.' },
+  { layer: 'Backend', option: 'NestJS', pros: 'Строгая backend-архитектура на TS.', cons: 'Дольше старт.', decision: 'Добавлять, когда логика вырастет.' },
+  { layer: 'Backend', option: 'FastAPI', pros: 'Удобен для AI/python pipelines.', cons: 'Еще один язык рядом с mobile/frontend.', decision: 'Использовать для AI-service позже, не обязательно в MVP.' }
+], [
+  { key: 'layer', label: 'Слой' },
+  { key: 'option', label: 'Вариант' },
+  { key: 'pros', label: 'Плюсы' },
+  { key: 'cons', label: 'Минусы' },
+  { key: 'decision', label: 'Выбор' }
+]));
+lines.push('');
+lines.push('Итоговый технологический выбор для MVP: React Native или Flutter для клиента, Supabase/Postgres как backend foundation, OpenRouter + один основной LLM + fallback, OpenAI Images/Stability/Replicate для image-first Life Canvas, RevenueCat для подписок, PostHog/Firebase для аналитики и пушей. Видео-avatar не включать в базовый MVP.');
+lines.push('');
+lines.push('### 4. Technical architecture: схема системы');
+lines.push('');
+lines.push('```mermaid');
+lines.push('flowchart LR');
+lines.push('  U["Mobile App"] --> API["Backend API"]');
+lines.push('  API --> DB["Postgres: users, seasons, episodes, actions"]');
+lines.push('  API --> AI["AI Orchestration: prompts, safety, routing"]');
+lines.push('  AI --> LLM["LLM Providers: GPT / Claude / Gemini / DeepSeek"]');
+lines.push('  AI --> IMG["Image Layer: OpenAI Images / Stability / Replicate / FLUX later"]');
+lines.push('  AI --> VID["Avatar Video Layer: HeyGen / Tavus / LivePortrait later"]');
+lines.push('  API --> ST["Storage: S3 / Supabase Storage"]');
+lines.push('  API --> PUSH["Push: Firebase / OneSignal"]');
+lines.push('  API --> BILL["Billing: RevenueCat"]');
+lines.push('  API --> AN["Analytics: PostHog / Firebase"]');
+lines.push('  ADMIN["Admin Panel"] --> API');
+lines.push('```');
+lines.push('');
+lines.push(mdTable([
+  { block: 'Источник данных', does: 'Дата рождения, состояние, запрос, действия, заметки, события.', services: 'Mobile app + Postgres.', cost: 'Низкая infra cost.', risk: 'Privacy/trust; нужна политика удаления и consent.' },
+  { block: 'Backend', does: 'API, профили, сезоны, эпизоды, права доступа.', services: 'Supabase сначала, NestJS позже.', cost: '$25-500+/мес. на ранних стадиях.', risk: 'Разрастание логики без архитектуры.' },
+  { block: 'AI слой', does: 'Генерация эпизода, action, reset, safety, routing.', services: 'OpenRouter/direct LLM.', cost: 'Зависит от tokens; считать на активного пользователя.', risk: 'Generic текст, hallucination, unsafe claims.' },
+  { block: 'Avatar слой', does: 'Life Canvas, avatar states, premium video.', services: 'OpenAI Images/Stability/Replicate; позже FLUX/LivePortrait/HeyGen.', cost: 'Главный variable cost после LLM.', risk: 'Маржа, качество лица, consent.' },
+  { block: 'Storage', does: 'Хранение изображений, аудио, видео, архива.', services: 'S3/Supabase Storage/CDN.', cost: 'Низкая для image, быстро растет для video.', risk: 'Хранить тяжелые видео без retention policy нельзя.' },
+  { block: 'Push', does: 'Возврат к следующему эпизоду.', services: 'Firebase/OneSignal.', cost: 'Низкая/средняя.', risk: 'Спам и churn.' },
+  { block: 'Analytics', does: 'Activation, D1/D7, paywall, avatar causality.', services: 'PostHog/Firebase.', cost: 'От free до usage-based.', risk: 'Без аналитики невозможно управлять MVP.' },
+  { block: 'Billing', does: 'Trial, subscriptions, tokens, entitlement.', services: 'RevenueCat + App Store/Google Play.', cost: 'Комиссии store + tooling.', risk: 'Ошибки доступа и refund негатив.' },
+  { block: 'Admin Panel', does: 'Модерация, промпты, сезоны, ручная поддержка.', services: 'Retool/Supabase Studio/custom admin.', cost: 'Низкая в MVP.', risk: 'Без admin нельзя быстро чинить content quality.' }
+], [
+  { key: 'block', label: 'Блок' },
+  { key: 'does', label: 'Что делает' },
+  { key: 'services', label: 'Сервисы' },
+  { key: 'cost', label: 'Стоимость' },
+  { key: 'risk', label: 'Риск' }
+]));
+lines.push('');
+lines.push('### 5. Unit economics: рабочая модель расходов');
+lines.push('');
+lines.push('Допущение для чтения таблицы: это не бухгалтерская модель, а stress-test. Сценарий text+image-first предполагает ежедневный эпизод, ограниченные изображения, редкий видео-layer. Если делать видео-avatar каждый день, расходы могут стать выше подписочной выручки.');
+lines.push('');
+lines.push(mdTable([
+  { users: '100', ai: '$5-30', images: '$10-80', video: '$0-150', push: '$0-10', storage: '$0-20', infra: '$0-50', support: '$0-100', total: '$15-440', margin: 'Проверка вручную; маржа не показательна.' },
+  { users: '1,000', ai: '$30-200', images: '$80-700', video: '$0-1,500', push: '$0-30', storage: '$20-100', infra: '$50-300', support: '$100-500', total: '$280-3,330', margin: 'MVP должен иметь лимиты visual/video.' },
+  { users: '10,000', ai: '$200-1,500', images: '$700-7,000', video: '$0-15,000+', push: '$20-150', storage: '$100-800', infra: '$300-2,000', support: '$500-4,000', total: '$1,820-30,450+', margin: 'Подписка работает только без ежедневного видео.' },
+  { users: '100,000', ai: '$1,500-12,000', images: '$5,000-70,000', video: '$0-150,000+', push: '$100-1,000', storage: '$800-8,000', infra: '$2,000-20,000', support: '$5,000-30,000', total: '$14,400-291,000+', margin: 'Нужны batching, limits, локальные модели, premium tokens.' },
+  { users: '1,000,000', ai: '$12,000-100,000', images: '$40,000-500,000', video: '$0-1,500,000+', push: '$1,000-8,000', storage: '$8,000-80,000', infra: '$20,000-150,000', support: '$50,000-250,000', total: '$131,000-2,588,000+', margin: 'Без собственной оптимизации visual layer экономика может сломаться.' }
+], [
+  { key: 'users', label: 'Пользователи / месяц' },
+  { key: 'ai', label: 'AI расходы' },
+  { key: 'images', label: 'Изображения' },
+  { key: 'video', label: 'Видео' },
+  { key: 'push', label: 'Push' },
+  { key: 'storage', label: 'Storage' },
+  { key: 'infra', label: 'Инфраструктура' },
+  { key: 'support', label: 'Поддержка' },
+  { key: 'total', label: 'Итого' },
+  { key: 'margin', label: 'Маржинальный вывод' }
+]));
+lines.push('');
+lines.push('Для первой платной версии целевая продуктовая маржа должна быть не ниже 70-80% до маркетинга. Это означает: текст и легкие image-сцены могут жить в подписке, а видео-avatar должен быть premium/token, milestone или редкая paid-сцена. Если CAC окажется выше 1-2 месячных маржинальных вкладов, paid acquisition нужно откладывать и запускаться через organic/creator/UGC.');
+lines.push('');
+lines.push('### 6. Monetization: конкуренты и итоговая модель АУРЫ');
+lines.push('');
+lines.push(mdTable([
+  { product: 'Calm', free: 'Ограниченный бесплатный контент/пробный вход.', paid: 'Библиотека медитаций, сон, программы, premium content.', price: 'Обычно subscription; цену проверять по стране/store.', negative: 'Жалобы на цену, trial/renewal, повторяемость.', renewal: 'Сон, доверие, привычка, библиотека.' },
+  { product: 'Finch', free: 'Базовая self-care петля и персонаж.', paid: 'Cosmetics, расширения, больше персонализации.', price: 'Subscription/IAP по store.', negative: 'Ограничения free, цена, детскость для части аудитории.', renewal: 'Привязанность к персонажу и мягкий прогресс.' },
+  { product: 'Replika', free: 'Базовый AI companion chat.', paid: 'Romantic/advanced modes, voice/video, кастомизация.', price: 'Subscription.', negative: 'Границы intimacy, изменения функциональности, цена.', renewal: 'Эмоциональная связь и память.' },
+  { product: 'Nebula', free: 'Часть astrology/horoscope контента.', paid: 'Персональные разборы, совместимость, прогнозы.', price: 'Subscription/IAP.', negative: 'Недоверие, paywall, generic readings.', renewal: 'Личный язык, регулярные прогнозы.' },
+  { product: 'Character AI', free: 'Большой объем chat/characters.', paid: 'Скорость, лимиты, premium access.', price: 'Subscription.', negative: 'Качество, лимиты, безопасность.', renewal: 'Бесконечный контент и roleplay.' },
+  { product: 'Headspace', free: 'Ограниченный trial/free content.', paid: 'Курсы, медитации, сон, focus.', price: 'Subscription.', negative: 'Цена и контент, который не всем нужен.', renewal: 'Бренд, sleep/focus routine, доверие.' }
+], [
+  { key: 'product', label: 'Конкурент' },
+  { key: 'free', label: 'Что бесплатно' },
+  { key: 'paid', label: 'За что платят' },
+  { key: 'price', label: 'Стоимость' },
+  { key: 'negative', label: 'Что вызывает негатив' },
+  { key: 'renewal', label: 'Что продлевает подписку' }
+]));
+lines.push('');
+lines.push(mdTable([
+  { hypothesis: 'Aura Plus subscription', potential: 'Высокий', complexity: 'Средняя', risk: 'Нужен D7 retention.', priority: 'P0' },
+  { hypothesis: 'Premium visual tokens', potential: 'Высокий', complexity: 'Средняя/высокая', risk: 'Может увести в генератор картинок.', priority: 'P0/P1' },
+  { hypothesis: 'Season packs', potential: 'Средний', complexity: 'Низкая/средняя', risk: 'Разовый чек слабее подписки.', priority: 'P1' },
+  { hypothesis: 'Deep personal reports', potential: 'Высокий', complexity: 'Средняя', risk: 'Нельзя звучать как жесткое предсказание.', priority: 'P1' },
+  { hypothesis: 'Creator seasons', potential: 'Высокий позже', complexity: 'Высокая', risk: 'Качество и модерация.', priority: 'P2' },
+  { hypothesis: 'Human coaching', potential: 'Высокий чек', complexity: 'Очень высокая', risk: 'Меняет бизнес-модель.', priority: 'Won’t Have MVP' }
+], [
+  { key: 'hypothesis', label: 'Гипотеза монетизации' },
+  { key: 'potential', label: 'Потенциал' },
+  { key: 'complexity', label: 'Сложность' },
+  { key: 'risk', label: 'Риск' },
+  { key: 'priority', label: 'Приоритет' }
+]));
+lines.push('');
+lines.push('Итоговая модель АУРЫ: free first episode -> Aura Plus subscription for seasons/memory/avatar evolution -> premium visual tokens for expensive scenes -> later season packs/deep reports. Marketplace, community и human coaching не входят в MVP.');
+lines.push('');
+lines.push('### 7. Retention research: удержание и отток');
+lines.push('');
+lines.push(mdTable([
+  { type: 'ТОП причин возврата', items: 'ежедневный якорь; продолжение сезона; видимый avatar-прогресс; эмоциональная поддержка; weekly recap; мягкий push; ощущение “меня помнят”.' },
+  { type: 'ТОП причин удаления', items: 'generic текст; ранний paywall; баги; медленная генерация; плохой avatar; недоверие к дате рождения; слишком эзотерично; слишком детски; нет результата через неделю.' },
+  { type: 'ТОП причин покупки', items: 'продолжить сезон; сохранить историю; открыть avatar evolution; получить deep report; получить premium visual scene; увидеть финал недели.' },
+  { type: 'ТОП причин отказа от подписки', items: 'дорого; ценность была до paywall, но дальше не усилилась; повторяется контент; нет D7 результата; визуальный слой не стоит денег; push раздражает.' }
+], [
+  { key: 'type', label: 'Группа' },
+  { key: 'items', label: 'Причины' }
+]));
+lines.push('');
+lines.push(mdTable([
+  { product: 'Calm', whyLeave: 'Цена, неиспользуемая библиотека, ощущение “я уже получил сон/медитацию и забыл”.', auraLesson: 'Не продавать библиотеку; продавать сезон и личную память.' },
+  { product: 'Finch', whyLeave: 'Для части аудитории слишком детский стиль или усталость от задач.', auraLesson: 'Аватар должен быть взрослым Life Canvas, не милой игрушкой.' },
+  { product: 'Replika', whyLeave: 'Границы intimacy, доверие, изменения функций, зависимость.', auraLesson: 'AI companion должен быть ограниченным, безопасным и не романтическим ядром.' },
+  { product: 'Nebula', whyLeave: 'Недоверие к точности, paywall, generic readings.', auraLesson: 'Не обещать судьбу; объяснять мягкую символическую рамку.' },
+  { product: 'Character AI', whyLeave: 'Качество ответов, безопасность, слишком много хаоса.', auraLesson: 'АУРА должна быть структурированным сезоном, а не бесконечным чатом.' }
+], [
+  { key: 'product', label: 'Продукт' },
+  { key: 'whyLeave', label: 'Почему бросают' },
+  { key: 'auraLesson', label: 'Вывод для АУРЫ' }
+]));
+lines.push('');
+lines.push('Удерживающие механики АУРЫ: season map, tomorrow hook, avatar causality, weekly recap, comeback episode, мягкий push, короткий reset, memory archive, visual before/after, paid depth after value.');
+lines.push('');
+lines.push('### 8. Go to market: каналы и план запуска');
+lines.push('');
+lines.push(mdTable([
+  { channel: 'TikTok', competitor: 'AI avatar, glow up, astrology и self-care форматы заходят через hook за 1-2 секунды.', content: '“Я сделала сериал о своей жизни”; “мой future-self сегодня”; before/after Life Canvas.', cta: 'Получить первый эпизод бесплатно.' },
+  { channel: 'Instagram Reels', competitor: 'Эстетичные self-care и transformation reels.', content: 'Life Canvas, ritual cards, creator seasons.', cta: 'Собери свою неделю.' },
+  { channel: 'YouTube Shorts', competitor: 'Объясняющие короткие истории и челленджи.', content: '7-дневный сезон, как меняется avatar.', cta: 'Пройди первый сезон.' },
+  { channel: 'Pinterest', competitor: 'Moodboards, future self, manifestation visuals.', content: 'Posters, visual boards, ritual templates.', cta: 'Сохрани Life Canvas.' },
+  { channel: 'Reddit', competitor: 'Работает не реклама, а честная validation-дискуссия.', content: 'Посты о journaling/astrology/AI companion/self-care behavior.', cta: 'Помочь протестировать прототип.' },
+  { channel: 'Influencers', competitor: 'Astrology/self-growth creators продают доверие.', content: 'Персональный сезон автора, разбор недели.', cta: 'Попробуй сезон автора.' },
+  { channel: 'UGC', competitor: 'Лучше работает личный опыт, чем polished ad.', content: '“Я прошла 7 дней и вот мой canvas”.', cta: 'Сделай свой.' },
+  { channel: 'Referral', competitor: 'Работает после первого результата, не до него.', content: 'Share season recap без личных деталей.', cta: 'Открыть свой эпизод.' }
+], [
+  { key: 'channel', label: 'Канал' },
+  { key: 'competitor', label: 'Как работает у рынка' },
+  { key: 'content', label: 'Какие ролики/темы' },
+  { key: 'cta', label: 'CTA' }
+]));
+lines.push('');
+lines.push(mdTable([
+  { stage: 'Первые 100 пользователей', plan: 'Интервью, личные приглашения, Reddit/community posts, creator friends, manual concierge.', metric: '30-50 завершили День 1, 10-20 вернулись на День 2.' },
+  { stage: 'Первые 1,000 пользователей', plan: 'Лендинг + waitlist + TikTok/Reels hooks + 2-3 creator collaborations.', metric: 'Activation >40%, D1 >25%, 5-10% выражают WTP.' },
+  { stage: 'Первые 10,000 пользователей', plan: 'Повторяемые UGC templates, App Store keywords, referral after D7, paid tests только после unit economics.', metric: 'D7 >10-15%, trial start >5%, paid conversion из trial >20-30%.' }
+], [
+  { key: 'stage', label: 'Этап' },
+  { key: 'plan', label: 'План запуска' },
+  { key: 'metric', label: 'Метрика' }
+]));
+lines.push('');
+lines.push('### 9. Interview system: сегменты и вопросы');
+lines.push('');
+lines.push('Интервью должны проверять не “нравится ли идея”, а недавнее поведение, текущие обходные решения, willingness to pay, доверие к avatar/AI и понимание причинной петли. Ниже - базовые блоки вопросов; для каждой сессии выбрать 20-30 вопросов из соответствующего сегмента.');
+lines.push('');
+lines.push(mdTable([
+  { segment: 'Spiritual Self Improvers', hypotheses: 'Им нужен личный смысл, но без жесткого фатализма.', questions: 'Когда последний раз ты смотрел astrology/tarot/meaning content? За что платил? Что звучит манипулятивно? Что должно стать действием? Что нужно увидеть на День 7?', pass: 'Есть недавнее поведение и платный опыт.', kill: 'Интерес только теоретический или все ожидается бесплатно.' },
+  { segment: 'Habit Users', hypotheses: 'Им нужен мягкий прогресс без давления streak.', questions: 'Какие habit apps пробовал? Почему бросил? Что считаешь прогрессом? Нужен ли avatar? Что должно вернуть завтра? Когда платил за productivity/self-improvement?', pass: 'Боль от жестких систем и желание видимого прогресса.', kill: 'Нужен просто task manager, без смысла/avatar.' },
+  { segment: 'Reset Users', hypotheses: 'Короткий reset может стать мостом к действию.', questions: 'Когда тебе нужен быстрый reset? Что используешь? Что мешает действовать после calm-down? Нужен ли голос? Что раздражает в mindfulness apps?', pass: 'Есть частый сценарий reset и желание следующего шага.', kill: 'Reset нужен только как сон/медитация, без действия.' },
+  { segment: 'Avatar Users', hypotheses: 'Avatar мотивирует, если связан с реальным действием.', questions: 'Какие avatar/AI image apps пробовал? Что сохранял/шарил? Платил ли за visual? Что делает образ “моим”? Что пугает в face/avatar?', pass: 'Есть платный/шеринговый visual behavior.', kill: 'Интерес только к разовой картинке.' }
+], [
+  { key: 'segment', label: 'Сегмент' },
+  { key: 'hypotheses', label: 'Гипотеза' },
+  { key: 'questions', label: '20-30 вопросов: темы' },
+  { key: 'pass', label: 'Что подтверждает' },
+  { key: 'kill', label: 'Что убивает' }
+]));
+lines.push('');
+lines.push('### 10. MVP validation plan: 6 недель');
+lines.push('');
+lines.push(mdTable([
+  { week: 'Неделя 1', goal: 'Интервью и конкурентные walkthrough.', actions: '20-30 интервью, 10-15 конкурентов, paywall screenshots, review objections.', metrics: 'Качественные боли, недавнее поведение, список killer risks.', success: '2 сегмента понимают идею и имеют recent behavior.', fail: 'Никто не может объяснить, зачем это завтра.' },
+  { week: 'Неделя 2', goal: 'Кликабельный прототип.', actions: '10 экранов, 3 позиционирования, 2 визуальных стиля.', metrics: 'Comprehension, wow, causality, return intent.', success: '>70% понимают петлю.', fail: '<50% понимают отличие от horoscope/journal.' },
+  { week: 'Неделя 3', goal: 'Лендинг и waitlist.', actions: '3 оффера, first episode mock, email/Telegram waitlist.', metrics: 'Visit->signup, CTA, comments.', success: '10-20% signup на теплом трафике.', fail: '<3-5% и нет качественных ответов.' },
+  { week: 'Неделя 4', goal: 'Первые пользователи concierge.', actions: '30-50 человек проходят 3-7 дней вручную/полуавтоматически.', metrics: 'D1/D3/D7, action completion, avatar save/share.', success: 'Есть возвраты и запрос продолжения.', fail: 'Люди смотрят один раз и исчезают.' },
+  { week: 'Неделя 5', goal: 'Первые продажи.', actions: 'Paywall mock, pre-order, paid season, premium visual token.', metrics: 'WTP, trial intent, paid clicks, price objections.', success: 'Первые реальные платежи/предзаказы или сильные WTP-сигналы.', fail: 'Все хотят только бесплатную картинку.' },
+  { week: 'Неделя 6', goal: 'Анализ и decision.', actions: 'Свести retention, WTP, CAC proxy, tech cost, user quotes.', metrics: 'Go/No-Go scorecard.', success: 'Есть сегмент, петля, цена, канал.', fail: 'Нет D2/D7 и нет платной ценности.' }
+], [
+  { key: 'week', label: 'Этап' },
+  { key: 'goal', label: 'Цель' },
+  { key: 'actions', label: 'Действия' },
+  { key: 'metrics', label: 'Метрики' },
+  { key: 'success', label: 'Условия успеха' },
+  { key: 'fail', label: 'Условия провала' }
+]));
+lines.push('');
+lines.push('### 11. Investment memo: инвесторская версия');
+lines.push('');
+lines.push('Проблема: пользователи потребляют self-care, astrology, journaling, AI companion и avatar tools, но эти продукты редко превращают личный смысл в действие и видимый прогресс. Рынок: пересечение mobile wellness, self-improvement, astrology, AI personalization, avatar identity и progression mechanics. Решение: АУРА - мобильный сериал о себе, где пользователь проходит daily episode, выбирает действие, делает reset и видит изменение Life Canvas/future-self avatar.');
+lines.push('');
+lines.push('Конкуренты: Calm/Headspace закрывают состояние; Nebula закрывает astrology meaning; Finch закрывает cozy self-care/progress; Replika/Character AI закрывают AI companion; avatar tools закрывают визуальный wow. Белое пятно: причинная связка meaning -> daily action -> reset -> visual identity/progress -> season memory. Команда: нужна связка product/AI/mobile/design/growth + эксперт по meaning/astrology как контентный и tone-of-voice слой. Риски: generic content, недоверие к персональным данным, дорогой video layer, слабый D7 retention, paywall до ценности, слишком детская или слишком эзотерическая упаковка.');
+lines.push('');
+lines.push('План запуска: 6 недель validation, затем 8-12 недель MVP, затем soft launch на 1-3 рынках/каналах. Финансовая модель: базовая подписка $7.99-9.99, Premium $14.99-19.99, visual tokens $2.99-9.99; video-avatar только premium/token. Потенциальная капитализация зависит не от количества фичей, а от доказательства D30 retention, платной конверсии и повторяемого acquisition channel. Почему сейчас: AI text/image/video уже позволяют создать персональный experience без огромной студии, а пользовательский рынок привык к подпискам и AI-personalization.');
+lines.push('');
+lines.push('### 12. Final product decision');
+lines.push('');
+lines.push(mdTable([
+  { question: 'Что строим?', answer: 'Мобильное приложение АУРА: daily life-series, где дата рождения и текущий запрос превращаются в эпизод дня, маленькое действие, reset и видимое изменение Life Canvas/future-self avatar.' },
+  { question: 'Для кого?', answer: 'Первично: Spiritual Self Improvers и Habit/Progress Users. Вторично: Reset Users и Avatar Users.' },
+  { question: 'Почему может выстрелить?', answer: 'Рынок уже платит за смысл, состояние, прогресс, AI companion и avatar; АУРА соединяет эти слои в одну причинную петлю.' },
+  { question: 'Почему может провалиться?', answer: 'Если текст generic, avatar декоративный, paywall ранний, видео слишком дорогое, а пользователь не возвращается на День 2/7.' },
+  { question: 'Что должно быть в MVP?', answer: 'Дата рождения + состояние, сезон, daily episode, daily action, reset, avatar/Life Canvas change, memory, tomorrow hook, аналитика, мягкий paywall после ценности.' },
+  { question: 'Что запрещено добавлять в MVP?', answer: 'Ежедневный video-avatar, социальная сеть, marketplace, human coaching, AR/метавселенная, большой дневник, бесконечный AI chat.' },
+  { question: 'Ключевые гипотезы?', answer: 'Понимание петли, D1/D7 retention, willingness to pay за сезон/visual depth, отсутствие прямого скрытого клона, управляемая себестоимость.' },
+  { question: 'Метрики успеха?', answer: 'Activation >40%, D1 >25%, D7 >10-15%, >70% понимают причинность, trial intent >5-10%, первые платежи/preorders в validation.' },
+  { question: 'Метрики остановки?', answer: 'D1 <10-15%, D7 почти нулевой, пользователи не видят отличие от horoscope/journal/avatar generator, нет WTP, video cost ломает маржу.' },
+  { question: 'Решение сейчас?', answer: 'Не строить большой продукт. Строить image-first MVP/concierge validation на 6 недель, где проверяется одна петля и один платный оффер.' }
+], [
+  { key: 'question', label: 'Вопрос' },
+  { key: 'answer', label: 'Финальное решение' }
+]));
+lines.push('');
+lines.push('Источники для перепроверки технической экономики перед разработкой: OpenAI API pricing https://openai.com/api/pricing/, Anthropic Claude pricing https://docs.anthropic.com/en/docs/about-claude/pricing, Google Gemini API pricing https://ai.google.dev/gemini-api/docs/pricing, DeepSeek API pricing https://api-docs.deepseek.com/quick_start/pricing, HeyGen API pricing https://help.heygen.com/en/articles/10060327-heygen-api-pricing-explained, Synthesia pricing https://www.synthesia.io/pricing. Перед бюджетированием нужно заново открыть эти страницы и пересчитать выбранный сценарий по фактическим лимитам.');
+lines.push('');
 lines.push('## БЛИЖАЙШАЯ ЛОГИКА ПРОВЕРКИ');
 lines.push('');
 lines.push('Следующий этап должен идти в том же порядке, в котором строится отчет. Сначала нужно убрать самый опасный риск: что прямой аналог уже существует внутри первого пользовательского опыта конкурента. Затем нужно проверить, где у соседних продуктов появляется платная ценность. После этого можно идти в интервью и прототип, потому что к этому моменту будет понятно, что именно показывать пользователю и какие сомнения проверять.');
@@ -4366,6 +4745,8 @@ const reportText = lines.join('\n')
   .replace(/первичный сегмент не по вкусу/g, 'первичный сегмент не по вкусу')
   .replace(/ручной проверки, платный экран подтверждение/g, 'ручной проверки, подтверждения платного экрана')
   .replace(/ручного платный экран/g, 'ручной проверки платного экрана')
+  .replace(/ручной ручную проверку/g, 'ручную проверку')
+  .replace(/сбор платный экран\/feature экраны/g, 'сбор платных экранов и feature-экранов')
   .replace(/до ручного платный экран/g, 'до ручной проверки платного экрана')
   .replace(/реальных платный экран/g, 'реальных платных экранов')
   .replace(/проверка платный экран/g, 'проверка платного экрана')
@@ -4582,6 +4963,19 @@ const reportText = lines.join('\n')
   .replace(/teaser/g, 'тизер')
   .replace(/Paywall нельзя/g, 'Платный экран нельзя')
   .replace(/Product specification: путь пользователя по дням/g, 'Продуктовая спецификация: путь пользователя по дням')
+  .replace(/DECISION-ВЕРСИЯ: ЧТО НУЖНО ДЛЯ ЗАПУСКА, ТЗ, БЮДЖЕТА И MVP/g, 'ВЕРСИЯ ДЛЯ РЕШЕНИЯ: ЧТО НУЖНО ДЛЯ ЗАПУСКА, ТЗ, БЮДЖЕТА И MVP')
+  .replace(/Product blueprint: полный путь пользователя/g, 'Продуктовый blueprint: полный путь пользователя')
+  .replace(/Product specification: функции и приоритеты/g, 'Продуктовая спецификация: функции и приоритеты')
+  .replace(/Technology research: сравнение и выбор/g, 'Технологическое исследование: сравнение и выбор')
+  .replace(/Technical architecture: схема системы/g, 'Техническая архитектура: схема системы')
+  .replace(/Unit economics: рабочая модель расходов/g, 'Юнит-экономика: рабочая модель расходов')
+  .replace(/Monetization: конкуренты и итоговая модель АУРЫ/g, 'Монетизация: конкуренты и итоговая модель АУРЫ')
+  .replace(/Retention research: удержание и отток/g, 'Исследование удержания: возврат и отток')
+  .replace(/Go to market: каналы и план запуска/g, 'Go-to-market: каналы и план запуска')
+  .replace(/Interview system: сегменты и вопросы/g, 'Система интервью: сегменты и вопросы')
+  .replace(/MVP validation plan: 6 недель/g, 'План проверки MVP: 6 недель')
+  .replace(/Investment memo: инвесторская версия/g, 'Инвестиционная записка: инвесторская версия')
+  .replace(/Final product decision/g, 'Финальное продуктовое решение')
   .replace(/Cost model: сколько может стоить продукт на разных масштабах/g, 'Модель себестоимости: сколько может стоить продукт на разных масштабах')
   .replace(/Retention analysis: почему пользователь возвращается или удаляет продукт/g, 'Анализ удержания: почему пользователь возвращается или удаляет продукт')
   .replace(/Virality: что пользователь может захотеть показать другим/g, 'Виральность: что пользователь может захотеть показать другим')
