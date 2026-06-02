@@ -4,14 +4,14 @@ import { spawnSync } from 'child_process';
 
 const ROOT = process.cwd();
 const THREAD_ID = process.env.CODEX_THREAD_ID || `manual-${Date.now().toString(36)}`;
-const WORKSPACE = path.join(ROOT, 'tmp', 'presentations', THREAD_ID, 'aura-25-slides');
+const WORKSPACE = path.join(ROOT, 'tmp', 'presentations', THREAD_ID, 'aura-product-deck');
 const SLIDES_DIR = path.join(WORKSPACE, 'slides');
 const PREVIEW_DIR = path.join(WORKSPACE, 'preview');
 const LAYOUT_DIR = path.join(WORKSPACE, 'layout');
 const OUTPUT_DIR = path.join(ROOT, 'output', 'pptx');
-const PLAN_OUT = path.join(ROOT, 'reports', 'aura-presentation-25-slides.md');
-const PPTX_OUT = path.join(OUTPUT_DIR, 'AURA_PRODUCT_MASTER_PLAN_25_SLIDES.pptx');
-const CONTACT_SHEET = path.join(OUTPUT_DIR, 'AURA_PRODUCT_MASTER_PLAN_25_SLIDES_CONTACT_SHEET.png');
+const PLAN_OUT = path.join(ROOT, 'reports', 'aura-product-deck.md');
+const PPTX_OUT = path.join(OUTPUT_DIR, 'AURA_PRODUCT_DECK.pptx');
+const CONTACT_SHEET = path.join(OUTPUT_DIR, 'AURA_PRODUCT_DECK_CONTACT_SHEET.png');
 
 const BUILDER = '/Users/kirill/.codex/plugins/cache/openai-primary-runtime/presentations/26.521.10419/skills/presentations/scripts/build_artifact_deck.mjs';
 const NODE = '/Users/kirill/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node';
@@ -206,7 +206,7 @@ function mdTable(rows, columns) {
 }
 
 function writePlan() {
-  const lines = ['# AURA Product Master Plan — 25 slides', ''];
+  const lines = ['# AURA Product Deck — 25 slides', ''];
   for (const [idx, slide] of slides.entries()) {
     lines.push(`## Слайд ${idx + 1}. ${slide.title}`);
     lines.push('');
@@ -241,19 +241,20 @@ const C = {
 
 export function base(slide, ctx, n, title, takeaway) {
   ctx.addShape(slide, { left: 0, top: 0, width: ctx.W, height: ctx.H, fill: C.bg });
+  ctx.addShape(slide, { left: 0, top: 0, width: ctx.W, height: 8, fill: n % 5 === 0 ? C.green : C.blue, line: { style: 'solid', fill: n % 5 === 0 ? C.green : C.blue, width: 0 } });
   ctx.addText(slide, { text: 'AURA', left: 54, top: 30, width: 130, height: 24, fontSize: 16, bold: true, color: C.ink });
   ctx.addText(slide, { text: String(n).padStart(2, '0'), left: ctx.W - 96, top: 30, width: 42, height: 24, fontSize: 13, bold: true, color: C.muted, align: 'right' });
-  ctx.addText(slide, { text: title, left: 54, top: 72, width: 620, height: 86, fontSize: 34, bold: true, color: C.ink, insets: { left: 0, right: 0, top: 0, bottom: 0 } });
+  ctx.addText(slide, { text: title, left: 54, top: 72, width: 570, height: 92, fontSize: 32, bold: true, color: C.ink, insets: { left: 0, right: 0, top: 0, bottom: 0 } });
   ctx.addShape(slide, { left: 54, top: ctx.H - 80, width: ctx.W - 108, height: 44, fill: '#F2F4F7', line: { style: 'solid', fill: '#E4E7EC', width: 1 } });
   ctx.addText(slide, { text: 'Что должен понять человек', left: 74, top: ctx.H - 72, width: 220, height: 14, fontSize: 10, bold: true, color: C.muted });
   ctx.addText(slide, { text: takeaway, left: 74, top: ctx.H - 56, width: ctx.W - 148, height: 28, fontSize: 15, bold: true, color: C.ink });
 }
 
-export function bullets(slide, ctx, items, x = 72, y = 172, w = 470) {
+export function bullets(slide, ctx, items, x = 72, y = 172, w = 410) {
   items.forEach((item, i) => {
-    const yy = y + i * 54;
+    const yy = y + i * 49;
     ctx.addShape(slide, { left: x, top: yy + 6, width: 8, height: 8, fill: C.blue, line: { style: 'solid', fill: C.blue, width: 0 } });
-    ctx.addText(slide, { text: item, left: x + 22, top: yy, width: w, height: 44, fontSize: 16, color: C.ink });
+    ctx.addText(slide, { text: item, left: x + 22, top: yy, width: w, height: 42, fontSize: 14.5, color: C.ink });
   });
 }
 
@@ -277,7 +278,7 @@ export function loopVisual(slide, ctx, x = 610, y = 210) {
 }
 
 export function visual(slide, ctx, type) {
-  const x = 620, y = 170, w = 560, h = 360;
+  const x = 540, y = 158, w = 650, h = 390;
   ctx.addShape(slide, { left: x, top: y, width: w, height: h, fill: '#FFFFFF', line: { style: 'solid', fill: '#E4E7EC', width: 1 } });
   if (type === 'loop') {
     loopVisual(slide, ctx, x + 170, y + 36);
@@ -293,8 +294,17 @@ export function visual(slide, ctx, type) {
     [['Calm', 130, 240], ['Finch', 260, 220], ['Replika', 190, 130], ['Avatar apps', 350, 120], ['AURA', 375, 150]].forEach(([t, dx, dy]) => tag(slide, ctx, t, x + dx, y + dy, t === 'AURA' ? 100 : 90, t === 'AURA' ? C.greenSoft : C.blueSoft));
     ctx.addText(slide, { text: 'meaning → action', left: x + 180, top: y + 310, width: 220, height: 18, fontSize: 12, color: C.muted, align: 'center' });
   } else if (type === 'journey' || type === 'screens') {
-    const steps = ['Welcome', 'Consent', 'Profile', 'Season', 'Episode', 'Action', 'Reset', 'Canvas', 'Hook'];
-    steps.forEach((s, i) => tag(slide, ctx, s, x + 36 + (i % 3) * 165, y + 40 + Math.floor(i / 3) * 86, 130, i >= 4 ? C.greenSoft : C.blueSoft));
+    const steps = type === 'journey'
+      ? ['Welcome', 'Consent', 'Profile', 'Season', 'Episode', 'Action', 'Reset', 'Canvas', 'Hook']
+      : ['Welcome', 'Profile', 'Episode', 'Action', 'Reset', 'Canvas', 'Paywall', 'Recap', 'Memory'];
+    steps.forEach((s, i) => {
+      const px = x + 42 + (i % 3) * 190;
+      const py = y + 34 + Math.floor(i / 3) * 102;
+      ctx.addShape(slide, { left: px, top: py, width: 112, height: 74, fill: i >= 4 ? C.greenSoft : C.blueSoft, line: { style: 'solid', fill: '#CBD5E1', width: 1 } });
+      ctx.addShape(slide, { left: px + 12, top: py + 10, width: 88, height: 10, fill: '#FFFFFF', line: { style: 'solid', fill: '#FFFFFF', width: 0 } });
+      ctx.addShape(slide, { left: px + 12, top: py + 28, width: 60, height: 8, fill: '#FFFFFF', line: { style: 'solid', fill: '#FFFFFF', width: 0 } });
+      ctx.addText(slide, { text: s, left: px, top: py + 48, width: 112, height: 16, fontSize: 10, bold: true, color: C.ink, align: 'center' });
+    });
   } else if (type === 'timeline') {
     const days = ['Day 1', 'Day 2', 'Day 7', 'Day 30'];
     days.forEach((d, i) => {
@@ -348,9 +358,9 @@ function slideModule(slide, n) {
 export async function slide${String(n).padStart(2, '0')}(presentation, ctx) {
   const slide = presentation.slides.add();
   base(slide, ctx, ${n}, \`${esc(slide.title)}\`, \`${esc(slide.understand)}\`);
-  bullets(slide, ctx, ${JSON.stringify(slide.thesis)}, 72, 178, 475);
+  bullets(slide, ctx, ${JSON.stringify(slide.thesis)}, 64, 178, 402);
   visual(slide, ctx, \`${slide.type}\`);
-  ctx.addText(slide, { text: \`${esc(slide.visual)}\`, left: 620, top: 542, width: 560, height: 22, fontSize: 13, bold: true, color: '#667085', align: 'center' });
+  ctx.addText(slide, { text: \`${esc(slide.visual)}\`, left: 540, top: 562, width: 650, height: 22, fontSize: 13, bold: true, color: '#667085', align: 'center' });
   return slide;
 }
 `;
