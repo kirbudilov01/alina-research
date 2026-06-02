@@ -52,6 +52,11 @@ function pick(chunks, names) {
   });
 }
 
+function removeFrom(chunk, marker) {
+  const index = chunk.indexOf(marker);
+  return (index === -1 ? chunk : chunk.slice(0, index)).trim();
+}
+
 function pageBreak() {
   return '<!-- PAGEBREAK -->';
 }
@@ -82,10 +87,10 @@ const layerCards = {
     evidence: 'Screen map, user stories, function-level specification, product copy principles.',
     appendix: 'Detailed screen specs, API payloads, acceptance criteria, edge cases.',
   },
-  'Как это строим': {
-    main: 'Архитектура, image-first Life Canvas, no free daily video, cost-control.',
-    evidence: 'Stack decision, provider logic, unit economics principles, security.',
-    appendix: 'Provider comparison, full cost tables, database schema, event taxonomy, QA checklist.',
+  'Как монетизируем и проверяем экономику': {
+    main: 'Монетизация, paywall after value, cost-control principles, no free daily video.',
+    evidence: 'Лестница монетизации, unit economics summary, pricing logic, paid intent.',
+    appendix: 'Полные cost tables, providers, architecture и sprint budget вынесены в AURA Build Plan.',
   },
   'Как это продаем': {
     main: 'GTM logic: первые 100/1000 пользователей, positioning, channels, content, experiments.',
@@ -145,6 +150,7 @@ function cleanChunk(chunk) {
   return chunk
     .replace(/^## Зачем нужна эта глава[\s\S]*?(?=^## |^# ГЛАВА |\z)/gm, '')
     .replace(/^## Центральная петля остается на экране[\s\S]*?(?=^## |^# ГЛАВА |\z)/gm, '')
+    .replace('RevenueCat entitlement', 'paid entitlement')
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 }
@@ -261,37 +267,17 @@ lines.push(...pick(decisionVersion, [
   '2. Продуктовая спецификация: функции и приоритеты',
 ]));
 
-lines.push(chapter(6, 'Как это строим', 'Техническая архитектура должна сохранять причинность, контролировать себестоимость и не допустить бесплатное ежедневное видео в MVP.'));
-lines.push(cleanChunk(h2('Архитектура как продуктовая система')));
-lines.push(cleanChunk(h2('Поток данных')));
+lines.push(chapter(6, 'Как монетизируем и проверяем экономику', 'В основном продуктово-стратегическом документе важна не архитектура, а логика: за что человек платит, почему экономика может сойтись и какие дорогие решения нельзя тащить в MVP.'));
 lines.push(cleanChunk(h2('Экономика петли')));
 lines.push(cleanChunk(h2('Cost stack')));
 lines.push(cleanChunk(h2('Лестница монетизации')));
 lines.push(...pick(productModel, [
-  'Техническая реализуемость и себестоимость',
-  'Рекомендуемый технологический стек и архитектура',
   'Монетизация: что проверять у конкурентов',
   'Монетизационная матрица: что именно продавать',
   'Почему люди платят соседним продуктам и что забирает АУРА',
 ]));
-lines.push(summaryOnly('Что технически нужно подключать для avatar и Life Series', 'В основном narrative фиксируем решение: image-first Life Canvas, controlled AI/image providers, backend state machine, storage, analytics, billing и admin-control. Полная таблица сервисов, цен и вариантов реализации остается в appendix.'));
-lines.push(summaryOnly('Модель себестоимости: сколько может стоить продукт на разных масштабах', 'Главный вывод для основной книги: text AI относительно дешевый, image generation становится ключевой переменной статьей, а free daily video нельзя включать в MVP. Полные сценарии на 100 / 1 000 / 10 000 / 100 000 пользователей уходят в appendix.'));
-lines.push(summaryOnly('Аналитика, платный экран и финмодель: что нужно доказать до ТЗ', 'В основном narrative оставляем управленческий вывод: считать нужно не абстрактный MAU, а completed loop, returned user, cost per completed loop и paid intent after value. Подробная финмодель и список аналитических событий находятся в appendix.'));
-lines.push(cleanChunk(h2('1. Architecture Decision')));
-lines.push(cleanChunk(h2('2. System Architecture')));
-lines.push(cleanChunk(h2('3. Recommended Stack For первый продукт')));
-lines.push(cleanChunk(h2('4. Component Responsibilities')));
-lines.push(summaryOnly('7. Provider Comparison', 'В основной книге достаточно выбора принципа: провайдеры должны быть быстрыми, управляемыми по стоимости, безопасными для персонального контекста и пригодными для image-first MVP. Полное сравнение GPT/Claude/Gemini/DeepSeek/OpenRouter, image и avatar providers переносится в appendix.'));
-lines.push(cleanChunk(h2('8. Unit Economics Assumptions')));
-lines.push(cleanChunk(h2('9. Unit Economics By Scale')));
-lines.push(cleanChunk(h2('10. Sensitivity Analysis')));
-lines.push(cleanChunk(h2('11. Revenue And Margin Scenarios')));
-lines.push(cleanChunk(h2('12. Cost Control Rules')));
-lines.push(cleanChunk(h2('13. Security And Privacy Requirements')));
-lines.push(cleanChunk(h2('21. Итоговое техническое решение')));
-lines.push(summaryOnly('3. Технологическое исследование: сравнение и выбор', 'В main narrative фиксируем не всю сравнительную таблицу, а решение: для MVP нужен управляемый AI brain, image-first avatar/Life Canvas layer, mobile stack, backend, storage, billing и analytics. Полная технологическая матрица остается в appendix.'));
-lines.push(...pick(decisionVersion, ['4. Техническая архитектура: схема системы']));
-lines.push(summaryOnly('5. Юнит-экономика: рабочая модель расходов', 'Основной вывод: экономика AURA бьется только при контроле image/video cost, paywall after value и учете cost per completed loop. Детальные сценарии по масштабам переносятся в appendix.'));
+lines.push(summaryOnly('Техническая реализуемость и себестоимость', 'В Product Master Plan оставляем только принцип: AURA нужно запускать image-first, без бесплатного ежедневного видео, с учетом cost per completed loop и paid intent. Подробная архитектура, стек, провайдеры, API, unit economics by scale и budget находятся в отдельном AURA Build Plan.'));
+lines.push(summaryOnly('5. Юнит-экономика: рабочая модель расходов', 'Основной вывод: экономика AURA бьется только при контроле image/video cost, paywall after value и учете cost per completed loop. Детальные сценарии по масштабам и sensitivity analysis вынесены в AURA Build Plan.'));
 lines.push(summaryOnly('6. Монетизация: конкуренты и итоговая модель АУРЫ', 'В main narrative оставляем итоговую модель: free first loop, paid season/memory/recap/styles, premium/video moments как отдельная проверка. Таблицы по конкурентам и гипотезам монетизации уходят в appendix.'));
 
 lines.push(chapter(7, 'Как это продаем', 'GTM должен продавать не абстрактный AI-продукт, а конкретный loop: действие сегодня меняет Life Canvas завтра.'));
@@ -341,40 +327,11 @@ lines.push(...pick(decisionVersion, [
   '12. Финальное продуктовое решение',
 ]));
 
-lines.push(chapter(9, 'Appendix / Evidence Layer', 'Appendix сохраняет детальность и доказательную базу, но не ломает основное product-first чтение.'));
-lines.push(block('Технические приложения', [
-  cleanChunk(h2('4. Detailed Screen Specifications')),
-  cleanChunk(h2('10. Data Model')),
-  cleanChunk(h2('11. API и системные контракты')),
-  cleanChunk(h2('14. Analytics Events')),
-  cleanChunk(h2('15. Metrics Dashboard')),
-  cleanChunk(h2('16. Acceptance Criteria')),
-  cleanChunk(h2('17. Edge Cases And Empty States')),
-  cleanChunk(h2('19. Technical Non-Functional Requirements')),
-  cleanChunk(h2('20. API And Backend Work Packages')),
-  cleanChunk(h2('5. Database Schema Draft')),
-  cleanChunk(h2('6. API Groups')),
-  cleanChunk(h2('17. Implementation Backlog')),
-  cleanChunk(h2('18. Event Taxonomy')),
-  cleanChunk(h2('19. QA Checklist Before First Cohort')),
-]));
+lines.push(chapter(9, 'Appendix / Evidence Layer', 'Appendix сохраняет продуктовую и рыночную доказательную базу, но техническая реализация вынесена в отдельный AURA Build Plan.'));
 lines.push(block('Доказательная база рынка и конкурентов', [
   cleanChunk(h2('ОПРЕДЕЛЕНИЕ МИРОВЫХ ЦЕЛЕВЫХ РЫНКОВ И ГИПОТЕЗА #2')),
   cleanChunk(h2('ОЦЕНКА РАЗМЕРА РЫНКА: TAM/SAM/SOM')),
   cleanChunk(h2('ОПРЕДЕЛЕНИЕ КОНКУРЕНТОВ И ГИПОТЕЗА #3')),
-]));
-lines.push(block('Экономика, провайдеры и финмодель', [
-  ...pick(productModel, [
-    'Что технически нужно подключать для avatar и Life Series',
-    'Модель себестоимости: сколько может стоить продукт на разных масштабах',
-    'Аналитика, платный экран и финмодель: что нужно доказать до ТЗ',
-  ]),
-  cleanChunk(h2('7. Provider Comparison')),
-  ...pick(decisionVersion, [
-    '3. Технологическое исследование: сравнение и выбор',
-    '5. Юнит-экономика: рабочая модель расходов',
-    '6. Монетизация: конкуренты и итоговая модель АУРЫ',
-  ]),
 ]));
 lines.push(block('Retention и маркетинговые приложения', [
   cleanChunk(h2('ПЛАН ПРОВЕРКИ САМЫХ ВАЖНЫХ РИСКОВ')),
@@ -382,28 +339,15 @@ lines.push(block('Retention и маркетинговые приложения',
   cleanChunk(h2('9. 30-Day Content Calendar')),
   cleanChunk(h2('17. Hook Bank')),
 ]));
-lines.push(block('План сборки и команда', [
-  cleanChunk(h2('Roadmap сборки')),
-  cleanChunk(h2('Карта зависимостей')),
-  cleanChunk(h2('Бюджет по спринтам')),
-  cleanChunk(h2('1. Требования к первому продукту')),
-  cleanChunk(h2('2. Sprint Plan')),
-  cleanChunk(h2('3. Budget Summary')),
-  cleanChunk(h2('4. Detailed Backlog')),
-  cleanChunk(h2('5. Epic Requirements')),
-  cleanChunk(h2('6. Dependencies And Critical Path')),
-  cleanChunk(h2('7. Definition Of Done')),
-  cleanChunk(h2('8. Open Questions Before Build')),
-  cleanChunk(h2('9. Team Plan')),
-  cleanChunk(h2('10. Итоговое решение по разработке')),
-]));
-lines.push(block('Расширенная детализация решения', [
-  ...pick(decisionVersion, ['13. Финальная детализация: День 90, экранная карта, первый продукт scope и roadmap']),
-  cleanChunk(h2('14. Build Phases')),
-  cleanChunk(h2('15. Engineering Roadmap')),
-  cleanChunk(h2('16. Technical Risk Register')),
-  cleanChunk(h2('20. Источники и допущения')),
+lines.push(block('Расширенная продуктовая детализация решения', [
+  removeFrom(
+    pick(decisionVersion, ['13. Финальная детализация: День 90, экранная карта, первый продукт scope и roadmap'])[0],
+    '#### Tech stack decision: выбранные решения по слоям'
+  ),
   cleanChunk(h2('20. Kill Criteria')),
+]));
+lines.push(block('Где техническая реализация', [
+  'Архитектура, стек, database, providers, API, unit economics by scale, sprint planning, backlog, budget, implementation details и engineering roadmap вынесены в отдельный документ: `AURA_BUILD_PLAN.pdf`.',
 ]));
 
 fs.writeFileSync(OUT, `${lines.join('\n').replace(/\n{3,}/g, '\n\n').trimEnd()}\n`);
