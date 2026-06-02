@@ -81,6 +81,11 @@ DOCUMENTS = [
         OUTPUT_DIR / "AURA_RESEARCH_FINAL.pdf",
         "AURA Research Final",
     ),
+    (
+        ROOT / "reports" / "aura-product-master-plan-final.md",
+        OUTPUT_DIR / "AURA_PRODUCT_MASTER_PLAN_FINAL.pdf",
+        "AURA Product Master Plan Final",
+    ),
 ]
 
 
