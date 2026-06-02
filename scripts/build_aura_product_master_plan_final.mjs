@@ -88,6 +88,20 @@ function cleanChunk(chunk) {
     .trim();
 }
 
+function summaryOnly(title, summary, movedTo = 'Appendix / Evidence Layer') {
+  return [
+    `## ${title}`,
+    '',
+    summary,
+    '',
+    `Полная доказательная детализация этого блока перенесена в ${movedTo}, чтобы основной narrative не превращался в таблицу и сохранял product-first чтение.`,
+  ].join('\n');
+}
+
+function compactH2(title, summary) {
+  return summaryOnly(title, summary);
+}
+
 const productModel = h3ChunksFromH2('ИТОГОВАЯ МОДЕЛЬ ПРОДУКТА И ГИПОТЕЗА #6');
 const decisionVersion = h3ChunksFromH2('ВЕРСИЯ ДЛЯ РЕШЕНИЯ: ЧТО НУЖНО ДЛЯ ЗАПУСКА, ТЗ, БЮДЖЕТА И первый продукт');
 
@@ -136,9 +150,9 @@ lines.push(chapter(3, 'Почему это может работать', 'Сна
 lines.push(cleanChunk(h2('Карта категорий')));
 lines.push(cleanChunk(h2('Категории как слои продукта')));
 lines.push(cleanChunk(h2('Карта конкурентного поля')));
-lines.push(cleanChunk(h2('ОПРЕДЕЛЕНИЕ МИРОВЫХ ЦЕЛЕВЫХ РЫНКОВ И ГИПОТЕЗА #2')));
-lines.push(cleanChunk(h2('ОЦЕНКА РАЗМЕРА РЫНКА: TAM/SAM/SOM')));
-lines.push(cleanChunk(h2('ОПРЕДЕЛЕНИЕ КОНКУРЕНТОВ И ГИПОТЕЗА #3')));
+lines.push(compactH2('ОПРЕДЕЛЕНИЕ МИРОВЫХ ЦЕЛЕВЫХ РЫНКОВ И ГИПОТЕЗА #2', 'Для AURA важны пять соседних направлений: mindfulness/reset, avatar/identity, astrology/self-discovery, coaching/self-improvement и gaming/progression как источник механик возврата. Смысл этого блока не в том, чтобы перечислить все найденные приложения, а в том, чтобы показать: у продукта есть несколько уже существующих платных поведенческих рынков.'));
+lines.push(compactH2('ОЦЕНКА РАЗМЕРА РЫНКА: TAM/SAM/SOM', 'AURA не должна считаться как один узкий horoscope или avatar TAM. Более честная рамка - пересечение мобильного self-care, персонального смысла, AI identity, coaching/habits и progression mechanics. В основной книге оставляем вывод: рынок достаточно большой для проверки, но деньги AURA доказываются не TAM, а платным поведением в MVP.'));
+lines.push(compactH2('ОПРЕДЕЛЕНИЕ КОНКУРЕНТОВ И ГИПОТЕЗА #3', 'Конкурентов много, и это хороший сигнал. Белое пятно не в отсутствии продуктов, а в том, что существующие решения часто разрывают цепочку: смысл без действия, действие без образа, avatar без причинности, progress без эмоционального контекста.'));
 lines.push(cleanChunk(h2('КОНКУРЕНТНОЕ ПРЕИМУЩЕСТВО И ГИПОТЕЗА #4')));
 lines.push(cleanChunk(h2('СВЯЗКА БЕЛОГО ПЯТНА И АУДИТОРИИ')));
 lines.push(cleanChunk(h2('ИСТОЧНИКИ И ГРАНИЦЫ ДОКАЗАТЕЛЬСТВ')));
@@ -161,7 +175,7 @@ lines.push(...pick(productModel, [
   'Прототипы как гипотезы',
   'Функциональная карта первый продукт',
 ]));
-lines.push(cleanChunk(h2('4. Detailed Screen Specifications')));
+lines.push(summaryOnly('4. Detailed Screen Specifications', 'В основном narrative достаточно зафиксировать экранную логику: Welcome -> Consent -> Profile -> Season -> Episode -> Action -> Reset -> Reflection -> Life Canvas -> Tomorrow Hook -> Paywall after value. Полные экранные спецификации нужны дизайнеру и разработчику, поэтому уходят в appendix.'));
 lines.push(cleanChunk(h2('5. User Stories')));
 lines.push(cleanChunk(h2('6. Core Scenarios')));
 lines.push(cleanChunk(h2('7. первый продукт Scope')));
@@ -184,19 +198,19 @@ lines.push(cleanChunk(h2('Cost stack')));
 lines.push(cleanChunk(h2('Лестница монетизации')));
 lines.push(...pick(productModel, [
   'Техническая реализуемость и себестоимость',
-  'Что технически нужно подключать для avatar и Life Series',
   'Рекомендуемый технологический стек и архитектура',
-  'Модель себестоимости: сколько может стоить продукт на разных масштабах',
   'Монетизация: что проверять у конкурентов',
   'Монетизационная матрица: что именно продавать',
   'Почему люди платят соседним продуктам и что забирает АУРА',
-  'Аналитика, платный экран и финмодель: что нужно доказать до ТЗ',
 ]));
+lines.push(summaryOnly('Что технически нужно подключать для avatar и Life Series', 'В основном narrative фиксируем решение: image-first Life Canvas, controlled AI/image providers, backend state machine, storage, analytics, billing и admin-control. Полная таблица сервисов, цен и вариантов реализации остается в appendix.'));
+lines.push(summaryOnly('Модель себестоимости: сколько может стоить продукт на разных масштабах', 'Главный вывод для основной книги: text AI относительно дешевый, image generation становится ключевой переменной статьей, а free daily video нельзя включать в MVP. Полные сценарии на 100 / 1 000 / 10 000 / 100 000 пользователей уходят в appendix.'));
+lines.push(summaryOnly('Аналитика, платный экран и финмодель: что нужно доказать до ТЗ', 'В основном narrative оставляем управленческий вывод: считать нужно не абстрактный MAU, а completed loop, returned user, cost per completed loop и paid intent after value. Подробная финмодель и список аналитических событий находятся в appendix.'));
 lines.push(cleanChunk(h2('1. Architecture Decision')));
 lines.push(cleanChunk(h2('2. System Architecture')));
 lines.push(cleanChunk(h2('3. Recommended Stack For первый продукт')));
 lines.push(cleanChunk(h2('4. Component Responsibilities')));
-lines.push(cleanChunk(h2('7. Provider Comparison')));
+lines.push(summaryOnly('7. Provider Comparison', 'В основной книге достаточно выбора принципа: провайдеры должны быть быстрыми, управляемыми по стоимости, безопасными для персонального контекста и пригодными для image-first MVP. Полное сравнение GPT/Claude/Gemini/DeepSeek/OpenRouter, image и avatar providers переносится в appendix.'));
 lines.push(cleanChunk(h2('8. Unit Economics Assumptions')));
 lines.push(cleanChunk(h2('9. Unit Economics By Scale')));
 lines.push(cleanChunk(h2('10. Sensitivity Analysis')));
@@ -204,12 +218,10 @@ lines.push(cleanChunk(h2('11. Revenue And Margin Scenarios')));
 lines.push(cleanChunk(h2('12. Cost Control Rules')));
 lines.push(cleanChunk(h2('13. Security And Privacy Requirements')));
 lines.push(cleanChunk(h2('21. Итоговое техническое решение')));
-lines.push(...pick(decisionVersion, [
-  '3. Технологическое исследование: сравнение и выбор',
-  '4. Техническая архитектура: схема системы',
-  '5. Юнит-экономика: рабочая модель расходов',
-  '6. Монетизация: конкуренты и итоговая модель АУРЫ',
-]));
+lines.push(summaryOnly('3. Технологическое исследование: сравнение и выбор', 'В main narrative фиксируем не всю сравнительную таблицу, а решение: для MVP нужен управляемый AI brain, image-first avatar/Life Canvas layer, mobile stack, backend, storage, billing и analytics. Полная технологическая матрица остается в appendix.'));
+lines.push(...pick(decisionVersion, ['4. Техническая архитектура: схема системы']));
+lines.push(summaryOnly('5. Юнит-экономика: рабочая модель расходов', 'Основной вывод: экономика AURA бьется только при контроле image/video cost, paywall after value и учете cost per completed loop. Детальные сценарии по масштабам переносятся в appendix.'));
+lines.push(summaryOnly('6. Монетизация: конкуренты и итоговая модель АУРЫ', 'В main narrative оставляем итоговую модель: free first loop, paid season/memory/recap/styles, premium/video moments как отдельная проверка. Таблицы по конкурентам и гипотезам монетизации уходят в appendix.'));
 
 lines.push(chapter(7, 'Как это продаем', 'GTM должен продавать не абстрактный AI-продукт, а конкретный loop: действие сегодня меняет Life Canvas завтра.'));
 lines.push(cleanChunk(h2('Воронка первых пользователей')));
@@ -224,18 +236,18 @@ lines.push(cleanChunk(h2('5. First 1000 Users')));
 lines.push(cleanChunk(h2('6. Content Pillars')));
 lines.push(cleanChunk(h2('7. Channel Playbooks')));
 lines.push(cleanChunk(h2('8. 30-Day Launch Plan')));
-lines.push(cleanChunk(h2('9. 30-Day Content Calendar')));
+lines.push(summaryOnly('9. 30-Day Content Calendar', 'В основной книге достаточно логики: первые 30 дней должны проверять positioning, loop comprehension, creator/content pull и paid intent. Полный календарь публикаций остается как рабочее приложение.'));
 lines.push(cleanChunk(h2('10. Experiment Backlog')));
 lines.push(cleanChunk(h2('11. Creator Outreach')));
 lines.push(cleanChunk(h2('12. Landing Page Variants')));
 lines.push(cleanChunk(h2('13. Messaging Matrix')));
 lines.push(cleanChunk(h2('16. Budget For First 30 Days')));
-lines.push(cleanChunk(h2('17. Hook Bank')));
+lines.push(summaryOnly('17. Hook Bank', 'В main narrative оставляем роль hook bank: маркетинг AURA должен объяснять life-series, future self, causal Life Canvas и маленькое действие. Полный банк формулировок лучше читать как рабочий appendix для контента.'));
 lines.push(cleanChunk(h2('18. Objection Handling')));
 lines.push(cleanChunk(h2('19. Operating Rhythm')));
 lines.push(cleanChunk(h2('21. Итоговое решение по запуску')));
+lines.push(summaryOnly('7. Исследование удержания: возврат и отток', 'Главная retention-гипотеза: пользователь возвращается, если Day 2 помнит Day 1, а Life Canvas объясняет накопление изменений. Полные таблицы причин возврата, удаления, покупки и отказа от подписки выносятся в appendix.'));
 lines.push(...pick(decisionVersion, [
-  '7. Исследование удержания: возврат и отток',
   '8. Go-to-market: каналы и план запуска',
   '9. Система интервью: сегменты и вопросы',
   '10. План проверки первый продукт: 6 недель',
@@ -243,7 +255,7 @@ lines.push(...pick(decisionVersion, [
 
 lines.push(chapter(8, 'Как принимаем решение', 'Финал должен отвечать не “понравилась ли идея”, а прошла ли AURA проверку loop, экономики, retention и paid intent.'));
 lines.push(cleanChunk(h2('СТОЛПЫ УВЕРЕННОСТИ И ОТКРЫТЫЕ РИСКИ')));
-lines.push(cleanChunk(h2('ПЛАН ПРОВЕРКИ САМЫХ ВАЖНЫХ РИСКОВ')));
+lines.push(summaryOnly('ПЛАН ПРОВЕРКИ САМЫХ ВАЖНЫХ РИСКОВ', 'В main narrative оставляем управленческий смысл: сначала проверяем causality Life Canvas, затем retention, paid intent, technical feasibility и GTM pull. Полные таблицы retention, virality, validation и investment memo уходят в appendix.'));
 lines.push(cleanChunk(h2('БЛИЖАЙШАЯ ЛОГИКА ПРОВЕРКИ')));
 lines.push(cleanChunk(h2('Dashboard решения')));
 lines.push(cleanChunk(h2('Дерево решения')));
@@ -260,6 +272,7 @@ lines.push(...pick(decisionVersion, [
 
 lines.push(chapter(9, 'Appendix / Evidence Layer', 'Appendix сохраняет детальность и доказательную базу, но не ломает основное product-first чтение.'));
 lines.push(block('Технические приложения', [
+  cleanChunk(h2('4. Detailed Screen Specifications')),
   cleanChunk(h2('10. Data Model')),
   cleanChunk(h2('11. API и системные контракты')),
   cleanChunk(h2('14. Analytics Events')),
@@ -273,6 +286,30 @@ lines.push(block('Технические приложения', [
   cleanChunk(h2('17. Implementation Backlog')),
   cleanChunk(h2('18. Event Taxonomy')),
   cleanChunk(h2('19. QA Checklist Before First Cohort')),
+]));
+lines.push(block('Доказательная база рынка и конкурентов', [
+  cleanChunk(h2('ОПРЕДЕЛЕНИЕ МИРОВЫХ ЦЕЛЕВЫХ РЫНКОВ И ГИПОТЕЗА #2')),
+  cleanChunk(h2('ОЦЕНКА РАЗМЕРА РЫНКА: TAM/SAM/SOM')),
+  cleanChunk(h2('ОПРЕДЕЛЕНИЕ КОНКУРЕНТОВ И ГИПОТЕЗА #3')),
+]));
+lines.push(block('Экономика, провайдеры и финмодель', [
+  ...pick(productModel, [
+    'Что технически нужно подключать для avatar и Life Series',
+    'Модель себестоимости: сколько может стоить продукт на разных масштабах',
+    'Аналитика, платный экран и финмодель: что нужно доказать до ТЗ',
+  ]),
+  cleanChunk(h2('7. Provider Comparison')),
+  ...pick(decisionVersion, [
+    '3. Технологическое исследование: сравнение и выбор',
+    '5. Юнит-экономика: рабочая модель расходов',
+    '6. Монетизация: конкуренты и итоговая модель АУРЫ',
+  ]),
+]));
+lines.push(block('Retention и маркетинговые приложения', [
+  cleanChunk(h2('ПЛАН ПРОВЕРКИ САМЫХ ВАЖНЫХ РИСКОВ')),
+  ...pick(decisionVersion, ['7. Исследование удержания: возврат и отток']),
+  cleanChunk(h2('9. 30-Day Content Calendar')),
+  cleanChunk(h2('17. Hook Bank')),
 ]));
 lines.push(block('План сборки и команда', [
   cleanChunk(h2('Roadmap сборки')),
