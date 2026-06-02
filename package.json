@@ -79,6 +79,7 @@
     "build:aura-information-layer-map": "node scripts/build_aura_information_layer_map.mjs",
     "build:aura-product-vs-build-split-map": "node scripts/build_aura_product_vs_build_split_map.mjs",
     "audit:aura-product-repetitions": "node scripts/audit_aura_product_repetitions.mjs",
+    "build:aura-trendvi-style-deck": "node scripts/build_aura_trendvi_style_deck.mjs",
     "build:aura-product-deck": "node scripts/build_aura_25_slide_deck.mjs",
     "build:aura-25-slide-deck": "node scripts/build_aura_25_slide_deck.mjs",
     "build:global-hypothesis-docx": "python3 scripts/build_alina_global_hypothesis_docx.py",
