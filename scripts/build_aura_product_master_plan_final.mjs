@@ -48,7 +48,7 @@ function h3ChunksFromH2(title) {
 function pick(chunks, names) {
   return names.map(name => {
     if (!chunks.has(name)) throw new Error(`Missing H3: ${name}`);
-    return chunks.get(name);
+    return cleanChunk(chunks.get(name));
   });
 }
 
@@ -146,11 +146,120 @@ function block(title, chunks) {
   ].filter(Boolean).join('\n');
 }
 
+const auraMeaningRules = [
+  {
+    test: /User Stories/i,
+    text: 'Вывод для AURA: user stories фиксируют роли вокруг продукта. Пользователь, дизайнер, маркетолог и команда должны видеть один и тот же value moment, иначе первый продукт разъедется по разным трактовкам.',
+  },
+  {
+    test: /Core Scenarios/i,
+    text: 'Вывод для AURA: сценарии показывают, где продукт живет в реальном дне человека. Если сценарий не приводит к действию или возврату завтра, он не должен перегружать первый продукт.',
+  },
+  {
+    test: /Scope/i,
+    text: 'Вывод для AURA: scope защищает первый продукт от расползания. Все, что не проверяет первый completed loop, должно ждать следующего этапа.',
+  },
+  {
+    test: /Product Mechanics/i,
+    text: 'Вывод для AURA: механики нужны не ради богатого интерфейса, а ради трех проверок: понял ли человек эпизод, сделал ли шаг, захотел ли увидеть продолжение.',
+  },
+  {
+    test: /Function-Level|будет, если убрать/i,
+    text: 'Вывод для AURA: функция остается в MVP только если без нее ломается смысл, действие, память, возврат или платный value moment.',
+  },
+  {
+    test: /User States|State Machine/i,
+    text: 'Вывод для AURA: состояния пользователя нужны, чтобы не потерять причинность в реализации. Каждый переход должен сохранять связь между эпизодом, действием и результатом.',
+  },
+  {
+    test: /Product Copy/i,
+    text: 'Вывод для AURA: язык продукта должен быть теплым и точным: без фатальных обещаний, без стыда за пропуски и без ощущения generic AI-текста.',
+  },
+  {
+    test: /Budget For First 30 Days/i,
+    text: 'Вывод для AURA: первые 30 дней должны покупать не масштаб, а обучение. Бюджет нужен для проверки спроса, а не для имитации большого запуска.',
+  },
+  {
+    test: /Objection Handling/i,
+    text: 'Вывод для AURA: objection handling должен заранее снять три риска восприятия: “это гороскоп”, “это игрушка с аватаром”, “это еще один трекер”.',
+  },
+  {
+    test: /Operating Rhythm/i,
+    text: 'Вывод для AURA: запуск требует недельного ритма решений. Без регулярного разбора метрик команда быстро начнет спорить о вкусе вместо поведения пользователей.',
+  },
+  {
+    test: /рынк|TAM|SAM|SOM|категор|деньг|market/i,
+    text: 'Вывод для AURA: рынок подтверждает право на проверку, но не заменяет прототип. Главная ставка остается в том, сможет ли пользователь пройти личный эпизод, действие и увидеть понятный результат.',
+  },
+  {
+    test: /конкур|бел(ое|ого) пятн|паттерн|whitespace/i,
+    text: 'Вывод для AURA: конкуренты подтверждают спрос на части системы, но преимущество появляется только там, где смысл, действие и визуальный прогресс соединены в один опыт.',
+  },
+  {
+    test: /аудитор|интерв|сегмент|ICP/i,
+    text: 'Вывод для AURA: первая аудитория должна уже иметь похожие ритуалы, но чувствовать, что текущие решения не собирают личную траекторию в понятную историю.',
+  },
+  {
+    test: /Journey|Screen|User Stories|Scope|Mechanics|Function|States|State Machine|Product Copy|blueprint|спецификац|экран|пользователь|MVP|первый продукт/i,
+    text: 'Вывод для AURA: этот раздел переводит идею в поведение пользователя. Важен не список функций, а то, проходит ли человек путь от первого эпизода к завершенному действию и понятному изменению Life Canvas.',
+  },
+  {
+    test: /монетизац|эконом|cost|paywall|цен|подпис|плат/i,
+    text: 'Вывод для AURA: монетизация должна появляться после первого value moment. Дорогие визуальные механики можно добавлять только там, где они усиливают оплату или удержание.',
+  },
+  {
+    test: /GTM|канал|launch|content|creator|landing|messaging|hook|objection|запуск|маркет/i,
+    text: 'Вывод для AURA: запуск должен продавать не абстрактный AI/wellness-продукт, а простую обещанную трансформацию: один день становится эпизодом, действием и видимым следом.',
+  },
+  {
+    test: /risk|criteria|decision|решени|провер|метрик|validation|верификац/i,
+    text: 'Вывод для AURA: решение о запуске принимается не по красоте идеи, а по проверке понимания, возврата, платного намерения и способности пользователя объяснить изменение Life Canvas.',
+  },
+  {
+    test: /avatar|Life Canvas|canvas/i,
+    text: 'Вывод для AURA: Life Canvas должен быть не украшением, а видимым следом действия. Если связь не считывается, визуальный слой превращается в обычную AI-картинку.',
+  },
+];
+
+function auraMeaningFor(context) {
+  const rule = auraMeaningRules.find(item => item.test.test(context));
+  return rule?.text ?? 'Вывод для AURA: этот раздел важен только в той мере, в какой он помогает проверить продуктовую ставку: личный смысл должен перейти в действие, а действие - в видимый и понятный результат.';
+}
+
+function replaceAuraMeaningBlocks(chunk) {
+  const lines = chunk.split('\n');
+  const out = [];
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+    if (!/^#{2,3} Что это значит для AURA\s*$/.test(line.trim())) {
+      out.push(line);
+      continue;
+    }
+
+    const context = out
+      .slice()
+      .reverse()
+      .find(prev => /^#{1,4}\s+/.test(prev)) ?? '';
+
+    out.push(line.trim());
+    out.push('');
+    out.push(auraMeaningFor(context.replace(/^#+\s*/, '')));
+
+    while (i + 1 < lines.length) {
+      const next = lines[i + 1];
+      if (/^#{1,3}\s+/.test(next) && !/^#{2,3} Что это значит для AURA\s*$/.test(next.trim())) break;
+      i += 1;
+    }
+  }
+  return out.join('\n');
+}
+
 function cleanChunk(chunk) {
-  return chunk
+  return replaceAuraMeaningBlocks(chunk)
     .replace(/^## Зачем нужна эта глава[\s\S]*?(?=^## |^# ГЛАВА |\z)/gm, '')
     .replace(/^## Центральная петля остается на экране[\s\S]*?(?=^## |^# ГЛАВА |\z)/gm, '')
     .replace('RevenueCat entitlement', 'paid entitlement')
+    .replace(/^\*\*Почему этот блок здесь\.\*\*[^\n]*(?:\n|$)/gm, '')
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 }
