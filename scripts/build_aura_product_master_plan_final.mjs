@@ -56,7 +56,60 @@ function pageBreak() {
   return '<!-- PAGEBREAK -->';
 }
 
+const layerCards = {
+  'Что такое AURA': {
+    main: 'Определение AURA, центральная петля, Life Canvas как причинный след.',
+    evidence: 'Карта гипотез, логика проверки, быстрые стратегические выводы.',
+    appendix: 'Не требуется: глава должна оставаться коротким входом.',
+  },
+  'Как работает AURA': {
+    main: 'Episode -> Action -> Reset -> Reflection -> Life Canvas -> Tomorrow Hook.',
+    evidence: 'Journey map, service blueprint, рабочие концепции, product verdict.',
+    appendix: 'Подробные экранные спецификации, states, API и acceptance details.',
+  },
+  'Почему это может работать': {
+    main: 'Рынок есть, деньги есть, конкуренты подтверждают спрос, белое пятно находится в причинной петле.',
+    evidence: 'Категории, TAM/SAM/SOM summary, конкурентная карта, whitespace summary.',
+    appendix: 'Полные market inventories, списки приложений, конкурентные таблицы, источники.',
+  },
+  'Для кого это': {
+    main: 'Первые ICP-сегменты и почему у них уже есть близкое поведение.',
+    evidence: 'Сценарии входа, interview logic, audience segments, behavioral signals.',
+    appendix: 'Полные interview/capture sheets, VOC-таблицы, дополнительные сегментные материалы.',
+  },
+  'Что мы строим': {
+    main: 'MVP scope, journey, функции, механики, что делаем и что запрещено добавлять.',
+    evidence: 'Screen map, user stories, function-level specification, product copy principles.',
+    appendix: 'Detailed screen specs, API payloads, acceptance criteria, edge cases.',
+  },
+  'Как это строим': {
+    main: 'Архитектура, image-first Life Canvas, no free daily video, cost-control.',
+    evidence: 'Stack decision, provider logic, unit economics principles, security.',
+    appendix: 'Provider comparison, full cost tables, database schema, event taxonomy, QA checklist.',
+  },
+  'Как это продаем': {
+    main: 'GTM logic: первые 100/1000 пользователей, positioning, channels, content, experiments.',
+    evidence: 'Channel playbooks, creator outreach, landing variants, messaging, budget.',
+    appendix: 'Hook bank, 30-day content calendar, retention tables, objection library.',
+  },
+  'Как принимаем решение': {
+    main: 'Go/no-go, риски, kill criteria, метрики loop, следующий шаг.',
+    evidence: 'Validation summary, dashboard, decision tree, точки верификации.',
+    appendix: 'Полный validation plan, retention/virality tables, investment memo skeleton.',
+  },
+  'Appendix / Evidence Layer': {
+    main: 'Не является обязательным последовательным чтением.',
+    evidence: 'Полные доказательства, таблицы, рабочие детали и технические приложения.',
+    appendix: 'Это и есть appendix.',
+  },
+};
+
 function chapter(no, title, promise) {
+  const layers = layerCards[title] ?? {
+    main: 'Основной вывод главы.',
+    evidence: 'Короткое подтверждение вывода.',
+    appendix: 'Детализация при необходимости.',
+  };
   return [
     pageBreak(),
     `# ГЛАВА ${no}`,
@@ -68,6 +121,14 @@ function chapter(no, title, promise) {
     '## Что читатель должен понять',
     '',
     `После этой главы читатель должен понимать: ${promise}`,
+    '',
+    '## Уровни информации в этой главе',
+    '',
+    '| Уровень | Что внутри | Как читать |',
+    '| --- | --- | --- |',
+    `| Main Narrative | ${layers.main} | Читать обязательно. |`,
+    `| Supporting Evidence | ${layers.evidence} | Читать для проверки вывода. |`,
+    `| Appendix | ${layers.appendix} | Открывать при глубокой проверке или подготовке работы. |`,
   ].join('\n');
 }
 
@@ -123,6 +184,16 @@ lines.push('| 3 | Что именно строим? | Глава 5 |');
 lines.push('| 4 | Как строим и продаем? | Главы 6-7 |');
 lines.push('| 5 | Как принимаем решение? | Глава 8 |');
 lines.push('| 6 | Где вся детализация? | Appendix |');
+lines.push('');
+lines.push('## Уровни информации');
+lines.push('');
+lines.push('| Уровень | Как читать | Что делать читателю |');
+lines.push('| --- | --- | --- |');
+lines.push('| Main Narrative | Обязательное последовательное чтение | Читать подряд, чтобы понять продукт и решение. |');
+lines.push('| Supporting Evidence | Короткие доказательства внутри главы | Смотреть, чтобы понять, на чем держится вывод. |');
+lines.push('| Appendix | Полные таблицы, списки, backlog, API, event taxonomy, источники | Открывать при проверке цифр, подготовке ТЗ или глубокой работе команды. |');
+lines.push('');
+lines.push('В каждой главе основной текст должен отвечать на вопрос “что важно запомнить”, а appendix - на вопрос “чем это подтверждается”.');
 
 lines.push(chapter(1, 'Что такое AURA', 'AURA - это daily life-series product, где личный контекст превращается в эпизод, действие, reset, reflection и причинное изменение Life Canvas.'));
 lines.push(introBlock());
