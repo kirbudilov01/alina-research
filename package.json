@@ -73,6 +73,7 @@
     "build:aura-prd-sprint-backlog": "node scripts/build_aura_prd_sprint_backlog.mjs",
     "build:aura-master-book": "node scripts/build_aura_master_book.mjs",
     "build:aura-research-final": "node scripts/build_aura_research_final.mjs",
+    "build:aura-future-structure-map": "node scripts/build_aura_future_structure_map.mjs",
     "build:aura-product-deck": "node scripts/build_aura_25_slide_deck.mjs",
     "build:aura-25-slide-deck": "node scripts/build_aura_25_slide_deck.mjs",
     "build:global-hypothesis-docx": "python3 scripts/build_alina_global_hypothesis_docx.py",
