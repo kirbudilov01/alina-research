@@ -42,78 +42,90 @@ Type: solution
 
 Type: marketSize
 
-## 11. Competitor Economics: The Read
+## 11. How The Numbers Work
 
-Type: money
+Type: numberLogic
 
-## 12. Astrology Unit Economics
+## 12. The Four Numbers That Matter
+
+Type: bigNumbers
+
+## 13. Competitor Economics: The Read
+
+Type: proofMatrix
+
+## 14. Astrology Unit Economics
 
 Type: competitorEconomics
 
-## 13. Mindfulness Unit Economics
+## 15. Mindfulness Unit Economics
 
 Type: competitorEconomics
 
-## 14. AI Companion / Avatar Economics
+## 16. AI Companion / Avatar Economics
 
 Type: competitorEconomics
 
-## 15. What People Actually Pay For
+## 17. What People Actually Pay For
 
 Type: pricingTable
 
-## 16. Pricing Decision
+## 18. Pricing Decision
 
 Type: auraMath
 
-## 17. Conversion / ARPMAU Assumptions
+## 19. Conversion / ARPMAU Assumptions
 
 Type: finance
 
-## 18. Generation Cost Benchmarks
+## 20. From Benchmarks To AURA Model
+
+Type: assumptionBridge
+
+## 21. Generation Cost Benchmarks
 
 Type: costBenchmarks
 
-## 19. Cost Per User / Month
+## 22. Cost Per User / Month
 
 Type: unitCost
 
-## 20. Video Cost Stress Test
+## 23. Video Cost Stress Test
 
 Type: videoStress
 
-## 21. AURA Base Financial Model
+## 24. AURA Base Financial Model
 
 Type: finance
 
-## 22. Marketing Benchmarks
+## 25. Marketing Benchmarks
 
 Type: competitorEconomics
 
-## 23. Go-to-Market Strategy
+## 26. Go-to-Market Strategy
 
 Type: gtm
 
-## 24. 30-Day Validation Plan
+## 27. 30-Day Validation Plan
 
 Type: validation
 
-## 25. Product Scope: MVP vs Later
+## 28. Product Scope: MVP vs Later
 
 Type: pricingTable
 
-## 26. Risks
+## 29. Risks
 
 Type: risks
 
-## 27. Growth Roadmap
+## 30. Growth Roadmap
 
 Type: roadmap
 
-## 28. What We Should Build
+## 31. What We Should Build
 
 Type: overview
 
-## 29. Contacts / Next Step
+## 32. Contacts / Next Step
 
 Type: contacts

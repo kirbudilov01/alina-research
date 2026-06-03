@@ -119,14 +119,37 @@ const slides = [
     note: 'The market is not a single horoscope TAM. It is the overlap of paid personal meaning, daily ritual and AI visual identity.'
   },
   {
+    title: 'How The Numbers Work',
+    type: 'numberLogic',
+    steps: [
+      ['1', 'External signals', 'Rev.now / Sacra / press / API pricing', 'Revenue, MAU, payers, price, public COGS'],
+      ['2', 'Derived benchmarks', 'calculated from public signals', 'ARPMAU, paid conversion, CAC bands, COGS per user'],
+      ['3', 'AURA assumptions', 'conservative / base / strong', 'pricing, conversion, token attach, no-free-video rule'],
+      ['4', 'Product decisions', 'what we actually build', 'Plus, annual, token video, image-first Life Canvas']
+    ],
+    note: 'The deck does not treat competitor estimates as truth. It uses them to create bounded assumptions for AURA.'
+  },
+  {
+    title: 'The Four Numbers That Matter',
+    type: 'bigNumbers',
+    numbers: [
+      ['2.5-3.0%', 'base paid conversion', 'derived from Co-Star / Nebula / The Pattern style subscription apps'],
+      ['$0.35-$0.50', 'base ARPMAU target', 'AURA needs subscription + some visual/token uplift to beat long-tail astrology'],
+      ['$0.80-$1.50', 'strong ARPMAU target', 'only if high-intent premium moments work: future-self, relationship, video'],
+      ['<$1.50', 'payer AI/image COGS target', 'daily loop must be cheap enough for $9.99-$14.99 subscription']
+    ],
+    note: 'If one of these four numbers breaks, the product model must change.'
+  },
+  {
     title: 'Competitor Economics: The Read',
-    type: 'money',
+    type: 'proofMatrix',
     rows: [
-      ['Co-Star iOS', '$797.5K/mo estimate', '2.7M MAU / 64K payers / 2.4% conversion', 'social astrology can scale with low CAC if language is viral'],
-      ['Nebula iOS', '$718K/mo estimate', '2.2M MAU / 52K payers / $0.33 ARPMAU', 'paid spiritual guidance works, but aggressive funnels create trust risk'],
-      ['Calm Android', '$2.35M/mo estimate', '3.6M MAU / 85K payers / 2.4% conversion', 'wellness ritual can monetize at scale with annual subscription logic'],
-      ['AstroTime Android', '$440.8K/mo estimate', '242K MAU / 11K payers / 4.5% conversion', 'urgent guidance and human-like help can lift ARPMAU'],
-      ['Replika Android', '$2.36M/mo estimate', '99K paying users proxy', 'memory, avatar, voice and emotional continuity create paid intent']
+      ['Proof question', 'Competitor signal', 'What it proves', 'AURA decision'],
+      ['Will people pay for personal meaning?', 'Co-Star iOS: $797.5K/mo, 2.7M MAU, 64K payers', 'yes, but conversion is closer to 2-3%', 'model base conversion at 2.5-3.0%'],
+      ['Can spiritual guidance monetize?', 'Nebula iOS: $718K/mo, 52K payers, $0.33 ARPMAU', 'yes, but aggressive paywalls create trust risk', 'sell causality and season, not vague psychic pressure'],
+      ['Can daily ritual become large?', 'Calm: $300M/year proxy, 4M+ subscribers', 'yes, if trust and annual habit exist', 'annual plan after first completed week'],
+      ['Can AI/avatar create paid intent?', 'Replika Android: $2.36M/mo estimate, 99K payers proxy', 'yes, users pay for memory/avatar/voice', 'assistant memory + visual identity layer'],
+      ['Can urgent guidance lift ARPMAU?', 'AstroTime Android: $1.82 ARPMAU, 4.5% conversion', 'yes, high-intent moments monetize better', 'future-self / relationship / video tokens']
     ],
     conclusion: 'AURA should model base-case like subscription self-discovery, and upside like premium visual/guidance moments.'
   },
@@ -210,6 +233,19 @@ const slides = [
       ['Verdict', 'content app risk', 'works if causality is understood', 'works only with high-intent moments']
     ],
     note: 'These assumptions are derived from competitor estimates: Co-Star, Nebula, The Pattern, AstroSage, AstroTime, Calm and Balance.'
+  },
+  {
+    title: 'From Benchmarks To AURA Model',
+    type: 'assumptionBridge',
+    rows: [
+      ['Input', 'Observed / benchmark range', 'AURA base assumption', 'Why this is reasonable'],
+      ['Paid conversion', '1.4-2.5% subscription astrology; 3.5% Balance; 4.5% AstroTime', '2.5-3.0%', 'base case assumes value is proven before paywall'],
+      ['ARPMAU', '$0.19-$0.37 subscription astrology; $0.57-$0.65 wellness; $1.82+ urgent guidance', '$0.35-$0.50', 'AURA needs to outperform generic astrology through visual/token uplift'],
+      ['Monthly price', '$8.99-$14.99 common paid band; $19.99+ premium teacher apps', '$9.99-$14.99', 'sits inside proven consumer subscription range'],
+      ['Video COGS', 'Runway ~$0.40 / 8s; Veo ~$4 / 8s; HeyGen ~$1.50-$2 / 30s', 'no free daily video', 'video destroys margin unless tokenized'],
+      ['CAC payer', '$50-$150 organic/social; $150-$500+ paid web2app', '$100-$250 base', 'paid acquisition only after retention and paywall data']
+    ],
+    note: 'This is the missing bridge: competitor data is not the model; it is the guardrail for the model.'
   },
   {
     title: 'Generation Cost Benchmarks',
@@ -602,6 +638,48 @@ function bodyFor(slide, n) {
   ctx.addText(slide, { text: '${esc(it[1])}', left: 875, top: ${208 + i * 150}, width: 240, height: 28, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink });
   ctx.addText(slide, { text: '${esc(it[2])}', left: 875, top: ${242 + i * 150}, width: 290, height: 60, fontSize: 17, fontFace: 'Arial', color: C.ink, fit: 'shrink' });`).join('\n')}
   ctx.addText(slide, { text: '${esc(slide.note)}', left: 690, top: 530, width: 430, height: 44, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink });
+`;
+  }
+
+  if (slide.type === 'numberLogic') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ctx.addShape(slide, { left: 95, top: 330, width: 955, height: 3, fill: C.purple, line: { style: 'solid', fill: C.purple, width: 0 } });
+  ${slide.steps.map((s, i) => {
+    const x = 58 + i * 292;
+    return `
+  ctx.addShape(slide, { geometry: 'ellipse', left: ${x + 60}, top: 210, width: 108, height: 108, fill: ${i === 2 ? 'C.purple' : i === 3 ? 'C.greenLight' : 'C.purpleLight'}, line: { style: 'solid', fill: C.line, width: 1.1 } });
+  ctx.addText(slide, { text: '${esc(s[0])}', left: ${x + 82}, top: 238, width: 64, height: 44, fontSize: 38, bold: true, fontFace: 'Montserrat', color: ${i === 2 ? 'C.white' : 'C.purpleDark'}, align: 'center' });
+  ctx.addText(slide, { text: '${esc(s[1])}', left: ${x}, top: 365, width: 230, height: 30, fontSize: 22, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(s[2])}', left: ${x}, top: 410, width: 230, height: 42, fontSize: 16, fontFace: 'Arial', color: C.muted, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(s[3])}', left: ${x}, top: 476, width: 230, height: 64, fontSize: 16, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });`;
+  }).join('\n')}
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 145, top: 600, width: 880, height: 36, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+`;
+  }
+
+  if (slide.type === 'bigNumbers') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ${slide.numbers.map((n, i) => {
+    const x = 74 + (i % 2) * 560;
+    const y = 175 + Math.floor(i / 2) * 210;
+    return `
+  ctx.addShape(slide, { left: ${x}, top: ${y}, width: 485, height: 160, fill: ${i === 2 ? 'C.greenLight' : 'C.purpleLight'}, line: { style: 'solid', fill: C.line, width: 1.1 } });
+  ctx.addText(slide, { text: '${esc(n[0])}', left: ${x + 24}, top: ${y + 22}, width: 190, height: 46, fontSize: 34, bold: true, fontFace: 'Montserrat', color: C.purpleDark, fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(n[1])}', left: ${x + 230}, top: ${y + 29}, width: 225, height: 35, fontSize: 22, bold: true, fontFace: 'Arial', color: C.ink, fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(n[2])}', left: ${x + 28}, top: ${y + 88}, width: 430, height: 48, fontSize: 16, fontFace: 'Arial', color: C.ink, fit: 'shrink' });`;
+  }).join('\n')}
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 150, top: 615, width: 850, height: 28, fontSize: 19, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+`;
+  }
+
+  if (slide.type === 'proofMatrix' || slide.type === 'assumptionBridge') {
+    const widths = slide.type === 'proofMatrix' ? [205, 315, 285, 270] : [190, 350, 235, 290];
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ${table(slide.rows, widths, 54, 148, slide.type === 'proofMatrix' ? 74 : 68)}
+  ctx.addText(slide, { text: '${esc(slide.conclusion || slide.note)}', left: 90, top: 620, width: 1000, height: 30, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
 `;
   }
 
