@@ -128,6 +128,81 @@ const slides = [
     note: 'Main financial conclusion: AURA must feel premium outside, but keep the daily loop cheap inside.'
   },
   {
+    title: 'Generation Cost Benchmarks',
+    type: 'costBenchmarks',
+    rows: [
+      ['Layer', 'Provider / model', 'Public price signal', 'AURA implication'],
+      ['LLM', 'OpenAI GPT-4.1 mini', '$0.40 / 1M input tokens; $1.60 / 1M output tokens', 'daily text loop is cheap if prompts are structured'],
+      ['Image', 'OpenAI Images', '~$0.01 low / $0.04 medium / $0.17 high per square image', 'Life Canvas can be included, but not generated infinitely'],
+      ['Cinematic video', 'Google Veo 2 / Vertex AI', '~$0.50 per generated second', '8 sec ≈ $4.00; cannot be free daily content'],
+      ['Cinematic video', 'Runway API', '$0.25 per 5 sec API example', '8 sec ≈ $0.40; viable for tests, still needs retries budget'],
+      ['Video model', 'Replicate Wan 2.1 720p', '$0.24 per output second', '8 sec ≈ $1.92; better as paid token / milestone'],
+      ['Talking avatar', 'HeyGen API Avatar IV/V', '$0.05/sec photo avatar; $0.0667/sec digital twin', '30 sec ≈ $1.50-2.00; not a default daily loop'],
+      ['Avatar API', 'D-ID Build plan', '$14.4/mo annual plan; up to 16 offline video min', '≈$0.90/min plan math, but limits/watermark/credits matter']
+    ],
+    note: 'All prices are public API/pricing-page signals as of June 2026; exact billing must be rechecked before procurement.'
+  },
+  {
+    title: 'Cost Per User / Month',
+    type: 'unitCost',
+    rows: [
+      ['User type', 'Usage assumption', 'Variable AI cost', 'Business meaning'],
+      ['Free active user', '8 text loops + 1 medium image + no video', '$0.10-0.20 / MAU', 'safe if onboarding is capped and no free video exists'],
+      ['Engaged free user', '20 text loops + 2 images + no video', '$0.25-0.45 / MAU', 'still acceptable as acquisition cost if retention is visible'],
+      ['Plus subscriber', '25 text loops + 4 images + recaps + storage/support', '$0.70-1.40 / payer', '$9.99-14.99 subscription can hold strong margin'],
+      ['Plus + 1 Veo clip', '+ one 8 sec Veo 2 clip', '+$4.00 before retries', 'margin collapses unless clip is paid separately'],
+      ['Plus + 4 Veo clips', '+ weekly 8 sec Veo clip', '+$16.00 before retries', 'negative economics on $9.99/mo subscription'],
+      ['Token video', 'one paid 8 sec video moment', 'Runway ≈$0.40 / Replicate ≈$1.92 / Veo ≈$4.00', 'price token by model: $2.99 low-cost, $6.99-9.99 premium']
+    ],
+    formula: 'Formula: user COGS = LLM tokens + image count × image cost + video seconds × model/sec + storage + support + failed-generation buffer.',
+    conclusion: 'Главное решение: AURA продает “живой визуальный момент”, но базовая подписка должна оставаться image-first.'
+  },
+  {
+    title: 'Video Cost Stress Test',
+    type: 'videoStress',
+    rows: [
+      ['Scenario', '100 users', '1,000 users', '10,000 users', 'Conclusion'],
+      ['1 free 8s Veo clip / month', '$400', '$4,000', '$40,000', 'too expensive before strong paid conversion'],
+      ['4 free 8s Veo clips / month', '$1,600', '$16,000', '$160,000', 'kills consumer subscription margin'],
+      ['1 paid 8s Runway clip', '$40 COGS', '$400 COGS', '$4,000 COGS', 'can work as low-price token'],
+      ['1 paid 8s Replicate/Wan clip', '$192 COGS', '$1,920 COGS', '$19,200 COGS', 'needs $4.99-9.99 token or bundle'],
+      ['1 paid 30s HeyGen avatar', '$150-200 COGS', '$1,500-2,000', '$15,000-20,000', 'works for premium forecast / assistant moment'],
+      ['Image-first Life Canvas', '$4-17 COGS', '$40-170', '$400-1,700', 'safe default visual layer']
+    ],
+    note: 'This is the missing math: video is not “a feature”; it is a pricing boundary.'
+  },
+  {
+    title: 'Competitor Revenue Proxies',
+    type: 'competitorEconomics',
+    rows: [
+      ['Product', 'Category', 'Public revenue / scale signal', 'What AURA learns'],
+      ['Calm', 'sleep / meditation', '$300M revenue proxy; 4M+ paying subscribers', 'routine + trust + annual plan can become massive'],
+      ['Headspace', 'meditation / mental health', '~$39-40M/year app-store revenue proxy; ~1.7M MAU signal', 'paid content library still works, but growth can mature'],
+      ['Finch', 'self-care pet', '$1.5-2.0M/month estimates; Plus around $9.99/mo', 'soft companion + daily loop monetizes without hard productivity'],
+      ['Replika', 'AI companion', '$2.36M/month Android estimate; paid voice/avatar/memory', 'emotional bond can monetize, but trust/safety is core'],
+      ['Character.AI', 'AI companion / roleplay', '$30-32M ARR proxy; c.ai+ $9.99/mo', 'engagement is huge, but inference cost and safety can dominate'],
+      ['Nebula', 'astrology guidance', '$718K/month iOS estimate; ~$9.99/mo + weekly IAPs', 'personal guidance monetizes, but generic/trust risk is high'],
+      ['CHANI', 'astrology / wellness', '$674K-$832K/month estimates; ~$13/mo signal', 'premium spiritual wellness works when voice/content is trusted'],
+      ['The Pattern', 'astrology / relationships', '$400K/month estimate', 'relationship/self-insight can pay if product feels personal'],
+      ['Co-Star', 'astrology / social', '$300K-$500K/month estimates; 20M+ historical downloads', 'viral language helps, but monetization must feel useful']
+    ],
+    note: 'These are public estimates from Sacra, Rev.now, SensorTower/Appark-style pages, Adapty and press references; not audited internal financials.'
+  },
+  {
+    title: 'AURA Monetization Math',
+    type: 'auraMath',
+    rows: [
+      ['Plan', 'Price', 'Included generation', 'Target gross margin logic'],
+      ['Free', '$0', '1 forecast + Day 1 loop + 1 medium Life Canvas', 'COGS <$0.20; goal is activation, not generosity'],
+      ['Plus monthly', '$9.99/mo', 'daily text loop, memory, weekly recap, 2-4 images/mo', 'net after app fee ≈$8.49; COGS target <$1.40'],
+      ['Plus annual', '$69-89/year', 'same core loop + annual season framing', 'improves cashflow and reduces churn pressure'],
+      ['Video token low', '$2.99-4.99', 'Runway/Luma-class 5-8 sec visual moment', 'works if COGS <$1 and retries are limited'],
+      ['Video token premium', '$6.99-9.99', 'Veo/Replicate/HeyGen high-quality avatar/video', 'needed for $2-4+ COGS clips'],
+      ['Creator season', '$14.99-29.99', 'limited guided pack / custom assistant style', 'uses content leverage, not only compute']
+    ],
+    conclusion: 'AURA should not sell “unlimited AI”. It should sell a season, memory, causality and rare premium visual events.'
+  },
+  {
     title: 'Go-to-Market Strategy',
     type: 'gtm',
     blocks: [
@@ -199,13 +274,23 @@ const slides = [
 
 const sources = [
   ['Calm', 'Sacra', 'Revenue $300M in 2023; $70/year subscription; 4M+ paying subscribers; 2-7% paid conversion commentary.', 'https://sacra.com/c/calm/'],
+  ['Headspace', 'Udonis statistics / public app-store proxy', 'Headspace estimated at roughly $39-40M/year app-store revenue and ~1.7M monthly users; directional public estimate.', 'https://www.blog.udonis.co/statistics/headspace'],
   ['Character.AI', 'Sacra / Character.AI pricing page', '$30M annualized revenue in July 2025; $50M projected end-2025; c.ai+ $9.99/month; 20M MAU early 2024.', 'https://sacra.com/c/character-ai/ and https://character.ai/subscribe'],
-  ['Co-Star', 'Adapty paywall library', '$300k/month revenue estimate; 200k+ downloads/month; IAP list.', 'https://adapty.io/paywall-library/co-star-personalized-astrology/'],
+  ['Character.AI', 'AI Wiki / public research proxy', 'Revenue grew from roughly $15.2M to $32.2M; user engagement remains high; safety/inference cost risk noted.', 'https://aiwiki.ai/wiki/character_ai'],
+  ['Co-Star', 'Adapty / Trend Apps / Axios', '$300k-$500k/month public estimates; 200k+ monthly downloads estimate; $15M Series A and 20M+ downloads reported by Axios.', 'https://adapty.io/paywall-library/co-star-personalized-astrology/ and https://trendapps.dev/app/ios/1264782561/ and https://www.axios.com/2021/04/14/astrology-app-co-star-raises-15-million-funding'],
   ['Replika', 'Rev.now Android estimate', '$2.36M/month Play Store estimate; $28.35M/year; 99K paying users estimate; ~$17.23/month proxy.', 'https://rev.now/app/android/replika-my-ai-friend-ux7ec/'],
-  ['Finch', 'Rev.now iOS estimate', '$1.50M/month App Store estimate; ~7.7M MAU estimate.', 'https://rev.now/app/ios/finch-self-care-pet-95748/'],
-  ['Nebula', 'Rev.now iOS/Android estimates', '$718k/month App Store estimate; $125.9k/month Play Store estimate; Android listing mentions $7.99 weekly, $24.99 monthly, $29.99 three-month tiers.', 'https://rev.now/app/ios/nebula-spiritual-guidance-69523/ and https://rev.now/app/android/nebula-spiritual-guidance-4a0ag/'],
-  ['OpenAI pricing', 'OpenAI official pricing', 'GPT-Image-2 pricing and web search/API pricing referenced for AI cost model.', 'https://openai.com/api/pricing/'],
-  ['Veo pricing', 'Google Vertex AI pricing', 'Veo 2 pricing around $0.50/second for generated video.', 'https://cloud.google.com/vertex-ai/generative-ai/pricing'],
+  ['Replika pricing', 'CompanionWise pricing guide', 'Replika Pro price ranges and paid features: voice/video/AR/avatar customization/memory.', 'https://companionwise.com/faqs/replika-pricing/'],
+  ['Finch', 'Rev.now / SensorTower snippet / ScreensDesign', '$1.5-2.0M/month public estimates; Finch Plus monthly price around $9.99.', 'https://rev.now/app/ios/finch-self-care-pet-95748/ and https://app.sensortower.com/overview/1528595748 and https://screensdesign.com/showcase/finch-self-care-pet'],
+  ['Nebula', 'Rev.now iOS/Android estimates', '$718k/month App Store estimate; $125.9k/month Play Store estimate; iOS estimate includes 52K paying users; IAP tiers include $7.99 weekly, $9.99 monthly, $24.99 monthly / $29.99 three-month signals.', 'https://rev.now/app/ios/nebula-spiritual-guidance-69523/ and https://rev.now/app/android/nebula-spiritual-guidance-4a0ag/'],
+  ['CHANI', 'Rev.now / Appark / Statista snippets', 'CHANI appears as top-grossing astrology/wellness app in public rankings; estimates range around $674K-$832K/month.', 'https://rev.now/best/astrology-apps/ and https://appark.ai/en/blog/market-insights-best-astrology-app-2026-growth-analysis and https://www.statista.com/statistics/1451664/top-horoscope-apps-us-market-revenue/'],
+  ['The Pattern', 'Adapty paywall library', 'Last-month estimates around 90K downloads and $400K revenue; paywall reference.', 'https://adapty.io/paywall-library/the-pattern/'],
+  ['OpenAI pricing', 'OpenAI official pricing', 'GPT-4.1 mini token pricing and GPT Image approximate per-image prices used for AI cost model.', 'https://openai.com/api/pricing/'],
+  ['Veo pricing', 'Google Vertex AI pricing / public reporting', 'Veo 2 pricing around $0.50/second for generated video.', 'https://cloud.google.com/vertex-ai/generative-ai/pricing and https://www.gadgets360.com/ai/news/google-veo-2-video-generation-ai-model-pricing-vertex-ai-platform-7783807/amp'],
+  ['Runway API pricing', 'Runway developer docs', 'API billing example: credits purchased at $0.01/credit; 5s video example around $0.25.', 'https://docs.dev.runwayml.com/usage/billing/'],
+  ['Replicate Wan 2.1 pricing', 'Replicate model page', 'Wan 2.1 720p price around $0.24 per output second.', 'https://replicate.com/wavespeedai/wan-2.1-t2v-720p/api'],
+  ['Luma pricing', 'APIs.io / Luma pricing profile', 'Ray-2 public API pricing proxy around $0.08/second; official Luma page uses credits/plans and should be rechecked before build.', 'https://plans.apis.io/plans/luma-ai/luma-ai-plans-pricing/ and https://lumalabs.ai/pricing'],
+  ['HeyGen API pricing', 'HeyGen official developer docs', 'Avatar IV/V API pricing: photo avatar $0.05/sec; digital twin and studio avatar $0.0667/sec; photo avatar creation $1/call.', 'https://developers.heygen.com/docs/pricing'],
+  ['D-ID API pricing', 'D-ID official pricing page', 'Build plan at $14.4/month annual with up to 16 min offline video; trial includes 3 min video.', 'https://www.d-id.com/pricing/api?from=studio_settings'],
 ];
 
 function esc(s) {
@@ -417,6 +502,50 @@ function bodyFor(slide, n) {
   ${table(slide.rows, [240, 260, 260, 260], 70, 180, 50)}
   ctx.addText(slide, { text: '${esc(slide.note)}', left: 112, top: 555, width: 940, height: 40, fontSize: 17, italic: true, fontFace: 'Arial', color: C.ink, align: 'center' });
   source(slide, ctx, 'Assumptions: $10-14 ARPPU, image-first cost control, premium video gated. Needs recalculation after prototype telemetry.');
+`;
+  }
+
+  if (slide.type === 'costBenchmarks') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ${table(slide.rows, [155, 245, 310, 360], 54, 150, 54)}
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 80, top: 610, width: 990, height: 34, fontSize: 15, italic: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  source(slide, ctx, 'Sources: OpenAI, Google Vertex AI, Runway, Replicate, HeyGen, D-ID, Luma public pricing pages.');
+`;
+  }
+
+  if (slide.type === 'unitCost') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ${table(slide.rows, [190, 345, 215, 320], 54, 154, 58)}
+  ctx.addShape(slide, { left: 72, top: 558, width: 1030, height: 42, fill: C.purpleLight, line: { style: 'solid', fill: C.line, width: 1 } });
+  ctx.addText(slide, { text: '${esc(slide.formula)}', left: 88, top: 568, width: 998, height: 22, fontSize: 15, bold: true, fontFace: 'Arial', color: C.ink, fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(slide.conclusion)}', left: 110, top: 615, width: 940, height: 28, fontSize: 18, italic: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+`;
+  }
+
+  if (slide.type === 'videoStress') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ${table(slide.rows, [265, 155, 170, 180, 300], 54, 158, 58)}
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 120, top: 610, width: 900, height: 34, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+`;
+  }
+
+  if (slide.type === 'competitorEconomics') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ${table(slide.rows, [155, 190, 375, 350], 54, 128, 48)}
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 82, top: 610, width: 990, height: 34, fontSize: 14, italic: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+`;
+  }
+
+  if (slide.type === 'auraMath') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ${table(slide.rows, [190, 160, 395, 325], 54, 150, 58)}
+  ctx.addShape(slide, { left: 140, top: 610, width: 870, height: 42, fill: C.greenLight, line: { style: 'solid', fill: C.line, width: 1 } });
+  ctx.addText(slide, { text: '${esc(slide.conclusion)}', left: 160, top: 620, width: 830, height: 22, fontSize: 17, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
 `;
   }
 

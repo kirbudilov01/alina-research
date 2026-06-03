@@ -50,30 +50,50 @@ Type: pricingNarrative
 
 Type: finance
 
-## 13. Go-to-Market Strategy
+## 13. Generation Cost Benchmarks
+
+Type: costBenchmarks
+
+## 14. Cost Per User / Month
+
+Type: unitCost
+
+## 15. Video Cost Stress Test
+
+Type: videoStress
+
+## 16. Competitor Revenue Proxies
+
+Type: competitorEconomics
+
+## 17. AURA Monetization Math
+
+Type: auraMath
+
+## 18. Go-to-Market Strategy
 
 Type: gtm
 
-## 14. Growth Roadmap (Post-MVP)
+## 19. Growth Roadmap (Post-MVP)
 
 Type: roadmap
 
-## 15. Product Background & Evolution
+## 20. Product Background & Evolution
 
 Type: background
 
-## 16. AI Avatar & Video Pipeline
+## 21. AI Avatar & Video Pipeline
 
 Type: pipeline
 
-## 17. Risks
+## 22. Risks
 
 Type: risks
 
-## 18. 30-Day Validation Plan
+## 23. 30-Day Validation Plan
 
 Type: validation
 
-## 19. Contacts / Next Step
+## 24. Contacts / Next Step
 
 Type: contacts
