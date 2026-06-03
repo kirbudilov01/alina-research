@@ -18,114 +18,143 @@ const BUILDER = '/Users/kirill/.codex/plugins/cache/openai-primary-runtime/prese
 const NODE = '/Users/kirill/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node';
 
 const slides = [
+  { title: 'AURA', type: 'cover' },
   {
-    title: 'AURA',
-    type: 'cover'
-  },
-  {
-    title: 'Project Overview',
+    title: 'What AURA Is',
     type: 'overview',
     blocks: [
-      ['Target audience', 'люди, которые уже потребляют astrology/self-care/AI-companion контент, хотят персональный недельный прогноз и видимый образ своей траектории.'],
-      ['Current alternatives', 'Nebula/Co-Star, Calm/Headspace, Finch, Replika/Character.AI, habit trackers, дневники, Telegram-каналы, ручные консультации и AI image/video tools.'],
-      ['Problem', 'рынок дает фрагменты: смысл без действия, действие без личного смысла, avatar без причинности, прогноз без памяти и продолжения.'],
-      ['Solution', 'AURA собирает weekly life-series: дата рождения и запрос → прогноз недели → daily episode → действие/reset → avatar/Life Canvas → продолжение завтра.'],
-      ['How it works', 'пользователь выбирает контекст и помощника, получает недельный сценарий, каждый день проходит короткий loop, а дорогие AI-video moments открываются как premium.'],
-      ['Key differentiation', 'это не horoscope app и не avatar generator, а карманный прогнозист и визуальный сериал о собственной жизни.']
+      ['One-line thesis', 'AURA is a weekly visual self-guidance app: birth data + personal context → forecast → daily episode → action/reset → Life Canvas change → tomorrow hook.'],
+      ['User promise', 'Not “your zodiac sign says X”. The user should feel: “I understand my week, I did one small action, and I can see how my life picture changed.”'],
+      ['Core product', 'A personal pocket forecastist/assistant with memory, weekly seasons, image-first Life Canvas and rare premium video moments.'],
+      ['Why now', 'Astrology apps monetize personal meaning, mindfulness apps monetize ritual, AI companions monetize memory, video AI creates premium visual moments. AURA joins these behaviors.'],
+      ['Business rule', 'Daily loop must stay cheap. Premium video/avatar must be tokenized, milestone-based or paid, not free daily generation.'],
+      ['Strategic gate', 'If users cannot explain why Life Canvas changed, AURA becomes an AI image toy. If they can, AURA becomes a product.']
     ]
   },
   {
-    title: 'Product Solution',
-    type: 'solution',
-    leftTitle: 'Что человек уже пытается получить',
-    left: ['Личный смысл: “что со мной сейчас происходит?”', 'Прогноз на неделю без жесткого фатализма.', 'Красивую future-self / avatar визуализацию.', 'Мягкое действие, а не сухой productivity checklist.'],
-    rightTitle: 'Как это становится AURA',
-    right: ['Week forecast становится season arc.', 'Daily episode переводит прогноз в сегодняшний фокус.', 'AI-помощник говорит с пользователем в выбранном тоне.', 'Life Canvas показывает, что именно изменилось.', 'Premium video продается как special episode, trailer или token moment.']
+    title: 'The Product Loop',
+    type: 'pipeline',
+    items: [
+      ['Birth data + request', 'personal context'],
+      ['Weekly forecast', 'season arc'],
+      ['Daily episode', 'today focus'],
+      ['Action / Reset', 'small behavior'],
+      ['Life Canvas', 'visible causality']
+    ],
+    note: 'The loop is the product: Episode → Action → Reset → Reflection → Life Canvas → Tomorrow Hook.'
   },
   {
-    title: 'Market Size',
+    title: 'Why This Is Not Just Astrology',
+    type: 'solution',
+    leftTitle: 'What existing apps give',
+    left: ['Astrology: meaning, but often generic and passive.', 'Mindfulness: ritual, but often not personal enough.', 'AI companion: conversation, but not a structured week.', 'Avatar tools: visuals, but weak causality.'],
+    rightTitle: 'What AURA combines',
+    right: ['Birth-data context without fatalistic positioning.', 'A weekly season that gives structure.', 'A daily micro-action that creates agency.', 'A Life Canvas that changes for a reason.', 'Premium video as rare proof-of-magic, not daily COGS leak.']
+  },
+  {
+    title: 'Market Map',
     type: 'marketSize',
     items: [
-      ['PAM', 'mobile consumer apps', 'AURA конкурирует за привычку открыть приложение, пройти короткую сессию и вернуться завтра.'],
-      ['TAM', '5 adjacent markets', 'mindfulness/reset, astrology/self-discovery, AI companion, avatar/identity, coaching/habits + progression.'],
-      ['SAM', '68,085 objects reviewed', 'в исследовании собран широкий competitor universe across app stores, web, desktop and adjacent sources.'],
-      ['SOM', '100k-300k users', 'реалистичный reachable base на 3 года при creator-led GTM, подписке и premium visual layer.'],
-      ['SUM', '$30-80M ARR', 'upside через подписку, premium video/avatar tokens, creator seasons и годовые планы.']
+      ['PAM', 'consumer mobile apps', 'AURA competes for the daily habit of opening an app for meaning, reset and self-direction.'],
+      ['TAM', '4 paid behaviors', 'personal guidance, wellness ritual, AI companion memory, visual identity/avatar progression.'],
+      ['SAM', 'apps + web + AI tools', 'existing research covers app stores, web apps, paywalls, adjacent tools and manual competitor walkthroughs.'],
+      ['SOM', '100k-300k users', 'reachable first scale if creator-led GTM, weekly seasons and premium visual moments work.'],
+      ['UP', '$30-80M ARR path', 'subscription + annual + premium tokens + creator seasons can create venture-relevant upside.']
     ],
-    note: 'Вывод: рынок не один. AURA должна считаться как пересечение платных привычек, а не как узкий horoscope TAM.'
+    note: 'The market is not a single horoscope TAM. It is the overlap of paid personal meaning, daily ritual and AI visual identity.'
   },
   {
-    title: 'Market Size ($)',
+    title: 'Competitor Economics: The Read',
     type: 'money',
     rows: [
-      ['Calm', '$300M revenue / 2023 proxy', '$70/year, 4M+ paying subscribers', 'wellness subscription can be a very large consumer business'],
-      ['Character.AI', '$30M ARR run-rate / 2025', '$9.99/month c.ai+', 'AI companion monetizes engagement, but compute cost remains key risk'],
-      ['Replika', '$2.36M/month Android est.', '~$17/month subscription proxy', 'AI companion + avatar + memory can create paid intent'],
-      ['Finch', '$1.5M/month iOS est.', 'self-care pet + paid expansion', 'soft companion + daily loop can monetize without “hard productivity”'],
-      ['Co-Star', '$300k/month est.', 'paid readings / IAPs', 'astrology monetizes personal depth, but needs careful positioning']
+      ['Co-Star iOS', '$797.5K/mo estimate', '2.7M MAU / 64K payers / 2.4% conversion', 'social astrology can scale with low CAC if language is viral'],
+      ['Nebula iOS', '$718K/mo estimate', '2.2M MAU / 52K payers / $0.33 ARPMAU', 'paid spiritual guidance works, but aggressive funnels create trust risk'],
+      ['Calm Android', '$2.35M/mo estimate', '3.6M MAU / 85K payers / 2.4% conversion', 'wellness ritual can monetize at scale with annual subscription logic'],
+      ['AstroTime Android', '$440.8K/mo estimate', '242K MAU / 11K payers / 4.5% conversion', 'urgent guidance and human-like help can lift ARPMAU'],
+      ['Replika Android', '$2.36M/mo estimate', '99K paying users proxy', 'memory, avatar, voice and emotional continuity create paid intent']
     ],
-    conclusion: 'Деньги есть не в одной нише, а вокруг связки: personal meaning + companion + visual progress + subscription habit.'
+    conclusion: 'AURA should model base-case like subscription self-discovery, and upside like premium visual/guidance moments.'
   },
   {
-    title: 'Customer Segments',
-    type: 'segments',
-    segments: [
-      ['Spiritual self-improvers', 'уже смотрят astrology/tarot/self-care контент, но хотят меньше фатализма и больше применимости.', 'weekly forecast + daily episode'],
-      ['Avatar / future-self users', 'хотят увидеть “другую версию себя”, визуальный стиль периода и красивый share artifact.', 'Life Canvas + avatar evolution'],
-      ['Habit & reset users', 'пытаются действовать, но устают от сухих streak и задач без эмоционального смысла.', '2-minute action + reset'],
-      ['AI companion users', 'готовы к персональному AI, но нуждаются в безопасной рамке, памяти и понятной роли помощника.', 'карманный прогнозист']
-    ]
-  },
-  {
-    title: 'Why AURA Is Needed by the Market',
-    type: 'why',
-    bullets: ['В review clusters видно: 415 сигналов про ежедневный якорь, 371 про структурирование саморазвития, 308 про видимый прогресс.', 'Главные причины ухода: 612 сигналов “не хватает глубины/кастомизации”, 367 сигналов “подписка не кажется ценной”.', 'AURA должна доказать ценность до paywall: личный прогноз, действие, reset и объяснимое изменение avatar / Life Canvas.'],
-    conclusion: 'AURA нужна рынку не как еще одна astrology app, а как продукт, который делает личный смысл регулярным, действенным и видимым.'
-  },
-  {
-    title: 'Competitors',
-    type: 'competitorsMap',
-    quote: 'AURA отвечает на вопрос “что со мной происходит, каким будет мой следующий шаг и как это меняет мой образ?” — не “что говорит знак” и не “какую картинку сгенерировал AI”.'
-  },
-  {
-    title: 'Competitive Analysis',
-    type: 'compTable',
+    title: 'Astrology Unit Economics',
+    type: 'competitorEconomics',
     rows: [
-      ['Calm / Headspace', 'mindfulness, sleep, reset', 'доверие, ритуал, контентная библиотека', 'нет личного weekly forecast и avatar trajectory'],
-      ['Co-Star / Nebula', 'astrology / spiritual guidance', 'персональный смысл, paid depth, регулярные прогнозы', 'риск generic readings, мало действия и visible progress'],
-      ['Replika / Character.AI', 'AI companion / roleplay', 'диалог, память, эмоциональная связь', 'нет life-series вокруг реальной недели пользователя'],
-      ['Finch', 'self-care pet + tasks', 'мягкий habit loop, companion, забота без стыда', 'части аудитории слишком детско; avatar не про adult future-self'],
-      ['AURA', 'weekly forecast + assistant + Life Canvas', 'личный смысл → действие → avatar evolution', 'главный риск: доказать causality и удержать video cost']
-    ]
+      ['Product', 'Revenue / scale signal', 'Visible economics', 'AURA implication'],
+      ['Co-Star iOS', '$797.5K/mo; 2.7M MAU; 64K payers', 'ARPMAU ~$0.30; conversion ~2.4%; $8.99/mo + IAP', 'base paid conversion should be 2-3%, not fantasy 8-10%'],
+      ['Nebula iOS', '$718K/mo; 2.2M MAU; 52K payers', 'ARPMAU ~$0.33; conversion ~2.4%; $9.99/mo + weekly IAPs', 'personal guidance monetizes, but paywall trust is fragile'],
+      ['The Pattern iOS', '$36.1K/mo; 160K MAU; 4K payers', 'ARPMAU ~$0.23; conversion ~2.5%', 'relationship/self-insight works, but depth alone does not guarantee scale'],
+      ['AstroSage Android', '$547.8K/mo; 2.4M MAU; 34K payers', 'ARPMAU ~$0.23; conversion ~1.4%', 'birth-data utility can bring huge reach with lower conversion'],
+      ['AstroTime Android', '$440.8K/mo; 242K MAU; 11K payers', 'ARPMAU ~$1.82; conversion ~4.5%', 'urgent guidance mechanics can lift conversion and ARPMAU'],
+      ['Astrotalk company', 'Rs 1,214 crore FY25 total revenue reported', 'consultation marketplace, not pure app subscription', 'human/expert layer is upside later, not MVP core']
+    ],
+    note: 'Source layer: Rev.now estimates and public company/press reports. Directional benchmarks, not audited internal P&L.'
   },
   {
-    title: 'Pricing Analysis',
+    title: 'Mindfulness Unit Economics',
+    type: 'competitorEconomics',
+    rows: [
+      ['Product', 'Revenue / scale signal', 'Visible economics', 'AURA implication'],
+      ['Calm brand', '$300M/year proxy; 4M+ paying subscribers', '$70/year and $14.99/mo price anchors', 'annual wellness subscription can be very large when trust and routine exist'],
+      ['Calm Android', '$2.35M/mo; 3.6M MAU; 85K payers', 'ARPMAU ~$0.65; conversion ~2.4%', 'wellness can monetize above astrology ARPMAU, but needs retention'],
+      ['Headspace', '~$200M/year brand proxy; app-store proxy ~$39-40M/year', '$12.99/mo price signal', 'off-store/B2B revenue can understate visible app economics'],
+      ['Waking Up', '$492.7K/mo iOS leaderboard estimate', '$19.99/mo; $129.99/year', 'trusted teacher voice can justify premium pricing'],
+      ['Balance Android', '$180K/mo; ~317K MAU; 11K payers', 'ARPMAU ~$0.57; conversion ~3.5%', 'personalization can outperform generic meditation libraries'],
+      ['Meditopia iOS', '$118.4K/mo; 629K MAU', 'ARPMAU ~$0.19', 'large MAU without strong monetization can still be thin']
+    ],
+    note: 'AURA should borrow daily ritual and annual plan logic, not build a giant meditation library.'
+  },
+  {
+    title: 'AI Companion / Avatar Economics',
+    type: 'competitorEconomics',
+    rows: [
+      ['Product', 'Revenue / scale signal', 'What people pay for', 'AURA implication'],
+      ['Character.AI', '$30M-$32M ARR proxy; c.ai+ $9.99/mo', 'priority, memory, engagement, chat volume', 'AI can monetize engagement, but inference cost and safety dominate'],
+      ['Replika Android', '$2.36M/mo estimate; 99K payers proxy', 'AI companion, avatar, memory, voice/video features', 'users pay for emotional continuity, not raw text chat'],
+      ['Finch iOS', '$1.5M-$2.0M/mo public estimate range', 'self-care pet, soft progression, daily loop, Plus features', 'daily companion mechanics can monetize without scary “therapy” positioning'],
+      ['HeyGen / D-ID', 'API pricing proves avatar video is paid compute', '$0.05-$0.0667/sec or plan/credit based pricing', 'talking avatar is a premium event, not free habit content'],
+      ['AURA', '$9.99-$14.99/mo + tokens target', 'season, assistant memory, Life Canvas, rare video', 'must be a cost-controlled AI product under a premium visual wrapper']
+    ],
+    note: 'The avatar is not decoration. It has to show the user why the week changed.'
+  },
+  {
+    title: 'What People Actually Pay For',
     type: 'pricingTable',
     rows: [
-      ['Calm', '$14.99/mo or ~$70/yr', 'sleep, meditation, content library', 'годовой план как anchor доверия и привычки'],
-      ['Character.AI', '$9.99/mo or $94.99/yr', 'priority, memory/voice/premium access', 'AI companion ceiling around $10/mo mass-market'],
-      ['Nebula', '$7.99/wk, $24.99/mo, $29.99/3mo', 'spiritual guidance, compatibility, deep readings', 'высокая цена возможна, но paywall вызывает риск'],
-      ['Replika', '~$17/mo proxy', 'AI companion, avatar, voice, memory', 'paid intent сильный, но trust/safety важны'],
-      ['AURA', '$9.99-14.99/mo + tokens', 'season, memory, Life Canvas, premium video', 'подписка ниже high-friction apps, video отдельно']
+      ['Paid object', 'Seen in competitors', 'Why users pay', 'AURA equivalent'],
+      ['Monthly subscription', 'Co-Star, Nebula, CHANI, Calm, Balance', 'regular personal value and lower friction', 'AURA Plus: weekly season + memory + Life Canvas'],
+      ['Annual subscription', 'Calm, Headspace, Waking Up, CHANI', 'commitment and cashflow when trust is formed', '$69-$89 annual after first completed week'],
+      ['Compatibility / relationship report', 'Co-Star, The Pattern, Nebula', 'emotionally high-stakes personal insight', 'relationship / future-self special episode'],
+      ['Live or urgent guidance', 'Astrotalk, AstroTime, Astroyogi', 'anxiety moment: “answer me now”', 'AI assistant first; human/creator layer later'],
+      ['Special visual asset', 'soulmate sketch, aura reading, avatar/video tools', 'ownable image of self/future/period', 'Life Canvas trailer or future-self video token']
     ]
   },
   {
-    title: 'Pricing',
-    type: 'pricingNarrative',
-    points: ['Free: первый прогноз, Day 1 episode, одно действие/reset и первый avatar / Life Canvas moment.', 'Plus: продолжение сезона, memory, weekly recap, assistant continuity, style presets и больше visual depth.', 'Premium / tokens: video-avatar, cinematic future-self, trailer недели, creator season, редкие special episodes.', 'Правило экономики: daily loop дешевый, video только как paid event или milestone.']
+    title: 'Pricing Decision',
+    type: 'auraMath',
+    rows: [
+      ['Plan', 'Price', 'Included generation', 'Target margin logic'],
+      ['Free', '$0', 'first forecast + Day 1 loop + one medium Life Canvas', 'COGS target <$0.20; goal is activation, not generosity'],
+      ['Plus monthly', '$9.99-$14.99', 'daily text loop, memory, weekly recap, 2-4 images/mo', 'net after app fee ~$8.49-$12.74; COGS target <$1.50'],
+      ['Plus annual', '$69-$89/year', 'same loop + annual season framing', 'cashflow and lower churn pressure'],
+      ['Low video token', '$2.99-$4.99', 'Runway/Luma-class 5-8 sec visual moment', 'works if COGS <$1 and retries are capped'],
+      ['Premium video token', '$6.99-$9.99', 'Veo/Replicate/HeyGen high-quality moment', 'needed when COGS is $2-$4+'],
+      ['Creator season', '$14.99-$29.99', 'limited guided pack / custom assistant style', 'monetizes content leverage, not only compute']
+    ],
+    conclusion: 'AURA should not sell unlimited AI. It sells season, memory, causality and rare premium visual events.'
   },
   {
-    title: 'Financial Model',
+    title: 'Conversion / ARPMAU Assumptions',
     type: 'finance',
     rows: [
-      ['Scenario', 'Conservative', 'Base', 'Optimistic'],
-      ['Scale', '10k MAU / 84 payers', '50k MAU / 1,650 payers', '150k MAU / 8,370 payers'],
-      ['Net revenue / month', '$413', '$13.1k', '$97.0k'],
-      ['Product gross margin', '29.2%', '68.8%', '70.6%'],
-      ['Payback period', '23.2 months', '5.5 months', '4.8 months'],
-      ['Verdict', 'does not pass', 'works if video gated', 'strong but needs retention']
+      ['Metric', 'Conservative', 'Base', 'Strong'],
+      ['Paid conversion', '1.5%', '2.5-3.0%', '4.0-5.0%'],
+      ['Monthly ARPMAU', '$0.20', '$0.35-$0.50', '$0.80-$1.50'],
+      ['Monthly price', '$7.99-$9.99', '$9.99-$14.99', '$14.99'],
+      ['Token buyer share', '3%', '8-12%', '15-20%'],
+      ['CAC payer', '$300-$800', '$100-$250', '$30-$100'],
+      ['Verdict', 'content app risk', 'works if causality is understood', 'works only with high-intent moments']
     ],
-    note: 'Main financial conclusion: AURA must feel premium outside, but keep the daily loop cheap inside.'
+    note: 'These assumptions are derived from competitor estimates: Co-Star, Nebula, The Pattern, AstroSage, AstroTime, Calm and Balance.'
   },
   {
     title: 'Generation Cost Benchmarks',
@@ -133,12 +162,12 @@ const slides = [
     rows: [
       ['Layer', 'Provider / model', 'Public price signal', 'AURA implication'],
       ['LLM', 'OpenAI GPT-4.1 mini', '$0.40 / 1M input tokens; $1.60 / 1M output tokens', 'daily text loop is cheap if prompts are structured'],
-      ['Image', 'OpenAI Images', '~$0.01 low / $0.04 medium / $0.17 high per square image', 'Life Canvas can be included, but not generated infinitely'],
-      ['Cinematic video', 'Google Veo 2 / Vertex AI', '~$0.50 per generated second', '8 sec ≈ $4.00; cannot be free daily content'],
-      ['Cinematic video', 'Runway API', '$0.25 per 5 sec API example', '8 sec ≈ $0.40; viable for tests, still needs retries budget'],
-      ['Video model', 'Replicate Wan 2.1 720p', '$0.24 per output second', '8 sec ≈ $1.92; better as paid token / milestone'],
-      ['Talking avatar', 'HeyGen API Avatar IV/V', '$0.05/sec photo avatar; $0.0667/sec digital twin', '30 sec ≈ $1.50-2.00; not a default daily loop'],
-      ['Avatar API', 'D-ID Build plan', '$14.4/mo annual plan; up to 16 offline video min', '≈$0.90/min plan math, but limits/watermark/credits matter']
+      ['Image', 'OpenAI Images', '~$0.01 low / $0.04 medium / $0.17 high per square image', 'Life Canvas can be included if image count is capped'],
+      ['Cinematic video', 'Google Veo 2 / Vertex AI', '~$0.50 per generated second', '8 sec ~= $4.00; cannot be free daily content'],
+      ['Cinematic video', 'Runway API', '$0.25 per 5 sec API example', '8 sec ~= $0.40; viable for tests, still needs retry budget'],
+      ['Video model', 'Replicate Wan 2.1 720p', '$0.24 per output second', '8 sec ~= $1.92; better as paid token / milestone'],
+      ['Talking avatar', 'HeyGen API Avatar IV/V', '$0.05/sec photo avatar; $0.0667/sec digital twin', '30 sec ~= $1.50-$2.00; not a default daily loop'],
+      ['Avatar API', 'D-ID Build plan', '$14.4/mo annual plan; up to 16 offline video min', '~$0.90/min plan math, but limits/watermark/credits matter']
     ],
     note: 'All prices are public API/pricing-page signals as of June 2026; exact billing must be rechecked before procurement.'
   },
@@ -147,15 +176,15 @@ const slides = [
     type: 'unitCost',
     rows: [
       ['User type', 'Usage assumption', 'Variable AI cost', 'Business meaning'],
-      ['Free active user', '8 text loops + 1 medium image + no video', '$0.10-0.20 / MAU', 'safe if onboarding is capped and no free video exists'],
-      ['Engaged free user', '20 text loops + 2 images + no video', '$0.25-0.45 / MAU', 'still acceptable as acquisition cost if retention is visible'],
-      ['Plus subscriber', '25 text loops + 4 images + recaps + storage/support', '$0.70-1.40 / payer', '$9.99-14.99 subscription can hold strong margin'],
+      ['Free active user', '8 text loops + 1 medium image + no video', '$0.10-$0.20 / MAU', 'safe if onboarding is capped and no free video exists'],
+      ['Engaged free user', '20 text loops + 2 images + no video', '$0.25-$0.45 / MAU', 'acceptable only if retention and conversion are visible'],
+      ['Plus subscriber', '25 text loops + 4 images + recaps + support', '$0.70-$1.40 / payer', '$9.99-$14.99 subscription can hold strong margin'],
       ['Plus + 1 Veo clip', '+ one 8 sec Veo 2 clip', '+$4.00 before retries', 'margin collapses unless clip is paid separately'],
-      ['Plus + 4 Veo clips', '+ weekly 8 sec Veo clip', '+$16.00 before retries', 'negative economics on $9.99/mo subscription'],
-      ['Token video', 'one paid 8 sec video moment', 'Runway ≈$0.40 / Replicate ≈$1.92 / Veo ≈$4.00', 'price token by model: $2.99 low-cost, $6.99-9.99 premium']
+      ['Plus + 4 Veo clips', '+ weekly 8 sec Veo clip', '+$16.00 before retries', 'negative economics on consumer subscription'],
+      ['Token video', 'one paid 8 sec video moment', 'Runway ~$0.40 / Replicate ~$1.92 / Veo ~$4.00', 'price token by model quality']
     ],
-    formula: 'Formula: user COGS = LLM tokens + image count × image cost + video seconds × model/sec + storage + support + failed-generation buffer.',
-    conclusion: 'Главное решение: AURA продает “живой визуальный момент”, но базовая подписка должна оставаться image-first.'
+    formula: 'COGS = LLM tokens + images + video seconds × provider price + storage + support + failed-generation buffer.',
+    conclusion: 'The daily product can be cheap. The wow video must be paid, capped and measurable.'
   },
   {
     title: 'Video Cost Stress Test',
@@ -165,114 +194,118 @@ const slides = [
       ['1 free 8s Veo clip / month', '$400', '$4,000', '$40,000', 'too expensive before strong paid conversion'],
       ['4 free 8s Veo clips / month', '$1,600', '$16,000', '$160,000', 'kills consumer subscription margin'],
       ['1 paid 8s Runway clip', '$40 COGS', '$400 COGS', '$4,000 COGS', 'can work as low-price token'],
-      ['1 paid 8s Replicate/Wan clip', '$192 COGS', '$1,920 COGS', '$19,200 COGS', 'needs $4.99-9.99 token or bundle'],
-      ['1 paid 30s HeyGen avatar', '$150-200 COGS', '$1,500-2,000', '$15,000-20,000', 'works for premium forecast / assistant moment'],
-      ['Image-first Life Canvas', '$4-17 COGS', '$40-170', '$400-1,700', 'safe default visual layer']
+      ['1 paid 8s Replicate/Wan clip', '$192 COGS', '$1,920 COGS', '$19,200 COGS', 'needs $4.99-$9.99 token or bundle'],
+      ['1 paid 30s HeyGen avatar', '$150-$200 COGS', '$1,500-$2,000', '$15,000-$20,000', 'works for premium forecast / assistant moment'],
+      ['Image-first Life Canvas', '$4-$17 COGS', '$40-$170', '$400-$1,700', 'safe default visual layer']
     ],
     note: 'This is the missing math: video is not “a feature”; it is a pricing boundary.'
   },
   {
-    title: 'Competitor Revenue Proxies',
-    type: 'competitorEconomics',
+    title: 'AURA Base Financial Model',
+    type: 'finance',
     rows: [
-      ['Product', 'Category', 'Public revenue / scale signal', 'What AURA learns'],
-      ['Calm', 'sleep / meditation', '$300M revenue proxy; 4M+ paying subscribers', 'routine + trust + annual plan can become massive'],
-      ['Headspace', 'meditation / mental health', '~$39-40M/year app-store revenue proxy; ~1.7M MAU signal', 'paid content library still works, but growth can mature'],
-      ['Finch', 'self-care pet', '$1.5-2.0M/month estimates; Plus around $9.99/mo', 'soft companion + daily loop monetizes without hard productivity'],
-      ['Replika', 'AI companion', '$2.36M/month Android estimate; paid voice/avatar/memory', 'emotional bond can monetize, but trust/safety is core'],
-      ['Character.AI', 'AI companion / roleplay', '$30-32M ARR proxy; c.ai+ $9.99/mo', 'engagement is huge, but inference cost and safety can dominate'],
-      ['Nebula', 'astrology guidance', '$718K/month iOS estimate; ~$9.99/mo + weekly IAPs', 'personal guidance monetizes, but generic/trust risk is high'],
-      ['CHANI', 'astrology / wellness', '$674K-$832K/month estimates; ~$13/mo signal', 'premium spiritual wellness works when voice/content is trusted'],
-      ['The Pattern', 'astrology / relationships', '$400K/month estimate', 'relationship/self-insight can pay if product feels personal'],
-      ['Co-Star', 'astrology / social', '$300K-$500K/month estimates; 20M+ historical downloads', 'viral language helps, but monetization must feel useful']
+      ['Scenario', '10k MAU', '50k MAU', '150k MAU'],
+      ['Paid conversion', '1.5%', '3.0%', '4.5%'],
+      ['Payers', '150', '1,500', '6,750'],
+      ['Gross subscription @ $11.99', '$1.8K/mo', '$18.0K/mo', '$80.9K/mo'],
+      ['Net after 15% fee', '$1.5K/mo', '$15.3K/mo', '$68.8K/mo'],
+      ['AI/image COGS', '$1.0K-$2.5K', '$5.0K-$12.5K', '$15K-$37.5K'],
+      ['Verdict', 'thin unless COGS capped', 'works if no free video', 'strong if retention + tokens work']
     ],
-    note: 'These are public estimates from Sacra, Rev.now, SensorTower/Appark-style pages, Adapty and press references; not audited internal financials.'
+    note: 'Subscription alone is not enough if free COGS is loose. Tokens and annual plans protect margin.'
   },
   {
-    title: 'AURA Monetization Math',
-    type: 'auraMath',
+    title: 'Marketing Benchmarks',
+    type: 'competitorEconomics',
     rows: [
-      ['Plan', 'Price', 'Included generation', 'Target gross margin logic'],
-      ['Free', '$0', '1 forecast + Day 1 loop + 1 medium Life Canvas', 'COGS <$0.20; goal is activation, not generosity'],
-      ['Plus monthly', '$9.99/mo', 'daily text loop, memory, weekly recap, 2-4 images/mo', 'net after app fee ≈$8.49; COGS target <$1.40'],
-      ['Plus annual', '$69-89/year', 'same core loop + annual season framing', 'improves cashflow and reduces churn pressure'],
-      ['Video token low', '$2.99-4.99', 'Runway/Luma-class 5-8 sec visual moment', 'works if COGS <$1 and retries are limited'],
-      ['Video token premium', '$6.99-9.99', 'Veo/Replicate/HeyGen high-quality avatar/video', 'needed for $2-4+ COGS clips'],
-      ['Creator season', '$14.99-29.99', 'limited guided pack / custom assistant style', 'uses content leverage, not only compute']
+      ['Competitor / archetype', 'Public marketing signal', 'Risk', 'AURA use'],
+      ['Nebula', '$6.8M/mo YouTube ad spend estimate; 620 creatives; 18.6M visits Jan 2026; 50 landing pages', 'paid scale requires high LTV and aggressive funnel', 'use as paid-test inspiration, not MVP operating model'],
+      ['Nebula prelands', 'soulmate sketch 10% ad traffic; marriage compatibility 8.2%; aura reading 8%', 'curiosity hooks can become scammy', 'test future-self / visual week / relationship hooks carefully'],
+      ['Co-Star', '20M+ downloads with no real marketing spend; 25% young US women 18-25 downloaded historically', 'hard to force virality', 'build shareable identity language and relationship/social hooks'],
+      ['Astrotalk', 'FY25 total expenses Rs 1,129 crore; marketing/tech/ops/talent growth cited', 'marketplace growth is expensive operationally', 'do not start with marketplace/expert model'],
+      ['CHANI / Waking Up', 'trusted founder/teacher voice', 'requires real authority', 'use Alina/creator expertise without guru tone']
     ],
-    conclusion: 'AURA should not sell “unlimited AI”. It should sell a season, memory, causality and rare premium visual events.'
+    note: 'Sources: Web2App World, Axios/TIME, Moneycontrol/ET-style reporting and qualitative product observations.'
   },
   {
     title: 'Go-to-Market Strategy',
     type: 'gtm',
     blocks: [
-      ['1. First 100 are not bought by ads', 'теплые пользователи, interviews, ручные weekly forecasts и concierge cohort — задача не installs, а понимание петли.'],
-      ['2. Creator-led proof', 'micro creators in astrology/self-growth/visual AI проходят “7-дневный сезон” и показывают не рекламу, а опыт.'],
-      ['3. TikTok / Reels / Shorts', 'future-self, weekly forecast, avatar transformation, “not horoscope”, before/after Life Canvas и paid-intent CTA.'],
-      ['4. Shareable artifacts', 'Life Canvas card, season recap, future-self poster и trailer недели как viral layer после value moment.']
-    ]
-  },
-  {
-    title: 'Growth Roadmap (Post-MVP)',
-    type: 'roadmap',
-    steps: [
-      ['IDEA', 'astrology + avatars'],
-      ['MVP', 'week forecast + assistant'],
-      ['First sales', 'paid season / Plus'],
-      ['Optimization', 'retention + paywall'],
-      ['Scaling', 'creators + AI pipeline'],
-      ['$1M ARR', 'premium visual engine']
-    ]
-  },
-  {
-    title: 'Product Background & Evolution',
-    type: 'background',
-    bullets: ['День 0: пользователь ищет прогноз, смысл, образ себя или мягкую опору на неделю.', 'День 1: вводит дату рождения/контекст, выбирает помощника, получает прогноз недели и первый episode.', 'День 2-7: помощник продолжает season, avatar/Canvas меняется после действий, неделя заканчивается recap или video moment.'],
-    stages: ['birth data', 'week forecast', 'daily episode', 'action/reset', 'avatar shift', 'week recap']
-  },
-  {
-    title: 'AI Avatar & Video Pipeline',
-    type: 'pipeline',
-    items: [
-      ['Birth data + request', 'personal context'],
-      ['Weekly forecast', 'season logic'],
-      ['Daily assistant', 'text / voice dialog'],
-      ['Avatar / Canvas', 'image-first evolution'],
-      ['Premium video', 'Veo / video model as paid wow']
-    ],
-    note: 'Video is a wow layer, not the core loop: official Vertex AI Veo 2 pricing is around $0.50/sec, so video should be gated.'
-  },
-  {
-    title: 'Risks',
-    type: 'risks',
-    rows: [
-      ['Looks like horoscope', 'user thinks it is generic astrology', 'position as life-series and action, not fate'],
-      ['Avatar feels random', 'user cannot explain visual change', 'show cause next to Canvas'],
-      ['Video cost kills margin', 'free users generate expensive clips', 'premium/token video only'],
-      ['AI sounds generic', 'low trust and no return', 'prompt QA + feedback loop'],
-      ['No paid intent', 'users like it but do not pay', 'paywall after first completed loop']
+      ['1. First 100 are not bought by ads', 'warm users, interviews, manual weekly forecasts and concierge cohort. Goal: understand the loop, not installs.'],
+      ['2. Creator-led proof', 'micro creators in astrology/self-growth/visual AI pass a 7-day season and show the experience, not a generic ad.'],
+      ['3. Short-form hooks', 'future-self, weekly forecast, avatar transformation, “not horoscope”, before/after Life Canvas and paid-intent CTA.'],
+      ['4. Shareable artifacts', 'Life Canvas card, season recap, future-self poster and trailer week as viral layer after value moment.']
     ]
   },
   {
     title: '30-Day Validation Plan',
     type: 'validation',
     weeks: [
-      ['Week 1', '20-30 interviews + manual competitor review'],
-      ['Week 2', '10-screen prototype + 2 Life Canvas styles'],
-      ['Week 3', 'landing + price test $7.99/$9.99/$14.99'],
-      ['Week 4', '30-50 concierge users through 3-7 days']
+      ['Week 1', '20-30 interviews + manual weekly forecast concierge'],
+      ['Week 2', '10-screen prototype + 2 Life Canvas visual styles'],
+      ['Week 3', 'landing + price test $7.99 / $9.99 / $14.99'],
+      ['Week 4', '30-50 users through 3-7 days + paid-intent test']
     ],
-    metrics: ['>70% understand category', '>50% explain avatar change', 'D1 >20%', 'paid intent >5%']
+    metrics: ['>70% understand category', '>50% explain Canvas change', 'D1 >20%', 'paid intent >5%']
+  },
+  {
+    title: 'Product Scope: MVP vs Later',
+    type: 'pricingTable',
+    rows: [
+      ['Layer', 'MVP', 'Later', 'Why'],
+      ['Core loop', 'Episode → Action → Reset → Reflection → Life Canvas', 'season branching and deeper memory', 'must prove causality first'],
+      ['Assistant', 'chosen tone + weekly context + memory summary', 'voice/video assistant, creator voices', 'text memory is cheaper and faster to validate'],
+      ['Visual layer', 'image-first Life Canvas + avatar style', 'cinematic video, talking avatar', 'video is premium COGS'],
+      ['Monetization', 'Plus + annual + one token test', 'creator seasons, expert layer, marketplace', 'avoid operational complexity before retention'],
+      ['Community', 'none in MVP', 'sharing, social, cohorts', 'do not build social network before core value is proven']
+    ]
+  },
+  {
+    title: 'Risks',
+    type: 'risks',
+    rows: [
+      ['Risk', 'How it breaks', 'Mitigation'],
+      ['Looks like horoscope', 'user thinks it is generic astrology', 'position as weekly life-series and action, not fate'],
+      ['Avatar feels random', 'user cannot explain visual change', 'show cause next to Canvas and tie it to action/reflection'],
+      ['Video cost kills margin', 'free users generate expensive clips', 'premium/token video only; log COGS per asset'],
+      ['AI sounds generic', 'low trust and no return', 'prompt QA, user feedback and memory guardrails'],
+      ['No paid intent', 'users like it but do not pay', 'paywall after first completed loop and price tests by cohort']
+    ]
+  },
+  {
+    title: 'Growth Roadmap',
+    type: 'roadmap',
+    steps: [
+      ['IDEA', 'forecast + avatars'],
+      ['MVP', 'week season + Canvas'],
+      ['PAID', 'Plus + first token'],
+      ['RETENTION', 'D7 / season recaps'],
+      ['SCALE', 'creators + paid tests'],
+      ['$1M ARR', 'visual engine + annual']
+    ]
+  },
+  {
+    title: 'What We Should Build',
+    type: 'overview',
+    blocks: [
+      ['Product', 'A weekly visual self-guidance app where the user enters birth data/context, receives a forecast, completes daily micro-actions, and sees Life Canvas evolve.'],
+      ['MVP', 'Text-first assistant, weekly season, daily episode, action/reset/reflection, image-first Life Canvas, Plus paywall, one premium video token test.'],
+      ['Pricing', '$9.99-$14.99 monthly, $69-$89 annual, $2.99-$9.99 visual/video tokens, no unlimited generation.'],
+      ['GTM', 'Start with interviews and concierge cohorts, then creator-led proof, then small paid tests around visual week/future-self hooks.'],
+      ['Kill criteria', 'Stop or pivot if users cannot explain Canvas causality, D1 is below 20%, paid intent stays below 5%, or video COGS cannot be controlled.'],
+      ['Next step', 'Create 3-5 visual examples, clickable prototype, 30-user cohort and one pricing/token experiment.']
+    ]
   },
   {
     title: 'Contacts / Next Step',
     type: 'contacts',
     name: 'AURA',
-    cta: 'Next step: generate 3-5 avatar/video examples, assemble clickable prototype, and validate the first weekly season with real users.'
+    cta: 'Next step: generate visual examples, assemble clickable prototype, test first 30 users, and verify whether Life Canvas causality is understood.'
   }
 ];
 
 const sources = [
+  ['AURA Competitor Economics Report', 'Internal sourcebook created 2026-06-03', 'Astrology, mindfulness, AI companion/avatar revenue proxies, ARPMAU, paid conversion, pricing, CAC, marketing benchmarks and AI generation costs.', 'reports/aura-competitor-economics-report.md'],
   ['Calm', 'Sacra', 'Revenue $300M in 2023; $70/year subscription; 4M+ paying subscribers; 2-7% paid conversion commentary.', 'https://sacra.com/c/calm/'],
   ['Headspace', 'Udonis statistics / public app-store proxy', 'Headspace estimated at roughly $39-40M/year app-store revenue and ~1.7M monthly users; directional public estimate.', 'https://www.blog.udonis.co/statistics/headspace'],
   ['Character.AI', 'Sacra / Character.AI pricing page', '$30M annualized revenue in July 2025; $50M projected end-2025; c.ai+ $9.99/month; 20M MAU early 2024.', 'https://sacra.com/c/character-ai/ and https://character.ai/subscribe'],
@@ -561,9 +594,11 @@ function bodyFor(slide, n) {
   if (slide.type === 'roadmap') {
     return `
   title(slide, ctx, '${esc(slide.title)}');
-  ctx.addShape(slide, { geometry: 'arc', left: -35, top: 500, width: 1280, height: 500, line: { style: 'solid', fill: C.purple, width: 5 } });
+  ctx.addShape(slide, { left: 88, top: 360, width: 1000, height: 3, fill: C.purple, line: { style: 'solid', fill: C.purple, width: 0 } });
   ${slide.steps.map((s, i) => `
-  pill(slide, ctx, '${esc(s[0])}\\n${esc(s[1])}', ${40 + i * 175}, ${500 - Math.sin((i + 0.5) / 6 * Math.PI) * 250}, ${i === 5 ? 170 : 145}, ${i === 5 ? 85 : 70}, ${i === 2 || i === 5 ? 'C.greenLight' : i === 3 ? 'C.purple' : 'C.grey'}, C.line, 17);`).join('\n')}
+  pill(slide, ctx, '${esc(s[0])}', ${55 + i * 185}, 320, 130, 58, ${i === 2 || i === 5 ? 'C.greenLight' : i === 3 ? 'C.purple' : 'C.grey'}, C.line, 17);
+  ctx.addText(slide, { text: '${esc(s[1])}', left: ${45 + i * 185}, top: 402, width: 150, height: 54, fontSize: 16, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });`).join('\n')}
+  ctx.addText(slide, { text: 'The roadmap stays narrow until the loop is proven: first causality, then retention, then paid scale.', left: 178, top: 520, width: 820, height: 42, fontSize: 22, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
 `;
   }
 

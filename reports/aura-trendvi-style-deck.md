@@ -6,47 +6,47 @@ Deck mode: create from AURA source material using Trendvi visual reference. This
 
 Type: cover
 
-## 02. Project Overview
+## 02. What AURA Is
 
 Type: overview
 
-## 03. Product Solution
+## 03. The Product Loop
+
+Type: pipeline
+
+## 04. Why This Is Not Just Astrology
 
 Type: solution
 
-## 04. Market Size
+## 05. Market Map
 
 Type: marketSize
 
-## 05. Market Size ($)
+## 06. Competitor Economics: The Read
 
 Type: money
 
-## 06. Customer Segments
+## 07. Astrology Unit Economics
 
-Type: segments
+Type: competitorEconomics
 
-## 07. Why AURA Is Needed by the Market
+## 08. Mindfulness Unit Economics
 
-Type: why
+Type: competitorEconomics
 
-## 08. Competitors
+## 09. AI Companion / Avatar Economics
 
-Type: competitorsMap
+Type: competitorEconomics
 
-## 09. Competitive Analysis
-
-Type: compTable
-
-## 10. Pricing Analysis
+## 10. What People Actually Pay For
 
 Type: pricingTable
 
-## 11. Pricing
+## 11. Pricing Decision
 
-Type: pricingNarrative
+Type: auraMath
 
-## 12. Financial Model
+## 12. Conversion / ARPMAU Assumptions
 
 Type: finance
 
@@ -62,37 +62,37 @@ Type: unitCost
 
 Type: videoStress
 
-## 16. Competitor Revenue Proxies
+## 16. AURA Base Financial Model
+
+Type: finance
+
+## 17. Marketing Benchmarks
 
 Type: competitorEconomics
-
-## 17. AURA Monetization Math
-
-Type: auraMath
 
 ## 18. Go-to-Market Strategy
 
 Type: gtm
 
-## 19. Growth Roadmap (Post-MVP)
+## 19. 30-Day Validation Plan
 
-Type: roadmap
+Type: validation
 
-## 20. Product Background & Evolution
+## 20. Product Scope: MVP vs Later
 
-Type: background
+Type: pricingTable
 
-## 21. AI Avatar & Video Pipeline
-
-Type: pipeline
-
-## 22. Risks
+## 21. Risks
 
 Type: risks
 
-## 23. 30-Day Validation Plan
+## 22. Growth Roadmap
 
-Type: validation
+Type: roadmap
+
+## 23. What We Should Build
+
+Type: overview
 
 ## 24. Contacts / Next Step
 

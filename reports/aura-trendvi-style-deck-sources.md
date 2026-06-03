@@ -2,6 +2,7 @@
 
 | Topic | Source | What is used | URL |
 | --- | --- | --- | --- |
+| AURA Competitor Economics Report | Internal sourcebook created 2026-06-03 | Astrology, mindfulness, AI companion/avatar revenue proxies, ARPMAU, paid conversion, pricing, CAC, marketing benchmarks and AI generation costs. | reports/aura-competitor-economics-report.md |
 | Calm | Sacra | Revenue $300M in 2023; $70/year subscription; 4M+ paying subscribers; 2-7% paid conversion commentary. | https://sacra.com/c/calm/ |
 | Headspace | Udonis statistics / public app-store proxy | Headspace estimated at roughly $39-40M/year app-store revenue and ~1.7M monthly users; directional public estimate. | https://www.blog.udonis.co/statistics/headspace |
 | Character.AI | Sacra / Character.AI pricing page | $30M annualized revenue in July 2025; $50M projected end-2025; c.ai+ $9.99/month; 20M MAU early 2024. | https://sacra.com/c/character-ai/ and https://character.ai/subscribe |
