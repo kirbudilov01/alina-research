@@ -20,6 +20,29 @@ const NODE = '/Users/kirill/.cache/codex-runtimes/codex-primary-runtime/dependen
 const slides = [
   { title: 'AURA', type: 'cover' },
   {
+    title: 'What The Leaders Already Prove',
+    type: 'leaderGrid',
+    leaders: [
+      ['Nebula / Co-Star', 'personal guidance', 'birth data, weekly meaning, compatibility, paid readings', '$718K-$797K/mo iOS estimates'],
+      ['Calm / Headspace', 'daily ritual', 'subscription trust, annual plans, wellness habit', '$300M/yr Calm proxy'],
+      ['Finch / Replika', 'companion loop', 'memory, avatar, gentle return, emotional continuity', '$1.5M-$2.36M/mo estimates'],
+      ['Runway / HeyGen', 'visual AI layer', 'video/avatar as premium output, not cheap daily commodity', 'Runway 8s Gen-4 Turbo ~= $0.40']
+    ],
+    note: 'The market already has the ingredients. AURA is the product format that connects them into one causal weekly experience.'
+  },
+  {
+    title: 'The New Format Is At The Intersection',
+    type: 'intersectionThesis',
+    pieces: [
+      ['Astrology', 'personal meaning'],
+      ['Mindfulness', 'daily ritual'],
+      ['AI Companion', 'memory / assistant'],
+      ['Visual AI', 'Life Canvas / video'],
+      ['AURA', 'weekly visual self-guidance']
+    ],
+    note: 'AURA is not “another horoscope app”. It is a weekly life-series where meaning becomes action and action changes the visual state.'
+  },
+  {
     title: 'What AURA Is',
     type: 'overview',
     blocks: [
@@ -78,23 +101,23 @@ const slides = [
   {
     title: 'Premium Video Is a Magic Moment',
     type: 'premiumMoment',
-    claim: 'Video should feel like the trailer of your week, not like a free daily content slot.',
+    claim: 'Video can be included in the subscription only if the model is cheap and capped: one 8s video per week, not unlimited generation.',
     economics: [
-      ['Veo 8 sec', '~$4 COGS before retries'],
-      ['Runway 8 sec', '~$0.40 COGS proxy'],
-      ['HeyGen 30 sec', '~$1.50-$2.00 COGS'],
-      ['AURA token', '$2.99-$9.99 depending quality']
+      ['Runway 8 sec', '~$0.40 COGS'],
+      ['4 videos/mo', '~$1.60 COGS'],
+      ['30 daily images', '~$0.60-$1.20 COGS'],
+      ['Total media', '~$2.20-$3.80/mo before buffer']
     ],
-    note: 'The business move: keep subscription image-first, sell rare video as premium forecast / future-self / season trailer.'
+    note: 'The business move: sell a visual subscription package, but cap it tightly and track every generated asset.'
   },
   {
     title: 'Paywall Architecture',
     type: 'paywallArchitecture',
     tiers: [
-      ['Free', '$0', 'first forecast\nDay 1 loop\none Life Canvas', 'activation'],
-      ['Plus', '$9.99-$14.99/mo', 'daily episodes\nmemory\nweekly recap\nlimited images', 'retention'],
-      ['Annual', '$69-$89/yr', 'same loop\nseason framing\nlower churn', 'cashflow'],
-      ['Tokens', '$2.99-$9.99', 'future-self video\nCanvas trailer\nspecial episode', 'ARPMAU uplift']
+      ['Free', '$0', 'first forecast\n3-7 daily cards\nlimited images\nno weekly video', 'activation'],
+      ['Plus', '$14.99/mo', 'daily cards\n30 images/mo\n4 weekly videos\nmemory + recap', 'core revenue'],
+      ['Annual', '$89/yr', 'same package\nlower churn\nupfront cash', 'cashflow'],
+      ['Creator add-on', 'later', 'Alina seasons\nspecial prompts\npremium packs', 'upside']
     ],
     note: 'Paywall appears after the first completed loop, not before the user understands the product.'
   },
@@ -242,10 +265,38 @@ const slides = [
       ['Paid conversion', '1.4-2.5% subscription astrology; 3.5% Balance; 4.5% AstroTime', '2.5-3.0%', 'base case assumes value is proven before paywall'],
       ['ARPMAU', '$0.19-$0.37 subscription astrology; $0.57-$0.65 wellness; $1.82+ urgent guidance', '$0.35-$0.50', 'AURA needs to outperform generic astrology through visual/token uplift'],
       ['Monthly price', '$8.99-$14.99 common paid band; $19.99+ premium teacher apps', '$9.99-$14.99', 'sits inside proven consumer subscription range'],
-      ['Video COGS', 'Runway ~$0.40 / 8s; Veo ~$4 / 8s; HeyGen ~$1.50-$2 / 30s', 'no free daily video', 'video destroys margin unless tokenized'],
+      ['Video COGS', 'Runway ~$0.40 / 8s; Veo ~$4 / 8s; HeyGen ~$1.50-$2 / 30s', '4 Runway clips / paid month; no free video', 'weekly video can sit in Plus only if model, retries and count are capped'],
       ['CAC payer', '$50-$150 organic/social; $150-$500+ paid web2app', '$100-$250 base', 'paid acquisition only after retention and paywall data']
     ],
     note: 'This is the missing bridge: competitor data is not the model; it is the guardrail for the model.'
+  },
+  {
+    title: 'Generation Subscription Package',
+    type: 'generationPackage',
+    rows: [
+      ['Asset', 'Frequency / month', 'Model option', 'Unit COGS', 'Monthly COGS'],
+      ['Daily card text', '30', 'LLM mini / structured prompt', '$0.003-$0.008', '$0.10-$0.25'],
+      ['Daily image / Life Canvas frame', '30', 'Runway gen4_image_turbo or low-cost image model', '$0.02-$0.04', '$0.60-$1.20'],
+      ['Weekly 8s video', '4', 'Runway Gen-4 Turbo, 5 credits/sec', '~$0.40', '~$1.60'],
+      ['Retry / failed generation buffer', '20-30%', 'media retry reserve', 'n/a', '$0.50-$1.10'],
+      ['Storage / infra / analytics', 'month', 'S3 + backend + events', 'n/a', '$0.20-$0.50'],
+      ['Total paid user COGS', 'Plus package', 'subscription generation bundle', 'n/a', '~$2.40-$4.05/mo']
+    ],
+    note: 'This is the recommended subscription bundle: 30 daily visual cards + 4 weekly videos, tightly capped.'
+  },
+  {
+    title: 'Free User Cost & Conversion Break-Even',
+    type: 'freeUserModel',
+    rows: [
+      ['Free scenario', 'Included usage', 'Free COGS / activated user', 'What must happen'],
+      ['Light free trial', 'first forecast + 3 cards + 1 image', '$0.08-$0.18', 'safe for broad acquisition tests'],
+      ['7-day free loop', '7 daily cards + 7 images + no video', '$0.25-$0.55', 'only works if D1/D7 and paywall intent are visible'],
+      ['Free video trial', '1 free 8s Runway video', '+$0.40-$0.60', 'risky unless it dramatically improves conversion'],
+      ['Plus contribution', '$14.99 price, 15% fee, $2.40-$4.05 COGS', '$8.70-$10.35 / month', 'base subscription margin per payer'],
+      ['Break-even CAC activated', '3% conversion, 3-month payer life', '~$0.53-$0.75', 'paid ads cannot scale yet without better LTV'],
+      ['Strong CAC activated', '5% conversion, 4-month payer life', '~$1.55-$2.05', 'possible only with strong retention and visual proof']
+    ],
+    note: 'Free users are not free. AURA should test paid acquisition only after free COGS and paywall conversion are measured.'
   },
   {
     title: 'Generation Cost Benchmarks',
@@ -269,27 +320,27 @@ const slides = [
       ['User type', 'Usage assumption', 'Variable AI cost', 'Business meaning'],
       ['Free active user', '8 text loops + 1 medium image + no video', '$0.10-$0.20 / MAU', 'safe if onboarding is capped and no free video exists'],
       ['Engaged free user', '20 text loops + 2 images + no video', '$0.25-$0.45 / MAU', 'acceptable only if retention and conversion are visible'],
-      ['Plus subscriber', '25 text loops + 4 images + recaps + support', '$0.70-$1.40 / payer', '$9.99-$14.99 subscription can hold strong margin'],
-      ['Plus + 1 Veo clip', '+ one 8 sec Veo 2 clip', '+$4.00 before retries', 'margin collapses unless clip is paid separately'],
-      ['Plus + 4 Veo clips', '+ weekly 8 sec Veo clip', '+$16.00 before retries', 'negative economics on consumer subscription'],
-      ['Token video', 'one paid 8 sec video moment', 'Runway ~$0.40 / Replicate ~$1.92 / Veo ~$4.00', 'price token by model quality']
+      ['Plus with Runway video', '30 cards + 30 images + 4 weekly 8s videos', '$2.40-$4.05 / payer', '$14.99 subscription can hold margin if retries are capped'],
+      ['Plus with Veo video', '+ four weekly 8s Veo clips', '+$16.00 before retries', 'too expensive for base subscription'],
+      ['Premium avatar token', 'HeyGen / talking-avatar moment', '$1.50-$2.00 per 30 sec', 'sell as separate pack or milestone'],
+      ['High-quality video token', 'Replicate / Veo / premium model', '$1.92-$4.00 per 8 sec', 'price token by model quality']
     ],
     formula: 'COGS = LLM tokens + images + video seconds × provider price + storage + support + failed-generation buffer.',
-    conclusion: 'The daily product can be cheap. The wow video must be paid, capped and measurable.'
+    conclusion: 'The daily product can be cheap. Weekly video is viable only as a capped paid subscription benefit or token.'
   },
   {
     title: 'Video Cost Stress Test',
     type: 'videoStress',
     rows: [
       ['Scenario', '100 users', '1,000 users', '10,000 users', 'Conclusion'],
-      ['1 free 8s Veo clip / month', '$400', '$4,000', '$40,000', 'too expensive before strong paid conversion'],
-      ['4 free 8s Veo clips / month', '$1,600', '$16,000', '$160,000', 'kills consumer subscription margin'],
-      ['1 paid 8s Runway clip', '$40 COGS', '$400 COGS', '$4,000 COGS', 'can work as low-price token'],
-      ['1 paid 8s Replicate/Wan clip', '$192 COGS', '$1,920 COGS', '$19,200 COGS', 'needs $4.99-$9.99 token or bundle'],
+      ['4 weekly Runway clips / payer', '$160', '$1,600', '$16,000', 'viable inside $14.99 Plus if paid cohort is real'],
+      ['4 weekly Veo clips / payer', '$1,600', '$16,000', '$160,000', 'not viable as base subscription bundle'],
+      ['1 free Runway trial clip', '$40 COGS', '$400 COGS', '$4,000 COGS', 'only if it sharply lifts paid conversion'],
+      ['1 premium Replicate/Wan clip', '$192 COGS', '$1,920 COGS', '$19,200 COGS', 'needs $4.99-$9.99 token or bundle'],
       ['1 paid 30s HeyGen avatar', '$150-$200 COGS', '$1,500-$2,000', '$15,000-$20,000', 'works for premium forecast / assistant moment'],
-      ['Image-first Life Canvas', '$4-$17 COGS', '$40-$170', '$400-$1,700', 'safe default visual layer']
+      ['30 daily Life Canvas images', '$60-$120 COGS', '$600-$1,200', '$6,000-$12,000', 'safe only for paid users, capped retries']
     ],
-    note: 'This is the missing math: video is not “a feature”; it is a pricing boundary.'
+    note: 'This is the decision: Runway can be the weekly subscription video; Veo/avatars stay premium or later.'
   },
   {
     title: 'AURA Base Financial Model',
@@ -298,12 +349,12 @@ const slides = [
       ['Scenario', '10k MAU', '50k MAU', '150k MAU'],
       ['Paid conversion', '1.5%', '3.0%', '4.5%'],
       ['Payers', '150', '1,500', '6,750'],
-      ['Gross subscription @ $11.99', '$1.8K/mo', '$18.0K/mo', '$80.9K/mo'],
-      ['Net after 15% fee', '$1.5K/mo', '$15.3K/mo', '$68.8K/mo'],
-      ['AI/image COGS', '$1.0K-$2.5K', '$5.0K-$12.5K', '$15K-$37.5K'],
-      ['Verdict', 'thin unless COGS capped', 'works if no free video', 'strong if retention + tokens work']
+      ['Gross subscription @ $14.99', '$2.2K/mo', '$22.5K/mo', '$101.2K/mo'],
+      ['Net after 15% fee', '$1.9K/mo', '$19.1K/mo', '$86.0K/mo'],
+      ['Paid-user generation COGS', '$0.4K-$0.6K', '$3.6K-$6.1K', '$16.2K-$27.3K'],
+      ['Verdict', 'thin until retention is proven', 'works if free COGS is capped', 'strong if annual + token upsell work']
     ],
-    note: 'Subscription alone is not enough if free COGS is loose. Tokens and annual plans protect margin.'
+    note: 'Base model assumes Plus users receive 30 daily visuals and 4 Runway 8s videos per month.'
   },
   {
     title: 'Marketing Benchmarks',
@@ -317,6 +368,20 @@ const slides = [
       ['CHANI / Waking Up', 'trusted founder/teacher voice', 'requires real authority', 'use Alina/creator expertise without guru tone']
     ],
     note: 'Sources: Web2App World, Axios/TIME, Moneycontrol/ET-style reporting and qualitative product observations.'
+  },
+  {
+    title: 'AURA Marketing Funnel Model',
+    type: 'marketingModel',
+    rows: [
+      ['Stage', 'Conservative', 'Base', 'Strong', 'Decision'],
+      ['Visitor -> signup', '8%', '15%', '25%', 'landing must be tested before ad scale'],
+      ['Signup -> activated', '35%', '50%', '65%', 'activation = first completed loop'],
+      ['Activated -> paid', '1.5%', '3.0%', '5.0%', 'paywall after value moment'],
+      ['CAC activated target', '<$0.50', '<$1.00', '<$2.00', 'based on COGS + contribution margin'],
+      ['First test budget', '$500', '$1,500-$3,000', '$5,000', 'small tests before scaling'],
+      ['First 1,000 users', 'warm/interviews', 'creator + organic', 'creator + paid test', 'Alina marketing layer can sit above this']
+    ],
+    note: 'Marketing cannot be modeled separately from free COGS. If free usage is generous, CAC must be extremely low.'
   },
   {
     title: 'Go-to-Market Strategy',
@@ -388,6 +453,20 @@ const slides = [
     ]
   },
   {
+    title: 'Development Offer: Phase 1',
+    type: 'offerSlide',
+    rows: [
+      ['Item', 'Included in €5,000 Phase 1', 'Not included yet'],
+      ['Prototype', 'clickable Figma / screen logic / product flow', 'full native mobile app'],
+      ['Generation pipeline', 'manual or semi-automated Runway/image workflow for 30-user test', 'scaled backend with unlimited generation'],
+      ['Content logic', 'weekly forecast prompts, daily card structure, Life Canvas explanation', 'large content marketplace'],
+      ['Landing / test', 'simple landing, price test, lead capture, analytics events', 'large paid acquisition campaign'],
+      ['Validation pack', '30-user cohort plan, metrics, interview script, results template', 'guaranteed revenue or scale'],
+      ['Alina side', 'marketing/creator distribution and expert content layer', 'handled outside development budget']
+    ],
+    note: 'Offer logic: do not sell a huge build yet. Sell a tight proof sprint that verifies product loop, generation cost and paid intent.'
+  },
+  {
     title: 'Contacts / Next Step',
     type: 'contacts',
     name: 'AURA',
@@ -408,12 +487,12 @@ const sources = [
   ['Nebula', 'Rev.now iOS/Android estimates', '$718k/month App Store estimate; $125.9k/month Play Store estimate; iOS estimate includes 52K paying users; IAP tiers include $7.99 weekly, $9.99 monthly, $24.99 monthly / $29.99 three-month signals.', 'https://rev.now/app/ios/nebula-spiritual-guidance-69523/ and https://rev.now/app/android/nebula-spiritual-guidance-4a0ag/'],
   ['CHANI', 'Rev.now / Appark / Statista snippets', 'CHANI appears as top-grossing astrology/wellness app in public rankings; estimates range around $674K-$832K/month.', 'https://rev.now/best/astrology-apps/ and https://appark.ai/en/blog/market-insights-best-astrology-app-2026-growth-analysis and https://www.statista.com/statistics/1451664/top-horoscope-apps-us-market-revenue/'],
   ['The Pattern', 'Adapty paywall library', 'Last-month estimates around 90K downloads and $400K revenue; paywall reference.', 'https://adapty.io/paywall-library/the-pattern/'],
-  ['OpenAI pricing', 'OpenAI official pricing', 'GPT-4.1 mini token pricing and GPT Image approximate per-image prices used for AI cost model.', 'https://openai.com/api/pricing/'],
-  ['Veo pricing', 'Google Vertex AI pricing / public reporting', 'Veo 2 pricing around $0.50/second for generated video.', 'https://cloud.google.com/vertex-ai/generative-ai/pricing and https://www.gadgets360.com/ai/news/google-veo-2-video-generation-ai-model-pricing-vertex-ai-platform-7783807/amp'],
-  ['Runway API pricing', 'Runway developer docs', 'API billing example: credits purchased at $0.01/credit; 5s video example around $0.25.', 'https://docs.dev.runwayml.com/usage/billing/'],
+  ['OpenAI pricing', 'OpenAI official pricing', 'GPT Image pricing is token-based; pricing calculator and token rates used as source for image-cost assumptions.', 'https://openai.com/api/pricing/'],
+  ['Veo pricing', 'Google Vertex AI pricing / public reporting', 'Veo-class video remains materially more expensive than Runway Gen-4 Turbo and is treated as premium/high-cost option.', 'https://cloud.google.com/vertex-ai/generative-ai/pricing and https://www.gadgets360.com/ai/news/google-veo-2-video-generation-ai-model-pricing-vertex-ai-platform-7783807/amp'],
+  ['Runway API pricing', 'Runway developer docs', 'Credits cost $0.01; Gen-4 Turbo is 5 credits/sec; an 8s clip is about 40 credits / $0.40; gen4_image_turbo is 2 credits per image.', 'https://docs.dev.runwayml.com/guides/pricing/'],
   ['Replicate Wan 2.1 pricing', 'Replicate model page', 'Wan 2.1 720p price around $0.24 per output second.', 'https://replicate.com/wavespeedai/wan-2.1-t2v-720p/api'],
   ['Luma pricing', 'APIs.io / Luma pricing profile', 'Ray-2 public API pricing proxy around $0.08/second; official Luma page uses credits/plans and should be rechecked before build.', 'https://plans.apis.io/plans/luma-ai/luma-ai-plans-pricing/ and https://lumalabs.ai/pricing'],
-  ['HeyGen API pricing', 'HeyGen official developer docs', 'Avatar IV/V API pricing: photo avatar $0.05/sec; digital twin and studio avatar $0.0667/sec; photo avatar creation $1/call.', 'https://developers.heygen.com/docs/pricing'],
+  ['HeyGen API pricing', 'HeyGen help/API docs', 'API pay-as-you-go: standard avatar video around $1/min, Avatar IV $3-$4/min depending avatar type and resolution.', 'https://help.heygen.com/en/articles/10060327-heygen-api-pricing-explained'],
   ['D-ID API pricing', 'D-ID official pricing page', 'Build plan at $14.4/month annual with up to 16 min offline video; trial includes 3 min video.', 'https://www.d-id.com/pricing/api?from=studio_settings'],
 ];
 
@@ -456,15 +535,16 @@ export function bg(slide, ctx) {
   ctx.addShape(slide, { left: 0, top: 0, width: ctx.W, height: ctx.H, fill: C.white, line: { style: 'solid', fill: C.white, width: 0 } });
 }
 
-export function mark(slide, ctx, x = 52, y = 42, size = 86) {
+export function mark(slide, ctx, x = 48, y = 30, size = 58) {
   ctx.addShape(slide, { left: x, top: y, width: size, height: size, fill: C.purpleLight, line: { style: 'solid', fill: C.purpleLight, width: 0 } });
-  ctx.addShape(slide, { left: x + 26, top: y + 16, width: size - 52, height: size - 32, fill: C.purple, line: { style: 'solid', fill: C.purple, width: 0 } });
-  ctx.addText(slide, { text: 'A', left: x + 29, top: y + 27, width: size - 58, height: size - 52, fontSize: 34, bold: true, fontFace: 'Montserrat', color: C.white, align: 'center' });
+  ctx.addShape(slide, { left: x + 17, top: y + 10, width: size - 34, height: size - 20, fill: C.purple, line: { style: 'solid', fill: C.purple, width: 0 } });
+  ctx.addText(slide, { text: 'A', left: x + 19, top: y + 17, width: size - 38, height: size - 34, fontSize: 25, bold: true, fontFace: 'Montserrat', color: C.white, align: 'center' });
 }
 
 export function title(slide, ctx, text) {
   mark(slide, ctx);
-  ctx.addText(slide, { text, left: 196, top: 78, width: 900, height: 54, fontSize: 38, bold: true, fontFace: 'Montserrat', color: C.purple });
+  ctx.addText(slide, { text, left: 128, top: 43, width: 960, height: 42, fontSize: 34, bold: true, fontFace: 'Montserrat', color: C.purple, fit: 'shrink' });
+  ctx.addShape(slide, { left: 50, top: 106, width: 1080, height: 1.5, fill: C.purpleLight, line: { style: 'solid', fill: C.purpleLight, width: 0 } });
 }
 
 export function footer(slide, ctx, n) {
@@ -526,6 +606,40 @@ function bodyFor(slide, n) {
     return `
   title(slide, ctx, '${esc(slide.title)}');
   ${slide.blocks.map((b, i) => `para(slide, ctx, '${esc(b[0])}', '${esc(b[1])}', 52, ${182 + i * 71}, 1068, 58);`).join('\n  ')}
+`;
+  }
+
+  if (slide.type === 'leaderGrid') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ${slide.leaders.map((l, i) => {
+    const x = 70 + (i % 2) * 545;
+    const y = 150 + Math.floor(i / 2) * 205;
+    return `
+  ctx.addShape(slide, { left: ${x}, top: ${y}, width: 485, height: 165, fill: ${i === 3 ? 'C.greenLight' : 'C.purpleLight'}, line: { style: 'solid', fill: C.line, width: 1.1 } });
+  ctx.addText(slide, { text: '${esc(l[0])}', left: ${x + 22}, top: ${y + 18}, width: 220, height: 28, fontSize: 23, bold: true, fontFace: 'Arial', color: C.ink, fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(l[1])}', left: ${x + 265}, top: ${y + 20}, width: 190, height: 24, fontSize: 17, bold: true, fontFace: 'Arial', color: C.purpleDark, align: 'right', fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(l[2])}', left: ${x + 24}, top: ${y + 66}, width: 440, height: 42, fontSize: 16, fontFace: 'Arial', color: C.ink, fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(l[3])}', left: ${x + 24}, top: ${y + 120}, width: 440, height: 24, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, fit: 'shrink' });`;
+  }).join('\n')}
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 150, top: 610, width: 850, height: 34, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+`;
+  }
+
+  if (slide.type === 'intersectionThesis') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ${slide.pieces.slice(0, 4).map((p, i) => {
+    const x = i < 2 ? 105 + i * 290 : 105 + (i - 2) * 290;
+    const y = i < 2 ? 185 : 405;
+    return `
+  pill(slide, ctx, '${esc(p[0])}', ${x}, ${y}, 220, 78, ${i === 3 ? 'C.greenLight' : 'C.purpleLight'}, C.line, 19);
+  ctx.addText(slide, { text: '${esc(p[1])}', left: ${x}, top: ${y + 92}, width: 220, height: 28, fontSize: 16, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });`;
+  }).join('\n')}
+  ctx.addShape(slide, { left: 720, top: 205, width: 300, height: 250, fill: C.purple, line: { style: 'solid', fill: C.line, width: 1.2 } });
+  ctx.addText(slide, { text: '${esc(slide.pieces[4][0])}', left: 740, top: 252, width: 260, height: 52, fontSize: 46, bold: true, fontFace: 'Montserrat', color: C.white, align: 'center' });
+  ctx.addText(slide, { text: '${esc(slide.pieces[4][1])}', left: 758, top: 330, width: 224, height: 46, fontSize: 23, bold: true, fontFace: 'Arial', color: C.white, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 145, top: 590, width: 880, height: 42, fontSize: 21, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
 `;
   }
 
@@ -680,6 +794,48 @@ function bodyFor(slide, n) {
   title(slide, ctx, '${esc(slide.title)}');
   ${table(slide.rows, widths, 54, 148, slide.type === 'proofMatrix' ? 74 : 68)}
   ctx.addText(slide, { text: '${esc(slide.conclusion || slide.note)}', left: 90, top: 620, width: 1000, height: 30, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+`;
+  }
+
+  if (slide.type === 'generationPackage') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ctx.addShape(slide, { left: 70, top: 135, width: 265, height: 455, fill: C.purpleLight, line: { style: 'solid', fill: C.line, width: 1.1 } });
+  ctx.addText(slide, { text: 'PLUS PACKAGE', left: 95, top: 164, width: 215, height: 30, fontSize: 25, bold: true, fontFace: 'Montserrat', color: C.purpleDark, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: '30 daily cards\\n30 images\\n4 weekly 8s videos\\nmemory + recap', left: 105, top: 235, width: 195, height: 145, fontSize: 22, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: '~$2.40-$4.05', left: 88, top: 430, width: 230, height: 42, fontSize: 33, bold: true, fontFace: 'Montserrat', color: C.purpleDark, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: 'COGS / paid user / month', left: 100, top: 482, width: 205, height: 28, fontSize: 17, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ${table(slide.rows, [155, 145, 250, 118, 130], 365, 145, 54)}
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 155, top: 628, width: 860, height: 28, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+`;
+  }
+
+  if (slide.type === 'freeUserModel') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ${table(slide.rows, [210, 300, 230, 330], 54, 138, 62)}
+  ctx.addShape(slide, { left: 90, top: 610, width: 980, height: 42, fill: C.greenLight, line: { style: 'solid', fill: C.line, width: 1 } });
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 110, top: 620, width: 940, height: 22, fontSize: 17, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+`;
+  }
+
+  if (slide.type === 'marketingModel') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ${table(slide.rows, [190, 190, 190, 190, 310], 54, 145, 58)}
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 150, top: 620, width: 850, height: 30, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+`;
+  }
+
+  if (slide.type === 'offerSlide') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ctx.addShape(slide, { left: 70, top: 142, width: 245, height: 420, fill: C.greenLight, line: { style: 'solid', fill: C.line, width: 1.1 } });
+  ctx.addText(slide, { text: '€5,000', left: 95, top: 210, width: 195, height: 55, fontSize: 48, bold: true, fontFace: 'Montserrat', color: C.purpleDark, align: 'center' });
+  ctx.addText(slide, { text: 'Phase 1\\nproof sprint', left: 105, top: 300, width: 175, height: 70, fontSize: 28, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: 'not a full-scale app build', left: 95, top: 442, width: 190, height: 26, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ${table(slide.rows, [150, 390, 300], 345, 145, 56)}
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 140, top: 620, width: 900, height: 30, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
 `;
   }
 

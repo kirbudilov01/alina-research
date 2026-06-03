@@ -6,126 +6,150 @@ Deck mode: create from AURA source material using Trendvi visual reference. This
 
 Type: cover
 
-## 02. What AURA Is
+## 02. What The Leaders Already Prove
+
+Type: leaderGrid
+
+## 03. The New Format Is At The Intersection
+
+Type: intersectionThesis
+
+## 04. What AURA Is
 
 Type: overview
 
-## 03. The Product Loop
+## 05. The Product Loop
 
 Type: pipeline
 
-## 04. User Journey: First 30 Days
+## 06. User Journey: First 30 Days
 
 Type: dayJourney
 
-## 05. Core Screens
+## 07. Core Screens
 
 Type: appScreens
 
-## 06. Life Canvas Must Explain Causality
+## 08. Life Canvas Must Explain Causality
 
 Type: lifeCanvasDemo
 
-## 07. Premium Video Is a Magic Moment
+## 09. Premium Video Is a Magic Moment
 
 Type: premiumMoment
 
-## 08. Paywall Architecture
+## 10. Paywall Architecture
 
 Type: paywallArchitecture
 
-## 09. Why This Is Not Just Astrology
+## 11. Why This Is Not Just Astrology
 
 Type: solution
 
-## 10. Market Map
+## 12. Market Map
 
 Type: marketSize
 
-## 11. How The Numbers Work
+## 13. How The Numbers Work
 
 Type: numberLogic
 
-## 12. The Four Numbers That Matter
+## 14. The Four Numbers That Matter
 
 Type: bigNumbers
 
-## 13. Competitor Economics: The Read
+## 15. Competitor Economics: The Read
 
 Type: proofMatrix
 
-## 14. Astrology Unit Economics
+## 16. Astrology Unit Economics
 
 Type: competitorEconomics
 
-## 15. Mindfulness Unit Economics
+## 17. Mindfulness Unit Economics
 
 Type: competitorEconomics
 
-## 16. AI Companion / Avatar Economics
+## 18. AI Companion / Avatar Economics
 
 Type: competitorEconomics
 
-## 17. What People Actually Pay For
+## 19. What People Actually Pay For
 
 Type: pricingTable
 
-## 18. Pricing Decision
+## 20. Pricing Decision
 
 Type: auraMath
 
-## 19. Conversion / ARPMAU Assumptions
+## 21. Conversion / ARPMAU Assumptions
 
 Type: finance
 
-## 20. From Benchmarks To AURA Model
+## 22. From Benchmarks To AURA Model
 
 Type: assumptionBridge
 
-## 21. Generation Cost Benchmarks
+## 23. Generation Subscription Package
+
+Type: generationPackage
+
+## 24. Free User Cost & Conversion Break-Even
+
+Type: freeUserModel
+
+## 25. Generation Cost Benchmarks
 
 Type: costBenchmarks
 
-## 22. Cost Per User / Month
+## 26. Cost Per User / Month
 
 Type: unitCost
 
-## 23. Video Cost Stress Test
+## 27. Video Cost Stress Test
 
 Type: videoStress
 
-## 24. AURA Base Financial Model
+## 28. AURA Base Financial Model
 
 Type: finance
 
-## 25. Marketing Benchmarks
+## 29. Marketing Benchmarks
 
 Type: competitorEconomics
 
-## 26. Go-to-Market Strategy
+## 30. AURA Marketing Funnel Model
+
+Type: marketingModel
+
+## 31. Go-to-Market Strategy
 
 Type: gtm
 
-## 27. 30-Day Validation Plan
+## 32. 30-Day Validation Plan
 
 Type: validation
 
-## 28. Product Scope: MVP vs Later
+## 33. Product Scope: MVP vs Later
 
 Type: pricingTable
 
-## 29. Risks
+## 34. Risks
 
 Type: risks
 
-## 30. Growth Roadmap
+## 35. Growth Roadmap
 
 Type: roadmap
 
-## 31. What We Should Build
+## 36. What We Should Build
 
 Type: overview
 
-## 32. Contacts / Next Step
+## 37. Development Offer: Phase 1
+
+Type: offerSlide
+
+## 38. Contacts / Next Step
 
 Type: contacts
