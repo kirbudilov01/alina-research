@@ -44,6 +44,61 @@ const slides = [
     note: 'The loop is the product: Episode → Action → Reset → Reflection → Life Canvas → Tomorrow Hook.'
   },
   {
+    title: 'User Journey: First 30 Days',
+    type: 'dayJourney',
+    stages: [
+      ['Day 0', 'Search moment', 'The user wants meaning for the week, a softer reset, or a visual future-self prompt.'],
+      ['Day 1', 'First loop', 'Birth data + context → first forecast → one action → first Life Canvas shift.'],
+      ['Day 7', 'First season', 'The user sees a weekly arc, remembers actions, and receives a recap/visual artifact.'],
+      ['Day 30', 'Personal system', 'AURA becomes a ritual: assistant memory, seasons, premium visual moments, annual path.']
+    ],
+    note: 'AURA only works if the user understands the sequence: input → meaning → action → visible change → return tomorrow.'
+  },
+  {
+    title: 'Core Screens',
+    type: 'appScreens',
+    screens: [
+      ['01', 'Birth data', 'date / time / place\ncurrent question'],
+      ['02', 'Week forecast', 'season theme\n3 tensions\nfirst promise'],
+      ['03', 'Daily episode', 'today focus\nassistant message\naction card'],
+      ['04', 'Reset', '2-min practice\nreflection\ncompletion'],
+      ['05', 'Life Canvas', 'before / after\nwhat changed\nwhy it changed'],
+      ['06', 'Paywall', 'continue season\nPlus / annual\ntoken video']
+    ],
+    note: 'These are not final UI designs. They define what the designer must make visible on screen.'
+  },
+  {
+    title: 'Life Canvas Must Explain Causality',
+    type: 'lifeCanvasDemo',
+    leftLabel: 'Before action',
+    rightLabel: 'After action',
+    cause: 'Because the user completed the reset and reflection, the Canvas changes from “fog / pressure” to “clear route / grounded self”.',
+    rule: 'If the user says “AI just drew another picture”, the product fails. If the user says “the picture changed because I acted”, AURA is alive.'
+  },
+  {
+    title: 'Premium Video Is a Magic Moment',
+    type: 'premiumMoment',
+    claim: 'Video should feel like the trailer of your week, not like a free daily content slot.',
+    economics: [
+      ['Veo 8 sec', '~$4 COGS before retries'],
+      ['Runway 8 sec', '~$0.40 COGS proxy'],
+      ['HeyGen 30 sec', '~$1.50-$2.00 COGS'],
+      ['AURA token', '$2.99-$9.99 depending quality']
+    ],
+    note: 'The business move: keep subscription image-first, sell rare video as premium forecast / future-self / season trailer.'
+  },
+  {
+    title: 'Paywall Architecture',
+    type: 'paywallArchitecture',
+    tiers: [
+      ['Free', '$0', 'first forecast\nDay 1 loop\none Life Canvas', 'activation'],
+      ['Plus', '$9.99-$14.99/mo', 'daily episodes\nmemory\nweekly recap\nlimited images', 'retention'],
+      ['Annual', '$69-$89/yr', 'same loop\nseason framing\nlower churn', 'cashflow'],
+      ['Tokens', '$2.99-$9.99', 'future-self video\nCanvas trailer\nspecial episode', 'ARPMAU uplift']
+    ],
+    note: 'Paywall appears after the first completed loop, not before the user understands the product.'
+  },
+  {
     title: 'Why This Is Not Just Astrology',
     type: 'solution',
     leftTitle: 'What existing apps give',
@@ -327,7 +382,7 @@ const sources = [
 ];
 
 function esc(s) {
-  return String(s).replace(/`/g, '\\`').replace(/\$/g, '\\$');
+  return String(s).replace(/`/g, '\\`').replace(/\$/g, '\\$').replace(/\n/g, '\\n');
 }
 
 function writePlan() {
@@ -446,6 +501,92 @@ function bodyFor(slide, n) {
   ctx.addText(slide, { text: '${esc(slide.rightTitle)}', left: 670, top: 180, width: 430, height: 34, fontSize: 24, bold: true, fontFace: 'Arial', color: C.ink });
   ${slide.right.map((t, i) => `bullet(slide, ctx, '${esc(t)}', 670, ${240 + i * 48}, 450, 17);`).join('\n  ')}
   ctx.addShape(slide, { left: 575, top: 175, width: 2, height: 360, fill: C.purple, line: { style: 'solid', fill: C.purple, width: 0 } });
+`;
+  }
+
+  if (slide.type === 'dayJourney') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ctx.addShape(slide, { left: 92, top: 330, width: 960, height: 3, fill: C.purple, line: { style: 'solid', fill: C.purple, width: 0 } });
+  ${slide.stages.map((s, i) => `
+  ctx.addShape(slide, { geometry: 'ellipse', left: ${84 + i * 300}, top: 280, width: 112, height: 112, fill: ${i === 1 ? 'C.purple' : i === 3 ? 'C.greenLight' : 'C.purpleLight'}, line: { style: 'solid', fill: C.line, width: 1.2 } });
+  ctx.addText(slide, { text: '${esc(s[0])}', left: ${96 + i * 300}, top: 318, width: 88, height: 25, fontSize: 20, bold: true, fontFace: 'Arial', color: ${i === 1 ? 'C.white' : 'C.ink'}, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(s[1])}', left: ${40 + i * 300}, top: 430, width: 200, height: 26, fontSize: 21, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(s[2])}', left: ${35 + i * 300}, top: 468, width: 210, height: 85, fontSize: 16, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });`).join('\n')}
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 142, top: 600, width: 860, height: 34, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+`;
+  }
+
+  if (slide.type === 'appScreens') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ${slide.screens.map((s, i) => {
+    const x = 58 + (i % 6) * 185;
+    const y = 165;
+    return `
+  ctx.addShape(slide, { left: ${x}, top: ${y}, width: 138, height: 330, fill: C.white, line: { style: 'solid', fill: C.line, width: 1.3 } });
+  ctx.addShape(slide, { left: ${x + 11}, top: ${y + 14}, width: 116, height: 45, fill: C.purpleLight, line: { style: 'solid', fill: C.purpleLight, width: 0 } });
+  ctx.addText(slide, { text: '${esc(s[0])}', left: ${x + 20}, top: ${y + 24}, width: 34, height: 20, fontSize: 16, bold: true, fontFace: 'Arial', color: C.purpleDark, align: 'center' });
+  ctx.addText(slide, { text: '${esc(s[1])}', left: ${x + 48}, top: ${y + 23}, width: 72, height: 22, fontSize: 12, bold: true, fontFace: 'Arial', color: C.ink, fit: 'shrink' });
+  ctx.addShape(slide, { geometry: 'ellipse', left: ${x + 43}, top: ${y + 86}, width: 52, height: 52, fill: ${i === 4 ? 'C.greenLight' : 'C.purpleLight'}, line: { style: 'solid', fill: C.line, width: 0.8 } });
+  ctx.addText(slide, { text: '${esc(s[2])}', left: ${x + 16}, top: ${y + 166}, width: 106, height: 82, fontSize: 12, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addShape(slide, { left: ${x + 24}, top: ${y + 274}, width: 90, height: 24, fill: ${i === 5 ? 'C.greenLight' : 'C.purpleLight'}, line: { style: 'solid', fill: C.line, width: 0.6 } });
+  ctx.addText(slide, { text: '${i === 5 ? 'choose plan' : 'continue'}', left: ${x + 28}, top: ${y + 279}, width: 82, height: 12, fontSize: 10, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });`;
+  }).join('\n')}
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 174, top: 570, width: 820, height: 34, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+`;
+  }
+
+  if (slide.type === 'lifeCanvasDemo') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ctx.addText(slide, { text: '${esc(slide.leftLabel)}', left: 160, top: 166, width: 260, height: 30, fontSize: 23, bold: true, fontFace: 'Arial', color: C.ink, align: 'center' });
+  ctx.addText(slide, { text: '${esc(slide.rightLabel)}', left: 650, top: 166, width: 260, height: 30, fontSize: 23, bold: true, fontFace: 'Arial', color: C.ink, align: 'center' });
+  ctx.addShape(slide, { left: 112, top: 210, width: 360, height: 250, fill: C.purpleLight, line: { style: 'solid', fill: C.line, width: 1.2 } });
+  ctx.addShape(slide, { geometry: 'ellipse', left: 165, top: 260, width: 120, height: 120, fill: '#D8D5E6', line: { style: 'solid', fill: '#D8D5E6', width: 0 } });
+  ctx.addShape(slide, { geometry: 'ellipse', left: 262, top: 235, width: 145, height: 145, fill: '#C4B7F5', line: { style: 'solid', fill: '#C4B7F5', width: 0 } });
+  ctx.addText(slide, { text: 'fog / pressure\\nunclear week', left: 158, top: 405, width: 270, height: 42, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addShape(slide, { left: 605, top: 210, width: 360, height: 250, fill: '#F4FFF0', line: { style: 'solid', fill: C.line, width: 1.2 } });
+  ctx.addShape(slide, { geometry: 'ellipse', left: 668, top: 258, width: 120, height: 120, fill: C.greenLight, line: { style: 'solid', fill: C.greenLight, width: 0 } });
+  ctx.addShape(slide, { left: 780, top: 268, width: 125, height: 28, fill: C.purple, line: { style: 'solid', fill: C.purple, width: 0 } });
+  ctx.addShape(slide, { left: 780, top: 318, width: 90, height: 28, fill: C.purpleDark, line: { style: 'solid', fill: C.purpleDark, width: 0 } });
+  ctx.addText(slide, { text: 'clear route\\ngrounded self', left: 650, top: 405, width: 270, height: 42, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: '→', left: 512, top: 300, width: 50, height: 44, fontSize: 40, bold: true, fontFace: 'Arial', color: C.purple, align: 'center' });
+  ctx.addShape(slide, { left: 180, top: 498, width: 790, height: 56, fill: C.purpleLight, line: { style: 'solid', fill: C.line, width: 1 } });
+  ctx.addText(slide, { text: '${esc(slide.cause)}', left: 200, top: 510, width: 750, height: 30, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(slide.rule)}', left: 145, top: 596, width: 860, height: 34, fontSize: 18, italic: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+`;
+  }
+
+  if (slide.type === 'premiumMoment') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ctx.addShape(slide, { left: 80, top: 160, width: 590, height: 360, fill: '#121022', line: { style: 'solid', fill: C.line, width: 1.2 } });
+  ctx.addShape(slide, { geometry: 'ellipse', left: 250, top: 230, width: 210, height: 210, fill: C.purple, line: { style: 'solid', fill: C.purple, width: 0 } });
+  ctx.addText(slide, { text: 'WEEK\\nTRAILER', left: 270, top: 287, width: 170, height: 86, fontSize: 34, bold: true, fontFace: 'Montserrat', color: C.white, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: 'Premium video moment', left: 210, top: 462, width: 250, height: 30, fontSize: 22, bold: true, fontFace: 'Arial', color: C.white, align: 'center' });
+  ctx.addText(slide, { text: '${esc(slide.claim)}', left: 750, top: 170, width: 330, height: 78, fontSize: 25, bold: true, fontFace: 'Arial', color: C.ink, fit: 'shrink' });
+  ${slide.economics.map((r, i) => `
+  cell(slide, ctx, '${esc(r[0])}', 740, ${285 + i * 50}, 170, 48, ${i === 3 ? 'C.greenLight' : 'C.white'}, true, 15);
+  cell(slide, ctx, '${esc(r[1])}', 910, ${285 + i * 50}, 210, 48, ${i === 3 ? 'C.greenLight' : 'C.white'}, false, 15);`).join('\n')}
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 140, top: 580, width: 940, height: 44, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+`;
+  }
+
+  if (slide.type === 'paywallArchitecture') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ${slide.tiers.map((t, i) => {
+    const x = 72 + i * 275;
+    return `
+  ctx.addShape(slide, { left: ${x}, top: 170, width: 235, height: 330, fill: ${i === 1 ? 'C.purpleLight' : i === 3 ? 'C.greenLight' : 'C.white'}, line: { style: 'solid', fill: C.line, width: 1.2 } });
+  ctx.addText(slide, { text: '${esc(t[0])}', left: ${x + 20}, top: 196, width: 195, height: 30, fontSize: 26, bold: true, fontFace: 'Arial', color: C.purpleDark, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(t[1])}', left: ${x + 20}, top: 245, width: 195, height: 34, fontSize: 24, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(t[2])}', left: ${x + 24}, top: 314, width: 187, height: 92, fontSize: 17, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addShape(slide, { left: ${x + 45}, top: 438, width: 145, height: 34, fill: C.purpleLight, line: { style: 'solid', fill: C.line, width: 0.8 } });
+  ctx.addText(slide, { text: '${esc(t[3])}', left: ${x + 52}, top: 446, width: 132, height: 16, fontSize: 13, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });`;
+  }).join('\n')}
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 170, top: 575, width: 840, height: 40, fontSize: 22, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
 `;
   }
 

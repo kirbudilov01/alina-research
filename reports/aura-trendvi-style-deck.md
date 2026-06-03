@@ -14,86 +14,106 @@ Type: overview
 
 Type: pipeline
 
-## 04. Why This Is Not Just Astrology
+## 04. User Journey: First 30 Days
+
+Type: dayJourney
+
+## 05. Core Screens
+
+Type: appScreens
+
+## 06. Life Canvas Must Explain Causality
+
+Type: lifeCanvasDemo
+
+## 07. Premium Video Is a Magic Moment
+
+Type: premiumMoment
+
+## 08. Paywall Architecture
+
+Type: paywallArchitecture
+
+## 09. Why This Is Not Just Astrology
 
 Type: solution
 
-## 05. Market Map
+## 10. Market Map
 
 Type: marketSize
 
-## 06. Competitor Economics: The Read
+## 11. Competitor Economics: The Read
 
 Type: money
 
-## 07. Astrology Unit Economics
+## 12. Astrology Unit Economics
 
 Type: competitorEconomics
 
-## 08. Mindfulness Unit Economics
+## 13. Mindfulness Unit Economics
 
 Type: competitorEconomics
 
-## 09. AI Companion / Avatar Economics
+## 14. AI Companion / Avatar Economics
 
 Type: competitorEconomics
 
-## 10. What People Actually Pay For
+## 15. What People Actually Pay For
 
 Type: pricingTable
 
-## 11. Pricing Decision
+## 16. Pricing Decision
 
 Type: auraMath
 
-## 12. Conversion / ARPMAU Assumptions
+## 17. Conversion / ARPMAU Assumptions
 
 Type: finance
 
-## 13. Generation Cost Benchmarks
+## 18. Generation Cost Benchmarks
 
 Type: costBenchmarks
 
-## 14. Cost Per User / Month
+## 19. Cost Per User / Month
 
 Type: unitCost
 
-## 15. Video Cost Stress Test
+## 20. Video Cost Stress Test
 
 Type: videoStress
 
-## 16. AURA Base Financial Model
+## 21. AURA Base Financial Model
 
 Type: finance
 
-## 17. Marketing Benchmarks
+## 22. Marketing Benchmarks
 
 Type: competitorEconomics
 
-## 18. Go-to-Market Strategy
+## 23. Go-to-Market Strategy
 
 Type: gtm
 
-## 19. 30-Day Validation Plan
+## 24. 30-Day Validation Plan
 
 Type: validation
 
-## 20. Product Scope: MVP vs Later
+## 25. Product Scope: MVP vs Later
 
 Type: pricingTable
 
-## 21. Risks
+## 26. Risks
 
 Type: risks
 
-## 22. Growth Roadmap
+## 27. Growth Roadmap
 
 Type: roadmap
 
-## 23. What We Should Build
+## 28. What We Should Build
 
 Type: overview
 
-## 24. Contacts / Next Step
+## 29. Contacts / Next Step
 
 Type: contacts
