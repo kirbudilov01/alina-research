@@ -138,58 +138,74 @@ Type: pricingTable
 
 Type: pricingTable
 
-## 35. Маркетинговые бенчмарки
+## 35. Помесячная финмодель: M1-M6
+
+Type: pricingTable
+
+## 36. Помесячная финмодель: M7-M12
+
+Type: pricingTable
+
+## 37. Квартальная модель: выручка, расходы, runway
+
+Type: pricingTable
+
+## 38. Годовые сценарии: сколько может приносить
+
+Type: pricingTable
+
+## 39. Маркетинговые бенчмарки
 
 Type: competitorEconomics
 
-## 36. Модель маркетинговой воронки AURA
+## 40. Модель маркетинговой воронки AURA
 
 Type: marketingModel
 
-## 37. Маркетинг в Фазе 1: что проверяем
+## 41. Маркетинг в Фазе 1: что проверяем
 
 Type: pricingTable
 
-## 38. Матрица маркетинговых hooks
+## 42. Матрица маркетинговых hooks
 
 Type: pricingTable
 
-## 39. Go-to-Market стратегия
+## 43. Go-to-Market стратегия
 
 Type: gtm
 
-## 40. 30-дневный план проверки
+## 44. 30-дневный план проверки
 
 Type: validation
 
-## 41. Roadmap Фазы 1: 30 дней
+## 45. Roadmap Фазы 1: 30 дней
 
 Type: pricingTable
 
-## 42. Roadmap Фазы 2: если Фаза 1 проходит
+## 46. Roadmap Фазы 2: если Фаза 1 проходит
 
 Type: pricingTable
 
-## 43. Scope продукта: MVP vs Later
+## 47. Scope продукта: MVP vs Later
 
 Type: pricingTable
 
-## 44. Риски
+## 48. Риски
 
 Type: risks
 
-## 45. Roadmap роста
+## 49. Roadmap роста
 
 Type: roadmap
 
-## 46. Что нужно строить
+## 50. Что нужно строить
 
 Type: overview
 
-## 47. Оффер: Фаза 1 validation sprint
+## 51. Оффер: Фаза 1 validation sprint
 
 Type: offerSlide
 
-## 48. Контакты / следующий шаг
+## 52. Контакты / следующий шаг
 
 Type: contacts

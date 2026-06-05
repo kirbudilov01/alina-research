@@ -434,6 +434,73 @@ const slides = [
     ]
   },
   {
+    title: 'Помесячная финмодель: M1-M6',
+    type: 'pricingTable',
+    widths: [92, 250, 170, 165, 165, 228],
+    tableY: 142,
+    rowH: 58,
+    rows: [
+      ['Месяц', 'Фокус', 'MAU / платящие', 'Выручка', 'Расходы', 'Нужно денег'],
+      ['M1', 'validation sprint: визуалы, лендинг, интервью', '0.1k / 0', '$0', '€5k-€8k', '€5k-€8k'],
+      ['M2', 'clickable prototype + first cohort', '0.5k / 10', '$0-$0.1k', '€5k-€8k', '€10k-€16k'],
+      ['M3', 'MVP build: weekly loop + paywall', '1k / 30', '$0.3k-$0.5k', '€10k-€16k', '€20k-€31k'],
+      ['M4', 'private beta + manual generation', '3k / 80', '$0.8k-$1.5k', '€12k-€20k', '€31k-€50k'],
+      ['M5', 'creator tests + COGS tracking', '6k / 150', '$1.5k-$3k', '€15k-€25k', '€44k-€73k'],
+      ['M6', 'first paywall iteration', '10k / 300', '$3k-$6k', '€18k-€30k', '€59k-€97k']
+    ],
+    note: 'Первые 6 месяцев — это не cash-out, а поиск петли: paid intent, retention, COGS и понятность Life Canvas.'
+  },
+  {
+    title: 'Помесячная финмодель: M7-M12',
+    type: 'pricingTable',
+    widths: [92, 250, 170, 165, 165, 228],
+    tableY: 142,
+    rowH: 58,
+    rows: [
+      ['Месяц', 'Фокус', 'MAU / платящие', 'Выручка', 'Расходы', 'Нужно денег'],
+      ['M7', 'public beta + paid creative tests', '15k / 450', '$5k-$9k', '€20k-€35k', '€74k-€123k'],
+      ['M8', 'annual/token experiment', '25k / 750', '$8k-$15k', '€22k-€40k', '€88k-€148k'],
+      ['M9', 'retention cohorts + creator pack', '40k / 1,200', '$12k-$25k', '€25k-€45k', '€101k-€168k'],
+      ['M10', 'launch system + careful CAC tests', '60k / 1,800', '$18k-$40k', '€30k-€55k', '€113k-€183k'],
+      ['M11', 'scale only if CAC/COGS сходятся', '90k / 3,000', '$30k-$65k', '€35k-€65k', '€118k-€183k'],
+      ['M12', 'break-even attempt / seed story', '150k / 6,750', '$60k-$100k', '€45k-€80k', 'peak €80k-€150k']
+    ],
+    note: 'Итог: первый год лучше планировать как €80k-€150k runway. €4k-€10k — только первая проверка, а не весь продукт.'
+  },
+  {
+    title: 'Квартальная модель: выручка, расходы, runway',
+    type: 'pricingTable',
+    widths: [190, 170, 170, 170, 170, 190],
+    tableY: 142,
+    rowH: 54,
+    rows: [
+      ['Показатель', 'Q1', 'Q2', 'Q3', 'Q4', 'Year 1'],
+      ['MAU на конец периода', '0.5k-2k', '5k-15k', '20k-60k', '50k-150k', 'цель: доказать scale'],
+      ['Платящих на конец периода', '30-100', '150-500', '600-2,000', '1,500-6,750', 'конверсия 2-4.5%'],
+      ['Валовая выручка', '$0.5k-$2k', '$3k-$10k', '$18k-$47k', '$60k-$150k', '$80k-$210k'],
+      ['Product + AI + infra', '€12k-€22k', '€30k-€55k', '€45k-€80k', '€55k-€100k', '€140k-€257k'],
+      ['Marketing / launch', '€3k-€8k', '€8k-€18k', '€15k-€35k', '€25k-€60k', '€51k-€121k'],
+      ['Чистый cashflow', '-€15k…-€28k', '-€35k…-€60k', '-€40k…-€70k', '-€10k…+€20k', 'cash need ~€80k-€150k']
+    ],
+    note: 'Break-even в base-case вероятнее не в первые 3 месяца, а ближе к Q4 / Q1 следующего года.'
+  },
+  {
+    title: 'Годовые сценарии: сколько может приносить',
+    type: 'pricingTable',
+    widths: [210, 200, 200, 200, 260],
+    tableY: 146,
+    rowH: 62,
+    rows: [
+      ['Сценарий', 'Год 1', 'Год 2', 'Год 3', 'Что это значит'],
+      ['Conservative', '$40k-$120k ARR run-rate', '$250k-$600k ARR', '$0.8M-$1.5M ARR', 'маленький cashflow-продукт, если CAC низкий и команда компактная'],
+      ['Base', '$150k-$400k ARR run-rate', '$0.8M-$2M ARR', '$3M-$6M ARR', 'можно строить standalone business или поднимать seed под рост'],
+      ['Strong', '$0.5M-$1M ARR run-rate', '$3M-$6M ARR', '$8M-$15M ARR', 'появляется стратегический интерес: wellness, astrology, AI companion, creator platform'],
+      ['Главный драйвер', 'paid intent и понятность Canvas', 'retention + annual + CAC', 'creator layer + paid scale', 'рост держится не на “красивых видео”, а на повторяемой петле'],
+      ['Главный stop-signal', 'D1 <20%, paid intent <5%', 'CAC > LTV, video COGS ест маржу', 'нет retention после novelty', 'тогда проект останавливаем или режем visual scope']
+    ],
+    note: 'Это не прогноз продаж, а рамка: сколько AURA может приносить при разных уровнях retention, CAC и paid conversion.'
+  },
+  {
     title: 'Маркетинговые бенчмарки',
     type: 'competitorEconomics',
     rows: [
@@ -1010,10 +1077,13 @@ function bodyFor(slide, n) {
   }
 
   if (slide.type === 'compTable' || slide.type === 'pricingTable') {
-    const cols = slide.type === 'compTable' ? [220, 220, 260, 370] : [220, 220, 260, 370];
+    const cols = slide.widths || (slide.type === 'compTable' ? [220, 220, 260, 370] : [220, 220, 260, 370]);
+    const tableY = slide.tableY || 176;
+    const rowH = slide.rowH || 72;
     return `
   title(slide, ctx, '${esc(slide.title)}');
-  ${table(slide.rows, cols, 54, 176, 72)}
+  ${table(slide.rows, cols, 54, tableY, rowH)}
+  ${slide.note ? `ctx.addText(slide, { text: '${esc(slide.note)}', left: 110, top: 620, width: 940, height: 28, fontSize: 17, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });` : ''}
 `;
   }
 
