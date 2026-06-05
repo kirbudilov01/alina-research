@@ -397,6 +397,43 @@ const slides = [
     note: 'Base model считает blended price $12.99. $14.99 — верхний тест для полного Visual Plus с 4 видео/мес.'
   },
   {
+    title: 'Сколько может стоить проект по стадиям',
+    type: 'pricingTable',
+    rows: [
+      ['Стадия', 'Бюджет', 'Что входит', 'Что покупаем этим бюджетом'],
+      ['Фаза 1: проверка', '€4k-€10k', 'прототип, visual examples, лендинг, микро-маркетинг, когорта 30 пользователей', 'ответ: есть ли спрос, платное намерение и понятная причинность'],
+      ['Фаза 2: MVP', '€25k-€60k', 'mobile/web MVP, вход, onboarding, daily cards, Life Canvas, paywall, аналитика', 'ответ: может ли пользователь пройти петлю без ручного сопровождения'],
+      ['Фаза 3: запуск', '€40k-€120k', 'generation pipeline, billing, CRM/admin, creator pack, paid/creator tests', 'ответ: сходятся ли удержание, CAC и себестоимость генерации'],
+      ['Фаза 4: масштаб', '€150k+', 'native app polish, backend scale, content ops, creator network, paid acquisition', 'ответ: можно ли идти к $50k-$100k MRR']
+    ]
+  },
+  {
+    title: 'Операционная экономика при росте пользователей',
+    type: 'pricingTable',
+    rows: [
+      ['Показатель', '1k MAU', '10k MAU', '50k MAU'],
+      ['Платная конверсия', '2.0%', '3.0%', '3.5%'],
+      ['Платящих пользователей', '20', '300', '1,750'],
+      ['Подписка после комиссии', '~$220/мес', '~$3.3k/мес', '~$19.3k/мес'],
+      ['COGS генерации paid users', '$50-$80', '$0.7k-$1.2k', '$4.2k-$7.1k'],
+      ['COGS free users', '$100-$300', '$1k-$3k', '$5k-$15k'],
+      ['Инфраструктура / support / tools', '$100-$300', '$500-$1.5k', '$2k-$6k'],
+      ['Вердикт', 'только обучение', 'первые revenue-сигналы', 'может стать small business, если CAC низкий']
+    ]
+  },
+  {
+    title: 'Финансовый путь: от проверки до cash-out',
+    type: 'pricingTable',
+    rows: [
+      ['Этап', 'Цель', 'Финансовый смысл', 'Решение'],
+      ['Проверка', '30 users, paid intent >5%, Canvas causality >50%', 'не выручка, а снятие главного product risk', 'делать / не делать MVP'],
+      ['Первая выручка', '100 payers, ~$1.3k MRR gross', 'подтверждение, что люди платят за формат', 'оставить price / поменять bundle'],
+      ['Путь к break-even', '1k-2k payers, ~$13k-$26k MRR gross', 'покрывает небольшой продуктовый/ops костяк', 'нанимать аккуратно, не раздувать burn'],
+      ['Seed / стратегический рост', '5k-10k payers, ~$65k-$130k MRR gross', 'появляется инвестиционный или acquisition narrative', 'масштабировать GTM и creator layer'],
+      ['Cash-out опция', '$1M+ ARR, удержание и CAC доказаны', 'можно обсуждать продажу, revenue-share или рост как standalone', 'выбор: cashflow business / seed / strategic exit']
+    ]
+  },
+  {
     title: 'Маркетинговые бенчмарки',
     type: 'competitorEconomics',
     rows: [
@@ -424,15 +461,15 @@ const slides = [
     note: 'Маркетинг нельзя считать отдельно от free COGS. Чем щедрее free usage, тем ниже должен быть CAC.'
   },
   {
-    title: 'Marketing test: что проверяем за €5,000',
+    title: 'Маркетинг в Фазе 1: что проверяем',
     type: 'pricingTable',
     rows: [
-      ['Блок', 'Бюджет', 'Что делаем', 'Что должно стать понятно'],
-      ['Visual examples', '€800', '3-5 примеров Life Canvas, future-self и week trailer', 'есть ли визуальный вау и понятна ли причинность'],
-      ['Landing + analytics', '€700', 'лендинг, price test, lead capture, события activation/paid intent', 'какая цена и формулировка дают signup'],
-      ['Creator micro-tests', '€1,500', '5-10 micro creators / warm audiences / сторис-форматы', 'какие hooks вызывают интерес без тяжелой рекламы'],
-      ['Paid creative tests', '€1,200', 'маленькие Meta/TikTok tests по 3-5 hooks', 'CAC visitor/signup и первичная конверсия'],
-      ['Concierge cohort', '€800', '30 users, ручной forecast, интервью, paid-intent follow-up', 'понимают ли users продукт и готовы ли платить']
+      ['Блок', 'Диапазон', 'Что делаем', 'Что должно стать понятно'],
+      ['Visual examples', '€700-€1.5k', '3-5 примеров Life Canvas, future-self и week trailer', 'есть ли визуальный вау и понятна ли причинность'],
+      ['Landing + analytics', '€500-€1.2k', 'лендинг, price test, lead capture, события activation/paid intent', 'какая цена и формулировка дают signup'],
+      ['Creator micro-tests', '€1k-€3k', '5-10 micro creators / warm audiences / сторис-форматы', 'какие hooks вызывают интерес без тяжелой рекламы'],
+      ['Paid creative tests', '€500-€2k', 'маленькие Meta/TikTok tests по 3-5 hooks', 'CAC visitor/signup и первичная конверсия'],
+      ['Concierge cohort', '€800-€2k', '30 users, ручной forecast, интервью, paid-intent follow-up', 'понимают ли users продукт и готовы ли платить']
     ]
   },
   {
@@ -469,7 +506,7 @@ const slides = [
     metrics: ['>70% понимают категорию', '>50% объясняют Canvas change', 'D1 >20%', 'paid intent >5%']
   },
   {
-    title: 'Roadmap Phase 1: 30 дней',
+    title: 'Roadmap Фазы 1: 30 дней',
     type: 'pricingTable',
     rows: [
       ['Период', 'Deliverables', 'Метрики', 'Решение'],
@@ -480,7 +517,7 @@ const slides = [
     ]
   },
   {
-    title: 'Roadmap Phase 2: если Phase 1 проходит',
+    title: 'Roadmap Фазы 2: если Фаза 1 проходит',
     type: 'pricingTable',
     rows: [
       ['Этап', 'Что строим', 'Зачем', 'Gate'],
@@ -540,18 +577,18 @@ const slides = [
     ]
   },
   {
-    title: 'Оффер на разработку: Phase 1',
+    title: 'Оффер: Фаза 1 validation sprint',
     type: 'offerSlide',
     rows: [
-      ['Блок', 'Что входит в €5,000 Phase 1', 'Что пока не входит'],
+      ['Блок', 'Что входит в €4k-€10k Фазы 1', 'Что пока не входит'],
       ['Prototype', '8-10 clickable screens, product flow, onboarding, paywall logic', 'полноценное native mobile app'],
       ['Visual examples', '3-5 Life Canvas / future-self / week trailer examples', 'production-grade генерация на scale'],
       ['Generation logic', 'manual/semi-automated Runway/image workflow, COGS tracking sheet', 'backend с unlimited generation'],
-      ['Landing + analytics', 'simple landing, price test, lead capture, activation/paid-intent events', 'крупная paid acquisition campaign'],
-      ['Marketing micro-test', 'creator hooks + small paid creative test inside validation logic', 'масштабный performance marketing'],
+      ['Landing + analytics', 'simple landing, price test, lead capture, activation/paid-intent events', 'сложная аналитика и CRM'],
+      ['Marketing launch', 'creator hooks, small paid tests, first warm/cohort launch', 'масштабный performance marketing'],
       ['Validation pack', '30-user cohort plan, interview script, metrics, go/no-go report', 'гарантированный revenue или scale']
     ],
-    note: 'Логика оффера: €5,000 — это validation sprint, а не полноценная разработка приложения.'
+    note: 'Логика оффера: €4k-€10k — это разработка + маркетинг + первые запуски для проверки, а не full-scale app.'
   },
   {
     title: 'Контакты / следующий шаг',
@@ -918,9 +955,9 @@ function bodyFor(slide, n) {
     return `
   title(slide, ctx, '${esc(slide.title)}');
   ctx.addShape(slide, { left: 70, top: 142, width: 245, height: 420, fill: C.greenLight, line: { style: 'solid', fill: C.line, width: 1.1 } });
-  ctx.addText(slide, { text: '€5,000', left: 95, top: 210, width: 195, height: 55, fontSize: 48, bold: true, fontFace: 'Montserrat', color: C.purpleDark, align: 'center' });
-  ctx.addText(slide, { text: 'Phase 1\\nproof sprint', left: 105, top: 300, width: 175, height: 70, fontSize: 28, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
-  ctx.addText(slide, { text: 'не full-scale app build', left: 95, top: 442, width: 190, height: 26, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: '€4k-€10k', left: 82, top: 210, width: 220, height: 55, fontSize: 42, bold: true, fontFace: 'Montserrat', color: C.purpleDark, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: 'Фаза 1\\nvalidation sprint', left: 92, top: 300, width: 200, height: 76, fontSize: 25, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: 'разработка + маркетинг + первые запуски', left: 88, top: 430, width: 205, height: 46, fontSize: 15, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
   ${table(slide.rows, [150, 390, 300], 345, 145, 56)}
   ctx.addText(slide, { text: '${esc(slide.note)}', left: 140, top: 620, width: 900, height: 30, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
 `;

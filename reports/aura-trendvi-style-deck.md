@@ -126,58 +126,70 @@ Type: videoStress
 
 Type: finance
 
-## 32. Маркетинговые бенчмарки
+## 32. Сколько может стоить проект по стадиям
+
+Type: pricingTable
+
+## 33. Операционная экономика при росте пользователей
+
+Type: pricingTable
+
+## 34. Финансовый путь: от проверки до cash-out
+
+Type: pricingTable
+
+## 35. Маркетинговые бенчмарки
 
 Type: competitorEconomics
 
-## 33. Модель маркетинговой воронки AURA
+## 36. Модель маркетинговой воронки AURA
 
 Type: marketingModel
 
-## 34. Marketing test: что проверяем за €5,000
+## 37. Маркетинг в Фазе 1: что проверяем
 
 Type: pricingTable
 
-## 35. Матрица маркетинговых hooks
+## 38. Матрица маркетинговых hooks
 
 Type: pricingTable
 
-## 36. Go-to-Market стратегия
+## 39. Go-to-Market стратегия
 
 Type: gtm
 
-## 37. 30-дневный план проверки
+## 40. 30-дневный план проверки
 
 Type: validation
 
-## 38. Roadmap Phase 1: 30 дней
+## 41. Roadmap Фазы 1: 30 дней
 
 Type: pricingTable
 
-## 39. Roadmap Phase 2: если Phase 1 проходит
+## 42. Roadmap Фазы 2: если Фаза 1 проходит
 
 Type: pricingTable
 
-## 40. Scope продукта: MVP vs Later
+## 43. Scope продукта: MVP vs Later
 
 Type: pricingTable
 
-## 41. Риски
+## 44. Риски
 
 Type: risks
 
-## 42. Roadmap роста
+## 45. Roadmap роста
 
 Type: roadmap
 
-## 43. Что нужно строить
+## 46. Что нужно строить
 
 Type: overview
 
-## 44. Оффер на разработку: Phase 1
+## 47. Оффер: Фаза 1 validation sprint
 
 Type: offerSlide
 
-## 45. Контакты / следующий шаг
+## 48. Контакты / следующий шаг
 
 Type: contacts
