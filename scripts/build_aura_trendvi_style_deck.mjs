@@ -20,416 +20,416 @@ const NODE = '/Users/kirill/.cache/codex-runtimes/codex-primary-runtime/dependen
 const slides = [
   { title: 'AURA', type: 'cover' },
   {
-    title: 'What The Leaders Already Prove',
+    title: 'Что уже доказали лидеры',
     type: 'leaderGrid',
     leaders: [
-      ['Nebula / Co-Star', 'personal guidance', 'birth data, weekly meaning, compatibility, paid readings', '$718K-$797K/mo iOS estimates'],
-      ['Calm / Headspace', 'daily ritual', 'subscription trust, annual plans, wellness habit', '$300M/yr Calm proxy'],
-      ['Finch / Replika', 'companion loop', 'memory, avatar, gentle return, emotional continuity', '$1.5M-$2.36M/mo estimates'],
-      ['Runway / HeyGen', 'visual AI layer', 'video/avatar as premium output, not cheap daily commodity', 'Runway 8s Gen-4 Turbo ~= $0.40']
+      ['Nebula / Co-Star', 'личная навигация', 'дата рождения, недельный смысл, совместимость, платные разборы', 'оценка iOS: $718K-$797K/мес'],
+      ['Calm / Headspace', 'ежедневный ритуал', 'доверие к подписке, годовые планы, wellness-привычка', 'Calm proxy: около $300M/год'],
+      ['Finch / Replika', 'петля помощника', 'память, аватар, мягкий возврат, эмоциональная непрерывность', 'оценки: $1.5M-$2.36M/мес'],
+      ['Runway / HeyGen', 'визуальный AI-слой', 'видео/аватар как premium-результат, не дешевый daily commodity', 'Runway 8s Gen-4 Turbo ~= $0.40']
     ],
-    note: 'The market already has the ingredients. AURA is the product format that connects them into one causal weekly experience.'
+    note: 'На рынке уже есть все ингредиенты. AURA собирает их в один причинный недельный опыт.'
   },
   {
-    title: 'The New Format Is At The Intersection',
+    title: 'Новый формат находится на пересечении',
     type: 'intersectionThesis',
     pieces: [
-      ['Astrology', 'personal meaning'],
-      ['Mindfulness', 'daily ritual'],
-      ['AI Companion', 'memory / assistant'],
-      ['Visual AI', 'Life Canvas / video'],
-      ['AURA', 'weekly visual self-guidance']
+      ['Астрология', 'личный смысл'],
+      ['Mindfulness', 'ежедневный ритуал'],
+      ['AI-помощник', 'память / ассистент'],
+      ['Visual AI', 'Life Canvas / видео'],
+      ['AURA', 'визуальная навигация недели']
     ],
-    note: 'AURA is not “another horoscope app”. It is a weekly life-series where meaning becomes action and action changes the visual state.'
+    note: 'AURA — не “еще одно приложение с гороскопами”. Это сериал о своей неделе, где смысл приводит к действию, а действие меняет визуальное состояние.'
   },
   {
-    title: 'What AURA Is',
+    title: 'Что такое AURA',
     type: 'overview',
     blocks: [
-      ['One-line thesis', 'AURA is a weekly visual self-guidance app: birth data + personal context → forecast → daily episode → action/reset → Life Canvas change → tomorrow hook.'],
-      ['User promise', 'Not “your zodiac sign says X”. The user should feel: “I understand my week, I did one small action, and I can see how my life picture changed.”'],
-      ['Core product', 'A personal pocket forecastist/assistant with memory, weekly seasons, image-first Life Canvas and rare premium video moments.'],
-      ['Why now', 'Astrology apps monetize personal meaning, mindfulness apps monetize ritual, AI companions monetize memory, video AI creates premium visual moments. AURA joins these behaviors.'],
-      ['Business rule', 'Daily loop must stay cheap. Premium video/avatar must be tokenized, milestone-based or paid, not free daily generation.'],
-      ['Strategic gate', 'If users cannot explain why Life Canvas changed, AURA becomes an AI image toy. If they can, AURA becomes a product.']
+      ['Тезис в одну строку', 'AURA — приложение визуальной самонавигации на неделю: дата рождения + контекст → прогноз → daily episode → действие/reset → изменение Life Canvas → причина вернуться завтра.'],
+      ['Обещание пользователю', 'Не “твой знак зодиака говорит X”. Пользователь должен почувствовать: “я понял свою неделю, сделал маленькое действие и увидел, как изменилась картинка моей жизни”.'],
+      ['Ядро продукта', 'Карманный прогнозист/ассистент с памятью, недельными сезонами, image-first Life Canvas и редкими premium-видео моментами.'],
+      ['Почему сейчас', 'Astrology-приложения монетизируют личный смысл, mindfulness — ритуал, AI companions — память, video AI — premium-визуал. AURA соединяет эти поведения.'],
+      ['Бизнес-правило', 'Ежедневная петля должна быть дешевой. Premium video/avatar должны быть лимитированы, milestone-based или платными, а не бесплатной ежедневной генерацией.'],
+      ['Стратегический фильтр', 'Если пользователь не может объяснить, почему изменился Life Canvas, AURA превращается в игрушку с AI-картинками. Если может — это продукт.']
     ]
   },
   {
-    title: 'The Product Loop',
+    title: 'Продуктовая петля',
     type: 'pipeline',
     items: [
-      ['Birth data + request', 'personal context'],
-      ['Weekly forecast', 'season arc'],
-      ['Daily episode', 'today focus'],
-      ['Action / Reset', 'small behavior'],
-      ['Life Canvas', 'visible causality']
+      ['Дата рождения + запрос', 'личный контекст'],
+      ['Прогноз недели', 'арка сезона'],
+      ['Daily episode', 'фокус дня'],
+      ['Action / Reset', 'маленькое действие'],
+      ['Life Canvas', 'видимая причинность']
     ],
-    note: 'The loop is the product: Episode → Action → Reset → Reflection → Life Canvas → Tomorrow Hook.'
+    note: 'Петля и есть продукт: Episode → Action → Reset → Reflection → Life Canvas → Tomorrow Hook.'
   },
   {
-    title: 'User Journey: First 30 Days',
+    title: 'Путь пользователя: первые 30 дней',
     type: 'dayJourney',
     stages: [
-      ['Day 0', 'Search moment', 'The user wants meaning for the week, a softer reset, or a visual future-self prompt.'],
-      ['Day 1', 'First loop', 'Birth data + context → first forecast → one action → first Life Canvas shift.'],
-      ['Day 7', 'First season', 'The user sees a weekly arc, remembers actions, and receives a recap/visual artifact.'],
-      ['Day 30', 'Personal system', 'AURA becomes a ritual: assistant memory, seasons, premium visual moments, annual path.']
+      ['День 0', 'Момент поиска', 'Пользователь хочет смысл на неделю, мягкий reset или визуальный образ будущей версии себя.'],
+      ['День 1', 'Первая петля', 'Дата рождения + контекст → первый прогноз → одно действие → первый сдвиг Life Canvas.'],
+      ['День 7', 'Первый сезон', 'Пользователь видит недельную арку, помнит действия и получает recap/визуальный артефакт.'],
+      ['День 30', 'Личная система', 'AURA становится ритуалом: память ассистента, сезоны, premium-визуалы, годовой путь.']
     ],
-    note: 'AURA only works if the user understands the sequence: input → meaning → action → visible change → return tomorrow.'
+    note: 'AURA работает только если пользователь понимает цепочку: ввод → смысл → действие → видимое изменение → возврат завтра.'
   },
   {
-    title: 'Core Screens',
+    title: 'Ключевые экраны',
     type: 'appScreens',
     screens: [
-      ['01', 'Birth data', 'date / time / place\ncurrent question'],
-      ['02', 'Week forecast', 'season theme\n3 tensions\nfirst promise'],
-      ['03', 'Daily episode', 'today focus\nassistant message\naction card'],
-      ['04', 'Reset', '2-min practice\nreflection\ncompletion'],
-      ['05', 'Life Canvas', 'before / after\nwhat changed\nwhy it changed'],
-      ['06', 'Paywall', 'continue season\nPlus / annual\ntoken video']
+      ['01', 'Данные рождения', 'дата / время / место\nтекущий вопрос'],
+      ['02', 'Прогноз недели', 'тема сезона\n3 напряжения\nпервое обещание'],
+      ['03', 'Daily episode', 'фокус дня\nсообщение ассистента\nкарточка действия'],
+      ['04', 'Reset', '2-мин практика\nрефлексия\nзавершение'],
+      ['05', 'Life Canvas', 'до / после\nчто изменилось\nпочему изменилось'],
+      ['06', 'Paywall', 'продолжить сезон\nPlus / annual\nvideo token']
     ],
-    note: 'These are not final UI designs. They define what the designer must make visible on screen.'
+    note: 'Это не финальный UI-дизайн. Это логика того, что дизайнер должен сделать видимым на экране.'
   },
   {
-    title: 'Life Canvas Must Explain Causality',
+    title: 'Life Canvas должен объяснять причинность',
     type: 'lifeCanvasDemo',
-    leftLabel: 'Before action',
-    rightLabel: 'After action',
-    cause: 'Because the user completed the reset and reflection, the Canvas changes from “fog / pressure” to “clear route / grounded self”.',
-    rule: 'If the user says “AI just drew another picture”, the product fails. If the user says “the picture changed because I acted”, AURA is alive.'
+    leftLabel: 'До действия',
+    rightLabel: 'После действия',
+    cause: 'Пользователь сделал reset и reflection, поэтому Canvas меняется из “туман / давление” в “понятный маршрут / собранное состояние”.',
+    rule: 'Если пользователь говорит “ИИ просто нарисовал другую картинку” — продукт провалился. Если говорит “картинка изменилась, потому что я действовал” — AURA жива.'
   },
   {
-    title: 'Premium Video Is a Magic Moment',
+    title: 'Premium-видео — это момент магии',
     type: 'premiumMoment',
-    claim: 'Video can be included in the subscription only if the model is cheap and capped: one 8s video per week, not unlimited generation.',
+    claim: 'Видео можно включать в подписку только если модель дешевая и жестко лимитирована: один 8s ролик в неделю, а не безлимитная генерация.',
     economics: [
-      ['Runway 8 sec', '~$0.40 COGS'],
-      ['4 videos/mo', '~$1.60 COGS'],
-      ['30 daily images', '~$0.60-$1.20 COGS'],
-      ['Total media', '~$2.20-$3.80/mo before buffer']
+      ['Runway 8 sec', '~$0.40 себестоимость'],
+      ['4 видео/мес', '~$1.60 себестоимость'],
+      ['30 daily images', '~$0.60-$1.20 себестоимость'],
+      ['Итого media', '~$2.20-$3.80/мес до буфера']
     ],
-    note: 'The business move: sell a visual subscription package, but cap it tightly and track every generated asset.'
+    note: 'Бизнес-ход: продавать визуальную подписку, но жестко лимитировать генерации и считать каждый asset.'
   },
   {
-    title: 'Paywall Architecture',
+    title: 'Архитектура paywall',
     type: 'paywallArchitecture',
     tiers: [
-      ['Free', '$0', 'first forecast\n3-7 daily cards\nlimited images\nno weekly video', 'activation'],
-      ['Plus', '$14.99/mo', 'daily cards\n30 images/mo\n4 weekly videos\nmemory + recap', 'core revenue'],
-      ['Annual', '$89/yr', 'same package\nlower churn\nupfront cash', 'cashflow'],
-      ['Creator add-on', 'later', 'Alina seasons\nspecial prompts\npremium packs', 'upside']
+      ['Free', '$0', 'первый прогноз\n3-7 daily cards\nлимит картинок\nбез weekly video', 'активация'],
+      ['Plus test', '$9.99-$12.99', 'daily cards\n30 images/mo\n0-2 видео/мес\nmemory + recap', 'стартовый тест'],
+      ['Visual Plus', '$14.99', '30 images/mo\n4 weekly videos\nmemory + recap', 'пакет с видео'],
+      ['Annual', '$79-$89/год', 'тот же пакет\nниже churn\nденьги вперед', 'cashflow']
     ],
-    note: 'Paywall appears after the first completed loop, not before the user understands the product.'
+    note: '$14.99 — не внезапное повышение, а верхний тест для пакета с 4 видео/мес. Базовую цену нужно тестировать.'
   },
   {
-    title: 'Why This Is Not Just Astrology',
+    title: 'Почему это не просто астрология',
     type: 'solution',
-    leftTitle: 'What existing apps give',
-    left: ['Astrology: meaning, but often generic and passive.', 'Mindfulness: ritual, but often not personal enough.', 'AI companion: conversation, but not a structured week.', 'Avatar tools: visuals, but weak causality.'],
-    rightTitle: 'What AURA combines',
-    right: ['Birth-data context without fatalistic positioning.', 'A weekly season that gives structure.', 'A daily micro-action that creates agency.', 'A Life Canvas that changes for a reason.', 'Premium video as rare proof-of-magic, not daily COGS leak.']
+    leftTitle: 'Что дают существующие приложения',
+    left: ['Astrology: смысл, но часто слишком общий и пассивный.', 'Mindfulness: ритуал, но часто недостаточно персональный.', 'AI companion: разговор, но не структурированная неделя.', 'Avatar tools: визуал, но слабая причинность.'],
+    rightTitle: 'Что соединяет AURA',
+    right: ['Контекст даты рождения без фаталистичного позиционирования.', 'Недельный сезон, который дает структуру.', 'Daily micro-action, который возвращает agency.', 'Life Canvas, который меняется по причине.', 'Premium-видео как редкий proof-of-magic, а не ежедневная утечка COGS.']
   },
   {
-    title: 'Market Map',
+    title: 'Карта рынка',
     type: 'marketSize',
     items: [
-      ['PAM', 'consumer mobile apps', 'AURA competes for the daily habit of opening an app for meaning, reset and self-direction.'],
-      ['TAM', '4 paid behaviors', 'personal guidance, wellness ritual, AI companion memory, visual identity/avatar progression.'],
-      ['SAM', 'apps + web + AI tools', 'existing research covers app stores, web apps, paywalls, adjacent tools and manual competitor walkthroughs.'],
-      ['SOM', '100k-300k users', 'reachable first scale if creator-led GTM, weekly seasons and premium visual moments work.'],
-      ['UP', '$30-80M ARR path', 'subscription + annual + premium tokens + creator seasons can create venture-relevant upside.']
+      ['PAM', 'consumer mobile apps', 'AURA конкурирует за ежедневную привычку открывать приложение ради смысла, reset и самонавигации.'],
+      ['TAM', '4 платных поведения', 'личная навигация, wellness-ритуал, память AI-companion, визуальная идентичность/avatar progression.'],
+      ['SAM', 'apps + web + AI tools', 'исследование покрывает app stores, web apps, paywalls, соседние инструменты и ручной competitor walkthrough.'],
+      ['SOM', '100k-300k users', 'достижимый первый масштаб, если creator-led GTM, недельные сезоны и premium-визуалы работают.'],
+      ['UP', '$30-80M ARR path', 'подписка + annual + premium tokens + creator seasons могут дать venture-relevant upside.']
     ],
-    note: 'The market is not a single horoscope TAM. It is the overlap of paid personal meaning, daily ritual and AI visual identity.'
+    note: 'Рынок — это не один horoscope TAM. Это пересечение paid personal meaning, daily ritual и AI visual identity.'
   },
   {
-    title: 'How The Numbers Work',
+    title: 'Как работают цифры',
     type: 'numberLogic',
     steps: [
-      ['1', 'External signals', 'Rev.now / Sacra / press / API pricing', 'Revenue, MAU, payers, price, public COGS'],
-      ['2', 'Derived benchmarks', 'calculated from public signals', 'ARPMAU, paid conversion, CAC bands, COGS per user'],
-      ['3', 'AURA assumptions', 'conservative / base / strong', 'pricing, conversion, token attach, no-free-video rule'],
-      ['4', 'Product decisions', 'what we actually build', 'Plus, annual, token video, image-first Life Canvas']
+      ['1', 'Внешние сигналы', 'Rev.now / Sacra / press / API pricing', 'Revenue, MAU, payers, price, public COGS'],
+      ['2', 'Производные бенчмарки', 'расчет из открытых сигналов', 'ARPMAU, paid conversion, CAC bands, COGS per user'],
+      ['3', 'Гипотезы AURA', 'conservative / base / strong', 'pricing, conversion, token attach, no-free-video rule'],
+      ['4', 'Продуктовые решения', 'что реально строим', 'Plus, annual, token video, image-first Life Canvas']
     ],
-    note: 'The deck does not treat competitor estimates as truth. It uses them to create bounded assumptions for AURA.'
+    note: 'Презентация не считает оценки конкурентов абсолютной правдой. Она использует их как рамки для гипотез AURA.'
   },
   {
-    title: 'The Four Numbers That Matter',
+    title: 'Четыре главные цифры',
     type: 'bigNumbers',
     numbers: [
-      ['2.5-3.0%', 'base paid conversion', 'derived from Co-Star / Nebula / The Pattern style subscription apps'],
-      ['$0.35-$0.50', 'base ARPMAU target', 'AURA needs subscription + some visual/token uplift to beat long-tail astrology'],
-      ['$0.80-$1.50', 'strong ARPMAU target', 'only if high-intent premium moments work: future-self, relationship, video'],
-      ['<$1.50', 'payer AI/image COGS target', 'daily loop must be cheap enough for $9.99-$14.99 subscription']
+      ['2.5-3.0%', 'base paid conversion', 'из Co-Star / Nebula / The Pattern style subscription apps'],
+      ['$0.35-$0.50', 'base ARPMAU target', 'AURA нужна подписка + visual/token uplift, чтобы быть сильнее long-tail astrology'],
+      ['$0.80-$1.50', 'strong ARPMAU target', 'если работают high-intent premium moments: future-self, relationship, video'],
+      ['<$1.50', 'AI/image COGS target', 'daily loop должен быть достаточно дешевым для подписки $9.99-$14.99']
     ],
-    note: 'If one of these four numbers breaks, the product model must change.'
+    note: 'Если ломается хотя бы одна из этих цифр, продуктовую модель нужно менять.'
   },
   {
-    title: 'Competitor Economics: The Read',
+    title: 'Экономика конкурентов: главный вывод',
     type: 'proofMatrix',
     rows: [
-      ['Proof question', 'Competitor signal', 'What it proves', 'AURA decision'],
-      ['Will people pay for personal meaning?', 'Co-Star iOS: $797.5K/mo, 2.7M MAU, 64K payers', 'yes, but conversion is closer to 2-3%', 'model base conversion at 2.5-3.0%'],
-      ['Can spiritual guidance monetize?', 'Nebula iOS: $718K/mo, 52K payers, $0.33 ARPMAU', 'yes, but aggressive paywalls create trust risk', 'sell causality and season, not vague psychic pressure'],
-      ['Can daily ritual become large?', 'Calm: $300M/year proxy, 4M+ subscribers', 'yes, if trust and annual habit exist', 'annual plan after first completed week'],
-      ['Can AI/avatar create paid intent?', 'Replika Android: $2.36M/mo estimate, 99K payers proxy', 'yes, users pay for memory/avatar/voice', 'assistant memory + visual identity layer'],
-      ['Can urgent guidance lift ARPMAU?', 'AstroTime Android: $1.82 ARPMAU, 4.5% conversion', 'yes, high-intent moments monetize better', 'future-self / relationship / video tokens']
+      ['Вопрос', 'Сигнал конкурента', 'Что это доказывает', 'Решение для AURA'],
+      ['Люди платят за личный смысл?', 'Co-Star iOS: $797.5K/мес, 2.7M MAU, 64K payers', 'да, но conversion ближе к 2-3%', 'base conversion: 2.5-3.0%'],
+      ['Spiritual guidance монетизируется?', 'Nebula iOS: $718K/мес, 52K payers, $0.33 ARPMAU', 'да, но агрессивный paywall ломает доверие', 'продавать causality + season, не vague psychic pressure'],
+      ['Daily ritual может стать большим?', 'Calm: proxy $300M/год, 4M+ subscribers', 'да, если есть доверие и annual habit', 'annual plan после первой завершенной недели'],
+      ['AI/avatar создает paid intent?', 'Replika Android: оценка $2.36M/мес, 99K payers proxy', 'да, пользователи платят за memory/avatar/voice', 'память ассистента + visual identity layer'],
+      ['Urgent guidance повышает ARPMAU?', 'AstroTime Android: $1.82 ARPMAU, 4.5% conversion', 'да, high-intent moments монетизируются лучше', 'future-self / relationship / video tokens']
     ],
-    conclusion: 'AURA should model base-case like subscription self-discovery, and upside like premium visual/guidance moments.'
+    conclusion: 'Base-case AURA должен считаться как subscription self-discovery, upside — как premium visual/guidance moments.'
   },
   {
-    title: 'Astrology Unit Economics',
+    title: 'Unit-экономика astrology-приложений',
     type: 'competitorEconomics',
     rows: [
-      ['Product', 'Revenue / scale signal', 'Visible economics', 'AURA implication'],
-      ['Co-Star iOS', '$797.5K/mo; 2.7M MAU; 64K payers', 'ARPMAU ~$0.30; conversion ~2.4%; $8.99/mo + IAP', 'base paid conversion should be 2-3%, not fantasy 8-10%'],
-      ['Nebula iOS', '$718K/mo; 2.2M MAU; 52K payers', 'ARPMAU ~$0.33; conversion ~2.4%; $9.99/mo + weekly IAPs', 'personal guidance monetizes, but paywall trust is fragile'],
-      ['The Pattern iOS', '$36.1K/mo; 160K MAU; 4K payers', 'ARPMAU ~$0.23; conversion ~2.5%', 'relationship/self-insight works, but depth alone does not guarantee scale'],
-      ['AstroSage Android', '$547.8K/mo; 2.4M MAU; 34K payers', 'ARPMAU ~$0.23; conversion ~1.4%', 'birth-data utility can bring huge reach with lower conversion'],
-      ['AstroTime Android', '$440.8K/mo; 242K MAU; 11K payers', 'ARPMAU ~$1.82; conversion ~4.5%', 'urgent guidance mechanics can lift conversion and ARPMAU'],
-      ['Astrotalk company', 'Rs 1,214 crore FY25 total revenue reported', 'consultation marketplace, not pure app subscription', 'human/expert layer is upside later, not MVP core']
+      ['Продукт', 'Revenue / scale signal', 'Видимая экономика', 'Вывод для AURA'],
+      ['Co-Star iOS', '$797.5K/мес; 2.7M MAU; 64K payers', 'ARPMAU ~$0.30; conversion ~2.4%; $8.99/мес + IAP', 'base paid conversion должен быть 2-3%, не fantasy 8-10%'],
+      ['Nebula iOS', '$718K/мес; 2.2M MAU; 52K payers', 'ARPMAU ~$0.33; conversion ~2.4%; $9.99/мес + weekly IAPs', 'personal guidance монетизируется, но trust paywall хрупкий'],
+      ['The Pattern iOS', '$36.1K/мес; 160K MAU; 4K payers', 'ARPMAU ~$0.23; conversion ~2.5%', 'relationship/self-insight работает, но depth сам по себе не гарантирует scale'],
+      ['AstroSage Android', '$547.8K/мес; 2.4M MAU; 34K payers', 'ARPMAU ~$0.23; conversion ~1.4%', 'birth-data utility дает большой reach при более низкой conversion'],
+      ['AstroTime Android', '$440.8K/мес; 242K MAU; 11K payers', 'ARPMAU ~$1.82; conversion ~4.5%', 'urgent guidance mechanics могут поднять conversion и ARPMAU'],
+      ['Astrotalk company', 'Rs 1,214 crore FY25 total revenue reported', 'consultation marketplace, не pure app subscription', 'human/expert layer — upside later, не MVP core']
     ],
-    note: 'Source layer: Rev.now estimates and public company/press reports. Directional benchmarks, not audited internal P&L.'
+    note: 'Источник: оценки Rev.now и публичные отчеты/пресса. Это directional benchmarks, не audited internal P&L.'
   },
   {
-    title: 'Mindfulness Unit Economics',
+    title: 'Unit-экономика mindfulness-приложений',
     type: 'competitorEconomics',
     rows: [
-      ['Product', 'Revenue / scale signal', 'Visible economics', 'AURA implication'],
-      ['Calm brand', '$300M/year proxy; 4M+ paying subscribers', '$70/year and $14.99/mo price anchors', 'annual wellness subscription can be very large when trust and routine exist'],
-      ['Calm Android', '$2.35M/mo; 3.6M MAU; 85K payers', 'ARPMAU ~$0.65; conversion ~2.4%', 'wellness can monetize above astrology ARPMAU, but needs retention'],
-      ['Headspace', '~$200M/year brand proxy; app-store proxy ~$39-40M/year', '$12.99/mo price signal', 'off-store/B2B revenue can understate visible app economics'],
-      ['Waking Up', '$492.7K/mo iOS leaderboard estimate', '$19.99/mo; $129.99/year', 'trusted teacher voice can justify premium pricing'],
-      ['Balance Android', '$180K/mo; ~317K MAU; 11K payers', 'ARPMAU ~$0.57; conversion ~3.5%', 'personalization can outperform generic meditation libraries'],
-      ['Meditopia iOS', '$118.4K/mo; 629K MAU', 'ARPMAU ~$0.19', 'large MAU without strong monetization can still be thin']
+      ['Продукт', 'Revenue / scale signal', 'Видимая экономика', 'Вывод для AURA'],
+      ['Calm brand', 'proxy $300M/год; 4M+ paying subscribers', '$70/год и $14.99/мес price anchors', 'annual wellness subscription может быть большой при доверии и routine'],
+      ['Calm Android', '$2.35M/мес; 3.6M MAU; 85K payers', 'ARPMAU ~$0.65; conversion ~2.4%', 'wellness может монетизироваться выше astrology ARPMAU, но нужна retention'],
+      ['Headspace', '~$200M/год brand proxy; app-store proxy ~$39-40M/год', '$12.99/мес price signal', 'off-store/B2B revenue может занижать видимую app economics'],
+      ['Waking Up', '$492.7K/мес iOS leaderboard estimate', '$19.99/мес; $129.99/год', 'trusted teacher voice может оправдать premium pricing'],
+      ['Balance Android', '$180K/мес; ~317K MAU; 11K payers', 'ARPMAU ~$0.57; conversion ~3.5%', 'personalization может outperform generic meditation libraries'],
+      ['Meditopia iOS', '$118.4K/мес; 629K MAU', 'ARPMAU ~$0.19', 'большой MAU без сильной monetization все еще может быть тонким']
     ],
-    note: 'AURA should borrow daily ritual and annual plan logic, not build a giant meditation library.'
+    note: 'AURA должна взять daily ritual и annual plan logic, а не строить гигантскую meditation library.'
   },
   {
-    title: 'AI Companion / Avatar Economics',
+    title: 'Экономика AI companion / avatar',
     type: 'competitorEconomics',
     rows: [
-      ['Product', 'Revenue / scale signal', 'What people pay for', 'AURA implication'],
-      ['Character.AI', '$30M-$32M ARR proxy; c.ai+ $9.99/mo', 'priority, memory, engagement, chat volume', 'AI can monetize engagement, but inference cost and safety dominate'],
-      ['Replika Android', '$2.36M/mo estimate; 99K payers proxy', 'AI companion, avatar, memory, voice/video features', 'users pay for emotional continuity, not raw text chat'],
-      ['Finch iOS', '$1.5M-$2.0M/mo public estimate range', 'self-care pet, soft progression, daily loop, Plus features', 'daily companion mechanics can monetize without scary “therapy” positioning'],
-      ['HeyGen / D-ID', 'API pricing proves avatar video is paid compute', '$0.05-$0.0667/sec or plan/credit based pricing', 'talking avatar is a premium event, not free habit content'],
-      ['AURA', '$9.99-$14.99/mo + tokens target', 'season, assistant memory, Life Canvas, rare video', 'must be a cost-controlled AI product under a premium visual wrapper']
+      ['Продукт', 'Revenue / scale signal', 'За что платят', 'Вывод для AURA'],
+      ['Character.AI', '$30M-$32M ARR proxy; c.ai+ $9.99/мес', 'priority, memory, engagement, chat volume', 'AI может монетизировать engagement, но inference cost и safety доминируют'],
+      ['Replika Android', 'оценка $2.36M/мес; 99K payers proxy', 'AI companion, avatar, memory, voice/video features', 'пользователи платят за emotional continuity, не raw text chat'],
+      ['Finch iOS', '$1.5M-$2.0M/мес public estimate range', 'self-care pet, soft progression, daily loop, Plus features', 'daily companion mechanics могут монетизироваться без scary “therapy” positioning'],
+      ['HeyGen / D-ID', 'API pricing показывает, что avatar video — paid compute', '$0.05-$0.0667/sec или plan/credit based pricing', 'talking avatar — premium event, не free habit content'],
+      ['AURA', '$9.99-$14.99/мес + tokens target', 'season, assistant memory, Life Canvas, rare video', 'должна быть cost-controlled AI product под premium visual wrapper']
     ],
-    note: 'The avatar is not decoration. It has to show the user why the week changed.'
+    note: 'Аватар — не декорация. Он должен помогать пользователю понять, почему изменилась неделя.'
   },
   {
-    title: 'What People Actually Pay For',
+    title: 'За что люди реально платят',
     type: 'pricingTable',
     rows: [
-      ['Paid object', 'Seen in competitors', 'Why users pay', 'AURA equivalent'],
-      ['Monthly subscription', 'Co-Star, Nebula, CHANI, Calm, Balance', 'regular personal value and lower friction', 'AURA Plus: weekly season + memory + Life Canvas'],
-      ['Annual subscription', 'Calm, Headspace, Waking Up, CHANI', 'commitment and cashflow when trust is formed', '$69-$89 annual after first completed week'],
-      ['Compatibility / relationship report', 'Co-Star, The Pattern, Nebula', 'emotionally high-stakes personal insight', 'relationship / future-self special episode'],
-      ['Live or urgent guidance', 'Astrotalk, AstroTime, Astroyogi', 'anxiety moment: “answer me now”', 'AI assistant first; human/creator layer later'],
-      ['Special visual asset', 'soulmate sketch, aura reading, avatar/video tools', 'ownable image of self/future/period', 'Life Canvas trailer or future-self video token']
+      ['Платный объект', 'Где видно у конкурентов', 'Почему платят', 'Эквивалент в AURA'],
+      ['Месячная подписка', 'Co-Star, Nebula, CHANI, Calm, Balance', 'регулярная личная ценность и низкое трение', 'AURA Plus: weekly season + memory + Life Canvas'],
+      ['Годовая подписка', 'Calm, Headspace, Waking Up, CHANI', 'commitment и cashflow, когда доверие уже сформировано', '$79-$89 annual после первой завершенной недели'],
+      ['Compatibility / relationship report', 'Co-Star, The Pattern, Nebula', 'эмоционально важный personal insight', 'relationship / future-self special episode'],
+      ['Live или urgent guidance', 'Astrotalk, AstroTime, Astroyogi', 'момент тревоги: “ответь мне сейчас”', 'сначала AI assistant; human/creator layer позже'],
+      ['Special visual asset', 'soulmate sketch, aura reading, avatar/video tools', 'ownable image себя/будущего/периода', 'Life Canvas trailer или future-self video token']
     ]
   },
   {
-    title: 'Pricing Decision',
+    title: 'Решение по pricing',
     type: 'auraMath',
     rows: [
-      ['Plan', 'Price', 'Included generation', 'Target margin logic'],
-      ['Free', '$0', 'first forecast + Day 1 loop + one medium Life Canvas', 'COGS target <$0.20; goal is activation, not generosity'],
-      ['Plus monthly', '$9.99-$14.99', 'daily text loop, memory, weekly recap, 2-4 images/mo', 'net after app fee ~$8.49-$12.74; COGS target <$1.50'],
-      ['Plus annual', '$69-$89/year', 'same loop + annual season framing', 'cashflow and lower churn pressure'],
-      ['Low video token', '$2.99-$4.99', 'Runway/Luma-class 5-8 sec visual moment', 'works if COGS <$1 and retries are capped'],
-      ['Premium video token', '$6.99-$9.99', 'Veo/Replicate/HeyGen high-quality moment', 'needed when COGS is $2-$4+'],
-      ['Creator season', '$14.99-$29.99', 'limited guided pack / custom assistant style', 'monetizes content leverage, not only compute']
+      ['План', 'Цена', 'Что входит по генерации', 'Логика маржи'],
+      ['Free', '$0', 'первый прогноз + Day 1 loop + один medium Life Canvas', 'COGS target <$0.20; цель — activation, не щедрость'],
+      ['Plus test', '$9.99', 'daily loop, memory, weekly recap, 30 images/mo, без обязательных 4 видео', 'нижний price test; проверяем willingness-to-pay'],
+      ['Visual Plus', '$12.99-$14.99', '30 images/mo + 4 weekly Runway 8s videos + recap', '$14.99 — верхний тест для полного video bundle'],
+      ['Plus annual', '$79-$89/year', 'тот же loop + annual season framing', 'cashflow и ниже churn pressure'],
+      ['Premium video token', '$4.99-$9.99', 'Veo/Replicate/HeyGen high-quality moment', 'нужен, если COGS $2-$4+ или нужен “wow” выше подписки'],
+      ['Creator season', '$14.99-$29.99', 'limited guided pack / custom assistant style', 'монетизирует content leverage, не только compute']
     ],
-    conclusion: 'AURA should not sell unlimited AI. It sells season, memory, causality and rare premium visual events.'
+    conclusion: 'AURA не должна продавать unlimited AI. Она продает season, memory, causality и лимитированные visual events.'
   },
   {
-    title: 'Conversion / ARPMAU Assumptions',
+    title: 'Гипотезы conversion / ARPMAU',
     type: 'finance',
     rows: [
-      ['Metric', 'Conservative', 'Base', 'Strong'],
+      ['Метрика', 'Conservative', 'Base', 'Strong'],
       ['Paid conversion', '1.5%', '2.5-3.0%', '4.0-5.0%'],
       ['Monthly ARPMAU', '$0.20', '$0.35-$0.50', '$0.80-$1.50'],
-      ['Monthly price', '$7.99-$9.99', '$9.99-$14.99', '$14.99'],
+      ['Monthly price', '$9.99', '$11.99-$12.99 blended', '$14.99'],
       ['Token buyer share', '3%', '8-12%', '15-20%'],
       ['CAC payer', '$300-$800', '$100-$250', '$30-$100'],
-      ['Verdict', 'content app risk', 'works if causality is understood', 'works only with high-intent moments']
+      ['Вердикт', 'content app risk', 'работает, если понятна causality', 'работает только с high-intent moments']
     ],
-    note: 'These assumptions are derived from competitor estimates: Co-Star, Nebula, The Pattern, AstroSage, AstroTime, Calm and Balance.'
+    note: 'Гипотезы построены из оценок конкурентов: Co-Star, Nebula, The Pattern, AstroSage, AstroTime, Calm и Balance.'
   },
   {
-    title: 'From Benchmarks To AURA Model',
+    title: 'От бенчмарков к модели AURA',
     type: 'assumptionBridge',
     rows: [
-      ['Input', 'Observed / benchmark range', 'AURA base assumption', 'Why this is reasonable'],
-      ['Paid conversion', '1.4-2.5% subscription astrology; 3.5% Balance; 4.5% AstroTime', '2.5-3.0%', 'base case assumes value is proven before paywall'],
-      ['ARPMAU', '$0.19-$0.37 subscription astrology; $0.57-$0.65 wellness; $1.82+ urgent guidance', '$0.35-$0.50', 'AURA needs to outperform generic astrology through visual/token uplift'],
-      ['Monthly price', '$8.99-$14.99 common paid band; $19.99+ premium teacher apps', '$9.99-$14.99', 'sits inside proven consumer subscription range'],
-      ['Video COGS', 'Runway ~$0.40 / 8s; Veo ~$4 / 8s; HeyGen ~$1.50-$2 / 30s', '4 Runway clips / paid month; no free video', 'weekly video can sit in Plus only if model, retries and count are capped'],
-      ['CAC payer', '$50-$150 organic/social; $150-$500+ paid web2app', '$100-$250 base', 'paid acquisition only after retention and paywall data']
+      ['Вводная', 'Диапазон бенчмарков', 'Гипотеза AURA', 'Почему это разумно'],
+      ['Paid conversion', '1.4-2.5% subscription astrology; 3.5% Balance; 4.5% AstroTime', '2.5-3.0%', 'base case предполагает, что value доказана до paywall'],
+      ['ARPMAU', '$0.19-$0.37 subscription astrology; $0.57-$0.65 wellness; $1.82+ urgent guidance', '$0.35-$0.50', 'AURA должна быть сильнее generic astrology за счет visual/token uplift'],
+      ['Monthly price', '$8.99-$14.99 common paid band; $19.99+ premium teacher apps', '$9.99-$12.99 base; $14.99 visual test', '$14.99 появляется только как верхний тест для video bundle'],
+      ['Video COGS', 'Runway ~$0.40 / 8s; Veo ~$4 / 8s; HeyGen ~$1.50-$2 / 30s', '4 Runway clips / paid month; no free video', 'weekly video можно держать в Plus только при лимитах и capped retries'],
+      ['CAC payer', '$50-$150 organic/social; $150-$500+ paid web2app', '$100-$250 base', 'paid acquisition только после retention и paywall data']
     ],
-    note: 'This is the missing bridge: competitor data is not the model; it is the guardrail for the model.'
+    note: 'Это важный мост: данные конкурентов — не готовая модель, а guardrail для модели AURA.'
   },
   {
-    title: 'Generation Subscription Package',
+    title: 'Подписка на генерации',
     type: 'generationPackage',
     rows: [
-      ['Asset', 'Frequency / month', 'Model option', 'Unit COGS', 'Monthly COGS'],
-      ['Daily card text', '30', 'LLM mini / structured prompt', '$0.003-$0.008', '$0.10-$0.25'],
-      ['Daily image / Life Canvas frame', '30', 'Runway gen4_image_turbo or low-cost image model', '$0.02-$0.04', '$0.60-$1.20'],
+      ['Asset', 'Частота / месяц', 'Модель', 'Unit COGS', 'Monthly COGS'],
+      ['Текст daily card', '30', 'LLM mini / structured prompt', '$0.003-$0.008', '$0.10-$0.25'],
+      ['Daily image / Life Canvas frame', '30', 'Runway gen4_image_turbo или low-cost image model', '$0.02-$0.04', '$0.60-$1.20'],
       ['Weekly 8s video', '4', 'Runway Gen-4 Turbo, 5 credits/sec', '~$0.40', '~$1.60'],
       ['Retry / failed generation buffer', '20-30%', 'media retry reserve', 'n/a', '$0.50-$1.10'],
-      ['Storage / infra / analytics', 'month', 'S3 + backend + events', 'n/a', '$0.20-$0.50'],
-      ['Total paid user COGS', 'Plus package', 'subscription generation bundle', 'n/a', '~$2.40-$4.05/mo']
+      ['Storage / infra / analytics', 'месяц', 'S3 + backend + events', 'n/a', '$0.20-$0.50'],
+      ['Total paid user COGS', 'Visual Plus package', 'subscription generation bundle', 'n/a', '~$2.40-$4.05/мес']
     ],
-    note: 'This is the recommended subscription bundle: 30 daily visual cards + 4 weekly videos, tightly capped.'
+    note: 'Рекомендуемый Visual Plus bundle: 30 daily visual cards + 4 weekly videos, жестко лимитировано.'
   },
   {
-    title: 'Free User Cost & Conversion Break-Even',
+    title: 'Стоимость free user и break-even conversion',
     type: 'freeUserModel',
     rows: [
-      ['Free scenario', 'Included usage', 'Free COGS / activated user', 'What must happen'],
-      ['Light free trial', 'first forecast + 3 cards + 1 image', '$0.08-$0.18', 'safe for broad acquisition tests'],
-      ['7-day free loop', '7 daily cards + 7 images + no video', '$0.25-$0.55', 'only works if D1/D7 and paywall intent are visible'],
-      ['Free video trial', '1 free 8s Runway video', '+$0.40-$0.60', 'risky unless it dramatically improves conversion'],
-      ['Plus contribution', '$14.99 price, 15% fee, $2.40-$4.05 COGS', '$8.70-$10.35 / month', 'base subscription margin per payer'],
-      ['Break-even CAC activated', '3% conversion, 3-month payer life', '~$0.53-$0.75', 'paid ads cannot scale yet without better LTV'],
-      ['Strong CAC activated', '5% conversion, 4-month payer life', '~$1.55-$2.05', 'possible only with strong retention and visual proof']
+      ['Free-сценарий', 'Что входит', 'Free COGS / activated user', 'Что должно случиться'],
+      ['Light free trial', 'первый прогноз + 3 cards + 1 image', '$0.08-$0.18', 'безопасно для broad acquisition tests'],
+      ['7-day free loop', '7 daily cards + 7 images + no video', '$0.25-$0.55', 'работает только если видны D1/D7 и paywall intent'],
+      ['Free video trial', '1 free 8s Runway video', '+$0.40-$0.60', 'рискованно, если не поднимает conversion резко'],
+      ['Plus contribution', '$12.99 blended price, 15% fee, $2.40-$4.05 COGS', '$6.99-$8.64 / month', 'базовая subscription margin per payer'],
+      ['Break-even CAC activated', '3% conversion, 3-month payer life', '~$0.42-$0.78', 'paid ads пока нельзя масштабировать без лучшего LTV'],
+      ['Strong CAC activated', '5% conversion, 4-month payer life', '~$1.40-$1.73', 'возможно только при сильной retention и visual proof']
     ],
-    note: 'Free users are not free. AURA should test paid acquisition only after free COGS and paywall conversion are measured.'
+    note: 'Free users не бесплатны. AURA должна тестировать paid acquisition только после замера free COGS и paywall conversion.'
   },
   {
-    title: 'Generation Cost Benchmarks',
+    title: 'Бенчмарки стоимости генерации',
     type: 'costBenchmarks',
     rows: [
-      ['Layer', 'Provider / model', 'Public price signal', 'AURA implication'],
-      ['LLM', 'OpenAI GPT-4.1 mini', '$0.40 / 1M input tokens; $1.60 / 1M output tokens', 'daily text loop is cheap if prompts are structured'],
-      ['Image', 'OpenAI Images', '~$0.01 low / $0.04 medium / $0.17 high per square image', 'Life Canvas can be included if image count is capped'],
-      ['Cinematic video', 'Google Veo 2 / Vertex AI', '~$0.50 per generated second', '8 sec ~= $4.00; cannot be free daily content'],
-      ['Cinematic video', 'Runway API', '$0.25 per 5 sec API example', '8 sec ~= $0.40; viable for tests, still needs retry budget'],
-      ['Video model', 'Replicate Wan 2.1 720p', '$0.24 per output second', '8 sec ~= $1.92; better as paid token / milestone'],
-      ['Talking avatar', 'HeyGen API Avatar IV/V', '$0.05/sec photo avatar; $0.0667/sec digital twin', '30 sec ~= $1.50-$2.00; not a default daily loop'],
-      ['Avatar API', 'D-ID Build plan', '$14.4/mo annual plan; up to 16 offline video min', '~$0.90/min plan math, but limits/watermark/credits matter']
+      ['Layer', 'Provider / model', 'Public price signal', 'Вывод для AURA'],
+      ['LLM', 'OpenAI GPT-4.1 mini', '$0.40 / 1M input tokens; $1.60 / 1M output tokens', 'daily text loop дешевый, если prompts структурированы'],
+      ['Image', 'OpenAI Images', '~$0.01 low / $0.04 medium / $0.17 high per square image', 'Life Canvas можно включать, если image count capped'],
+      ['Cinematic video', 'Google Veo 2 / Vertex AI', '~$0.50 per generated second', '8 sec ~= $4.00; нельзя делать free daily content'],
+      ['Cinematic video', 'Runway API', '$0.25 per 5 sec API example', '8 sec ~= $0.40; подходит для тестов, но нужен retry budget'],
+      ['Video model', 'Replicate Wan 2.1 720p', '$0.24 per output second', '8 sec ~= $1.92; лучше как paid token / milestone'],
+      ['Talking avatar', 'HeyGen API Avatar IV/V', '$0.05/sec photo avatar; $0.0667/sec digital twin', '30 sec ~= $1.50-$2.00; не default daily loop'],
+      ['Avatar API', 'D-ID Build plan', '$14.4/mo annual plan; up to 16 offline video min', '~$0.90/min plan math, но limits/watermark/credits важны']
     ],
-    note: 'All prices are public API/pricing-page signals as of June 2026; exact billing must be rechecked before procurement.'
+    note: 'Все цены — public API/pricing-page signals на июнь 2026; exact billing нужно перепроверить перед закупкой.'
   },
   {
-    title: 'Cost Per User / Month',
+    title: 'Стоимость пользователя / месяц',
     type: 'unitCost',
     rows: [
-      ['User type', 'Usage assumption', 'Variable AI cost', 'Business meaning'],
-      ['Free active user', '8 text loops + 1 medium image + no video', '$0.10-$0.20 / MAU', 'safe if onboarding is capped and no free video exists'],
-      ['Engaged free user', '20 text loops + 2 images + no video', '$0.25-$0.45 / MAU', 'acceptable only if retention and conversion are visible'],
-      ['Plus with Runway video', '30 cards + 30 images + 4 weekly 8s videos', '$2.40-$4.05 / payer', '$14.99 subscription can hold margin if retries are capped'],
-      ['Plus with Veo video', '+ four weekly 8s Veo clips', '+$16.00 before retries', 'too expensive for base subscription'],
-      ['Premium avatar token', 'HeyGen / talking-avatar moment', '$1.50-$2.00 per 30 sec', 'sell as separate pack or milestone'],
+      ['Тип пользователя', 'Usage assumption', 'Variable AI cost', 'Бизнес-смысл'],
+      ['Free active user', '8 text loops + 1 medium image + no video', '$0.10-$0.20 / MAU', 'безопасно, если onboarding capped и нет free video'],
+      ['Engaged free user', '20 text loops + 2 images + no video', '$0.25-$0.45 / MAU', 'допустимо только если видны retention и conversion'],
+      ['Visual Plus с Runway video', '30 cards + 30 images + 4 weekly 8s videos', '$2.40-$4.05 / payer', '$12.99-$14.99 может держать margin при capped retries'],
+      ['Plus с Veo video', '+ four weekly 8s Veo clips', '+$16.00 before retries', 'слишком дорого для базовой подписки'],
+      ['Premium avatar token', 'HeyGen / talking-avatar moment', '$1.50-$2.00 per 30 sec', 'продавать отдельным pack или milestone'],
       ['High-quality video token', 'Replicate / Veo / premium model', '$1.92-$4.00 per 8 sec', 'price token by model quality']
     ],
     formula: 'COGS = LLM tokens + images + video seconds × provider price + storage + support + failed-generation buffer.',
-    conclusion: 'The daily product can be cheap. Weekly video is viable only as a capped paid subscription benefit or token.'
+    conclusion: 'Daily product может быть дешевым. Weekly video жизнеспособно только как capped paid subscription benefit или token.'
   },
   {
-    title: 'Video Cost Stress Test',
+    title: 'Stress-test стоимости видео',
     type: 'videoStress',
     rows: [
-      ['Scenario', '100 users', '1,000 users', '10,000 users', 'Conclusion'],
-      ['4 weekly Runway clips / payer', '$160', '$1,600', '$16,000', 'viable inside $14.99 Plus if paid cohort is real'],
-      ['4 weekly Veo clips / payer', '$1,600', '$16,000', '$160,000', 'not viable as base subscription bundle'],
-      ['1 free Runway trial clip', '$40 COGS', '$400 COGS', '$4,000 COGS', 'only if it sharply lifts paid conversion'],
-      ['1 premium Replicate/Wan clip', '$192 COGS', '$1,920 COGS', '$19,200 COGS', 'needs $4.99-$9.99 token or bundle'],
-      ['1 paid 30s HeyGen avatar', '$150-$200 COGS', '$1,500-$2,000', '$15,000-$20,000', 'works for premium forecast / assistant moment'],
-      ['30 daily Life Canvas images', '$60-$120 COGS', '$600-$1,200', '$6,000-$12,000', 'safe only for paid users, capped retries']
+      ['Сценарий', '100 users', '1,000 users', '10,000 users', 'Вывод'],
+      ['4 weekly Runway clips / payer', '$160', '$1,600', '$16,000', 'жизнеспособно внутри $12.99-$14.99, если paid cohort реальный'],
+      ['4 weekly Veo clips / payer', '$1,600', '$16,000', '$160,000', 'не жизнеспособно как base subscription bundle'],
+      ['1 free Runway trial clip', '$40 COGS', '$400 COGS', '$4,000 COGS', 'только если резко поднимает paid conversion'],
+      ['1 premium Replicate/Wan clip', '$192 COGS', '$1,920 COGS', '$19,200 COGS', 'нужен $4.99-$9.99 token или bundle'],
+      ['1 paid 30s HeyGen avatar', '$150-$200 COGS', '$1,500-$2,000', '$15,000-$20,000', 'работает для premium forecast / assistant moment'],
+      ['30 daily Life Canvas images', '$60-$120 COGS', '$600-$1,200', '$6,000-$12,000', 'безопасно только для paid users, capped retries']
     ],
-    note: 'This is the decision: Runway can be the weekly subscription video; Veo/avatars stay premium or later.'
+    note: 'Решение: Runway может быть weekly subscription video; Veo/avatars остаются premium или later.'
   },
   {
-    title: 'AURA Base Financial Model',
+    title: 'Базовая финансовая модель AURA',
     type: 'finance',
     rows: [
-      ['Scenario', '10k MAU', '50k MAU', '150k MAU'],
+      ['Сценарий', '10k MAU', '50k MAU', '150k MAU'],
       ['Paid conversion', '1.5%', '3.0%', '4.5%'],
       ['Payers', '150', '1,500', '6,750'],
-      ['Gross subscription @ $14.99', '$2.2K/mo', '$22.5K/mo', '$101.2K/mo'],
-      ['Net after 15% fee', '$1.9K/mo', '$19.1K/mo', '$86.0K/mo'],
-      ['Paid-user generation COGS', '$0.4K-$0.6K', '$3.6K-$6.1K', '$16.2K-$27.3K'],
-      ['Verdict', 'thin until retention is proven', 'works if free COGS is capped', 'strong if annual + token upsell work']
+      ['Gross subscription @ $12.99 blended', '$1.9K/мес', '$19.5K/мес', '$87.7K/мес'],
+      ['Net после 15% fee', '$1.7K/мес', '$16.6K/мес', '$74.5K/мес'],
+      ['COGS генерации paid users', '$0.4K-$0.6K', '$3.6K-$6.1K', '$16.2K-$27.3K'],
+      ['Вердикт', 'тонко, пока не доказана retention', 'работает при capped free COGS', 'сильно, если annual + token upsell работают']
     ],
-    note: 'Base model assumes Plus users receive 30 daily visuals and 4 Runway 8s videos per month.'
+    note: 'Base model считает blended price $12.99. $14.99 — верхний тест для полного Visual Plus с 4 видео/мес.'
   },
   {
-    title: 'Marketing Benchmarks',
+    title: 'Маркетинговые бенчмарки',
     type: 'competitorEconomics',
     rows: [
-      ['Competitor / archetype', 'Public marketing signal', 'Risk', 'AURA use'],
-      ['Nebula', '$6.8M/mo YouTube ad spend estimate; 620 creatives; 18.6M visits Jan 2026; 50 landing pages', 'paid scale requires high LTV and aggressive funnel', 'use as paid-test inspiration, not MVP operating model'],
-      ['Nebula prelands', 'soulmate sketch 10% ad traffic; marriage compatibility 8.2%; aura reading 8%', 'curiosity hooks can become scammy', 'test future-self / visual week / relationship hooks carefully'],
-      ['Co-Star', '20M+ downloads with no real marketing spend; 25% young US women 18-25 downloaded historically', 'hard to force virality', 'build shareable identity language and relationship/social hooks'],
-      ['Astrotalk', 'FY25 total expenses Rs 1,129 crore; marketing/tech/ops/talent growth cited', 'marketplace growth is expensive operationally', 'do not start with marketplace/expert model'],
-      ['CHANI / Waking Up', 'trusted founder/teacher voice', 'requires real authority', 'use Alina/creator expertise without guru tone']
+      ['Конкурент / архетип', 'Public marketing signal', 'Риск', 'Как использовать в AURA'],
+      ['Nebula', '$6.8M/мес estimated YouTube ad spend; 620 creatives; 18.6M visits Jan 2026; 50 landing pages', 'paid scale требует высокий LTV и агрессивную funnel', 'использовать как paid-test inspiration, не MVP operating model'],
+      ['Nebula prelands', 'soulmate sketch 10% ad traffic; marriage compatibility 8.2%; aura reading 8%', 'curiosity hooks могут выглядеть scammy', 'аккуратно тестировать future-self / visual week / relationship hooks'],
+      ['Co-Star', '20M+ downloads без real marketing spend; 25% young US women 18-25 downloaded historically', 'virality сложно повторить искусственно', 'строить shareable identity language и relationship/social hooks'],
+      ['Astrotalk', 'FY25 total expenses Rs 1,129 crore; marketing/tech/ops/talent growth cited', 'marketplace growth дорогой операционно', 'не начинать с marketplace/expert model'],
+      ['CHANI / Waking Up', 'trusted founder/teacher voice', 'требует настоящей authority', 'использовать экспертизу Алины без guru tone']
     ],
-    note: 'Sources: Web2App World, Axios/TIME, Moneycontrol/ET-style reporting and qualitative product observations.'
+    note: 'Sources: Web2App World, Axios/TIME, Moneycontrol/ET-style reporting и qualitative product observations.'
   },
   {
-    title: 'AURA Marketing Funnel Model',
+    title: 'Модель маркетинговой воронки AURA',
     type: 'marketingModel',
     rows: [
-      ['Stage', 'Conservative', 'Base', 'Strong', 'Decision'],
-      ['Visitor -> signup', '8%', '15%', '25%', 'landing must be tested before ad scale'],
+      ['Этап', 'Conservative', 'Base', 'Strong', 'Решение'],
+      ['Visitor -> signup', '8%', '15%', '25%', 'landing нужно тестировать до ad scale'],
       ['Signup -> activated', '35%', '50%', '65%', 'activation = first completed loop'],
-      ['Activated -> paid', '1.5%', '3.0%', '5.0%', 'paywall after value moment'],
-      ['CAC activated target', '<$0.50', '<$1.00', '<$2.00', 'based on COGS + contribution margin'],
-      ['First test budget', '$500', '$1,500-$3,000', '$5,000', 'small tests before scaling'],
-      ['First 1,000 users', 'warm/interviews', 'creator + organic', 'creator + paid test', 'Alina marketing layer can sit above this']
+      ['Activated -> paid', '1.5%', '3.0%', '5.0%', 'paywall после value moment'],
+      ['CAC activated target', '<$0.50', '<$1.00', '<$2.00', 'на основе COGS + contribution margin'],
+      ['First test budget', '$500', '$1,500-$3,000', '$5,000', 'маленькие тесты до scaling'],
+      ['First 1,000 users', 'warm/interviews', 'creator + organic', 'creator + paid test', 'маркетинговый слой Алины ложится сверху']
     ],
-    note: 'Marketing cannot be modeled separately from free COGS. If free usage is generous, CAC must be extremely low.'
+    note: 'Маркетинг нельзя считать отдельно от free COGS. Чем щедрее free usage, тем ниже должен быть CAC.'
   },
   {
-    title: 'Go-to-Market Strategy',
+    title: 'Go-to-Market стратегия',
     type: 'gtm',
     blocks: [
-      ['1. First 100 are not bought by ads', 'warm users, interviews, manual weekly forecasts and concierge cohort. Goal: understand the loop, not installs.'],
-      ['2. Creator-led proof', 'micro creators in astrology/self-growth/visual AI pass a 7-day season and show the experience, not a generic ad.'],
-      ['3. Short-form hooks', 'future-self, weekly forecast, avatar transformation, “not horoscope”, before/after Life Canvas and paid-intent CTA.'],
-      ['4. Shareable artifacts', 'Life Canvas card, season recap, future-self poster and trailer week as viral layer after value moment.']
+      ['1. Первые 100 не покупаются рекламой', 'warm users, interviews, ручные weekly forecasts и concierge cohort. Цель: понять loop, а не installs.'],
+      ['2. Creator-led proof', 'micro creators в astrology/self-growth/visual AI проходят 7-day season и показывают опыт, не generic ad.'],
+      ['3. Short-form hooks', 'future-self, weekly forecast, avatar transformation, “not horoscope”, before/after Life Canvas и paid-intent CTA.'],
+      ['4. Shareable artifacts', 'Life Canvas card, season recap, future-self poster и trailer week как viral layer после value moment.']
     ]
   },
   {
-    title: '30-Day Validation Plan',
+    title: '30-дневный план проверки',
     type: 'validation',
     weeks: [
-      ['Week 1', '20-30 interviews + manual weekly forecast concierge'],
-      ['Week 2', '10-screen prototype + 2 Life Canvas visual styles'],
-      ['Week 3', 'landing + price test $7.99 / $9.99 / $14.99'],
-      ['Week 4', '30-50 users through 3-7 days + paid-intent test']
+      ['Неделя 1', '20-30 interviews + ручной weekly forecast concierge'],
+      ['Неделя 2', '10-screen prototype + 2 visual styles для Life Canvas'],
+      ['Неделя 3', 'landing + price test $9.99 / $12.99 / $14.99'],
+      ['Неделя 4', '30-50 users через 3-7 дней + paid-intent test']
     ],
-    metrics: ['>70% understand category', '>50% explain Canvas change', 'D1 >20%', 'paid intent >5%']
+    metrics: ['>70% понимают категорию', '>50% объясняют Canvas change', 'D1 >20%', 'paid intent >5%']
   },
   {
-    title: 'Product Scope: MVP vs Later',
+    title: 'Scope продукта: MVP vs Later',
     type: 'pricingTable',
     rows: [
-      ['Layer', 'MVP', 'Later', 'Why'],
-      ['Core loop', 'Episode → Action → Reset → Reflection → Life Canvas', 'season branching and deeper memory', 'must prove causality first'],
-      ['Assistant', 'chosen tone + weekly context + memory summary', 'voice/video assistant, creator voices', 'text memory is cheaper and faster to validate'],
-      ['Visual layer', 'image-first Life Canvas + avatar style', 'cinematic video, talking avatar', 'video is premium COGS'],
-      ['Monetization', 'Plus + annual + one token test', 'creator seasons, expert layer, marketplace', 'avoid operational complexity before retention'],
-      ['Community', 'none in MVP', 'sharing, social, cohorts', 'do not build social network before core value is proven']
+      ['Layer', 'MVP', 'Later', 'Почему'],
+      ['Core loop', 'Episode → Action → Reset → Reflection → Life Canvas', 'season branching и deeper memory', 'сначала нужно доказать causality'],
+      ['Assistant', 'chosen tone + weekly context + memory summary', 'voice/video assistant, creator voices', 'text memory дешевле и быстрее валидировать'],
+      ['Visual layer', 'image-first Life Canvas + avatar style', 'cinematic video, talking avatar', 'video — premium COGS'],
+      ['Monetization', 'Plus + annual + one token test', 'creator seasons, expert layer, marketplace', 'избегаем complexity до retention'],
+      ['Community', 'нет в MVP', 'sharing, social, cohorts', 'не строим social network до доказанной core value']
     ]
   },
   {
-    title: 'Risks',
+    title: 'Риски',
     type: 'risks',
     rows: [
-      ['Risk', 'How it breaks', 'Mitigation'],
-      ['Looks like horoscope', 'user thinks it is generic astrology', 'position as weekly life-series and action, not fate'],
-      ['Avatar feels random', 'user cannot explain visual change', 'show cause next to Canvas and tie it to action/reflection'],
+      ['Риск', 'Как ломает продукт', 'Митигация'],
+      ['Похоже на гороскоп', 'user thinks it is generic astrology', 'позиционировать как weekly life-series и action, не fate'],
+      ['Avatar feels random', 'user cannot explain visual change', 'показывать cause рядом с Canvas и связывать с action/reflection'],
       ['Video cost kills margin', 'free users generate expensive clips', 'premium/token video only; log COGS per asset'],
-      ['AI sounds generic', 'low trust and no return', 'prompt QA, user feedback and memory guardrails'],
-      ['No paid intent', 'users like it but do not pay', 'paywall after first completed loop and price tests by cohort']
+      ['AI sounds generic', 'low trust and no return', 'prompt QA, user feedback и memory guardrails'],
+      ['No paid intent', 'users like it but do not pay', 'paywall after first completed loop и price tests by cohort']
     ]
   },
   {
-    title: 'Growth Roadmap',
+    title: 'Roadmap роста',
     type: 'roadmap',
     steps: [
       ['IDEA', 'forecast + avatars'],
@@ -441,36 +441,36 @@ const slides = [
     ]
   },
   {
-    title: 'What We Should Build',
+    title: 'Что нужно строить',
     type: 'overview',
     blocks: [
-      ['Product', 'A weekly visual self-guidance app where the user enters birth data/context, receives a forecast, completes daily micro-actions, and sees Life Canvas evolve.'],
-      ['MVP', 'Text-first assistant, weekly season, daily episode, action/reset/reflection, image-first Life Canvas, Plus paywall, one premium video token test.'],
-      ['Pricing', '$9.99-$14.99 monthly, $69-$89 annual, $2.99-$9.99 visual/video tokens, no unlimited generation.'],
-      ['GTM', 'Start with interviews and concierge cohorts, then creator-led proof, then small paid tests around visual week/future-self hooks.'],
-      ['Kill criteria', 'Stop or pivot if users cannot explain Canvas causality, D1 is below 20%, paid intent stays below 5%, or video COGS cannot be controlled.'],
-      ['Next step', 'Create 3-5 visual examples, clickable prototype, 30-user cohort and one pricing/token experiment.']
+      ['Product', 'Weekly visual self-guidance app: пользователь вводит birth data/context, получает прогноз, делает daily micro-actions и видит, как развивается Life Canvas.'],
+      ['MVP', 'Text-first assistant, weekly season, daily episode, action/reset/reflection, image-first Life Canvas, Plus paywall, один premium video token test.'],
+      ['Pricing', '$9.99 стартовый тест, $12.99 blended/base, $14.99 visual bundle с 4 видео/мес, $4.99-$9.99 premium tokens, no unlimited generation.'],
+      ['GTM', 'Начать с interviews и concierge cohorts, затем creator-led proof, затем маленькие paid tests вокруг visual week/future-self hooks.'],
+      ['Kill criteria', 'Stop/pivot, если users не объясняют Canvas causality, D1 ниже 20%, paid intent ниже 5% или video COGS нельзя контролировать.'],
+      ['Next step', 'Сделать 3-5 visual examples, clickable prototype, 30-user cohort и один pricing/token experiment.']
     ]
   },
   {
-    title: 'Development Offer: Phase 1',
+    title: 'Оффер на разработку: Phase 1',
     type: 'offerSlide',
     rows: [
-      ['Item', 'Included in €5,000 Phase 1', 'Not included yet'],
-      ['Prototype', 'clickable Figma / screen logic / product flow', 'full native mobile app'],
-      ['Generation pipeline', 'manual or semi-automated Runway/image workflow for 30-user test', 'scaled backend with unlimited generation'],
-      ['Content logic', 'weekly forecast prompts, daily card structure, Life Canvas explanation', 'large content marketplace'],
-      ['Landing / test', 'simple landing, price test, lead capture, analytics events', 'large paid acquisition campaign'],
-      ['Validation pack', '30-user cohort plan, metrics, interview script, results template', 'guaranteed revenue or scale'],
-      ['Alina side', 'marketing/creator distribution and expert content layer', 'handled outside development budget']
+      ['Блок', 'Что входит в €5,000 Phase 1', 'Что пока не входит'],
+      ['Prototype', 'clickable Figma / логика экранов / product flow', 'полноценное native mobile app'],
+      ['Generation pipeline', 'ручной или semi-automated Runway/image workflow для 30-user test', 'scaled backend с unlimited generation'],
+      ['Content logic', 'weekly forecast prompts, daily card structure, объяснение Life Canvas', 'большой content marketplace'],
+      ['Landing / test', 'simple landing, price test, lead capture, analytics events', 'крупная paid acquisition campaign'],
+      ['Validation pack', '30-user cohort plan, metrics, interview script, results template', 'гарантированный revenue или scale'],
+      ['Alina side', 'marketing/creator distribution и expert content layer', 'за пределами development budget']
     ],
-    note: 'Offer logic: do not sell a huge build yet. Sell a tight proof sprint that verifies product loop, generation cost and paid intent.'
+    note: 'Логика оффера: не продавать огромную разработку. Продать узкий proof sprint, который проверяет product loop, generation cost и paid intent.'
   },
   {
-    title: 'Contacts / Next Step',
+    title: 'Контакты / следующий шаг',
     type: 'contacts',
     name: 'AURA',
-    cta: 'Next step: generate visual examples, assemble clickable prototype, test first 30 users, and verify whether Life Canvas causality is understood.'
+    cta: 'Следующий шаг: сгенерировать visual examples, собрать clickable prototype, протестировать первых 30 users и проверить, понимают ли они causality Life Canvas.'
   }
 ];
 
@@ -598,7 +598,7 @@ function bodyFor(slide, n) {
   ctx.addShape(slide, { left: 470, top: 245, width: 130, height: 130, fill: C.purple, line: { style: 'solid', fill: C.purple, width: 0 } });
   ctx.addText(slide, { text: 'A', left: 492, top: 268, width: 86, height: 86, fontSize: 76, bold: true, fontFace: 'Montserrat', color: C.white, align: 'center' });
   ctx.addText(slide, { text: 'AURA', left: 620, top: 282, width: 320, height: 68, fontSize: 58, bold: true, fontFace: 'Montserrat', color: C.purple });
-  ctx.addText(slide, { text: 'Product / Investor Deck', left: 465, top: 382, width: 500, height: 34, fontSize: 24, fontFace: 'Arial', color: C.muted, align: 'center' });
+  ctx.addText(slide, { text: 'Продуктовая / инвесторская презентация', left: 430, top: 382, width: 570, height: 34, fontSize: 24, fontFace: 'Arial', color: C.muted, align: 'center' });
 `;
   }
 
@@ -681,7 +681,7 @@ function bodyFor(slide, n) {
   ctx.addShape(slide, { geometry: 'ellipse', left: ${x + 43}, top: ${y + 86}, width: 52, height: 52, fill: ${i === 4 ? 'C.greenLight' : 'C.purpleLight'}, line: { style: 'solid', fill: C.line, width: 0.8 } });
   ctx.addText(slide, { text: '${esc(s[2])}', left: ${x + 16}, top: ${y + 166}, width: 106, height: 82, fontSize: 12, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
   ctx.addShape(slide, { left: ${x + 24}, top: ${y + 274}, width: 90, height: 24, fill: ${i === 5 ? 'C.greenLight' : 'C.purpleLight'}, line: { style: 'solid', fill: C.line, width: 0.6 } });
-  ctx.addText(slide, { text: '${i === 5 ? 'choose plan' : 'continue'}', left: ${x + 28}, top: ${y + 279}, width: 82, height: 12, fontSize: 10, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });`;
+  ctx.addText(slide, { text: '${i === 5 ? 'выбрать' : 'дальше'}', left: ${x + 28}, top: ${y + 279}, width: 82, height: 12, fontSize: 10, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });`;
   }).join('\n')}
   ctx.addText(slide, { text: '${esc(slide.note)}', left: 174, top: 570, width: 820, height: 34, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
 `;
@@ -695,12 +695,12 @@ function bodyFor(slide, n) {
   ctx.addShape(slide, { left: 112, top: 210, width: 360, height: 250, fill: C.purpleLight, line: { style: 'solid', fill: C.line, width: 1.2 } });
   ctx.addShape(slide, { geometry: 'ellipse', left: 165, top: 260, width: 120, height: 120, fill: '#D8D5E6', line: { style: 'solid', fill: '#D8D5E6', width: 0 } });
   ctx.addShape(slide, { geometry: 'ellipse', left: 262, top: 235, width: 145, height: 145, fill: '#C4B7F5', line: { style: 'solid', fill: '#C4B7F5', width: 0 } });
-  ctx.addText(slide, { text: 'fog / pressure\\nunclear week', left: 158, top: 405, width: 270, height: 42, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: 'туман / давление\\nнеясная неделя', left: 158, top: 405, width: 270, height: 42, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
   ctx.addShape(slide, { left: 605, top: 210, width: 360, height: 250, fill: '#F4FFF0', line: { style: 'solid', fill: C.line, width: 1.2 } });
   ctx.addShape(slide, { geometry: 'ellipse', left: 668, top: 258, width: 120, height: 120, fill: C.greenLight, line: { style: 'solid', fill: C.greenLight, width: 0 } });
   ctx.addShape(slide, { left: 780, top: 268, width: 125, height: 28, fill: C.purple, line: { style: 'solid', fill: C.purple, width: 0 } });
   ctx.addShape(slide, { left: 780, top: 318, width: 90, height: 28, fill: C.purpleDark, line: { style: 'solid', fill: C.purpleDark, width: 0 } });
-  ctx.addText(slide, { text: 'clear route\\ngrounded self', left: 650, top: 405, width: 270, height: 42, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: 'ясный маршрут\\nсобранное состояние', left: 650, top: 405, width: 270, height: 42, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
   ctx.addText(slide, { text: '→', left: 512, top: 300, width: 50, height: 44, fontSize: 40, bold: true, fontFace: 'Arial', color: C.purple, align: 'center' });
   ctx.addShape(slide, { left: 180, top: 498, width: 790, height: 56, fill: C.purpleLight, line: { style: 'solid', fill: C.line, width: 1 } });
   ctx.addText(slide, { text: '${esc(slide.cause)}', left: 200, top: 510, width: 750, height: 30, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
@@ -801,7 +801,7 @@ function bodyFor(slide, n) {
     return `
   title(slide, ctx, '${esc(slide.title)}');
   ctx.addShape(slide, { left: 70, top: 135, width: 265, height: 455, fill: C.purpleLight, line: { style: 'solid', fill: C.line, width: 1.1 } });
-  ctx.addText(slide, { text: 'PLUS PACKAGE', left: 95, top: 164, width: 215, height: 30, fontSize: 25, bold: true, fontFace: 'Montserrat', color: C.purpleDark, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: 'VISUAL PLUS', left: 95, top: 164, width: 215, height: 30, fontSize: 25, bold: true, fontFace: 'Montserrat', color: C.purpleDark, align: 'center', fit: 'shrink' });
   ctx.addText(slide, { text: '30 daily cards\\n30 images\\n4 weekly 8s videos\\nmemory + recap', left: 105, top: 235, width: 195, height: 145, fontSize: 22, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
   ctx.addText(slide, { text: '~$2.40-$4.05', left: 88, top: 430, width: 230, height: 42, fontSize: 33, bold: true, fontFace: 'Montserrat', color: C.purpleDark, align: 'center', fit: 'shrink' });
   ctx.addText(slide, { text: 'COGS / paid user / month', left: 100, top: 482, width: 205, height: 28, fontSize: 17, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
@@ -833,7 +833,7 @@ function bodyFor(slide, n) {
   ctx.addShape(slide, { left: 70, top: 142, width: 245, height: 420, fill: C.greenLight, line: { style: 'solid', fill: C.line, width: 1.1 } });
   ctx.addText(slide, { text: '€5,000', left: 95, top: 210, width: 195, height: 55, fontSize: 48, bold: true, fontFace: 'Montserrat', color: C.purpleDark, align: 'center' });
   ctx.addText(slide, { text: 'Phase 1\\nproof sprint', left: 105, top: 300, width: 175, height: 70, fontSize: 28, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
-  ctx.addText(slide, { text: 'not a full-scale app build', left: 95, top: 442, width: 190, height: 26, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: 'не full-scale app build', left: 95, top: 442, width: 190, height: 26, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
   ${table(slide.rows, [150, 390, 300], 345, 145, 56)}
   ctx.addText(slide, { text: '${esc(slide.note)}', left: 140, top: 620, width: 900, height: 30, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
 `;
@@ -844,7 +844,7 @@ function bodyFor(slide, n) {
   title(slide, ctx, '${esc(slide.title)}');
   ${table(slide.rows, [210, 225, 230, 420], 54, 176, 58)}
   ctx.addText(slide, { text: '${esc(slide.conclusion)}', left: 610, top: 535, width: 500, height: 56, fontSize: 20, fontFace: 'Arial', color: C.ink, fit: 'shrink' });
-  source(slide, ctx, 'Sources: Sacra, Adapty, Rev.now public estimates. Figures are directional public proxies, not private company P&L.');
+  source(slide, ctx, 'Источники: Sacra, Adapty, Rev.now public estimates. Цифры являются directional public proxies, не private company P&L.');
 `;
   }
 
@@ -862,7 +862,7 @@ function bodyFor(slide, n) {
     return `
   title(slide, ctx, '${esc(slide.title)}');
   ${slide.bullets.map((t, i) => `bullet(slide, ctx, '${esc(t)}', 90, ${190 + i * 72}, 660, 20);`).join('\n  ')}
-  ctx.addText(slide, { text: 'Conclusion', left: 760, top: 210, width: 250, height: 28, fontSize: 24, bold: true, fontFace: 'Arial', color: C.ink });
+  ctx.addText(slide, { text: 'Вывод', left: 760, top: 210, width: 250, height: 28, fontSize: 24, bold: true, fontFace: 'Arial', color: C.ink });
   ctx.addText(slide, { text: '${esc(slide.conclusion)}', left: 760, top: 255, width: 330, height: 180, fontSize: 22, fontFace: 'Arial', color: C.ink, fit: 'shrink' });
 `;
   }
@@ -872,8 +872,8 @@ function bodyFor(slide, n) {
   title(slide, ctx, '${esc(slide.title)}');
   ctx.addShape(slide, { left: 520, top: 135, width: 2, height: 470, fill: C.line });
   ctx.addShape(slide, { left: 135, top: 395, width: 820, height: 2, fill: C.line });
-  ctx.addText(slide, { text: 'Depth of personal meaning', left: 38, top: 355, width: 130, height: 70, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink });
-  ctx.addText(slide, { text: 'Visual / companion experience', left: 760, top: 610, width: 260, height: 24, fontSize: 18, italic: true, fontFace: 'Arial', color: C.ink });
+  ctx.addText(slide, { text: 'Глубина личного смысла', left: 38, top: 355, width: 130, height: 70, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink });
+  ctx.addText(slide, { text: 'Визуальный / companion experience', left: 760, top: 610, width: 260, height: 24, fontSize: 18, italic: true, fontFace: 'Arial', color: C.ink });
   pill(slide, ctx, 'Calm', 220, 458, 150, 70, C.grey);
   pill(slide, ctx, 'Co-Star', 610, 455, 160, 70, C.purpleLight);
   pill(slide, ctx, 'Replika', 615, 250, 170, 70, C.grey);
@@ -909,7 +909,7 @@ function bodyFor(slide, n) {
   title(slide, ctx, '${esc(slide.title)}');
   ${table(slide.rows, [240, 260, 260, 260], 70, 180, 50)}
   ctx.addText(slide, { text: '${esc(slide.note)}', left: 112, top: 555, width: 940, height: 40, fontSize: 17, italic: true, fontFace: 'Arial', color: C.ink, align: 'center' });
-  source(slide, ctx, 'Assumptions: $10-14 ARPPU, image-first cost control, premium video gated. Needs recalculation after prototype telemetry.');
+  source(slide, ctx, 'Assumptions: $10-14 ARPPU, image-first cost control, premium video gated. Нужно пересчитать после prototype telemetry.');
 `;
   }
 
@@ -918,7 +918,7 @@ function bodyFor(slide, n) {
   title(slide, ctx, '${esc(slide.title)}');
   ${table(slide.rows, [155, 245, 310, 360], 54, 150, 54)}
   ctx.addText(slide, { text: '${esc(slide.note)}', left: 80, top: 610, width: 990, height: 34, fontSize: 15, italic: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
-  source(slide, ctx, 'Sources: OpenAI, Google Vertex AI, Runway, Replicate, HeyGen, D-ID, Luma public pricing pages.');
+  source(slide, ctx, 'Источники: OpenAI, Google Vertex AI, Runway, Replicate, HeyGen, D-ID, Luma public pricing pages.');
 `;
   }
 
@@ -973,7 +973,7 @@ function bodyFor(slide, n) {
   ${slide.steps.map((s, i) => `
   pill(slide, ctx, '${esc(s[0])}', ${55 + i * 185}, 320, 130, 58, ${i === 2 || i === 5 ? 'C.greenLight' : i === 3 ? 'C.purple' : 'C.grey'}, C.line, 17);
   ctx.addText(slide, { text: '${esc(s[1])}', left: ${45 + i * 185}, top: 402, width: 150, height: 54, fontSize: 16, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });`).join('\n')}
-  ctx.addText(slide, { text: 'The roadmap stays narrow until the loop is proven: first causality, then retention, then paid scale.', left: 178, top: 520, width: 820, height: 42, fontSize: 22, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
+  ctx.addText(slide, { text: 'Roadmap остается узким, пока loop не доказан: сначала causality, затем retention, затем paid scale.', left: 178, top: 520, width: 820, height: 42, fontSize: 22, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
 `;
   }
 
@@ -981,7 +981,7 @@ function bodyFor(slide, n) {
     return `
   title(slide, ctx, '${esc(slide.title)}');
   ${slide.bullets.map((t, i) => `bullet(slide, ctx, '${esc(t)}', 76, ${190 + i * 82}, 570, 19);`).join('\n  ')}
-  ctx.addText(slide, { text: 'Product Evolution', left: 705, top: 220, width: 360, height: 38, fontSize: 28, bold: true, fontFace: 'Arial', color: C.ink });
+  ctx.addText(slide, { text: 'Эволюция продукта', left: 705, top: 220, width: 360, height: 38, fontSize: 28, bold: true, fontFace: 'Arial', color: C.ink });
   ${slide.stages.map((s, i) => `bullet(slide, ctx, '${esc(s)}', 720, ${282 + i * 44}, 360, 18);`).join('\n  ')}
 `;
   }
@@ -993,7 +993,7 @@ function bodyFor(slide, n) {
   pill(slide, ctx, '${esc(it[0])}', ${80 + i * 205}, 270, 170, 76, ${i >= 3 ? 'C.greenLight' : 'C.purpleLight'}, C.line, 17);
   ctx.addText(slide, { text: '${esc(it[1])}', left: ${85 + i * 205}, top: 360, width: 160, height: 36, fontSize: 15, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });`).join('\n')}
   ctx.addText(slide, { text: '${esc(slide.note)}', left: 150, top: 480, width: 850, height: 52, fontSize: 22, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
-  source(slide, ctx, 'Source: Google Vertex AI pricing page for Veo 2; exact video model pricing must be rechecked before build.');
+  source(slide, ctx, 'Источник: Google Vertex AI pricing page for Veo 2; exact video model pricing нужно перепроверить перед build.');
 `;
   }
 
@@ -1010,7 +1010,7 @@ function bodyFor(slide, n) {
   ${slide.weeks.map((w, i) => `
   pill(slide, ctx, '${esc(w[0])}', ${90 + i * 260}, 230, 150, 70, ${i === 3 ? 'C.greenLight' : 'C.purpleLight'}, C.line, 20);
   ctx.addText(slide, { text: '${esc(w[1])}', left: ${70 + i * 260}, top: 325, width: 190, height: 70, fontSize: 17, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });`).join('\n')}
-  ctx.addText(slide, { text: 'Success metrics', left: 105, top: 480, width: 240, height: 30, fontSize: 24, bold: true, fontFace: 'Arial', color: C.ink });
+  ctx.addText(slide, { text: 'Метрики успеха', left: 105, top: 480, width: 240, height: 30, fontSize: 24, bold: true, fontFace: 'Arial', color: C.ink });
   ctx.addText(slide, { text: '${esc(slide.metrics.join('  /  '))}', left: 105, top: 522, width: 940, height: 40, fontSize: 20, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
 `;
   }

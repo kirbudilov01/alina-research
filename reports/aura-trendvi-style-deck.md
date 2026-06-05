@@ -6,150 +6,150 @@ Deck mode: create from AURA source material using Trendvi visual reference. This
 
 Type: cover
 
-## 02. What The Leaders Already Prove
+## 02. Что уже доказали лидеры
 
 Type: leaderGrid
 
-## 03. The New Format Is At The Intersection
+## 03. Новый формат находится на пересечении
 
 Type: intersectionThesis
 
-## 04. What AURA Is
+## 04. Что такое AURA
 
 Type: overview
 
-## 05. The Product Loop
+## 05. Продуктовая петля
 
 Type: pipeline
 
-## 06. User Journey: First 30 Days
+## 06. Путь пользователя: первые 30 дней
 
 Type: dayJourney
 
-## 07. Core Screens
+## 07. Ключевые экраны
 
 Type: appScreens
 
-## 08. Life Canvas Must Explain Causality
+## 08. Life Canvas должен объяснять причинность
 
 Type: lifeCanvasDemo
 
-## 09. Premium Video Is a Magic Moment
+## 09. Premium-видео — это момент магии
 
 Type: premiumMoment
 
-## 10. Paywall Architecture
+## 10. Архитектура paywall
 
 Type: paywallArchitecture
 
-## 11. Why This Is Not Just Astrology
+## 11. Почему это не просто астрология
 
 Type: solution
 
-## 12. Market Map
+## 12. Карта рынка
 
 Type: marketSize
 
-## 13. How The Numbers Work
+## 13. Как работают цифры
 
 Type: numberLogic
 
-## 14. The Four Numbers That Matter
+## 14. Четыре главные цифры
 
 Type: bigNumbers
 
-## 15. Competitor Economics: The Read
+## 15. Экономика конкурентов: главный вывод
 
 Type: proofMatrix
 
-## 16. Astrology Unit Economics
+## 16. Unit-экономика astrology-приложений
 
 Type: competitorEconomics
 
-## 17. Mindfulness Unit Economics
+## 17. Unit-экономика mindfulness-приложений
 
 Type: competitorEconomics
 
-## 18. AI Companion / Avatar Economics
+## 18. Экономика AI companion / avatar
 
 Type: competitorEconomics
 
-## 19. What People Actually Pay For
+## 19. За что люди реально платят
 
 Type: pricingTable
 
-## 20. Pricing Decision
+## 20. Решение по pricing
 
 Type: auraMath
 
-## 21. Conversion / ARPMAU Assumptions
+## 21. Гипотезы conversion / ARPMAU
 
 Type: finance
 
-## 22. From Benchmarks To AURA Model
+## 22. От бенчмарков к модели AURA
 
 Type: assumptionBridge
 
-## 23. Generation Subscription Package
+## 23. Подписка на генерации
 
 Type: generationPackage
 
-## 24. Free User Cost & Conversion Break-Even
+## 24. Стоимость free user и break-even conversion
 
 Type: freeUserModel
 
-## 25. Generation Cost Benchmarks
+## 25. Бенчмарки стоимости генерации
 
 Type: costBenchmarks
 
-## 26. Cost Per User / Month
+## 26. Стоимость пользователя / месяц
 
 Type: unitCost
 
-## 27. Video Cost Stress Test
+## 27. Stress-test стоимости видео
 
 Type: videoStress
 
-## 28. AURA Base Financial Model
+## 28. Базовая финансовая модель AURA
 
 Type: finance
 
-## 29. Marketing Benchmarks
+## 29. Маркетинговые бенчмарки
 
 Type: competitorEconomics
 
-## 30. AURA Marketing Funnel Model
+## 30. Модель маркетинговой воронки AURA
 
 Type: marketingModel
 
-## 31. Go-to-Market Strategy
+## 31. Go-to-Market стратегия
 
 Type: gtm
 
-## 32. 30-Day Validation Plan
+## 32. 30-дневный план проверки
 
 Type: validation
 
-## 33. Product Scope: MVP vs Later
+## 33. Scope продукта: MVP vs Later
 
 Type: pricingTable
 
-## 34. Risks
+## 34. Риски
 
 Type: risks
 
-## 35. Growth Roadmap
+## 35. Roadmap роста
 
 Type: roadmap
 
-## 36. What We Should Build
+## 36. Что нужно строить
 
 Type: overview
 
-## 37. Development Offer: Phase 1
+## 37. Оффер на разработку: Phase 1
 
 Type: offerSlide
 
-## 38. Contacts / Next Step
+## 38. Контакты / следующий шаг
 
 Type: contacts
