@@ -43,15 +43,55 @@ const slides = [
     note: 'AURA — не “еще одно приложение с гороскопами”. Это сериал о своей неделе, где смысл приводит к действию, а действие меняет визуальное состояние.'
   },
   {
+    title: 'Как мы выводим продукт',
+    type: 'numberLogic',
+    steps: [
+      ['1', 'Смотрим лидеров', 'Nebula / Calm / Finch / Runway', 'рынок уже платит за смысл, ритуал, память и визуальный AI'],
+      ['2', 'Находим разрыв', 'приложения дают куски опыта', 'нет формата, где смысл превращается в действие и видимое изменение'],
+      ['3', 'Формулируем AURA', 'weekly visual self-guidance', 'неделя становится личным сериалом, а Life Canvas показывает причинность'],
+      ['4', 'Собираем MVP', 'Episode → Action → Canvas', 'проверяем не рынок вообще, а понятна ли пользователю причинная петля']
+    ],
+    note: 'Логика презентации: не “мы придумали приложение”, а “из существующих платных паттернов появляется новый формат”.'
+  },
+  {
+    title: 'Пользовательская проблема → ответ AURA',
+    type: 'solution',
+    leftTitle: 'Что сейчас болит',
+    left: [
+      'Гороскопы дают смысл, но часто звучат общо и не ведут к действию.',
+      'Mindfulness дает ритуал, но не объясняет личную неделю пользователя.',
+      'AI companion умеет помнить, но не превращает неделю в понятную структуру.',
+      'Avatar/video tools дают вау-картинку, но она часто не связана с поведением.'
+    ],
+    rightTitle: 'Что должна дать AURA',
+    right: [
+      'Личный прогноз недели на основе birth data и текущего запроса.',
+      'Daily episode: один фокус дня, одно маленькое действие, один reset.',
+      'Life Canvas: визуальная картинка меняется не случайно, а по причине.',
+      'Weekly recap/video: неделя ощущается как серия жизни, а не набор карточек.',
+      'Ассистент с памятью: пользователь чувствует продолжение, а не новый чат с нуля.'
+    ]
+  },
+  {
+    title: '3 рабочие продуктовые концепции',
+    type: 'pricingTable',
+    rows: [
+      ['Концепция', 'Как выглядит для пользователя', 'Вау-момент', 'Что проверяет'],
+      ['Weekly Life Trailer', 'раз в неделю пользователь получает визуальный трейлер своей недели', '“моя неделя выглядит как фильм обо мне”', 'готов ли пользователь платить за premium visual moment'],
+      ['Future Self Canvas', 'ежедневные действия меняют образ будущей версии себя', '“картинка изменилась, потому что я сделал действие”', 'понятна ли причинность Life Canvas'],
+      ['Pocket Forecastist', 'карманный прогнозист помнит контекст и ведет через неделю', '“он понимает мою ситуацию, а не просто пишет гороскоп”', 'работает ли trust + memory + weekly guidance']
+    ]
+  },
+  {
     title: 'Что такое AURA',
     type: 'overview',
     blocks: [
-      ['Тезис в одну строку', 'AURA — приложение визуальной самонавигации на неделю: дата рождения + контекст → прогноз → daily episode → действие/reset → изменение Life Canvas → причина вернуться завтра.'],
-      ['Обещание пользователю', 'Не “твой знак зодиака говорит X”. Пользователь должен почувствовать: “я понял свою неделю, сделал маленькое действие и увидел, как изменилась картинка моей жизни”.'],
-      ['Ядро продукта', 'Карманный прогнозист/ассистент с памятью, недельными сезонами, image-first Life Canvas и редкими premium-видео моментами.'],
-      ['Почему сейчас', 'Astrology-приложения монетизируют личный смысл, mindfulness — ритуал, AI companions — память, video AI — premium-визуал. AURA соединяет эти поведения.'],
-      ['Бизнес-правило', 'Ежедневная петля должна быть дешевой. Premium video/avatar должны быть лимитированы, milestone-based или платными, а не бесплатной ежедневной генерацией.'],
-      ['Стратегический фильтр', 'Если пользователь не может объяснить, почему изменился Life Canvas, AURA превращается в игрушку с AI-картинками. Если может — это продукт.']
+      ['Финальная формула', 'AURA — weekly visual self-guidance app: пользователь вводит birth data и текущий запрос, получает прогноз недели, проходит daily episodes и видит изменение Life Canvas.'],
+      ['Главный принцип', 'Продукт не продает “предсказание судьбы”. Он продает структуру недели: понять состояние → сделать действие → увидеть изменение → вернуться завтра.'],
+      ['Что внутри', 'Карманный прогнозист/ассистент с памятью, weekly season, daily action/reset, image-first Life Canvas и редкими premium video moments.'],
+      ['Что отличает', 'У конкурентов смысл, ритуал, AI-память и визуал часто живут отдельно. AURA соединяет их в причинную петлю.'],
+      ['Что не делаем', 'Не строим безлимитный AI-video generator, социальную сеть или marketplace экспертов в MVP. Сначала доказываем loop.'],
+      ['Критерий жизни продукта', 'Если пользователь может объяснить, почему Canvas изменился, AURA имеет шанс. Если нет — это просто генератор красивых картинок.']
     ]
   },
   {
@@ -384,6 +424,30 @@ const slides = [
     note: 'Маркетинг нельзя считать отдельно от free COGS. Чем щедрее free usage, тем ниже должен быть CAC.'
   },
   {
+    title: 'Marketing test: что проверяем за €5,000',
+    type: 'pricingTable',
+    rows: [
+      ['Блок', 'Бюджет', 'Что делаем', 'Что должно стать понятно'],
+      ['Visual examples', '€800', '3-5 примеров Life Canvas, future-self и week trailer', 'есть ли визуальный вау и понятна ли причинность'],
+      ['Landing + analytics', '€700', 'лендинг, price test, lead capture, события activation/paid intent', 'какая цена и формулировка дают signup'],
+      ['Creator micro-tests', '€1,500', '5-10 micro creators / warm audiences / сторис-форматы', 'какие hooks вызывают интерес без тяжелой рекламы'],
+      ['Paid creative tests', '€1,200', 'маленькие Meta/TikTok tests по 3-5 hooks', 'CAC visitor/signup и первичная конверсия'],
+      ['Concierge cohort', '€800', '30 users, ручной forecast, интервью, paid-intent follow-up', 'понимают ли users продукт и готовы ли платить']
+    ]
+  },
+  {
+    title: 'Матрица маркетинговых hooks',
+    type: 'pricingTable',
+    rows: [
+      ['Hook', 'Кому', 'Формат', 'CTA'],
+      ['“Твоя неделя как трейлер”', 'visual AI / self-growth audience', 'short video before/after week trailer', 'получить свой week trailer'],
+      ['“Не гороскоп, а план недели”', 'астро-аудитория с усталостью от generic прогнозов', 'creator explanation + example Canvas', 'пройти 7-day season'],
+      ['“Future self изменился”', 'women 20-35, self-improvement', 'до/после Life Canvas + действие дня', 'увидеть future-self'],
+      ['“Карманный прогнозист”', 'люди, которым нужен личный ориентир', 'screen walkthrough assistant memory', 'получить прогноз недели'],
+      ['“Relationship / decision week”', 'high-intent emotional moments', 'тема недели + персональный вопрос', 'получить разбор недели']
+    ]
+  },
+  {
     title: 'Go-to-Market стратегия',
     type: 'gtm',
     blocks: [
@@ -403,6 +467,29 @@ const slides = [
       ['Неделя 4', '30-50 users через 3-7 дней + paid-intent test']
     ],
     metrics: ['>70% понимают категорию', '>50% объясняют Canvas change', 'D1 >20%', 'paid intent >5%']
+  },
+  {
+    title: 'Roadmap Phase 1: 30 дней',
+    type: 'pricingTable',
+    rows: [
+      ['Период', 'Deliverables', 'Метрики', 'Решение'],
+      ['Дни 1-7', '3 концепта, 5 visual examples, landing structure, сценарий интервью', 'понятность идеи, сила visual hook', 'какие 1-2 концепции оставляем'],
+      ['Дни 8-14', 'clickable prototype 8-10 screens, prompt logic, first Life Canvas styles', 'можно ли пройти loop без объяснений', 'что входит в MVP, что выкидываем'],
+      ['Дни 15-21', '30-user concierge cohort, ручные forecasts, first creator tests', 'D1, понимание Canvas, qualitative objections', 'есть ли продуктовая петля'],
+      ['Дни 22-30', 'price test $9.99/$12.99/$14.99, paid intent, CAC signup proxy', 'paid intent >5%, D1 >20%, Canvas causality >50%', 'go/no-go на MVP build']
+    ]
+  },
+  {
+    title: 'Roadmap Phase 2: если Phase 1 проходит',
+    type: 'pricingTable',
+    rows: [
+      ['Этап', 'Что строим', 'Зачем', 'Gate'],
+      ['MVP build', 'mobile/web prototype, auth, onboarding, weekly season, daily cards', 'дать пользователю пройти loop без ручного сопровождения', '30-100 активных пользователей'],
+      ['Generation system', 'image prompts, Runway workflow, retry limits, COGS logging', 'контролировать стоимость каждого generated asset', 'COGS paid user <$4/мес'],
+      ['Paywall test', 'Plus test, Visual Plus, annual, premium token', 'найти рабочую цену до масштабного маркетинга', 'paid conversion 2.5-3%+'],
+      ['GTM scale test', 'creator pack, 10-20 hooks, small paid budget', 'понять, можно ли привлекать не только warm users', 'CAC activated в допустимом диапазоне'],
+      ['Build decision', 'native app / backend / analytics / billing roadmap', 'переходить от проверки к разработке', 'только если retention + paid intent сходятся']
+    ]
   },
   {
     title: 'Scope продукта: MVP vs Later',
@@ -457,14 +544,14 @@ const slides = [
     type: 'offerSlide',
     rows: [
       ['Блок', 'Что входит в €5,000 Phase 1', 'Что пока не входит'],
-      ['Prototype', 'clickable Figma / логика экранов / product flow', 'полноценное native mobile app'],
-      ['Generation pipeline', 'ручной или semi-automated Runway/image workflow для 30-user test', 'scaled backend с unlimited generation'],
-      ['Content logic', 'weekly forecast prompts, daily card structure, объяснение Life Canvas', 'большой content marketplace'],
-      ['Landing / test', 'simple landing, price test, lead capture, analytics events', 'крупная paid acquisition campaign'],
-      ['Validation pack', '30-user cohort plan, metrics, interview script, results template', 'гарантированный revenue или scale'],
-      ['Alina side', 'marketing/creator distribution и expert content layer', 'за пределами development budget']
+      ['Prototype', '8-10 clickable screens, product flow, onboarding, paywall logic', 'полноценное native mobile app'],
+      ['Visual examples', '3-5 Life Canvas / future-self / week trailer examples', 'production-grade генерация на scale'],
+      ['Generation logic', 'manual/semi-automated Runway/image workflow, COGS tracking sheet', 'backend с unlimited generation'],
+      ['Landing + analytics', 'simple landing, price test, lead capture, activation/paid-intent events', 'крупная paid acquisition campaign'],
+      ['Marketing micro-test', 'creator hooks + small paid creative test inside validation logic', 'масштабный performance marketing'],
+      ['Validation pack', '30-user cohort plan, interview script, metrics, go/no-go report', 'гарантированный revenue или scale']
     ],
-    note: 'Логика оффера: не продавать огромную разработку. Продать узкий proof sprint, который проверяет product loop, generation cost и paid intent.'
+    note: 'Логика оффера: €5,000 — это validation sprint, а не полноценная разработка приложения.'
   },
   {
     title: 'Контакты / следующий шаг',
