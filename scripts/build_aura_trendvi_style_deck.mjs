@@ -397,6 +397,19 @@ const slides = [
     note: 'Base model считает blended price $12.99. $14.99 — верхний тест для полного Visual Plus с 4 видео/мес.'
   },
   {
+    title: 'Как читать финансовую модель',
+    type: 'financialGlossary',
+    terms: [
+      ['MAU', 'активные пользователи в месяц', 'сколько людей реально пользуются продуктом'],
+      ['Платящие', 'часть MAU, которая купила подписку или токен', 'главный источник выручки'],
+      ['Выручка', 'деньги от подписок и платных генераций до/после комиссий', 'показывает потенциал бизнеса'],
+      ['COGS', 'переменные расходы на AI, картинки, видео, storage и ошибки генерации', 'чем выше COGS, тем быстрее съедается маржа'],
+      ['CAC', 'стоимость привлечения одного пользователя или платящего клиента', 'если CAC выше LTV, масштабировать нельзя'],
+      ['Runway', 'сколько денег нужно до следующей проверки', 'это бюджет риска, а не обещание прибыли']
+    ],
+    note: 'Финмодель ниже — не обещание результата. Это рамка принятия решения: сколько нужно вложить, какие метрики должны сойтись и когда проект может стать денежным.'
+  },
+  {
     title: 'Сколько может стоить проект по стадиям',
     type: 'pricingTable',
     rows: [
@@ -642,20 +655,6 @@ const slides = [
       ['Kill criteria', 'Stop/pivot, если users не объясняют Canvas causality, D1 ниже 20%, paid intent ниже 5% или video COGS нельзя контролировать.'],
       ['Next step', 'Сделать 3-5 visual examples, clickable prototype, 30-user cohort и один pricing/token experiment.']
     ]
-  },
-  {
-    title: 'Оффер: Фаза 1 validation sprint',
-    type: 'offerSlide',
-    rows: [
-      ['Блок', 'Что входит в €4k-€10k Фазы 1', 'Что пока не входит'],
-      ['Prototype', '8-10 clickable screens, product flow, onboarding, paywall logic', 'полноценное native mobile app'],
-      ['Visual examples', '3-5 Life Canvas / future-self / week trailer examples', 'production-grade генерация на scale'],
-      ['Generation logic', 'manual/semi-automated Runway/image workflow, COGS tracking sheet', 'backend с unlimited generation'],
-      ['Landing + analytics', 'simple landing, price test, lead capture, activation/paid-intent events', 'сложная аналитика и CRM'],
-      ['Marketing launch', 'creator hooks, small paid tests, first warm/cohort launch', 'масштабный performance marketing'],
-      ['Validation pack', '30-user cohort plan, interview script, metrics, go/no-go report', 'гарантированный revenue или scale']
-    ],
-    note: 'Логика оффера: €4k-€10k — это разработка + маркетинг + первые запуски для проверки, а не full-scale app.'
   },
   {
     title: 'Контакты / следующий шаг',
@@ -1018,18 +1017,6 @@ function bodyFor(slide, n) {
 `;
   }
 
-  if (slide.type === 'offerSlide') {
-    return `
-  title(slide, ctx, '${esc(slide.title)}');
-  ctx.addShape(slide, { left: 70, top: 142, width: 245, height: 420, fill: C.greenLight, line: { style: 'solid', fill: C.line, width: 1.1 } });
-  ctx.addText(slide, { text: '€4k-€10k', left: 82, top: 210, width: 220, height: 55, fontSize: 42, bold: true, fontFace: 'Montserrat', color: C.purpleDark, align: 'center', fit: 'shrink' });
-  ctx.addText(slide, { text: 'Фаза 1\\nvalidation sprint', left: 92, top: 300, width: 200, height: 76, fontSize: 25, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
-  ctx.addText(slide, { text: 'разработка + маркетинг + первые запуски', left: 88, top: 430, width: 205, height: 46, fontSize: 15, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
-  ${table(slide.rows, [150, 390, 300], 345, 145, 56)}
-  ctx.addText(slide, { text: '${esc(slide.note)}', left: 140, top: 620, width: 900, height: 30, fontSize: 18, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
-`;
-  }
-
   if (slide.type === 'money') {
     return `
   title(slide, ctx, '${esc(slide.title)}');
@@ -1104,6 +1091,22 @@ function bodyFor(slide, n) {
   ${table(slide.rows, [240, 260, 260, 260], 70, 180, 50)}
   ctx.addText(slide, { text: '${esc(slide.note)}', left: 112, top: 555, width: 940, height: 40, fontSize: 17, italic: true, fontFace: 'Arial', color: C.ink, align: 'center' });
   source(slide, ctx, 'Assumptions: $10-14 ARPPU, image-first cost control, premium video gated. Нужно пересчитать после prototype telemetry.');
+`;
+  }
+
+  if (slide.type === 'financialGlossary') {
+    return `
+  title(slide, ctx, '${esc(slide.title)}');
+  ${slide.terms.map((t, i) => {
+    const x = i % 2 === 0 ? 80 : 620;
+    const y = 122 + Math.floor(i / 2) * 126;
+    return `
+  ctx.addShape(slide, { left: ${x}, top: ${y}, width: 470, height: 112, fill: ${i === 2 || i === 5 ? 'C.greenLight' : 'C.purpleLight'}, line: { style: 'solid', fill: C.line, width: 1 } });
+  ctx.addText(slide, { text: '${esc(t[0])}', left: ${x + 18}, top: ${y + 12}, width: 126, height: 30, fontSize: 20, bold: true, fontFace: 'Montserrat', color: C.purpleDark, fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(t[1])}', left: ${x + 158}, top: ${y + 12}, width: 285, height: 40, fontSize: 15, bold: true, fontFace: 'Arial', color: C.ink, fit: 'shrink' });
+  ctx.addText(slide, { text: '${esc(t[2])}', left: ${x + 18}, top: ${y + 62}, width: 425, height: 34, fontSize: 13.5, fontFace: 'Arial', color: C.ink, fit: 'shrink' });`;
+  }).join('\n')}
+  ctx.addText(slide, { text: '${esc(slide.note)}', left: 110, top: 535, width: 940, height: 70, fontSize: 20, bold: true, fontFace: 'Arial', color: C.ink, align: 'center', fit: 'shrink' });
 `;
   }
 
