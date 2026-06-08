@@ -501,7 +501,7 @@ const allSlides = [
     type: 'pricingTable',
     rows: [
       ['Стадия', 'Бюджет', 'Что входит', 'Что покупаем этим бюджетом'],
-      ['Фаза 1: проверка', '€4k-€10k', 'прототип, visual examples, лендинг, микро-маркетинг, когорта 30 пользователей', 'ответ: есть ли спрос, платное намерение и понятная причинность'],
+      ['Фаза 1: проверка', '€6k-€15k', 'прототип, visual examples, лендинг, микро-маркетинг, когорта 30 пользователей', 'ответ: есть ли спрос, платное намерение и понятная причинность'],
       ['Фаза 2: MVP', '€25k-€60k', 'mobile/web MVP, вход, onboarding, daily cards, Life Canvas, paywall, аналитика', 'ответ: может ли пользователь пройти петлю без ручного сопровождения'],
       ['Фаза 3: запуск', '€40k-€120k', 'generation pipeline, billing, CRM/admin, creator pack, paid/creator tests', 'ответ: сходятся ли удержание, CAC и себестоимость генерации'],
       ['Фаза 4: масштаб', '€150k-€500k+', 'native app polish, backend scale, content ops, creator network, paid acquisition', 'ответ: можно ли идти к $50k-$100k MRR без разрушения маржи']
@@ -537,7 +537,7 @@ const allSlides = [
     title: 'Финансовая модель: главный dashboard',
     type: 'financeDashboardV2',
     tiles: [
-      ['Фаза 1', '€4k-€10k', 'прототип, визуалы, лендинг, 30-user cohort'],
+      ['Фаза 1', '€6k-€15k', 'прототип, визуалы, лендинг, 30-user cohort'],
       ['Pre-scale runway', '€80k-€150k', 'бережливый бюджет до сильной MVP-проверки, не весь путь к 150k MAU'],
       ['Base price', '$9.99-$12.99', 'основной тест подписки без перегруза видео'],
       ['Visual Plus', '$14.99', 'только если 4 видео/мес держат COGS'],
@@ -584,7 +584,7 @@ const allSlides = [
       ['M11', 'scale only if CAC/COGS сходятся', '90k / 3,000', '$30k-$65k', '€35k-€65k', '€118k-€183k'],
       ['M12', 'break-even attempt / seed story', '150k / 6,750', '$60k-$100k', '€45k-€80k', 'peak €500k+ при полном scale-пути']
     ],
-    note: 'Важно: €4k-€10k — первая проверка; €80k-€150k — pre-scale runway; путь к 150k MAU требует отдельного scale-бюджета.'
+    note: 'Важно: €6k-€15k — первая проверка; €80k-€150k — pre-scale runway; путь к 150k MAU требует отдельного scale-бюджета.'
   },
   {
     title: 'Квартальная модель: выручка, расходы, runway',
@@ -727,15 +727,15 @@ const allSlides = [
     rule: 'Каждая фаза заканчивается решением: продолжаем, режем scope или останавливаем.'
   },
   {
-    title: 'Scope продукта: MVP vs Later',
+    title: 'Границы продукта: MVP и позже',
     type: 'pricingTable',
     rows: [
-      ['Layer', 'MVP', 'Later', 'Почему'],
-      ['Core loop', 'Episode → Action → Reset → Reflection → Life Canvas', 'season branching и deeper memory', 'сначала нужно доказать causality'],
-      ['Assistant', 'chosen tone + weekly context + memory summary', 'voice/video assistant, creator voices', 'text memory дешевле и быстрее валидировать'],
-      ['Visual layer', 'image-first Life Canvas + avatar style', 'cinematic video, talking avatar', 'video — premium COGS'],
-      ['Monetization', 'Plus + annual + one token test', 'creator seasons, expert layer, marketplace', 'избегаем complexity до retention'],
-      ['Community', 'нет в MVP', 'sharing, social, cohorts', 'не строим social network до доказанной core value']
+      ['Слой', 'MVP', 'Позже', 'Почему'],
+      ['Петля', 'Episode → Action → Reset → Canvas', 'ветвления сезонов и deeper memory', 'сначала доказать причинность'],
+      ['Помощник', 'тон + контекст недели + memory summary', 'voice/video assistant, голоса авторов', 'текстовая память дешевле для проверки'],
+      ['Визуальный слой', 'Life Canvas через изображения + avatar style', 'cinematic video, talking avatar', 'video — premium COGS'],
+      ['Монетизация', 'Plus + annual + один token test', 'creator seasons, expert layer, marketplace', 'не усложнять до retention'],
+      ['Сообщество', 'нет в MVP', 'sharing, social, cohorts', 'не строить social до core value']
     ]
   },
   {
@@ -743,11 +743,11 @@ const allSlides = [
     type: 'risks',
     rows: [
       ['Риск', 'Как ломает продукт', 'Митигация'],
-      ['Похоже на гороскоп', 'user thinks it is generic astrology', 'позиционировать как weekly life-series и action, не fate'],
-      ['Avatar feels random', 'user cannot explain visual change', 'показывать cause рядом с Canvas и связывать с action/reflection'],
-      ['Video cost kills margin', 'free users generate expensive clips', 'premium/token video only; log COGS per asset'],
-      ['AI sounds generic', 'low trust and no return', 'prompt QA, user feedback и memory guardrails'],
-      ['No paid intent', 'users like it but do not pay', 'paywall after first completed loop и price tests by cohort']
+      ['Похоже на гороскоп', 'пользователь видит обычную астрологию', 'позиционировать как week-series и действие, не fate'],
+      ['Аватар случайный', 'неясно, почему изменился Canvas', 'показывать причину рядом с Canvas'],
+      ['Видео съедает маржу', 'бесплатные users генерируют дорогие видео', 'только premium/token video; логировать COGS'],
+      ['AI звучит generic', 'низкое доверие и нет возврата', 'prompt QA, feedback и memory guardrails'],
+      ['Нет платного интереса', 'нравится, но не покупают', 'paywall после первой петли + price tests']
     ]
   },
   {
@@ -757,9 +757,9 @@ const allSlides = [
       ['Блок', 'Что уже понятно', 'Что остается допущением', 'Как проверяем'],
       ['Продуктовая логика', 'понятная петля: эпизод → действие → сброс → Canvas', 'насколько сильно пользователь почувствует причинность Canvas', '3-5 визуальных примеров + кликабельный прототип'],
       ['Финансовая модель', 'цена, себестоимость, бесплатный пользователь, привлечение и сценарии разделены', 'точная себестоимость зависит от провайдеров и фактического использования', 'логировать каждую генерацию и пересчитать после первой группы пользователей'],
-      ['GTM', 'лучший старт — авторский контент и теплая аудитория, не закупка трафика', 'стоимость привлечения неизвестна до тестов креативов и лендинга', '10-20 креативных hooks + маленький платный тест после сигнала оплаты'],
-      ['Технологии', 'MVP должен начинаться с изображений и лимитированного видео', 'выбор провайдера влияет на маржу', 'сравнить провайдеров перед разработкой и поставить лимиты'],
-      ['Следующее решение', 'можно начинать фазу проверки', 'это еще не доказанный бизнес', 'решение по возврату, готовности платить, причинности Canvas и себестоимости']
+      ['GTM', 'старт — авторский контент и теплая аудитория', 'CAC неизвестен до тестов креативов и лендинга', '10-20 hooks + малый платный тест после paid signal'],
+      ['Технологии', 'MVP начинается с изображений и лимитированного видео', 'провайдер влияет на маржу', 'сравнить провайдеров и поставить лимиты'],
+      ['Следующее решение', 'можно начинать фазу проверки', 'это еще не доказанный бизнес', 'решение по возврату, оплате, Canvas и COGS']
     ],
     note: 'Вывод: следующая фаза должна не масштабировать идею, а быстро проверить петлю, цену и себестоимость на реальных пользователях.'
   },
@@ -788,7 +788,7 @@ const allSlides = [
     ]
   },
   {
-    title: 'Контакты / следующий шаг',
+    title: 'Следующий шаг: запуск проверки',
     type: 'contacts',
     name: 'AURA',
     cta: 'Следующий шаг: сгенерировать визуальные примеры, собрать кликабельный прототип, протестировать первых 30 пользователей и проверить, понимают ли они причинность Life Canvas.'
@@ -829,10 +829,10 @@ const mainSlideTitles = [
   '30-дневный план проверки',
   'Roadmap Фазы 1: 30 дней',
   'Roadmap Фазы 2: если Фаза 1 проходит',
-  'Scope продукта: MVP vs Later',
+  'Границы продукта: MVP и позже',
   'Риски',
   'Условия перехода к запуску',
-  'Контакты / следующий шаг'
+  'Следующий шаг: запуск проверки'
 ];
 
 const appendixSlideTitles = [

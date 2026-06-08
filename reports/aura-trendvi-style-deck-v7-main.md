@@ -136,7 +136,7 @@ Type: pricingTable
 
 Type: pricingTable
 
-## 33. Scope продукта: MVP vs Later
+## 33. Границы продукта: MVP и позже
 
 Type: pricingTable
 
@@ -148,6 +148,6 @@ Type: risks
 
 Type: readinessCheck
 
-## 36. Контакты / следующий шаг
+## 36. Следующий шаг: запуск проверки
 
 Type: contacts
