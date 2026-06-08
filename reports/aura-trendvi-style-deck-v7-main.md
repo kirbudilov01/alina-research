@@ -4,7 +4,7 @@ Deck mode: optimized client-facing AURA product deck. V7 Main is the client-faci
 
 ## Client-facing main deck
 
-- Main story: 35 slides including the competitor implications bridge.
+- Main story: 36 slides including the competitor implications bridge.
 - Keeps decisions, money logic, launch gates and client-readable competitor meaning.
 - Dense proof tables, detailed cost benchmarks, monthly models and marketing hooks are intentionally excluded from this client-facing version.
 
@@ -60,90 +60,94 @@ Type: paywallArchitecture
 
 Type: solution
 
-## 14. Карта рынка
+## 14. Рынок: 4 денежных пула
 
-Type: marketSize
+Type: pricingTable
 
-## 15. Четыре главные цифры
+## 15. Карта рынка: от категории к деньгам
+
+Type: pricingTable
+
+## 16. Четыре главные цифры
 
 Type: bigNumbers
 
-## 16. Пороговые показатели запуска
+## 17. Пороговые показатели запуска
 
 Type: metricScorecard
 
-## 17. Экономика конкурентов: главный вывод
+## 18. Экономика конкурентов: главный вывод
 
 Type: proofMatrix
-
-## 18. За что люди реально платят
-
-Type: pricingTable
 
 ## 19. Что данные конкурентов значат для AURA
 
 Type: pricingTable
 
-## 20. Решение по pricing
+## 20. За что люди реально платят
+
+Type: pricingTable
+
+## 21. Решение по pricing
 
 Type: auraMath
 
-## 21. Гипотезы conversion / ARPMAU
+## 22. Гипотезы conversion / ARPMAU
 
 Type: finance
 
-## 22. Подписка на генерации
+## 23. Подписка на генерации
 
 Type: generationPackage
 
-## 23. Стоимость free user и break-even conversion
+## 24. Стоимость free user и break-even conversion
 
 Type: freeUserModel
 
-## 24. Финансовая модель: главный dashboard
+## 25. Финансовая модель: главный dashboard
 
 Type: financeDashboardV2
 
-## 25. Годовые сценарии: сколько может приносить
+## 26. Годовые сценарии: сколько может приносить
 
 Type: pricingTable
 
-## 26. Сколько может стоить проект по стадиям
+## 27. Сколько может стоить проект по стадиям
 
 Type: pricingTable
 
-## 27. Модель маркетинговой воронки AURA
+## 28. Модель маркетинговой воронки AURA
 
 Type: marketingModel
 
-## 28. Маркетинг в Фазе 1: что проверяем
+## 29. Маркетинг в Фазе 1: что проверяем
 
 Type: pricingTable
 
-## 29. 30-дневный план проверки
+## 30. 30-дневный план проверки
 
 Type: validation
 
-## 30. Roadmap Фазы 1: 30 дней
+## 31. Roadmap Фазы 1: 30 дней
 
 Type: pricingTable
 
-## 31. Roadmap Фазы 2: если Фаза 1 проходит
+## 32. Roadmap Фазы 2: если Фаза 1 проходит
 
 Type: pricingTable
 
-## 32. Scope продукта: MVP vs Later
+## 33. Scope продукта: MVP vs Later
 
 Type: pricingTable
 
-## 33. Риски
+## 34. Риски
 
 Type: risks
 
-## 34. Условия перехода к запуску
+## 35. Условия перехода к запуску
 
 Type: readinessCheck
 
-## 35. Контакты / следующий шаг
+## 36. Контакты / следующий шаг
 
 Type: contacts

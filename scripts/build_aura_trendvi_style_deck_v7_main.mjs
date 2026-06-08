@@ -230,16 +230,29 @@ const allSlides = [
     right: ['Контекст даты рождения без фаталистичного позиционирования.', 'Недельный сезон, который дает структуру.', 'Daily micro-action, который возвращает agency.', 'Life Canvas, который меняется по причине.', 'Premium-видео как редкий proof-of-magic, а не ежедневная утечка COGS.']
   },
   {
-    title: 'Карта рынка',
-    type: 'marketSize',
-    items: [
-      ['PAM', 'consumer mobile apps', 'AURA конкурирует за ежедневную привычку открывать приложение ради смысла, reset и самонавигации.'],
-      ['TAM', '4 платных поведения', 'личная навигация, wellness-ритуал, память AI-companion, визуальная идентичность/avatar progression.'],
-      ['SAM', 'apps + web + AI tools', 'исследование покрывает app stores, web apps, paywalls, соседние инструменты и ручной competitor walkthrough.'],
-      ['SOM', '100k-300k users', 'достижимый первый масштаб, если creator-led GTM, недельные сезоны и premium-визуалы работают.'],
-      ['UP', '$30-80M ARR path', 'подписка + annual + premium tokens + creator seasons могут дать venture-relevant upside.']
+    title: 'Рынок: 4 денежных пула',
+    type: 'pricingTable',
+    rows: [
+      ['Пул', 'Публичные сигналы', 'Пользователи / деньги', 'Что это значит для AURA'],
+      ['Astrology / guidance', 'Co-Star, Nebula, CHANI, The Pattern', 'Co-Star: 20M+ downloads; Nebula/CHANI: сотни тыс. $/мес public proxy', 'есть платеж за персональный смысл, но нужна менее “гороскопная” подача'],
+      ['Mindfulness / habit', 'Calm, Headspace', 'Calm: ~$300M/year и 4M+ paying subscribers; Headspace: десятки млн $/год proxy', 'подписка держится на daily ritual, trust и annual plans'],
+      ['AI companion', 'Character.AI, Replika, Finch', 'Character.AI: 20M MAU; Replika/Finch: ~$1.5M-$2.36M/мес proxy', 'память, companion и avatar повышают возврат и willingness to pay'],
+      ['Visual AI / avatar', 'Runway, HeyGen, D-ID, Luma', 'Runway 8s video ~= $0.40; talking avatar может стоить дороже daily image', 'визуал должен быть premium layer, иначе COGS ломает маржу']
     ],
-    note: 'Рынок — это не один horoscope TAM. Это пересечение paid personal meaning, daily ritual и AI visual identity.'
+    note: 'Вывод: AURA не выбирает один рынок. Она собирает платные паттерны из 4 рынков: meaning + ritual + companion + visual AI.'
+  },
+  {
+    title: 'Карта рынка: от категории к деньгам',
+    type: 'pricingTable',
+    rows: [
+      ['Уровень', 'Что считаем', 'Пользователи', 'Денежная логика'],
+      ['TAM', 'платные поведения: astrology / mindfulness / AI companion / visual AI', 'сотни млн потенциальных users в соседних категориях', 'лидеры уже продают подписки $9.99-$14.99+ и annual plans'],
+      ['SAM', 'доступный сегмент для AURA: mobile-first self-guidance + visual AI', 'условно 10-30M reachable users через app stores, creators и short-form', 'при 1-3% paid это рынок десятков млн ARR'],
+      ['Beachhead', 'первые 12-24 месяца, не весь рынок', '100k-300k registered users / 10k-60k active users', '2.5-5% paid => 2.5k-15k payers, ~$0.4M-$2.7M ARR'],
+      ['Scale case', 'если loop и GTM повторяются', '1M-3M registered users / 100k-600k active users', '25k-150k payers + tokens => ~$4M-$25M+ ARR'],
+      ['Venture upside', 'масштаб категории, а не первый SOM', '5M+ users и сильная годовая подписка', '$30M-$80M ARR path появляется только после retention + CAC proof']
+    ],
+    note: 'Важно: 100k-300k — это beachhead для проверки масштаба, а не размер рынка. $30M-$80M ARR — сценарий scale/upside после доказанной петли и маркетинга.'
   },
   {
     title: 'Как работают цифры',
@@ -798,7 +811,8 @@ const mainSlideTitles = [
   'Premium-видео — это момент магии',
   'Архитектура paywall',
   'Почему это не просто астрология',
-  'Карта рынка',
+  'Рынок: 4 денежных пула',
+  'Карта рынка: от категории к деньгам',
   'Четыре главные цифры',
   'Пороговые показатели запуска',
   'Экономика конкурентов: главный вывод',
